@@ -1,0 +1,254 @@
+[ :ref:`aws <cli:aws>` . :ref:`gamelift <cli:aws gamelift>` ]
+
+.. _cli:aws gamelift describe-fleet-attributes:
+
+
+*************************
+describe-fleet-attributes
+*************************
+
+
+
+===========
+Description
+===========
+
+
+
+Retrieves fleet properties, including metadata, status, and configuration, for one or more fleets. You can request attributes for all fleets, or specify a list of one or more fleet IDs. When requesting all fleets, use the pagination parameters to retrieve results as a set of sequential pages. If successful, a  FleetAttributes object is returned for each requested fleet ID. When specifying a list of fleet IDs, attribute objects are returned only for fleets that currently exist. 
+
+ 
+
+.. note::
+
+  
+
+  Some API actions may limit the number of fleet IDs allowed in one request. If a request exceeds this limit, the request fails and the error message includes the maximum allowed.
+
+  
+
+
+
+========
+Synopsis
+========
+
+::
+
+    describe-fleet-attributes
+  [--fleet-ids <value>]
+  [--limit <value>]
+  [--next-token <value>]
+  [--cli-input-json <value>]
+  [--generate-cli-skeleton]
+
+
+
+
+=======
+Options
+=======
+
+``--fleet-ids`` (list)
+
+
+  Unique identifiers for the fleet(s) that you want to retrieve attributes for. Leave this parameter empty to retrieve attributes for all fleets.
+
+  
+
+
+
+Syntax::
+
+  "string" "string" ...
+
+
+
+``--limit`` (integer)
+
+
+  Maximum number of results to return. You can use this parameter with *NextToken* to get results as a set of sequential pages. This parameter is ignored when the request specifies one or a list of fleet IDs.
+
+  
+
+``--next-token`` (string)
+
+
+  Token indicating the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value. This parameter is ignored when the request specifies one or a list of fleet IDs.
+
+  
+
+``--cli-input-json`` (string)
+Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
+
+``--generate-cli-skeleton`` (boolean)
+Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+
+
+
+======
+Output
+======
+
+FleetAttributes -> (list)
+
+  
+
+  Collection of objects containing attribute metadata for each requested fleet ID. 
+
+  
+
+  (structure)
+
+    
+
+    General properties describing a fleet.
+
+    
+
+    FleetId -> (string)
+
+      
+
+      Unique identifier for a fleet.
+
+      
+
+      
+
+    Description -> (string)
+
+      
+
+      Human-readable description of the fleet.
+
+      
+
+      
+
+    Name -> (string)
+
+      
+
+      Descriptive label associated with this fleet. Fleet names do not need to be unique.
+
+      
+
+      
+
+    CreationTime -> (timestamp)
+
+      
+
+      Time stamp indicating when this object was created. Format is an integer representing the number of seconds since the Unix epoch (Unix time).
+
+      
+
+      
+
+    TerminationTime -> (timestamp)
+
+      
+
+      Time stamp indicating when this fleet was terminated. Format is an integer representing the number of seconds since the Unix epoch (Unix time).
+
+      
+
+      
+
+    Status -> (string)
+
+      
+
+      Current status of the fleet. Possible fleet states include: 
+
+      
+      * NEW: A new fleet has been defined and hosts allocated.
+      
+      * DOWNLOADING/VALIDATING/BUILDING/ACTIVATING: The new fleet is being set up with the game build, and new hosts are being started.
+      
+      * ACTIVE: Hosts can now accept game sessions.
+      
+      * ERROR: An error occurred when downloading, validating, building, or activating the fleet.
+      
+      * DELETING: Hosts are responding to a delete fleet request.
+      
+      * TERMINATED: The fleet no longer exists.
+      
+
+      
+
+      
+
+      
+
+    BuildId -> (string)
+
+      
+
+      Unique identifier for a build.
+
+      
+
+      
+
+    ServerLaunchPath -> (string)
+
+      
+
+      Path to the launch executable for the game server. A game server is built into a ``C:\game`` drive. This value must be expressed as ``C:\game\[launchpath]`` . Example: If, when built, your game server files are in a folder called "MyGame", your log path should be ``C:\game\MyGame\server.exe`` .
+
+      
+
+      
+
+    ServerLaunchParameters -> (string)
+
+      
+
+      Parameters required to launch your game server. These parameters should be expressed as a string of command-line parameters. Example: "+sv_port 33435 +start_lobby".
+
+      
+
+      
+
+    LogPaths -> (list)
+
+      
+
+      Path to game-session log files generated by your game server. Once a game session has been terminated, Amazon GameLift captures and stores the logs on Amazon S3. Use the GameLift console to access the stored logs.
+
+      
+
+      (string)
+
+        
+
+        
+
+      
+
+    
+
+  
+
+NextToken -> (string)
+
+  
+
+  Token indicating where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
+
+   
+
+  .. note::
+
+    
+
+    If a request has a limit that exactly matches the number of remaining results, a token is returned even though there are no more results to retrieve.
+
+    
+
+  
+
+  
+

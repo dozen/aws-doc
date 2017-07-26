@@ -1,0 +1,384 @@
+[ :ref:`aws <cli:aws>` . :ref:`s3api <cli:aws s3api>` ]
+
+.. _cli:aws s3api list-object-versions:
+
+
+********************
+list-object-versions
+********************
+
+
+
+===========
+Description
+===========
+
+Returns metadata about all of the versions of objects in a bucket.
+
+``list-object-versions`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
+When using ``--output text`` and the ``--query`` argument on a paginated response, the ``--query`` argument must extract data from the results of the following query expressions: ``Versions``, ``DeleteMarkers``, ``CommonPrefixes``
+
+
+========
+Synopsis
+========
+
+::
+
+    list-object-versions
+  --bucket <value>
+  [--delimiter <value>]
+  [--encoding-type <value>]
+  [--prefix <value>]
+  [--cli-input-json <value>]
+  [--starting-token <value>]
+  [--page-size <value>]
+  [--max-items <value>]
+  [--generate-cli-skeleton]
+
+
+
+
+=======
+Options
+=======
+
+``--bucket`` (string)
+
+
+``--delimiter`` (string)
+A delimiter is a character you use to group keys.
+
+``--encoding-type`` (string)
+Requests Amazon S3 to encode the object keys in the response and specifies the encoding method to use. An object key may contain any Unicode character; however, XML 1.0 parser cannot parse some characters, such as characters with an ASCII value from 0 to 10. For characters that are not supported in XML 1.0, you can add this parameter to request that Amazon S3 encode the keys in the response.
+
+  Possible values:
+
+  
+  *   ``url``
+
+  
+
+  
+
+``--prefix`` (string)
+Limits the response to keys that begin with the specified prefix.
+
+``--cli-input-json`` (string)
+Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
+
+``--starting-token`` (string)
+ 
+
+  A token to specify where to start paginating. This is the ``NextToken`` from a previously truncated response.
+
+   
+
+``--page-size`` (integer)
+ 
+
+  The size of each page.
+
+   
+
+  
+
+  
+
+``--max-items`` (integer)
+ 
+
+  The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination. This ``NextToken`` response element should **not** be used directly outside of the AWS CLI.
+
+   
+
+``--generate-cli-skeleton`` (boolean)
+Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+
+
+
+========
+Examples
+========
+
+The following command retrieves version information for an object in a bucket named ``my-bucket``::
+
+  aws s3api list-object-versions --bucket my-bucket --key index.html
+
+Output::
+
+  {
+      "DeleteMarkers": [
+          {
+              "Owner": {
+                  "DisplayName": "my-username",
+                  "ID": "7009a8971cd660687538875e7c86c5b672fe116bd438f46db45460ddcd036c32"
+              },
+              "IsLatest": true,
+              "VersionId": "B2VsEK5saUNNHKcOAJj7hIE86RozToyq",
+              "Key": "index.html",
+              "LastModified": "2015-11-10T00:57:03.000Z"
+          },
+          {
+              "Owner": {
+                  "DisplayName": "my-username",
+                  "ID": "7009a8971cd660687538875e7c86c5b672fe116bd438f46db45460ddcd036c32"
+              },
+              "IsLatest": false,
+              "VersionId": ".FLQEZscLIcfxSq.jsFJ.szUkmng2Yw6",
+              "Key": "index.html",
+              "LastModified": "2015-11-09T23:32:20.000Z"
+          }
+      ],
+      "Versions": [
+          {
+              "LastModified": "2015-11-10T00:20:11.000Z",
+              "VersionId": "Rb_l2T8UHDkFEwCgJjhlgPOZC0qJ.vpD",
+              "ETag": "\"0622528de826c0df5db1258a23b80be5\"",
+              "StorageClass": "STANDARD",
+              "Key": "index.html",
+              "Owner": {
+                  "DisplayName": "my-username",
+                  "ID": "7009a8971cd660687538875e7c86c5b672fe116bd438f46db45460ddcd036c32"
+              },
+              "IsLatest": false,
+              "Size": 38
+          },
+          {
+              "LastModified": "2015-11-09T23:26:41.000Z",
+              "VersionId": "rasWWGpgk9E4s0LyTJgusGeRQKLVIAFf",
+              "ETag": "\"06225825b8028de826c0df5db1a23be5\"",
+              "StorageClass": "STANDARD",
+              "Key": "index.html",
+              "Owner": {
+                  "DisplayName": "my-username",
+                  "ID": "7009a8971cd660687538875e7c86c5b672fe116bd438f46db45460ddcd036c32"
+              },
+              "IsLatest": false,
+              "Size": 38
+          },
+          {
+              "LastModified": "2015-11-09T22:50:50.000Z",
+              "VersionId": "null",
+              "ETag": "\"d1f45267a863c8392e07d24dd592f1b9\"",
+              "StorageClass": "STANDARD",
+              "Key": "index.html",
+              "Owner": {
+                  "DisplayName": "my-username",
+                  "ID": "7009a8971cd660687538875e7c86c5b672fe116bd438f46db45460ddcd036c32"
+              },
+              "IsLatest": false,
+              "Size": 533823
+          }
+      ]
+  }
+
+
+======
+Output
+======
+
+IsTruncated -> (boolean)
+
+  A flag that indicates whether or not Amazon S3 returned all of the results that satisfied the search criteria. If your results were truncated, you can make a follow-up paginated request using the NextKeyMarker and NextVersionIdMarker response parameters as a starting place in another request to return the rest of the results.
+
+  
+
+KeyMarker -> (string)
+
+  Marks the last Key returned in a truncated response.
+
+  
+
+VersionIdMarker -> (string)
+
+  
+
+  
+
+NextKeyMarker -> (string)
+
+  Use this value for the key marker request parameter in a subsequent request.
+
+  
+
+NextVersionIdMarker -> (string)
+
+  Use this value for the next version id marker parameter in a subsequent request.
+
+  
+
+Versions -> (list)
+
+  
+
+  (structure)
+
+    
+
+    ETag -> (string)
+
+      
+
+      
+
+    Size -> (integer)
+
+      Size in bytes of the object.
+
+      
+
+    StorageClass -> (string)
+
+      The class of storage used to store the object.
+
+      
+
+    Key -> (string)
+
+      The object key.
+
+      
+
+    VersionId -> (string)
+
+      Version ID of an object.
+
+      
+
+    IsLatest -> (boolean)
+
+      Specifies whether the object is (true) or is not (false) the latest version of an object.
+
+      
+
+    LastModified -> (timestamp)
+
+      Date and time the object was last modified.
+
+      
+
+    Owner -> (structure)
+
+      
+
+      DisplayName -> (string)
+
+        
+
+        
+
+      ID -> (string)
+
+        
+
+        
+
+      
+
+    
+
+  
+
+DeleteMarkers -> (list)
+
+  
+
+  (structure)
+
+    
+
+    Owner -> (structure)
+
+      
+
+      DisplayName -> (string)
+
+        
+
+        
+
+      ID -> (string)
+
+        
+
+        
+
+      
+
+    Key -> (string)
+
+      The object key.
+
+      
+
+    VersionId -> (string)
+
+      Version ID of an object.
+
+      
+
+    IsLatest -> (boolean)
+
+      Specifies whether the object is (true) or is not (false) the latest version of an object.
+
+      
+
+    LastModified -> (timestamp)
+
+      Date and time the object was last modified.
+
+      
+
+    
+
+  
+
+Name -> (string)
+
+  
+
+  
+
+Prefix -> (string)
+
+  
+
+  
+
+Delimiter -> (string)
+
+  
+
+  
+
+MaxKeys -> (integer)
+
+  
+
+  
+
+CommonPrefixes -> (list)
+
+  
+
+  (structure)
+
+    
+
+    Prefix -> (string)
+
+      
+
+      
+
+    
+
+  
+
+EncodingType -> (string)
+
+  Encoding type used by Amazon S3 to encode object keys in the response.
+
+  
+

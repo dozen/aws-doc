@@ -1,0 +1,83 @@
+[ :ref:`aws <cli:aws>` . :ref:`kms <cli:aws kms>` ]
+
+.. _cli:aws kms put-key-policy:
+
+
+**************
+put-key-policy
+**************
+
+
+
+===========
+Description
+===========
+
+
+
+Attaches a policy to the specified key.
+
+
+
+========
+Synopsis
+========
+
+::
+
+    put-key-policy
+  --key-id <value>
+  --policy-name <value>
+  --policy <value>
+  [--cli-input-json <value>]
+  [--generate-cli-skeleton]
+
+
+
+
+=======
+Options
+=======
+
+``--key-id`` (string)
+
+
+  A unique identifier for the customer master key. This value can be a globally unique identifier or the fully specified ARN to a key. 
+
+   
+  * Key ARN Example - arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+   
+  * Globally Unique Key ID Example - 12345678-1234-1234-1234-123456789012
+   
+
+   
+
+  
+
+``--policy-name`` (string)
+
+
+  Name of the policy to be attached. Currently, the only supported name is "default".
+
+  
+
+``--policy`` (string)
+
+
+  The policy to attach to the key. This is required and delegates back to the account. The key is the root of trust. The policy size limit is 32 KiB (32768 bytes). 
+
+  
+
+``--cli-input-json`` (string)
+Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
+
+``--generate-cli-skeleton`` (boolean)
+Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+
+
+
+======
+Output
+======
+
+None

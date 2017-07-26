@@ -1,0 +1,305 @@
+[ :ref:`aws <cli:aws>` . :ref:`swf <cli:aws swf>` ]
+
+.. _cli:aws swf list-domains:
+
+
+************
+list-domains
+************
+
+
+
+===========
+Description
+===========
+
+
+
+Returns the list of domains registered in the account. The results may be split into multiple pages. To retrieve subsequent pages, make the call again using the nextPageToken returned by the initial call.
+
+ 
+
+.. note::
+
+  This operation is eventually consistent. The results are best effort and may not exactly reflect recent updates and changes.
+
+ 
+
+**Access Control** 
+
+ 
+
+You can use IAM policies to control this action's access to Amazon SWF resources as follows:
+
+ 
+
+ 
+* Use a ``Resource`` element with the domain name to limit the action to only specified domains. The element must be set to ``arn:aws:swf::AccountID:domain/*`` , where *AccountID* is the account ID, with no dashes.
+ 
+* Use an ``Action`` element to allow or deny permission to call this action.
+ 
+* You cannot use an IAM policy to constrain this action's parameters.
+ 
+
+ 
+
+If the caller does not have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's **cause** parameter will be set to OPERATION_NOT_PERMITTED. For details and example IAM policies, see `Using IAM to Manage Access to Amazon SWF Workflows`_ .
+
+
+
+``list-domains`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
+When using ``--output text`` and the ``--query`` argument on a paginated response, the ``--query`` argument must extract data from the results of the following query expressions: ``domainInfos``
+
+
+========
+Synopsis
+========
+
+::
+
+    list-domains
+  --registration-status <value>
+  [--reverse-order | --no-reverse-order]
+  [--cli-input-json <value>]
+  [--starting-token <value>]
+  [--page-size <value>]
+  [--max-items <value>]
+  [--generate-cli-skeleton]
+
+
+
+
+=======
+Options
+=======
+
+``--registration-status`` (string)
+
+
+  Specifies the registration status of the domains to list.
+
+  
+
+  Possible values:
+
+  
+  *   ``REGISTERED``
+
+  
+  *   ``DEPRECATED``
+
+  
+
+  
+
+``--reverse-order`` | ``--no-reverse-order`` (boolean)
+
+
+  When set to ``true`` , returns the results in reverse order. By default, the results are returned in ascending alphabetical order by ``name`` of the domains.
+
+  
+
+``--cli-input-json`` (string)
+Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
+
+``--starting-token`` (string)
+ 
+
+  A token to specify where to start paginating. This is the ``NextToken`` from a previously truncated response.
+
+   
+
+``--page-size`` (integer)
+ 
+
+  The size of each page.
+
+   
+
+  
+
+  
+
+``--max-items`` (integer)
+ 
+
+  The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination. This ``NextToken`` response element should **not** be used directly outside of the AWS CLI.
+
+   
+
+``--generate-cli-skeleton`` (boolean)
+Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+
+
+
+========
+Examples
+========
+
+Listing your Domains
+--------------------
+
+To list the SWF domains that you have registered for your account, you can use ``swf list-domains``. There is only one
+required parameter: ``--registration-status``, which you can set to either ``REGISTERED`` or ``DEPRECATED``.
+
+Here's a typical example::
+
+    aws swf list-domains --registration-status REGISTERED
+
+Result::
+
+    {
+      "domainInfos": [
+        {
+          "status": "REGISTERED",
+          "name": "DataFrobotz"
+        },
+        {
+          "status": "REGISTERED",
+          "name": "erontest"
+        }
+      ]
+    }
+
+If you set ``--registration-status`` to ``DEPRECATED``, you will see deprecated domains (domains that can not register
+new workflows or activities, but that can still be queried). For example::
+
+    aws swf list-domains --registration-status DEPRECATED
+
+Result::
+
+    {
+      "domainInfos": [
+        {
+          "status": "DEPRECATED",
+          "name": "MyNeatNewDomain"
+        }
+      ]
+    }
+
+
+If you have many domains, you can set the ``--maximum-page-size`` option to limit the number of results returned. If
+there are more results to return than the maximum number that you specified, you will receive a ``nextPageToken`` that
+you can send to the next call to ``list-domains`` to retrieve additional entries.
+
+Here's an example of using ``--maximum-page-size``::
+
+    aws swf list-domains --registration-status REGISTERED --maximum-page-size 1
+
+Result::
+
+    {
+      "domainInfos": [
+        {
+          "status": "REGISTERED",
+          "name": "DataFrobotz"
+        }
+      ],
+      "nextPageToken": "AAAAKgAAAAEAAAAAAAAAA2QJKNtidVgd49TTeNwYcpD+QKT2ynuEbibcQWe2QKrslMGe63gpS0MgZGpcpoKttL4OCXRFn98Xif557it+wSZUsvUDtImjDLvguyuyyFdIZtvIxIKEOPm3k2r4OjAGaFsGOuVbrKljvla7wdU7FYH3OlkNCP8b7PBj9SBkUyGoiAghET74P93AuVIIkdKGtQ=="
+    }
+
+When you make the call again, this time supplying the value of ``nextPageToken`` in the ``--next-page-token`` argument,
+you'll get another page of results::
+
+    aws swf list-domains --registration-status REGISTERED --maximum-page-size 1 --next-page-token "AAAAKgAAAAEAAAAAAAAAA2QJKNtidVgd49TTeNwYcpD+QKT2ynuEbibcQWe2QKrslMGe63gpS0MgZGpcpoKttL4OCXRFn98Xif557it+wSZUsvUDtImjDLvguyuyyFdIZtvIxIKEOPm3k2r4OjAGaFsGOuVbrKljvla7wdU7FYH3OlkNCP8b7PBj9SBkUyGoiAghET74P93AuVIIkdKGtQ=="
+
+Result::
+
+    {
+      "domainInfos": [
+        {
+          "status": "REGISTERED",
+          "name": "erontest"
+        }
+      ]
+    }
+
+When there are no further pages of results to retrieve, ``nextPageToken`` will not be returned in the results.
+
+See Also
+--------
+
+-  `ListDomains <http://docs.aws.amazon.com/amazonswf/latest/apireference/API_ListDomains.html>`__
+   in the *Amazon Simple Workflow Service API Reference*
+
+
+
+======
+Output
+======
+
+domainInfos -> (list)
+
+  
+
+  A list of DomainInfo structures.
+
+  
+
+  (structure)
+
+    
+
+    Contains general information about a domain.
+
+    
+
+    name -> (string)
+
+      
+
+      The name of the domain. This name is unique within the account.
+
+      
+
+      
+
+    status -> (string)
+
+      
+
+      The status of the domain:
+
+       
+
+       
+      * **REGISTERED** : The domain is properly registered and available. You can use this domain for registering types and creating new workflow executions. 
+       
+      * **DEPRECATED** : The domain was deprecated using  deprecate-domain , but is still in use. You should not create new workflow executions in this domain. 
+       
+
+      
+
+      
+
+    description -> (string)
+
+      
+
+      The description of the domain provided through  register-domain .
+
+      
+
+      
+
+    
+
+  
+
+nextPageToken -> (string)
+
+  
+
+  If a ``NextPageToken`` was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in ``nextPageToken`` . Keep all other arguments unchanged.
+
+   
+
+  The configured ``maximumPageSize`` determines how many results can be returned in a single call.
+
+  
+
+  
+
+
+
+.. _Using IAM to Manage Access to Amazon SWF Workflows: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html

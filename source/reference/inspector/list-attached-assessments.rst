@@ -1,0 +1,143 @@
+[ :ref:`aws <cli:aws>` . :ref:`inspector <cli:aws inspector>` ]
+
+.. _cli:aws inspector list-attached-assessments:
+
+
+*************************
+list-attached-assessments
+*************************
+
+
+
+===========
+Description
+===========
+
+
+
+Lists the assessments attached to the rules package specified by the rules package ARN.
+
+
+
+========
+Synopsis
+========
+
+::
+
+    list-attached-assessments
+  --rules-package-arn <value>
+  [--filter <value>]
+  [--next-token <value>]
+  [--max-results <value>]
+  [--cli-input-json <value>]
+  [--generate-cli-skeleton]
+
+
+
+
+=======
+Options
+=======
+
+``--rules-package-arn`` (string)
+
+
+  The ARN specifying the rules package whose assessments you want to list.
+
+  
+
+``--filter`` (structure)
+
+
+  You can use this parameter to specify a subset of data to be included in the action's response.
+
+   
+
+  For a record to match a filter, all specified filter attributes must match. When multiple values are specified for a filter attribute, any of the values can match.
+
+  
+
+
+
+Shorthand Syntax::
+
+    assessmentNamePatterns=string,string,assessmentStates=string,string,dataCollected=boolean,startTimeRange={minimum=timestamp,maximum=timestamp},endTimeRange={minimum=timestamp,maximum=timestamp},durationRange={minimum=integer,maximum=integer}
+
+
+
+
+JSON Syntax::
+
+  {
+    "assessmentNamePatterns": ["string", ...],
+    "assessmentStates": ["string", ...],
+    "dataCollected": true|false,
+    "startTimeRange": {
+      "minimum": timestamp,
+      "maximum": timestamp
+    },
+    "endTimeRange": {
+      "minimum": timestamp,
+      "maximum": timestamp
+    },
+    "durationRange": {
+      "minimum": integer,
+      "maximum": integer
+    }
+  }
+
+
+
+``--next-token`` (string)
+
+
+  You can use this parameter when paginating results. Set the value of this parameter to 'null' on your first call to the **list-attached-assessments** action. Subsequent calls to the action fill **nextToken** in the request with the value of **NextToken** from previous response to continue listing data.
+
+  
+
+``--max-results`` (integer)
+
+
+  You can use this parameter to indicate the maximum number of items you want in the response. The default value is 10. The maximum value is 500.
+
+  
+
+``--cli-input-json`` (string)
+Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
+
+``--generate-cli-skeleton`` (boolean)
+Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+
+
+
+======
+Output
+======
+
+assessmentArnList -> (list)
+
+  
+
+  A list of ARNs specifying the assessments returned by the action.
+
+  
+
+  (string)
+
+    
+
+    
+
+  
+
+nextToken -> (string)
+
+  
+
+  When a response is generated, if there is more data to be listed, this parameter is present in the response and contains the value to use for the **nextToken** parameter in a subsequent pagination request. If there is no more data to be listed, this parameter is set to 'null'.
+
+  
+
+  
+

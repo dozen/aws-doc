@@ -1,0 +1,344 @@
+[ :ref:`aws <cli:aws>` . :ref:`ec2 <cli:aws ec2>` ]
+
+.. _cli:aws ec2 describe-network-interface-attribute:
+
+
+************************************
+describe-network-interface-attribute
+************************************
+
+
+
+===========
+Description
+===========
+
+
+
+Describes a network interface attribute. You can specify only one attribute at a time.
+
+
+
+========
+Synopsis
+========
+
+::
+
+    describe-network-interface-attribute
+  [--dry-run | --no-dry-run]
+  --network-interface-id <value>
+  [--attribute <value>]
+  [--cli-input-json <value>]
+  [--generate-cli-skeleton]
+
+
+
+
+=======
+Options
+=======
+
+``--dry-run`` | ``--no-dry-run`` (boolean)
+
+
+  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
+
+  
+
+``--network-interface-id`` (string)
+
+
+  The ID of the network interface.
+
+  
+
+``--attribute`` (string)
+
+
+  The attribute of the network interface.
+
+  
+
+  Possible values:
+
+  
+  *   ``description``
+
+  
+  *   ``groupSet``
+
+  
+  *   ``sourceDestCheck``
+
+  
+  *   ``attachment``
+
+  
+
+  
+
+``--cli-input-json`` (string)
+Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
+
+``--generate-cli-skeleton`` (boolean)
+Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+
+
+
+========
+Examples
+========
+
+**To describe the attachment attribute of a network interface**
+
+This example command describes the ``attachment`` attribute of the specified network interface.
+
+Command::
+
+  aws ec2 describe-network-interface-attribute --network-interface-id eni-686ea200 --attribute attachment
+  
+Output::
+
+  {
+    "NetworkInterfaceId": "eni-686ea200",
+    "Attachment": {
+        "Status": "attached",
+        "DeviceIndex": 0,
+        "AttachTime": "2015-05-21T20:02:20.000Z",
+        "InstanceId": "i-d5652e23",
+        "DeleteOnTermination": true,
+        "AttachmentId": "eni-attach-43348162",
+        "InstanceOwnerId": "123456789012"
+    }
+  }
+
+**To describe the description attribute of a network interface**
+
+This example command describes the ``description`` attribute of the specified network interface.
+
+Command::
+
+  aws ec2 describe-network-interface-attribute --network-interface-id eni-686ea200 --attribute description 
+  
+Output::
+
+  {
+    "NetworkInterfaceId": "eni-686ea200",
+    "Description": {
+        "Value": "My description"
+    }
+  }
+
+**To describe the groupSet attribute of a network interface**
+
+This example command describes the ``groupSet`` attribute of the specified network interface.
+
+Command::
+
+  aws ec2 describe-network-interface-attribute --network-interface-id eni-686ea200 --attribute groupSet
+  
+Output::
+
+  {
+    "NetworkInterfaceId": "eni-686ea200",
+    "Groups": [
+        {
+            "GroupName": "my-security-group",
+            "GroupId": "sg-903004f8"
+        }
+    ]
+  }
+
+**To describe the sourceDestCheck attribute of a network interface**
+
+This example command describes the ``sourceDestCheck`` attribute of the specified network interface.
+
+Command::
+
+  aws ec2 describe-network-interface-attribute --network-interface-id eni-686ea200 --attribute sourceDestCheck
+  
+Output::
+
+  {
+    "NetworkInterfaceId": "eni-686ea200",
+    "SourceDestCheck": {
+        "Value": true
+    }
+  }
+
+
+======
+Output
+======
+
+NetworkInterfaceId -> (string)
+
+  
+
+  The ID of the network interface.
+
+  
+
+  
+
+Description -> (structure)
+
+  
+
+  The description of the network interface.
+
+  
+
+  Value -> (string)
+
+    
+
+    Valid values are case-sensitive and vary by action.
+
+    
+
+    
+
+  
+
+SourceDestCheck -> (structure)
+
+  
+
+  Indicates whether source/destination checking is enabled.
+
+  
+
+  Value -> (boolean)
+
+    
+
+    Valid values are ``true`` or ``false`` .
+
+    
+
+    
+
+  
+
+Groups -> (list)
+
+  
+
+  The security groups associated with the network interface.
+
+  
+
+  (structure)
+
+    
+
+    Describes a security group.
+
+    
+
+    GroupName -> (string)
+
+      
+
+      The name of the security group.
+
+      
+
+      
+
+    GroupId -> (string)
+
+      
+
+      The ID of the security group.
+
+      
+
+      
+
+    
+
+  
+
+Attachment -> (structure)
+
+  
+
+  The attachment (if any) of the network interface.
+
+  
+
+  AttachmentId -> (string)
+
+    
+
+    The ID of the network interface attachment.
+
+    
+
+    
+
+  InstanceId -> (string)
+
+    
+
+    The ID of the instance.
+
+    
+
+    
+
+  InstanceOwnerId -> (string)
+
+    
+
+    The AWS account ID of the owner of the instance.
+
+    
+
+    
+
+  DeviceIndex -> (integer)
+
+    
+
+    The device index of the network interface attachment on the instance.
+
+    
+
+    
+
+  Status -> (string)
+
+    
+
+    The attachment state.
+
+    
+
+    
+
+  AttachTime -> (timestamp)
+
+    
+
+    The timestamp indicating when the attachment initiated.
+
+    
+
+    
+
+  DeleteOnTermination -> (boolean)
+
+    
+
+    Indicates whether the network interface is deleted when the instance is terminated.
+
+    
+
+    
+
+  
+

@@ -1,0 +1,122 @@
+[ :ref:`aws <cli:aws>` . :ref:`redshift <cli:aws redshift>` ]
+
+.. _cli:aws redshift describe-logging-status:
+
+
+***********************
+describe-logging-status
+***********************
+
+
+
+===========
+Description
+===========
+
+
+
+Describes whether information, such as queries and connection attempts, is being logged for the specified Amazon Redshift cluster.
+
+
+
+========
+Synopsis
+========
+
+::
+
+    describe-logging-status
+  --cluster-identifier <value>
+  [--cli-input-json <value>]
+  [--generate-cli-skeleton]
+
+
+
+
+=======
+Options
+=======
+
+``--cluster-identifier`` (string)
+
+
+  The identifier of the cluster to get the logging status from. 
+
+   
+
+  Example: ``examplecluster`` 
+
+  
+
+``--cli-input-json`` (string)
+Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
+
+``--generate-cli-skeleton`` (boolean)
+Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+
+
+
+======
+Output
+======
+
+LoggingEnabled -> (boolean)
+
+  
+
+  ``true`` if logging is on, ``false`` if logging is off.
+
+  
+
+  
+
+BucketName -> (string)
+
+  
+
+  The name of the S3 bucket where the log files are stored.
+
+  
+
+  
+
+S3KeyPrefix -> (string)
+
+  
+
+  The prefix applied to the log file names.
+
+  
+
+  
+
+LastSuccessfulDeliveryTime -> (timestamp)
+
+  
+
+  The last time when logs were delivered. 
+
+  
+
+  
+
+LastFailureTime -> (timestamp)
+
+  
+
+  The last time when logs failed to be delivered. 
+
+  
+
+  
+
+LastFailureMessage -> (string)
+
+  
+
+  The message indicating that logs failed to be delivered. 
+
+  
+
+  
+

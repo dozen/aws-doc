@@ -1,0 +1,111 @@
+[ :ref:`aws <cli:aws>` . :ref:`iam <cli:aws iam>` ]
+
+.. _cli:aws iam list-open-id-connect-providers:
+
+
+******************************
+list-open-id-connect-providers
+******************************
+
+
+
+===========
+Description
+===========
+
+
+
+Lists information about the OpenID Connect providers in the AWS account. 
+
+
+
+========
+Synopsis
+========
+
+::
+
+    list-open-id-connect-providers
+  [--cli-input-json <value>]
+  [--generate-cli-skeleton]
+
+
+
+
+=======
+Options
+=======
+
+``--cli-input-json`` (string)
+Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
+
+``--generate-cli-skeleton`` (boolean)
+Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+
+
+
+========
+Examples
+========
+
+**To list information about the OpenID Connect providers in the AWS account**
+
+This example returns a list of ARNS of all the OpenID Connect providers that are defined in the current AWS account::
+
+  aws iam list-open-id-connect-providers 
+
+Output::
+
+  {
+    "OpenIDConnectProviderList": [
+      {
+        "Arn": "arn:aws:iam::123456789012:oidc-provider/example.oidcprovider.com"
+      }
+    ]
+  }
+
+For more information, see `Using OpenID Connect Identity Providers`_ in the *Using IAM* guide.
+
+.. _`Using OpenID Connect Identity Providers`: http://docs.aws.amazon.com/IAM/latest/UserGuide/identity-providers-oidc.html
+
+======
+Output
+======
+
+OpenIDConnectProviderList -> (list)
+
+  
+
+  The list of IAM OpenID Connect providers in the AWS account.
+
+  
+
+  (structure)
+
+    
+
+    Contains the Amazon Resource Name (ARN) for an IAM OpenID Connect provider.
+
+    
+
+    Arn -> (string)
+
+      
+
+      The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS resources. 
+
+       
+
+      For more information about ARNs, go to `Amazon Resource Names (ARNs) and AWS Service Namespaces`_ in the *AWS General Reference* . 
+
+      
+
+      
+
+    
+
+  
+
+
+
+.. _Amazon Resource Names (ARNs) and AWS Service Namespaces: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
