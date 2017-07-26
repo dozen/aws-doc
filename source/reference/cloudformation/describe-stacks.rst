@@ -17,6 +17,19 @@ Description
 
 Returns the description for the specified stack; if no stack name was specified, then it returns the description for all the stacks created.
 
+ 
+
+.. note::
+
+   
+
+  If the stack does not exist, an ``AmazonCloudFormationException`` is returned.
+
+   
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStacks>`_
 
 
 ``describe-stacks`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
@@ -34,7 +47,7 @@ Synopsis
   [--cli-input-json <value>]
   [--starting-token <value>]
   [--max-items <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -51,9 +64,9 @@ Options
    
 
    
-  * Running stacks: You can specify either the stack's name or its unique stack ID.
+  * Running stacks: You can specify either the stack's name or its unique stack ID. 
    
-  * Deleted stacks: You must specify the unique stack ID.
+  * Deleted stacks: You must specify the unique stack ID. 
    
 
    
@@ -72,15 +85,23 @@ Performs service operation based on the JSON string provided. The JSON string fo
 
    
 
-``--max-items`` (integer)
- 
-
-  The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``next-token`` will be provided in the output that you can use to resume pagination. This ``next-token`` response element should **not** be used directly outside of the AWS CLI.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
    
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--max-items`` (integer)
+ 
+
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``next-token`` is provided in the command's output. To resume pagination, provide the ``next-token`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``next-token`` response element directly outside of the AWS CLI.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -158,6 +179,16 @@ Stacks -> (list)
       
 
       The name associated with the stack.
+
+      
+
+      
+
+    ChangeSetId -> (string)
+
+      
+
+      The unique ID of the change set.
 
       
 
@@ -272,13 +303,9 @@ Stacks -> (list)
        
 
        
-
+      * ``true`` : disable rollback 
        
-      * ``true`` : disable rollback
-       
-      * ``false`` : enable rollback
-       
-
+      * ``false`` : enable rollback 
        
 
       
@@ -373,7 +400,27 @@ Stacks -> (list)
 
           
 
+        ExportName -> (string)
+
+          
+
+          The name of the export associated with the output.
+
+          
+
+          
+
         
+
+      
+
+    RoleARN -> (string)
+
+      
+
+      The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM) role that is associated with the stack. During a stack operation, AWS CloudFormation uses this role's credentials to make calls on your behalf.
+
+      
 
       
 
@@ -381,7 +428,7 @@ Stacks -> (list)
 
       
 
-      A list of ``Tag`` s that specify cost allocation information for the stack.
+      A list of ``Tag`` s that specify information about the stack.
 
       
 
@@ -389,7 +436,7 @@ Stacks -> (list)
 
         
 
-        The Tag type is used by ``create-stack`` in the ``Tags`` parameter. It allows you to specify a key-value pair that can be used to store information related to cost allocation for an AWS CloudFormation stack.
+        The Tag type enables you to specify a key-value pair that can be used to store information about an AWS CloudFormation stack.
 
         
 
@@ -397,7 +444,7 @@ Stacks -> (list)
 
           
 
-          *Required* . A string used to identify this tag. You can specify a maximum of 128 characters for a tag key. Tags owned by Amazon Web Services (AWS) have the reserved prefix: ``aws:`` .
+           *Required* . A string used to identify this tag. You can specify a maximum of 128 characters for a tag key. Tags owned by Amazon Web Services (AWS) have the reserved prefix: ``aws:`` .
 
           
 
@@ -407,7 +454,7 @@ Stacks -> (list)
 
           
 
-          *Required* . A string containing the value for this tag. You can specify a maximum of 256 characters for a tag value.
+           *Required* . A string containing the value for this tag. You can specify a maximum of 256 characters for a tag value.
 
           
 

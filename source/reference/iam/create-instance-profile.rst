@@ -15,12 +15,15 @@ Description
 
 
 
-Creates a new instance profile. For information about instance profiles, go to `About Instance Profiles`_ . 
+Creates a new instance profile. For information about instance profiles, go to `About Instance Profiles <http://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html>`_ .
 
  
 
-For information about the number of instance profiles you can create, see `Limitations on IAM Entities`_ in the *IAM User Guide* . 
+For information about the number of instance profiles you can create, see `Limitations on IAM Entities <http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html>`_ in the *IAM User Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateInstanceProfile>`_
 
 
 ========
@@ -33,7 +36,7 @@ Synopsis
   --instance-profile-name <value>
   [--path <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -47,24 +50,32 @@ Options
 
   The name of the instance profile to create.
 
+   
+
+  This parameter allows (per its `regex pattern <http://wikipedia.org/wiki/regex>`_ ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-
+
   
 
 ``--path`` (string)
 
 
-  The path to the instance profile. For more information about paths, see `IAM Identifiers`_ in the *Using IAM* guide. 
+  The path to the instance profile. For more information about paths, see `IAM Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ in the *IAM User Guide* .
 
    
 
   This parameter is optional. If it is not included, it defaults to a slash (/).
+
+   
+
+  This paramater allows (per its `regex pattern <http://wikipedia.org/wiki/regex>`_ ) a string of characters consisting of either a forward slash (/) by itself or a string that must begin and end with forward slashes, containing any ASCII character from the ! (\u0021) thru the DEL character (\u007F), including most punctuation characters, digits, and upper and lowercased letters.
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -105,7 +116,7 @@ InstanceProfile -> (structure)
 
   
 
-  Information about the instance profile.
+  A structure containing details about the new instance profile.
 
   
 
@@ -113,7 +124,7 @@ InstanceProfile -> (structure)
 
     
 
-    The path to the instance profile. For more information about paths, see `IAM Identifiers`_ in the *Using IAM* guide. 
+    The path to the instance profile. For more information about paths, see `IAM Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ in the *Using IAM* guide. 
 
     
 
@@ -133,7 +144,7 @@ InstanceProfile -> (structure)
 
     
 
-    The stable and unique string identifying the instance profile. For more information about IDs, see `IAM Identifiers`_ in the *Using IAM* guide. 
+    The stable and unique string identifying the instance profile. For more information about IDs, see `IAM Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ in the *Using IAM* guide. 
 
     
 
@@ -143,7 +154,7 @@ InstanceProfile -> (structure)
 
     
 
-    The Amazon Resource Name (ARN) specifying the instance profile. For more information about ARNs and how to use them in policies, see `IAM Identifiers`_ in the *Using IAM* guide. 
+    The Amazon Resource Name (ARN) specifying the instance profile. For more information about ARNs and how to use them in policies, see `IAM Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ in the *Using IAM* guide. 
 
     
 
@@ -171,21 +182,7 @@ InstanceProfile -> (structure)
 
       
 
-      Contains information about an IAM role.
-
-       
-
-      This data type is used as a response element in the following actions:
-
-       
-
-       
-      *  create-role   
-       
-      *  get-role   
-       
-      *  list-roles   
-       
+      Contains information about an IAM role. This structure is returned as a response element in several APIs that interact with roles.
 
       
 
@@ -193,7 +190,7 @@ InstanceProfile -> (structure)
 
         
 
-        The path to the role. For more information about paths, see `IAM Identifiers`_ in the *Using IAM* guide. 
+        The path to the role. For more information about paths, see `IAM Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ in the *Using IAM* guide. 
 
         
 
@@ -213,7 +210,7 @@ InstanceProfile -> (structure)
 
         
 
-        The stable and unique string identifying the role. For more information about IDs, see `IAM Identifiers`_ in the *Using IAM* guide. 
+        The stable and unique string identifying the role. For more information about IDs, see `IAM Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ in the *Using IAM* guide. 
 
         
 
@@ -223,7 +220,7 @@ InstanceProfile -> (structure)
 
         
 
-        The Amazon Resource Name (ARN) specifying the role. For more information about ARNs and how to use them in policies, see `IAM Identifiers`_ in the *Using IAM* guide. 
+        The Amazon Resource Name (ARN) specifying the role. For more information about ARNs and how to use them in policies, see `IAM Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ in the *IAM User Guide* guide. 
 
         
 
@@ -233,7 +230,7 @@ InstanceProfile -> (structure)
 
         
 
-        The date and time, in `ISO 8601 date-time format`_ , when the role was created.
+        The date and time, in `ISO 8601 date-time format <http://www.iso.org/iso/iso8601>`_ , when the role was created.
 
         
 
@@ -249,15 +246,19 @@ InstanceProfile -> (structure)
 
         
 
+      Description -> (string)
+
+        
+
+        A description of the role that you provide.
+
+        
+
+        
+
       
 
     
 
   
 
-
-
-.. _ISO 8601 date-time format: http://www.iso.org/iso/iso8601
-.. _IAM Identifiers: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
-.. _About Instance Profiles: http://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html
-.. _Limitations on IAM Entities: http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html

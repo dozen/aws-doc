@@ -15,7 +15,7 @@ Description
 
 
 
-Creates a layer. For more information, see `How to Create a Layer`_ .
+Creates a layer. For more information, see `How to Create a Layer <http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-create.html>`_ .
 
  
 
@@ -29,8 +29,11 @@ Creates a layer. For more information, see `How to Create a Layer`_ .
 
  
 
-**Required Permissions** : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see `Managing User Permissions`_ .
+ **Required Permissions** : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see `Managing User Permissions <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html>`_ .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateLayer>`_
 
 
 ========
@@ -45,6 +48,7 @@ Synopsis
   --name <value>
   --shortname <value>
   [--attributes <value>]
+  [--cloud-watch-logs-configuration <value>]
   [--custom-instance-profile-arn <value>]
   [--custom-json <value>]
   [--custom-security-group-ids <value>]
@@ -58,7 +62,7 @@ Synopsis
   [--use-ebs-optimized-instances | --no-use-ebs-optimized-instances]
   [--lifecycle-event-configuration <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -77,7 +81,7 @@ Options
 ``--type`` (string)
 
 
-  The layer type. A stack cannot have more than one built-in layer of the same type. It can have any number of custom layers.
+  The layer type. A stack cannot have more than one built-in layer of the same type. It can have any number of custom layers. Built-in layers are not available in Chef 12 stacks.
 
   
 
@@ -133,11 +137,11 @@ Options
 ``--shortname`` (string)
 
 
-  For custom layers only, use this parameter to specify the layer's short name, which is used internally by AWS OpsWorks and by Chef recipes. The short name is also used as the name for the directory where your app files are installed. It can have a maximum of 200 characters, which are limited to the alphanumeric characters, '-', '_', and '.'.
+  For custom layers only, use this parameter to specify the layer's short name, which is used internally by AWS OpsWorks Stacks and by Chef recipes. The short name is also used as the name for the directory where your app files are installed. It can have a maximum of 200 characters, which are limited to the alphanumeric characters, '-', '_', and '.'.
 
    
 
-  The built-in layers' short names are defined by AWS OpsWorks. For more information, see the `Layer Reference`_ .
+  The built-in layers' short names are defined by AWS OpsWorks Stacks. For more information, see the `Layer Reference <http://docs.aws.amazon.com/opsworks/latest/userguide/layers.html>`_ .
 
   
 
@@ -195,17 +199,57 @@ JSON Syntax::
 
 
 
+``--cloud-watch-logs-configuration`` (structure)
+
+
+  Specifies CloudWatch Logs configuration options for the layer. For more information, see  CloudWatchLogsLogStream .
+
+  
+
+
+
+Shorthand Syntax::
+
+    Enabled=boolean,LogStreams=[{LogGroupName=string,DatetimeFormat=string,TimeZone=string,File=string,FileFingerprintLines=string,MultiLineStartPattern=string,InitialPosition=string,Encoding=string,BufferDuration=integer,BatchCount=integer,BatchSize=integer},{LogGroupName=string,DatetimeFormat=string,TimeZone=string,File=string,FileFingerprintLines=string,MultiLineStartPattern=string,InitialPosition=string,Encoding=string,BufferDuration=integer,BatchCount=integer,BatchSize=integer}]
+
+
+
+
+JSON Syntax::
+
+  {
+    "Enabled": true|false,
+    "LogStreams": [
+      {
+        "LogGroupName": "string",
+        "DatetimeFormat": "string",
+        "TimeZone": "LOCAL"|"UTC",
+        "File": "string",
+        "FileFingerprintLines": "string",
+        "MultiLineStartPattern": "string",
+        "InitialPosition": "start_of_file"|"end_of_file",
+        "Encoding": "ascii"|"big5"|"big5hkscs"|"cp037"|"cp424"|"cp437"|"cp500"|"cp720"|"cp737"|"cp775"|"cp850"|"cp852"|"cp855"|"cp856"|"cp857"|"cp858"|"cp860"|"cp861"|"cp862"|"cp863"|"cp864"|"cp865"|"cp866"|"cp869"|"cp874"|"cp875"|"cp932"|"cp949"|"cp950"|"cp1006"|"cp1026"|"cp1140"|"cp1250"|"cp1251"|"cp1252"|"cp1253"|"cp1254"|"cp1255"|"cp1256"|"cp1257"|"cp1258"|"euc_jp"|"euc_jis_2004"|"euc_jisx0213"|"euc_kr"|"gb2312"|"gbk"|"gb18030"|"hz"|"iso2022_jp"|"iso2022_jp_1"|"iso2022_jp_2"|"iso2022_jp_2004"|"iso2022_jp_3"|"iso2022_jp_ext"|"iso2022_kr"|"latin_1"|"iso8859_2"|"iso8859_3"|"iso8859_4"|"iso8859_5"|"iso8859_6"|"iso8859_7"|"iso8859_8"|"iso8859_9"|"iso8859_10"|"iso8859_13"|"iso8859_14"|"iso8859_15"|"iso8859_16"|"johab"|"koi8_r"|"koi8_u"|"mac_cyrillic"|"mac_greek"|"mac_iceland"|"mac_latin2"|"mac_roman"|"mac_turkish"|"ptcp154"|"shift_jis"|"shift_jis_2004"|"shift_jisx0213"|"utf_32"|"utf_32_be"|"utf_32_le"|"utf_16"|"utf_16_be"|"utf_16_le"|"utf_7"|"utf_8"|"utf_8_sig",
+        "BufferDuration": integer,
+        "BatchCount": integer,
+        "BatchSize": integer
+      }
+      ...
+    ]
+  }
+
+
+
 ``--custom-instance-profile-arn`` (string)
 
 
-  The ARN of an IAM profile to be used for the layer's EC2 instances. For more information about IAM ARNs, see `Using Identifiers`_ .
+  The ARN of an IAM profile to be used for the layer's EC2 instances. For more information about IAM ARNs, see `Using Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ .
 
   
 
 ``--custom-json`` (string)
 
 
-  A JSON-formatted string containing custom stack configuration and deployment attributes to be installed on the layer's instances. For more information, see `Using Custom JSON`_ . This feature is supported as of version 1.7.42 of the AWS CLI. 
+  A JSON-formatted string containing custom stack configuration and deployment attributes to be installed on the layer's instances. For more information, see `Using Custom JSON <http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html>`_ . This feature is supported as of version 1.7.42 of the AWS CLI. 
 
   
 
@@ -281,14 +325,14 @@ JSON Syntax::
 ``--auto-assign-elastic-ips`` | ``--no-auto-assign-elastic-ips`` (boolean)
 
 
-  Whether to automatically assign an `Elastic IP address`_ to the layer's instances. For more information, see `How to Edit a Layer`_ .
+  Whether to automatically assign an `Elastic IP address <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html>`_ to the layer's instances. For more information, see `How to Edit a Layer <http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html>`_ .
 
   
 
 ``--auto-assign-public-ips`` | ``--no-auto-assign-public-ips`` (boolean)
 
 
-  For stacks that are running in a VPC, whether to automatically assign a public IP address to the layer's instances. For more information, see `How to Edit a Layer`_ .
+  For stacks that are running in a VPC, whether to automatically assign a public IP address to the layer's instances. For more information, see `How to Edit a Layer <http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html>`_ .
 
   
 
@@ -374,8 +418,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -388,8 +432,6 @@ Examples
 The following ``create-layer`` command creates a PHP App Server layer named MyPHPLayer in a specified stack. ::
 
   aws opsworks create-layer --region us-east-1 --stack-id f6673d70-32e6-4425-8999-265dd002fec7 --type php-app --name MyPHPLayer --shortname myphplayer
-
-**Note**: AWS OpsWorks CLI commands should set the region to ``us-east-1`` regardless of the stack's location.
 
 *Output*::
 
@@ -418,12 +460,3 @@ LayerId -> (string)
 
   
 
-
-
-.. _Using Custom JSON: http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html
-.. _Layer Reference: http://docs.aws.amazon.com/opsworks/latest/userguide/layers.html
-.. _How to Create a Layer: http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-create.html
-.. _Using Identifiers: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
-.. _Elastic IP address: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
-.. _How to Edit a Layer: http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
-.. _Managing User Permissions: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html

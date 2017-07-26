@@ -23,15 +23,15 @@ The ``describe-volume-status`` operation provides the following information abou
 
  
 
-*Status* : Reflects the current status of the volume. The possible values are ``ok`` , ``impaired`` , ``warning`` , or ``insufficient-data`` . If all checks pass, the overall status of the volume is ``ok`` . If the check fails, the overall status is ``impaired`` . If the status is ``insufficient-data`` , then the checks may still be taking place on your volume at the time. We recommend that you retry the request. For more information on volume status, see `Monitoring the Status of Your Volumes`_ .
+ *Status* : Reflects the current status of the volume. The possible values are ``ok`` , ``impaired`` , ``warning`` , or ``insufficient-data`` . If all checks pass, the overall status of the volume is ``ok`` . If the check fails, the overall status is ``impaired`` . If the status is ``insufficient-data`` , then the checks may still be taking place on your volume at the time. We recommend that you retry the request. For more information on volume status, see `Monitoring the Status of Your Volumes <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-volume-status.html>`_ .
 
  
 
-*Events* : Reflect the cause of a volume status and may require you to take action. For example, if your volume returns an ``impaired`` status, then the volume event might be ``potential-data-inconsistency`` . This means that your volume has been affected by an issue with the underlying host, has all I/O operations disabled, and may have inconsistent data.
+ *Events* : Reflect the cause of a volume status and may require you to take action. For example, if your volume returns an ``impaired`` status, then the volume event might be ``potential-data-inconsistency`` . This means that your volume has been affected by an issue with the underlying host, has all I/O operations disabled, and may have inconsistent data.
 
  
 
-*Actions* : Reflect the actions you may have to take in response to an event. For example, if the status of the volume is ``impaired`` and the volume event shows ``potential-data-inconsistency`` , then the action shows ``enable-volume-io`` . This means that you may want to enable the I/O operations for the volume by calling the  enable-volume-io action and then check the volume for data consistency.
+ *Actions* : Reflect the actions you may have to take in response to an event. For example, if the status of the volume is ``impaired`` and the volume event shows ``potential-data-inconsistency`` , then the action shows ``enable-volume-io`` . This means that you may want to enable the I/O operations for the volume by calling the  enable-volume-io action and then check the volume for data consistency.
 
  
 
@@ -45,6 +45,9 @@ The ``describe-volume-status`` operation provides the following information abou
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumeStatus>`_
+
+
 ``describe-volume-status`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
 When using ``--output text`` and the ``--query`` argument on a paginated response, the ``--query`` argument must extract data from the results of the following query expressions: ``VolumeStatuses``
 
@@ -56,14 +59,14 @@ Synopsis
 ::
 
     describe-volume-status
-  [--dry-run | --no-dry-run]
-  [--volume-ids <value>]
   [--filters <value>]
+  [--volume-ids <value>]
+  [--dry-run | --no-dry-run]
   [--cli-input-json <value>]
   [--starting-token <value>]
   [--page-size <value>]
   [--max-items <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -71,32 +74,6 @@ Synopsis
 =======
 Options
 =======
-
-``--dry-run`` | ``--no-dry-run`` (boolean)
-
-
-  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
-
-  
-
-``--volume-ids`` (list)
-
-
-  One or more volume IDs.
-
-   
-
-  Default: Describes all your volumes.
-
-  
-
-
-
-Syntax::
-
-  "string" "string" ...
-
-
 
 ``--filters`` (list)
 
@@ -154,6 +131,32 @@ JSON Syntax::
 
 
 
+``--volume-ids`` (list)
+
+
+  One or more volume IDs.
+
+   
+
+  Default: Describes all your volumes.
+
+  
+
+
+
+Syntax::
+
+  "string" "string" ...
+
+
+
+``--dry-run`` | ``--no-dry-run`` (boolean)
+
+
+  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
+
+  
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
@@ -164,26 +167,34 @@ Performs service operation based on the JSON string provided. The JSON string fo
 
    
 
-``--page-size`` (integer)
- 
-
-  The size of each page.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
    
 
-  
+``--page-size`` (integer)
+ 
 
-  
+  The size of each page to get in the AWS service call. This does not affect the number of items returned in the command's output. Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call. This can help prevent the AWS service calls from timing out.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
 
 ``--max-items`` (integer)
  
 
-  The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination. This ``NextToken`` response element should **not** be used directly outside of the AWS CLI.
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``NextToken`` is provided in the command's output. To resume pagination, provide the ``NextToken`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``NextToken`` response element directly outside of the AWS CLI.
 
    
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -193,11 +204,11 @@ Examples
 
 **To describe the status of a single volume**
 
-This example command describes the status for the volume ``vol-2725bc51``.
+This example command describes the status for the volume ``vol-1234567890abcdef0``.
 
 Command::
 
-  aws ec2 describe-volume-status --volume-ids vol-2725bc51
+  aws ec2 describe-volume-status --volume-ids vol-1234567890abcdef0
 
 Output::
 
@@ -218,7 +229,7 @@ Output::
                    ]
                },
                "AvailabilityZone": "us-east-1a",
-               "VolumeId": "vol-2725bc51",
+               "VolumeId": "vol-1234567890abcdef0",
                "Actions": [],
                "Events": []
            }
@@ -248,6 +259,16 @@ If you have a volume with a failed status check (status is impaired), see `Worki
 Output
 ======
 
+NextToken -> (string)
+
+  
+
+  The token to use to retrieve the next page of results. This value is ``null`` when there are no more results to return.
+
+  
+
+  
+
 VolumeStatuses -> (list)
 
   
@@ -264,13 +285,63 @@ VolumeStatuses -> (list)
 
     
 
-    VolumeId -> (string)
+    Actions -> (list)
 
       
 
-      The volume ID.
+      The details of the operation.
 
       
+
+      (structure)
+
+        
+
+        Describes a volume status operation code.
+
+        
+
+        Code -> (string)
+
+          
+
+          The code identifying the operation, for example, ``enable-volume-io`` .
+
+          
+
+          
+
+        Description -> (string)
+
+          
+
+          A description of the operation.
+
+          
+
+          
+
+        EventId -> (string)
+
+          
+
+          The ID of the event associated with this operation.
+
+          
+
+          
+
+        EventType -> (string)
+
+          
+
+          The event type associated with this operation.
+
+          
+
+          
+
+        
 
       
 
@@ -284,6 +355,86 @@ VolumeStatuses -> (list)
 
       
 
+    Events -> (list)
+
+      
+
+      A list of events associated with the volume.
+
+      
+
+      (structure)
+
+        
+
+        Describes a volume status event.
+
+        
+
+        Description -> (string)
+
+          
+
+          A description of the event.
+
+          
+
+          
+
+        EventId -> (string)
+
+          
+
+          The ID of this event.
+
+          
+
+          
+
+        EventType -> (string)
+
+          
+
+          The type of this event.
+
+          
+
+          
+
+        NotAfter -> (timestamp)
+
+          
+
+          The latest end time of the event.
+
+          
+
+          
+
+        NotBefore -> (timestamp)
+
+          
+
+          The earliest start time of the event.
+
+          
+
+          
+
+        
+
+      
+
+    VolumeId -> (string)
+
+      
+
+      The volume ID.
+
+      
+
+      
+
     VolumeStatus -> (structure)
 
       
@@ -291,16 +442,6 @@ VolumeStatuses -> (list)
       The volume status.
 
       
-
-      Status -> (string)
-
-        
-
-        The status of the volume.
-
-        
-
-        
 
       Details -> (list)
 
@@ -342,133 +483,13 @@ VolumeStatuses -> (list)
 
         
 
-      
-
-    Events -> (list)
-
-      
-
-      A list of events associated with the volume.
-
-      
-
-      (structure)
+      Status -> (string)
 
         
 
-        Describes a volume status event.
+        The status of the volume.
 
         
-
-        EventType -> (string)
-
-          
-
-          The type of this event.
-
-          
-
-          
-
-        Description -> (string)
-
-          
-
-          A description of the event.
-
-          
-
-          
-
-        NotBefore -> (timestamp)
-
-          
-
-          The earliest start time of the event.
-
-          
-
-          
-
-        NotAfter -> (timestamp)
-
-          
-
-          The latest end time of the event.
-
-          
-
-          
-
-        EventId -> (string)
-
-          
-
-          The ID of this event.
-
-          
-
-          
-
-        
-
-      
-
-    Actions -> (list)
-
-      
-
-      The details of the operation.
-
-      
-
-      (structure)
-
-        
-
-        Describes a volume status operation code.
-
-        
-
-        Code -> (string)
-
-          
-
-          The code identifying the operation, for example, ``enable-volume-io`` .
-
-          
-
-          
-
-        Description -> (string)
-
-          
-
-          A description of the operation.
-
-          
-
-          
-
-        EventType -> (string)
-
-          
-
-          The event type associated with this operation.
-
-          
-
-          
-
-        EventId -> (string)
-
-          
-
-          The ID of the event associated with this operation.
-
-          
-
-          
 
         
 
@@ -478,16 +499,3 @@ VolumeStatuses -> (list)
 
   
 
-NextToken -> (string)
-
-  
-
-  The token to use to retrieve the next page of results. This value is ``null`` when there are no more results to return.
-
-  
-
-  
-
-
-
-.. _Monitoring the Status of Your Volumes: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-volume-status.html

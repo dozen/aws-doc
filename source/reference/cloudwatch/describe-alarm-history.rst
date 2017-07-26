@@ -15,14 +15,15 @@ Description
 
 
 
-Retrieves history for the specified alarm. Filter alarms by date range or item type. If an alarm name is not specified, Amazon CloudWatch returns histories for all of the owner's alarms. 
+Retrieves the history for the specified alarm. You can filter the results by date range or item type. If an alarm name is not specified, the histories for all alarms are returned.
 
  
 
-.. note::
+CloudWatch retains the history of an alarm even if you delete the alarm.
 
-  Amazon CloudWatch retains the history of an alarm for two weeks, whether or not you delete the alarm. 
 
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarmHistory>`_
 
 
 ``describe-alarm-history`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
@@ -44,7 +45,7 @@ Synopsis
   [--starting-token <value>]
   [--page-size <value>]
   [--max-items <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -56,14 +57,14 @@ Options
 ``--alarm-name`` (string)
 
 
-  The name of the alarm. 
+  The name of the alarm.
 
   
 
 ``--history-item-type`` (string)
 
 
-  The type of alarm histories to retrieve. 
+  The type of alarm histories to retrieve.
 
   
 
@@ -85,14 +86,14 @@ Options
 ``--start-date`` (timestamp)
 
 
-  The starting date to retrieve alarm history. 
+  The starting date to retrieve alarm history.
 
   
 
 ``--end-date`` (timestamp)
 
 
-  The ending date to retrieve alarm history. 
+  The ending date to retrieve alarm history.
 
   
 
@@ -106,26 +107,34 @@ Performs service operation based on the JSON string provided. The JSON string fo
 
    
 
-``--page-size`` (integer)
- 
-
-  The size of each page.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
    
 
-  
+``--page-size`` (integer)
+ 
 
-  
+  The size of each page to get in the AWS service call. This does not affect the number of items returned in the command's output. Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call. This can help prevent the AWS service calls from timing out.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
 
 ``--max-items`` (integer)
  
 
-  The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``next-token`` will be provided in the output that you can use to resume pagination. This ``next-token`` response element should **not** be used directly outside of the AWS CLI.
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``next-token`` is provided in the command's output. To resume pagination, provide the ``next-token`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``next-token`` response element directly outside of the AWS CLI.
 
    
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -171,7 +180,7 @@ AlarmHistoryItems -> (list)
 
   
 
-  A list of alarm histories in JSON format. 
+  The alarm histories, in JSON format.
 
   
 
@@ -179,7 +188,7 @@ AlarmHistoryItems -> (list)
 
     
 
-    The ``AlarmHistoryItem`` data type contains descriptive information about the history of a specific alarm. If you call  describe-alarm-history , Amazon CloudWatch returns this data type as part of the DescribeAlarmHistoryResult data type. 
+    Represents the history of a specific alarm.
 
     
 
@@ -187,7 +196,7 @@ AlarmHistoryItems -> (list)
 
       
 
-      The descriptive name for the alarm. 
+      The descriptive name for the alarm.
 
       
 
@@ -197,7 +206,7 @@ AlarmHistoryItems -> (list)
 
       
 
-      The time stamp for the alarm history item. 
+      The time stamp for the alarm history item.
 
       
 
@@ -207,7 +216,7 @@ AlarmHistoryItems -> (list)
 
       
 
-      The type of alarm history item. 
+      The type of alarm history item.
 
       
 
@@ -217,7 +226,7 @@ AlarmHistoryItems -> (list)
 
       
 
-      A human-readable summary of the alarm history. 
+      A summary of the alarm history, in text format.
 
       
 
@@ -227,7 +236,7 @@ AlarmHistoryItems -> (list)
 
       
 
-      Machine-readable data about the alarm in JSON format. 
+      Data about the alarm, in JSON format.
 
       
 
@@ -241,7 +250,7 @@ NextToken -> (string)
 
   
 
-  A string that marks the start of the next batch of returned results. 
+  The token that marks the start of the next batch of returned results.
 
   
 

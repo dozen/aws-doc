@@ -19,7 +19,11 @@ Creates a subnet in an existing VPC.
 
  
 
-When you create each subnet, you provide the VPC ID and the CIDR block you want for the subnet. After you create a subnet, you can't change its CIDR block. The subnet's CIDR block can be the same as the VPC's CIDR block (assuming you want only a single subnet in the VPC), or a subset of the VPC's CIDR block. If you create more than one subnet in a VPC, the subnets' CIDR blocks must not overlap. The smallest subnet (and VPC) you can create uses a /28 netmask (16 IP addresses), and the largest uses a /16 netmask (65,536 IP addresses).
+When you create each subnet, you provide the VPC ID and the CIDR block you want for the subnet. After you create a subnet, you can't change its CIDR block. The subnet's IPv4 CIDR block can be the same as the VPC's IPv4 CIDR block (assuming you want only a single subnet in the VPC), or a subset of the VPC's IPv4 CIDR block. If you create more than one subnet in a VPC, the subnets' CIDR blocks must not overlap. The smallest IPv4 subnet (and VPC) you can create uses a /28 netmask (16 IPv4 addresses), and the largest uses a /16 netmask (65,536 IPv4 addresses).
+
+ 
+
+If you've associated an IPv6 CIDR block with your VPC, you can create a subnet with an IPv6 CIDR block that uses a /64 prefix length. 
 
  
 
@@ -27,7 +31,7 @@ When you create each subnet, you provide the VPC ID and the CIDR block you want 
 
    
 
-  AWS reserves both the first four and the last IP address in each subnet's CIDR block. They're not available for use.
+  AWS reserves both the first four and the last IPv4 address in each subnet's CIDR block. They're not available for use.
 
    
 
@@ -41,8 +45,11 @@ If you launch an instance in a VPC using an Amazon EBS-backed AMI, the IP addres
 
  
 
-For more information about subnets, see `Your VPC and Subnets`_ in the *Amazon Virtual Private Cloud User Guide* .
+For more information about subnets, see `Your VPC and Subnets <http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html>`_ in the *Amazon Virtual Private Cloud User Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSubnet>`_
 
 
 ========
@@ -52,12 +59,13 @@ Synopsis
 ::
 
     create-subnet
-  [--dry-run | --no-dry-run]
-  --vpc-id <value>
-  --cidr-block <value>
   [--availability-zone <value>]
+  --cidr-block <value>
+  [--ipv6-cidr-block <value>]
+  --vpc-id <value>
+  [--dry-run | --no-dry-run]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -66,10 +74,28 @@ Synopsis
 Options
 =======
 
-``--dry-run`` | ``--no-dry-run`` (boolean)
+``--availability-zone`` (string)
 
 
-  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
+  The Availability Zone for the subnet.
+
+   
+
+  Default: AWS selects one for you. If you create more than one subnet in your VPC, we may not necessarily select a different zone for each subnet.
+
+  
+
+``--cidr-block`` (string)
+
+
+  The IPv4 network range for the subnet, in CIDR notation. For example, ``10.0.0.0/24`` .
+
+  
+
+``--ipv6-cidr-block`` (string)
+
+
+  The IPv6 network range for the subnet, in CIDR notation. The subnet size must use a /64 prefix length.
 
   
 
@@ -80,29 +106,18 @@ Options
 
   
 
-``--cidr-block`` (string)
+``--dry-run`` | ``--no-dry-run`` (boolean)
 
 
-  The network range for the subnet, in CIDR notation. For example, ``10.0.0.0/24`` .
-
-  
-
-``--availability-zone`` (string)
-
-
-  The Availability Zone for the subnet.
-
-   
-
-  Default: AWS selects one for you. If you create more than one subnet in your VPC, we may not necessarily select a different zone for each subnet. 
+  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -112,7 +127,7 @@ Examples
 
 **To create a subnet**
 
-This example creates a subnet in the specified VPC with the specified CIDR block. We recommend that you let us select an Availability Zone for you. Alternatively, you can use the ``--availability-zone`` option to specify the Availability Zone.
+This example creates a subnet in the specified VPC with the specified IPv4 CIDR block. We recommend that you let us select an Availability Zone for you. Alternatively, you can use the ``--availability-zone`` option to specify the Availability Zone.
 
 Command::
 
@@ -122,13 +137,50 @@ Output::
 
   {
       "Subnet": {
-          "VpcId": "vpc-a01106c2",
-          "CidrBlock": "10.0.1.0/24",
-          "State": "pending",
-          "AvailabilityZone": "us-east-1c",
-          "SubnetId": "subnet-9d4a7b6c",
-          "AvailableIpAddressCount": 251
+        "VpcId": "vpc-a01106c2",
+        "AvailableIpAddressCount": 251, 
+        "MapPublicIpOnLaunch": false, 
+        "DefaultForAz": false, 
+        "Ipv6CidrBlockAssociationSet": [], 
+        "State": "pending", 
+        "AvailabilityZone": "us-east-1a", 
+        "SubnetId": "subnet-2c2de375", 
+        "CidrBlock": "10.0.1.0/24", 
+        "AssignIpv6AddressOnCreation": false
       }  
+  }
+
+**To create a subnet with an IPv6 CIDR block**
+
+This example creates a subnet in the specified VPC with the specified IPv4 and IPv6 CIDR blocks (from the ranges of the VPC).
+
+Command::
+
+  aws ec2 create-subnet --vpc-id vpc-31896b55 --cidr-block 10.0.0.0/24 --ipv6-cidr-block 2001:db8:1234:a100::/64
+  
+Output::
+
+  {
+    "Subnet": {
+        "VpcId": "vpc-31896b55", 
+        "AvailableIpAddressCount": 251, 
+        "MapPublicIpOnLaunch": false, 
+        "DefaultForAz": false, 
+        "Ipv6CidrBlockAssociationSet": [
+            {
+                "Ipv6CidrBlock": "2001:db8:1234:a100::/64", 
+                "AssociationId": "subnet-cidr-assoc-3fe7e347", 
+                "Ipv6CidrBlockState": {
+                    "State": "ASSOCIATING"
+                }
+            }
+        ], 
+        "State": "pending", 
+        "AvailabilityZone": "ap-southeast-2a", 
+        "SubnetId": "subnet-5504d223", 
+        "CidrBlock": "10.0.0.0/24", 
+        "AssignIpv6AddressOnCreation": false
+    }
   }
 
 ======
@@ -143,41 +195,11 @@ Subnet -> (structure)
 
   
 
-  SubnetId -> (string)
+  AvailabilityZone -> (string)
 
     
 
-    The ID of the subnet.
-
-    
-
-    
-
-  State -> (string)
-
-    
-
-    The current state of the subnet.
-
-    
-
-    
-
-  VpcId -> (string)
-
-    
-
-    The ID of the VPC the subnet is in.
-
-    
-
-    
-
-  CidrBlock -> (string)
-
-    
-
-    The CIDR block assigned to the subnet.
+    The Availability Zone of the subnet.
 
     
 
@@ -187,17 +209,17 @@ Subnet -> (structure)
 
     
 
-    The number of unused IP addresses in the subnet. Note that the IP addresses for any stopped instances are considered unavailable.
+    The number of unused private IPv4 addresses in the subnet. Note that the IPv4 addresses for any stopped instances are considered unavailable.
 
     
 
     
 
-  AvailabilityZone -> (string)
+  CidrBlock -> (string)
 
     
 
-    The Availability Zone of the subnet.
+    The IPv4 CIDR block assigned to the subnet.
 
     
 
@@ -217,9 +239,119 @@ Subnet -> (structure)
 
     
 
-    Indicates whether instances launched in this subnet receive a public IP address.
+    Indicates whether instances launched in this subnet receive a public IPv4 address.
 
     
+
+    
+
+  State -> (string)
+
+    
+
+    The current state of the subnet.
+
+    
+
+    
+
+  SubnetId -> (string)
+
+    
+
+    The ID of the subnet.
+
+    
+
+    
+
+  VpcId -> (string)
+
+    
+
+    The ID of the VPC the subnet is in.
+
+    
+
+    
+
+  AssignIpv6AddressOnCreation -> (boolean)
+
+    
+
+    Indicates whether a network interface created in this subnet (including a network interface created by  run-instances ) receives an IPv6 address.
+
+    
+
+    
+
+  Ipv6CidrBlockAssociationSet -> (list)
+
+    
+
+    Information about the IPv6 CIDR blocks associated with the subnet.
+
+    
+
+    (structure)
+
+      
+
+      Describes an IPv6 CIDR block associated with a subnet.
+
+      
+
+      AssociationId -> (string)
+
+        
+
+        The association ID for the CIDR block.
+
+        
+
+        
+
+      Ipv6CidrBlock -> (string)
+
+        
+
+        The IPv6 CIDR block.
+
+        
+
+        
+
+      Ipv6CidrBlockState -> (structure)
+
+        
+
+        Information about the state of the CIDR block.
+
+        
+
+        State -> (string)
+
+          
+
+          The state of a CIDR block.
+
+          
+
+          
+
+        StatusMessage -> (string)
+
+          
+
+          A message about the status of the CIDR block, if applicable.
+
+          
+
+          
+
+        
+
+      
 
     
 
@@ -243,11 +375,11 @@ Subnet -> (structure)
 
         
 
-        The key of the tag. 
+        The key of the tag.
 
          
 
-        Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with ``aws:`` 
+        Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with ``aws:``  
 
         
 
@@ -273,6 +405,3 @@ Subnet -> (structure)
 
   
 
-
-
-.. _Your VPC and Subnets: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html

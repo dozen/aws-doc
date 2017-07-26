@@ -15,8 +15,11 @@ Description
 
 
 
-Creates a new deployment configuration.
+Creates a deployment configuration.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeploymentConfig>`_
 
 
 ========
@@ -29,7 +32,7 @@ Synopsis
   --deployment-config-name <value>
   [--minimum-healthy-hosts <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -57,9 +60,9 @@ Options
    
 
    
-  * HOST_COUNT: The value parameter represents the minimum number of healthy instances, as an absolute value.
+  * HOST_COUNT: The value parameter represents the minimum number of healthy instances as an absolute value. 
    
-  * FLEET_PERCENT: The value parameter represents the minimum number of healthy instances, as a percentage of the total number of instances in the deployment. If you specify FLEET_PERCENT, then at the start of the deployment AWS CodeDeploy converts the percentage to the equivalent number of instances and rounds fractional instances up.
+  * FLEET_PERCENT: The value parameter represents the minimum number of healthy instances as a percentage of the total number of instances in the deployment. If you specify FLEET_PERCENT, at the start of the deployment, AWS CodeDeploy converts the percentage to the equivalent number of instance and rounds up fractional instances. 
    
 
    
@@ -68,7 +71,7 @@ Options
 
    
 
-  For example, to set a minimum of 95% healthy instances, specify a type of FLEET_PERCENT and a value of 95.
+  For example, to set a minimum of 95% healthy instance, specify a type of FLEET_PERCENT and a value of 95.
 
   
 
@@ -93,8 +96,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 

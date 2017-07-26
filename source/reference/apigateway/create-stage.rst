@@ -19,6 +19,9 @@ Creates a new  Stage resource that references a pre-existing  Deployment for the
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/apigateway-2015-07-09/CreateStage>`_
+
+
 ========
 Synopsis
 ========
@@ -33,8 +36,9 @@ Synopsis
   [--cache-cluster-enabled | --no-cache-cluster-enabled]
   [--cache-cluster-size <value>]
   [--variables <value>]
+  [--documentation-version <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -46,7 +50,7 @@ Options
 ``--rest-api-id`` (string)
 
 
-  The identifier of the  RestApi resource for the  Stage resource to create.
+  The string identifier of the associated  RestApi .
 
   
 
@@ -118,7 +122,7 @@ Options
 ``--variables`` (map)
 
 
-  A map that defines the stage variables for the new  Stage resource. Variable names can have alphanumeric characters, and the values must match ``[A-Za-z0-9-._~:/?#=,]+`` .
+  A map that defines the stage variables for the new  Stage resource. Variable names can have alphanumeric and underscore characters, and the values must match ``[A-Za-z0-9-._~:/?#=,]+`` .
 
   
 
@@ -138,12 +142,36 @@ JSON Syntax::
 
 
 
+``--documentation-version`` (string)
+
+
+  The version of the associated API documentation.
+
+  
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
+
+
+========
+Examples
+========
+
+**To create a stage in an API which will contain an existing deployment**
+
+Command::
+
+  aws apigateway create-stage --rest-api-id 1234123412 --stage-name 'dev' --description 'Development stage' --deployment-id a1b2c3
+
+**To create a stage in an API which will contain an existing deployment and custom Stage Variables**
+
+Command::
+
+  aws apigateway create-stage --rest-api-id 1234123412 --stage-name 'dev' --description 'Development stage' --deployment-id a1b2c3 --variables key='value',otherKey='otherValue'
 
 
 ======
@@ -161,6 +189,10 @@ deploymentId -> (string)
   
 
 clientCertificateId -> (string)
+
+  
+
+  The identifier of a client certificate for an API stage.
 
   
 
@@ -220,7 +252,7 @@ methodSettings -> (map)
 
   
 
-  A map that defines the method settings for a  Stage resource. Keys are defined as ``{resource_path}/{http_method}`` for an individual method override, or ``\*/\*`` for the settings applied to all methods in the stage.
+  A map that defines the method settings for a  Stage resource. Keys (designated as ``/{method_setting_key`` below) are method paths defined as ``{resource_path}/{http_method}`` for an individual method override, or ``/\*/\*`` for overriding all methods in the stage. 
 
   
 
@@ -262,7 +294,7 @@ methodSettings -> (map)
 
       
 
-      Specifies the whether data trace logging is enabled for this method, which effects the log entries pushed to Amazon CloudWatch Logs. The PATCH path for this setting is ``/{method_setting_key}/logging/dataTrace`` , and the value is a Boolean.
+      Specifies whether data trace logging is enabled for this method, which effects the log entries pushed to Amazon CloudWatch Logs. The PATCH path for this setting is ``/{method_setting_key}/logging/dataTrace`` , and the value is a Boolean.
 
       
 
@@ -302,7 +334,7 @@ methodSettings -> (map)
 
       
 
-      Specifies the time to live (TTL) in seconds, for cached responses. The higher a the TTL, the longer the response will be cached. The PATCH path for this setting is ``/{method_setting_key}/caching/ttlInSeconds`` , and the value is an integer.
+      Specifies the time to live (TTL), in seconds, for cached responses. The higher the TTL, the longer the response will be cached. The PATCH path for this setting is ``/{method_setting_key}/caching/ttlInSeconds`` , and the value is an integer.
 
       
 
@@ -318,6 +350,26 @@ methodSettings -> (map)
 
       
 
+    requireAuthorizationForCacheControl -> (boolean)
+
+      
+
+      Specifies whether authorization is required for a cache invalidation request. The PATCH path for this setting is ``/{method_setting_key}/caching/requireAuthorizationForCacheControl`` , and the value is a Boolean.
+
+      
+
+      
+
+    unauthorizedCacheControlHeaderStrategy -> (string)
+
+      
+
+      Specifies how to handle unauthorized requests for cache invalidation. The PATCH path for this setting is ``/{method_setting_key}/caching/unauthorizedCacheControlHeaderStrategy`` , and the available values are ``FAIL_WITH_403`` , ``SUCCEED_WITH_RESPONSE_HEADER`` , ``SUCCEED_WITHOUT_RESPONSE_HEADER`` .
+
+      
+
+      
+
     
 
   
@@ -326,7 +378,7 @@ variables -> (map)
 
   
 
-  A map that defines the stage variables for a  Stage resource. Variable names can have alphanumeric characters, and the values must match ``[A-Za-z0-9-._~:/?#=,]+`` .
+  A map that defines the stage variables for a  Stage resource. Variable names can have alphanumeric and underscore characters, and the values must match ``[A-Za-z0-9-._~:/?#=,]+`` .
 
   
 
@@ -344,11 +396,21 @@ variables -> (map)
 
   
 
+documentationVersion -> (string)
+
+  
+
+  The version of the associated API documentation.
+
+  
+
+  
+
 createdDate -> (timestamp)
 
   
 
-  The date and time that the stage was created, in `ISO 8601 format`_ .
+  The timestamp when the stage was created.
 
   
 
@@ -358,12 +420,9 @@ lastUpdatedDate -> (timestamp)
 
   
 
-  The date and time that information about the stage was last updated, in `ISO 8601 format`_ .
+  The timestamp when the stage last updated.
 
   
 
   
 
-
-
-.. _ISO 8601 format: http://www.iso.org/iso/home/standards/iso8601.htm

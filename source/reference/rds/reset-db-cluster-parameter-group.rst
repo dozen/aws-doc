@@ -23,8 +23,11 @@ When resetting the entire group, dynamic parameters are updated immediately and 
 
  
 
-For more information on Amazon Aurora, see `Aurora on Amazon RDS`_ in the *Amazon RDS User Guide.* 
+For more information on Amazon Aurora, see `Aurora on Amazon RDS <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html>`_ in the *Amazon RDS User Guide.*  
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ResetDBClusterParameterGroup>`_
 
 
 ========
@@ -38,7 +41,7 @@ Synopsis
   [--reset-all-parameters | --no-reset-all-parameters]
   [--parameters <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -100,8 +103,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -113,32 +116,33 @@ DBClusterParameterGroupName -> (string)
 
   
 
-  The name of the DB cluster parameter group. 
+  The name of the DB cluster parameter group.
 
    
 
-  Constraints: 
+  Constraints:
 
    
 
    
-  * Must be 1 to 255 alphanumeric characters
+  * Must be 1 to 255 alphanumeric characters 
    
-  * First character must be a letter
+  * First character must be a letter 
    
-  * Cannot end with a hyphen or contain two consecutive hyphens
+  * Cannot end with a hyphen or contain two consecutive hyphens 
    
 
    
 
   .. note::
 
+     
+
     This value is stored as a lowercase string.
 
-  
+     
 
   
 
+  
 
-
-.. _Aurora on Amazon RDS: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html

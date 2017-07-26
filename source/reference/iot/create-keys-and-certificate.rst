@@ -15,12 +15,15 @@ Description
 
 
 
-Creates a 2048 bit RSA key pair and issues an X.509 certificate using the issued public key.
+Creates a 2048-bit RSA key pair and issues an X.509 certificate using the issued public key.
 
  
 
-**Note** This is the only time AWS IoT issues the private key for this certificate. It is important to keep track of the private key.
+ **Note** This is the only time AWS IoT issues the private key for this certificate, so it is important to keep it in a secure location.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iot-2015-05-28/CreateKeysAndCertificate>`_
 
 
 ========
@@ -35,7 +38,7 @@ Synopsis
   [--public-key-outfile <value>]
   [--private-key-outfile <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -63,8 +66,8 @@ Saves the command output contents of keyPair.PrivateKey to the given filename
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -86,7 +89,7 @@ certificateId -> (string)
 
   
 
-  The ID of the certificate. AWS IoT issues a default subject name for the certificate (e.g., AWS IoT Certificate).
+  The ID of the certificate. AWS IoT issues a default subject name for the certificate (for example, AWS IoT Certificate).
 
   
 

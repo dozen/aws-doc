@@ -15,8 +15,11 @@ Description
 
 
 
-Describes the ClassicLink DNS support status of one or more VPCs. If enabled, the DNS hostname of a linked EC2-Classic instance resolves to its private IP address when addressed from an instance in the VPC to which it's linked. Similarly, the DNS hostname of an instance in a VPC resolves to its private IP address when addressed from a linked EC2-Classic instance. For more information about ClassicLink, see `ClassicLink`_ in the Amazon Elastic Compute Cloud User Guide.
+Describes the ClassicLink DNS support status of one or more VPCs. If enabled, the DNS hostname of a linked EC2-Classic instance resolves to its private IP address when addressed from an instance in the VPC to which it's linked. Similarly, the DNS hostname of an instance in a VPC resolves to its private IP address when addressed from a linked EC2-Classic instance. For more information, see `ClassicLink <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html>`_ in the *Amazon Elastic Compute Cloud User Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcClassicLinkDnsSupport>`_
 
 
 ========
@@ -26,11 +29,11 @@ Synopsis
 ::
 
     describe-vpc-classic-link-dns-support
-  [--vpc-ids <value>]
   [--max-results <value>]
   [--next-token <value>]
+  [--vpc-ids <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -38,6 +41,20 @@ Synopsis
 =======
 Options
 =======
+
+``--max-results`` (integer)
+
+
+  The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results.
+
+  
+
+``--next-token`` (string)
+
+
+  The token for the next set of items to return. (You received this token from a prior call.)
+
+  
 
 ``--vpc-ids`` (list)
 
@@ -54,25 +71,11 @@ Syntax::
 
 
 
-``--max-results`` (integer)
-
-
-  The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results.
-
-  
-
-``--next-token`` (string)
-
-
-  The token for the next set of items to return. (You received this token from a prior call.)
-
-  
-
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -107,6 +110,16 @@ Output::
 Output
 ======
 
+NextToken -> (string)
+
+  
+
+  The token to use when requesting the next set of items.
+
+  
+
+  
+
 Vpcs -> (list)
 
   
@@ -123,16 +136,6 @@ Vpcs -> (list)
 
     
 
-    VpcId -> (string)
-
-      
-
-      The ID of the VPC.
-
-      
-
-      
-
     ClassicLinkDnsSupported -> (boolean)
 
       
@@ -143,20 +146,17 @@ Vpcs -> (list)
 
       
 
+    VpcId -> (string)
+
+      
+
+      The ID of the VPC.
+
+      
+
+      
+
     
 
   
 
-NextToken -> (string)
-
-  
-
-  The token to use when requesting the next set of items.
-
-  
-
-  
-
-
-
-.. _ClassicLink: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html

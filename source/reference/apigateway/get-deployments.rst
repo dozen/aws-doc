@@ -19,6 +19,9 @@ Gets information about a  Deployments collection.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/apigateway-2015-07-09/GetDeployments>`_
+
+
 ``get-deployments`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
 When using ``--output text`` and the ``--query`` argument on a paginated response, the ``--query`` argument must extract data from the results of the following query expressions: ``items``
 
@@ -35,7 +38,7 @@ Synopsis
   [--starting-token <value>]
   [--page-size <value>]
   [--max-items <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -47,7 +50,7 @@ Options
 ``--rest-api-id`` (string)
 
 
-  The identifier of the  RestApi resource for the collection of  Deployment resources to get information about.
+  The string identifier of the associated  RestApi .
 
   
 
@@ -61,26 +64,58 @@ Performs service operation based on the JSON string provided. The JSON string fo
 
    
 
-``--page-size`` (integer)
- 
-
-  The size of each page.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
    
 
-  
+``--page-size`` (integer)
+ 
 
-  
+  The size of each page to get in the AWS service call. This does not affect the number of items returned in the command's output. Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call. This can help prevent the AWS service calls from timing out.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
 
 ``--max-items`` (integer)
  
 
-  The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination. This ``NextToken`` response element should **not** be used directly outside of the AWS CLI.
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``NextToken`` is provided in the command's output. To resume pagination, provide the ``NextToken`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``NextToken`` response element directly outside of the AWS CLI.
 
    
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
+
+
+
+========
+Examples
+========
+
+**To get a list of deployments for a REST API**
+
+Command::
+
+  aws apigateway get-deployments --rest-api-id 1234123412
+
+Output::
+
+  {
+      "items": [
+          {
+              "createdDate": 1453797217, 
+              "id": "0a2b4c", 
+              "description": "Deployed my API for the first time"
+          }
+      ]
+  }
 
 
 
@@ -98,7 +133,7 @@ items -> (list)
 
   
 
-  The current page of any  Deployment resources in the collection of deployment resources.
+  The current page of elements from this collection.
 
   
 
@@ -108,7 +143,7 @@ items -> (list)
 
     An immutable representation of a  RestApi resource that can be called by users using  Stages . A deployment must be associated with a  Stage for it to be callable over the Internet.
 
-    
+     To create a deployment, call ``POST`` on the  Deployments resource of a  RestApi . To view, update, or delete a deployment, call ``GET`` , ``PATCH`` , or ``DELETE`` on the specified deployment resource (``/restapis/{restapi_id}/deployments/{deployment_id}`` ).  RestApi ,  Deployments ,  Stage , `AWS CLI <http://docs.aws.amazon.com/cli/latest/reference/apigateway/get-deployment.html>`_ , `AWS SDKs <https://aws.amazon.com/tools/>`_  
 
     id -> (string)
 
@@ -144,7 +179,7 @@ items -> (list)
 
       
 
-      Gets a summary of the  RestApi at the date and time that the deployment resource was created.
+      A summary of the  RestApi at the date and time that the deployment resource was created.
 
       
 
@@ -176,7 +211,7 @@ items -> (list)
 
             
 
-            Specifies the type of authorization used for the method.
+            The method's authorization type. Valid values are ``NONE`` for open access, ``AWS_IAM`` for using AWS IAM permissions, ``CUSTOM`` for using a custom authorizer, or ``COGNITO_USER_POOLS`` for using a Cognito user pool.
 
             
 

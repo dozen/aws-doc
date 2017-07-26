@@ -164,7 +164,7 @@ will exclude ``/tmp/foo/bar.txt`` and ``/tmp/foo/baz.jpg``::
 Note that, by default, *all files are included*.  This means that
 providing **only** an ``--include`` filter will not change what
 files are transferred.  ``--include`` will only re-include files that
-have been excluded from an ``--exclude`` filter.  If you want only want
+have been excluded from an ``--exclude`` filter.  If you only want
 to upload files with a particular extension, you need to first exclude
 all files, then re-include the files with the particular extension.
 This command will upload **only** files ending with ``.jpg``::
@@ -211,6 +211,7 @@ Available Commands
   ls
   mb
   mv
+  presign
   rb
   rm
   sync

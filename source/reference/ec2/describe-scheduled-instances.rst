@@ -19,6 +19,9 @@ Describes one or more of your Scheduled Instances.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeScheduledInstances>`_
+
+
 ========
 Synopsis
 ========
@@ -27,13 +30,13 @@ Synopsis
 
     describe-scheduled-instances
   [--dry-run | --no-dry-run]
+  [--filters <value>]
+  [--max-results <value>]
+  [--next-token <value>]
   [--scheduled-instance-ids <value>]
   [--slot-start-time-range <value>]
-  [--next-token <value>]
-  [--max-results <value>]
-  [--filters <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -46,60 +49,6 @@ Options
 
 
   Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
-
-  
-
-``--scheduled-instance-ids`` (list)
-
-
-  One or more Scheduled Instance IDs.
-
-  
-
-
-
-Syntax::
-
-  "string" "string" ...
-
-
-
-``--slot-start-time-range`` (structure)
-
-
-  The time period for the first schedule to start.
-
-  
-
-
-
-Shorthand Syntax::
-
-    EarliestTime=timestamp,LatestTime=timestamp
-
-
-
-
-JSON Syntax::
-
-  {
-    "EarliestTime": timestamp,
-    "LatestTime": timestamp
-  }
-
-
-
-``--next-token`` (string)
-
-
-  The token for the next set of results.
-
-  
-
-``--max-results`` (integer)
-
-
-  The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned ``NextToken`` value.
 
   
 
@@ -143,11 +92,65 @@ JSON Syntax::
 
 
 
+``--max-results`` (integer)
+
+
+  The maximum number of results to return in a single call. This value can be between 5 and 300. The default value is 100. To retrieve the remaining results, make another call with the returned ``NextToken`` value.
+
+  
+
+``--next-token`` (string)
+
+
+  The token for the next set of results.
+
+  
+
+``--scheduled-instance-ids`` (list)
+
+
+  One or more Scheduled Instance IDs.
+
+  
+
+
+
+Syntax::
+
+  "string" "string" ...
+
+
+
+``--slot-start-time-range`` (structure)
+
+
+  The time period for the first schedule to start.
+
+  
+
+
+
+Shorthand Syntax::
+
+    EarliestTime=timestamp,LatestTime=timestamp
+
+
+
+
+JSON Syntax::
+
+  {
+    "EarliestTime": timestamp,
+    "LatestTime": timestamp
+  }
+
+
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -231,11 +234,41 @@ ScheduledInstanceSet -> (list)
 
     
 
-    ScheduledInstanceId -> (string)
+    AvailabilityZone -> (string)
 
       
 
-      The Scheduled Instance ID.
+      The Availability Zone.
+
+      
+
+      
+
+    CreateDate -> (timestamp)
+
+      
+
+      The date when the Scheduled Instance was purchased.
+
+      
+
+      
+
+    HourlyPrice -> (string)
+
+      
+
+      The hourly price for a single instance.
+
+      
+
+      
+
+    InstanceCount -> (integer)
+
+      
+
+      The number of instances.
 
       
 
@@ -251,16 +284,6 @@ ScheduledInstanceSet -> (list)
 
       
 
-    Platform -> (string)
-
-      
-
-      The platform (``Linux/UNIX`` or ``Windows`` ).
-
-      
-
-      
-
     NetworkPlatform -> (string)
 
       
@@ -271,21 +294,31 @@ ScheduledInstanceSet -> (list)
 
       
 
-    AvailabilityZone -> (string)
+    NextSlotStartTime -> (timestamp)
 
       
 
-      The Availability Zone.
+      The time for the next schedule to start.
 
       
 
       
 
-    SlotDurationInHours -> (integer)
+    Platform -> (string)
 
       
 
-      The number of hours in the schedule.
+      The platform (``Linux/UNIX`` or ``Windows`` ).
+
+      
+
+      
+
+    PreviousSlotEndTime -> (timestamp)
+
+      
+
+      The time that the previous schedule ended or will end.
 
       
 
@@ -357,61 +390,21 @@ ScheduledInstanceSet -> (list)
 
       
 
-    PreviousSlotEndTime -> (timestamp)
+    ScheduledInstanceId -> (string)
 
       
 
-      The time that the previous schedule ended or will end.
-
-      
-
-      
-
-    NextSlotStartTime -> (timestamp)
-
-      
-
-      The time for the next schedule to start.
+      The Scheduled Instance ID.
 
       
 
       
 
-    HourlyPrice -> (string)
+    SlotDurationInHours -> (integer)
 
       
 
-      The hourly price for a single instance.
-
-      
-
-      
-
-    TotalScheduledInstanceHours -> (integer)
-
-      
-
-      The total number of hours for a single instance for the entire term.
-
-      
-
-      
-
-    InstanceCount -> (integer)
-
-      
-
-      The number of instances.
-
-      
-
-      
-
-    TermStartDate -> (timestamp)
-
-      
-
-      The start date for the Scheduled Instance.
+      The number of hours in the schedule.
 
       
 
@@ -427,11 +420,21 @@ ScheduledInstanceSet -> (list)
 
       
 
-    CreateDate -> (timestamp)
+    TermStartDate -> (timestamp)
 
       
 
-      The date when the Scheduled Instance was purchased.
+      The start date for the Scheduled Instance.
+
+      
+
+      
+
+    TotalScheduledInstanceHours -> (integer)
+
+      
+
+      The total number of hours for a single instance for the entire term.
 
       
 

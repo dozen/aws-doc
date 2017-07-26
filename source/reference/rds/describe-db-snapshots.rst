@@ -15,8 +15,11 @@ Description
 
 
 
-Returns information about DB snapshots. This API supports pagination. 
+Returns information about DB snapshots. This API action supports pagination.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSnapshots>`_
 
 
 ``describe-db-snapshots`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
@@ -40,7 +43,7 @@ Synopsis
   [--starting-token <value>]
   [--page-size <value>]
   [--max-items <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -52,7 +55,7 @@ Options
 ``--db-instance-identifier`` (string)
 
 
-  A DB instance identifier to retrieve the list of DB snapshots for. This parameter cannot be used in conjunction with ``DBSnapshotIdentifier`` . This parameter is not case-sensitive. 
+  The ID of the DB instance to retrieve the list of DB snapshots for. This parameter cannot be used in conjunction with ``DBSnapshotIdentifier`` . This parameter is not case-sensitive. 
 
    
 
@@ -61,11 +64,11 @@ Options
    
 
    
-  * Must contain from 1 to 63 alphanumeric characters or hyphens
+  * Must contain from 1 to 63 alphanumeric characters or hyphens 
    
-  * First character must be a letter
+  * First character must be a letter 
    
-  * Cannot end with a hyphen or contain two consecutive hyphens
+  * Cannot end with a hyphen or contain two consecutive hyphens 
    
 
   
@@ -82,13 +85,13 @@ Options
    
 
    
-  * Must be 1 to 255 alphanumeric characters.
+  * Must be 1 to 255 alphanumeric characters. 
    
-  * First character must be a letter.
+  * First character must be a letter. 
    
-  * Cannot end with a hyphen or contain two consecutive hyphens.
+  * Cannot end with a hyphen or contain two consecutive hyphens. 
    
-  * If this is the identifier of an automated snapshot, the ``SnapshotType`` parameter must also be specified.
+  * If this identifier is for an automated snapshot, the ``SnapshotType`` parameter must also be specified. 
    
 
   
@@ -96,27 +99,27 @@ Options
 ``--snapshot-type`` (string)
 
 
-  The type of snapshots that will be returned. You can specify one of the following values:
+  The type of snapshots to be returned. You can specify one of the following values:
 
    
 
    
-  * ``automated`` - Return all DB snapshots that have been automatically taken by Amazon RDS for my AWS account.
+  * ``automated`` - Return all DB snapshots that have been automatically taken by Amazon RDS for my AWS account. 
    
-  * ``manual`` - Return all DB snapshots that have been taken by my AWS account.
+  * ``manual`` - Return all DB snapshots that have been taken by my AWS account. 
    
-  * ``shared`` - Return all manual DB snapshots that have been shared to my AWS account.
+  * ``shared`` - Return all manual DB snapshots that have been shared to my AWS account. 
    
-  * ``public`` - Return all DB snapshots that have been marked as public.
+  * ``public`` - Return all DB snapshots that have been marked as public. 
    
-
-   
-
-  If you do not specify a ``SnapshotType`` , then both automated and manual snapshots are returned. You can include shared snapshots with these results by setting the ``IncludeShared`` parameter to ``true`` . You can include public snapshots with these results by setting the ``IncludePublic`` parameter to ``true`` .
 
    
 
-  The ``IncludeShared`` and ``IncludePublic`` parameters do not apply for ``SnapshotType`` values of ``manual`` or ``automated`` . The ``IncludePublic`` parameter does not apply when ``SnapshotType`` is set to ``shared`` . the ``IncludeShared`` parameter does not apply when ``SnapshotType`` is set to ``public`` .
+  If you don't specify a ``SnapshotType`` value, then both automated and manual snapshots are returned. Shared and public DB snapshots are not included in the returned results by default. You can include shared snapshots with these results by setting the ``IncludeShared`` parameter to ``true`` . You can include public snapshots with these results by setting the ``IncludePublic`` parameter to ``true`` .
+
+   
+
+  The ``IncludeShared`` and ``IncludePublic`` parameters don't apply for ``SnapshotType`` values of ``manual`` or ``automated`` . The ``IncludePublic`` parameter doesn't apply when ``SnapshotType`` is set to ``shared`` . The ``IncludeShared`` parameter doesn't apply when ``SnapshotType`` is set to ``public`` .
 
   
 
@@ -151,22 +154,22 @@ JSON Syntax::
 ``--include-shared`` | ``--no-include-shared`` (boolean)
 
 
-  True to include shared manual DB snapshots from other AWS accounts that this AWS account has been given permission to copy or restore; otherwise false. The default is false.
+  Set this value to ``true`` to include shared manual DB snapshots from other AWS accounts that this AWS account has been given permission to copy or restore, otherwise set this value to ``false`` . The default is ``false`` .
 
    
 
-  An AWS account is given permission to restore a manual DB snapshot from another AWS account by the  modify-db-snapshot-attribute API.
+  You can give an AWS account permission to restore a manual DB snapshot from another AWS account by using the  modify-db-snapshot-attribute API action.
 
   
 
 ``--include-public`` | ``--no-include-public`` (boolean)
 
 
-  True to include manual DB snapshots that are public and can be copied or restored by any AWS account; otherwise false. The default is false.
+  Set this value to ``true`` to include manual DB snapshots that are public and can be copied or restored by any AWS account, otherwise set this value to ``false`` . The default is ``false`` .
 
    
 
-  An manual DB snapshot is shared as public by the  modify-db-snapshot-attribute API.
+  You can share a manual DB snapshot as public by using the  modify-db-snapshot-attribute API.
 
   
 
@@ -180,26 +183,34 @@ Performs service operation based on the JSON string provided. The JSON string fo
 
    
 
-``--page-size`` (integer)
- 
-
-  The size of each page.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
    
 
-  
+``--page-size`` (integer)
+ 
 
-  
+  The size of each page to get in the AWS service call. This does not affect the number of items returned in the command's output. Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call. This can help prevent the AWS service calls from timing out.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
 
 ``--max-items`` (integer)
  
 
-  The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination. This ``NextToken`` response element should **not** be used directly outside of the AWS CLI.
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``NextToken`` is provided in the command's output. To resume pagination, provide the ``NextToken`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``NextToken`` response element directly outside of the AWS CLI.
 
    
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -229,14 +240,14 @@ DBSnapshots -> (list)
 
     
 
-    Contains the result of a successful invocation of the following actions: 
+    Contains the result of a successful invocation of the following actions:
 
      
 
      
-    *  create-db-snapshot  
+    *  create-db-snapshot   
      
-    *  delete-db-snapshot  
+    *  delete-db-snapshot   
      
 
      
@@ -249,7 +260,7 @@ DBSnapshots -> (list)
 
       
 
-      Specifies the identifier for the DB snapshot. 
+      Specifies the identifier for the DB snapshot.
 
       
 
@@ -259,7 +270,7 @@ DBSnapshots -> (list)
 
       
 
-      Specifies the DB instance identifier of the DB instance this DB snapshot was created from. 
+      Specifies the DB instance identifier of the DB instance this DB snapshot was created from.
 
       
 
@@ -269,7 +280,7 @@ DBSnapshots -> (list)
 
       
 
-      Provides the time when the snapshot was taken, in Universal Coordinated Time (UTC). 
+      Provides the time when the snapshot was taken, in Universal Coordinated Time (UTC).
 
       
 
@@ -279,7 +290,7 @@ DBSnapshots -> (list)
 
       
 
-      Specifies the name of the database engine. 
+      Specifies the name of the database engine.
 
       
 
@@ -289,7 +300,7 @@ DBSnapshots -> (list)
 
       
 
-      Specifies the allocated storage size in gigabytes (GB). 
+      Specifies the allocated storage size in gigabytes (GB).
 
       
 
@@ -299,7 +310,7 @@ DBSnapshots -> (list)
 
       
 
-      Specifies the status of this DB snapshot. 
+      Specifies the status of this DB snapshot.
 
       
 
@@ -309,7 +320,7 @@ DBSnapshots -> (list)
 
       
 
-      Specifies the port that the database engine was listening on at the time of the snapshot. 
+      Specifies the port that the database engine was listening on at the time of the snapshot.
 
       
 
@@ -319,7 +330,7 @@ DBSnapshots -> (list)
 
       
 
-      Specifies the name of the Availability Zone the DB instance was located in at the time of the DB snapshot. 
+      Specifies the name of the Availability Zone the DB instance was located in at the time of the DB snapshot.
 
       
 
@@ -329,7 +340,7 @@ DBSnapshots -> (list)
 
       
 
-      Provides the VPC ID associated with the DB snapshot. 
+      Provides the VPC ID associated with the DB snapshot.
 
       
 
@@ -339,7 +350,7 @@ DBSnapshots -> (list)
 
       
 
-      Specifies the time when the snapshot was taken, in Universal Coordinated Time (UTC). 
+      Specifies the time when the snapshot was taken, in Universal Coordinated Time (UTC).
 
       
 
@@ -349,7 +360,7 @@ DBSnapshots -> (list)
 
       
 
-      Provides the master username for the DB snapshot. 
+      Provides the master username for the DB snapshot.
 
       
 
@@ -359,7 +370,7 @@ DBSnapshots -> (list)
 
       
 
-      Specifies the version of the database engine. 
+      Specifies the version of the database engine.
 
       
 
@@ -369,7 +380,7 @@ DBSnapshots -> (list)
 
       
 
-      License model information for the restored DB instance. 
+      License model information for the restored DB instance.
 
       
 
@@ -379,7 +390,7 @@ DBSnapshots -> (list)
 
       
 
-      Provides the type of the DB snapshot. 
+      Provides the type of the DB snapshot.
 
       
 
@@ -389,7 +400,7 @@ DBSnapshots -> (list)
 
       
 
-      Specifies the Provisioned IOPS (I/O operations per second) value of the DB instance at the time of the snapshot. 
+      Specifies the Provisioned IOPS (I/O operations per second) value of the DB instance at the time of the snapshot.
 
       
 
@@ -399,7 +410,7 @@ DBSnapshots -> (list)
 
       
 
-      Provides the option group name for the DB snapshot. 
+      Provides the option group name for the DB snapshot.
 
       
 
@@ -409,7 +420,7 @@ DBSnapshots -> (list)
 
       
 
-      The percentage of the estimated data that has been transferred. 
+      The percentage of the estimated data that has been transferred.
 
       
 
@@ -419,7 +430,7 @@ DBSnapshots -> (list)
 
       
 
-      The region that the DB snapshot was created in or copied from. 
+      The region that the DB snapshot was created in or copied from.
 
       
 
@@ -429,7 +440,7 @@ DBSnapshots -> (list)
 
       
 
-      The DB snapshot Arn that the DB snapshot was copied from. It only has value in case of cross customer or cross region copy. 
+      The DB snapshot Arn that the DB snapshot was copied from. It only has value in case of cross customer or cross region copy.
 
       
 
@@ -439,7 +450,7 @@ DBSnapshots -> (list)
 
       
 
-      Specifies the storage type associated with DB Snapshot. 
+      Specifies the storage type associated with DB snapshot.
 
       
 
@@ -449,7 +460,7 @@ DBSnapshots -> (list)
 
       
 
-      The ARN from the Key Store with which to associate the instance for TDE encryption. 
+      The ARN from the key store with which to associate the instance for TDE encryption.
 
       
 
@@ -459,7 +470,7 @@ DBSnapshots -> (list)
 
       
 
-      Specifies whether the DB snapshot is encrypted. 
+      Specifies whether the DB snapshot is encrypted.
 
       
 
@@ -470,6 +481,36 @@ DBSnapshots -> (list)
       
 
       If ``Encrypted`` is true, the KMS key identifier for the encrypted DB snapshot. 
+
+      
+
+      
+
+    DBSnapshotArn -> (string)
+
+      
+
+      The Amazon Resource Name (ARN) for the DB snapshot.
+
+      
+
+      
+
+    Timezone -> (string)
+
+      
+
+      The time zone of the DB snapshot. In most cases, the ``Timezone`` element is empty. ``Timezone`` content appears only for snapshots taken from Microsoft SQL Server DB instances that were created with a time zone specified. 
+
+      
+
+      
+
+    IAMDatabaseAuthenticationEnabled -> (boolean)
+
+      
+
+      True if mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled; otherwise false.
 
       
 

@@ -15,20 +15,19 @@ Description
 
 
 
-Returns a list of valid metrics stored for the AWS account owner. Returned metrics can be used with  get-metric-statistics to obtain statistical data for a given metric. 
+List the specified metrics. You can use the returned metrics with  get-metric-statistics to obtain statistical data.
 
  
 
-.. note::
-
-  Up to 500 results are returned for any one call. To retrieve further results, use returned ``next-token`` values with subsequent ``list-metrics`` operations. 
+Up to 500 results are returned for any one call. To retrieve additional results, use the returned token with subsequent calls.
 
  
 
-.. note::
+After you create a metric, allow up to fifteen minutes before the metric appears. Statistics about the metric, however, are available sooner using  get-metric-statistics .
 
-  If you create a metric with the  put-metric-data action, allow up to fifteen minutes for the metric to appear in calls to the ``list-metrics`` action. Statistics about the metric, however, are available sooner using  get-metric-statistics . 
 
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListMetrics>`_
 
 
 ``list-metrics`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
@@ -48,7 +47,7 @@ Synopsis
   [--cli-input-json <value>]
   [--starting-token <value>]
   [--max-items <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -60,21 +59,21 @@ Options
 ``--namespace`` (string)
 
 
-  The namespace to filter against. 
+  The namespace to filter against.
 
   
 
 ``--metric-name`` (string)
 
 
-  The name of the metric to filter against. 
+  The name of the metric to filter against.
 
   
 
 ``--dimensions`` (list)
 
 
-  A list of dimensions to filter against. 
+  The dimensions to filter against.
 
   
 
@@ -109,15 +108,23 @@ Performs service operation based on the JSON string provided. The JSON string fo
 
    
 
-``--max-items`` (integer)
- 
-
-  The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``next-token`` will be provided in the output that you can use to resume pagination. This ``next-token`` response element should **not** be used directly outside of the AWS CLI.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
    
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--max-items`` (integer)
+ 
+
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``next-token`` is provided in the command's output. To resume pagination, provide the ``next-token`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``next-token`` response element directly outside of the AWS CLI.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -228,7 +235,7 @@ Metrics -> (list)
 
   
 
-  A list of metrics used to generate statistics for an AWS account. 
+  The metrics.
 
   
 
@@ -236,11 +243,7 @@ Metrics -> (list)
 
     
 
-    The ``Metric`` data type contains information about a specific metric. If you call  list-metrics , Amazon CloudWatch returns information contained by this data type. 
-
-     
-
-    The example in the Examples section publishes two metrics named buffers and latency. Both metrics are in the examples namespace. Both metrics have two dimensions, InstanceID and InstanceType. 
+    Represents a specific metric.
 
     
 
@@ -248,7 +251,7 @@ Metrics -> (list)
 
       
 
-      The namespace of the metric. 
+      The namespace of the metric.
 
       
 
@@ -258,7 +261,7 @@ Metrics -> (list)
 
       
 
-      The name of the metric. 
+      The name of the metric.
 
       
 
@@ -268,7 +271,7 @@ Metrics -> (list)
 
       
 
-      A list of dimensions associated with the metric. 
+      The dimensions for the metric.
 
       
 
@@ -276,11 +279,7 @@ Metrics -> (list)
 
         
 
-        The ``Dimension`` data type further expands on the identity of a metric using a Name, Value pair. 
-
-         
-
-        For examples that use one or more dimensions, see  put-metric-data .
+        Expands the identity of a metric.
 
         
 
@@ -288,7 +287,7 @@ Metrics -> (list)
 
           
 
-          The name of the dimension. 
+          The name of the dimension.
 
           
 
@@ -298,7 +297,7 @@ Metrics -> (list)
 
           
 
-          The value representing the dimension measurement 
+          The value representing the dimension measurement.
 
           
 
@@ -316,7 +315,7 @@ NextToken -> (string)
 
   
 
-  A string that marks the start of the next batch of returned results. 
+  The token that marks the start of the next batch of returned results.
 
   
 

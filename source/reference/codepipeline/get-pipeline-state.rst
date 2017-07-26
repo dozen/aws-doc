@@ -15,8 +15,11 @@ Description
 
 
 
-Returns information about the state of a pipeline, including the stages, actions, and details about the last run of the pipeline.
+Returns information about the state of a pipeline, including the stages and actions.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetPipelineState>`_
 
 
 ========
@@ -28,7 +31,7 @@ Synopsis
     get-pipeline-state
   --name <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -47,8 +50,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -134,7 +137,11 @@ pipelineVersion -> (integer)
 
   .. note::
 
+     
+
     A newly-created pipeline is always assigned a version number of ``1`` .
+
+     
 
   
 
@@ -144,7 +151,7 @@ stageStates -> (list)
 
   
 
-  A list of the pipeline stage output information, including stage name, state, most recent run details, whether the stage is disabled, and other data. 
+  A list of the pipeline stage output information, including stage name, state, most recent run details, whether the stage is disabled, and other data.
 
   
 
@@ -286,7 +293,7 @@ stageStates -> (list)
 
           
 
-          Represents information about how an action runs.
+          Represents information about the run of an action.
 
           
 
@@ -315,6 +322,26 @@ stageStates -> (list)
             
 
             The last status change of the action.
+
+            
+
+            
+
+          token -> (string)
+
+            
+
+            The system-generated token used to identify a unique approval request. The token for each open approval request can be obtained using the get-pipeline-state command and is used to validate that the approval request corresponding to this token is still valid.
+
+            
+
+            
+
+          lastUpdatedBy -> (string)
+
+            
+
+            The ARN of the user who last changed the pipeline.
 
             
 
@@ -401,6 +428,36 @@ stageStates -> (list)
           
 
           
+
+        
+
+      
+
+    latestExecution -> (structure)
+
+      
+
+      Information about the latest execution in the stage, including its ID and status.
+
+      
+
+      pipelineExecutionId -> (string)
+
+        
+
+        The ID of the pipeline execution associated with the stage.
+
+        
+
+        
+
+      status -> (string)
+
+        
+
+        The status of the stage, or for a completed stage, the last status of the stage.
+
+        
 
         
 

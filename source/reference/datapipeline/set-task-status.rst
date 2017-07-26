@@ -19,6 +19,9 @@ Task runners call ``set-task-status`` to notify AWS Data Pipeline that a task is
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/SetTaskStatus>`_
+
+
 ========
 Synopsis
 ========
@@ -32,7 +35,7 @@ Synopsis
   [--error-message <value>]
   [--error-stack-trace <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -73,7 +76,7 @@ Options
 ``--error-id`` (string)
 
 
-  If an error occurred during the task, this value specifies the error code. This value is set on the physical attempt object. It is used to display error information to the user. It should not start with error-stack-trace "Service_" which is reserved by the system.
+  If an error occurred during the task, this value specifies the error code. This value is set on the physical attempt object. It is used to display error information to the user. It should not start with error-id "Service_" which is reserved by the system.
 
   
 
@@ -92,10 +95,10 @@ Options
   
 
 ``--cli-input-json`` (string)
-Performs service operation based on the JSON error-stack-trace provided. The JSON error-stack-trace follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
+Performs service operation based on the JSON error-id provided. The JSON error-id follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 

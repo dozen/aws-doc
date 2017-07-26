@@ -15,38 +15,41 @@ Description
 
 
 
-This operation lists jobs for a vault, including jobs that are in-progress and jobs that have recently finished. 
+This operation lists jobs for a vault, including jobs that are in-progress and jobs that have recently finished.
 
  
 
 .. note::
 
-  
+   
 
-  Amazon Glacier retains recently completed jobs for a period before deleting them; however, it eventually removes completed jobs. The output of completed jobs can be retrieved. Retaining completed jobs for a period of time after they have completed enables you to get a job output in the event you miss the job completion notification or your first attempt to download it fails. For example, suppose you start an archive retrieval job to download an archive. After the job completes, you start to download the archive but encounter a network error. In this scenario, you can retry and download the archive while the job exists. 
+  Amazon Glacier retains recently completed jobs for a period before deleting them; however, it eventually removes completed jobs. The output of completed jobs can be retrieved. Retaining completed jobs for a period of time after they have completed enables you to get a job output in the event you miss the job completion notification or your first attempt to download it fails. For example, suppose you start an archive retrieval job to download an archive. After the job completes, you start to download the archive but encounter a network error. In this scenario, you can retry and download the archive while the job exists.
 
-  
-
- 
-
-To retrieve an archive or retrieve a vault inventory from Amazon Glacier, you first initiate a job, and after the job completes, you download the data. For an archive retrieval, the output is the archive data, and for an inventory retrieval, it is the inventory list. The List Job operation returns a list of these jobs sorted by job initiation time.
+   
 
  
 
-This List Jobs operation supports pagination. By default, this operation returns up to 1,000 jobs in the response. You should always check the response for a ``marker`` at which to continue the list; if there are no more items the ``marker`` is ``null`` . To return a list of jobs that begins at a specific job, set the ``marker`` request parameter to the value you obtained from a previous List Jobs request. You can also limit the number of jobs returned in the response by specifying the ``limit`` parameter in the request.
+To retrieve an archive or retrieve a vault inventory from Amazon Glacier, you first initiate a job, and after the job completes, you download the data. For an archive retrieval, the output is the archive data. For an inventory retrieval, it is the inventory list. The List Job operation returns a list of these jobs sorted by job initiation time.
 
  
 
-Additionally, you can filter the jobs list returned by specifying an optional ``statuscode`` (InProgress, Succeeded, or Failed) and ``completed`` (true, false) parameter. The ``statuscode`` allows you to specify that only jobs that match a specified status are returned. The ``completed`` parameter allows you to specify that only jobs in a specific completion state are returned.
+The List Jobs operation supports pagination. You should always check the response ``Marker`` field. If there are no more jobs to list, the ``Marker`` field is set to ``null`` . If there are more jobs to list, the ``Marker`` field is set to a non-null value, which you can use to continue the pagination of the list. To return a list of jobs that begins at a specific job, set the marker request parameter to the ``Marker`` value for that job that you obtained from a previous List Jobs request.
 
  
 
-An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see `Access Control Using AWS Identity and Access Management (IAM)`_ .
+You can set a maximum limit for the number of jobs returned in the response by specifying the ``limit`` parameter in the request. The default limit is 1000. The number of jobs returned might be fewer than the limit, but the number of returned jobs never exceeds the limit.
 
  
 
-For the underlying REST API, go to `List Jobs`_  
+Additionally, you can filter the jobs list returned by specifying the optional ``statuscode`` parameter or ``completed`` parameter, or both. Using the ``statuscode`` parameter, you can specify to return only jobs that match either the ``InProgress`` , ``Succeeded`` , or ``Failed`` status. Using the ``completed`` parameter, you can specify to return only jobs that were completed (``true`` ) or jobs that were not completed (``false`` ).
 
+ 
+
+For the underlying REST API, see `List Jobs <http://docs.aws.amazon.com/amazonglacier/latest/dev/api-jobs-get.html>`_ . 
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/glacier-2012-06-01/ListJobs>`_
 
 
 ``list-jobs`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
@@ -68,7 +71,7 @@ Synopsis
   [--starting-token <value>]
   [--page-size <value>]
   [--max-items <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -80,7 +83,7 @@ Options
 ``--account-id`` (string)
 
 
-  The ``AccountId`` value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single apos``-`` apos (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens (apos-apos) in the ID. 
+  The ``AccountId`` value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single '``-`` ' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens ('-') in the ID. 
 
   
 
@@ -94,19 +97,19 @@ Options
 ``--statuscode`` (string)
 
 
-  Specifies the type of job status to return. You can specify the following values: "InProgress", "Succeeded", or "Failed".
+  The type of job status to return. You can specify the following values: ``InProgress`` , ``Succeeded`` , or ``Failed`` .
 
   
 
 ``--completed`` (string)
 
 
-  Specifies the state of the jobs to return. You can specify ``true`` or ``false`` .
+  The state of the jobs to return. You can specify ``true`` or ``false`` .
 
   
 
 ``--cli-input-json`` (string)
-Performs service operation based on the JSON completed provided. The JSON completed follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
+Performs service operation based on the JSON account-id provided. The JSON account-id follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
 ``--starting-token`` (string)
  
@@ -115,26 +118,34 @@ Performs service operation based on the JSON completed provided. The JSON comple
 
    
 
-``--page-size`` (string)
- 
-
-  The size of each page.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
    
 
-  
+``--page-size`` (string)
+ 
 
-  
+  The size of each page to get in the AWS service call. This does not affect the number of items returned in the command's output. Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call. This can help prevent the AWS service calls from timing out.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
 
 ``--max-items`` (string)
  
 
-  The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination. This ``NextToken`` response element should **not** be used directly outside of the AWS CLI.
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``NextToken`` is provided in the command's output. To resume pagination, provide the ``NextToken`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``NextToken`` response element directly outside of the AWS CLI.
 
    
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -190,7 +201,7 @@ JobList -> (list)
 
   
 
-  A list of job objects. Each job object contains metadata describing the job. 
+  A list of job objects. Each job object contains metadata describing the job.
 
   
 
@@ -206,7 +217,7 @@ JobList -> (list)
 
       
 
-      An opaque completed that identifies an Amazon Glacier job.
+      An opaque account-id that identifies an Amazon Glacier job.
 
       
 
@@ -256,7 +267,7 @@ JobList -> (list)
 
       
 
-      The UTC date when the job was created. A completed representation of ISO 8601 date format, for example, "2012-03-20T17:03:43.221Z".
+      The UTC date when the job was created. A account-id representation of ISO 8601 date format, for example, "2012-03-20T17:03:43.221Z".
 
       
 
@@ -340,32 +351,32 @@ JobList -> (list)
 
        
 
-      The SHA256 tree hash value for the requested range of an archive. If the Initiate a Job request for an archive specified a tree-hash aligned range, then this field returns a value. 
+      The SHA256 tree hash value for the requested range of an archive. If the Initiate a Job request for an archive specified a tree-hash aligned range, then this field returns a value.
 
        
 
-      For the specific case when the whole archive is retrieved, this value is the same as the ArchiveSHA256TreeHash value. 
+      For the specific case when the whole archive is retrieved, this value is the same as the ArchiveSHA256TreeHash value.
 
        
 
-      This field is null in the following situations: 
-
-       
-      * Archive retrieval jobs that specify a range that is not tree-hash aligned.
-       
+      This field is null in the following situations:
 
        
 
        
-      * Archival jobs that specify a range that is equal to the whole archive and the job status is InProgress.
+      * Archive retrieval jobs that specify a range that is not tree-hash aligned. 
        
 
        
 
        
-      * Inventory jobs.
+      * Archival jobs that specify a range that is equal to the whole archive and the job status is InProgress. 
        
 
+       
+
+       
+      * Inventory jobs. 
        
 
       
@@ -376,7 +387,7 @@ JobList -> (list)
 
       
 
-      The SHA256 tree hash of the entire archive for an archive retrieval. For inventory retrieval jobs, this field is null. 
+      The SHA256 tree hash of the entire archive for an archive retrieval. For inventory retrieval jobs, this field is null.
 
       
 
@@ -387,6 +398,16 @@ JobList -> (list)
       
 
       The retrieved byte range for archive retrieval jobs in the form "*StartByteValue* -*EndByteValue* " If no range was specified in the archive retrieval, then the whole archive is retrieved and *StartByteValue* equals 0 and *EndByteValue* equals the size of the archive minus 1. For inventory retrieval jobs this field is null. 
+
+      
+
+      
+
+    Tier -> (string)
+
+      
+
+      The retrieval option to use for the archive retrieval. Valid values are ``Expedited`` , ``Standard`` , or ``Bulk`` . ``Standard`` is the default.
 
       
 
@@ -404,7 +425,7 @@ JobList -> (list)
 
         
 
-        The output format for the vault inventory list, which is set by the **initiate-job** request when initiating a job to retrieve a vault inventory. Valid values are "CSV" and "JSON".
+        The output format for the vault inventory list, which is set by the **initiate-job** request when initiating a job to retrieve a vault inventory. Valid values are ``CSV`` and ``JSON`` .
 
         
 
@@ -414,7 +435,7 @@ JobList -> (list)
 
         
 
-        The start of the date range in UTC for vault inventory retrieval that includes archives created on or after this date. A completed representation of ISO 8601 date format, for example, 2013-03-20T17:03:43Z.
+        The start of the date range in Universal Coordinated Time (UTC) for vault inventory retrieval that includes archives created on or after this date. This value should be a account-id in the ISO 8601 date format, for example ``2013-03-20T17:03:43Z`` .
 
         
 
@@ -424,7 +445,7 @@ JobList -> (list)
 
         
 
-        The end of the date range in UTC for vault inventory retrieval that includes archives created before this date. A completed representation of ISO 8601 date format, for example, 2013-03-20T17:03:43Z.
+        The end of the date range in UTC for vault inventory retrieval that includes archives created before this date. This value should be a account-id in the ISO 8601 date format, for example ``2013-03-20T17:03:43Z`` .
 
         
 
@@ -434,7 +455,7 @@ JobList -> (list)
 
         
 
-        Specifies the maximum number of inventory items returned per vault inventory retrieval request. This limit is set when initiating the job with the a **initiate-job** request. 
+        The maximum number of inventory items returned per vault inventory retrieval request. This limit is set when initiating the job with the a **initiate-job** request. 
 
         
 
@@ -444,7 +465,7 @@ JobList -> (list)
 
         
 
-        An opaque completed that represents where to continue pagination of the vault inventory retrieval results. You use the marker in a new **initiate-job** request to obtain additional inventory items. If there are no more inventory items, this value is ``null`` . For more information, see `Range Inventory Retrieval`_ .
+        An opaque account-id that represents where to continue pagination of the vault inventory retrieval results. You use the marker in a new **initiate-job** request to obtain additional inventory items. If there are no more inventory items, this value is ``null`` . For more information, see `Range Inventory Retrieval <http://docs.aws.amazon.com/amazonglacier/latest/dev/api-initiate-job-post.html#api-initiate-job-post-vault-inventory-list-filtering>`_ .
 
         
 
@@ -460,14 +481,9 @@ Marker -> (string)
 
   
 
-  An opaque completed that represents where to continue pagination of the results. You use this value in a new List Jobs request to obtain more jobs in the list. If there are no more jobs, this value is ``null`` . 
+  An opaque account-id used for pagination that specifies the job at which the listing of jobs should begin. You get the ``marker`` value from a previous List Jobs response. You only need to include the marker if you are continuing the pagination of the results started in a previous List Jobs request. 
 
   
 
   
 
-
-
-.. _Access Control Using AWS Identity and Access Management (IAM): http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html
-.. _Range Inventory Retrieval: http://docs.aws.amazon.com/amazonglacier/latest/dev/api-initiate-job-post.html#api-initiate-job-post-vault-inventory-list-filtering
-.. _List Jobs: http://docs.aws.amazon.com/amazonglacier/latest/dev/api-jobs-get.html

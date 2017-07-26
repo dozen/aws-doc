@@ -17,6 +17,19 @@ Description
 
 Modifies an HSM.
 
+ 
+
+.. warning::
+
+   
+
+  This operation can result in the HSM being offline for up to 15 minutes while the AWS CloudHSM service is reconfigured. If you are modifying a production HSM, you should ensure that your AWS CloudHSM service is configured for high availability, and consider executing this operation during a maintenance window.
+
+   
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ModifyHsm>`_
 
 
 ========
@@ -33,7 +46,7 @@ Synopsis
   [--external-id <value>]
   [--syslog-ip <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -52,14 +65,18 @@ Options
 ``--subnet-id`` (string)
 
 
-  The new identifier of the subnet that the HSM is in.
+  The new identifier of the subnet that the HSM is in. The new subnet must be in the same Availability Zone as the current subnet.
 
   
 
 ``--eni-ip`` (string)
 
 
-  The new IP address for the elastic network interface attached to the HSM.
+  The new IP address for the elastic network interface (ENI) attached to the HSM.
+
+   
+
+  If the HSM is moved to a different subnet, and an IP address is not specified, an IP address will be randomly chosen from the CIDR range of the new subnet.
 
   
 
@@ -80,15 +97,15 @@ Options
 ``--syslog-ip`` (string)
 
 
-  The new IP address for the syslog monitoring server.
+  The new IP address for the syslog monitoring server. The AWS CloudHSM service only supports one syslog monitoring server.
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 

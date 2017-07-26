@@ -15,8 +15,11 @@ Description
 
 
 
-Creates a new DB instance. 
+Creates a new DB instance.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstance>`_
 
 
 ========
@@ -57,11 +60,16 @@ Synopsis
   [--tde-credential-password <value>]
   [--storage-encrypted | --no-storage-encrypted]
   [--kms-key-id <value>]
+  [--domain <value>]
   [--copy-tags-to-snapshot | --no-copy-tags-to-snapshot]
   [--monitoring-interval <value>]
   [--monitoring-role-arn <value>]
+  [--domain-iam-role-name <value>]
+  [--promotion-tier <value>]
+  [--timezone <value>]
+  [--enable-iam-database-authentication | --no-enable-iam-database-authentication]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -77,7 +85,7 @@ Options
 
    
 
-  Type: monitoring-role-arn
+  Type: db-name
 
    
 
@@ -85,7 +93,7 @@ Options
 
    
 
-  The name of the database to create when the DB instance is created. If this parameter is not specified, no database is created in the DB instance. 
+  The name of the database to create when the DB instance is created. If this parameter is not specified, no database is created in the DB instance.
 
    
 
@@ -94,9 +102,9 @@ Options
    
 
    
-  * Must contain 1 to 64 alphanumeric characters
+  * Must contain 1 to 64 alphanumeric characters 
    
-  * Cannot be a word reserved by the specified database engine
+  * Cannot be a word reserved by the specified database engine 
    
 
    
@@ -105,7 +113,7 @@ Options
 
    
 
-  The name of the database to create when the DB instance is created. If this parameter is not specified, no database is created in the DB instance. 
+  The name of the database to create when the DB instance is created. If this parameter is not specified, no database is created in the DB instance.
 
    
 
@@ -114,9 +122,9 @@ Options
    
 
    
-  * Must contain 1 to 64 alphanumeric characters
+  * Must contain 1 to 64 alphanumeric characters 
    
-  * Cannot be a word reserved by the specified database engine
+  * Cannot be a word reserved by the specified database engine 
    
 
    
@@ -125,7 +133,7 @@ Options
 
    
 
-  The name of the database to create when the DB instance is created. If this parameter is not specified, the default "postgres" database is created in the DB instance. 
+  The name of the database to create when the DB instance is created. If this parameter is not specified, the default "postgres" database is created in the DB instance.
 
    
 
@@ -134,11 +142,11 @@ Options
    
 
    
-  * Must contain 1 to 63 alphanumeric characters
+  * Must contain 1 to 63 alphanumeric characters 
    
-  * Must begin with a letter or an underscore. Subsequent characters can be letters, underscores, or digits (0-9).
+  * Must begin with a letter or an underscore. Subsequent characters can be letters, underscores, or digits (0-9). 
    
-  * Cannot be a word reserved by the specified database engine
+  * Cannot be a word reserved by the specified database engine 
    
 
    
@@ -147,11 +155,11 @@ Options
 
    
 
-  The Oracle System ID (SID) of the created DB instance. 
+  The Oracle System ID (SID) of the created DB instance. If you specify ``null`` , the default value ``ORCL`` is used. You can't specify the string NULL, or any other reserved word, for ``DBName`` . 
 
    
 
-  Default: ``ORCL`` 
+  Default: ``ORCL``  
 
    
 
@@ -160,7 +168,7 @@ Options
    
 
    
-  * Cannot be longer than 8 characters
+  * Cannot be longer than 8 characters 
    
 
    
@@ -177,7 +185,7 @@ Options
 
    
 
-  The name of the database to create when the primary instance of the DB cluster is created. If this parameter is not specified, no database is created in the DB instance. 
+  The name of the database to create when the primary instance of the DB cluster is created. If this parameter is not specified, no database is created in the DB instance.
 
    
 
@@ -186,9 +194,9 @@ Options
    
 
    
-  * Must contain 1 to 64 alphanumeric characters
+  * Must contain 1 to 64 alphanumeric characters 
    
-  * Cannot be a word reserved by the specified database engine
+  * Cannot be a word reserved by the specified database engine 
    
 
   
@@ -196,7 +204,7 @@ Options
 ``--db-instance-identifier`` (string)
 
 
-  The DB instance identifier. This parameter is stored as a lowercase string. 
+  The DB instance identifier. This parameter is stored as a lowercase string.
 
    
 
@@ -205,27 +213,35 @@ Options
    
 
    
-  * Must contain from 1 to 63 alphanumeric characters or hyphens (1 to 15 for SQL Server).
+  * Must contain from 1 to 63 alphanumeric characters or hyphens (1 to 15 for SQL Server). 
    
-  * First character must be a letter.
+  * First character must be a letter. 
    
-  * Cannot end with a hyphen or contain two consecutive hyphens.
-   
-
+  * Cannot end with a hyphen or contain two consecutive hyphens. 
    
 
-  Example: ``mydbinstance`` 
+   
+
+  Example: ``mydbinstance``  
 
   
 
 ``--allocated-storage`` (integer)
 
 
-  The amount of storage (in gigabytes) to be initially allocated for the database instance. 
+  The amount of storage (in gigabytes) to be initially allocated for the database instance.
 
    
 
   Type: Integer
+
+   
+
+   **Amazon Aurora**  
+
+   
+
+  Not applicable. Aurora cluster volumes automatically grow as the amount of data in your database increases, though you are only charged for the space that you use in an Aurora cluster volume.
 
    
 
@@ -272,11 +288,11 @@ Options
 ``--db-instance-class`` (string)
 
 
-  The compute and memory capacity of the DB instance. 
+  The compute and memory capacity of the DB instance. Note that not all instance classes are available in all regions for all DB engines.
 
    
 
-  Valid Values: ``db.t1.micro | db.m1.small | db.m1.medium | db.m1.large | db.m1.xlarge | db.m2.xlarge |db.m2.2xlarge | db.m2.4xlarge | db.m3.medium | db.m3.large | db.m3.xlarge | db.m3.2xlarge | db.m4.large | db.m4.xlarge | db.m4.2xlarge | db.m4.4xlarge | db.m4.10xlarge | db.r3.large | db.r3.xlarge | db.r3.2xlarge | db.r3.4xlarge | db.r3.8xlarge | db.t2.micro | db.t2.small | db.t2.medium | db.t2.large`` 
+  Valid Values: ``db.t1.micro | db.m1.small | db.m1.medium | db.m1.large | db.m1.xlarge | db.m2.xlarge |db.m2.2xlarge | db.m2.4xlarge | db.m3.medium | db.m3.large | db.m3.xlarge | db.m3.2xlarge | db.m4.large | db.m4.xlarge | db.m4.2xlarge | db.m4.4xlarge | db.m4.10xlarge | db.r3.large | db.r3.xlarge | db.r3.2xlarge | db.r3.4xlarge | db.r3.8xlarge | db.t2.micro | db.t2.small | db.t2.medium | db.t2.large``  
 
   
 
@@ -287,161 +303,46 @@ Options
 
    
 
-  Valid Values: ``MySQL`` | ``mariadb`` | ``oracle-se1`` | ``oracle-se`` | ``oracle-ee`` | ``sqlserver-ee`` | ``sqlserver-se`` | ``sqlserver-ex`` | ``sqlserver-web`` | ``postgres`` | ``aurora`` 
+  Not every database engine is available for every AWS region. 
 
    
 
-  Not every database engine is available for every AWS region. 
+  Valid Values: 
+
+   
+
+   
+  * ``aurora``   
+   
+  * ``mariadb``   
+   
+  * ``mysql``   
+   
+  * ``oracle-ee``   
+   
+  * ``oracle-se2``   
+   
+  * ``oracle-se1``   
+   
+  * ``oracle-se``   
+   
+  * ``postgres``   
+   
+  * ``sqlserver-ee``   
+   
+  * ``sqlserver-se``   
+   
+  * ``sqlserver-ex``   
+   
+  * ``sqlserver-web``   
+   
 
   
 
 ``--master-username`` (string)
 
 
-  The name of master user for the client DB instance. 
-
-   
-
-   **MySQL**  
-
-   
-
-  Constraints:
-
-   
-
-   
-  * Must be 1 to 16 alphanumeric characters.
-   
-  * First character must be a letter.
-   
-  * Cannot be a reserved word for the chosen database engine.
-   
-
-   
-
-   **MariaDB**  
-
-   
-
-  Constraints:
-
-   
-
-   
-  * Must be 1 to 16 alphanumeric characters.
-   
-  * Cannot be a reserved word for the chosen database engine.
-   
-
-   
-
-  Type: monitoring-role-arn
-
-   
-
-   **Oracle**  
-
-   
-
-  Constraints:
-
-   
-
-   
-  * Must be 1 to 30 alphanumeric characters.
-   
-  * First character must be a letter.
-   
-  * Cannot be a reserved word for the chosen database engine.
-   
-
-   
-
-   **SQL Server**  
-
-   
-
-  Constraints:
-
-   
-
-   
-  * Must be 1 to 128 alphanumeric characters.
-   
-  * First character must be a letter.
-   
-  * Cannot be a reserved word for the chosen database engine.
-   
-
-   
-
-   **PostgreSQL**  
-
-   
-
-  Constraints:
-
-   
-
-   
-  * Must be 1 to 63 alphanumeric characters.
-   
-  * First character must be a letter.
-   
-  * Cannot be a reserved word for the chosen database engine.
-   
-
-  
-
-``--master-user-password`` (string)
-
-
-  The password for the master database user. Can be any printable ASCII character except "/", """, or "@". 
-
-   
-
-  Type: monitoring-role-arn
-
-   
-
-   **MySQL**  
-
-   
-
-  Constraints: Must contain from 8 to 41 characters. 
-
-   
-
-   **MariaDB**  
-
-   
-
-  Constraints: Must contain from 8 to 41 characters. 
-
-   
-
-   **Oracle**  
-
-   
-
-  Constraints: Must contain from 8 to 30 characters. 
-
-   
-
-   **SQL Server**  
-
-   
-
-  Constraints: Must contain from 8 to 128 characters. 
-
-   
-
-   **PostgreSQL**  
-
-   
-
-  Constraints: Must contain from 8 to 128 characters. 
+  The name for the master database user.
 
    
 
@@ -449,18 +350,161 @@ Options
 
    
 
-  Constraints: Must contain from 8 to 41 characters. 
+  Not applicable. You specify the name for the master database user when you create your DB cluster. 
+
+   
+
+   **MariaDB**  
+
+   
+
+  Constraints:
+
+   
+
+   
+  * Must be 1 to 16 alphanumeric characters. 
+   
+  * Cannot be a reserved word for the chosen database engine. 
+   
+
+   
+
+   **Microsoft SQL Server**  
+
+   
+
+  Constraints:
+
+   
+
+   
+  * Must be 1 to 128 alphanumeric characters. 
+   
+  * First character must be a letter. 
+   
+  * Cannot be a reserved word for the chosen database engine. 
+   
+
+   
+
+   **MySQL**  
+
+   
+
+  Constraints:
+
+   
+
+   
+  * Must be 1 to 16 alphanumeric characters. 
+   
+  * First character must be a letter. 
+   
+  * Cannot be a reserved word for the chosen database engine. 
+   
+
+   
+
+   **Oracle**  
+
+   
+
+  Constraints:
+
+   
+
+   
+  * Must be 1 to 30 alphanumeric characters. 
+   
+  * First character must be a letter. 
+   
+  * Cannot be a reserved word for the chosen database engine. 
+   
+
+   
+
+   **PostgreSQL**  
+
+   
+
+  Constraints:
+
+   
+
+   
+  * Must be 1 to 63 alphanumeric characters. 
+   
+  * First character must be a letter. 
+   
+  * Cannot be a reserved word for the chosen database engine. 
+   
+
+  
+
+``--master-user-password`` (string)
+
+
+  The password for the master database user. Can be any printable ASCII character except "/", """, or "@".
+
+   
+
+   **Amazon Aurora**  
+
+   
+
+  Not applicable. You specify the password for the master database user when you create your DB cluster. 
+
+   
+
+   **MariaDB**  
+
+   
+
+  Constraints: Must contain from 8 to 41 characters.
+
+   
+
+   **Microsoft SQL Server**  
+
+   
+
+  Constraints: Must contain from 8 to 128 characters.
+
+   
+
+   **MySQL**  
+
+   
+
+  Constraints: Must contain from 8 to 41 characters.
+
+   
+
+   **Oracle**  
+
+   
+
+  Constraints: Must contain from 8 to 30 characters.
+
+   
+
+   **PostgreSQL**  
+
+   
+
+  Constraints: Must contain from 8 to 128 characters.
 
   
 
 ``--db-security-groups`` (list)
 
 
-  A list of DB security groups to associate with this DB instance. 
+  A list of DB security groups to associate with this DB instance.
 
    
 
-  Default: The default DB security group for the database engine. 
+  Default: The default DB security group for the database engine.
 
   
 
@@ -475,11 +519,11 @@ Syntax::
 ``--vpc-security-group-ids`` (list)
 
 
-  A list of EC2 VPC security groups to associate with this DB instance. 
+  A list of EC2 VPC security groups to associate with this DB instance.
 
    
 
-  Default: The default EC2 VPC security group for the DB subnet group's VPC. 
+  Default: The default EC2 VPC security group for the DB subnet group's VPC.
 
   
 
@@ -494,15 +538,15 @@ Syntax::
 ``--availability-zone`` (string)
 
 
-  The EC2 Availability Zone that the database instance will be created in. For information on regions and Availability Zones, see `Regions and Availability Zones`_ . 
+  The EC2 Availability Zone that the database instance will be created in. For information on regions and Availability Zones, see `Regions and Availability Zones <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html>`_ . 
 
    
 
-  Default: A random, system-chosen Availability Zone in the endpoint's region. 
+  Default: A random, system-chosen Availability Zone in the endpoint's region.
 
    
 
-  Example: ``us-east-1d`` 
+  Example: ``us-east-1d``  
 
    
 
@@ -513,26 +557,26 @@ Syntax::
 ``--db-subnet-group-name`` (string)
 
 
-  A DB subnet group to associate with this DB instance. 
+  A DB subnet group to associate with this DB instance.
 
    
 
-  If there is no DB subnet group, then it is a non-VPC DB instance. 
+  If there is no DB subnet group, then it is a non-VPC DB instance.
 
   
 
 ``--preferred-maintenance-window`` (string)
 
 
-  The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC). For more information, see `DB Instance Maintenance`_ . 
+  The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC). For more information, see `DB Instance Maintenance <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBMaintenance.html>`_ . 
 
    
 
-  Format: ``ddd:hh24:mi-ddd:hh24:mi`` 
+  Format: ``ddd:hh24:mi-ddd:hh24:mi``  
 
    
 
-  Default: A 30-minute window selected at random from an 8-hour block of time per region, occurring on a random day of the week. To see the time blocks available, see `Adjusting the Preferred Maintenance Window`_ in the *Amazon RDS User Guide.*  
+  Default: A 30-minute window selected at random from an 8-hour block of time per region, occurring on a random day of the week. To see the time blocks available, see `Adjusting the Preferred Maintenance Window <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html>`_ in the *Amazon RDS User Guide.*  
 
    
 
@@ -547,32 +591,7 @@ Syntax::
 ``--db-parameter-group-name`` (string)
 
 
-  The name of the DB parameter group to associate with this DB instance. If this argument is omitted, the default DBParameterGroup for the specified engine will be used. 
-
-   
-
-  Constraints: 
-
-   
-
-   
-  * Must be 1 to 255 alphanumeric characters
-   
-  * First character must be a letter
-   
-  * Cannot end with a hyphen or contain two consecutive hyphens
-   
-
-  
-
-``--backup-retention-period`` (integer)
-
-
-  The number of days for which automated backups are retained. Setting this parameter to a positive number enables backups. Setting this parameter to 0 disables automated backups. 
-
-   
-
-  Default: 1 
+  The name of the DB parameter group to associate with this DB instance. If this argument is omitted, the default DBParameterGroup for the specified engine will be used.
 
    
 
@@ -581,9 +600,34 @@ Syntax::
    
 
    
-  * Must be a value from 0 to 35
+  * Must be 1 to 255 alphanumeric characters 
    
-  * Cannot be set to 0 if the DB instance is a source to Read Replicas
+  * First character must be a letter 
+   
+  * Cannot end with a hyphen or contain two consecutive hyphens 
+   
+
+  
+
+``--backup-retention-period`` (integer)
+
+
+  The number of days for which automated backups are retained. Setting this parameter to a positive number enables backups. Setting this parameter to 0 disables automated backups.
+
+   
+
+  Default: 1
+
+   
+
+  Constraints:
+
+   
+
+   
+  * Must be a value from 0 to 35 
+   
+  * Cannot be set to 0 if the DB instance is a source to Read Replicas 
    
 
   
@@ -591,26 +635,26 @@ Syntax::
 ``--preferred-backup-window`` (string)
 
 
-  The daily time range during which automated backups are created if automated backups are enabled, using the ``BackupRetentionPeriod`` parameter. For more information, see `DB Instance Backups`_ . 
+  The daily time range during which automated backups are created if automated backups are enabled, using the ``BackupRetentionPeriod`` parameter. For more information, see `DB Instance Backups <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.BackingUpAndRestoringAmazonRDSInstances.html>`_ . 
 
    
 
-  Default: A 30-minute window selected at random from an 8-hour block of time per region. To see the time blocks available, see `Adjusting the Preferred Maintenance Window`_ in the *Amazon RDS User Guide.*  
+  Default: A 30-minute window selected at random from an 8-hour block of time per region. To see the time blocks available, see `Adjusting the Preferred DB Instance Maintenance Window <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow>`_ . 
 
    
 
-  Constraints: 
+  Constraints:
 
    
 
    
-  * Must be in the format ``hh24:mi-hh24:mi`` .
+  * Must be in the format ``hh24:mi-hh24:mi`` . 
    
-  * Times should be in Universal Coordinated Time (UTC).
+  * Times should be in Universal Coordinated Time (UTC). 
    
-  * Must not conflict with the preferred maintenance window.
+  * Must not conflict with the preferred maintenance window. 
    
-  * Must be at least 30 minutes.
+  * Must be at least 30 minutes. 
    
 
   
@@ -618,7 +662,7 @@ Syntax::
 ``--port`` (integer)
 
 
-  The port number on which the database accepts connections. 
+  The port number on which the database accepts connections.
 
    
 
@@ -626,15 +670,15 @@ Syntax::
 
    
 
-  Default: ``3306`` 
+  Default: ``3306``  
 
    
 
-  Valid Values: ``1150-65535`` 
+  Valid Values: ``1150-65535``  
 
    
 
-  Type: Integer 
+  Type: Integer
 
    
 
@@ -642,15 +686,15 @@ Syntax::
 
    
 
-  Default: ``3306`` 
+  Default: ``3306``  
 
    
 
-  Valid Values: ``1150-65535`` 
+  Valid Values: ``1150-65535``  
 
    
 
-  Type: Integer 
+  Type: Integer
 
    
 
@@ -658,15 +702,15 @@ Syntax::
 
    
 
-  Default: ``5432`` 
+  Default: ``5432``  
 
    
 
-  Valid Values: ``1150-65535`` 
+  Valid Values: ``1150-65535``  
 
    
 
-  Type: Integer 
+  Type: Integer
 
    
 
@@ -674,11 +718,11 @@ Syntax::
 
    
 
-  Default: ``1521`` 
+  Default: ``1521``  
 
    
 
-  Valid Values: ``1150-65535`` 
+  Valid Values: ``1150-65535``  
 
    
 
@@ -686,7 +730,7 @@ Syntax::
 
    
 
-  Default: ``1433`` 
+  Default: ``1433``  
 
    
 
@@ -698,186 +742,252 @@ Syntax::
 
    
 
-  Default: ``3306`` 
+  Default: ``3306``  
 
    
 
-  Valid Values: ``1150-65535`` 
+  Valid Values: ``1150-65535``  
 
    
 
-  Type: Integer 
+  Type: Integer
 
   
 
 ``--multi-az`` | ``--no-multi-az`` (boolean)
 
 
-  Specifies if the DB instance is a Multi-AZ deployment. You cannot set the AvailabilityZone parameter if the MultiAZ parameter is set to true. Do not set this value if you want a Multi-AZ deployment for a SQL Server DB instance. Multi-AZ for SQL Server is set using the Mirroring option in an option group. 
+  Specifies if the DB instance is a Multi-AZ deployment. You cannot set the AvailabilityZone parameter if the MultiAZ parameter is set to true.
 
   
 
 ``--engine-version`` (string)
 
 
-  The version number of the database engine to use. 
+  The version number of the database engine to use.
 
    
 
-  The following are the database engines and major and minor versions that are available with Amazon RDS. Not every database engine is available for every AWS region. 
+  The following are the database engines and major and minor versions that are available with Amazon RDS. Not every database engine is available for every AWS region.
 
    
 
-  **MySQL** 
-
-   
-
-   
-  * **Version 5.1 (Only available in the following regions: ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-west-1, us-west-2):**  ``5.1.73a | 5.1.73b`` 
-   
-  * **Version 5.5 (Only available in the following regions: ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-west-1, us-west-2):**  ``5.5.40 | 5.5.40a`` 
-   
-  * **Version 5.5 (Available in all regions):**  ``5.5.40b | 5.5.41 | 5.5.42`` 
-   
-  * **Version 5.6 (Available in all regions):**  ``5.6.19a | 5.6.19b | 5.6.21 | 5.6.21b | 5.6.22 | 5.6.23`` 
-   
-  * **Version 5.7 (Available in all regions):**  ``5.7.10`` 
-   
-
-   
-
-  **MariaDB** 
+   **Amazon Aurora**  
 
    
 
    
-  * **Version 10.0 (Available in all regions except AWS GovCloud (US) Region (us-gov-west-1)):**  ``10.0.17`` 
+  * Version 5.6 (available in these AWS regions: ap-northeast-1, ap-northeast-2, ap-south-1, ap-southeast-2, eu-west-1, us-east-1, us-east-2, us-west-2): ``5.6.10a``   
    
 
    
 
-  **Oracle Database Enterprise Edition (oracle-ee)** 
+   **MariaDB**  
 
    
 
    
-  * **Version 11.2 (Only available in the following regions: ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-west-1, us-west-2):**  ``11.2.0.2.v3 | 11.2.0.2.v4 | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7`` 
+  * ``10.1.19`` (supported in all AWS regions) 
    
-  * **Version 11.2 (Available in all regions):**  ``11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3 | 11.2.0.4.v1 | 11.2.0.4.v3 | 11.2.0.4.v4`` 
-   
-  * **Version 12.1 (Available in all regions):**  ``12.1.0.1.v1 | 12.1.0.1.v2 | 12.1.0.2.v1`` 
+  * ``10.1.14`` (supported in all regions except us-east-2) 
    
 
    
 
-  **Oracle Database Standard Edition (oracle-se)** 
+  
 
    
 
    
-  * **Version 11.2 (Only available in the following regions: us-west-1):**  ``11.2.0.2.v3 | 11.2.0.2.v4 | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7`` 
+  * ``10.0.28`` (supported in all AWS regions) 
    
-  * **Version 11.2 (Only available in the following regions: eu-central-1, us-west-1):**  ``11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3 | 11.2.0.4.v1 | 11.2.0.4.v3 | 11.2.0.4.v4`` 
+  * ``10.0.24`` (supported in all AWS regions) 
    
-  * **Version 12.1 (Only available in the following regions: eu-central-1, us-west-1):**  ``12.1.0.1.v1 | 12.1.0.1.v2`` 
-   
-
-   
-
-  **Oracle Database Standard Edition One (oracle-se1)** 
-
-   
-
-   
-  * **Version 11.2 (Only available in the following regions: us-west-1):**  ``11.2.0.2.v3 | 11.2.0.2.v4 | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7`` 
-   
-  * **Version 11.2 (Only available in the following regions: eu-central-1, us-west-1):**  ``11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3 | 11.2.0.4.v1 | 11.2.0.4.v3 | 11.2.0.4.v4`` 
-   
-  * **Version 12.1 (Only available in the following regions: eu-central-1, us-west-1):**  ``12.1.0.1.v1 | 12.1.0.1.v2`` 
+  * ``10.0.17`` (supported in all regions except us-east-2, ca-central-1, eu-west-2) 
    
 
    
 
-  **PostgreSQL** 
+   **Microsoft SQL Server 2016**  
 
    
 
    
-  * **Version 9.3 (Only available in the following regions: ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-west-1, us-west-2):**  ``9.3.1 | 9.3.2`` 
+  * ``13.00.4422.0.v1`` (supported for all editions, and all AWS regions) 
    
-  * **Version 9.3 (Available in all regions):**  ``9.3.3 | 9.3.5 | 9.3.6 | 9.3.9 | 9.3.10`` 
-   
-  * **Version 9.4 (Available in all regions):**  ``9.4.1 | 9.4.4 | 9.4.5`` 
+  * ``13.00.2164.0.v1`` (supported for all editions, and all AWS regions) 
    
 
    
 
-  **Microsoft SQL Server Enterprise Edition (sqlserver-ee)** 
+   **Microsoft SQL Server 2014**  
 
    
 
    
-  * **Version 10.50 (Available in all regions):**  ``10.50.2789.0.v1`` 
+  * ``12.00.5546.0.v1`` (supported for all editions, and all AWS regions) 
    
-  * **Version 10.50 (Available in all regions):**  ``10.50.6000.34.v1`` 
+  * ``12.00.5000.0.v1`` (supported for all editions, and all AWS regions) 
    
-  * **Version 11.00 (Available in all regions):**  ``11.00.2100.60.v1`` 
-   
-  * **Version 11.00 (Available in all regions):**  ``11.00.5058.0.v1`` 
+  * ``12.00.4422.0.v1`` (supported for all editions except Enterprise Edition, and all AWS regions except ca-central-1 and eu-west-2) 
    
 
    
 
-  **Microsoft SQL Server Express Edition (sqlserver-ex)** 
+   **Microsoft SQL Server 2012**  
 
    
 
    
-  * **Version 10.50 (Available in all regions):**  ``10.50.2789.0.v1`` 
+  * ``11.00.6594.0.v1`` (supported for all editions, and all AWS regions) 
    
-  * **Version 10.50 (Available in all regions):**  ``10.50.6000.34.v1`` 
+  * ``11.00.6020.0.v1`` (supported for all editions, and all AWS regions) 
    
-  * **Version 11.00 (Available in all regions):**  ``11.00.2100.60.v1`` 
+  * ``11.00.5058.0.v1`` (supported for all editions, and all AWS regions except us-east-2, ca-central-1, and eu-west-2) 
    
-  * **Version 11.00 (Available in all regions):**  ``11.00.5058.0.v1`` 
-   
-  * **Version 12.00 (Available in all regions):**  ``12.00.4422.0.v1`` 
+  * ``11.00.2100.60.v1`` (supported for all editions, and all AWS regions except us-east-2, ca-central-1, and eu-west-2) 
    
 
    
 
-  **Microsoft SQL Server Standard Edition (sqlserver-se)** 
+   **Microsoft SQL Server 2008 R2**  
 
    
 
    
-  * **Version 10.50 (Available in all regions):**  ``10.50.2789.0.v1`` 
+  * ``10.50.6529.0.v1`` (supported for all editions, and all AWS regions except us-east-2, ca-central-1, and eu-west-2) 
    
-  * **Version 10.50 (Available in all regions):**  ``10.50.6000.34.v1`` 
+  * ``10.50.6000.34.v1`` (supported for all editions, and all AWS regions except us-east-2, ca-central-1, and eu-west-2) 
    
-  * **Version 11.00 (Available in all regions):**  ``11.00.2100.60.v1`` 
-   
-  * **Version 11.00 (Available in all regions):**  ``11.00.5058.0.v1`` 
-   
-  * **Version 12.00 (Available in all regions):**  ``12.00.4422.0.v1`` 
+  * ``10.50.2789.0.v1`` (supported for all editions, and all AWS regions except us-east-2, ca-central-1, and eu-west-2) 
    
 
    
 
-  **Microsoft SQL Server Web Edition (sqlserver-web)** 
+   **MySQL**  
 
    
 
    
-  * **Version 10.50 (Available in all regions):**  ``10.50.2789.0.v1`` 
+  * ``5.7.17`` (supported in all AWS regions) 
    
-  * **Version 10.50 (Available in all regions):**  ``10.50.6000.34.v1`` 
+  * ``5.7.16`` (supported in all AWS regions) 
    
-  * **Version 11.00 (Available in all regions):**  ``11.00.2100.60.v1`` 
+  * ``5.7.11`` (supported in all AWS regions) 
    
-  * **Version 11.00 (Available in all regions):**  ``11.00.5058.0.v1`` 
+  * ``5.7.10`` (supported in all regions except us-east-2, ca-central-1, eu-west-2) 
    
-  * **Version 12.00 (Available in all regions):**  ``12.00.4422.0.v1`` 
+
+   
+
+  
+
+   
+
+   
+  * ``5.6.35`` (supported in all AWS regions) 
+   
+  * ``5.6.34`` (supported in all AWS regions) 
+   
+  * ``5.6.29`` (supported in all AWS regions) 
+   
+  * ``5.6.27`` (supported in all regions except us-east-2, ca-central-1, eu-west-2) 
+   
+  * ``5.6.23`` (supported in all regions except us-east-2, ap-south-1, ca-central-1, eu-west-2) 
+   
+  * ``5.6.22`` (supported in all regions except us-east-2, ap-south-1, ap-northeast-2, ca-central-1, eu-west-2) 
+   
+  * ``5.6.21b`` (supported in all regions except us-east-2, ap-south-1, ap-northeast-2, ca-central-1, eu-west-2) 
+   
+  * ``5.6.21`` (supported in all regions except us-east-2, ap-south-1, ap-northeast-2, ca-central-1, eu-west-2) 
+   
+  * ``5.6.19b`` (supported in all regions except us-east-2, ap-south-1, ap-northeast-2, ca-central-1, eu-west-2) 
+   
+  * ``5.6.19a`` (supported in all regions except us-east-2, ap-south-1, ap-northeast-2, ca-central-1, eu-west-2) 
+   
+
+   
+
+  
+
+   
+
+   
+  * ``5.5.54`` (supported in all AWS regions) 
+   
+  * ``5.5.53`` (supported in all AWS regions) 
+   
+  * ``5.5.46`` (supported in all AWS regions) 
+   
+
+   
+
+   **Oracle 12c**  
+
+   
+
+   
+  * ``12.1.0.2.v8`` (supported for EE in all AWS regions, and SE2 in all AWS regions except us-gov-west-1) 
+   
+  * ``12.1.0.2.v7`` (supported for EE in all AWS regions, and SE2 in all AWS regions except us-gov-west-1) 
+   
+  * ``12.1.0.2.v6`` (supported for EE in all AWS regions, and SE2 in all AWS regions except us-gov-west-1) 
+   
+  * ``12.1.0.2.v5`` (supported for EE in all AWS regions, and SE2 in all AWS regions except us-gov-west-1) 
+   
+  * ``12.1.0.2.v4`` (supported for EE in all AWS regions, and SE2 in all AWS regions except us-gov-west-1) 
+   
+  * ``12.1.0.2.v3`` (supported for EE in all AWS regions, and SE2 in all AWS regions except us-gov-west-1) 
+   
+  * ``12.1.0.2.v2`` (supported for EE in all AWS regions, and SE2 in all AWS regions except us-gov-west-1) 
+   
+  * ``12.1.0.2.v1`` (supported for EE in all AWS regions, and SE2 in all AWS regions except us-gov-west-1) 
+   
+
+   
+
+   **Oracle 11g**  
+
+   
+
+   
+  * ``11.2.0.4.v12`` (supported for EE, SE1, and SE, in all AWS regions) 
+   
+  * ``11.2.0.4.v11`` (supported for EE, SE1, and SE, in all AWS regions) 
+   
+  * ``11.2.0.4.v10`` (supported for EE, SE1, and SE, in all AWS regions) 
+   
+  * ``11.2.0.4.v9`` (supported for EE, SE1, and SE, in all AWS regions) 
+   
+  * ``11.2.0.4.v8`` (supported for EE, SE1, and SE, in all AWS regions) 
+   
+  * ``11.2.0.4.v7`` (supported for EE, SE1, and SE, in all AWS regions) 
+   
+  * ``11.2.0.4.v6`` (supported for EE, SE1, and SE, in all AWS regions) 
+   
+  * ``11.2.0.4.v5`` (supported for EE, SE1, and SE, in all AWS regions) 
+   
+  * ``11.2.0.4.v4`` (supported for EE, SE1, and SE, in all AWS regions) 
+   
+  * ``11.2.0.4.v3`` (supported for EE, SE1, and SE, in all AWS regions) 
+   
+  * ``11.2.0.4.v1`` (supported for EE, SE1, and SE, in all AWS regions) 
+   
+
+   
+
+   **PostgreSQL**  
+
+   
+
+   
+  * **Version 9.6.x:**  ``9.6.1 | 9.6.2``   
+   
+  * **Version 9.5.x:**  ``9.5.6 | 9.5.4 | 9.5.2``   
+   
+  * **Version 9.4.x:**  ``9.4.11 | 9.4.9 | 9.4.7``   
+   
+  * **Version 9.3.x:**  ``9.3.16 | 9.3.14 | 9.3.12``   
    
 
   
@@ -885,29 +995,29 @@ Syntax::
 ``--auto-minor-version-upgrade`` | ``--no-auto-minor-version-upgrade`` (boolean)
 
 
-  Indicates that minor engine upgrades will be applied automatically to the DB instance during the maintenance window. 
+  Indicates that minor engine upgrades will be applied automatically to the DB instance during the maintenance window.
 
    
 
-  Default: ``true`` 
+  Default: ``true``  
 
   
 
 ``--license-model`` (string)
 
 
-  License model information for this DB instance. 
+  License model information for this DB instance.
 
    
 
-  Valid values: ``license-included`` | ``bring-your-own-license`` | ``general-public-license`` 
+  Valid values: ``license-included`` | ``bring-your-own-license`` | ``general-public-license``  
 
   
 
 ``--iops`` (integer)
 
 
-  The amount of Provisioned IOPS (input/output operations per second) to be initially allocated for the DB instance. 
+  The amount of Provisioned IOPS (input/output operations per second) to be initially allocated for the DB instance.
 
    
 
@@ -918,41 +1028,41 @@ Syntax::
 ``--option-group-name`` (string)
 
 
-  Indicates that the DB instance should be associated with the specified option group. 
+  Indicates that the DB instance should be associated with the specified option group.
 
    
 
-  Permanent options, such as the TDE option for Oracle Advanced Security TDE, cannot be removed from an option group, and that option group cannot be removed from a DB instance once it is associated with a DB instance 
+  Permanent options, such as the TDE option for Oracle Advanced Security TDE, cannot be removed from an option group, and that option group cannot be removed from a DB instance once it is associated with a DB instance
 
   
 
 ``--character-set-name`` (string)
 
 
-  For supported engines, indicates that the DB instance should be associated with the specified CharacterSet. 
+  For supported engines, indicates that the DB instance should be associated with the specified CharacterSet.
 
   
 
 ``--publicly-accessible`` | ``--no-publicly-accessible`` (boolean)
 
 
-  Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address. 
+  Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address.
 
    
 
-  Default: The default behavior varies depending on whether a VPC has been requested or not. The following list shows the default behavior in each case. 
+  Default: The default behavior varies depending on whether a VPC has been requested or not. The following list shows the default behavior in each case.
 
    
 
    
-  * **Default VPC:** true
+  * **Default VPC:** true 
    
-  * **VPC:** false
-   
-
+  * **VPC:** false 
    
 
-  If no DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance will be publicly accessible. If a specific DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance will be private. 
+   
+
+  If no DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance will be publicly accessible. If a specific DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance will be private.
 
   
 
@@ -995,18 +1105,18 @@ JSON Syntax::
 
    
 
-  Type: monitoring-role-arn
+  Type: db-name
 
   
 
 ``--storage-type`` (string)
 
 
-  Specifies the storage type to be associated with the DB instance. 
+  Specifies the storage type to be associated with the DB instance.
 
    
 
-  Valid values: ``standard | gp2 | io1`` 
+  Valid values: ``standard | gp2 | io1``  
 
    
 
@@ -1014,39 +1124,39 @@ JSON Syntax::
 
    
 
-  Default: ``io1`` if the ``Iops`` parameter is specified; otherwise ``standard`` 
+  Default: ``io1`` if the ``Iops`` parameter is specified; otherwise ``standard``  
 
   
 
 ``--tde-credential-arn`` (string)
 
 
-  The ARN from the Key Store with which to associate the instance for TDE encryption. 
+  The ARN from the Key Store with which to associate the instance for TDE encryption.
 
   
 
 ``--tde-credential-password`` (string)
 
 
-  The password for the given ARN from the Key Store in order to access the device. 
+  The password for the given ARN from the Key Store in order to access the device.
 
   
 
 ``--storage-encrypted`` | ``--no-storage-encrypted`` (boolean)
 
 
-  Specifies whether the DB instance is encrypted. 
+  Specifies whether the DB instance is encrypted.
 
    
 
-  Default: false 
+  Default: false
 
   
 
 ``--kms-key-id`` (string)
 
 
-  The KMS key identifier for an encrypted DB instance. 
+  The KMS key identifier for an encrypted DB instance.
 
    
 
@@ -1055,6 +1165,13 @@ JSON Syntax::
    
 
   If the ``StorageEncrypted`` parameter is true, and you do not specify a value for the ``KmsKeyId`` parameter, then Amazon RDS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS region.
+
+  
+
+``--domain`` (string)
+
+
+  Specify the Active Directory Domain to create the instance in.
 
   
 
@@ -1068,7 +1185,7 @@ JSON Syntax::
 ``--monitoring-interval`` (integer)
 
 
-  The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance. To disable collecting Enhanced Monitoring metrics, specify 0. The default is 60.
+  The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance. To disable collecting Enhanced Monitoring metrics, specify 0. The default is 0.
 
    
 
@@ -1076,14 +1193,14 @@ JSON Syntax::
 
    
 
-  Valid Values: ``0, 1, 5, 10, 15, 30, 60`` 
+  Valid Values: ``0, 1, 5, 10, 15, 30, 60``  
 
   
 
 ``--monitoring-role-arn`` (string)
 
 
-  The ARN for the IAM role that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. For example, ``arn:aws:iam:123456789012:role/emaccess`` . For information on creating a monitoring role, go to `To create an IAM role for Amazon RDS Enhanced Monitoring`_ .
+  The ARN for the IAM role that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. For example, ``arn:aws:iam:123456789012:role/emaccess`` . For information on creating a monitoring role, go to `Setting Up and Enabling Enhanced Monitoring <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html#USER_Monitoring.OS.Enabling>`_ .
 
    
 
@@ -1091,11 +1208,63 @@ JSON Syntax::
 
   
 
+``--domain-iam-role-name`` (string)
+
+
+  Specify the name of the IAM role to be used when making API calls to the Directory Service.
+
+  
+
+``--promotion-tier`` (integer)
+
+
+  A value that specifies the order in which an Aurora Replica is promoted to the primary instance after a failure of the existing primary instance. For more information, see `Fault Tolerance for an Aurora DB Cluster <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Managing.html#Aurora.Managing.FaultTolerance>`_ . 
+
+   
+
+  Default: 1
+
+   
+
+  Valid Values: 0 - 15
+
+  
+
+``--timezone`` (string)
+
+
+  The time zone of the DB instance. The time zone parameter is currently supported only by `Microsoft SQL Server <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.TimeZone>`_ . 
+
+  
+
+``--enable-iam-database-authentication`` | ``--no-enable-iam-database-authentication`` (boolean)
+
+
+  True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts; otherwise false. 
+
+   
+
+  You can enable IAM database authentication for the following database engines:
+
+   
+
+   
+  * For MySQL 5.6, minor version 5.6.34 or higher 
+   
+  * For MySQL 5.7, minor version 5.7.16 or higher 
+   
+
+   
+
+  Default: ``false``  
+
+  
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -1168,16 +1337,20 @@ DBInstance -> (structure)
 
   
 
-  Contains the result of a successful invocation of the following actions: 
+  Contains the result of a successful invocation of the following actions:
 
    
 
    
-  *  create-db-instance  
+  *  create-db-instance   
    
-  *  delete-db-instance  
+  *  delete-db-instance   
    
-  *  modify-db-instance  
+  *  modify-db-instance   
+   
+  *  stop-db-instance   
+   
+  *  start-db-instance   
    
 
    
@@ -1190,7 +1363,7 @@ DBInstance -> (structure)
 
     
 
-    Contains a user-supplied database identifier. This identifier is the unique key that identifies a DB instance. 
+    Contains a user-supplied database identifier. This identifier is the unique key that identifies a DB instance.
 
     
 
@@ -1200,7 +1373,7 @@ DBInstance -> (structure)
 
     
 
-    Contains the name of the compute and memory capacity class of the DB instance. 
+    Contains the name of the compute and memory capacity class of the DB instance.
 
     
 
@@ -1210,7 +1383,7 @@ DBInstance -> (structure)
 
     
 
-    Provides the name of the database engine to be used for this DB instance. 
+    Provides the name of the database engine to be used for this DB instance.
 
     
 
@@ -1220,7 +1393,7 @@ DBInstance -> (structure)
 
     
 
-    Specifies the current state of this database. 
+    Specifies the current state of this database.
 
     
 
@@ -1230,7 +1403,7 @@ DBInstance -> (structure)
 
     
 
-    Contains the master username for the DB instance. 
+    Contains the master username for the DB instance.
 
     
 
@@ -1244,15 +1417,15 @@ DBInstance -> (structure)
 
      
 
-     **MySQL, MariaDB, SQL Server, PostgreSQL, Amazon Aurora**  
+     **MySQL, MariaDB, SQL Server, PostgreSQL**  
 
      
 
-    Contains the name of the initial database of this instance that was provided at create time, if one was specified when the DB instance was created. This same name is returned for the life of the DB instance. 
+    Contains the name of the initial database of this instance that was provided at create time, if one was specified when the DB instance was created. This same name is returned for the life of the DB instance.
 
      
 
-    Type: monitoring-role-arn
+    Type: db-name
 
      
 
@@ -1260,7 +1433,7 @@ DBInstance -> (structure)
 
      
 
-    Contains the Oracle System ID (SID) of the created DB instance. Not shown when the returned parameters do not apply to an Oracle DB instance. 
+    Contains the Oracle System ID (SID) of the created DB instance. Not shown when the returned parameters do not apply to an Oracle DB instance.
 
     
 
@@ -1270,7 +1443,7 @@ DBInstance -> (structure)
 
     
 
-    Specifies the connection endpoint. 
+    Specifies the connection endpoint.
 
     
 
@@ -1278,7 +1451,7 @@ DBInstance -> (structure)
 
       
 
-      Specifies the DNS address of the DB instance. 
+      Specifies the DNS address of the DB instance.
 
       
 
@@ -1288,7 +1461,7 @@ DBInstance -> (structure)
 
       
 
-      Specifies the port that the database engine is listening on. 
+      Specifies the port that the database engine is listening on.
 
       
 
@@ -1310,7 +1483,7 @@ DBInstance -> (structure)
 
     
 
-    Specifies the allocated storage size specified in gigabytes. 
+    Specifies the allocated storage size specified in gigabytes.
 
     
 
@@ -1320,7 +1493,7 @@ DBInstance -> (structure)
 
     
 
-    Provides the date and time the DB instance was created. 
+    Provides the date and time the DB instance was created.
 
     
 
@@ -1340,7 +1513,7 @@ DBInstance -> (structure)
 
     
 
-    Specifies the number of days for which automatic DB snapshots are retained. 
+    Specifies the number of days for which automatic DB snapshots are retained.
 
     
 
@@ -1358,18 +1531,18 @@ DBInstance -> (structure)
 
       
 
-      This data type is used as a response element in the following actions: 
+      This data type is used as a response element in the following actions:
 
        
 
        
-      *  modify-db-instance  
+      *  modify-db-instance   
        
-      *  reboot-db-instance  
+      *  reboot-db-instance   
        
-      *  restore-db-instance-from-db-snapshot  
+      *  restore-db-instance-from-db-snapshot   
        
-      *  restore-db-instance-to-point-in-time  
+      *  restore-db-instance-to-point-in-time   
        
 
       
@@ -1378,7 +1551,7 @@ DBInstance -> (structure)
 
         
 
-        The name of the DB security group. 
+        The name of the DB security group.
 
         
 
@@ -1388,7 +1561,7 @@ DBInstance -> (structure)
 
         
 
-        The status of the DB security group. 
+        The status of the DB security group.
 
         
 
@@ -1402,7 +1575,7 @@ DBInstance -> (structure)
 
     
 
-    Provides List of VPC security group elements that the DB instance belongs to. 
+    Provides a list of VPC security group elements that the DB instance belongs to.
 
     
 
@@ -1428,7 +1601,7 @@ DBInstance -> (structure)
 
         
 
-        The status of the VPC security group. 
+        The status of the VPC security group.
 
         
 
@@ -1442,7 +1615,7 @@ DBInstance -> (structure)
 
     
 
-    Provides the list of DB parameter groups applied to this DB instance. 
+    Provides the list of DB parameter groups applied to this DB instance.
 
     
 
@@ -1450,7 +1623,7 @@ DBInstance -> (structure)
 
       
 
-      The status of the DB parameter group. 
+      The status of the DB parameter group.
 
        
 
@@ -1459,17 +1632,17 @@ DBInstance -> (structure)
        
 
        
-      *  create-db-instance  
+      *  create-db-instance   
        
-      *  create-db-instance-read-replica  
+      *  create-db-instance-read-replica   
        
-      *  delete-db-instance  
+      *  delete-db-instance   
        
-      *  modify-db-instance  
+      *  modify-db-instance   
        
-      *  reboot-db-instance  
+      *  reboot-db-instance   
        
-      *  restore-db-instance-from-db-snapshot  
+      *  restore-db-instance-from-db-snapshot   
        
 
       
@@ -1478,7 +1651,7 @@ DBInstance -> (structure)
 
         
 
-        The name of the DP parameter group. 
+        The name of the DP parameter group.
 
         
 
@@ -1488,7 +1661,7 @@ DBInstance -> (structure)
 
         
 
-        The status of parameter updates. 
+        The status of parameter updates.
 
         
 
@@ -1502,7 +1675,7 @@ DBInstance -> (structure)
 
     
 
-    Specifies the name of the Availability Zone the DB instance is located in. 
+    Specifies the name of the Availability Zone the DB instance is located in.
 
     
 
@@ -1512,7 +1685,7 @@ DBInstance -> (structure)
 
     
 
-    Specifies information on the subnet group associated with the DB instance, including the name, description, and subnets in the subnet group. 
+    Specifies information on the subnet group associated with the DB instance, including the name, description, and subnets in the subnet group.
 
     
 
@@ -1520,7 +1693,7 @@ DBInstance -> (structure)
 
       
 
-      The name of the DB subnet group. 
+      The name of the DB subnet group.
 
       
 
@@ -1530,7 +1703,7 @@ DBInstance -> (structure)
 
       
 
-      Provides the description of the DB subnet group. 
+      Provides the description of the DB subnet group.
 
       
 
@@ -1540,7 +1713,7 @@ DBInstance -> (structure)
 
       
 
-      Provides the VpcId of the DB subnet group. 
+      Provides the VpcId of the DB subnet group.
 
       
 
@@ -1550,7 +1723,7 @@ DBInstance -> (structure)
 
       
 
-      Provides the status of the DB subnet group. 
+      Provides the status of the DB subnet group.
 
       
 
@@ -1576,7 +1749,7 @@ DBInstance -> (structure)
 
           
 
-          Specifies the identifier of the subnet. 
+          Specifies the identifier of the subnet.
 
           
 
@@ -1586,17 +1759,17 @@ DBInstance -> (structure)
 
           
 
-          Contains Availability Zone information. 
+          Contains Availability Zone information.
 
            
 
-          This data type is used as an element in the following data type: 
+          This data type is used as an element in the following data type:
 
-          
-          *  OrderableDBInstanceOption 
-          
+           
 
-          
+           
+          *  OrderableDBInstanceOption   
+           
 
           
 
@@ -1604,7 +1777,7 @@ DBInstance -> (structure)
 
             
 
-            The name of the availability zone. 
+            The name of the availability zone.
 
             
 
@@ -1616,7 +1789,7 @@ DBInstance -> (structure)
 
           
 
-          Specifies the status of the subnet. 
+          Specifies the status of the subnet.
 
           
 
@@ -1626,13 +1799,23 @@ DBInstance -> (structure)
 
       
 
+    DBSubnetGroupArn -> (string)
+
+      
+
+      The Amazon Resource Name (ARN) for the DB subnet group.
+
+      
+
+      
+
     
 
   PreferredMaintenanceWindow -> (string)
 
     
 
-    Specifies the weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC). 
+    Specifies the weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).
 
     
 
@@ -1642,7 +1825,7 @@ DBInstance -> (structure)
 
     
 
-    Specifies that changes to the DB instance are pending. This element is only included when changes are pending. Specific changes are identified by subelements. 
+    Specifies that changes to the DB instance are pending. This element is only included when changes are pending. Specific changes are identified by subelements.
 
     
 
@@ -1670,7 +1853,7 @@ DBInstance -> (structure)
 
       
 
-      Contains the pending or in-progress change of the master credentials for the DB instance. 
+      Contains the pending or in-progress change of the master credentials for the DB instance.
 
       
 
@@ -1680,7 +1863,7 @@ DBInstance -> (structure)
 
       
 
-      Specifies the pending port for the DB instance. 
+      Specifies the pending port for the DB instance.
 
       
 
@@ -1690,7 +1873,7 @@ DBInstance -> (structure)
 
       
 
-      Specifies the pending number of days for which automated backups are retained. 
+      Specifies the pending number of days for which automated backups are retained.
 
       
 
@@ -1700,7 +1883,7 @@ DBInstance -> (structure)
 
       
 
-      Indicates that the Single-AZ DB instance is to change to a Multi-AZ deployment. 
+      Indicates that the Single-AZ DB instance is to change to a Multi-AZ deployment.
 
       
 
@@ -1710,7 +1893,21 @@ DBInstance -> (structure)
 
       
 
-      Indicates the database engine version. 
+      Indicates the database engine version.
+
+      
+
+      
+
+    LicenseModel -> (string)
+
+      
+
+      The license model for the DB instance.
+
+       
+
+      Valid values: ``license-included`` | ``bring-your-own-license`` | ``general-public-license``  
 
       
 
@@ -1720,7 +1917,7 @@ DBInstance -> (structure)
 
       
 
-      Specifies the new Provisioned IOPS value for the DB instance that will be applied or is being applied. 
+      Specifies the new Provisioned IOPS value for the DB instance that will be applied or is being applied.
 
       
 
@@ -1740,7 +1937,7 @@ DBInstance -> (structure)
 
       
 
-      Specifies the storage type to be associated with the DB instance. 
+      Specifies the storage type to be associated with the DB instance.
 
       
 
@@ -1756,13 +1953,23 @@ DBInstance -> (structure)
 
       
 
+    DBSubnetGroupName -> (string)
+
+      
+
+      The new DB subnet group for the DB instance. 
+
+      
+
+      
+
     
 
   LatestRestorableTime -> (timestamp)
 
     
 
-    Specifies the latest time to which a database can be restored with point-in-time restore. 
+    Specifies the latest time to which a database can be restored with point-in-time restore.
 
     
 
@@ -1772,7 +1979,7 @@ DBInstance -> (structure)
 
     
 
-    Specifies if the DB instance is a Multi-AZ deployment. 
+    Specifies if the DB instance is a Multi-AZ deployment.
 
     
 
@@ -1782,7 +1989,7 @@ DBInstance -> (structure)
 
     
 
-    Indicates the database engine version. 
+    Indicates the database engine version.
 
     
 
@@ -1792,7 +1999,7 @@ DBInstance -> (structure)
 
     
 
-    Indicates that minor version patches are applied automatically. 
+    Indicates that minor version patches are applied automatically.
 
     
 
@@ -1802,7 +2009,7 @@ DBInstance -> (structure)
 
     
 
-    Contains the identifier of the source DB instance if this DB instance is a Read Replica. 
+    Contains the identifier of the source DB instance if this DB instance is a Read Replica.
 
     
 
@@ -1812,7 +2019,23 @@ DBInstance -> (structure)
 
     
 
-    Contains one or more identifiers of the Read Replicas associated with this DB instance. 
+    Contains one or more identifiers of the Read Replicas associated with this DB instance.
+
+    
+
+    (string)
+
+      
+
+      
+
+    
+
+  ReadReplicaDBClusterIdentifiers -> (list)
+
+    
+
+    Contains one or more identifiers of Aurora DB clusters that are Read Replicas of this DB instance.
 
     
 
@@ -1828,7 +2051,7 @@ DBInstance -> (structure)
 
     
 
-    License model information for this DB instance. 
+    License model information for this DB instance.
 
     
 
@@ -1838,7 +2061,7 @@ DBInstance -> (structure)
 
     
 
-    Specifies the Provisioned IOPS (I/O operations per second) value. 
+    Specifies the Provisioned IOPS (I/O operations per second) value.
 
     
 
@@ -1848,7 +2071,7 @@ DBInstance -> (structure)
 
     
 
-    Provides the list of option group memberships for this DB instance. 
+    Provides the list of option group memberships for this DB instance.
 
     
 
@@ -1856,7 +2079,7 @@ DBInstance -> (structure)
 
       
 
-      Provides information on the option groups the DB instance is a member of. 
+      Provides information on the option groups the DB instance is a member of.
 
       
 
@@ -1864,7 +2087,7 @@ DBInstance -> (structure)
 
         
 
-        The name of the option group that the instance belongs to. 
+        The name of the option group that the instance belongs to.
 
         
 
@@ -1888,7 +2111,7 @@ DBInstance -> (structure)
 
     
 
-    If present, specifies the name of the character set that this instance is associated with. 
+    If present, specifies the name of the character set that this instance is associated with.
 
     
 
@@ -1898,7 +2121,7 @@ DBInstance -> (structure)
 
     
 
-    If present, specifies the name of the secondary Availability Zone for a DB instance with multi-AZ support. 
+    If present, specifies the name of the secondary Availability Zone for a DB instance with multi-AZ support.
 
     
 
@@ -1908,23 +2131,23 @@ DBInstance -> (structure)
 
     
 
-    Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address. 
+    Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address.
 
      
 
-    Default: The default behavior varies depending on whether a VPC has been requested or not. The following list shows the default behavior in each case. 
+    Default: The default behavior varies depending on whether a VPC has been requested or not. The following list shows the default behavior in each case.
 
      
 
      
-    * **Default VPC:** true
+    * **Default VPC:** true 
      
-    * **VPC:** false
-     
-
+    * **VPC:** false 
      
 
-    If no DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance will be publicly accessible. If a specific DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance will be private. 
+     
+
+    If no DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance will be publicly accessible. If a specific DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance will be private.
 
     
 
@@ -1934,7 +2157,7 @@ DBInstance -> (structure)
 
     
 
-    The status of a Read Replica. If the instance is not a Read Replica, this will be blank. 
+    The status of a Read Replica. If the instance is not a Read Replica, this will be blank.
 
     
 
@@ -1950,7 +2173,7 @@ DBInstance -> (structure)
 
         
 
-        This value is currently "read replication." 
+        This value is currently "read replication."
 
         
 
@@ -1960,7 +2183,7 @@ DBInstance -> (structure)
 
         
 
-        Boolean value that is true if the instance is operating normally, or false if the instance is in an error state. 
+        Boolean value that is true if the instance is operating normally, or false if the instance is in an error state.
 
         
 
@@ -1970,7 +2193,7 @@ DBInstance -> (structure)
 
         
 
-        Status of the DB instance. For a StatusType of read replica, the values can be replicating, error, stopped, or terminated. 
+        Status of the DB instance. For a StatusType of read replica, the values can be replicating, error, stopped, or terminated.
 
         
 
@@ -1980,7 +2203,7 @@ DBInstance -> (structure)
 
         
 
-        Details of the error if there is an error for the instance. If the instance is not in an error state, this value is blank. 
+        Details of the error if there is an error for the instance. If the instance is not in an error state, this value is blank.
 
         
 
@@ -1994,7 +2217,7 @@ DBInstance -> (structure)
 
     
 
-    Specifies the storage type associated with DB instance. 
+    Specifies the storage type associated with DB instance.
 
     
 
@@ -2004,7 +2227,7 @@ DBInstance -> (structure)
 
     
 
-    The ARN from the Key Store with which the instance is associated for TDE encryption. 
+    The ARN from the key store with which the instance is associated for TDE encryption.
 
     
 
@@ -2014,7 +2237,7 @@ DBInstance -> (structure)
 
     
 
-    Specifies the port that the DB instance listens on. If the DB instance is part of a DB cluster, this can be a different port than the DB cluster port. 
+    Specifies the port that the DB instance listens on. If the DB instance is part of a DB cluster, this can be a different port than the DB cluster port.
 
     
 
@@ -2034,7 +2257,7 @@ DBInstance -> (structure)
 
     
 
-    Specifies whether the DB instance is encrypted. 
+    Specifies whether the DB instance is encrypted.
 
     
 
@@ -2054,7 +2277,7 @@ DBInstance -> (structure)
 
     
 
-    The region-unique, immutable identifier for the DB instance. This identifier is found in AWS CloudTrail log entries whenever the KMS key for the DB instance is accessed. 
+    The region-unique, immutable identifier for the DB instance. This identifier is found in AWS CloudTrail log entries whenever the KMS key for the DB instance is accessed.
 
     
 
@@ -2067,6 +2290,66 @@ DBInstance -> (structure)
     The identifier of the CA certificate for this DB instance.
 
     
+
+    
+
+  DomainMemberships -> (list)
+
+    
+
+    The Active Directory Domain membership records associated with the DB instance.
+
+    
+
+    (structure)
+
+      
+
+      An Active Directory Domain membership record associated with the DB instance.
+
+      
+
+      Domain -> (string)
+
+        
+
+        The identifier of the Active Directory Domain.
+
+        
+
+        
+
+      Status -> (string)
+
+        
+
+        The status of the DB instance's Active Directory Domain membership, such as joined, pending-join, failed etc).
+
+        
+
+        
+
+      FQDN -> (string)
+
+        
+
+        The fully qualified domain name of the Active Directory Domain.
+
+        
+
+        
+
+      IAMRoleName -> (string)
+
+        
+
+        The name of the IAM role to be used when making API calls to the Directory Service.
+
+        
+
+        
+
+      
 
     
 
@@ -2110,12 +2393,59 @@ DBInstance -> (structure)
 
     
 
+  PromotionTier -> (integer)
+
+    
+
+    A value that specifies the order in which an Aurora Replica is promoted to the primary instance after a failure of the existing primary instance. For more information, see `Fault Tolerance for an Aurora DB Cluster <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Managing.html#Aurora.Managing.FaultTolerance>`_ . 
+
+    
+
+    
+
+  DBInstanceArn -> (string)
+
+    
+
+    The Amazon Resource Name (ARN) for the DB instance.
+
+    
+
+    
+
+  Timezone -> (string)
+
+    
+
+    The time zone of the DB instance. In most cases, the ``Timezone`` element is empty. ``Timezone`` content appears only for Microsoft SQL Server DB instances that were created with a time zone specified. 
+
+    
+
+    
+
+  IAMDatabaseAuthenticationEnabled -> (boolean)
+
+    
+
+    True if mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled; otherwise false.
+
+     
+
+    IAM database authentication can be enabled for the following database engines
+
+     
+
+     
+    * For MySQL 5.6, minor version 5.6.34 or higher 
+     
+    * For MySQL 5.7, minor version 5.7.16 or higher 
+     
+    * Aurora 5.6 or higher. To enable IAM database authentication for Aurora, see DBCluster Type. 
+     
+
+    
+
+    
+
   
 
-
-
-.. _DB Instance Maintenance: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBMaintenance.html
-.. _Adjusting the Preferred Maintenance Window: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
-.. _To create an IAM role for Amazon RDS Enhanced Monitoring: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.html#USER_Monitoring.OS.IAMRole
-.. _Regions and Availability Zones: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html
-.. _DB Instance Backups: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.BackingUpAndRestoringAmazonRDSInstances.html

@@ -15,23 +15,7 @@ Description
 
 
 
-AWS Direct Connect makes it easy to establish a dedicated network connection from your premises to Amazon Web Services (AWS). Using AWS Direct Connect, you can establish private connectivity between AWS and your data center, office, or colocation environment, which in many cases can reduce your network costs, increase bandwidth throughput, and provide a more consistent network experience than Internet-based connections.
-
- 
-
-The AWS Direct Connect API Reference provides descriptions, syntax, and usage examples for each of the actions and data types for AWS Direct Connect. Use the following links to get started using the *AWS Direct Connect API Reference* :
-
- 
-
- 
-* `Actions`_ : An alphabetical list of all AWS Direct Connect actions.
- 
-* `Data Types`_ : An alphabetical list of all AWS Direct Connect data types.
- 
-* `Common Query Parameters`_ : Parameters that all Query actions can use.
- 
-* `Common Errors`_ : Client and server errors that all actions can return.
- 
+AWS Direct Connect links your internal network to an AWS Direct Connect location over a standard 1 gigabit or 10 gigabit Ethernet fiber-optic cable. One end of the cable is connected to your router, the other to an AWS Direct Connect router. With this connection in place, you can create virtual interfaces directly to the AWS cloud (for example, to Amazon Elastic Compute Cloud (Amazon EC2) and Amazon Simple Storage Service (Amazon S3)) and to Amazon Virtual Private Cloud (Amazon VPC), bypassing Internet service providers in your network path. An AWS Direct Connect location provides access to AWS in the region it is associated with, as well as access to other US regions. For example, you can provision a single connection to any AWS Direct Connect location in the US and use it to access public AWS services in all US Regions and AWS GovCloud (US).
 
 
 
@@ -45,27 +29,39 @@ Available Commands
   :titlesonly:
 
   allocate-connection-on-interconnect
+  allocate-hosted-connection
   allocate-private-virtual-interface
   allocate-public-virtual-interface
+  associate-connection-with-lag
+  associate-hosted-connection
+  associate-virtual-interface
   confirm-connection
   confirm-private-virtual-interface
   confirm-public-virtual-interface
+  create-bgp-peer
   create-connection
   create-interconnect
+  create-lag
   create-private-virtual-interface
   create-public-virtual-interface
+  delete-bgp-peer
   delete-connection
   delete-interconnect
+  delete-lag
   delete-virtual-interface
+  describe-connection-loa
   describe-connections
   describe-connections-on-interconnect
+  describe-hosted-connections
+  describe-interconnect-loa
   describe-interconnects
+  describe-lags
+  describe-loa
   describe-locations
+  describe-tags
   describe-virtual-gateways
   describe-virtual-interfaces
-
-
-.. _Data Types: http://docs.aws.amazon.com/directconnect/latest/APIReference/API_Types.html
-.. _Common Query Parameters: http://docs.aws.amazon.com/directconnect/latest/APIReference/CommonParameters.html
-.. _Actions: http://docs.aws.amazon.com/directconnect/latest/APIReference/API_Operations.html
-.. _Common Errors: http://docs.aws.amazon.com/directconnect/latest/APIReference/CommonErrors.html
+  disassociate-connection-from-lag
+  tag-resource
+  untag-resource
+  update-lag

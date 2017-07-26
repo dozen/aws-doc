@@ -15,11 +15,7 @@ Description
 
 
 
-Detaches an EBS volume from an instance. Make sure to unmount any file systems on the device within your operating system before detaching the volume. Failure to do so results in the volume being stuck in a busy state while detaching.
-
- 
-
-If an Amazon EBS volume is the root device of an instance, it can't be detached while the instance is running. To detach the root volume, stop the instance first.
+Detaches an EBS volume from an instance. Make sure to unmount any file systems on the device within your operating system before detaching the volume. Failure to do so can result in the volume becoming stuck in the ``busy`` state while detaching. If this happens, detachment can be delayed indefinitely until you unmount the volume, force detachment, reboot the instance, or all three. If an EBS volume is the root device of an instance, it can't be detached while the instance is running. To detach the root volume, stop the instance first.
 
  
 
@@ -27,8 +23,11 @@ When a volume with an AWS Marketplace product code is detached from an instance,
 
  
 
-For more information, see `Detaching an Amazon EBS Volume`_ in the *Amazon Elastic Compute Cloud User Guide* .
+For more information, see `Detaching an Amazon EBS Volume <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-detaching-volume.html>`_ in the *Amazon Elastic Compute Cloud User Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DetachVolume>`_
 
 
 ========
@@ -38,13 +37,13 @@ Synopsis
 ::
 
     detach-volume
-  [--dry-run | --no-dry-run]
-  --volume-id <value>
-  [--instance-id <value>]
   [--device <value>]
   [--force | --no-force]
+  [--instance-id <value>]
+  --volume-id <value>
+  [--dry-run | --no-dry-run]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -52,27 +51,6 @@ Synopsis
 =======
 Options
 =======
-
-``--dry-run`` | ``--no-dry-run`` (boolean)
-
-
-  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
-
-  
-
-``--volume-id`` (string)
-
-
-  The ID of the volume.
-
-  
-
-``--instance-id`` (string)
-
-
-  The ID of the instance.
-
-  
 
 ``--device`` (string)
 
@@ -88,11 +66,32 @@ Options
 
   
 
+``--instance-id`` (string)
+
+
+  The ID of the instance.
+
+  
+
+``--volume-id`` (string)
+
+
+  The ID of the volume.
+
+  
+
+``--dry-run`` | ``--no-dry-run`` (boolean)
+
+
+  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
+
+  
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -102,18 +101,18 @@ Examples
 
 **To detach a volume from an instance**
 
-This example command detaches the volume (``vol-1234abcd``) from the instance it is attached to.
+This example command detaches the volume (``vol-049df61146c4d7901``) from the instance it is attached to.
 
 Command::
 
-  aws ec2 detach-volume --volume-id vol-1234abcd
+  aws ec2 detach-volume --volume-id vol-1234567890abcdef0
 
 Output::
 
    {
        "AttachTime": "2014-02-27T19:23:06.000Z",
-       "InstanceId": "i-0751440e",
-       "VolumeId": "vol-1234abcd",
+       "InstanceId": "i-1234567890abcdef0",
+       "VolumeId": "vol-049df61146c4d7901",
        "State": "detaching",
        "Device": "/dev/sdb"
    }
@@ -122,21 +121,11 @@ Output::
 Output
 ======
 
-VolumeId -> (string)
+AttachTime -> (timestamp)
 
   
 
-  The ID of the volume.
-
-  
-
-  
-
-InstanceId -> (string)
-
-  
-
-  The ID of the instance.
+  The time stamp when the attachment initiated.
 
   
 
@@ -152,6 +141,16 @@ Device -> (string)
 
   
 
+InstanceId -> (string)
+
+  
+
+  The ID of the instance.
+
+  
+
+  
+
 State -> (string)
 
   
@@ -162,11 +161,11 @@ State -> (string)
 
   
 
-AttachTime -> (timestamp)
+VolumeId -> (string)
 
   
 
-  The time stamp when the attachment initiated.
+  The ID of the volume.
 
   
 
@@ -182,6 +181,3 @@ DeleteOnTermination -> (boolean)
 
   
 
-
-
-.. _Detaching an Amazon EBS Volume: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-detaching-volume.html

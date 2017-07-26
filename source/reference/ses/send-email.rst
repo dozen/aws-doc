@@ -15,7 +15,7 @@ Description
 
 
 
-Composes an email message based on input data, and then immediately queues the message for sending. 
+Composes an email message based on input data, and then immediately queues the message for sending.
 
  
 
@@ -24,15 +24,18 @@ There are several important points to know about ``send-email`` :
  
 
  
-* You can only send email from verified email addresses and domains; otherwise, you will get an "Email address not verified" error. If your account is still in the Amazon SES sandbox, you must also verify every recipient email address except for the recipients provided by the Amazon SES mailbox simulator. For more information, go to the `Amazon SES Developer Guide`_ .
+* You can only send email from verified email addresses and domains; otherwise, you will get an "Email address not verified" error. If your account is still in the Amazon SES sandbox, you must also verify every recipient email address except for the recipients provided by the Amazon SES mailbox simulator. For more information, go to the `Amazon SES Developer Guide <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html>`_ . 
  
-* The total size of the message cannot exceed 10 MB. This includes any attachments that are part of the message.
+* The total size of the message cannot exceed 10 MB. This includes any attachments that are part of the message. 
  
-* Amazon SES has a limit on the total number of recipients per message. The combined number of To:, CC: and BCC: email addresses cannot exceed 50. If you need to send an email message to a larger audience, you can divide your recipient list into groups of 50 or fewer, and then call Amazon SES repeatedly to send the message to each group.
+* Amazon SES has a limit on the total number of recipients per message. The combined number of To:, CC: and BCC: email addresses cannot exceed 50. If you need to send an email message to a larger audience, you can divide your recipient list into groups of 50 or fewer, and then call Amazon SES repeatedly to send the message to each group. 
  
-* For every message that you send, the total number of recipients (To:, CC: and BCC:) is counted against your sending quota - the maximum number of emails you can send in a 24-hour period. For information about your sending quota, go to the `Amazon SES Developer Guide`_ .
+* For every message that you send, the total number of recipients (To:, CC: and BCC:) is counted against your sending quota - the maximum number of emails you can send in a 24-hour period. For information about your sending quota, go to the `Amazon SES Developer Guide <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/manage-sending-limits.html>`_ . 
  
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendEmail>`_
 
 
 ========
@@ -48,6 +51,8 @@ Synopsis
   [--return-path <value>]
   [--source-arn <value>]
   [--return-path-arn <value>]
+  [--tags <value>]
+  [--configuration-set-name <value>]
   --from <value>
   [--to <value>]
   [--cc <value>]
@@ -56,7 +61,7 @@ Synopsis
   [--text <value>]
   [--html <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -131,7 +136,7 @@ JSON Syntax::
 ``--reply-to-addresses`` (list)
 
 
-  The reply-to email address(es) for the message. If the recipient replies to the message, each reply-to address will receive the reply. 
+  The reply-to email address(es) for the message. If the recipient replies to the message, each reply-to address will receive the reply.
 
   
 
@@ -161,7 +166,7 @@ Syntax::
 
    
 
-  For more information about sending authorization, see the `Amazon SES Developer Guide`_ . 
+  For more information about sending authorization, see the `Amazon SES Developer Guide <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html>`_ . 
 
   
 
@@ -176,22 +181,57 @@ Syntax::
 
    
 
-  For more information about sending authorization, see the `Amazon SES Developer Guide`_ . 
+  For more information about sending authorization, see the `Amazon SES Developer Guide <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html>`_ . 
+
+  
+
+``--tags`` (list)
+
+
+  A list of tags, in the form of name/value pairs, to apply to an email that you send using ``send-email`` . Tags correspond to characteristics of the email that you define, so that you can publish email sending events.
+
+  
+
+
+
+Shorthand Syntax::
+
+    Name=string,Value=string ...
+
+
+
+
+JSON Syntax::
+
+  [
+    {
+      "Name": "string",
+      "Value": "string"
+    }
+    ...
+  ]
+
+
+
+``--configuration-set-name`` (string)
+
+
+  The name of the configuration set to use when you send an email using ``send-email`` .
 
   
 
 ``--from`` (string)
 
 
-  The email address that is sending the email. This email address must be either individually verified with Amazon SES, or from a domain that has been verified with Amazon SES. For information about verifying identities, see the `Amazon SES Developer Guide`_ .
+  The email address that is sending the email. This email address must be either individually verified with Amazon SES, or from a domain that has been verified with Amazon SES. For information about verifying identities, see the `Amazon SES Developer Guide <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html>`_ .
 
    
 
-  If you are sending on behalf of another user and have been permitted to do so by a sending authorization policy, then you must also specify the ``SourceArn`` parameter. For more information about sending authorization, see the `Amazon SES Developer Guide`_ .
+  If you are sending on behalf of another user and have been permitted to do so by a sending authorization policy, then you must also specify the ``SourceArn`` parameter. For more information about sending authorization, see the `Amazon SES Developer Guide <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html>`_ .
 
    
 
-  In all cases, the email address must be 7-bit ASCII. If the text must contain any other characters, then you must use MIME encoded-word syntax (RFC 2047) instead of a literal string. MIME encoded-word syntax uses the following form: ``=?charset?encoding?encoded-text?=`` . For more information, see `RFC 2047`_ . 
+  In all cases, the email address must be 7-bit ASCII. If the text must contain any other characters, then you must use MIME encoded-word syntax (RFC 2047) instead of a literal string. MIME encoded-word syntax uses the following form: ``=?charset?encoding?encoded-text?=`` . For more information, see `RFC 2047 <http://tools.ietf.org/html/rfc2047>`_ . 
 
   
 
@@ -216,8 +256,8 @@ The HTML body of the message
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -293,7 +333,3 @@ MessageId -> (string)
 
   
 
-
-
-.. _RFC 2047: http://tools.ietf.org/html/rfc2047
-.. _Amazon SES Developer Guide: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html

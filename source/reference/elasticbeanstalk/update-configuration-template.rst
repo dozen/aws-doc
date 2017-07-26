@@ -15,13 +15,17 @@ Description
 
 
 
-Updates the specified configuration template to have the specified properties or configuration option values. 
+Updates the specified configuration template to have the specified properties or configuration option values.
 
  
 
 .. note::
 
-  If a property (for example, ``application-name`` ) is not provided, its value remains unchanged. To clear such properties, specify an empty string. 
+   
+
+  If a property (for example, ``application-name`` ) is not provided, its value remains unchanged. To clear such properties, specify an empty string.
+
+   
 
  
 
@@ -30,9 +34,12 @@ Related Topics
  
 
  
-*  describe-configuration-options  
+*  describe-configuration-options   
  
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateConfigurationTemplate>`_
 
 
 ========
@@ -48,7 +55,7 @@ Synopsis
   [--option-settings <value>]
   [--options-to-remove <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -89,7 +96,7 @@ Options
 ``--option-settings`` (list)
 
 
-  A list of configuration option settings to update with the new specified option value. 
+  A list of configuration option settings to update with the new specified option value.
 
   
 
@@ -119,7 +126,7 @@ JSON Syntax::
 ``--options-to-remove`` (list)
 
 
-  A list of configuration options to remove from the configuration set. 
+  A list of configuration options to remove from the configuration set.
 
    
 
@@ -152,8 +159,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -190,7 +197,17 @@ SolutionStackName -> (string)
 
   
 
-  The name of the solution stack this configuration set uses. 
+  The name of the solution stack this configuration set uses.
+
+  
+
+  
+
+PlatformArn -> (string)
+
+  
+
+  The ARN of the custom platform.
 
   
 
@@ -200,7 +217,7 @@ ApplicationName -> (string)
 
   
 
-  The name of the application associated with this configuration set. 
+  The name of the application associated with this configuration set.
 
   
 
@@ -220,7 +237,7 @@ Description -> (string)
 
   
 
-  Describes this configuration set. 
+  Describes this configuration set.
 
   
 
@@ -262,7 +279,7 @@ DateCreated -> (timestamp)
 
   
 
-  The date (in UTC time) when this configuration set was created. 
+  The date (in UTC time) when this configuration set was created.
 
   
 
@@ -272,7 +289,7 @@ DateUpdated -> (timestamp)
 
   
 
-  The date (in UTC time) when this configuration set was last modified. 
+  The date (in UTC time) when this configuration set was last modified.
 
   
 
@@ -282,7 +299,7 @@ OptionSettings -> (list)
 
   
 
-  A list of the configuration options and their values in this configuration set. 
+  A list of the configuration options and their values in this configuration set.
 
   
 
@@ -290,7 +307,7 @@ OptionSettings -> (list)
 
     
 
-    A specification identifying an individual configuration option along with its current value. For a list of possible option values, go to `Option Values`_ in the *AWS Elastic Beanstalk Developer Guide* . 
+    A specification identifying an individual configuration option along with its current value. For a list of possible option values, go to `Option Values <http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-options.html>`_ in the *AWS Elastic Beanstalk Developer Guide* . 
 
     
 
@@ -298,7 +315,7 @@ OptionSettings -> (list)
 
       
 
-      A unique resource name for a time-based scaling configuration option. 
+      A unique resource name for a time-based scaling configuration option.
 
       
 
@@ -308,7 +325,7 @@ OptionSettings -> (list)
 
       
 
-      A unique namespace identifying the option's associated AWS resource. 
+      A unique namespace identifying the option's associated AWS resource.
 
       
 
@@ -318,7 +335,7 @@ OptionSettings -> (list)
 
       
 
-      The name of the configuration option. 
+      The name of the configuration option.
 
       
 
@@ -328,7 +345,7 @@ OptionSettings -> (list)
 
       
 
-      The current value for the configuration option. 
+      The current value for the configuration option.
 
       
 
@@ -338,6 +355,3 @@ OptionSettings -> (list)
 
   
 
-
-
-.. _Option Values: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-options.html

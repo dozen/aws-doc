@@ -15,12 +15,15 @@ Description
 
 
 
-Returns an ``MLModel`` that includes detailed metadata, and data source information as well as the current status of the ``MLModel`` .
+Returns an ``MLModel`` that includes detailed metadata, data source information, and the current status of the ``MLModel`` .
 
  
 
 ``get-ml-model`` provides results in normal or verbose format. 
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/machinelearning-2014-12-12/GetMLModel>`_
 
 
 ========
@@ -33,7 +36,7 @@ Synopsis
   --ml-model-id <value>
   [--verbose | --no-verbose]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -67,8 +70,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -80,7 +83,7 @@ MLModelId -> (string)
 
   
 
-  The MLModel ID which is same as the ``MLModelId`` in the request.
+  The MLModel ID,which is same as the ``MLModelId`` in the request.
 
   
 
@@ -149,11 +152,11 @@ Status -> (string)
    
   * ``INPROGRESS`` - The request is processing.
    
-  * ``FAILED`` - The request did not run to completion. It is not usable.
+  * ``FAILED`` - The request did not run to completion. The ML model isn't usable.
    
   * ``COMPLETED`` - The request completed successfully.
    
-  * ``DELETED`` - The ``MLModel`` is marked as deleted. It is not usable.
+  * ``DELETED`` - The ``MLModel`` is marked as deleted. It isn't usable.
    
 
   
@@ -227,11 +230,11 @@ EndpointInfo -> (structure)
      
 
      
-    * NONE - Endpoint does not exist or was previously deleted.
+    * ``NONE`` - Endpoint does not exist or was previously deleted.
      
-    * READY - Endpoint is ready to be used for real-time predictions.
+    * ``READY`` - Endpoint is ready to be used for real-time predictions.
      
-    * UPDATING - Updating/creating the endpoint. 
+    * ``UPDATING`` - Updating/creating the endpoint. 
      
 
     
@@ -244,7 +247,7 @@ TrainingParameters -> (map)
 
   
 
-  A list of the training parameters in the ``MLModel`` . The list is implemented as a map of key/value pairs.
+  A list of the training parameters in the ``MLModel`` . The list is implemented as a map of key-value pairs.
 
    
 
@@ -253,13 +256,15 @@ TrainingParameters -> (map)
    
 
    
-  * ``sgd.l1RegularizationAmount`` - Coefficient regularization L1 norm. It controls overfitting the data by penalizing large coefficients. This tends to drive coefficients to zero, resulting in a sparse feature set. If you use this parameter, specify a small value, such as 1.0E-04 or 1.0E-08. The value is a double that ranges from 0 to MAX_DOUBLE. The default is not to use L1 normalization. The parameter cannot be used when ``L2`` is specified. Use this parameter sparingly. 
+  * ``sgd.maxMLModelSizeInBytes`` - The maximum allowed size of the model. Depending on the input data, the size of the model might affect its performance. The value is an integer that ranges from ``100000`` to ``2147483648`` . The default value is ``33554432`` . 
    
-  * ``sgd.l2RegularizationAmount`` - Coefficient regularization L2 norm. It controls overfitting the data by penalizing large coefficients. This tends to drive coefficients to small, nonzero values. If you use this parameter, specify a small value, such as 1.0E-04 or 1.0E-08. The value is a double that ranges from 0 to MAX_DOUBLE. The default is not to use L2 normalization. This parameter cannot be used when ``L1`` is specified. Use this parameter sparingly. 
+  * ``sgd.maxPasses`` - The number of times that the training process traverses the observations to build the ``MLModel`` . The value is an integer that ranges from ``1`` to ``10000`` . The default value is ``10`` .
    
-  * ``sgd.maxPasses`` - The number of times that the training process traverses the observations to build the ``MLModel`` . The value is an integer that ranges from 1 to 10000. The default value is 10. 
+  * ``sgd.shuffleType`` - Whether Amazon ML shuffles the training data. Shuffling data improves a model's ability to find the optimal solution for a variety of data types. The valid values are ``auto`` and ``none`` . The default value is ``none`` . We strongly recommend that you shuffle your data.
    
-  * ``sgd.maxMLModelSizeInBytes`` - The maximum allowed size of the model. Depending on the input data, the model size might affect performance.  The value is an integer that ranges from 100000 to 2147483648. The default value is 33554432.  
+  * ``sgd.l1RegularizationAmount`` - The coefficient regularization L1 norm. It controls overfitting the data by penalizing large coefficients. This tends to drive coefficients to zero, resulting in a sparse feature set. If you use this parameter, start by specifying a small value, such as ``1.0E-08`` . The value is a double that ranges from ``0`` to ``MAX_DOUBLE`` . The default is to not use L1 normalization. This parameter can't be used when ``L2`` is specified. Use this parameter sparingly. 
+   
+  * ``sgd.l2RegularizationAmount`` - The coefficient regularization L2 norm. It controls overfitting the data by penalizing large coefficients. This tends to drive coefficients to small, nonzero values. If you use this parameter, start by specifying a small value, such as ``1.0E-08`` . The value is a double that ranges from ``0`` to ``MAX_DOUBLE`` . The default is to not use L2 normalization. This parameter can't be used when ``L1`` is specified. Use this parameter sparingly. 
    
 
   
@@ -305,11 +310,11 @@ MLModelType -> (string)
    
 
    
-  * REGRESSION -- Produces a numeric result. For example, "What listing price should a house have?"
+  * REGRESSION -- Produces a numeric result. For example, "What price should a house be listed at?"
    
   * BINARY -- Produces one of two possible results. For example, "Is this an e-commerce website?"
    
-  * MULTICLASS -- Produces more than two possible results. For example, "Is this a HIGH, LOW or MEDIUM risk trade?"
+  * MULTICLASS -- Produces one of several possible results. For example, "Is this a HIGH, LOW or MEDIUM risk trade?"
    
 
   
@@ -320,7 +325,7 @@ ScoreThreshold -> (float)
 
   
 
-  The scoring threshold is used in binary classification ``MLModel`` s, and marks the boundary between a positive prediction and a negative prediction.
+  The scoring threshold is used in binary classification ``MLModel``  models. It marks the boundary between a positive prediction and a negative prediction.
 
    
 
@@ -354,7 +359,37 @@ Message -> (string)
 
   
 
-  Description of the most recent details about accessing the ``MLModel`` .
+  A description of the most recent details about accessing the ``MLModel`` .
+
+  
+
+  
+
+ComputeTime -> (long)
+
+  
+
+  The approximate CPU time in milliseconds that Amazon Machine Learning spent processing the ``MLModel`` , normalized and scaled on computation resources. ``ComputeTime`` is only available if the ``MLModel`` is in the ``COMPLETED`` state.
+
+  
+
+  
+
+FinishedAt -> (timestamp)
+
+  
+
+  The epoch time when Amazon Machine Learning marked the ``MLModel`` as ``COMPLETED`` or ``FAILED`` . ``FinishedAt`` is only available when the ``MLModel`` is in the ``COMPLETED`` or ``FAILED`` state.
+
+  
+
+  
+
+StartedAt -> (timestamp)
+
+  
+
+  The epoch time when Amazon Machine Learning marked the ``MLModel`` as ``INPROGRESS`` . ``StartedAt`` isn't available if the ``MLModel`` is in the ``PENDING`` state.
 
   
 
@@ -364,7 +399,7 @@ Recipe -> (string)
 
   
 
-  The recipe to use when training the ``MLModel`` . The ``Recipe`` provides detailed information about the observation data to use during training, as well as manipulations to perform on the observation data during training.
+  The recipe to use when training the ``MLModel`` . The ``Recipe`` provides detailed information about the observation data to use during training, and manipulations to perform on the observation data during training.
 
    
 

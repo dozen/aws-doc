@@ -19,7 +19,7 @@ Returns information about the specified domain, including description and status
 
  
 
-**Access Control** 
+ **Access Control**  
 
  
 
@@ -28,17 +28,20 @@ You can use IAM policies to control this action's access to Amazon SWF resources
  
 
  
-* Use a ``Resource`` element with the domain name to limit the action to only specified domains.
+* Use a ``Resource`` element with the domain name to limit the action to only specified domains. 
  
-* Use an ``Action`` element to allow or deny permission to call this action.
+* Use an ``Action`` element to allow or deny permission to call this action. 
  
-* You cannot use an IAM policy to constrain this action's parameters.
- 
-
+* You cannot use an IAM policy to constrain this action's parameters. 
  
 
-If the caller does not have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's **cause** parameter will be set to OPERATION_NOT_PERMITTED. For details and example IAM policies, see `Using IAM to Manage Access to Amazon SWF Workflows`_ .
+ 
 
+If the caller doesn't have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's ``cause`` parameter is set to ``OPERATION_NOT_PERMITTED`` . For details and example IAM policies, see `Using IAM to Manage Access to Amazon SWF Workflows <http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html>`_ in the *Amazon SWF Developer Guide* .
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/swf-2012-01-25/DescribeDomain>`_
 
 
 ========
@@ -50,7 +53,7 @@ Synopsis
     describe-domain
   --name <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -69,8 +72,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -131,7 +134,7 @@ domainInfo -> (structure)
 
   
 
-  Contains general information about a domain.
+  The basic information about a domain, such as its name, status, and description.
 
   
 
@@ -154,9 +157,9 @@ domainInfo -> (structure)
      
 
      
-    * **REGISTERED** : The domain is properly registered and available. You can use this domain for registering types and creating new workflow executions. 
+    * ``REGISTERED`` – The domain is properly registered and available. You can use this domain for registering types and creating new workflow executions.  
      
-    * **DEPRECATED** : The domain was deprecated using  deprecate-domain , but is still in use. You should not create new workflow executions in this domain. 
+    * ``DEPRECATED`` – The domain was deprecated using  deprecate-domain , but is still in use. You should not create new workflow executions in this domain.  
      
 
     
@@ -179,7 +182,7 @@ configuration -> (structure)
 
   
 
-  Contains the configuration settings of a domain.
+  The domain configuration. Currently, this includes only the domain's retention period.
 
   
 
@@ -195,6 +198,3 @@ configuration -> (structure)
 
   
 
-
-
-.. _Using IAM to Manage Access to Amazon SWF Workflows: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html

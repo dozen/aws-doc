@@ -27,6 +27,9 @@ After you find a schedule that meets your needs, call  purchase-scheduled-instan
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeScheduledInstanceAvailability>`_
+
+
 ========
 Synopsis
 ========
@@ -35,15 +38,15 @@ Synopsis
 
     describe-scheduled-instance-availability
   [--dry-run | --no-dry-run]
-  --recurrence <value>
-  --first-slot-start-time-range <value>
-  [--min-slot-duration-in-hours <value>]
-  [--max-slot-duration-in-hours <value>]
-  [--next-token <value>]
-  [--max-results <value>]
   [--filters <value>]
+  --first-slot-start-time-range <value>
+  [--max-results <value>]
+  [--max-slot-duration-in-hours <value>]
+  [--min-slot-duration-in-hours <value>]
+  [--next-token <value>]
+  --recurrence <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -56,87 +59,6 @@ Options
 
 
   Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
-
-  
-
-``--recurrence`` (structure)
-
-
-  The schedule recurrence.
-
-  
-
-
-
-Shorthand Syntax::
-
-    Frequency=string,Interval=integer,OccurrenceDays=integer,integer,OccurrenceRelativeToEnd=boolean,OccurrenceUnit=string
-
-
-
-
-JSON Syntax::
-
-  {
-    "Frequency": "string",
-    "Interval": integer,
-    "OccurrenceDays": [integer, ...],
-    "OccurrenceRelativeToEnd": true|false,
-    "OccurrenceUnit": "string"
-  }
-
-
-
-``--first-slot-start-time-range`` (structure)
-
-
-  The time period for the first schedule to start.
-
-  
-
-
-
-Shorthand Syntax::
-
-    EarliestTime=timestamp,LatestTime=timestamp
-
-
-
-
-JSON Syntax::
-
-  {
-    "EarliestTime": timestamp,
-    "LatestTime": timestamp
-  }
-
-
-
-``--min-slot-duration-in-hours`` (integer)
-
-
-  The minimum available duration, in hours. The minimum required duration is 1,200 hours per year. For example, the minimum daily schedule is 4 hours, the minimum weekly schedule is 24 hours, and the minimum monthly schedule is 100 hours.
-
-  
-
-``--max-slot-duration-in-hours`` (integer)
-
-
-  The maximum available duration, in hours. This value must be greater than ``MinSlotDurationInHours`` and less than 1,720.
-
-  
-
-``--next-token`` (string)
-
-
-  The token for the next set of results.
-
-  
-
-``--max-results`` (integer)
-
-
-  The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned ``NextToken`` value.
 
   
 
@@ -180,11 +102,92 @@ JSON Syntax::
 
 
 
+``--first-slot-start-time-range`` (structure)
+
+
+  The time period for the first schedule to start.
+
+  
+
+
+
+Shorthand Syntax::
+
+    EarliestTime=timestamp,LatestTime=timestamp
+
+
+
+
+JSON Syntax::
+
+  {
+    "EarliestTime": timestamp,
+    "LatestTime": timestamp
+  }
+
+
+
+``--max-results`` (integer)
+
+
+  The maximum number of results to return in a single call. This value can be between 5 and 300. The default value is 300. To retrieve the remaining results, make another call with the returned ``NextToken`` value.
+
+  
+
+``--max-slot-duration-in-hours`` (integer)
+
+
+  The maximum available duration, in hours. This value must be greater than ``MinSlotDurationInHours`` and less than 1,720.
+
+  
+
+``--min-slot-duration-in-hours`` (integer)
+
+
+  The minimum available duration, in hours. The minimum required duration is 1,200 hours per year. For example, the minimum daily schedule is 4 hours, the minimum weekly schedule is 24 hours, and the minimum monthly schedule is 100 hours.
+
+  
+
+``--next-token`` (string)
+
+
+  The token for the next set of results.
+
+  
+
+``--recurrence`` (structure)
+
+
+  The schedule recurrence.
+
+  
+
+
+
+Shorthand Syntax::
+
+    Frequency=string,Interval=integer,OccurrenceDays=integer,integer,OccurrenceRelativeToEnd=boolean,OccurrenceUnit=string
+
+
+
+
+JSON Syntax::
+
+  {
+    "Frequency": "string",
+    "Interval": integer,
+    "OccurrenceDays": [integer, ...],
+    "OccurrenceRelativeToEnd": true|false,
+    "OccurrenceUnit": "string"
+  }
+
+
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -267,6 +270,46 @@ ScheduledInstanceAvailabilitySet -> (list)
 
     
 
+    AvailabilityZone -> (string)
+
+      
+
+      The Availability Zone.
+
+      
+
+      
+
+    AvailableInstanceCount -> (integer)
+
+      
+
+      The number of available instances.
+
+      
+
+      
+
+    FirstSlotStartTime -> (timestamp)
+
+      
+
+      The time period for the first schedule to start.
+
+      
+
+      
+
+    HourlyPrice -> (string)
+
+      
+
+      The hourly price for a single instance.
+
+      
+
+      
+
     InstanceType -> (string)
 
       
@@ -277,11 +320,21 @@ ScheduledInstanceAvailabilitySet -> (list)
 
       
 
-    Platform -> (string)
+    MaxTermDurationInDays -> (integer)
 
       
 
-      The platform (``Linux/UNIX`` or ``Windows`` ).
+      The maximum term. The only possible value is 365 days.
+
+      
+
+      
+
+    MinTermDurationInDays -> (integer)
+
+      
+
+      The minimum term. The only possible value is 365 days.
 
       
 
@@ -297,11 +350,11 @@ ScheduledInstanceAvailabilitySet -> (list)
 
       
 
-    AvailabilityZone -> (string)
+    Platform -> (string)
 
       
 
-      The Availability Zone.
+      The platform (``Linux/UNIX`` or ``Windows`` ).
 
       
 
@@ -312,16 +365,6 @@ ScheduledInstanceAvailabilitySet -> (list)
       
 
       The purchase token. This token expires in two hours.
-
-      
-
-      
-
-    SlotDurationInHours -> (integer)
-
-      
-
-      The number of hours in the schedule.
 
       
 
@@ -393,21 +436,11 @@ ScheduledInstanceAvailabilitySet -> (list)
 
       
 
-    FirstSlotStartTime -> (timestamp)
+    SlotDurationInHours -> (integer)
 
       
 
-      The time period for the first schedule to start.
-
-      
-
-      
-
-    HourlyPrice -> (string)
-
-      
-
-      The hourly price for a single instance.
+      The number of hours in the schedule.
 
       
 
@@ -418,36 +451,6 @@ ScheduledInstanceAvailabilitySet -> (list)
       
 
       The total number of hours for a single instance for the entire term.
-
-      
-
-      
-
-    AvailableInstanceCount -> (integer)
-
-      
-
-      The number of available instances.
-
-      
-
-      
-
-    MinTermDurationInDays -> (integer)
-
-      
-
-      The minimum term. The only possible value is 365 days.
-
-      
-
-      
-
-    MaxTermDurationInDays -> (integer)
-
-      
-
-      The maximum term. The only possible value is 365 days.
 
       
 

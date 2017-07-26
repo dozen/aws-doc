@@ -15,7 +15,7 @@ Description
 
 
 
-Returns properties of provisioned clusters including general cluster properties, cluster database properties, maintenance and backup properties, and security and access properties. This operation supports pagination. For more information about managing clusters, go to `Amazon Redshift Clusters`_ in the *Amazon Redshift Cluster Management Guide* . 
+Returns properties of provisioned clusters including general cluster properties, cluster database properties, maintenance and backup properties, and security and access properties. This operation supports pagination. For more information about managing clusters, go to `Amazon Redshift Clusters <http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html>`_ in the *Amazon Redshift Cluster Management Guide* .
 
  
 
@@ -25,6 +25,9 @@ If you specify both tag keys and tag values in the same request, Amazon Redshift
 
 If both tag keys and values are omitted from the request, clusters are returned regardless of whether they have tag keys or values associated with them.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusters>`_
 
 
 ``describe-clusters`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
@@ -45,7 +48,7 @@ Synopsis
   [--starting-token <value>]
   [--page-size <value>]
   [--max-items <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -57,11 +60,11 @@ Options
 ``--cluster-identifier`` (string)
 
 
-  The unique identifier of a cluster whose properties you are requesting. This parameter is case sensitive. 
+  The unique identifier of a cluster whose properties you are requesting. This parameter is case sensitive.
 
    
 
-  The default is that all clusters defined for an account are returned. 
+  The default is that all clusters defined for an account are returned.
 
   
 
@@ -105,26 +108,34 @@ Performs service operation based on the JSON string provided. The JSON string fo
 
    
 
-``--page-size`` (integer)
- 
-
-  The size of each page.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
    
 
-  
+``--page-size`` (integer)
+ 
 
-  
+  The size of each page to get in the AWS service call. This does not affect the number of items returned in the command's output. Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call. This can help prevent the AWS service calls from timing out.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
 
 ``--max-items`` (integer)
  
 
-  The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination. This ``NextToken`` response element should **not** be used directly outside of the AWS CLI.
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``NextToken`` is provided in the command's output. To resume pagination, provide the ``NextToken`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``NextToken`` response element directly outside of the AWS CLI.
 
    
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -216,7 +227,7 @@ Clusters -> (list)
 
   
 
-  A list of  Cluster objects, where each object describes one cluster. 
+  A list of ``Cluster`` objects, where each object describes one cluster. 
 
   
 
@@ -232,7 +243,7 @@ Clusters -> (list)
 
       
 
-      The unique identifier of the cluster. 
+      The unique identifier of the cluster.
 
       
 
@@ -242,7 +253,7 @@ Clusters -> (list)
 
       
 
-      The node type for the nodes in the cluster. 
+      The node type for the nodes in the cluster.
 
       
 
@@ -252,7 +263,43 @@ Clusters -> (list)
 
       
 
-      The current state of this cluster. Possible values include ``available`` , ``creating`` , ``deleting`` , ``rebooting`` , ``renaming`` , and ``resizing`` . 
+      The current state of the cluster. Possible values are the following:
+
+       
+
+       
+      * ``available``   
+       
+      * ``creating``   
+       
+      * ``deleting``   
+       
+      * ``final-snapshot``   
+       
+      * ``hardware-failure``   
+       
+      * ``incompatible-hsm``   
+       
+      * ``incompatible-network``   
+       
+      * ``incompatible-parameters``   
+       
+      * ``incompatible-restore``   
+       
+      * ``modifying``   
+       
+      * ``rebooting``   
+       
+      * ``renaming``   
+       
+      * ``resizing``   
+       
+      * ``rotating-keys``   
+       
+      * ``storage-full``   
+       
+      * ``updating-hsm``   
+       
 
       
 
@@ -272,7 +319,7 @@ Clusters -> (list)
 
       
 
-      The master user name for the cluster. This name is used to connect to the database that is specified in **DBName** . 
+      The master user name for the cluster. This name is used to connect to the database that is specified in the **DBName** parameter. 
 
       
 
@@ -282,7 +329,7 @@ Clusters -> (list)
 
       
 
-      The name of the initial database that was created when the cluster was created. This same name is returned for the life of the cluster. If an initial database was not specified, a database named "dev" was created by default. 
+      The name of the initial database that was created when the cluster was created. This same name is returned for the life of the cluster. If an initial database was not specified, a database named ``dev`` dev was created by default. 
 
       
 
@@ -292,7 +339,7 @@ Clusters -> (list)
 
       
 
-      The connection endpoint. 
+      The connection endpoint.
 
       
 
@@ -300,7 +347,7 @@ Clusters -> (list)
 
         
 
-        The DNS address of the Cluster. 
+        The DNS address of the Cluster.
 
         
 
@@ -310,7 +357,7 @@ Clusters -> (list)
 
         
 
-        The port that the database engine is listening on. 
+        The port that the database engine is listening on.
 
         
 
@@ -322,7 +369,7 @@ Clusters -> (list)
 
       
 
-      The date and time that the cluster was created. 
+      The date and time that the cluster was created.
 
       
 
@@ -332,7 +379,7 @@ Clusters -> (list)
 
       
 
-      The number of days that automatic cluster snapshots are retained. 
+      The number of days that automatic cluster snapshots are retained.
 
       
 
@@ -346,7 +393,7 @@ Clusters -> (list)
 
        
 
-      Cluster security groups are used when the cluster is not created in a VPC. Clusters that are created in a VPC use VPC security groups, which are listed by the **VpcSecurityGroups** parameter. 
+      Cluster security groups are used when the cluster is not created in an Amazon Virtual Private Cloud (VPC). Clusters that are created in a VPC use VPC security groups, which are listed by the **VpcSecurityGroups** parameter. 
 
       
 
@@ -354,7 +401,7 @@ Clusters -> (list)
 
         
 
-        Describes a security group.
+        Describes a cluster security group.
 
         
 
@@ -362,7 +409,7 @@ Clusters -> (list)
 
           
 
-          The name of the cluster security group. 
+          The name of the cluster security group.
 
           
 
@@ -372,7 +419,7 @@ Clusters -> (list)
 
           
 
-          The status of the cluster security group. 
+          The status of the cluster security group.
 
           
 
@@ -386,7 +433,7 @@ Clusters -> (list)
 
       
 
-      A list of Virtual Private Cloud (VPC) security groups that are associated with the cluster. This parameter is returned only if the cluster is in a VPC. 
+      A list of Amazon Virtual Private Cloud (Amazon VPC) security groups that are associated with the cluster. This parameter is returned only if the cluster is in a VPC.
 
       
 
@@ -402,9 +449,17 @@ Clusters -> (list)
 
           
 
+          The identifier of the VPC security group.
+
+          
+
           
 
         Status -> (string)
+
+          
+
+          The status of the VPC security group.
 
           
 
@@ -426,7 +481,7 @@ Clusters -> (list)
 
         
 
-        Describes the status of a parameter group. 
+        Describes the status of a parameter group.
 
         
 
@@ -434,7 +489,7 @@ Clusters -> (list)
 
           
 
-          The name of the cluster parameter group. 
+          The name of the cluster parameter group.
 
           
 
@@ -444,7 +499,7 @@ Clusters -> (list)
 
           
 
-          The status of parameter updates. 
+          The status of parameter updates.
 
           
 
@@ -458,7 +513,7 @@ Clusters -> (list)
 
            
 
-          For more information about parameters and parameter groups, go to `Amazon Redshift Parameter Groups`_ in the *Amazon Redshift Cluster Management Guide* . 
+          For more information about parameters and parameter groups, go to `Amazon Redshift Parameter Groups <http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html>`_ in the *Amazon Redshift Cluster Management Guide* .
 
           
 
@@ -491,21 +546,21 @@ Clusters -> (list)
               The following are possible statuses and descriptions.
 
                
-              * ``in-sync`` : The parameter value is in sync with the database.
-               
-              * ``pending-reboot`` : The parameter value will be applied after the cluster reboots.
-               
-              * ``applying`` : The parameter value is being applied to the database.
-               
-              * ``invalid-parameter`` : Cannot apply the parameter value because it has an invalid value or syntax.
-               
-              * ``apply-deferred`` : The parameter contains static property changes. The changes are deferred until the cluster reboots.
-               
-              * ``apply-error`` : Cannot connect to the cluster. The parameter change will be applied after the cluster reboots.
-               
-              * ``unknown-error`` : Cannot apply the parameter change right now. The change will be applied after the cluster reboots.
-               
 
+               
+              * ``in-sync`` : The parameter value is in sync with the database. 
+               
+              * ``pending-reboot`` : The parameter value will be applied after the cluster reboots. 
+               
+              * ``applying`` : The parameter value is being applied to the database. 
+               
+              * ``invalid-parameter`` : Cannot apply the parameter value because it has an invalid value or syntax. 
+               
+              * ``apply-deferred`` : The parameter contains static property changes. The changes are deferred until the cluster reboots. 
+               
+              * ``apply-error`` : Cannot connect to the cluster. The parameter change will be applied after the cluster reboots. 
+               
+              * ``unknown-error`` : Cannot apply the parameter change right now. The change will be applied after the cluster reboots. 
                
 
               
@@ -534,7 +589,7 @@ Clusters -> (list)
 
       
 
-      The name of the subnet group that is associated with the cluster. This parameter is valid only when the cluster is in a VPC. 
+      The name of the subnet group that is associated with the cluster. This parameter is valid only when the cluster is in a VPC.
 
       
 
@@ -544,7 +599,7 @@ Clusters -> (list)
 
       
 
-      The identifier of the VPC the cluster is in, if the cluster is in a VPC. 
+      The identifier of the VPC the cluster is in, if the cluster is in a VPC.
 
       
 
@@ -554,7 +609,7 @@ Clusters -> (list)
 
       
 
-      The name of the Availability Zone in which the cluster is located. 
+      The name of the Availability Zone in which the cluster is located.
 
       
 
@@ -564,7 +619,7 @@ Clusters -> (list)
 
       
 
-      The weekly time range (in UTC) during which system maintenance can occur. 
+      The weekly time range, in Universal Coordinated Time (UTC), during which system maintenance can occur.
 
       
 
@@ -574,7 +629,7 @@ Clusters -> (list)
 
       
 
-      If present, changes to the cluster are pending. Specific pending changes are identified by subelements. 
+      A value that, if present, indicates that changes to the cluster are pending. Specific pending changes are identified by subelements.
 
       
 
@@ -582,7 +637,7 @@ Clusters -> (list)
 
         
 
-        The pending or in-progress change of the master user password for the cluster. 
+        The pending or in-progress change of the master user password for the cluster.
 
         
 
@@ -592,7 +647,7 @@ Clusters -> (list)
 
         
 
-        The pending or in-progress change of the cluster's node type. 
+        The pending or in-progress change of the cluster's node type.
 
         
 
@@ -602,7 +657,7 @@ Clusters -> (list)
 
         
 
-        The pending or in-progress change of the number of nodes in the cluster. 
+        The pending or in-progress change of the number of nodes in the cluster.
 
         
 
@@ -612,7 +667,7 @@ Clusters -> (list)
 
         
 
-        The pending or in-progress change of the cluster type. 
+        The pending or in-progress change of the cluster type.
 
         
 
@@ -622,7 +677,7 @@ Clusters -> (list)
 
         
 
-        The pending or in-progress change of the service version. 
+        The pending or in-progress change of the service version.
 
         
 
@@ -632,7 +687,7 @@ Clusters -> (list)
 
         
 
-        The pending or in-progress change of the automated snapshot retention period. 
+        The pending or in-progress change of the automated snapshot retention period.
 
         
 
@@ -648,13 +703,41 @@ Clusters -> (list)
 
         
 
+      PubliclyAccessible -> (boolean)
+
+        
+
+        The pending or in-progress change of the ability to connect to the cluster from the public network.
+
+        
+
+        
+
+      EnhancedVpcRouting -> (boolean)
+
+        
+
+        An option that specifies whether to create the cluster with enhanced VPC routing enabled. To create a cluster that uses enhanced VPC routing, the cluster must be in a VPC. For more information, see `Enhanced VPC Routing <http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html>`_ in the Amazon Redshift Cluster Management Guide.
+
+         
+
+        If this option is ``true`` , enhanced VPC routing is enabled. 
+
+         
+
+        Default: false
+
+        
+
+        
+
       
 
     ClusterVersion -> (string)
 
       
 
-      The version ID of the Amazon Redshift engine that is running on the cluster. 
+      The version ID of the Amazon Redshift engine that is running on the cluster.
 
       
 
@@ -664,7 +747,7 @@ Clusters -> (list)
 
       
 
-      If ``true`` , major version upgrades will be applied automatically to the cluster during the maintenance window. 
+      A Boolean value that, if ``true`` , indicates that major version upgrades will be applied automatically to the cluster during the maintenance window. 
 
       
 
@@ -674,7 +757,7 @@ Clusters -> (list)
 
       
 
-      The number of compute nodes in the cluster. 
+      The number of compute nodes in the cluster.
 
       
 
@@ -684,7 +767,7 @@ Clusters -> (list)
 
       
 
-      If ``true`` , the cluster can be accessed from a public network.
+      A Boolean value that, if ``true`` , indicates that the cluster can be accessed from a public network.
 
       
 
@@ -694,7 +777,7 @@ Clusters -> (list)
 
       
 
-      If ``true`` , data in the cluster is encrypted at rest.
+      A Boolean value that, if ``true`` , indicates that data in the cluster is encrypted at rest.
 
       
 
@@ -704,7 +787,7 @@ Clusters -> (list)
 
       
 
-      Describes the status of a cluster restore action. Returns null if the cluster was not created by restoring a snapshot. 
+      A value that describes the status of a cluster restore action. This parameter returns null if the cluster was not created by restoring a snapshot.
 
       
 
@@ -712,7 +795,7 @@ Clusters -> (list)
 
         
 
-        The status of the restore action. Returns starting, restoring, completed, or failed. 
+        The status of the restore action. Returns starting, restoring, completed, or failed.
 
         
 
@@ -722,7 +805,7 @@ Clusters -> (list)
 
         
 
-        The number of megabytes per second being transferred from the backup storage. Returns the average rate for a completed backup. 
+        The number of megabytes per second being transferred from the backup storage. Returns the average rate for a completed backup.
 
         
 
@@ -732,7 +815,7 @@ Clusters -> (list)
 
         
 
-        The size of the set of snapshot data used to restore the cluster. 
+        The size of the set of snapshot data used to restore the cluster.
 
         
 
@@ -742,7 +825,7 @@ Clusters -> (list)
 
         
 
-        The number of megabytes that have been transferred from snapshot storage. 
+        The number of megabytes that have been transferred from snapshot storage.
 
         
 
@@ -752,7 +835,7 @@ Clusters -> (list)
 
         
 
-        The amount of time an in-progress restore has been running, or the amount of time it took a completed restore to finish. 
+        The amount of time an in-progress restore has been running, or the amount of time it took a completed restore to finish.
 
         
 
@@ -762,7 +845,7 @@ Clusters -> (list)
 
         
 
-        The estimate of the time remaining before the restore will complete. Returns 0 for a completed restore. 
+        The estimate of the time remaining before the restore will complete. Returns 0 for a completed restore.
 
         
 
@@ -774,7 +857,7 @@ Clusters -> (list)
 
       
 
-      Reports whether the Amazon Redshift cluster has finished applying any HSM settings changes specified in a modify cluster command.
+      A value that reports whether the Amazon Redshift cluster has finished applying any hardware security module (HSM) settings changes specified in a modify cluster command.
 
        
 
@@ -822,7 +905,7 @@ Clusters -> (list)
 
       
 
-      Returns the destination region and retention period that are configured for cross-region snapshot copy. 
+      A value that returns the destination region and retention period that are configured for cross-region snapshot copy.
 
       
 
@@ -872,7 +955,7 @@ Clusters -> (list)
 
       
 
-      The nodes in a cluster.
+      The nodes in the cluster.
 
       
 
@@ -922,7 +1005,7 @@ Clusters -> (list)
 
       
 
-      Describes the status of the elastic IP (EIP) address.
+      The status of the elastic IP (EIP) address.
 
       
 
@@ -940,7 +1023,7 @@ Clusters -> (list)
 
         
 
-        Describes the status of the elastic IP (EIP) address.
+        The status of the elastic IP (EIP) address.
 
         
 
@@ -1002,9 +1085,81 @@ Clusters -> (list)
 
       
 
-      The AWS Key Management Service (KMS) key ID of the encryption key used to encrypt data in the cluster.
+      The AWS Key Management Service (AWS KMS) key ID of the encryption key used to encrypt data in the cluster.
 
       
+
+      
+
+    EnhancedVpcRouting -> (boolean)
+
+      
+
+      An option that specifies whether to create the cluster with enhanced VPC routing enabled. To create a cluster that uses enhanced VPC routing, the cluster must be in a VPC. For more information, see `Enhanced VPC Routing <http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html>`_ in the Amazon Redshift Cluster Management Guide.
+
+       
+
+      If this option is ``true`` , enhanced VPC routing is enabled. 
+
+       
+
+      Default: false
+
+      
+
+      
+
+    IamRoles -> (list)
+
+      
+
+      A list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services.
+
+      
+
+      (structure)
+
+        
+
+        An AWS Identity and Access Management (IAM) role that can be used by the associated Amazon Redshift cluster to access other AWS services.
+
+        
+
+        IamRoleArn -> (string)
+
+          
+
+          The Amazon Resource Name (ARN) of the IAM role, for example, ``arn:aws:iam::123456789012:role/RedshiftCopyUnload`` . 
+
+          
+
+          
+
+        ApplyStatus -> (string)
+
+          
+
+          A value that describes the status of the IAM role's association with an Amazon Redshift cluster.
+
+           
+
+          The following are possible statuses and descriptions.
+
+           
+
+           
+          * ``in-sync`` : The role is available for use by the cluster. 
+           
+          * ``adding`` : The role is in the process of being associated with the cluster. 
+           
+          * ``removing`` : The role is in the process of being disassociated with the cluster. 
+           
+
+          
+
+          
+
+        
 
       
 
@@ -1012,7 +1167,3 @@ Clusters -> (list)
 
   
 
-
-
-.. _Amazon Redshift Clusters: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html
-.. _Amazon Redshift Parameter Groups: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html

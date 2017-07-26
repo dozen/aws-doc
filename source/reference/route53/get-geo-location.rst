@@ -15,8 +15,35 @@ Description
 
 
 
-To retrieve a single geo location, send a ``GET`` request to the ``/*Route 53 API version* /geolocation`` resource with one of these options: continentcode | countrycode | countrycode and subdivisioncode.
+Gets information about whether a specified geographic location is supported for Amazon Route 53 geolocation resource record sets.
 
+ 
+
+Use the following syntax to determine whether a continent is supported for geolocation:
+
+ 
+
+ ``GET /2013-04-01/geolocation?ContinentCode=*two-letter abbreviation for a continent* ``  
+
+ 
+
+Use the following syntax to determine whether a country is supported for geolocation:
+
+ 
+
+ ``GET /2013-04-01/geolocation?CountryCode=*two-character country code* ``  
+
+ 
+
+Use the following syntax to determine whether a subdivision of a country is supported for geolocation:
+
+ 
+
+ ``GET /2013-04-01/geolocation?CountryCode=*two-character country code* SubdivisionCode=*subdivision code* ``  
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetGeoLocation>`_
 
 
 ========
@@ -30,7 +57,7 @@ Synopsis
   [--country-code <value>]
   [--subdivision-code <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -42,45 +69,47 @@ Options
 ``--continent-code`` (string)
 
 
-  The code for a continent geo location. Note: only continent locations have a continent code.
+  Amazon Route 53 supports the following continent codes:
 
    
 
-  Valid values: ``AF`` | ``AN`` | ``AS`` | ``EU`` | ``OC`` | ``NA`` | ``SA`` 
-
    
-
-  Constraint: Specifying ``ContinentCode`` with either ``CountryCode`` or ``SubdivisionCode`` returns an  InvalidInput error.
+  * **AF** : Africa 
+   
+  * **AN** : Antarctica 
+   
+  * **AS** : Asia 
+   
+  * **EU** : Europe 
+   
+  * **OC** : Oceania 
+   
+  * **NA** : North America 
+   
+  * **SA** : South America 
+   
 
   
 
 ``--country-code`` (string)
 
 
-  The code for a country geo location. The default location uses '*' for the country code and will match all locations that are not matched by a geo location.
-
-   
-
-  The default geo location uses a ``*`` for the country code. All other country codes follow the ISO 3166 two-character code.
+  Amazon Route 53 uses the two-letter country codes that are specified in `ISO standard 3166-1 alpha-2 <https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2>`_ .
 
   
 
 ``--subdivision-code`` (string)
 
 
-  The code for a country's subdivision (e.g., a province of Canada). A subdivision code is only valid with the appropriate country code.
-
-   
-
-  Constraint: Specifying ``SubdivisionCode`` without ``CountryCode`` returns an  InvalidInput error.
+  Amazon Route 53 uses the one- to three-letter subdivision codes that are specified in `ISO standard 3166-1 alpha-2 <https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2>`_ . Amazon Route 53 doesn't support subdivision codes for all countries. If you specify ``SubdivisionCode`` , you must also specify ``CountryCode`` . 
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -92,7 +121,7 @@ GeoLocationDetails -> (structure)
 
   
 
-  A complex type that contains the information about the specified geo location.
+  A complex type that contains the codes and full continent, country, and subdivision names for the specified geolocation code.
 
   
 
@@ -100,7 +129,7 @@ GeoLocationDetails -> (structure)
 
     
 
-    The code for a continent geo location. Note: only continent locations have a continent code.
+    The two-letter code for the continent.
 
     
 
@@ -110,7 +139,7 @@ GeoLocationDetails -> (structure)
 
     
 
-    The name of the continent. This element is only present if ``ContinentCode`` is also present.
+    The full name of the continent.
 
     
 
@@ -120,11 +149,7 @@ GeoLocationDetails -> (structure)
 
     
 
-    The code for a country geo location. The default location uses '*' for the country code and will match all locations that are not matched by a geo location.
-
-     
-
-    The default geo location uses a ``*`` for the country code. All other country codes follow the ISO 3166 two-character code.
+    The two-letter code for the country.
 
     
 
@@ -134,7 +159,7 @@ GeoLocationDetails -> (structure)
 
     
 
-    The name of the country. This element is only present if ``CountryCode`` is also present.
+    The name of the country.
 
     
 
@@ -144,7 +169,7 @@ GeoLocationDetails -> (structure)
 
     
 
-    The code for a country's subdivision (e.g., a province of Canada). A subdivision code is only valid with the appropriate country code.
+    The code for the subdivision, for example, a state in the United States or a province in Canada.
 
     
 
@@ -154,7 +179,7 @@ GeoLocationDetails -> (structure)
 
     
 
-    The name of the subdivision. This element is only present if ``SubdivisionCode`` is also present.
+    The full name of the subdivision, for example, a state in the United States or a province in Canada.
 
     
 

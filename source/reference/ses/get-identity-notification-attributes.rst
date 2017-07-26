@@ -23,8 +23,11 @@ This action is throttled at one request per second and can only get notification
 
  
 
-For more information about using notifications with Amazon SES, see the `Amazon SES Developer Guide`_ .
+For more information about using notifications with Amazon SES, see the `Amazon SES Developer Guide <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html>`_ .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityNotificationAttributes>`_
 
 
 ========
@@ -36,7 +39,7 @@ Synopsis
     get-identity-notification-attributes
   --identities <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -63,8 +66,8 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -169,10 +172,37 @@ NotificationAttributes -> (map)
 
       
 
+    HeadersInBounceNotificationsEnabled -> (boolean)
+
+      
+
+      Describes whether Amazon SES includes the original email headers in Amazon SNS notifications of type ``Bounce`` . A value of ``true`` specifies that Amazon SES will include headers in bounce notifications, and a value of ``false`` specifies that Amazon SES will not include headers in bounce notifications.
+
+      
+
+      
+
+    HeadersInComplaintNotificationsEnabled -> (boolean)
+
+      
+
+      Describes whether Amazon SES includes the original email headers in Amazon SNS notifications of type ``Complaint`` . A value of ``true`` specifies that Amazon SES will include headers in complaint notifications, and a value of ``false`` specifies that Amazon SES will not include headers in complaint notifications.
+
+      
+
+      
+
+    HeadersInDeliveryNotificationsEnabled -> (boolean)
+
+      
+
+      Describes whether Amazon SES includes the original email headers in Amazon SNS notifications of type ``Delivery`` . A value of ``true`` specifies that Amazon SES will include headers in delivery notifications, and a value of ``false`` specifies that Amazon SES will not include headers in delivery notifications.
+
+      
+
+      
+
     
 
   
 
-
-
-.. _Amazon SES Developer Guide: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html

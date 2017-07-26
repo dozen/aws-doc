@@ -15,16 +15,19 @@ Description
 
 
 
-This action returns the current status of a change batch request. The status is one of the following values:
+Returns the current status of a change batch request. The status is one of the following values:
 
  
 
-- ``PENDING`` indicates that the changes in this request have not replicated to all Amazon Route 53 DNS servers. This is the initial status of all change batch requests.
-
+ 
+* ``PENDING`` indicates that the changes in this request have not propagated to all Amazon Route 53 DNS servers. This is the initial status of all change batch requests. 
+ 
+* ``INSYNC`` indicates that the changes have propagated to all Amazon Route 53 DNS servers.  
  
 
-- ``INSYNC`` indicates that the changes have replicated to all Amazon Route 53 DNS servers. 
 
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetChange>`_
 
 
 ========
@@ -36,7 +39,7 @@ Synopsis
     get-change
   --id <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -48,15 +51,15 @@ Options
 ``--id`` (string)
 
 
-  The ID of the change batch request. The value that you specify here is the value that ``change-resource-record-sets`` returned in the Id element when you submitted the request.
+  The ID of the change batch request. The value that you specify here is the value that ``change-resource-record-sets`` returned in the ``Id`` element when you submitted the request.
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -80,7 +83,7 @@ ChangeInfo -> (structure)
 
   
 
-  A complex type that contains information about the specified change batch, including the change batch ID, the status of the change, and the date and time of the request.
+  A complex type that contains information about the specified change batch.
 
   
 
@@ -88,7 +91,7 @@ ChangeInfo -> (structure)
 
     
 
-    The ID of the request. Use this ID to track when the change has completed across all Amazon Route 53 DNS servers.
+    The ID of the request.
 
     
 
@@ -100,10 +103,6 @@ ChangeInfo -> (structure)
 
     The current state of the request. ``PENDING`` indicates that this request has not yet been applied to all Amazon Route 53 DNS servers.
 
-     
-
-    Valid Values: ``PENDING`` | ``INSYNC`` 
-
     
 
     
@@ -112,7 +111,7 @@ ChangeInfo -> (structure)
 
     
 
-    The date and time the change was submitted, in the format ``YYYY-MM-DDThh:mm:ssZ`` , as specified in the ISO 8601 standard (for example, 2009-11-19T19:37:58Z). The ``Z`` after the time indicates that the time is listed in Coordinated Universal Time (UTC).
+    The date and time that the change request was submitted in `ISO 8601 format <https://en.wikipedia.org/wiki/ISO_8601>`_ and Coordinated Universal Time (UTC). For example, the value ``2017-03-27T17:48:16.751Z`` represents March 27, 2017 at 17:48:16.751 UTC.
 
     
 

@@ -19,8 +19,11 @@ Moves the specified instances into ``Standby`` mode.
 
  
 
-For more information, see `Auto Scaling Lifecycle`_ in the *Auto Scaling Developer Guide* .
+For more information, see `Auto Scaling Lifecycle <http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroupLifecycle.html>`_ in the *Auto Scaling User Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/EnterStandby>`_
 
 
 ========
@@ -34,7 +37,7 @@ Synopsis
   --auto-scaling-group-name <value>
   --should-decrement-desired-capacity | --no-should-decrement-desired-capacity
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -75,8 +78,8 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -88,24 +91,24 @@ Examples
 
 This example puts the specified instance into standby mode::
 
-   aws autoscaling enter-standby --instance-ids i-93633f9b --auto-scaling-group-name my-auto-scaling-group --should-decrement-desired-capacity
-   
+    aws autoscaling enter-standby --instance-ids i-93633f9b --auto-scaling-group-name my-auto-scaling-group --should-decrement-desired-capacity
+
 The following is example output::
 
-  {
-    "Activities": [
-        {
-            "Description": "Moving EC2 instance to Standby: i-93633f9b",
-            "AutoScalingGroupName": "my-auto-scaling-group",
-            "ActivityId": "ffa056b4-6ed3-41ba-ae7c-249dfae6eba1",
-            "Details": {"Availability Zone": "us-west-2a"},
-            "StartTime": "2015-04-12T15:10:23.640Z",
-            "Progress": 50,
-            "Cause": "At 2015-04-12T15:10:23Z instance i-93633f9b was moved to standby in response to a user request, shrinking the capacity from 2 to 1.",
-            "StatusCode": "InProgress"
-        }
-    ]
-  }
+    {
+        "Activities": [
+            {
+                "Description": "Moving EC2 instance to Standby: i-93633f9b",
+                "AutoScalingGroupName": "my-auto-scaling-group",
+                "ActivityId": "ffa056b4-6ed3-41ba-ae7c-249dfae6eba1",
+                "Details": {"Availability Zone": "us-west-2a"},
+                "StartTime": "2015-04-12T15:10:23.640Z",
+                "Progress": 50,
+                "Cause": "At 2015-04-12T15:10:23Z instance i-93633f9b was moved to standby in response to a user request, shrinking the capacity from 2 to 1.",
+                "StatusCode": "InProgress"
+            }
+        ]
+    }
 
 
 ======
@@ -232,6 +235,3 @@ Activities -> (list)
 
   
 
-
-
-.. _Auto Scaling Lifecycle: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingGroupLifecycle.html

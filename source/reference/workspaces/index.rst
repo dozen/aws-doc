@@ -15,7 +15,7 @@ Description
 
  
 
-This is the *Amazon WorkSpaces API Reference* . This guide provides detailed information about Amazon WorkSpaces operations, data types, parameters, and errors.
+This reference provides detailed information about the Amazon WorkSpaces operations.
 
 
 
@@ -28,10 +28,17 @@ Available Commands
   :maxdepth: 1
   :titlesonly:
 
+  create-tags
   create-workspaces
+  delete-tags
+  describe-tags
   describe-workspace-bundles
   describe-workspace-directories
   describe-workspaces
+  describe-workspaces-connection-status
+  modify-workspace-properties
   reboot-workspaces
   rebuild-workspaces
+  start-workspaces
+  stop-workspaces
   terminate-workspaces

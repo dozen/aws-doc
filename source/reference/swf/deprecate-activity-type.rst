@@ -15,17 +15,21 @@ Description
 
 
 
-Deprecates the specified *activity type* . After an activity type has been deprecated, you cannot create new tasks of that activity type. Tasks of this type that were scheduled before the type was deprecated will continue to run.
+Deprecates the specified *activity type* . After an activity type has been deprecated, you cannot create new tasks of that activity type. Tasks of this type that were scheduled before the type was deprecated continue to run.
 
  
 
 .. note::
 
+   
+
   This operation is eventually consistent. The results are best effort and may not exactly reflect recent updates and changes.
+
+   
 
  
 
-**Access Control** 
+ **Access Control**  
 
  
 
@@ -34,16 +38,16 @@ You can use IAM policies to control this action's access to Amazon SWF resources
  
 
  
-* Use a ``Resource`` element with the domain name to limit the action to only specified domains.
+* Use a ``Resource`` element with the domain name to limit the action to only specified domains. 
  
-* Use an ``Action`` element to allow or deny permission to call this action.
+* Use an ``Action`` element to allow or deny permission to call this action. 
  
 * Constrain the following parameters by using a ``Condition`` element with the appropriate keys. 
 
    
-  * ``activityType.name`` : String constraint. The key is ``swf:activityType.name`` .
+  * ``activityType.name`` : String constraint. The key is ``swf:activityType.name`` . 
    
-  * ``activityType.version`` : String constraint. The key is ``swf:activityType.version`` .
+  * ``activityType.version`` : String constraint. The key is ``swf:activityType.version`` . 
    
 
  
@@ -51,8 +55,11 @@ You can use IAM policies to control this action's access to Amazon SWF resources
 
  
 
-If the caller does not have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's **cause** parameter will be set to OPERATION_NOT_PERMITTED. For details and example IAM policies, see `Using IAM to Manage Access to Amazon SWF Workflows`_ .
+If the caller doesn't have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's ``cause`` parameter is set to ``OPERATION_NOT_PERMITTED`` . For details and example IAM policies, see `Using IAM to Manage Access to Amazon SWF Workflows <http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html>`_ in the *Amazon SWF Developer Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/swf-2012-01-25/DeprecateActivityType>`_
 
 
 ========
@@ -65,7 +72,7 @@ Synopsis
   --domain <value>
   --activity-type <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -109,8 +116,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -119,5 +126,3 @@ Output
 ======
 
 None
-
-.. _Using IAM to Manage Access to Amazon SWF Workflows: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html

@@ -15,8 +15,11 @@ Description
 
 
 
-Describes all available options. 
+Describes all available options.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOptionGroupOptions>`_
 
 
 ``describe-option-group-options`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
@@ -37,7 +40,7 @@ Synopsis
   [--starting-token <value>]
   [--page-size <value>]
   [--max-items <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -49,14 +52,14 @@ Options
 ``--engine-name`` (string)
 
 
-  A required parameter. Options available for the given engine name will be described. 
+  A required parameter. Options available for the given engine name will be described.
 
   
 
 ``--major-engine-version`` (string)
 
 
-  If specified, filters the results to include only options for the specified major engine version. 
+  If specified, filters the results to include only options for the specified major engine version.
 
   
 
@@ -98,26 +101,34 @@ Performs service operation based on the JSON string provided. The JSON string fo
 
    
 
-``--page-size`` (integer)
- 
-
-  The size of each page.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
    
 
-  
+``--page-size`` (integer)
+ 
 
-  
+  The size of each page to get in the AWS service call. This does not affect the number of items returned in the command's output. Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call. This can help prevent the AWS service calls from timing out.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
 
 ``--max-items`` (integer)
  
 
-  The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination. This ``NextToken`` response element should **not** be used directly outside of the AWS CLI.
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``NextToken`` is provided in the command's output. To resume pagination, provide the ``NextToken`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``NextToken`` response element directly outside of the AWS CLI.
 
    
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -129,7 +140,7 @@ OptionGroupOptions -> (list)
 
   
 
-  List of available option group options. 
+  List of available option group options.
 
   
 
@@ -137,7 +148,7 @@ OptionGroupOptions -> (list)
 
     
 
-    Available option. 
+    Available option.
 
     
 
@@ -145,7 +156,7 @@ OptionGroupOptions -> (list)
 
       
 
-      The name of the option. 
+      The name of the option.
 
       
 
@@ -155,7 +166,7 @@ OptionGroupOptions -> (list)
 
       
 
-      The description of the option. 
+      The description of the option.
 
       
 
@@ -165,7 +176,7 @@ OptionGroupOptions -> (list)
 
       
 
-      The name of the engine that this option can be applied to. 
+      The name of the engine that this option can be applied to.
 
       
 
@@ -175,7 +186,7 @@ OptionGroupOptions -> (list)
 
       
 
-      Indicates the major engine version that the option is available for. 
+      Indicates the major engine version that the option is available for.
 
       
 
@@ -185,7 +196,7 @@ OptionGroupOptions -> (list)
 
       
 
-      The minimum required engine version for the option to be applied. 
+      The minimum required engine version for the option to be applied.
 
       
 
@@ -195,7 +206,7 @@ OptionGroupOptions -> (list)
 
       
 
-      Specifies whether the option requires a port. 
+      Specifies whether the option requires a port.
 
       
 
@@ -205,7 +216,7 @@ OptionGroupOptions -> (list)
 
       
 
-      If the option requires a port, specifies the default port for the option. 
+      If the option requires a port, specifies the default port for the option.
 
       
 
@@ -215,7 +226,23 @@ OptionGroupOptions -> (list)
 
       
 
-      List of all options that are prerequisites for this option. 
+      The options that are prerequisites for this option.
+
+      
+
+      (string)
+
+        
+
+        
+
+      
+
+    OptionsConflictsWith -> (list)
+
+      
+
+      The options that conflict with this option.
 
       
 
@@ -231,7 +258,7 @@ OptionGroupOptions -> (list)
 
       
 
-      A persistent option cannot be removed from the option group once the option group is used, but this option can be removed from the db instance while modifying the related data and assigning another option group without this option. 
+      Persistent options can't be removed from an option group while DB instances are associated with the option group. If you disassociate all DB instances from the option group, your can remove the persistent option from the option group.
 
       
 
@@ -241,7 +268,7 @@ OptionGroupOptions -> (list)
 
       
 
-      A permanent option cannot be removed from the option group once the option group is used, and it cannot be removed from the db instance after assigning an option group with this permanent option. 
+      Permanent options can never be removed from an option group. An option group containing a permanent option can't be removed from a DB instance.
 
       
 
@@ -251,7 +278,7 @@ OptionGroupOptions -> (list)
 
       
 
-      Specifies the option settings that are available (and the default value) for each option in an option group. 
+      The option settings that are available (and the default value) for each option in an option group.
 
       
 
@@ -259,7 +286,7 @@ OptionGroupOptions -> (list)
 
         
 
-        Option group option settings are used to display settings available for each option with their default values and other information. These values are used with the describe-option-group-options action. 
+        Option group option settings are used to display settings available for each option with their default values and other information. These values are used with the describe-option-group-options action.
 
         
 
@@ -267,7 +294,7 @@ OptionGroupOptions -> (list)
 
           
 
-          The name of the option group option. 
+          The name of the option group option.
 
           
 
@@ -277,7 +304,7 @@ OptionGroupOptions -> (list)
 
           
 
-          The description of the option group option. 
+          The description of the option group option.
 
           
 
@@ -287,7 +314,7 @@ OptionGroupOptions -> (list)
 
           
 
-          The default value for the option group option. 
+          The default value for the option group option.
 
           
 
@@ -297,7 +324,7 @@ OptionGroupOptions -> (list)
 
           
 
-          The DB engine specific parameter type for the option group option. 
+          The DB engine specific parameter type for the option group option.
 
           
 
@@ -307,7 +334,7 @@ OptionGroupOptions -> (list)
 
           
 
-          Indicates the acceptable values for the option group option. 
+          Indicates the acceptable values for the option group option.
 
           
 
@@ -317,7 +344,47 @@ OptionGroupOptions -> (list)
 
           
 
-          Boolean value where true indicates that this option group option can be changed from the default value. 
+          Boolean value where true indicates that this option group option can be changed from the default value.
+
+          
+
+          
+
+        
+
+      
+
+    OptionGroupOptionVersions -> (list)
+
+      
+
+      The versions that are available for the option.
+
+      
+
+      (structure)
+
+        
+
+        The version for an option. Option group option versions are returned by the  describe-option-group-options action.
+
+        
+
+        Version -> (string)
+
+          
+
+          The version of the option.
+
+          
+
+          
+
+        IsDefault -> (boolean)
+
+          
+
+          True if the version is the default version of the option; otherwise, false.
 
           
 

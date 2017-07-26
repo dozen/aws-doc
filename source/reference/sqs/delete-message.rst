@@ -15,7 +15,7 @@ Description
 
 
 
-Deletes the specified message from the specified queue. You specify the message by using the message's ``receipt handle`` and not the ``message ID`` you received when you sent the message. Even if the message is locked by another reader due to the visibility timeout setting, it is still deleted from the queue. If you leave a message in the queue for longer than the queue's configured retention period, Amazon SQS automatically deletes it. 
+Deletes the specified message from the specified queue. You specify the message by using the message's *receipt handle* and not the *MessageId* you receive when you send the message. Even if the message is locked by another reader due to the visibility timeout setting, it is still deleted from the queue. If you leave a message in the queue for longer than the queue's configured retention period, Amazon SQS automatically deletes the message. 
 
  
 
@@ -23,20 +23,17 @@ Deletes the specified message from the specified queue. You specify the message 
 
    
 
-  The receipt handle is associated with a specific instance of receiving the message. If you receive a message more than once, the receipt handle you get each time you receive the message is different. When you request ``delete-message`` , if you don't provide the most recently received receipt handle for the message, the request will still succeed, but the message might not be deleted. 
+  The receipt handle is associated with a specific instance of receiving the message. If you receive a message more than once, the receipt handle you get each time you receive the message is different. If you don't provide the most recently received receipt handle for the message when you use the ``delete-message`` action, the request succeeds, but the message might not be deleted.
 
    
 
- 
-
-.. warning::
+  For standard queues, it is possible to receive a message even after you delete it. This might happen on rare occasions if one of the servers storing a copy of the message is unavailable when you send the request to delete the message. The copy remains on the server and might be returned to you on a subsequent receive request. You should ensure that your application is idempotent, so that receiving a message more than once does not cause issues.
 
    
 
-  It is possible you will receive a message even after you have deleted it. This might happen on rare occasions if one of the servers storing a copy of the message is unavailable when you request to delete the message. The copy remains on the server and might be returned to you again on a subsequent receive request. You should create your system to be idempotent so that receiving a particular message more than once is not a problem. 
 
-   
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteMessage>`_
 
 
 ========
@@ -49,7 +46,7 @@ Synopsis
   --queue-url <value>
   --receipt-handle <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -61,7 +58,11 @@ Options
 ``--queue-url`` (string)
 
 
-  The URL of the Amazon SQS queue to take action on.
+  The URL of the Amazon SQS queue from which messages are deleted.
+
+   
+
+  Queue URLs are case-sensitive.
 
   
 
@@ -75,8 +76,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 

@@ -19,6 +19,9 @@ Gets information about a test.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetTest>`_
+
+
 ========
 Synopsis
 ========
@@ -28,7 +31,7 @@ Synopsis
     get-test
   --arn <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -47,8 +50,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -60,7 +63,7 @@ test -> (structure)
 
   
 
-  Represents a condition that is evaluated.
+  A test condition that is evaluated.
 
   
 
@@ -97,31 +100,33 @@ test -> (structure)
      
 
      
-    * BUILTIN_FUZZ: The built-in fuzz type.
+    * BUILTIN_FUZZ: The built-in fuzz type. 
      
-    * BUILTIN_EXPLORER: For Android, an app explorer that will traverse an Android app, interacting with it and capturing screenshots at the same time.
+    * BUILTIN_EXPLORER: For Android, an app explorer that will traverse an Android app, interacting with it and capturing screenshots at the same time. 
      
-    * APPIUM_JAVA_JUNIT: The Appium Java JUnit type.
+    * APPIUM_JAVA_JUNIT: The Appium Java JUnit type. 
      
-    * APPIUM_JAVA_TESTNG: The Appium Java TestNG type.
+    * APPIUM_JAVA_TESTNG: The Appium Java TestNG type. 
      
-    * APPIUM_PYTHON: The Appium Python type.
+    * APPIUM_PYTHON: The Appium Python type. 
      
-    * CALABASH: The Calabash type.
+    * APPIUM_WEB_JAVA_JUNIT: The Appium Java JUnit type for Web apps. 
      
-    * INSTRUMENTATION: The Instrumentation type.
+    * APPIUM_WEB_JAVA_TESTNG: The Appium Java TestNG type for Web apps. 
      
-    * UIAUTOMATION: The uiautomation type.
+    * APPIUM_WEB_PYTHON: The Appium Python type for Web apps. 
      
-    * UIAUTOMATOR: The uiautomator type.
+    * CALABASH: The Calabash type. 
      
-    * XCTEST: The XCode test type.
+    * INSTRUMENTATION: The Instrumentation type. 
      
-    * APPIUM_WEB_JAVA_JUNIT: The Appium Java JUnit type for Web apps.
+    * UIAUTOMATION: The uiautomation type. 
      
-    * APPIUM_WEB_JAVA_TESTNG: The Appium Java TestNG type for Web apps.
+    * UIAUTOMATOR: The uiautomator type. 
      
-    * APPIUM_WEB_PYTHON: The Appium Python type for Web apps.
+    * XCTEST: The XCode test type. 
+     
+    * XCTEST_UI: The XCode UI test type. 
      
 
     
@@ -151,15 +156,23 @@ test -> (structure)
      
 
      
-    * COMPLETED: A completed status.
+    * PENDING: A pending status. 
      
-    * PENDING: A pending status.
+    * PENDING_CONCURRENCY: A pending concurrency status. 
      
-    * PROCESSING: A processing status.
+    * PENDING_DEVICE: A pending device status. 
      
-    * RUNNING: A running status.
+    * PROCESSING: A processing status. 
      
-    * SCHEDULING: A scheduling status.
+    * SCHEDULING: A scheduling status. 
+     
+    * PREPARING: A preparing status. 
+     
+    * RUNNING: A running status. 
+     
+    * COMPLETED: A completed status. 
+     
+    * STOPPING: A stopping status. 
      
 
     
@@ -179,19 +192,19 @@ test -> (structure)
      
 
      
-    * ERRORED: An error condition.
+    * PENDING: A pending condition. 
      
-    * FAILED: A failed condition.
+    * PASSED: A passing condition. 
      
-    * SKIPPED: A skipped condition.
+    * WARNED: A warning condition. 
      
-    * STOPPED: A stopped condition.
+    * FAILED: A failed condition. 
      
-    * PASSED: A passing condition.
+    * SKIPPED: A skipped condition. 
      
-    * PENDING: A pending condition.
+    * ERRORED: An error condition. 
      
-    * WARNED: A warning condition.
+    * STOPPED: A stopped condition. 
      
 
     

@@ -15,8 +15,11 @@ Description
 
 
 
-Returns information about the specified OpenID Connect provider.
+Returns information about the specified OpenID Connect (OIDC) provider resource object in IAM.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetOpenIDConnectProvider>`_
 
 
 ========
@@ -28,7 +31,7 @@ Synopsis
     get-open-id-connect-provider
   --open-id-connect-provider-arn <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -40,15 +43,19 @@ Options
 ``--open-id-connect-provider-arn`` (string)
 
 
-  The Amazon Resource Name (ARN) of the IAM OpenID Connect (OIDC) provider to get information for. You can get a list of OIDC provider ARNs by using the  list-open-id-connect-providers action.
+  The Amazon Resource Name (ARN) of the OIDC provider resource object in IAM to get information for. You can get a list of OIDC provider resource ARNs by using the  list-open-id-connect-providers action.
+
+   
+
+  For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces <http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`_ in the *AWS General Reference* .
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -87,7 +94,7 @@ Url -> (string)
 
   
 
-  The URL that the IAM OpenID Connect provider is associated with. For more information, see  create-open-id-connect-provider . 
+  The URL that the IAM OIDC provider resource object is associated with. For more information, see  create-open-id-connect-provider .
 
   
 
@@ -97,7 +104,7 @@ ClientIDList -> (list)
 
   
 
-  A list of client IDs (also known as audiences) that are associated with the specified IAM OpenID Connect provider. For more information, see  create-open-id-connect-provider . 
+  A list of client IDs (also known as audiences) that are associated with the specified IAM OIDC provider resource object. For more information, see  create-open-id-connect-provider .
 
   
 
@@ -113,7 +120,7 @@ ThumbprintList -> (list)
 
   
 
-  A list of certificate thumbprints that are associated with the specified IAM OpenID Connect provider. For more information, see  create-open-id-connect-provider . 
+  A list of certificate thumbprints that are associated with the specified IAM OIDC provider resource object. For more information, see  create-open-id-connect-provider . 
 
   
 
@@ -125,7 +132,7 @@ ThumbprintList -> (list)
 
      
 
-    The identity provider's server certificate thumbprint is the hex-encoded SHA-1 hash value of the self-signed X.509 certificate used by the domain where the OpenID Connect provider makes its keys available. It is always a 40-character string. 
+    The identity provider's server certificate thumbprint is the hex-encoded SHA-1 hash value of the self-signed X.509 certificate used by the domain where the OpenID Connect provider makes its keys available. It is always a 40-character string.
 
     
 
@@ -137,7 +144,7 @@ CreateDate -> (timestamp)
 
   
 
-  The date and time when the IAM OpenID Connect provider entity was created in the AWS account. 
+  The date and time when the IAM OIDC provider resource object was created in the AWS account.
 
   
 

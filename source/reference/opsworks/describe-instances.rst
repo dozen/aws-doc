@@ -23,14 +23,17 @@ Requests a description of a set of instances.
 
    
 
-  You must specify at least one of the parameters.
+  This call accepts only one resource-identifying parameter.
 
    
 
  
 
-**Required Permissions** : To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see `Managing User Permissions`_ .
+ **Required Permissions** : To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see `Managing User Permissions <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html>`_ .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeInstances>`_
 
 
 ========
@@ -44,7 +47,7 @@ Synopsis
   [--layer-id <value>]
   [--instance-ids <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -85,8 +88,8 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -99,8 +102,6 @@ Examples
 The following ``describe-instances`` commmand describes the instances in a specified stack::
 
   aws opsworks --region us-east-1 describe-instances --stack-id 8c428b08-a1a1-46ce-a5f8-feddc43771b8
-
-**Note**: AWS OpsWorks CLI commands should set the region to ``us-east-1`` regardless of the stack's location.
 
 *Output*: The following output example is for a stack with two instances. The first is a registered
 EC2 instance, and the second was created by AWS OpsWorks.
@@ -227,7 +228,7 @@ Instances -> (list)
 
       
 
-      A custom AMI ID to be used to create the instance. For more information, see `Instances`_ 
+      A custom AMI ID to be used to create the instance. For more information, see `Instances <http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html>`_  
 
       
 
@@ -238,6 +239,12 @@ Instances -> (list)
       
 
       The instance architecture: "i386" or "x86_64".
+
+      
+
+      
+
+    Arn -> (string)
 
       
 
@@ -257,7 +264,7 @@ Instances -> (list)
 
       
 
-      The instance Availability Zone. For more information, see `Regions and Endpoints`_ .
+      The instance Availability Zone. For more information, see `Regions and Endpoints <http://docs.aws.amazon.com/general/latest/gr/rande.html>`_ .
 
       
 
@@ -275,7 +282,7 @@ Instances -> (list)
 
         
 
-        Describes a block device mapping. This data type maps directly to the Amazon EC2 `BlockDeviceMapping`_ data type. 
+        Describes a block device mapping. This data type maps directly to the Amazon EC2 `BlockDeviceMapping <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_BlockDeviceMapping.html>`_ data type. 
 
         
 
@@ -283,7 +290,7 @@ Instances -> (list)
 
           
 
-          The device name that is exposed to the instance, such as ``/dev/sdh`` . For the root device, you can use the explicit device name or you can set this parameter to ``ROOT_DEVICE`` and AWS OpsWorks will provide the correct device name.
+          The device name that is exposed to the instance, such as ``/dev/sdh`` . For the root device, you can use the explicit device name or you can set this parameter to ``ROOT_DEVICE`` and AWS OpsWorks Stacks will provide the correct device name.
 
           
 
@@ -303,7 +310,7 @@ Instances -> (list)
 
           
 
-          The virtual device name. For more information, see `BlockDeviceMapping`_ .
+          The virtual device name. For more information, see `BlockDeviceMapping <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_BlockDeviceMapping.html>`_ .
 
           
 
@@ -331,7 +338,7 @@ Instances -> (list)
 
             
 
-            The number of I/O operations per second (IOPS) that the volume supports. For more information, see `EbsBlockDevice`_ .
+            The number of I/O operations per second (IOPS) that the volume supports. For more information, see `EbsBlockDevice <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EbsBlockDevice.html>`_ .
 
             
 
@@ -341,7 +348,7 @@ Instances -> (list)
 
             
 
-            The volume size, in GiB. For more information, see `EbsBlockDevice`_ .
+            The volume size, in GiB. For more information, see `EbsBlockDevice <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EbsBlockDevice.html>`_ .
 
             
 
@@ -427,7 +434,7 @@ Instances -> (list)
 
       
 
-      The instance `Elastic IP address`_ .
+      The instance `Elastic IP address <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html>`_ .
 
       
 
@@ -487,7 +494,7 @@ Instances -> (list)
 
       
 
-      The ARN of the instance's IAM profile. For more information about IAM ARNs, see `Using Identifiers`_ .
+      The ARN of the instance's IAM profile. For more information about IAM ARNs, see `Using Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ .
 
       
 
@@ -553,7 +560,7 @@ Instances -> (list)
 
       
 
-      The The instance's private DNS name.
+      The instance's private DNS name.
 
       
 
@@ -603,7 +610,7 @@ Instances -> (list)
 
       
 
-      The instance's reported AWS OpsWorks agent version.
+      The instance's reported AWS OpsWorks Stacks agent version.
 
       
 
@@ -653,7 +660,7 @@ Instances -> (list)
 
       
 
-      The instance's root device type. For more information, see `Storage for the Root Device`_ .
+      The instance's root device type. For more information, see `Storage for the Root Device <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device>`_ .
 
       
 
@@ -734,33 +741,35 @@ Instances -> (list)
        
 
        
-      * ``booting``  
+      * ``booting``   
        
-      * ``connection_lost``  
+      * ``connection_lost``   
        
-      * ``online``  
+      * ``online``   
        
-      * ``pending``  
+      * ``pending``   
        
-      * ``rebooting``  
+      * ``rebooting``   
        
-      * ``requested``  
+      * ``requested``   
        
-      * ``running_setup``  
+      * ``running_setup``   
        
-      * ``setup_failed``  
+      * ``setup_failed``   
        
-      * ``shutting_down``  
+      * ``shutting_down``   
        
-      * ``start_failed``  
+      * ``start_failed``   
        
-      * ``stopped``  
+      * ``stop_failed``   
        
-      * ``stopping``  
+      * ``stopped``   
        
-      * ``terminated``  
+      * ``stopping``   
        
-      * ``terminating``  
+      * ``terminated``   
+       
+      * ``terminating``   
        
 
       
@@ -772,6 +781,16 @@ Instances -> (list)
       
 
       The instance's subnet ID; applicable only if the stack is running in a VPC.
+
+      
+
+      
+
+    Tenancy -> (string)
+
+      
+
+      The instance's tenancy option, such as ``dedicated`` or ``host`` .
 
       
 
@@ -791,13 +810,3 @@ Instances -> (list)
 
   
 
-
-
-.. _Storage for the Root Device: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device
-.. _BlockDeviceMapping: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_BlockDeviceMapping.html
-.. _Using Identifiers: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
-.. _Regions and Endpoints: http://docs.aws.amazon.com/general/latest/gr/rande.html
-.. _Instances: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
-.. _Elastic IP address: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
-.. _Managing User Permissions: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
-.. _EbsBlockDevice: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EbsBlockDevice.html

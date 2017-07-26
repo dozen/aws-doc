@@ -15,22 +15,11 @@ Description
 
 
 
-Retrieves a fresh set of upload credentials and the assigned Amazon S3 storage location for a specific build. Valid credentials are required to upload your game build files to Amazon S3.
+ *This API call is not currently in use.* Retrieves a fresh set of upload credentials and the assigned Amazon S3 storage location for a specific build. Valid credentials are required to upload your game build files to Amazon S3.
 
- 
 
-.. warning::
 
-  
-
-  Call this action only if you need credentials for a build created with  create-build . This is a rare situation; in most cases, builds are created using the CLI command ``upload-build`` , which creates a build record and also uploads build files. 
-
-  
-
- 
-
-Upload credentials are returned when you create the build, but they have a limited lifespan. You can get fresh credentials and use them to re-upload game files until the state of that build changes to READY. Once this happens, you must create a brand new build.
-
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/RequestUploadCredentials>`_
 
 
 ========
@@ -42,7 +31,7 @@ Synopsis
     request-upload-credentials
   --build-id <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -54,15 +43,15 @@ Options
 ``--build-id`` (string)
 
 
-  Unique identifier for the build you want to get credentials for. 
+  Unique identifier for a build to get credentials for.
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -122,7 +111,7 @@ StorageLocation -> (structure)
 
     
 
-    Amazon S3 bucket identifier.
+    Amazon S3 bucket identifier. This is the name of your S3 bucket.
 
     
 
@@ -132,7 +121,17 @@ StorageLocation -> (structure)
 
     
 
-    Amazon S3 bucket key.
+    Name of the zip file containing your build files. 
+
+    
+
+    
+
+  RoleArn -> (string)
+
+    
+
+    Amazon Resource Name (`ARN <http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html>`_ ) for the access role that allows Amazon GameLift to access your S3 bucket.
 
     
 

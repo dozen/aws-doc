@@ -15,8 +15,11 @@ Description
 
 
 
-Modifies the parameters of a DB parameter group to the engine/system default value. To reset specific parameters submit a list of the following: ``ParameterName`` and ``ApplyMethod`` . To reset the entire DB parameter group, specify the ``DBParameterGroup`` name and ``ResetAllParameters`` parameters. When resetting the entire group, dynamic parameters are updated immediately and static parameters are set to ``pending-reboot`` to take effect on the next DB instance restart or ``reboot-db-instance`` request. 
+Modifies the parameters of a DB parameter group to the engine/system default value. To reset specific parameters, provide a list of the following: ``ParameterName`` and ``ApplyMethod`` . To reset the entire DB parameter group, specify the ``DBParameterGroup`` name and ``ResetAllParameters`` parameters. When resetting the entire group, dynamic parameters are updated immediately and static parameters are set to ``pending-reboot`` to take effect on the next DB instance restart or ``reboot-db-instance`` request. 
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ResetDBParameterGroup>`_
 
 
 ========
@@ -30,7 +33,7 @@ Synopsis
   [--reset-all-parameters | --no-reset-all-parameters]
   [--parameters <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -42,7 +45,7 @@ Options
 ``--db-parameter-group-name`` (string)
 
 
-  The name of the DB parameter group. 
+  The name of the DB parameter group.
 
    
 
@@ -51,11 +54,11 @@ Options
    
 
    
-  * Must be 1 to 255 alphanumeric characters
+  * Must be 1 to 255 alphanumeric characters 
    
-  * First character must be a letter
+  * First character must be a letter 
    
-  * Cannot end with a hyphen or contain two consecutive hyphens
+  * Cannot end with a hyphen or contain two consecutive hyphens 
    
 
   
@@ -67,14 +70,14 @@ Options
 
    
 
-  Default: ``true`` 
+  Default: ``true``  
 
   
 
 ``--parameters`` (list)
 
 
-  An array of parameter names, values, and the apply method for the parameter update. At least one parameter name, value, and apply method must be supplied; subsequent arguments are optional. A maximum of 20 parameters can be modified in a single request. 
+  To reset the entire DB parameter group, specify the ``DBParameterGroup`` name and ``ResetAllParameters`` parameters. To reset specific parameters, provide a list of the following: ``ParameterName`` and ``ApplyMethod`` . A maximum of 20 parameters can be modified in a single request.
 
    
 
@@ -82,7 +85,7 @@ Options
 
    
 
-  Valid Values (for Apply method): ``immediate`` | ``pending-reboot`` 
+  Valid Values (for Apply method): ``immediate`` | ``pending-reboot``  
 
    
 
@@ -94,7 +97,7 @@ Options
 
    
 
-  Valid Values (for Apply method): ``immediate`` | ``pending-reboot`` 
+  Valid Values (for Apply method): ``immediate`` | ``pending-reboot``  
 
    
 
@@ -106,7 +109,7 @@ Options
 
    
 
-  Valid Values (for Apply method): ``pending-reboot`` 
+  Valid Values (for Apply method): ``pending-reboot``  
 
   
 
@@ -142,8 +145,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -155,7 +158,7 @@ DBParameterGroupName -> (string)
 
   
 
-  Provides the name of the DB parameter group. 
+  Provides the name of the DB parameter group.
 
   
 

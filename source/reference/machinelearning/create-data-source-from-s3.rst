@@ -15,24 +15,27 @@ Description
 
 
 
-Creates a ``DataSource`` object. A ``DataSource`` references data that can be used to perform  create-ml-model ,  create-evaluation , or  create-batch-prediction operations.
+Creates a ``DataSource`` object. A ``DataSource`` references data that can be used to perform ``create-ml-model`` , ``create-evaluation`` , or ``create-batch-prediction`` operations.
 
  
 
-``create-data-source-from-s3`` is an asynchronous operation. In response to ``create-data-source-from-s3`` , Amazon Machine Learning (Amazon ML) immediately returns and sets the ``DataSource`` status to ``PENDING`` . After the ``DataSource`` is created and ready for use, Amazon ML sets the ``Status`` parameter to ``COMPLETED`` . ``DataSource`` in ``COMPLETED`` or ``PENDING`` status can only be used to perform  create-ml-model ,  create-evaluation or  create-batch-prediction operations. 
+``create-data-source-from-s3`` is an asynchronous operation. In response to ``create-data-source-from-s3`` , Amazon Machine Learning (Amazon ML) immediately returns and sets the ``DataSource`` status to ``PENDING`` . After the ``DataSource`` has been created and is ready for use, Amazon ML sets the ``Status`` parameter to ``COMPLETED`` . ``DataSource`` in the ``COMPLETED`` or ``PENDING`` state can be used to perform only ``create-ml-model`` , ``create-evaluation`` or ``create-batch-prediction`` operations. 
 
  
 
-If Amazon ML cannot accept the input source, it sets the ``Status`` parameter to ``FAILED`` and includes an error message in the ``Message`` attribute of the  get-data-source operation response. 
+If Amazon ML can't accept the input source, it sets the ``Status`` parameter to ``FAILED`` and includes an error message in the ``Message`` attribute of the ``get-data-source`` operation response. 
 
  
 
-The observation data used in a ``DataSource`` should be ready to use; that is, it should have a consistent structure, and missing data values should be kept to a minimum. The observation data must reside in one or more CSV files in an Amazon Simple Storage Service (Amazon S3) bucket, along with a schema that describes the data items by name and type. The same schema must be used for all of the data files referenced by the ``DataSource`` . 
+The observation data used in a ``DataSource`` should be ready to use; that is, it should have a consistent structure, and missing data values should be kept to a minimum. The observation data must reside in one or more .csv files in an Amazon Simple Storage Service (Amazon S3) location, along with a schema that describes the data items by name and type. The same schema must be used for all of the data files referenced by the ``DataSource`` . 
 
  
 
-After the ``DataSource`` has been created, it's ready to use in evaluations and batch predictions. If you plan to use the ``DataSource`` to train an ``MLModel`` , the ``DataSource`` requires another item: a recipe. A recipe describes the observation variables that participate in training an ``MLModel`` . A recipe describes how each input variable will be used in training. Will the variable be included or excluded from training? Will the variable be manipulated, for example, combined with another variable, or split apart into word combinations? The recipe provides answers to these questions. For more information, see the `Amazon Machine Learning Developer Guide`_ .
+After the ``DataSource`` has been created, it's ready to use in evaluations and batch predictions. If you plan to use the ``DataSource`` to train an ``MLModel`` , the ``DataSource`` also needs a recipe. A recipe describes how each input variable will be used in training an ``MLModel`` . Will the variable be included or excluded from training? Will the variable be manipulated; for example, will it be combined with another variable or will it be split apart into word combinations? The recipe provides answers to these questions.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/machinelearning-2014-12-12/CreateDataSourceFromS3>`_
 
 
 ========
@@ -47,7 +50,7 @@ Synopsis
   --data-spec <value>
   [--compute-statistics | --no-compute-statistics]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -78,13 +81,13 @@ Options
    
 
    
-  * DataLocationS3 - Amazon Simple Storage Service (Amazon S3) location of the observation data.
+  * DataLocationS3 - The Amazon S3 location of the observation data.
    
-  * DataSchemaLocationS3 - Amazon S3 location of the ``DataSchema`` .
+  * DataSchemaLocationS3 - The Amazon S3 location of the ``DataSchema`` .
    
   * DataSchema - A JSON string representing the schema. This is not required if ``DataSchemaUri`` is specified. 
    
-  * DataRearrangement - A JSON string representing the splitting requirement of a ``Datasource`` .   Sample - ``"{\"splitting\":{\"percentBegin\":10,\"percentEnd\":60}}"``   
+  * DataRearrangement - A JSON string that represents the splitting and rearrangement requirements for the ``Datasource`` .  Sample - ``"{\"splitting\":{\"percentBegin\":10,\"percentEnd\":60}}"``   
    
 
   
@@ -112,15 +115,15 @@ JSON Syntax::
 ``--compute-statistics`` | ``--no-compute-statistics`` (boolean)
 
 
-  The compute statistics for a ``DataSource`` . The statistics are generated from the observation data referenced by a ``DataSource`` . Amazon ML uses the statistics internally during an ``MLModel`` training. This parameter must be set to ``true`` if the ```` DataSource```` needs to be used for ``MLModel`` training
+  The compute statistics for a ``DataSource`` . The statistics are generated from the observation data referenced by a ``DataSource`` . Amazon ML uses the statistics internally during ``MLModel`` training. This parameter must be set to ``true`` if the ```` DataSource```` needs to be used for ``MLModel`` training.
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -132,12 +135,9 @@ DataSourceId -> (string)
 
   
 
-  A user-supplied ID that uniquely identifies the datasource. This value should be identical to the value of the ``DataSourceID`` in the request. 
+  A user-supplied ID that uniquely identifies the ``DataSource`` . This value should be identical to the value of the ``DataSourceID`` in the request. 
 
   
 
   
 
-
-
-.. _Amazon Machine Learning Developer Guide: http://docs.aws.amazon.com/machine-learning/latest/dg

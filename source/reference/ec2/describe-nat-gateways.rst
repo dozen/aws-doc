@@ -19,6 +19,13 @@ Describes one or more of the your NAT gateways.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNatGateways>`_
+
+
+``describe-nat-gateways`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
+When using ``--output text`` and the ``--query`` argument on a paginated response, the ``--query`` argument must extract data from the results of the following query expressions: ``NatGateways``
+
+
 ========
 Synopsis
 ========
@@ -26,12 +33,13 @@ Synopsis
 ::
 
     describe-nat-gateways
-  [--nat-gateway-ids <value>]
   [--filter <value>]
-  [--max-results <value>]
-  [--next-token <value>]
+  [--nat-gateway-ids <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--starting-token <value>]
+  [--page-size <value>]
+  [--max-items <value>]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -39,21 +47,6 @@ Synopsis
 =======
 Options
 =======
-
-``--nat-gateway-ids`` (list)
-
-
-  One or more NAT gateway IDs.
-
-  
-
-
-
-Syntax::
-
-  "string" "string" ...
-
-
 
 ``--filter`` (list)
 
@@ -95,29 +88,59 @@ JSON Syntax::
 
 
 
-``--max-results`` (integer)
+``--nat-gateway-ids`` (list)
 
 
-  The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results.
-
-   
-
-  Constraint: If the value specified is greater than 1000, we return only 1000 items.
+  One or more NAT gateway IDs.
 
   
 
-``--next-token`` (string)
 
 
-  The token to retrieve the next page of results.
+Syntax::
 
-  
+  "string" "string" ...
+
+
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--starting-token`` (string)
+ 
+
+  A token to specify where to start paginating. This is the ``NextToken`` from a previously truncated response.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--page-size`` (integer)
+ 
+
+  The size of each page to get in the AWS service call. This does not affect the number of items returned in the command's output. Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call. This can help prevent the AWS service calls from timing out.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--max-items`` (integer)
+ 
+
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``NextToken`` is provided in the command's output. To resume pagination, provide the ``NextToken`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``NextToken`` response element directly outside of the AWS CLI.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -191,36 +214,6 @@ NatGateways -> (list)
 
     
 
-    VpcId -> (string)
-
-      
-
-      The ID of the VPC in which the NAT gateway is located.
-
-      
-
-      
-
-    SubnetId -> (string)
-
-      
-
-      The ID of the subnet in which the NAT gateway is located.
-
-      
-
-      
-
-    NatGatewayId -> (string)
-
-      
-
-      The ID of the NAT gateway.
-
-      
-
-      
-
     CreateTime -> (timestamp)
 
       
@@ -236,6 +229,42 @@ NatGateways -> (list)
       
 
       The date and time the NAT gateway was deleted, if applicable.
+
+      
+
+      
+
+    FailureCode -> (string)
+
+      
+
+      If the NAT gateway could not be created, specifies the error code for the failure. (``InsufficientFreeAddressesInSubnet`` | ``Gateway.NotAttached`` | ``InvalidAllocationID.NotFound`` | ``Resource.AlreadyAssociated`` | ``InternalError`` | ``InvalidSubnetID.NotFound`` )
+
+      
+
+      
+
+    FailureMessage -> (string)
+
+      
+
+      If the NAT gateway could not be created, specifies the error message for the failure, that corresponds to the error code.
+
+       
+
+       
+      * For InsufficientFreeAddressesInSubnet: "Subnet has insufficient free addresses to create this NAT gateway" 
+       
+      * For Gateway.NotAttached: "Network vpc-xxxxxxxx has no Internet gateway attached" 
+       
+      * For InvalidAllocationID.NotFound: "Elastic IP address eipalloc-xxxxxxxx could not be associated with this NAT gateway" 
+       
+      * For Resource.AlreadyAssociated: "Elastic IP address eipalloc-xxxxxxxx is already associated" 
+       
+      * For InternalError: "Network interface eni-xxxxxxxx, created and used internally by this NAT gateway is in an invalid state. Please try again." 
+       
+      * For InvalidSubnetID.NotFound: "The specified subnet subnet-xxxxxxxx does not exist or could not be found." 
+       
 
       
 
@@ -257,31 +286,11 @@ NatGateways -> (list)
 
         
 
-        PublicIp -> (string)
-
-          
-
-          The Elastic IP address associated with the NAT gateway.
-
-          
-
-          
-
         AllocationId -> (string)
 
           
 
           The allocation ID of the Elastic IP address that's associated with the NAT gateway.
-
-          
-
-          
-
-        PrivateIp -> (string)
-
-          
-
-          The private IP address associated with the Elastic IP address.
 
           
 
@@ -297,6 +306,96 @@ NatGateways -> (list)
 
           
 
+        PrivateIp -> (string)
+
+          
+
+          The private IP address associated with the Elastic IP address.
+
+          
+
+          
+
+        PublicIp -> (string)
+
+          
+
+          The Elastic IP address associated with the NAT gateway.
+
+          
+
+          
+
+        
+
+      
+
+    NatGatewayId -> (string)
+
+      
+
+      The ID of the NAT gateway.
+
+      
+
+      
+
+    ProvisionedBandwidth -> (structure)
+
+      
+
+      Reserved. If you need to sustain traffic greater than the `documented limits <http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html>`_ , contact us through the `Support Center <https://console.aws.amazon.com/support/home?>`_ .
+
+      
+
+      ProvisionTime -> (timestamp)
+
+        
+
+        Reserved. If you need to sustain traffic greater than the `documented limits <http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html>`_ , contact us through the `Support Center <https://console.aws.amazon.com/support/home?>`_ .
+
+        
+
+        
+
+      Provisioned -> (string)
+
+        
+
+        Reserved. If you need to sustain traffic greater than the `documented limits <http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html>`_ , contact us through the `Support Center <https://console.aws.amazon.com/support/home?>`_ .
+
+        
+
+        
+
+      RequestTime -> (timestamp)
+
+        
+
+        Reserved. If you need to sustain traffic greater than the `documented limits <http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html>`_ , contact us through the `Support Center <https://console.aws.amazon.com/support/home?>`_ .
+
+        
+
+        
+
+      Requested -> (string)
+
+        
+
+        Reserved. If you need to sustain traffic greater than the `documented limits <http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html>`_ , contact us through the `Support Center <https://console.aws.amazon.com/support/home?>`_ .
+
+        
+
+        
+
+      Status -> (string)
+
+        
+
+        Reserved. If you need to sustain traffic greater than the `documented limits <http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html>`_ , contact us through the `Support Center <https://console.aws.amazon.com/support/home?>`_ .
+
+        
+
         
 
       
@@ -307,39 +406,39 @@ NatGateways -> (list)
 
       The state of the NAT gateway.
 
+       
+
+       
+      * ``pending`` : The NAT gateway is being created and is not ready to process traffic. 
+       
+      * ``failed`` : The NAT gateway could not be created. Check the ``failureCode`` and ``failureMessage`` fields for the reason. 
+       
+      * ``available`` : The NAT gateway is able to process traffic. This status remains until you delete the NAT gateway, and does not indicate the health of the NAT gateway. 
+       
+      * ``deleting`` : The NAT gateway is in the process of being terminated and may still be processing traffic. 
+       
+      * ``deleted`` : The NAT gateway has been terminated and is no longer processing traffic. 
+       
+
       
 
       
 
-    FailureCode -> (string)
+    SubnetId -> (string)
 
       
 
-      If the NAT gateway could not be created, specifies the error code for the failure. (``InsufficientFreeAddressesInSubnet`` | ``Gateway.NotAttached`` | ``InvalidAllocationID.NotFound`` | ``Resource.AlreadyAssociated`` | ``InternalError`` )
+      The ID of the subnet in which the NAT gateway is located.
 
       
 
       
 
-    FailureMessage -> (string)
+    VpcId -> (string)
 
       
 
-      If the NAT gateway could not be created, specifies the error message for the failure, that corresponds to the error code. 
-
-       
-
-       
-      * For InsufficientFreeAddressesInSubnet: ``Subnet has insufficient free addresses to create this NAT gateway`` 
-       
-      * For Gateway.NotAttached: ``Network vpc-xxxxxxxx has no Internet gateway attached`` 
-       
-      * For InvalidAllocationID.NotFound: ``Elastic IP address eipalloc-xxxxxxxx could not be associated with this NAT gateway`` 
-       
-      * For Resource.AlreadyAssociated: ``Elastic IP address eipalloc-xxxxxxxx is already associated`` 
-       
-      * For InternalError: ``Network interface eni-xxxxxxxx, created and used internally by this NAT gateway is in an invalid state. Please try again.`` 
-       
+      The ID of the VPC in which the NAT gateway is located.
 
       
 

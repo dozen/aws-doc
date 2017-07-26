@@ -15,34 +15,53 @@ Description
 
 
 
-Gets statistics for the specified metric. 
+Gets statistics for the specified metric.
 
  
 
-The maximum number of data points that can be queried is 50,850, whereas the maximum number of data points returned from a single ``get-metric-statistics`` request is 1,440. If you make a request that generates more than 1,440 data points, Amazon CloudWatch returns an error. In such a case, you can alter the request by narrowing the specified time range or increasing the specified period. Alternatively, you can make multiple requests across adjacent time ranges. ``get-metric-statistics`` does not return the data in chronological order. 
-
- 
-
-Amazon CloudWatch aggregates data points based on the length of the ``period`` that you specify. For example, if you request statistics with a one-minute granularity, Amazon CloudWatch aggregates data points with time stamps that fall within the same one-minute period. In such a case, the data points queried can greatly outnumber the data points returned. 
-
- 
-
-The following examples show various statistics allowed by the data point query maximum of 50,850 when you call ``get-metric-statistics`` on Amazon EC2 instances with detailed (one-minute) monitoring enabled: 
+Amazon CloudWatch retains metric data as follows:
 
  
 
  
-* statistics for up to 400 instances for a span of one hour
+* Data points with a period of 60 seconds (1-minute) are available for 15 days 
  
-* statistics for up to 35 instances over a span of 24 hours
+* Data points with a period of 300 seconds (5-minute) are available for 63 days 
  
-* statistics for up to 2 instances over a span of 2 weeks
+* Data points with a period of 3600 seconds (1 hour) are available for 455 days (15 months) 
+ 
+
+ 
+
+CloudWatch started retaining 5-minute and 1-hour metric data as of July 9, 2016.
+
+ 
+
+The maximum number of data points returned from a single call is 1,440. If you request more than 1,440 data points, CloudWatch returns an error. To reduce the number of data points, you can narrow the specified time range and make multiple requests across adjacent time ranges, or you can increase the specified period. A period can be as short as one minute (60 seconds). Data points are not returned in chronological order.
+
+ 
+
+CloudWatch aggregates data points based on the length of the period that you specify. For example, if you request statistics with a one-hour period, CloudWatch aggregates all data points with time stamps that fall within each one-hour period. Therefore, the number of values aggregated by CloudWatch is larger than the number of data points returned.
+
+ 
+
+CloudWatch needs raw data points to calculate percentile statistics. If you publish data using a statistic set instead, you can only retrieve percentile statistics for this data if one of the following conditions is true:
+
+ 
+
+ 
+* The SampleCount value of the statistic set is 1. 
+ 
+* The Min and the Max values of the statistic set are equal. 
  
 
  
 
-For information about the namespace, metric names, and dimensions that other Amazon Web Services products use to send metrics to CloudWatch, go to `Amazon CloudWatch Metrics, Namespaces, and dimensions Reference`_ in the *Amazon CloudWatch Developer Guide* . 
+For a list of metrics and dimensions supported by AWS services, see the `Amazon CloudWatch Metrics and dimensions Reference <http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CW_Support_For_AWS.html>`_ in the *Amazon CloudWatch User Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricStatistics>`_
 
 
 ========
@@ -58,10 +77,11 @@ Synopsis
   --start-time <value>
   --end-time <value>
   --period <value>
-  --statistics <value>
+  [--statistics <value>]
+  [--extended-statistics <value>]
   [--unit <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -73,21 +93,21 @@ Options
 ``--namespace`` (string)
 
 
-  The namespace of the metric, with or without spaces. 
+  The namespace of the metric, with or without spaces.
 
   
 
 ``--metric-name`` (string)
 
 
-  The name of the metric, with or without spaces. 
+  The name of the metric, with or without spaces.
 
   
 
 ``--dimensions`` (list)
 
 
-  A list of dimensions describing qualities of the metric. 
+  The dimensions. If the metric contains multiple dimensions, you must include a value for each dimension. CloudWatch treats each unique combination of dimensions as a separate metric. If a specific combination of dimensions was not published, you can't retrieve statistics for it. You must specify the same dimensions that were used when the metrics were created. For an example, see `Dimension Combinations <http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#dimension-combinations>`_ in the *Amazon CloudWatch User Guide* . For more information about specifying dimensions, see `Publishing Metrics <http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html>`_ in the *Amazon CloudWatch User Guide* .
 
   
 
@@ -115,38 +135,62 @@ JSON Syntax::
 ``--start-time`` (timestamp)
 
 
-  The time stamp to use for determining the first datapoint to return. The value specified is inclusive; results include datapoints with the time stamp specified. The time stamp must be in ISO 8601 UTC format (e.g., 2014-09-03T23:00:00Z). 
+  The time stamp that determines the first data point to return. Start times are evaluated relative to the time that CloudWatch receives the request.
 
    
 
-  .. note::
+  The value specified is inclusive; results include data points with the specified time stamp. The time stamp must be in ISO 8601 UTC format (for example, 2016-10-03T23:00:00Z).
 
-    The specified start time is rounded down to the nearest value. Datapoints are returned for start times up to two weeks in the past. Specified start times that are more than two weeks in the past will not return datapoints for metrics that are older than two weeks. 
+   
 
-    Data that is timestamped 24 hours or more in the past may take in excess of 48 hours to become available from submission time using ``get-metric-statistics`` .
+  CloudWatch rounds the specified time stamp as follows:
 
-     
+   
+
+   
+  * Start time less than 15 days ago - Round down to the nearest whole minute. For example, 12:32:34 is rounded down to 12:32:00. 
+   
+  * Start time between 15 and 63 days ago - Round down to the nearest 5-minute clock interval. For example, 12:32:34 is rounded down to 12:30:00. 
+   
+  * Start time greater than 63 days ago - Round down to the nearest 1-hour clock interval. For example, 12:32:34 is rounded down to 12:00:00. 
+   
 
   
 
 ``--end-time`` (timestamp)
 
 
-  The time stamp to use for determining the last datapoint to return. The value specified is exclusive; results will include datapoints up to the time stamp specified. The time stamp must be in ISO 8601 UTC format (e.g., 2014-09-03T23:00:00Z). 
+  The time stamp that determines the last data point to return.
+
+   
+
+  The value specified is exclusive; results include data points up to the specified time stamp. The time stamp must be in ISO 8601 UTC format (for example, 2016-10-10T23:00:00Z).
 
   
 
 ``--period`` (integer)
 
 
-  The granularity, in seconds, of the returned datapoints. ``period`` must be at least 60 seconds and must be a multiple of 60. The default value is 60. 
+  The granularity, in seconds, of the returned data points. A period can be as short as one minute (60 seconds) and must be a multiple of 60. 
+
+   
+
+  If the ``StartTime`` parameter specifies a time stamp that is greater than 15 days ago, you must specify the period as follows or no data points in that time range is returned:
+
+   
+
+   
+  * Start time between 15 and 63 days ago - Use a multiple of 300 seconds (5 minutes). 
+   
+  * Start time greater than 63 days ago - Use a multiple of 3600 seconds (1 hour). 
+   
 
   
 
 ``--statistics`` (list)
 
 
-  The metric statistics to return. For information about specific statistics returned by GetMetricStatistics, see `statistics`_ in the *Amazon CloudWatch Developer Guide* . 
+  The metric statistics, other than percentile. For percentile statistics, use ``extended-statistics`` . When calling ``get-metric-statistics`` , you must specify either ``statistics`` or ``extended-statistics`` , but not both.
 
   
 
@@ -167,10 +211,25 @@ Syntax::
 
 
 
+``--extended-statistics`` (list)
+
+
+  The percentile statistics. Specify values between p0.0 and p100. When calling ``get-metric-statistics`` , you must specify either ``statistics`` or ``extended-statistics`` , but not both.
+
+  
+
+
+
+Syntax::
+
+  "string" "string" ...
+
+
+
 ``--unit`` (string)
 
 
-  The unit for the metric. 
+  The unit for a given metric. Metrics may be reported in multiple units. Not supplying a unit results in all units being returned. If the metric only ever reports one unit, specifying a unit has no effect.
 
   
 
@@ -264,8 +323,8 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -276,7 +335,7 @@ Examples
 **To get the CPU utilization per EC2 instance**
 
 The following example uses the ``get-metric-statistics`` command to get the CPU utilization for an EC2
-instance with the ID i-abcdef. For more examples using the ``get-metric-statistics`` command, see `Get Statistics for a Metric`__ in the *Amazon CloudWatch Developer Guide*.
+instance with the ID i-abcdef. 
 
 .. __: http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/US_GetStatistics.html
 
@@ -407,6 +466,17 @@ Output::
         "Label": "CPUUtilization"
     }
 
+**Specifying multiple dimensions**
+
+The following example illustrates how to specify multiple dimensions. Each dimension is specified as a Name/Value pair, with a comma between the name and the value. Multiple dimensions are separated by a space. If a single metric includes multiple dimensions, you must specify a value for every defined dimension.
+
+For more examples using the ``get-metric-statistics`` command, see `Get Statistics for a Metric`__ in the *Amazon CloudWatch Developer Guide*.
+
+.. __: http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/US_GetStatistics.html
+
+::
+
+  aws cloudwatch get-metric-statistics --metric-name Buffers --namespace MyNameSpace --dimensions Name=InstanceID,Value=i-abcdef Name=InstanceType,Value=m1.small --start-time 2016-10-15T04:00:00Z --end-time 2016-10-19T07:00:00Z --statistics Average --period 60
 
 
 ======
@@ -417,7 +487,7 @@ Label -> (string)
 
   
 
-  A label describing the specified metric. 
+  A label for the specified metric.
 
   
 
@@ -427,7 +497,7 @@ Datapoints -> (list)
 
   
 
-  The datapoints for the specified metric. 
+  The data points for the specified metric.
 
   
 
@@ -435,7 +505,7 @@ Datapoints -> (list)
 
     
 
-    The ``Datapoint`` data type encapsulates the statistical data that Amazon CloudWatch computes from metric data. 
+    Encapsulates the statistical data that CloudWatch computes from metric data.
 
     
 
@@ -443,7 +513,7 @@ Datapoints -> (list)
 
       
 
-      The time stamp used for the datapoint. 
+      The time stamp used for the data point.
 
       
 
@@ -453,7 +523,7 @@ Datapoints -> (list)
 
       
 
-      The number of metric values that contributed to the aggregate value of this datapoint. 
+      The number of metric values that contributed to the aggregate value of this data point.
 
       
 
@@ -463,7 +533,7 @@ Datapoints -> (list)
 
       
 
-      The average of metric values that correspond to the datapoint. 
+      The average of the metric values that correspond to the data point.
 
       
 
@@ -473,7 +543,7 @@ Datapoints -> (list)
 
       
 
-      The sum of metric values used for the datapoint. 
+      The sum of the metric values for the data point.
 
       
 
@@ -483,7 +553,7 @@ Datapoints -> (list)
 
       
 
-      The minimum metric value used for the datapoint. 
+      The minimum metric value for the data point.
 
       
 
@@ -493,7 +563,7 @@ Datapoints -> (list)
 
       
 
-      The maximum of the metric value used for the datapoint. 
+      The maximum metric value for the data point.
 
       
 
@@ -503,9 +573,31 @@ Datapoints -> (list)
 
       
 
-      The standard unit used for the datapoint. 
+      The standard unit for the data point.
 
       
+
+      
+
+    ExtendedStatistics -> (map)
+
+      
+
+      The percentile statistic for the data point.
+
+      
+
+      key -> (string)
+
+        
+
+        
+
+      value -> (double)
+
+        
+
+        
 
       
 
@@ -513,7 +605,3 @@ Datapoints -> (list)
 
   
 
-
-
-.. _Amazon CloudWatch Metrics, Namespaces, and dimensions Reference: http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/CW_Support_For_AWS.html
-.. _statistics: http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#Statistic

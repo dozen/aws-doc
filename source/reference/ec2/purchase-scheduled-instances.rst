@@ -19,8 +19,15 @@ Purchases one or more Scheduled Instances with the specified schedule.
 
  
 
-Scheduled Instances enable you to purchase Amazon EC2 compute capacity by the hour for a one-year term. Before you can purchase a Scheduled Instance, you must call  describe-scheduled-instance-availability to check for available schedules and obtain a purchase token.
+Scheduled Instances enable you to purchase Amazon EC2 compute capacity by the hour for a one-year term. Before you can purchase a Scheduled Instance, you must call  describe-scheduled-instance-availability to check for available schedules and obtain a purchase token. After you purchase a Scheduled Instance, you must call  run-scheduled-instances during each scheduled time period.
 
+ 
+
+After you purchase a Scheduled Instance, you can't cancel, modify, or resell your purchase.
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseScheduledInstances>`_
 
 
 ========
@@ -30,11 +37,11 @@ Synopsis
 ::
 
     purchase-scheduled-instances
-  [--dry-run | --no-dry-run]
   [--client-token <value>]
+  [--dry-run | --no-dry-run]
   --purchase-requests <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -43,17 +50,17 @@ Synopsis
 Options
 =======
 
+``--client-token`` (string)
+
+
+  Unique, case-sensitive identifier that ensures the idempotency of the request. For more information, see `Ensuring Idempotency <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html>`_ .
+
+  
+
 ``--dry-run`` | ``--no-dry-run`` (boolean)
 
 
   Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
-
-  
-
-``--client-token`` (string)
-
-
-  Unique, case-sensitive identifier that ensures the idempotency of the request. For more information, see `Ensuring Idempotency`_ .
 
   
 
@@ -68,7 +75,7 @@ Options
 
 Shorthand Syntax::
 
-    PurchaseToken=string,InstanceCount=integer ...
+    InstanceCount=integer,PurchaseToken=string ...
 
 
 
@@ -77,8 +84,8 @@ JSON Syntax::
 
   [
     {
-      "PurchaseToken": "string",
-      "InstanceCount": integer
+      "InstanceCount": integer,
+      "PurchaseToken": "string"
     }
     ...
   ]
@@ -88,8 +95,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -166,11 +173,41 @@ ScheduledInstanceSet -> (list)
 
     
 
-    ScheduledInstanceId -> (string)
+    AvailabilityZone -> (string)
 
       
 
-      The Scheduled Instance ID.
+      The Availability Zone.
+
+      
+
+      
+
+    CreateDate -> (timestamp)
+
+      
+
+      The date when the Scheduled Instance was purchased.
+
+      
+
+      
+
+    HourlyPrice -> (string)
+
+      
+
+      The hourly price for a single instance.
+
+      
+
+      
+
+    InstanceCount -> (integer)
+
+      
+
+      The number of instances.
 
       
 
@@ -186,16 +223,6 @@ ScheduledInstanceSet -> (list)
 
       
 
-    Platform -> (string)
-
-      
-
-      The platform (``Linux/UNIX`` or ``Windows`` ).
-
-      
-
-      
-
     NetworkPlatform -> (string)
 
       
@@ -206,21 +233,31 @@ ScheduledInstanceSet -> (list)
 
       
 
-    AvailabilityZone -> (string)
+    NextSlotStartTime -> (timestamp)
 
       
 
-      The Availability Zone.
+      The time for the next schedule to start.
 
       
 
       
 
-    SlotDurationInHours -> (integer)
+    Platform -> (string)
 
       
 
-      The number of hours in the schedule.
+      The platform (``Linux/UNIX`` or ``Windows`` ).
+
+      
+
+      
+
+    PreviousSlotEndTime -> (timestamp)
+
+      
+
+      The time that the previous schedule ended or will end.
 
       
 
@@ -292,61 +329,21 @@ ScheduledInstanceSet -> (list)
 
       
 
-    PreviousSlotEndTime -> (timestamp)
+    ScheduledInstanceId -> (string)
 
       
 
-      The time that the previous schedule ended or will end.
-
-      
-
-      
-
-    NextSlotStartTime -> (timestamp)
-
-      
-
-      The time for the next schedule to start.
+      The Scheduled Instance ID.
 
       
 
       
 
-    HourlyPrice -> (string)
+    SlotDurationInHours -> (integer)
 
       
 
-      The hourly price for a single instance.
-
-      
-
-      
-
-    TotalScheduledInstanceHours -> (integer)
-
-      
-
-      The total number of hours for a single instance for the entire term.
-
-      
-
-      
-
-    InstanceCount -> (integer)
-
-      
-
-      The number of instances.
-
-      
-
-      
-
-    TermStartDate -> (timestamp)
-
-      
-
-      The start date for the Scheduled Instance.
+      The number of hours in the schedule.
 
       
 
@@ -362,11 +359,21 @@ ScheduledInstanceSet -> (list)
 
       
 
-    CreateDate -> (timestamp)
+    TermStartDate -> (timestamp)
 
       
 
-      The date when the Scheduled Instance was purchased.
+      The start date for the Scheduled Instance.
+
+      
+
+      
+
+    TotalScheduledInstanceHours -> (integer)
+
+      
+
+      The total number of hours for a single instance for the entire term.
 
       
 
@@ -376,6 +383,3 @@ ScheduledInstanceSet -> (list)
 
   
 
-
-
-.. _Ensuring Idempotency: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html

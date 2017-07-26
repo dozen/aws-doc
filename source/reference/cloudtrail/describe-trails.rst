@@ -19,6 +19,9 @@ Retrieves settings for the trail associated with the current region for your acc
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DescribeTrails>`_
+
+
 ========
 Synopsis
 ========
@@ -29,7 +32,7 @@ Synopsis
   [--trail-name-list <value>]
   [--include-shadow-trails | --no-include-shadow-trails]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -41,12 +44,20 @@ Options
 ``--trail-name-list`` (list)
 
 
-  Specifies a list of trail names, trail ARNs, or both, of the trails to describe. The format of a trail ARN is ``arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`` . If an empty list is specified, information for the trail in the current region is returned.
+  Specifies a list of trail names, trail ARNs, or both, of the trails to describe. The format of a trail ARN is:
+
+   
+
+   ``arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail``  
+
+   
+
+  If an empty list is specified, information for the trail in the current region is returned.
 
    
 
    
-  * If an empty list is specified and ``IncludeShadowTrails`` is false, then information for all trails in the current region is returned.
+  * If an empty list is specified and ``IncludeShadowTrails`` is false, then information for all trails in the current region is returned. 
    
   * If an empty list is specified and IncludeShadowTrails is null or true, then information for all trails in the current region and any associated shadow trails in other regions is returned. 
    
@@ -55,7 +66,11 @@ Options
 
   .. note::
 
+     
+
     If one or more trail names are specified, information is returned only if the names match the names of trails belonging only to the current region. To return information about a trail in another region, you must specify its trail ARN.
+
+     
 
   
 
@@ -77,10 +92,50 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
+
+========
+Examples
+========
+
+**To describe a trail**
+
+The following ``describe-trails`` command returns the settings for ``Trail1`` and ``Trail2``::
+
+  aws cloudtrail describe-trails --trail-name-list Trail1 Trail2
+
+Output::
+
+  {
+   "trailList": [
+       {
+           "IncludeGlobalServiceEvents": true, 
+           "Name": "Trail1", 
+           "TrailARN": "arn:aws:cloudtrail:us-east-1:123456789012:trail/Trail1", 
+           "LogFileValidationEnabled": false, 
+           "IsMultiRegionTrail": false, 
+           "S3BucketName": "my-bucket", 
+           "CloudWatchLogsRoleArn": "arn:aws:iam::123456789012:role/CloudTrail_CloudWatchLogs_Role", 
+           "CloudWatchLogsLogGroupArn": "arn:aws:logs:us-east-1:123456789012:log-group:CloudTrail:*", 
+           "SnsTopicName": "my-topic", 
+           "HomeRegion": "us-east-1"
+       }, 
+       {
+           "IncludeGlobalServiceEvents": true, 
+           "Name": "Trail2", 
+           "S3KeyPrefix": "my-prefix", 
+           "TrailARN": "arn:aws:cloudtrail:us-east-1:123456789012:trail/Trail2", 
+           "LogFileValidationEnabled": false, 
+           "IsMultiRegionTrail": false, 
+           "S3BucketName": "my-bucket", 
+           "KmsKeyId": "arn:aws:kms:us-east-1:123456789012:key/4c5ae5ac-3c13-421e-8335-c7868ef6a769", 
+           "HomeRegion": "us-east-1"
+       }
+    ]
+  }
 
 ======
 Output
@@ -116,7 +171,7 @@ trailList -> (list)
 
       
 
-      Name of the Amazon S3 bucket into which CloudTrail delivers your trail files. See `Amazon S3 Bucket Naming Requirements`_ .
+      Name of the Amazon S3 bucket into which CloudTrail delivers your trail files. See `Amazon S3 Bucket Naming Requirements <http://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html>`_ .
 
       
 
@@ -126,7 +181,7 @@ trailList -> (list)
 
       
 
-      Specifies the Amazon S3 key prefix that comes after the name of the bucket you have designated for log file delivery. For more information, see `Finding Your CloudTrail Log Files`_ .The maximum length is 200 characters.
+      Specifies the Amazon S3 key prefix that comes after the name of the bucket you have designated for log file delivery. For more information, see `Finding Your CloudTrail Log Files <http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html>`_ .The maximum length is 200 characters.
 
       
 
@@ -136,7 +191,21 @@ trailList -> (list)
 
       
 
-      Name of the existing Amazon SNS topic that CloudTrail uses to notify the account owner when new CloudTrail log files have been delivered. The maximum length is 256 characters.
+      This field is deprecated. Use SnsTopicARN.
+
+      
+
+      
+
+    SnsTopicARN -> (string)
+
+      
+
+      Specifies the ARN of the Amazon SNS topic that CloudTrail uses to send notifications when log files are delivered. The format of a topic ARN is:
+
+       
+
+       ``arn:aws:sns:us-east-1:123456789012:MyTopic``  
 
       
 
@@ -176,7 +245,11 @@ trailList -> (list)
 
       
 
-      The Amazon Resource Name of the trail. The ``TrailARN`` format is ``arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`` .
+      Specifies the ARN of the trail. The format of a trail ARN is:
+
+       
+
+       ``arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail``  
 
       
 
@@ -218,7 +291,21 @@ trailList -> (list)
 
       Specifies the KMS key ID that encrypts the logs delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the format:
 
-       ``arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012`` 
+       
+
+       ``arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012``  
+
+      
+
+      
+
+    HasCustomEventSelectors -> (boolean)
+
+      
+
+      Specifies if the trail has custom event selectors.
+
+      
 
       
 
@@ -226,7 +313,3 @@ trailList -> (list)
 
   
 
-
-
-.. _Amazon S3 Bucket Naming Requirements: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html
-.. _Finding Your CloudTrail Log Files: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html

@@ -21,23 +21,35 @@ Records a ``WorkflowExecutionTerminated`` event and forces closure of the workfl
 
 .. warning::
 
+   
+
   If the identified workflow execution was in progress, it is terminated immediately.
 
- 
-
-.. note::
-
-  If a runId is not specified, then the ``WorkflowExecutionTerminated`` event is recorded in the history of the current open workflow with the matching workflowId in the domain.
+   
 
  
 
 .. note::
 
-  You should consider using  request-cancel-workflow-execution action instead because it allows the workflow to gracefully close while  terminate-workflow-execution does not.
+   
+
+  If a runId isn't specified, then the ``WorkflowExecutionTerminated`` event is recorded in the history of the current open workflow with the matching workflowId in the domain.
+
+   
 
  
 
-**Access Control** 
+.. note::
+
+   
+
+  You should consider using  request-cancel-workflow-execution action instead because it allows the workflow to gracefully close while  terminate-workflow-execution doesn't.
+
+   
+
+ 
+
+ **Access Control**  
 
  
 
@@ -46,17 +58,20 @@ You can use IAM policies to control this action's access to Amazon SWF resources
  
 
  
-* Use a ``Resource`` element with the domain name to limit the action to only specified domains.
+* Use a ``Resource`` element with the domain name to limit the action to only specified domains. 
  
-* Use an ``Action`` element to allow or deny permission to call this action.
+* Use an ``Action`` element to allow or deny permission to call this action. 
  
-* You cannot use an IAM policy to constrain this action's parameters.
- 
-
+* You cannot use an IAM policy to constrain this action's parameters. 
  
 
-If the caller does not have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's **cause** parameter will be set to OPERATION_NOT_PERMITTED. For details and example IAM policies, see `Using IAM to Manage Access to Amazon SWF Workflows`_ .
+ 
 
+If the caller doesn't have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's ``cause`` parameter is set to ``OPERATION_NOT_PERMITTED`` . For details and example IAM policies, see `Using IAM to Manage Access to Amazon SWF Workflows <http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html>`_ in the *Amazon SWF Developer Guide* .
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/swf-2012-01-25/TerminateWorkflowExecution>`_
 
 
 ========
@@ -73,7 +88,7 @@ Synopsis
   [--details <value>]
   [--child-policy <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -106,14 +121,14 @@ Options
 ``--reason`` (string)
 
 
-  *Optional.* A descriptive reason for terminating the workflow execution.
+  A descriptive reason for terminating the workflow execution.
 
   
 
 ``--details`` (string)
 
 
-  *Optional.* Details for terminating the workflow execution.
+  Details for terminating the workflow execution.
 
   
 
@@ -129,18 +144,22 @@ Options
    
 
    
-  * **TERMINATE:** the child executions will be terminated.
+  * ``TERMINATE`` – The child executions are terminated. 
    
-  * **REQUEST_CANCEL:** a request to cancel will be attempted for each child execution by recording a ``WorkflowExecutionCancelRequested`` event in its history. It is up to the decider to take appropriate actions when it receives an execution history with this event.
+  * ``REQUEST_CANCEL`` – A request to cancel is attempted for each child execution by recording a ``WorkflowExecutionCancelRequested`` event in its history. It is up to the decider to take appropriate actions when it receives an execution history with this event. 
    
-  * **ABANDON:** no action will be taken. The child executions will continue to run.
+  * ``ABANDON`` – No action is taken. The child executions continue to run. 
    
 
    
 
   .. note::
 
-    A child policy for this workflow execution must be specified either as a default for the workflow type or through this parameter. If neither this parameter is set nor a default child policy was specified at registration time then a fault will be returned.
+     
+
+    A child policy for this workflow execution must be specified either as a default for the workflow type or through this parameter. If neither this parameter is set nor a default child policy was specified at registration time then a fault is returned.
+
+     
 
   
 
@@ -162,8 +181,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -172,5 +191,3 @@ Output
 ======
 
 None
-
-.. _Using IAM to Manage Access to Amazon SWF Workflows: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html

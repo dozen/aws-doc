@@ -19,8 +19,11 @@ Adds one or more subnets to the set of configured subnets for the specified load
 
  
 
-The load balancer evenly distributes requests across all registered subnets. For more information, see `Add or Remove subnets for Your Load Balancer in a VPC`_ in the *Elastic Load Balancing Developer Guide* .
+The load balancer evenly distributes requests across all registered subnets. For more information, see `Add or Remove subnets for Your Load Balancer in a VPC <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-manage-subnets.html>`_ in the *Classic Load Balancer Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/AttachLoadBalancerToSubnets>`_
 
 
 ========
@@ -33,7 +36,7 @@ Synopsis
   --load-balancer-name <value>
   --subnets <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -52,7 +55,7 @@ Options
 ``--subnets`` (list)
 
 
-  The IDs of the subnets to add for the load balancer. You can add only one subnet per Availability Zone.
+  The IDs of the subnets to add. You can add only one subnet per Availability Zone.
 
   
 
@@ -67,8 +70,8 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -115,6 +118,3 @@ Subnets -> (list)
 
   
 
-
-
-.. _Add or Remove subnets for Your Load Balancer in a VPC: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/elb-manage-subnets.html

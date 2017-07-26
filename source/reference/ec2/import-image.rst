@@ -15,8 +15,11 @@ Description
 
 
 
-Import single or multi-volume disk images or EBS snapshots into an Amazon Machine Image (AMI).
+Import single or multi-volume disk images or EBS snapshots into an Amazon Machine Image (AMI). For more information, see `Importing a VM as an Image Using VM Import/Export <http://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html>`_ in the *VM Import/Export User Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportImage>`_
 
 
 ========
@@ -26,18 +29,18 @@ Synopsis
 ::
 
     import-image
-  [--dry-run | --no-dry-run]
-  [--description <value>]
-  [--disk-containers <value>]
-  [--license-type <value>]
-  [--hypervisor <value>]
   [--architecture <value>]
-  [--platform <value>]
   [--client-data <value>]
   [--client-token <value>]
+  [--description <value>]
+  [--disk-containers <value>]
+  [--dry-run | --no-dry-run]
+  [--hypervisor <value>]
+  [--license-type <value>]
+  [--platform <value>]
   [--role-name <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -46,10 +49,48 @@ Synopsis
 Options
 =======
 
-``--dry-run`` | ``--no-dry-run`` (boolean)
+``--architecture`` (string)
 
 
-  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
+  The architecture of the virtual machine.
+
+   
+
+  Valid values: ``i386`` | ``x86_64``  
+
+  
+
+``--client-data`` (structure)
+
+
+  The client-specific data.
+
+  
+
+
+
+Shorthand Syntax::
+
+    Comment=string,UploadEnd=timestamp,UploadSize=double,UploadStart=timestamp
+
+
+
+
+JSON Syntax::
+
+  {
+    "Comment": "string",
+    "UploadEnd": timestamp,
+    "UploadSize": double,
+    "UploadStart": timestamp
+  }
+
+
+
+``--client-token`` (string)
+
+
+  The token to enable idempotency for VM import requests.
 
   
 
@@ -71,7 +112,7 @@ Options
 
 Shorthand Syntax::
 
-    Description=string,Format=string,Url=string,UserBucket={S3Bucket=string,S3Key=string},DeviceName=string,SnapshotId=string ...
+    Description=string,DeviceName=string,Format=string,SnapshotId=string,Url=string,UserBucket={S3Bucket=string,S3Key=string} ...
 
 
 
@@ -81,32 +122,24 @@ JSON Syntax::
   [
     {
       "Description": "string",
+      "DeviceName": "string",
       "Format": "string",
+      "SnapshotId": "string",
       "Url": "string",
       "UserBucket": {
         "S3Bucket": "string",
         "S3Key": "string"
-      },
-      "DeviceName": "string",
-      "SnapshotId": "string"
+      }
     }
     ...
   ]
 
 
 
-``--license-type`` (string)
+``--dry-run`` | ``--no-dry-run`` (boolean)
 
 
-  The license type to be used for the Amazon Machine Image (AMI) after importing.
-
-   
-
-  **Note:** You may only use BYOL if you have existing licenses with rights to use these licenses in a third party cloud like AWS. For more information, see `VM Import/Export Prerequisites`_ in the *Amazon Elastic Compute Cloud User Guide* .
-
-   
-
-  Valid values: ``AWS`` | ``BYOL`` 
+  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
 
   
 
@@ -117,18 +150,22 @@ JSON Syntax::
 
    
 
-  Valid values: ``xen`` 
+  Valid values: ``xen``  
 
   
 
-``--architecture`` (string)
+``--license-type`` (string)
 
 
-  The architecture of the virtual machine.
+  The license type to be used for the Amazon Machine Image (AMI) after importing.
 
    
 
-  Valid values: ``i386`` | ``x86_64`` 
+   **Note:** You may only use BYOL if you have existing licenses with rights to use these licenses in a third party cloud like AWS. For more information, see `Prerequisites <http://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html#prerequisites-image>`_ in the VM Import/Export User Guide.
+
+   
+
+  Valid values: ``AWS`` | ``BYOL``  
 
   
 
@@ -139,41 +176,7 @@ JSON Syntax::
 
    
 
-  Valid values: ``Windows`` | ``Linux`` 
-
-  
-
-``--client-data`` (structure)
-
-
-  The client-specific data.
-
-  
-
-
-
-Shorthand Syntax::
-
-    UploadStart=timestamp,UploadEnd=timestamp,UploadSize=double,Comment=string
-
-
-
-
-JSON Syntax::
-
-  {
-    "UploadStart": timestamp,
-    "UploadEnd": timestamp,
-    "UploadSize": double,
-    "Comment": "string"
-  }
-
-
-
-``--client-token`` (string)
-
-
-  The token to enable idempotency for VM import requests.
+  Valid values: ``Windows`` | ``Linux``  
 
   
 
@@ -187,8 +190,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -196,21 +199,51 @@ Prints a sample input JSON to standard output. Note the specified operation is n
 Output
 ======
 
-ImportTaskId -> (string)
-
-  
-
-  The task ID of the import image task.
-
-  
-
-  
-
 Architecture -> (string)
 
   
 
   The architecture of the virtual machine.
+
+  
+
+  
+
+Description -> (string)
+
+  
+
+  A description of the import task.
+
+  
+
+  
+
+Hypervisor -> (string)
+
+  
+
+  The target hypervisor of the import task.
+
+  
+
+  
+
+ImageId -> (string)
+
+  
+
+  The ID of the Amazon Machine Image (AMI) created by the import task.
+
+  
+
+  
+
+ImportTaskId -> (string)
+
+  
+
+  The task ID of the import image task.
 
   
 
@@ -236,21 +269,11 @@ Platform -> (string)
 
   
 
-Hypervisor -> (string)
+Progress -> (string)
 
   
 
-  The target hypervisor of the import task.
-
-  
-
-  
-
-Description -> (string)
-
-  
-
-  A description of the import task.
+  The progress of the task.
 
   
 
@@ -272,16 +295,6 @@ SnapshotDetails -> (list)
 
     
 
-    DiskImageSize -> (double)
-
-      
-
-      The size of the disk in the snapshot, in GiB.
-
-      
-
-      
-
     Description -> (string)
 
       
@@ -292,11 +305,71 @@ SnapshotDetails -> (list)
 
       
 
+    DeviceName -> (string)
+
+      
+
+      The block device mapping for the snapshot.
+
+      
+
+      
+
+    DiskImageSize -> (double)
+
+      
+
+      The size of the disk in the snapshot, in GiB.
+
+      
+
+      
+
     Format -> (string)
 
       
 
       The format of the disk image from which the snapshot is created.
+
+      
+
+      
+
+    Progress -> (string)
+
+      
+
+      The percentage of progress for the task.
+
+      
+
+      
+
+    SnapshotId -> (string)
+
+      
+
+      The snapshot ID of the disk being imported.
+
+      
+
+      
+
+    Status -> (string)
+
+      
+
+      A brief status of the snapshot creation.
+
+      
+
+      
+
+    StatusMessage -> (string)
+
+      
+
+      A detailed status message for the snapshot creation.
 
       
 
@@ -316,7 +389,7 @@ SnapshotDetails -> (list)
 
       
 
-      Describes the S3 bucket for the disk image.
+      The S3 bucket for the disk image.
 
       
 
@@ -334,61 +407,11 @@ SnapshotDetails -> (list)
 
         
 
-        The key from which the disk image was created.
+        The file name of the disk image.
 
         
 
         
-
-      
-
-    DeviceName -> (string)
-
-      
-
-      The block device mapping for the snapshot.
-
-      
-
-      
-
-    SnapshotId -> (string)
-
-      
-
-      The snapshot ID of the disk being imported.
-
-      
-
-      
-
-    Progress -> (string)
-
-      
-
-      The percentage of progress for the task.
-
-      
-
-      
-
-    StatusMessage -> (string)
-
-      
-
-      A detailed status message for the snapshot creation.
-
-      
-
-      
-
-    Status -> (string)
-
-      
-
-      A brief status of the snapshot creation.
-
-      
 
       
 
@@ -396,21 +419,11 @@ SnapshotDetails -> (list)
 
   
 
-ImageId -> (string)
+Status -> (string)
 
   
 
-  The ID of the Amazon Machine Image (AMI) created by the import task.
-
-  
-
-  
-
-Progress -> (string)
-
-  
-
-  The progress of the task.
+  A brief status of the task.
 
   
 
@@ -426,16 +439,3 @@ StatusMessage -> (string)
 
   
 
-Status -> (string)
-
-  
-
-  A brief status of the task.
-
-  
-
-  
-
-
-
-.. _VM Import/Export Prerequisites: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/VMImportPrerequisites.html

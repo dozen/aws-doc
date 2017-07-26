@@ -19,6 +19,9 @@ Returns information about the overall health of the specified environment. The *
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironmentHealth>`_
+
+
 ========
 Synopsis
 ========
@@ -30,7 +33,7 @@ Synopsis
   [--environment-id <value>]
   [--attribute-names <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -42,29 +45,29 @@ Options
 ``--environment-name`` (string)
 
 
-  Specifies the AWS Elastic Beanstalk environment name.
+  Specify the environment by name.
 
    
 
-  Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns ``MissingRequiredParameter`` error. 
+  You must specify either this or an EnvironmentName, or both.
 
   
 
 ``--environment-id`` (string)
 
 
-  Specifies the AWS Elastic Beanstalk environment ID.
+  Specify the environment by ID.
 
    
 
-  Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns ``MissingRequiredParameter`` error. 
+  You must specify either this or an EnvironmentName, or both.
 
   
 
 ``--attribute-names`` (list)
 
 
-  Specifies the response elements you wish to receive. If no attribute names are specified, AWS Elastic Beanstalk only returns the name of the environment.
+  Specify the response elements to return. To retrieve all attributes, set to ``All`` . If no attribute names are specified, returns the name of the environment.
 
   
 
@@ -91,8 +94,8 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -160,7 +163,7 @@ EnvironmentName -> (string)
 
   
 
-  The AWS Elastic Beanstalk environment name.
+  The environment's name.
 
   
 
@@ -170,7 +173,7 @@ HealthStatus -> (string)
 
   
 
-  Contains the response body with information about the health of the environment.
+  The `health status <http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html>`_ of the environment. For example, ``Ok`` .
 
   
 
@@ -180,7 +183,7 @@ Status -> (string)
 
   
 
-  Returns the health status value of the environment. For more information, see `Health Colors and Statuses`_ .
+  The environment's operational status. ``Ready`` , ``Launching`` , ``Updating`` , ``Terminating`` , or ``Terminated`` .
 
   
 
@@ -190,7 +193,7 @@ Color -> (string)
 
   
 
-  Returns the color indicator that tells you information about the health of the environment. For more information, see `Health Colors and Statuses`_ .
+  The `health color <http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html>`_ of the environment.
 
   
 
@@ -200,7 +203,7 @@ Causes -> (list)
 
   
 
-  Returns potential causes for the reported status.
+  Descriptions of the data that contributed to the environment's current health status.
 
   
 
@@ -216,7 +219,7 @@ ApplicationMetrics -> (structure)
 
   
 
-  Represents the application metrics for a specified environment.
+  Application request metrics for the environment.
 
   
 
@@ -294,7 +297,7 @@ ApplicationMetrics -> (structure)
 
     
 
-    Represents the average latency for the slowest X percent of requests over the last 10 seconds. Latencies are in seconds with one milisecond resolution.
+    Represents the average latency for the slowest X percent of requests over the last 10 seconds. Latencies are in seconds with one millisecond resolution.
 
     
 
@@ -386,7 +389,7 @@ InstancesHealth -> (structure)
 
   
 
-  Represents summary information about the health of an instance. For more information, see `Health Colors and Statuses`_ .
+  Summary health information for the instances in the environment.
 
   
 
@@ -394,7 +397,7 @@ InstancesHealth -> (structure)
 
     
 
-    **Grey.** AWS Elastic Beanstalk and the health agent are reporting no data on an instance.
+     **Grey.** AWS Elastic Beanstalk and the health agent are reporting no data on an instance.
 
     
 
@@ -404,7 +407,7 @@ InstancesHealth -> (structure)
 
     
 
-    **Grey.** AWS Elastic Beanstalk and the health agent are reporting an insufficient amount of data on an instance.
+     **Grey.** AWS Elastic Beanstalk and the health agent are reporting an insufficient amount of data on an instance.
 
     
 
@@ -414,7 +417,7 @@ InstancesHealth -> (structure)
 
     
 
-    **Grey.** An operation is in progress on an instance within the command timeout.
+     **Grey.** An operation is in progress on an instance within the command timeout.
 
     
 
@@ -424,7 +427,7 @@ InstancesHealth -> (structure)
 
     
 
-    **Green.** An instance is passing health checks and the health agent is not reporting any problems.
+     **Green.** An instance is passing health checks and the health agent is not reporting any problems.
 
     
 
@@ -434,7 +437,7 @@ InstancesHealth -> (structure)
 
     
 
-    **Green.** An operation is in progress on an instance.
+     **Green.** An operation is in progress on an instance.
 
     
 
@@ -444,7 +447,7 @@ InstancesHealth -> (structure)
 
     
 
-    **Yellow.** The health agent is reporting a moderate number of request failures or other issues for an instance or environment.
+     **Yellow.** The health agent is reporting a moderate number of request failures or other issues for an instance or environment.
 
     
 
@@ -454,7 +457,7 @@ InstancesHealth -> (structure)
 
     
 
-    **Red.** The health agent is reporting a high number of request failures or other issues for an instance or environment.
+     **Red.** The health agent is reporting a high number of request failures or other issues for an instance or environment.
 
     
 
@@ -464,7 +467,7 @@ InstancesHealth -> (structure)
 
     
 
-    **Red.** The health agent is reporting a very high number of request failures or other issues for an instance or environment.
+     **Red.** The health agent is reporting a very high number of request failures or other issues for an instance or environment.
 
     
 
@@ -476,12 +479,9 @@ RefreshedAt -> (timestamp)
 
   
 
-  The date and time the information was last refreshed.
+  The date and time that the health information was retrieved.
 
   
 
   
 
-
-
-.. _Health Colors and Statuses: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html

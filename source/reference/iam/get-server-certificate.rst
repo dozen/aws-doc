@@ -15,12 +15,15 @@ Description
 
 
 
-Retrieves information about the specified server certificate.
+Retrieves information about the specified server certificate stored in IAM.
 
  
 
-For more information about working with server certificates, including a list of AWS services that can use the server certificates that you manage with IAM, go to `Working with Server Certificates`_ in the *IAM User Guide* .
+For more information about working with server certificates, including a list of AWS services that can use the server certificates that you manage with IAM, go to `Working with Server Certificates <http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html>`_ in the *IAM User Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetServerCertificate>`_
 
 
 ========
@@ -32,7 +35,7 @@ Synopsis
     get-server-certificate
   --server-certificate-name <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -46,13 +49,17 @@ Options
 
   The name of the server certificate you want to retrieve information about.
 
+   
+
+  This parameter allows (per its `regex pattern <http://wikipedia.org/wiki/regex>`_ ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-
+
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -64,7 +71,7 @@ ServerCertificate -> (structure)
 
   
 
-  Information about the server certificate.
+  A structure containing details about the server certificate.
 
   
 
@@ -80,7 +87,7 @@ ServerCertificate -> (structure)
 
       
 
-      The path to the server certificate. For more information about paths, see `IAM Identifiers`_ in the *Using IAM* guide. 
+      The path to the server certificate. For more information about paths, see `IAM Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ in the *Using IAM* guide. 
 
       
 
@@ -100,7 +107,7 @@ ServerCertificate -> (structure)
 
       
 
-      The stable and unique string identifying the server certificate. For more information about IDs, see `IAM Identifiers`_ in the *Using IAM* guide. 
+      The stable and unique string identifying the server certificate. For more information about IDs, see `IAM Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ in the *Using IAM* guide. 
 
       
 
@@ -110,7 +117,7 @@ ServerCertificate -> (structure)
 
       
 
-      The Amazon Resource Name (ARN) specifying the server certificate. For more information about ARNs and how to use them in policies, see `IAM Identifiers`_ in the *Using IAM* guide. 
+      The Amazon Resource Name (ARN) specifying the server certificate. For more information about ARNs and how to use them in policies, see `IAM Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ in the *Using IAM* guide. 
 
       
 
@@ -160,7 +167,3 @@ ServerCertificate -> (structure)
 
   
 
-
-
-.. _Working with Server Certificates: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html
-.. _IAM Identifiers: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html

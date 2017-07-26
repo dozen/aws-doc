@@ -15,12 +15,11 @@ Description
 
 
 
-Returns all the metrics filters associated with the specified log group. The list returned in the response is ASCII-sorted by filter name. 
+Lists the specified metric filters. You can list all the metric filters or filter the results by log name, prefix, metric name, and metric namespace. The results are ASCII-sorted by filter name.
 
- 
 
-By default, this operation returns up to 50 metric filters. If there are more metric filters to list, the response would contain a ``nextToken`` value in the response body. You can also limit the number of metric filters returned in the response by specifying the ``limit`` parameter in the request. 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeMetricFilters>`_
 
 
 ``describe-metric-filters`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
@@ -34,13 +33,15 @@ Synopsis
 ::
 
     describe-metric-filters
-  --log-group-name <value>
+  [--log-group-name <value>]
   [--filter-name-prefix <value>]
+  [--metric-name <value>]
+  [--metric-namespace <value>]
   [--cli-input-json <value>]
   [--starting-token <value>]
   [--page-size <value>]
   [--max-items <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -52,14 +53,28 @@ Options
 ``--log-group-name`` (string)
 
 
-  The log group name for which metric filters are to be listed.
+  The name of the log group.
 
   
 
 ``--filter-name-prefix`` (string)
 
 
-  Will only return metric filters that match the provided filterNamePrefix. If you don't specify a value, no prefix filter is applied.
+  The prefix to match.
+
+  
+
+``--metric-name`` (string)
+
+
+  The name of the CloudWatch metric.
+
+  
+
+``--metric-namespace`` (string)
+
+
+  The namespace of the CloudWatch metric.
 
   
 
@@ -73,26 +88,34 @@ Performs service operation based on the JSON string provided. The JSON string fo
 
    
 
-``--page-size`` (integer)
- 
-
-  The size of each page.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
    
 
-  
+``--page-size`` (integer)
+ 
 
-  
+  The size of each page to get in the AWS service call. This does not affect the number of items returned in the command's output. Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call. This can help prevent the AWS service calls from timing out.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
 
 ``--max-items`` (integer)
  
 
-  The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``next-token`` will be provided in the output that you can use to resume pagination. This ``next-token`` response element should **not** be used directly outside of the AWS CLI.
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``next-token`` is provided in the command's output. To resume pagination, provide the ``next-token`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``next-token`` response element directly outside of the AWS CLI.
 
    
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -104,11 +127,15 @@ metricFilters -> (list)
 
   
 
+  The metric filters.
+
+  
+
   (structure)
 
     
 
-    Metric filters can be used to express how CloudWatch Logs would extract metric observations from ingested log events and transform them to metric data in a CloudWatch metric.
+    Metric filters express how CloudWatch Logs would extract metric observations from ingested log events and transform them into metric data in a CloudWatch metric.
 
     
 
@@ -116,7 +143,7 @@ metricFilters -> (list)
 
       
 
-      A name for a metric or subscription filter.
+      The name of the metric filter.
 
       
 
@@ -136,7 +163,15 @@ metricFilters -> (list)
 
       
 
+      The metric transformations.
+
+      
+
       (structure)
+
+        
+
+        Indicates how to transform ingested log events into metric data in a CloudWatch metric.
 
         
 
@@ -144,7 +179,7 @@ metricFilters -> (list)
 
           
 
-          The name of the CloudWatch metric to which the monitored log information should be published. For example, you may publish to a metric called ErrorCount.
+          The name of the CloudWatch metric.
 
           
 
@@ -154,7 +189,7 @@ metricFilters -> (list)
 
           
 
-          The destination namespace of the new CloudWatch metric.
+          The namespace of the CloudWatch metric.
 
           
 
@@ -164,7 +199,17 @@ metricFilters -> (list)
 
           
 
-          What to publish to the metric. For example, if you're counting the occurrences of a particular term like "Error", the value will be "1" for each occurrence. If you're counting the bytes transferred the published value will be the value in the log event.
+          The value to publish to the CloudWatch metric when a filter pattern matches a log event.
+
+          
+
+          
+
+        defaultValue -> (double)
+
+          
+
+          (Optional) The value to emit when a filter pattern does not match a log event. This value can be null.
 
           
 
@@ -178,7 +223,17 @@ metricFilters -> (list)
 
       
 
-      A point in time expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
+      The creation time of the metric filter, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
+
+      
+
+      
+
+    logGroupName -> (string)
+
+      
+
+      The name of the log group.
 
       
 
@@ -192,7 +247,7 @@ nextToken -> (string)
 
   
 
-  A string token used for pagination that points to the next page of results. It must be a value obtained from the response of the previous request. The token expires after 24 hours.
+  The token for the next set of items to return. The token expires after 24 hours.
 
   
 

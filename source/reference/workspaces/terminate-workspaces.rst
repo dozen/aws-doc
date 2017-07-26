@@ -31,10 +31,13 @@ You can terminate a WorkSpace that is in any state except ``SUSPENDED`` .
 
    
 
-  This operation is asynchronous and will return before the WorkSpaces have been completely terminated.
+  This operation is asynchronous and returns before the WorkSpaces have been completely terminated.
 
    
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/TerminateWorkspaces>`_
 
 
 ========
@@ -46,7 +49,7 @@ Synopsis
     terminate-workspaces
   --terminate-workspace-requests <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -85,8 +88,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -116,7 +119,7 @@ FailedRequests -> (list)
 
   
 
-  An array of structures that represent any WorkSpaces that could not be terminated.
+  An array of structures representing any WorkSpaces that could not be terminated.
 
   
 
@@ -124,7 +127,7 @@ FailedRequests -> (list)
 
     
 
-    Contains information about a WorkSpace that could not be rebooted ( reboot-workspaces ), rebuilt ( rebuild-workspaces ), or terminated ( terminate-workspaces ).
+    Contains information about a WorkSpace that could not be rebooted ( reboot-workspaces ), rebuilt ( rebuild-workspaces ), terminated ( terminate-workspaces ), started ( start-workspaces ), or stopped ( stop-workspaces ).
 
     
 

@@ -20,16 +20,32 @@ Inserts or deletes  IPSetDescriptor objects in an ``IPSet`` . For each ``IPSetDe
  
 
  
-* Whether to insert or delete the object from the array. If you want to change an ``IPSetDescriptor`` object, you delete the existing object and add a new one.
+* Whether to insert or delete the object from the array. If you want to change an ``IPSetDescriptor`` object, you delete the existing object and add a new one. 
  
-* The IP address version, ``IPv4`` . 
+* The IP address version, ``IPv4`` or ``IPv6`` .  
  
-* The IP address in CIDR notation, for example, ``192.0.2.0/24`` (for the range of IP addresses from ``192.0.2.0`` to ``192.0.2.255`` ) or ``192.0.2.44/32`` (for the individual IP address ``192.0.2.44`` ). 
+* The IP address in CIDR notation, for example, ``192.0.2.0/24`` (for the range of IP addresses from ``192.0.2.0`` to ``192.0.2.255`` ) or ``192.0.2.44/32`` (for the individual IP address ``192.0.2.44`` ).  
  
+
+ 
+
+AWS WAF supports /8, /16, /24, and /32 IP address ranges for IPv4, and /24, /32, /48, /56, /64 and /128 for IPv6. For more information about CIDR notation, see the Wikipedia entry `Classless Inter-Domain Routing <https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing>`_ .
 
  
 
-AWS WAF supports /8, /16, /24, and /32 IP address ranges. For more information about CIDR notation, see the Wikipedia entry `Classless Inter-Domain Routing`_ .
+IPv6 addresses can be represented using any of the following formats:
+
+ 
+
+ 
+* 1111:0000:0000:0000:0000:0000:0000:0111/128 
+ 
+* 1111:0:0:0:0:0:0:0111/128 
+ 
+* 1111::0111/128 
+ 
+* 1111::111/128 
+ 
 
  
 
@@ -42,11 +58,11 @@ To create and configure an ``IPSet`` , perform the following steps:
  
 
  
-* Submit a  create-ip-set request.
+* Submit a  create-ip-set request. 
  
-* Use  get-change-token to get the change token that you provide in the ``change-token`` parameter of an  update-ip-set request.
+* Use  get-change-token to get the change token that you provide in the ``change-token`` parameter of an  update-ip-set request. 
  
-* Submit an ``update-ip-set`` request to specify the IP addresses that you want AWS WAF to watch for.
+* Submit an ``update-ip-set`` request to specify the IP addresses that you want AWS WAF to watch for. 
  
 
  
@@ -55,8 +71,11 @@ When you update an ``IPSet`` , you specify the IP addresses that you want to add
 
  
 
-For more information about how to use the AWS WAF API to allow or block HTTP requests, see the `AWS WAF Developer Guide`_ .
+For more information about how to use the AWS WAF API to allow or block HTTP requests, see the `AWS WAF Developer Guide <http://docs.aws.amazon.com/waf/latest/developerguide/>`_ .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateIPSet>`_
 
 
 ========
@@ -70,7 +89,7 @@ Synopsis
   --change-token <value>
   --updates <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -101,9 +120,9 @@ Options
    
 
    
-  *  IPSetUpdate : Contains ``Action`` and ``IPSetDescriptor`` 
+  *  IPSetUpdate : Contains ``Action`` and ``IPSetDescriptor``   
    
-  *  IPSetDescriptor : Contains ``Type`` and ``Value`` 
+  *  IPSetDescriptor : Contains ``Type`` and ``Value``   
    
 
   
@@ -123,7 +142,7 @@ JSON Syntax::
     {
       "Action": "INSERT"|"DELETE",
       "IPSetDescriptor": {
-        "Type": "IPV4",
+        "Type": "IPV4"|"IPV6",
         "Value": "string"
       }
     }
@@ -135,8 +154,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -154,7 +173,3 @@ ChangeToken -> (string)
 
   
 
-
-
-.. _AWS WAF Developer Guide: http://docs.aws.amazon.com/waf/latest/developerguide/
-.. _Classless Inter-Domain Routing: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing

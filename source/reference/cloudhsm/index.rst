@@ -24,6 +24,7 @@ Available Commands
   :maxdepth: 1
   :titlesonly:
 
+  add-tags-to-resource
   create-hapg
   create-hsm
   create-luna-client
@@ -38,6 +39,8 @@ Available Commands
   list-hapgs
   list-hsms
   list-luna-clients
+  list-tags-for-resource
   modify-hapg
   modify-hsm
   modify-luna-client
+  remove-tags-from-resource

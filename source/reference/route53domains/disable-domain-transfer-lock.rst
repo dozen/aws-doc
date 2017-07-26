@@ -19,6 +19,9 @@ This operation removes the transfer lock on the domain (specifically the ``clien
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DisableDomainTransferLock>`_
+
+
 ========
 Synopsis
 ========
@@ -28,7 +31,7 @@ Synopsis
     disable-domain-transfer-lock
   --domain-name <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -40,31 +43,15 @@ Options
 ``--domain-name`` (string)
 
 
-  The name of a domain.
-
-   
-
-  Type: String
-
-   
-
-  Default: None
-
-   
-
-  Constraints: The domain name can contain only the letters a through z, the numbers 0 through 9, and hyphen (-). Internationalized Domain Names are not supported.
-
-   
-
-  Required: Yes
+  The name of the domain that you want to remove the transfer lock for.
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -76,19 +63,7 @@ OperationId -> (string)
 
   
 
-  Identifier for tracking the progress of the request. To use this ID to query the operation status, use GetOperationDetail.
-
-   
-
-  Type: String
-
-   
-
-  Default: None
-
-   
-
-  Constraints: Maximum 255 characters.
+  Identifier for tracking the progress of the request. To use this ID to query the operation status, use  get-operation-detail .
 
   
 

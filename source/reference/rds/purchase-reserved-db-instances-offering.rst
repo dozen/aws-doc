@@ -15,8 +15,11 @@ Description
 
 
 
-Purchases a reserved DB instance offering. 
+Purchases a reserved DB instance offering.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PurchaseReservedDBInstancesOffering>`_
 
 
 ========
@@ -31,7 +34,7 @@ Synopsis
   [--db-instance-count <value>]
   [--tags <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -43,7 +46,7 @@ Options
 ``--reserved-db-instances-offering-id`` (string)
 
 
-  The ID of the Reserved DB instance offering to purchase. 
+  The ID of the Reserved DB instance offering to purchase.
 
    
 
@@ -54,7 +57,7 @@ Options
 ``--reserved-db-instance-id`` (string)
 
 
-  Customer-specified identifier to track this reservation. 
+  Customer-specified identifier to track this reservation.
 
    
 
@@ -65,11 +68,11 @@ Options
 ``--db-instance-count`` (integer)
 
 
-  The number of instances to reserve. 
+  The number of instances to reserve.
 
    
 
-  Default: ``1`` 
+  Default: ``1``  
 
   
 
@@ -104,8 +107,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -125,7 +128,7 @@ ReservedDBInstance -> (structure)
 
     
 
-    The unique identifier for the reservation. 
+    The unique identifier for the reservation.
 
     
 
@@ -135,7 +138,7 @@ ReservedDBInstance -> (structure)
 
     
 
-    The offering identifier. 
+    The offering identifier.
 
     
 
@@ -145,7 +148,7 @@ ReservedDBInstance -> (structure)
 
     
 
-    The DB instance class for the reserved DB instance. 
+    The DB instance class for the reserved DB instance.
 
     
 
@@ -155,7 +158,7 @@ ReservedDBInstance -> (structure)
 
     
 
-    The time the reservation started. 
+    The time the reservation started.
 
     
 
@@ -165,7 +168,7 @@ ReservedDBInstance -> (structure)
 
     
 
-    The duration of the reservation in seconds. 
+    The duration of the reservation in seconds.
 
     
 
@@ -175,7 +178,7 @@ ReservedDBInstance -> (structure)
 
     
 
-    The fixed price charged for this reserved DB instance. 
+    The fixed price charged for this reserved DB instance.
 
     
 
@@ -185,7 +188,7 @@ ReservedDBInstance -> (structure)
 
     
 
-    The hourly price charged for this reserved DB instance. 
+    The hourly price charged for this reserved DB instance.
 
     
 
@@ -195,7 +198,7 @@ ReservedDBInstance -> (structure)
 
     
 
-    The currency code for the reserved DB instance. 
+    The currency code for the reserved DB instance.
 
     
 
@@ -205,7 +208,7 @@ ReservedDBInstance -> (structure)
 
     
 
-    The number of reserved DB instances. 
+    The number of reserved DB instances.
 
     
 
@@ -215,7 +218,7 @@ ReservedDBInstance -> (structure)
 
     
 
-    The description of the reserved DB instance. 
+    The description of the reserved DB instance.
 
     
 
@@ -225,7 +228,7 @@ ReservedDBInstance -> (structure)
 
     
 
-    The offering type of this reserved DB instance. 
+    The offering type of this reserved DB instance.
 
     
 
@@ -235,7 +238,7 @@ ReservedDBInstance -> (structure)
 
     
 
-    Indicates if the reservation applies to Multi-AZ deployments. 
+    Indicates if the reservation applies to Multi-AZ deployments.
 
     
 
@@ -245,7 +248,7 @@ ReservedDBInstance -> (structure)
 
     
 
-    The state of the reserved DB instance. 
+    The state of the reserved DB instance.
 
     
 
@@ -255,7 +258,7 @@ ReservedDBInstance -> (structure)
 
     
 
-    The recurring price charged to run this reserved DB instance. 
+    The recurring price charged to run this reserved DB instance.
 
     
 
@@ -271,7 +274,7 @@ ReservedDBInstance -> (structure)
 
         
 
-        The amount of the recurring charge. 
+        The amount of the recurring charge.
 
         
 
@@ -281,13 +284,23 @@ ReservedDBInstance -> (structure)
 
         
 
-        The frequency of the recurring charge. 
+        The frequency of the recurring charge.
 
         
 
         
 
       
+
+    
+
+  ReservedDBInstanceArn -> (string)
+
+    
+
+    The Amazon Resource Name (ARN) for the reserved DB instance.
+
+    
 
     
 

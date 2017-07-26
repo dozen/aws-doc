@@ -23,7 +23,7 @@ The endpoints for submitting ``upload-documents`` , ``search`` , and ``suggest``
 
  
 
-For more information, see the `Amazon CloudSearch Developer Guide`_ .
+For more information, see the `Amazon CloudSearch Developer Guide <http://docs.aws.amazon.com/cloudsearch/latest/developerguide>`_ .
 
 
 
@@ -39,6 +39,3 @@ Available Commands
   search
   suggest
   upload-documents
-
-
-.. _Amazon CloudSearch Developer Guide: http://docs.aws.amazon.com/cloudsearch/latest/developerguide

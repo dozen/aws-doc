@@ -15,8 +15,11 @@ Description
 
 
 
-Revokes an ingress rule in an Amazon Redshift security group for a previously authorized IP range or Amazon EC2 security group. To add an ingress rule, see  authorize-cluster-security-group-ingress . For information about managing security groups, go to `Amazon Redshift Cluster Security Groups`_ in the *Amazon Redshift Cluster Management Guide* . 
+Revokes an ingress rule in an Amazon Redshift security group for a previously authorized IP range or Amazon EC2 security group. To add an ingress rule, see  authorize-cluster-security-group-ingress . For information about managing security groups, go to `Amazon Redshift Cluster Security Groups <http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html>`_ in the *Amazon Redshift Cluster Management Guide* . 
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RevokeClusterSecurityGroupIngress>`_
 
 
 ========
@@ -31,7 +34,7 @@ Synopsis
   [--ec2-security-group-name <value>]
   [--ec2-security-group-owner-id <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -43,7 +46,7 @@ Options
 ``--cluster-security-group-name`` (string)
 
 
-  The name of the security Group from which to revoke the ingress rule. 
+  The name of the security Group from which to revoke the ingress rule.
 
   
 
@@ -68,15 +71,15 @@ Options
 
    
 
-  Example: ``111122223333`` 
+  Example: ``111122223333``  
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -122,7 +125,7 @@ ClusterSecurityGroup -> (structure)
 
     
 
-    The name of the cluster security group to which the operation was applied. 
+    The name of the cluster security group to which the operation was applied.
 
     
 
@@ -132,7 +135,7 @@ ClusterSecurityGroup -> (structure)
 
     
 
-    A description of the security group. 
+    A description of the security group.
 
     
 
@@ -142,7 +145,7 @@ ClusterSecurityGroup -> (structure)
 
     
 
-    A list of EC2 security groups that are permitted to access clusters associated with this cluster security group. 
+    A list of EC2 security groups that are permitted to access clusters associated with this cluster security group.
 
     
 
@@ -158,7 +161,7 @@ ClusterSecurityGroup -> (structure)
 
         
 
-        The status of the EC2 security group. 
+        The status of the EC2 security group.
 
         
 
@@ -168,7 +171,7 @@ ClusterSecurityGroup -> (structure)
 
         
 
-        The name of the EC2 Security Group. 
+        The name of the EC2 Security Group.
 
         
 
@@ -232,7 +235,7 @@ ClusterSecurityGroup -> (structure)
 
     
 
-    A list of IP ranges (CIDR blocks) that are permitted to access clusters associated with this cluster security group. 
+    A list of IP ranges (CIDR blocks) that are permitted to access clusters associated with this cluster security group.
 
     
 
@@ -240,7 +243,7 @@ ClusterSecurityGroup -> (structure)
 
       
 
-      Describes an IP range used in a security group. 
+      Describes an IP range used in a security group.
 
       
 
@@ -248,7 +251,7 @@ ClusterSecurityGroup -> (structure)
 
         
 
-        The status of the IP range, for example, "authorized". 
+        The status of the IP range, for example, "authorized".
 
         
 
@@ -258,7 +261,7 @@ ClusterSecurityGroup -> (structure)
 
         
 
-        The IP range in Classless Inter-Domain Routing (CIDR) notation. 
+        The IP range in Classless Inter-Domain Routing (CIDR) notation.
 
         
 
@@ -350,6 +353,3 @@ ClusterSecurityGroup -> (structure)
 
   
 
-
-
-.. _Amazon Redshift Cluster Security Groups: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html

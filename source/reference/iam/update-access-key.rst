@@ -15,16 +15,19 @@ Description
 
 
 
-Changes the status of the specified access key from Active to Inactive, or vice versa. This action can be used to disable a user's key as part of a key rotation work flow. 
+Changes the status of the specified access key from Active to Inactive, or vice versa. This action can be used to disable a user's key as part of a key rotation work flow.
 
  
 
-If the ``UserName`` field is not specified, the UserName is determined implicitly based on the AWS access key ID used to sign the request. Because this action works for access keys under the AWS account, you can use this action to manage root credentials even if the AWS account has no associated users. 
+If the ``UserName`` field is not specified, the UserName is determined implicitly based on the AWS access key ID used to sign the request. Because this action works for access keys under the AWS account, you can use this action to manage root credentials even if the AWS account has no associated users.
 
  
 
-For information about rotating keys, see `Managing Keys and Certificates`_ in the *IAM User Guide* . 
+For information about rotating keys, see `Managing Keys and Certificates <http://docs.aws.amazon.com/IAM/latest/UserGuide/ManagingCredentials.html>`_ in the *IAM User Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateAccessKey>`_
 
 
 ========
@@ -38,7 +41,7 @@ Synopsis
   --access-key-id <value>
   --status <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -52,6 +55,10 @@ Options
 
   The name of the user whose key you want to update.
 
+   
+
+  This parameter allows (per its `regex pattern <http://wikipedia.org/wiki/regex>`_ ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-
+
   
 
 ``--access-key-id`` (string)
@@ -59,12 +66,16 @@ Options
 
   The access key ID of the secret access key you want to update.
 
+   
+
+  This parameter allows (per its `regex pattern <http://wikipedia.org/wiki/regex>`_ ) a string of characters that can consist of any upper or lowercased letter or digit.
+
   
 
 ``--status`` (string)
 
 
-  The status you want to assign to the secret access key. ``Active`` means the key can be used for API calls to AWS, while ``Inactive`` means the key cannot be used. 
+  The status you want to assign to the secret access key. ``Active`` means the key can be used for API calls to AWS, while ``Inactive`` means the key cannot be used.
 
   
 
@@ -83,8 +94,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -113,5 +124,3 @@ Output
 ======
 
 None
-
-.. _Managing Keys and Certificates: http://docs.aws.amazon.com/IAM/latest/UserGuide/ManagingCredentials.html

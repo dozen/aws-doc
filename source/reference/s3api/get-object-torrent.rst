@@ -15,6 +15,9 @@ Description
 
 Return torrent files from a bucket.
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectTorrent>`_
+
+
 ========
 Synopsis
 ========

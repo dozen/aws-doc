@@ -19,6 +19,9 @@ Sets one or more parameters of the specified parameter group to their default va
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResetClusterParameterGroup>`_
+
+
 ========
 Synopsis
 ========
@@ -30,7 +33,7 @@ Synopsis
   [--reset-all-parameters | --no-reset-all-parameters]
   [--parameters <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -42,7 +45,7 @@ Options
 ``--parameter-group-name`` (string)
 
 
-  The name of the cluster parameter group to be reset. 
+  The name of the cluster parameter group to be reset.
 
   
 
@@ -53,7 +56,7 @@ Options
 
    
 
-  Default: ``true`` 
+  Default: ``true``  
 
   
 
@@ -99,8 +102,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -127,7 +130,7 @@ ParameterGroupName -> (string)
 
   
 
-  The name of the cluster parameter group. 
+  The name of the cluster parameter group.
 
   
 
@@ -137,7 +140,7 @@ ParameterGroupStatus -> (string)
 
   
 
-  The status of the parameter group. For example, if you made a change to a parameter group name-value pair, then the change could be pending a reboot of an associated cluster. 
+  The status of the parameter group. For example, if you made a change to a parameter group name-value pair, then the change could be pending a reboot of an associated cluster.
 
   
 

@@ -23,6 +23,9 @@ Initiates a multipart upload and returns an upload ID.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateMultipartUpload>`_
+
+
 ========
 Synopsis
 ========
@@ -52,8 +55,9 @@ Synopsis
   [--sse-customer-key-md5 <value>]
   [--ssekms-key-id <value>]
   [--request-payer <value>]
+  [--tagging <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -207,11 +211,14 @@ Confirms that the requester knows that she or he will be charged for the request
 
   
 
+``--tagging`` (string)
+The tag-set for the object. The tag-set must be encoded as URL Query parameters
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -236,6 +243,18 @@ The completed file will be named ``01`` in a folder called ``multipart`` in the 
 ======
 Output
 ======
+
+AbortDate -> (timestamp)
+
+  Date when multipart upload will become eligible for abort operation by lifecycle.
+
+  
+
+AbortRuleId -> (string)
+
+  Id of the lifecycle rule that makes a multipart upload eligible for abort operation.
+
+  
 
 Bucket -> (string)
 

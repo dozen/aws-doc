@@ -27,6 +27,7 @@ Synopsis
   --name <value>
   --build-version <value>
   --build-root <value>
+  [--operating-system <value>]
 
 
 
@@ -42,5 +43,8 @@ The name of the build
 The version of the build
 
 ``--build-root`` (string)
-The root directory of build to upload
+The path to the directory containing the build to upload
+
+``--operating-system`` (string)
+The operating system the build runs on
 

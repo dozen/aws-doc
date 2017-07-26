@@ -15,14 +15,51 @@ Description
 
 
 
-To retrieve a list of your hosted zones in lexicographic order, send a ``GET`` request to the ``/*Route 53 API version* /hostedzonesbyname`` resource. The response to this request includes a ``HostedZones`` element with zero or more ``HostedZone`` child elements lexicographically ordered by DNS name. By default, the list of hosted zones is displayed on a single page. You can control the length of the page that is displayed by using the ``MaxItems`` parameter. You can use the ``dns-name`` and ``HostedZoneId`` parameters to control the hosted zone that the list begins with.
+Retrieves a list of your hosted zones in lexicographic order. The response includes a ``HostedZones`` child element for each hosted zone created by the current AWS account. 
 
  
 
-.. note::
+ ``list-hosted-zones-by-name`` sorts hosted zones by name with the labels reversed. For example:
 
-  Amazon Route 53 returns a maximum of 100 items. If you set MaxItems to a value greater than 100, Amazon Route 53 returns only the first 100.
+ 
 
+ ``com.example.www.``  
+
+ 
+
+Note the trailing dot, which can change the sort order in some circumstances.
+
+ 
+
+If the domain name includes escape characters or Punycode, ``list-hosted-zones-by-name`` alphabetizes the domain name using the escaped or Punycoded value, which is the format that Amazon Route 53 saves in its database. For example, to create a hosted zone for exämple.com, you specify ex\344mple.com for the domain name. ``list-hosted-zones-by-name`` alphabetizes it as:
+
+ 
+
+ ``com.ex\344mple.``  
+
+ 
+
+The labels are reversed and alphabetized using the escaped value. For more information about valid domain name formats, including internationalized domain names, see `DNS Domain Name Format <http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DomainNameFormat.html>`_ in the *Amazon Route 53 Developer Guide* .
+
+ 
+
+Amazon Route 53 returns up to 100 items in each response. If you have a lot of hosted zones, use the ``MaxItems`` parameter to list them in groups of up to 100. The response includes values that help navigate from one group of ``MaxItems`` hosted zones to the next:
+
+ 
+
+ 
+* The ``dns-name`` and ``HostedZoneId`` elements in the response contain the values, if any, specified for the ``dnsname`` and ``hostedzoneid`` parameters in the request that produced the current response. 
+ 
+* The ``MaxItems`` element in the response contains the value, if any, that you specified for the ``maxitems`` parameter in the request that produced the current response. 
+ 
+* If the value of ``IsTruncated`` in the response is true, there are more hosted zones associated with the current AWS account.  If ``IsTruncated`` is false, this response includes the last hosted zone that is associated with the current account. The ``NextDNSName`` element and ``NextHostedZoneId`` elements are omitted from the response. 
+ 
+* The ``NextDNSName`` and ``NextHostedZoneId`` elements in the response contain the domain name and the hosted zone ID of the next hosted zone that is associated with the current AWS account. If you want to list more hosted zones, make another call to ``list-hosted-zones-by-name`` , and specify the value of ``NextDNSName`` and ``NextHostedZoneId`` in the ``dnsname`` and ``hostedzoneid`` parameters, respectively. 
+ 
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListHostedZonesByName>`_
 
 
 ========
@@ -36,7 +73,7 @@ Synopsis
   [--hosted-zone-id <value>]
   [--max-items <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -48,33 +85,33 @@ Options
 ``--dns-name`` (string)
 
 
-  The first name in the lexicographic ordering of domain names that you want the ``ListHostedZonesByNameRequest`` request to list.
-
-   
-
-  If the request returned more than one page of results, submit another request and specify the value of ``NextDNSName`` and ``NextHostedZoneId`` from the last response in the ``dns-name`` and ``HostedZoneId`` parameters to get the next page of results.
+  (Optional) For your first request to ``list-hosted-zones-by-name`` , include the ``dnsname`` parameter only if you want to specify the name of the first hosted zone in the response. If you don't include the ``dnsname`` parameter, Amazon Route 53 returns all of the hosted zones that were created by the current AWS account, in ASCII order. For subsequent requests, include both ``dnsname`` and ``hostedzoneid`` parameters. For ``dnsname`` , specify the value of ``NextDNSName`` from the previous response.
 
   
 
 ``--hosted-zone-id`` (string)
 
 
-  If the request returned more than one page of results, submit another request and specify the value of ``NextDNSName`` and ``NextHostedZoneId`` from the last response in the ``dns-name`` and ``HostedZoneId`` parameters to get the next page of results.
+  (Optional) For your first request to ``list-hosted-zones-by-name`` , do not include the ``hostedzoneid`` parameter.
+
+   
+
+  If you have more hosted zones than the value of ``maxitems`` , ``list-hosted-zones-by-name`` returns only the first ``maxitems`` hosted zones. To get the next group of ``maxitems`` hosted zones, submit another request to ``list-hosted-zones-by-name`` and include both ``dnsname`` and ``hostedzoneid`` parameters. For the value of ``hostedzoneid`` , specify the value of the ``NextHostedZoneId`` element from the previous response.
 
   
 
 ``--max-items`` (string)
 
 
-  Specify the maximum number of hosted zones to return per page of results.
+  The maximum number of hosted zones to be included in the response body for this request. If you have more than ``maxitems`` hosted zones, then the value of the ``IsTruncated`` element in the response is true, and the values of ``NextDNSName`` and ``NextHostedZoneId`` specify the first hosted zone in the next group of ``maxitems`` hosted zones. 
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -147,7 +184,7 @@ HostedZones -> (list)
 
   
 
-  A complex type that contains information about the hosted zones associated with the current AWS account.
+  A complex type that contains general information about the hosted zone.
 
   
 
@@ -155,7 +192,7 @@ HostedZones -> (list)
 
     
 
-    A complex type that contain information about the specified hosted zone.
+    A complex type that contains general information about the hosted zone.
 
     
 
@@ -163,7 +200,7 @@ HostedZones -> (list)
 
       
 
-      The ID of the specified hosted zone.
+      The ID that Amazon Route 53 assigned to the hosted zone when you created it.
 
       
 
@@ -173,11 +210,11 @@ HostedZones -> (list)
 
       
 
-      The name of the domain. This must be a fully-specified domain, for example, www.example.com. The trailing dot is optional; Amazon Route 53 assumes that the domain name is fully qualified. This means that Amazon Route 53 treats www.example.com (without a trailing dot) and www.example.com. (with a trailing dot) as identical.
+      The name of the domain. For public hosted zones, this is the name that you have registered with your DNS registrar.
 
        
 
-      This is the name you have registered with your DNS registrar. You should ask your registrar to change the authoritative name servers for your domain to the set of ``NameServers`` elements returned in ``DelegationSet`` .
+      For information about how to specify characters other than ``a-z`` , ``0-9`` , and ``-`` (hyphen) and how to specify internationalized domain names, see  create-hosted-zone .
 
       
 
@@ -187,7 +224,7 @@ HostedZones -> (list)
 
       
 
-      A unique string that identifies the request to create the hosted zone.
+      The value that you specified for ``CallerReference`` when you created the hosted zone.
 
       
 
@@ -197,7 +234,7 @@ HostedZones -> (list)
 
       
 
-      A complex type that contains the ``Comment`` element.
+      A complex type that includes the ``Comment`` and ``PrivateZone`` elements. If you omitted the ``HostedZoneConfig`` and ``Comment`` elements from the request, the ``Config`` and ``Comment`` elements don't appear in the response.
 
       
 
@@ -205,13 +242,17 @@ HostedZones -> (list)
 
         
 
-        An optional comment about your hosted zone. If you don't want to specify a comment, you can omit the ``HostedZoneConfig`` and ``Comment`` elements from the XML document.
+        Any comments that you want to include about the hosted zone.
 
         
 
         
 
       PrivateZone -> (boolean)
+
+        
+
+        A value that indicates whether this is a private hosted zone.
 
         
 
@@ -223,7 +264,7 @@ HostedZones -> (list)
 
       
 
-      Total number of resource record sets in the hosted zone.
+      The number of resource record sets in the hosted zone.
 
       
 
@@ -237,7 +278,7 @@ DNSName -> (string)
 
   
 
-  The ``dns-name`` value sent in the request.
+  For the second and subsequent calls to ``list-hosted-zones-by-name`` , ``dns-name`` is the value that you specified for the ``dnsname`` parameter in the request that produced the current response.
 
   
 
@@ -247,7 +288,7 @@ HostedZoneId -> (string)
 
   
 
-  The ``HostedZoneId`` value sent in the request.
+  The ID that Amazon Route 53 assigned to the hosted zone when you created it.
 
   
 
@@ -257,11 +298,7 @@ IsTruncated -> (boolean)
 
   
 
-  A flag indicating whether there are more hosted zones to be listed. If your results were truncated, you can make a follow-up request for the next page of results by using the ``NextDNSName`` and ``NextHostedZoneId`` elements.
-
-   
-
-  Valid Values: ``true`` | ``false`` 
+  A flag that indicates whether there are more hosted zones to be listed. If the response was truncated, you can get the next group of ``maxitems`` hosted zones by calling ``list-hosted-zones-by-name`` again and specifying the values of ``NextDNSName`` and ``NextHostedZoneId`` elements in the ``dnsname`` and ``hostedzoneid`` parameters.
 
   
 
@@ -271,7 +308,11 @@ NextDNSName -> (string)
 
   
 
-  If  ListHostedZonesByNameResponse$IsTruncated is ``true`` , there are more hosted zones associated with the current AWS account. To get the next page of results, make another request to ``list-hosted-zones-by-name`` . Specify the value of  ListHostedZonesByNameResponse$NextDNSName in the  ListHostedZonesByNameRequest$DNSName element and  ListHostedZonesByNameResponse$NextHostedZoneId in the  ListHostedZonesByNameRequest$HostedZoneId element.
+  If ``IsTruncated`` is true, the value of ``NextDNSName`` is the name of the first hosted zone in the next group of ``maxitems`` hosted zones. Call ``list-hosted-zones-by-name`` again and specify the value of ``NextDNSName`` and ``NextHostedZoneId`` in the ``dnsname`` and ``hostedzoneid`` parameters, respectively.
+
+   
+
+  This element is present only if ``IsTruncated`` is ``true`` .
 
   
 
@@ -281,7 +322,11 @@ NextHostedZoneId -> (string)
 
   
 
-  If  ListHostedZonesByNameResponse$IsTruncated is ``true`` , there are more hosted zones associated with the current AWS account. To get the next page of results, make another request to ``list-hosted-zones-by-name`` . Specify the value of  ListHostedZonesByNameResponse$NextDNSName in the  ListHostedZonesByNameRequest$DNSName element and  ListHostedZonesByNameResponse$NextHostedZoneId in the  ListHostedZonesByNameRequest$HostedZoneId element.
+  If ``IsTruncated`` is ``true`` , the value of ``NextHostedZoneId`` identifies the first hosted zone in the next group of ``maxitems`` hosted zones. Call ``list-hosted-zones-by-name`` again and specify the value of ``NextDNSName`` and ``NextHostedZoneId`` in the ``dnsname`` and ``hostedzoneid`` parameters, respectively.
+
+   
+
+  This element is present only if ``IsTruncated`` is ``true`` .
 
   
 
@@ -291,7 +336,7 @@ MaxItems -> (string)
 
   
 
-  The maximum number of hosted zones to be included in the response body. If the number of hosted zones associated with this AWS account exceeds ``MaxItems`` , the value of  ListHostedZonesByNameResponse$IsTruncated in the response is ``true`` . Call ``list-hosted-zones-by-name`` again and specify the value of  ListHostedZonesByNameResponse$NextDNSName and  ListHostedZonesByNameResponse$NextHostedZoneId elements respectively to get the next page of results.
+  The value that you specified for the ``maxitems`` parameter in the call to ``list-hosted-zones-by-name`` that produced the current response.
 
   
 

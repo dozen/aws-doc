@@ -15,8 +15,11 @@ Description
 
 
 
-The *describe-cache-parameters* action returns the detailed parameter list for a particular cache parameter group.
+Returns the detailed parameter list for a particular cache parameter group.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheParameters>`_
 
 
 ``describe-cache-parameters`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
@@ -36,7 +39,7 @@ Synopsis
   [--starting-token <value>]
   [--page-size <value>]
   [--max-items <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -59,7 +62,7 @@ Options
 
    
 
-  Valid values: ``user`` | ``system`` | ``engine-default`` 
+  Valid values: ``user`` | ``system`` | ``engine-default``  
 
   
 
@@ -73,26 +76,34 @@ Performs service operation based on the JSON string provided. The JSON string fo
 
    
 
-``--page-size`` (integer)
- 
-
-  The size of each page.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
    
 
-  
+``--page-size`` (integer)
+ 
 
-  
+  The size of each page to get in the AWS service call. This does not affect the number of items returned in the command's output. Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call. This can help prevent the AWS service calls from timing out.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
 
 ``--max-items`` (integer)
  
 
-  The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination. This ``NextToken`` response element should **not** be used directly outside of the AWS CLI.
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``NextToken`` is provided in the command's output. To resume pagination, provide the ``NextToken`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``NextToken`` response element directly outside of the AWS CLI.
 
    
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -206,6 +217,16 @@ Parameters -> (list)
 
       
 
+    ChangeType -> (string)
+
+      
+
+      Indicates whether a change to the parameter is applied immediately or requires a reboot for the change to be applied. You can force a reboot or wait until the next maintenance window's reboot. For more information, see `Rebooting a Cluster <http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Clusters.Rebooting.html>`_ .
+
+      
+
+      
+
     
 
   
@@ -222,7 +243,7 @@ CacheNodeTypeSpecificParameters -> (list)
 
     
 
-    A parameter that has a different value for each cache node type it is applied to. For example, in a Redis cache cluster, a *cache.m1.large* cache node type would have a larger *maxmemory* value than a *cache.m1.small* type.
+    A parameter that has a different value for each cache node type it is applied to. For example, in a Redis cache cluster, a ``cache.m1.large`` cache node type would have a larger ``maxmemory`` value than a ``cache.m1.small`` type.
 
     
 
@@ -333,6 +354,16 @@ CacheNodeTypeSpecificParameters -> (list)
           
 
         
+
+      
+
+    ChangeType -> (string)
+
+      
+
+      Indicates whether a change to the parameter is applied immediately or requires a reboot for the change to be applied. You can force a reboot or wait until the next maintenance window's reboot. For more information, see `Rebooting a Cluster <http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Clusters.Rebooting.html>`_ .
+
+      
 
       
 

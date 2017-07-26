@@ -15,12 +15,15 @@ Description
 
 
 
-Creates one or more flow logs to capture IP traffic for a specific network interface, subnet, or VPC. Flow logs are delivered to a specified log group in Amazon CloudWatch Logs. If you specify a VPC or subnet in the request, a log stream is created in CloudWatch Logs for each network interface in the subnet or VPC. Log streams can include information about accepted and rejected traffic to a network interface. You can view the data in your log streams using Amazon CloudWatch Logs. 
+Creates one or more flow logs to capture IP traffic for a specific network interface, subnet, or VPC. Flow logs are delivered to a specified log group in Amazon CloudWatch Logs. If you specify a VPC or subnet in the request, a log stream is created in CloudWatch Logs for each network interface in the subnet or VPC. Log streams can include information about accepted and rejected traffic to a network interface. You can view the data in your log streams using Amazon CloudWatch Logs.
 
  
 
 In your request, you must also specify an IAM role that has permission to publish logs to CloudWatch Logs.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateFlowLogs>`_
 
 
 ========
@@ -30,14 +33,14 @@ Synopsis
 ::
 
     create-flow-logs
+  [--client-token <value>]
+  --deliver-logs-permission-arn <value>
+  --log-group-name <value>
   --resource-ids <value>
   --resource-type <value>
   --traffic-type <value>
-  --log-group-name <value>
-  --deliver-logs-permission-arn <value>
-  [--client-token <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -46,10 +49,35 @@ Synopsis
 Options
 =======
 
+``--client-token`` (string)
+
+
+  Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see `How to Ensure Idempotency <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html>`_ .
+
+  
+
+``--deliver-logs-permission-arn`` (string)
+
+
+  The ARN for the IAM role that's used to post flow logs to a CloudWatch Logs log group.
+
+  
+
+``--log-group-name`` (string)
+
+
+  The name of the CloudWatch log group.
+
+  
+
 ``--resource-ids`` (list)
 
 
   One or more subnet, network interface, or VPC IDs.
+
+   
+
+  Constraints: Maximum of 1000 resources
 
   
 
@@ -105,32 +133,11 @@ Syntax::
 
   
 
-``--log-group-name`` (string)
-
-
-  The name of the CloudWatch log group.
-
-  
-
-``--deliver-logs-permission-arn`` (string)
-
-
-  The ARN for the IAM role that's used to post flow logs to a CloudWatch Logs log group.
-
-  
-
-``--client-token`` (string)
-
-
-  Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see `How to Ensure Idempotency`_ .
-
-  
-
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -160,6 +167,16 @@ Output::
 Output
 ======
 
+ClientToken -> (string)
+
+  
+
+  Unique, case-sensitive identifier you provide to ensure the idempotency of the request.
+
+  
+
+  
+
 FlowLogIds -> (list)
 
   
@@ -173,16 +190,6 @@ FlowLogIds -> (list)
     
 
     
-
-  
-
-ClientToken -> (string)
-
-  
-
-  Unique, case-sensitive identifier you provide to ensure the idempotency of the request.
-
-  
 
   
 
@@ -246,6 +253,3 @@ Unsuccessful -> (list)
 
   
 
-
-
-.. _How to Ensure Idempotency: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html

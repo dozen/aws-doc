@@ -15,12 +15,15 @@ Description
 
 
 
-Assigns one or more secondary private IP addresses to the specified network interface. You can specify one or more specific secondary IP addresses, or you can specify the number of secondary IP addresses to be automatically assigned within the subnet's CIDR block range. The number of secondary IP addresses that you can assign to an instance varies by instance type. For information about instance types, see `Instance Types`_ in the *Amazon Elastic Compute Cloud User Guide* . For more information about Elastic IP addresses, see `Elastic IP Addresses`_ in the *Amazon Elastic Compute Cloud User Guide* .
+Assigns one or more secondary private IP addresses to the specified network interface. You can specify one or more specific secondary IP addresses, or you can specify the number of secondary IP addresses to be automatically assigned within the subnet's CIDR block range. The number of secondary IP addresses that you can assign to an instance varies by instance type. For information about instance types, see `Instance Types <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html>`_ in the *Amazon Elastic Compute Cloud User Guide* . For more information about Elastic IP addresses, see `Elastic IP Addresses <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html>`_ in the *Amazon Elastic Compute Cloud User Guide* .
 
  
 
 assign-private-ip-addresses is available only in EC2-VPC.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssignPrivateIpAddresses>`_
 
 
 ========
@@ -30,12 +33,12 @@ Synopsis
 ::
 
     assign-private-ip-addresses
+  [--allow-reassignment | --no-allow-reassignment]
   --network-interface-id <value>
   [--private-ip-addresses <value>]
   [--secondary-private-ip-address-count <value>]
-  [--allow-reassignment | --no-allow-reassignment]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -43,6 +46,13 @@ Synopsis
 =======
 Options
 =======
+
+``--allow-reassignment`` | ``--no-allow-reassignment`` (boolean)
+
+
+  Indicates whether to allow an IP address that is already assigned to another network interface or instance to be reassigned to the specified network interface.
+
+  
 
 ``--network-interface-id`` (string)
 
@@ -77,18 +87,11 @@ Syntax::
 
   
 
-``--allow-reassignment`` | ``--no-allow-reassignment`` (boolean)
-
-
-  Indicates whether to allow an IP address that is already assigned to another network interface or instance to be reassigned to the specified network interface.
-
-  
-
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -118,6 +121,3 @@ Output
 ======
 
 None
-
-.. _Elastic IP Addresses: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
-.. _Instance Types: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html

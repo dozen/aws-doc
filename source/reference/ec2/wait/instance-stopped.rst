@@ -15,6 +15,9 @@ Description
 
 Wait until JMESPath query Reservations[].Instances[].State.Name returns stopped for all elements when polling with ``describe-instances``. It will poll every 15 seconds until a successful state has been reached. This will exit with a return code of 255 after 40 failed checks.
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstances>`_
+
+
 ``instance-stopped`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
 When using ``--output text`` and the ``--query`` argument on a paginated response, the ``--query`` argument must extract data from the results of the following query expressions: ``Reservations``
 
@@ -26,14 +29,14 @@ Synopsis
 ::
 
     instance-stopped
-  [--dry-run | --no-dry-run]
-  [--instance-ids <value>]
   [--filters <value>]
+  [--instance-ids <value>]
+  [--dry-run | --no-dry-run]
   [--cli-input-json <value>]
   [--starting-token <value>]
   [--page-size <value>]
   [--max-items <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -41,32 +44,6 @@ Synopsis
 =======
 Options
 =======
-
-``--dry-run`` | ``--no-dry-run`` (boolean)
-
-
-  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
-
-  
-
-``--instance-ids`` (list)
-
-
-  One or more instance IDs.
-
-   
-
-  Default: Describes all your instances.
-
-  
-
-
-
-Syntax::
-
-  "string" "string" ...
-
-
 
 ``--filters`` (list)
 
@@ -76,7 +53,7 @@ Syntax::
    
 
    
-  * ``affinity`` - The affinity setting for an instance running on a Dedicated host (``default`` | ``host`` ). 
+  * ``affinity`` - The affinity setting for an instance running on a Dedicated Host (``default`` | ``host`` ). 
    
   * ``architecture`` - The instance architecture (``i386`` | ``x86_64`` ). 
    
@@ -84,7 +61,7 @@ Syntax::
    
   * ``block-device-mapping.attach-time`` - The attach time for an EBS volume mapped to the instance, for example, ``2010-09-15T17:15:20.000Z`` . 
    
-  * ``block-device-mapping.delete-on-termination`` - A no-dry-run that indicates whether the EBS volume is deleted on instance termination. 
+  * ``block-device-mapping.delete-on-termination`` - A dry-run that indicates whether the EBS volume is deleted on instance termination. 
    
   * ``block-device-mapping.device-name`` - The device name for the EBS volume (for example, ``/dev/sdh`` or ``xvdh`` ). 
    
@@ -100,7 +77,7 @@ Syntax::
    
   * ``group-name`` - The name of the security group for the instance. EC2-Classic only. 
    
-  * ``host-Id`` - The ID of the Dedicated host on which the instance is running, if applicable. 
+  * ``host-id`` - The ID of the Dedicated Host on which the instance is running, if applicable. 
    
   * ``hypervisor`` - The hypervisor type of the instance (``ovm`` | ``xen`` ). 
    
@@ -110,7 +87,7 @@ Syntax::
    
   * ``instance-id`` - The ID of the instance. 
    
-  * ``instance-lifecycle`` - Indicates whether this is a Spot Instance (``spot`` ). 
+  * ``instance-lifecycle`` - Indicates whether this is a Spot Instance or a Scheduled Instance (``spot`` | ``scheduled`` ). 
    
   * ``instance-state-code`` - The state of the instance, as a 16-bit unsigned integer. The high byte is an opaque internal value and should be ignored. The low byte is set based on the state represented. The valid values are: 0 (pending), 16 (running), 32 (shutting-down), 48 (terminated), 64 (stopping), and 80 (stopped). 
    
@@ -122,7 +99,7 @@ Syntax::
    
   * ``instance.group-name`` - The name of the security group for the instance.  
    
-  * ``ip-address`` - The public IP address of the instance. 
+  * ``ip-address`` - The public IPv4 address of the instance. 
    
   * ``kernel-id`` - The kernel ID. 
    
@@ -132,7 +109,67 @@ Syntax::
    
   * ``launch-time`` - The time when the instance was launched. 
    
-  * ``monitoring-state`` - Indicates whether monitoring is enabled for the instance (``disabled`` | ``enabled`` ). 
+  * ``monitoring-state`` - Indicates whether detailed monitoring is enabled (``disabled`` | ``enabled`` ). 
+   
+  * ``network-interface.addresses.private-ip-address`` - The private IPv4 address associated with the network interface. 
+   
+  * ``network-interface.addresses.primary`` - Specifies whether the IPv4 address of the network interface is the primary private IPv4 address. 
+   
+  * ``network-interface.addresses.association.public-ip`` - The ID of the association of an Elastic IP address (IPv4) with a network interface. 
+   
+  * ``network-interface.addresses.association.ip-owner-id`` - The owner ID of the private IPv4 address associated with the network interface. 
+   
+  * ``network-interface.association.public-ip`` - The address of the Elastic IP address (IPv4) bound to the network interface. 
+   
+  * ``network-interface.association.ip-owner-id`` - The owner of the Elastic IP address (IPv4) associated with the network interface. 
+   
+  * ``network-interface.association.allocation-id`` - The allocation ID returned when you allocated the Elastic IP address (IPv4) for your network interface. 
+   
+  * ``network-interface.association.association-id`` - The association ID returned when the network interface was associated with an IPv4 address. 
+   
+  * ``network-interface.attachment.attachment-id`` - The ID of the interface attachment. 
+   
+  * ``network-interface.attachment.instance-id`` - The ID of the instance to which the network interface is attached. 
+   
+  * ``network-interface.attachment.instance-owner-id`` - The owner ID of the instance to which the network interface is attached. 
+   
+  * ``network-interface.attachment.device-index`` - The device index to which the network interface is attached. 
+   
+  * ``network-interface.attachment.status`` - The status of the attachment (``attaching`` | ``attached`` | ``detaching`` | ``detached`` ). 
+   
+  * ``network-interface.attachment.attach-time`` - The time that the network interface was attached to an instance. 
+   
+  * ``network-interface.attachment.delete-on-termination`` - Specifies whether the attachment is deleted when an instance is terminated. 
+   
+  * ``network-interface.availability-zone`` - The Availability Zone for the network interface. 
+   
+  * ``network-interface.description`` - The description of the network interface. 
+   
+  * ``network-interface.group-id`` - The ID of a security group associated with the network interface. 
+   
+  * ``network-interface.group-name`` - The name of a security group associated with the network interface. 
+   
+  * ``network-interface.ipv6-addresses.ipv6-address`` - The IPv6 address associated with the network interface. 
+   
+  * ``network-interface.mac-address`` - The MAC address of the network interface. 
+   
+  * ``network-interface.network-interface-id`` - The ID of the network interface. 
+   
+  * ``network-interface.owner-id`` - The ID of the owner of the network interface. 
+   
+  * ``network-interface.private-dns-name`` - The private DNS name of the network interface. 
+   
+  * ``network-interface.requester-id`` - The requester ID for the network interface. 
+   
+  * ``network-interface.requester-managed`` - Indicates whether the network interface is being managed by AWS. 
+   
+  * ``network-interface.status`` - The status of the network interface (``available`` ) | ``in-use`` ). 
+   
+  * ``network-interface.source-dest-check`` - Whether the network interface performs source/destination checking. A value of ``true`` means checking is enabled, and ``false`` means checking is disabled. The value must be ``false`` for the network interface to perform network address translation (NAT) in your VPC. 
+   
+  * ``network-interface.subnet-id`` - The ID of the subnet for the network interface. 
+   
+  * ``network-interface.vpc-id`` - The ID of the VPC for the network interface. 
    
   * ``owner-id`` - The AWS account ID of the instance owner. 
    
@@ -140,9 +177,9 @@ Syntax::
    
   * ``platform`` - The platform. Use ``windows`` if you have Windows instances; otherwise, leave blank. 
    
-  * ``private-dns-name`` - The private DNS name of the instance. 
+  * ``private-dns-name`` - The private IPv4 DNS name of the instance. 
    
-  * ``private-ip-address`` - The private IP address of the instance. 
+  * ``private-ip-address`` - The private IPv4 address of the instance. 
    
   * ``product-code`` - The product code associated with the AMI used to launch the instance. 
    
@@ -170,7 +207,7 @@ Syntax::
    
   * ``subnet-id`` - The ID of the subnet for the instance. 
    
-  * ``tag`` :*key* =*value* - The key/value combination of a tag assigned to the resource, where ``tag`` :*key* is the tag's key.  
+  * ``tag`` :*key* =*value* - The key/value combination of a tag assigned to the resource. Specify the key of the tag in the filter name and the value of the tag in the filter value. For example, for the tag Purpose=X, specify ``tag:Purpose`` for the filter name and ``X`` for the filter value. 
    
   * ``tag-key`` - The key of a tag assigned to the resource. This filter is independent of the ``tag-value`` filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the ``tag`` :*key* =*value* filter. 
    
@@ -181,64 +218,6 @@ Syntax::
   * ``virtualization-type`` - The virtualization type of the instance (``paravirtual`` | ``hvm`` ). 
    
   * ``vpc-id`` - The ID of the VPC that the instance is running in. 
-   
-  * ``network-interface.description`` - The description of the network interface. 
-   
-  * ``network-interface.subnet-id`` - The ID of the subnet for the network interface. 
-   
-  * ``network-interface.vpc-id`` - The ID of the VPC for the network interface. 
-   
-  * ``network-interface.network-interface-id`` - The ID of the network interface. 
-   
-  * ``network-interface.owner-id`` - The ID of the owner of the network interface. 
-   
-  * ``network-interface.availability-zone`` - The Availability Zone for the network interface. 
-   
-  * ``network-interface.requester-id`` - The requester ID for the network interface. 
-   
-  * ``network-interface.requester-managed`` - Indicates whether the network interface is being managed by AWS. 
-   
-  * ``network-interface.status`` - The status of the network interface (``available`` ) | ``in-use`` ). 
-   
-  * ``network-interface.mac-address`` - The MAC address of the network interface. 
-   
-  * ``network-interface.private-dns-name`` - The private DNS name of the network interface. 
-   
-  * ``network-interface.source-dest-check`` - Whether the network interface performs source/destination checking. A value of ``true`` means checking is enabled, and ``false`` means checking is disabled. The value must be ``false`` for the network interface to perform network address translation (NAT) in your VPC. 
-   
-  * ``network-interface.group-id`` - The ID of a security group associated with the network interface. 
-   
-  * ``network-interface.group-name`` - The name of a security group associated with the network interface. 
-   
-  * ``network-interface.attachment.attachment-id`` - The ID of the interface attachment. 
-   
-  * ``network-interface.attachment.instance-id`` - The ID of the instance to which the network interface is attached. 
-   
-  * ``network-interface.attachment.instance-owner-id`` - The owner ID of the instance to which the network interface is attached. 
-   
-  * ``network-interface.addresses.private-ip-address`` - The private IP address associated with the network interface. 
-   
-  * ``network-interface.attachment.device-index`` - The device index to which the network interface is attached. 
-   
-  * ``network-interface.attachment.status`` - The status of the attachment (``attaching`` | ``attached`` | ``detaching`` | ``detached`` ). 
-   
-  * ``network-interface.attachment.attach-time`` - The time that the network interface was attached to an instance. 
-   
-  * ``network-interface.attachment.delete-on-termination`` - Specifies whether the attachment is deleted when an instance is terminated. 
-   
-  * ``network-interface.addresses.primary`` - Specifies whether the IP address of the network interface is the primary private IP address. 
-   
-  * ``network-interface.addresses.association.public-ip`` - The ID of the association of an Elastic IP address with a network interface. 
-   
-  * ``network-interface.addresses.association.ip-owner-id`` - The owner ID of the private IP address associated with the network interface. 
-   
-  * ``association.public-ip`` - The address of the Elastic IP address bound to the network interface. 
-   
-  * ``association.ip-owner-id`` - The owner of the Elastic IP address associated with the network interface. 
-   
-  * ``association.allocation-id`` - The allocation ID returned when you allocated the Elastic IP address for your network interface. 
-   
-  * ``association.association-id`` - The association ID returned when the network interface was associated with an IP address. 
    
 
   
@@ -264,6 +243,32 @@ JSON Syntax::
 
 
 
+``--instance-ids`` (list)
+
+
+  One or more instance IDs.
+
+   
+
+  Default: Describes all your instances.
+
+  
+
+
+
+Syntax::
+
+  "string" "string" ...
+
+
+
+``--dry-run`` | ``--no-dry-run`` (boolean)
+
+
+  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
+
+  
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
@@ -274,26 +279,34 @@ Performs service operation based on the JSON string provided. The JSON string fo
 
    
 
-``--page-size`` (integer)
- 
-
-  The size of each page.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
    
 
-  
+``--page-size`` (integer)
+ 
 
-  
+  The size of each page to get in the AWS service call. This does not affect the number of items returned in the command's output. Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call. This can help prevent the AWS service calls from timing out.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
 
 ``--max-items`` (integer)
  
 
-  The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination. This ``NextToken`` response element should **not** be used directly outside of the AWS CLI.
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``NextToken`` is provided in the command's output. To resume pagination, provide the ``NextToken`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``NextToken`` response element directly outside of the AWS CLI.
 
    
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 

@@ -19,6 +19,9 @@ Returns descriptions for existing environments.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironments>`_
+
+
 ========
 Synopsis
 ========
@@ -33,7 +36,7 @@ Synopsis
   [--include-deleted | --no-include-deleted]
   [--included-deleted-back-to <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -45,21 +48,21 @@ Options
 ``--application-name`` (string)
 
 
-  If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that are associated with this application. 
+  If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that are associated with this application.
 
   
 
 ``--version-label`` (string)
 
 
-  If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that are associated with this application version. 
+  If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that are associated with this application version.
 
   
 
 ``--environment-ids`` (list)
 
 
-  If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that have the specified IDs. 
+  If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that have the specified IDs.
 
   
 
@@ -74,7 +77,7 @@ Syntax::
 ``--environment-names`` (list)
 
 
-  If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that have the specified names. 
+  If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that have the specified names.
 
   
 
@@ -89,30 +92,30 @@ Syntax::
 ``--include-deleted`` | ``--no-include-deleted`` (boolean)
 
 
-  Indicates whether to include deleted environments: 
+  Indicates whether to include deleted environments:
 
    
 
-   ``true`` : Environments that have been deleted after ``IncludedDeletedBackTo`` are displayed. 
+   ``true`` : Environments that have been deleted after ``IncludedDeletedBackTo`` are displayed.
 
    
 
-   ``false`` : Do not include deleted environments. 
+   ``false`` : Do not include deleted environments.
 
   
 
 ``--included-deleted-back-to`` (timestamp)
 
 
-  If specified when ``no-include-deleted`` is set to ``true`` , then environments deleted after this date are displayed. 
+  If specified when ``include-deleted`` is set to ``true`` , then environments deleted after this date are displayed. 
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -187,7 +190,7 @@ Environments -> (list)
 
       
 
-      The ID of this environment. 
+      The ID of this environment.
 
       
 
@@ -223,11 +226,21 @@ Environments -> (list)
 
       
 
+    PlatformArn -> (string)
+
+      
+
+      The ARN of the custom platform.
+
+      
+
+      
+
     TemplateName -> (string)
 
       
 
-      The name of the configuration template used to originally launch this environment. 
+      The name of the configuration template used to originally launch this environment.
 
       
 
@@ -257,7 +270,7 @@ Environments -> (list)
 
       
 
-      The URL to the CNAME for this environment. 
+      The URL to the CNAME for this environment.
 
       
 
@@ -287,7 +300,7 @@ Environments -> (list)
 
       
 
-      The current operational status of the environment: 
+      The current operational status of the environment:
 
        
 
@@ -329,7 +342,7 @@ Environments -> (list)
 
       
 
-      Describes the health status of the environment. AWS Elastic Beanstalk indicates the failure levels for a running environment: 
+      Describes the health status of the environment. AWS Elastic Beanstalk indicates the failure levels for a running environment:
 
        
 
@@ -355,7 +368,7 @@ Environments -> (list)
 
       
 
-      Returns the health status of the application running in your environment. For more information, see `Health Colors and Statuses`_ .
+      Returns the health status of the application running in your environment. For more information, see `Health Colors and Statuses <http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html>`_ .
 
       
 
@@ -493,7 +506,7 @@ Environments -> (list)
 
         
 
-        A link to another environment, defined in the environment's manifest. Links provide connection information in system properties that can be used to connect to another environment in the same group. See `Environment Manifest (env.yaml)`_ for details.
+        A link to another environment, defined in the environment's manifest. Links provide connection information in system properties that can be used to connect to another environment in the same group. See `Environment Manifest (env.yaml) <http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html>`_ for details.
 
         
 
@@ -525,7 +538,3 @@ Environments -> (list)
 
   
 
-
-
-.. _Environment Manifest (env.yaml): http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-mgmt-compose.html#environment-mgmt-compose-envyaml
-.. _Health Colors and Statuses: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html

@@ -25,12 +25,15 @@ Specify a shard iterator using the ``shard-iterator`` parameter. The shard itera
 
 .. note::
 
-  
+   
 
-  get-recordscan retrieve a maximum of 1 MB of data or 2000 stream records, whichever comes first.
+   ``get-records`` can retrieve a maximum of 1 MB of data or 1000 stream records, whichever comes first.
 
-  
+   
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/GetRecords>`_
 
 
 ========
@@ -43,7 +46,7 @@ Synopsis
   --shard-iterator <value>
   [--limit <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -69,8 +72,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -113,11 +116,11 @@ Records -> (list)
        
 
        
-      * ``INSERT`` - a new item was added to the table.
+      * ``INSERT`` - a new item was added to the table. 
        
-      * ``MODIFY`` - one or more of the item's attributes were updated.
+      * ``MODIFY`` - one or more of an existing item's attributes were modified. 
        
-      * ``REMOVE`` - the item was deleted from the table
+      * ``REMOVE`` - the item was deleted from the table 
        
 
       
@@ -128,7 +131,11 @@ Records -> (list)
 
       
 
-      The version number of the stream record format. Currently, this is *1.0* .
+      The version number of the stream record format. This number is updated whenever the structure of ``Record`` is modified.
+
+       
+
+      Client applications must not assume that ``eventVersion`` will remain at a particular value, as this number is subject to change at any time. In general, ``eventVersion`` will only increase as the low-level DynamoDB Streams API evolves.
 
       
 
@@ -138,7 +145,7 @@ Records -> (list)
 
       
 
-      The AWS service from which the stream record originated. For DynamoDB Streams, this is *aws:dynamodb* .
+      The AWS service from which the stream record originated. For DynamoDB Streams, this is ``aws:dynamodb`` .
 
       
 
@@ -148,7 +155,7 @@ Records -> (list)
 
       
 
-      The region in which the *get-records* request was received.
+      The region in which the ``get-records`` request was received.
 
       
 
@@ -161,6 +168,16 @@ Records -> (list)
       The main body of the stream record, containing all of the DynamoDB-specific fields.
 
       
+
+      ApproximateCreationDateTime -> (timestamp)
+
+        
+
+        The approximate date and time when the stream record was created, in `UNIX epoch time <http://www.epochconverter.com/>`_ format.
+
+        
+
+        
 
       Keys -> (map)
 
@@ -184,7 +201,7 @@ Records -> (list)
 
            
 
-          Each attribute in an item is a name-value pair. An attribute can be single-valued or multi-valued set. For example, a book item can have title and authors attributes. Each book has one title but can have many authors. The multi-valued attribute is a set; duplicate values are not allowed. 
+          Each attribute in an item is a name-value pair. An attribute can be single-valued or multi-valued set. For example, a book item can have title and authors attributes. Each book has one title but can have many authors. The multi-valued attribute is a set; duplicate values are not allowed.
 
           
 
@@ -288,7 +305,7 @@ Records -> (list)
 
                
 
-              Each attribute in an item is a name-value pair. An attribute can be single-valued or multi-valued set. For example, a book item can have title and authors attributes. Each book has one title but can have many authors. The multi-valued attribute is a set; duplicate values are not allowed. 
+              Each attribute in an item is a name-value pair. An attribute can be single-valued or multi-valued set. For example, a book item can have title and authors attributes. Each book has one title but can have many authors. The multi-valued attribute is a set; duplicate values are not allowed.
 
               
 
@@ -436,7 +453,7 @@ Records -> (list)
 
                
 
-              Each attribute in an item is a name-value pair. An attribute can be single-valued or multi-valued set. For example, a book item can have title and authors attributes. Each book has one title but can have many authors. The multi-valued attribute is a set; duplicate values are not allowed. 
+              Each attribute in an item is a name-value pair. An attribute can be single-valued or multi-valued set. For example, a book item can have title and authors attributes. Each book has one title but can have many authors. The multi-valued attribute is a set; duplicate values are not allowed.
 
               
 
@@ -614,7 +631,7 @@ Records -> (list)
 
            
 
-          Each attribute in an item is a name-value pair. An attribute can be single-valued or multi-valued set. For example, a book item can have title and authors attributes. Each book has one title but can have many authors. The multi-valued attribute is a set; duplicate values are not allowed. 
+          Each attribute in an item is a name-value pair. An attribute can be single-valued or multi-valued set. For example, a book item can have title and authors attributes. Each book has one title but can have many authors. The multi-valued attribute is a set; duplicate values are not allowed.
 
           
 
@@ -718,7 +735,7 @@ Records -> (list)
 
                
 
-              Each attribute in an item is a name-value pair. An attribute can be single-valued or multi-valued set. For example, a book item can have title and authors attributes. Each book has one title but can have many authors. The multi-valued attribute is a set; duplicate values are not allowed. 
+              Each attribute in an item is a name-value pair. An attribute can be single-valued or multi-valued set. For example, a book item can have title and authors attributes. Each book has one title but can have many authors. The multi-valued attribute is a set; duplicate values are not allowed.
 
               
 
@@ -866,7 +883,7 @@ Records -> (list)
 
                
 
-              Each attribute in an item is a name-value pair. An attribute can be single-valued or multi-valued set. For example, a book item can have title and authors attributes. Each book has one title but can have many authors. The multi-valued attribute is a set; duplicate values are not allowed. 
+              Each attribute in an item is a name-value pair. An attribute can be single-valued or multi-valued set. For example, a book item can have title and authors attributes. Each book has one title but can have many authors. The multi-valued attribute is a set; duplicate values are not allowed.
 
               
 
@@ -1044,7 +1061,7 @@ Records -> (list)
 
            
 
-          Each attribute in an item is a name-value pair. An attribute can be single-valued or multi-valued set. For example, a book item can have title and authors attributes. Each book has one title but can have many authors. The multi-valued attribute is a set; duplicate values are not allowed. 
+          Each attribute in an item is a name-value pair. An attribute can be single-valued or multi-valued set. For example, a book item can have title and authors attributes. Each book has one title but can have many authors. The multi-valued attribute is a set; duplicate values are not allowed.
 
           
 
@@ -1148,7 +1165,7 @@ Records -> (list)
 
                
 
-              Each attribute in an item is a name-value pair. An attribute can be single-valued or multi-valued set. For example, a book item can have title and authors attributes. Each book has one title but can have many authors. The multi-valued attribute is a set; duplicate values are not allowed. 
+              Each attribute in an item is a name-value pair. An attribute can be single-valued or multi-valued set. For example, a book item can have title and authors attributes. Each book has one title but can have many authors. The multi-valued attribute is a set; duplicate values are not allowed.
 
               
 
@@ -1296,7 +1313,7 @@ Records -> (list)
 
                
 
-              Each attribute in an item is a name-value pair. An attribute can be single-valued or multi-valued set. For example, a book item can have title and authors attributes. Each book has one title but can have many authors. The multi-valued attribute is a set; duplicate values are not allowed. 
+              Each attribute in an item is a name-value pair. An attribute can be single-valued or multi-valued set. For example, a book item can have title and authors attributes. Each book has one title but can have many authors. The multi-valued attribute is a set; duplicate values are not allowed.
 
               
 
@@ -1481,14 +1498,52 @@ Records -> (list)
          
 
          
-        * ``KEYS_ONLY`` - only the key attributes of the modified item.
+        * ``KEYS_ONLY`` - only the key attributes of the modified item. 
          
-        * ``NEW_IMAGE`` - the entire item, as it appears after it was modified.
+        * ``NEW_IMAGE`` - the entire item, as it appeared after it was modified. 
          
-        * ``OLD_IMAGE`` - the entire item, as it appeared before it was modified.
+        * ``OLD_IMAGE`` - the entire item, as it appeared before it was modified. 
          
-        * ``NEW_AND_OLD_IMAGES`` — both the new and the old item images of the item.
+        * ``NEW_AND_OLD_IMAGES`` - both the new and the old item images of the item. 
          
+
+        
+
+        
+
+      
+
+    userIdentity -> (structure)
+
+      
+
+      Items that are deleted by the Time to Live process after expiration have the following fields: 
+
+       
+
+       
+      * Records[].userIdentity.type "Service" 
+       
+      * Records[].userIdentity.principalId "dynamodb.amazonaws.com" 
+       
+
+      
+
+      PrincipalId -> (string)
+
+        
+
+        A unique identifier for the entity that made the call. For Time To Live, the principalId is "dynamodb.amazonaws.com".
+
+        
+
+        
+
+      Type -> (string)
+
+        
+
+        The type of the identity. For Time To Live, the type is "Service".
 
         
 

@@ -15,8 +15,15 @@ Description
 
 
 
-Creates a new cluster. To create the cluster in virtual private cloud (VPC), you must provide cluster subnet group name. If you don't provide a cluster subnet group name or the cluster security group parameter, Amazon Redshift creates a non-VPC cluster, it associates the default cluster security group with the cluster. For more information about managing clusters, go to `Amazon Redshift Clusters`_ in the *Amazon Redshift Cluster Management Guide* . 
+Creates a new cluster.
 
+ 
+
+To create the cluster in Virtual Private Cloud (VPC), you must provide a cluster subnet group name. The cluster subnet group identifies the subnets of your VPC that Amazon Redshift uses when creating the cluster. For more information about managing clusters, go to `Amazon Redshift Clusters <http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html>`_ in the *Amazon Redshift Cluster Management Guide* .
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateCluster>`_
 
 
 ========
@@ -50,8 +57,11 @@ Synopsis
   [--elastic-ip <value>]
   [--tags <value>]
   [--kms-key-id <value>]
+  [--enhanced-vpc-routing | --no-enhanced-vpc-routing]
+  [--additional-info <value>]
+  [--iam-roles <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -63,15 +73,15 @@ Options
 ``--db-name`` (string)
 
 
-  The name of the first database to be created when the cluster is created. 
+  The name of the first database to be created when the cluster is created.
 
    
 
-  To create additional databases after the cluster is created, connect to the cluster with a SQL client and use SQL commands to create a database. For more information, go to `Create a Database`_ in the Amazon Redshift Database Developer Guide. 
+  To create additional databases after the cluster is created, connect to the cluster with a SQL client and use SQL commands to create a database. For more information, go to `Create a Database <http://docs.aws.amazon.com/redshift/latest/dg/t_creating_database.html>`_ in the Amazon Redshift Database Developer Guide. 
 
    
 
-  Default: ``dev`` 
+  Default: ``dev``  
 
    
 
@@ -80,11 +90,11 @@ Options
    
 
    
-  * Must contain 1 to 64 alphanumeric characters.
+  * Must contain 1 to 64 alphanumeric characters. 
    
-  * Must contain only lowercase letters.
+  * Must contain only lowercase letters. 
    
-  * Cannot be a word that is reserved by the service. A list of reserved words can be found in `Reserved Words`_ in the Amazon Redshift Database Developer Guide. 
+  * Cannot be a word that is reserved by the service. A list of reserved words can be found in `Reserved Words <http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html>`_ in the Amazon Redshift Database Developer Guide.  
    
 
   
@@ -92,7 +102,7 @@ Options
 ``--cluster-identifier`` (string)
 
 
-  A unique identifier for the cluster. You use this identifier to refer to the cluster for any subsequent cluster operations such as deleting or modifying. The identifier also appears in the Amazon Redshift console. 
+  A unique identifier for the cluster. You use this identifier to refer to the cluster for any subsequent cluster operations such as deleting or modifying. The identifier also appears in the Amazon Redshift console.
 
    
 
@@ -101,34 +111,34 @@ Options
    
 
    
-  * Must contain from 1 to 63 alphanumeric characters or hyphens.
+  * Must contain from 1 to 63 alphanumeric characters or hyphens. 
    
-  * Alphabetic characters must be lowercase.
+  * Alphabetic characters must be lowercase. 
    
-  * First character must be a letter.
+  * First character must be a letter. 
    
-  * Cannot end with a hyphen or contain two consecutive hyphens.
+  * Cannot end with a hyphen or contain two consecutive hyphens. 
    
-  * Must be unique for all clusters within an AWS account.
-   
-
+  * Must be unique for all clusters within an AWS account. 
    
 
-  Example: ``myexamplecluster`` 
+   
+
+  Example: ``myexamplecluster``  
 
   
 
 ``--cluster-type`` (string)
 
 
-  The type of the cluster. When cluster type is specified as 
+  The type of the cluster. When cluster type is specified as
 
    
-  * ``single-node`` , the **NumberOfNodes** parameter is not required.
-   
-  * ``multi-node`` , the **NumberOfNodes** parameter is required.
-   
 
+   
+  * ``single-node`` , the **NumberOfNodes** parameter is not required. 
+   
+  * ``multi-node`` , the **NumberOfNodes** parameter is required. 
    
 
    
@@ -137,14 +147,14 @@ Options
 
    
 
-  Default: ``multi-node`` 
+  Default: ``multi-node``  
 
   
 
 ``--node-type`` (string)
 
 
-  The node type to be provisioned for the cluster. For information about node types, go to `Working with Clusters`_ in the *Amazon Redshift Cluster Management Guide* . 
+  The node type to be provisioned for the cluster. For information about node types, go to `Working with Clusters <http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes>`_ in the *Amazon Redshift Cluster Management Guide* . 
 
    
 
@@ -155,7 +165,7 @@ Options
 ``--master-username`` (string)
 
 
-  The user name associated with the master user account for the cluster that is being created. 
+  The user name associated with the master user account for the cluster that is being created.
 
    
 
@@ -164,11 +174,11 @@ Options
    
 
    
-  * Must be 1 - 128 alphanumeric characters.
+  * Must be 1 - 128 alphanumeric characters. 
    
-  * First character must be a letter.
+  * First character must be a letter. 
    
-  * Cannot be a reserved word. A list of reserved words can be found in `Reserved Words`_ in the Amazon Redshift Database Developer Guide. 
+  * Cannot be a reserved word. A list of reserved words can be found in `Reserved Words <http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html>`_ in the Amazon Redshift Database Developer Guide.  
    
 
   
@@ -176,24 +186,24 @@ Options
 ``--master-user-password`` (string)
 
 
-  The password associated with the master user account for the cluster that is being created. 
+  The password associated with the master user account for the cluster that is being created.
 
    
 
-  Constraints: 
+  Constraints:
 
    
 
    
-  * Must be between 8 and 64 characters in length.
+  * Must be between 8 and 64 characters in length. 
    
-  * Must contain at least one uppercase letter.
+  * Must contain at least one uppercase letter. 
    
-  * Must contain at least one lowercase letter.
+  * Must contain at least one lowercase letter. 
    
-  * Must contain one number.
+  * Must contain one number. 
    
-  * Can be any printable ASCII character (ASCII code 33 to 126) except ' (single quote), " (double quote), \, /, @, or space.
+  * Can be any printable ASCII character (ASCII code 33 to 126) except ' (single quote), " (double quote), \, /, @, or space. 
    
 
   
@@ -201,11 +211,11 @@ Options
 ``--cluster-security-groups`` (list)
 
 
-  A list of security groups to be associated with this cluster. 
+  A list of security groups to be associated with this cluster.
 
    
 
-  Default: The default cluster security group for Amazon Redshift. 
+  Default: The default cluster security group for Amazon Redshift.
 
   
 
@@ -239,22 +249,22 @@ Syntax::
 ``--cluster-subnet-group-name`` (string)
 
 
-  The name of a cluster subnet group to be associated with this cluster. 
+  The name of a cluster subnet group to be associated with this cluster.
 
    
 
-  If this parameter is not provided the resulting cluster will be deployed outside virtual private cloud (VPC). 
+  If this parameter is not provided the resulting cluster will be deployed outside virtual private cloud (VPC).
 
   
 
 ``--availability-zone`` (string)
 
 
-  The EC2 Availability Zone (AZ) in which you want Amazon Redshift to provision the cluster. For example, if you have several EC2 instances running in a specific Availability Zone, then you might want the cluster to be provisioned in the same zone in order to decrease network latency. 
+  The EC2 Availability Zone (AZ) in which you want Amazon Redshift to provision the cluster. For example, if you have several EC2 instances running in a specific Availability Zone, then you might want the cluster to be provisioned in the same zone in order to decrease network latency.
 
    
 
-  Default: A random, system-chosen Availability Zone in the region that is specified by the endpoint. 
+  Default: A random, system-chosen Availability Zone in the region that is specified by the endpoint.
 
    
 
@@ -262,14 +272,14 @@ Syntax::
 
    
 
-  Constraint: The specified Availability Zone must be in the same region as the current endpoint. 
+  Constraint: The specified Availability Zone must be in the same region as the current endpoint.
 
   
 
 ``--preferred-maintenance-window`` (string)
 
 
-  The weekly time range (in UTC) during which automated cluster maintenance can occur. 
+  The weekly time range (in UTC) during which automated cluster maintenance can occur.
 
    
 
@@ -277,7 +287,7 @@ Syntax::
 
    
 
-  Default: A 30-minute window selected at random from an 8-hour block of time per region, occurring on a random day of the week. For more information about the time blocks for each region, see `Maintenance Windows`_ in Amazon Redshift Cluster Management Guide.
+  Default: A 30-minute window selected at random from an 8-hour block of time per region, occurring on a random day of the week. For more information about the time blocks for each region, see `Maintenance Windows <http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-maintenance-windows>`_ in Amazon Redshift Cluster Management Guide.
 
    
 
@@ -292,24 +302,24 @@ Syntax::
 ``--cluster-parameter-group-name`` (string)
 
 
-  The name of the parameter group to be associated with this cluster. 
+  The name of the parameter group to be associated with this cluster.
 
    
 
-  Default: The default Amazon Redshift cluster parameter group. For information about the default parameter group, go to `Working with Amazon Redshift Parameter Groups`_ 
+  Default: The default Amazon Redshift cluster parameter group. For information about the default parameter group, go to `Working with Amazon Redshift Parameter Groups <http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html>`_  
 
    
 
-  Constraints: 
+  Constraints:
 
    
 
    
-  * Must be 1 to 255 alphanumeric characters or hyphens.
+  * Must be 1 to 255 alphanumeric characters or hyphens. 
    
-  * First character must be a letter.
+  * First character must be a letter. 
    
-  * Cannot end with a hyphen or contain two consecutive hyphens.
+  * Cannot end with a hyphen or contain two consecutive hyphens. 
    
 
   
@@ -332,7 +342,7 @@ Syntax::
 ``--port`` (integer)
 
 
-  The port number on which the cluster accepts incoming connections. 
+  The port number on which the cluster accepts incoming connections.
 
    
 
@@ -351,11 +361,11 @@ Syntax::
 ``--cluster-version`` (string)
 
 
-  The version of the Amazon Redshift engine software that you want to deploy on the cluster. 
+  The version of the Amazon Redshift engine software that you want to deploy on the cluster.
 
    
 
-  The version selected runs on all the nodes in the cluster. 
+  The version selected runs on all the nodes in the cluster.
 
    
 
@@ -363,7 +373,7 @@ Syntax::
 
    
 
-  Example: ``1.0`` 
+  Example: ``1.0``  
 
   
 
@@ -374,11 +384,11 @@ Syntax::
 
    
 
-  When a new major version of the Amazon Redshift engine is released, you can request that the service automatically apply upgrades during the maintenance window to the Amazon Redshift engine that is running on your cluster. 
+  When a new major version of the Amazon Redshift engine is released, you can request that the service automatically apply upgrades during the maintenance window to the Amazon Redshift engine that is running on your cluster.
 
    
 
-  Default: ``true`` 
+  Default: ``true``  
 
   
 
@@ -389,7 +399,7 @@ Syntax::
 
    
 
-  For information about determining how many nodes you need, go to `Working with Clusters`_ in the *Amazon Redshift Cluster Management Guide* . 
+  For information about determining how many nodes you need, go to `Working with Clusters <http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes>`_ in the *Amazon Redshift Cluster Management Guide* . 
 
    
 
@@ -397,7 +407,7 @@ Syntax::
 
    
 
-  Default: ``1`` 
+  Default: ``1``  
 
    
 
@@ -444,7 +454,7 @@ Syntax::
 
    
 
-  Constraints: The cluster must be provisioned in EC2-VPC and publicly-accessible through an Internet gateway. For more information about provisioning clusters in EC2-VPC, go to `Supported Platforms to Launch Your Cluster`_ in the Amazon Redshift Cluster Management Guide.
+  Constraints: The cluster must be provisioned in EC2-VPC and publicly-accessible through an Internet gateway. For more information about provisioning clusters in EC2-VPC, go to `Supported Platforms to Launch Your Cluster <http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#cluster-platforms>`_ in the Amazon Redshift Cluster Management Guide.
 
   
 
@@ -483,11 +493,52 @@ JSON Syntax::
 
   
 
+``--enhanced-vpc-routing`` | ``--no-enhanced-vpc-routing`` (boolean)
+
+
+  An option that specifies whether to create the cluster with enhanced VPC routing enabled. To create a cluster that uses enhanced VPC routing, the cluster must be in a VPC. For more information, see `Enhanced VPC Routing <http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html>`_ in the Amazon Redshift Cluster Management Guide.
+
+   
+
+  If this option is ``true`` , enhanced VPC routing is enabled. 
+
+   
+
+  Default: false
+
+  
+
+``--additional-info`` (string)
+
+
+  Reserved.
+
+  
+
+``--iam-roles`` (list)
+
+
+  A list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. You can supply up to 10 IAM roles in a single request.
+
+   
+
+  A cluster can have up to 10 IAM roles associated with it at any time.
+
+  
+
+
+
+Syntax::
+
+  "string" "string" ...
+
+
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -558,7 +609,7 @@ Cluster -> (structure)
 
     
 
-    The unique identifier of the cluster. 
+    The unique identifier of the cluster.
 
     
 
@@ -568,7 +619,7 @@ Cluster -> (structure)
 
     
 
-    The node type for the nodes in the cluster. 
+    The node type for the nodes in the cluster.
 
     
 
@@ -578,7 +629,43 @@ Cluster -> (structure)
 
     
 
-    The current state of this cluster. Possible values include ``available`` , ``creating`` , ``deleting`` , ``rebooting`` , ``renaming`` , and ``resizing`` . 
+    The current state of the cluster. Possible values are the following:
+
+     
+
+     
+    * ``available``   
+     
+    * ``creating``   
+     
+    * ``deleting``   
+     
+    * ``final-snapshot``   
+     
+    * ``hardware-failure``   
+     
+    * ``incompatible-hsm``   
+     
+    * ``incompatible-network``   
+     
+    * ``incompatible-parameters``   
+     
+    * ``incompatible-restore``   
+     
+    * ``modifying``   
+     
+    * ``rebooting``   
+     
+    * ``renaming``   
+     
+    * ``resizing``   
+     
+    * ``rotating-keys``   
+     
+    * ``storage-full``   
+     
+    * ``updating-hsm``   
+     
 
     
 
@@ -598,7 +685,7 @@ Cluster -> (structure)
 
     
 
-    The master user name for the cluster. This name is used to connect to the database that is specified in **DBName** . 
+    The master user name for the cluster. This name is used to connect to the database that is specified in the **DBName** parameter. 
 
     
 
@@ -608,7 +695,7 @@ Cluster -> (structure)
 
     
 
-    The name of the initial database that was created when the cluster was created. This same name is returned for the life of the cluster. If an initial database was not specified, a database named "dev" was created by default. 
+    The name of the initial database that was created when the cluster was created. This same name is returned for the life of the cluster. If an initial database was not specified, a database named ``dev`` dev was created by default. 
 
     
 
@@ -618,7 +705,7 @@ Cluster -> (structure)
 
     
 
-    The connection endpoint. 
+    The connection endpoint.
 
     
 
@@ -626,7 +713,7 @@ Cluster -> (structure)
 
       
 
-      The DNS address of the Cluster. 
+      The DNS address of the Cluster.
 
       
 
@@ -636,7 +723,7 @@ Cluster -> (structure)
 
       
 
-      The port that the database engine is listening on. 
+      The port that the database engine is listening on.
 
       
 
@@ -648,7 +735,7 @@ Cluster -> (structure)
 
     
 
-    The date and time that the cluster was created. 
+    The date and time that the cluster was created.
 
     
 
@@ -658,7 +745,7 @@ Cluster -> (structure)
 
     
 
-    The number of days that automatic cluster snapshots are retained. 
+    The number of days that automatic cluster snapshots are retained.
 
     
 
@@ -672,7 +759,7 @@ Cluster -> (structure)
 
      
 
-    Cluster security groups are used when the cluster is not created in a VPC. Clusters that are created in a VPC use VPC security groups, which are listed by the **VpcSecurityGroups** parameter. 
+    Cluster security groups are used when the cluster is not created in an Amazon Virtual Private Cloud (VPC). Clusters that are created in a VPC use VPC security groups, which are listed by the **VpcSecurityGroups** parameter. 
 
     
 
@@ -680,7 +767,7 @@ Cluster -> (structure)
 
       
 
-      Describes a security group.
+      Describes a cluster security group.
 
       
 
@@ -688,7 +775,7 @@ Cluster -> (structure)
 
         
 
-        The name of the cluster security group. 
+        The name of the cluster security group.
 
         
 
@@ -698,7 +785,7 @@ Cluster -> (structure)
 
         
 
-        The status of the cluster security group. 
+        The status of the cluster security group.
 
         
 
@@ -712,7 +799,7 @@ Cluster -> (structure)
 
     
 
-    A list of Virtual Private Cloud (VPC) security groups that are associated with the cluster. This parameter is returned only if the cluster is in a VPC. 
+    A list of Amazon Virtual Private Cloud (Amazon VPC) security groups that are associated with the cluster. This parameter is returned only if the cluster is in a VPC.
 
     
 
@@ -728,9 +815,17 @@ Cluster -> (structure)
 
         
 
+        The identifier of the VPC security group.
+
+        
+
         
 
       Status -> (string)
+
+        
+
+        The status of the VPC security group.
 
         
 
@@ -752,7 +847,7 @@ Cluster -> (structure)
 
       
 
-      Describes the status of a parameter group. 
+      Describes the status of a parameter group.
 
       
 
@@ -760,7 +855,7 @@ Cluster -> (structure)
 
         
 
-        The name of the cluster parameter group. 
+        The name of the cluster parameter group.
 
         
 
@@ -770,7 +865,7 @@ Cluster -> (structure)
 
         
 
-        The status of parameter updates. 
+        The status of parameter updates.
 
         
 
@@ -784,7 +879,7 @@ Cluster -> (structure)
 
          
 
-        For more information about parameters and parameter groups, go to `Amazon Redshift Parameter Groups`_ in the *Amazon Redshift Cluster Management Guide* . 
+        For more information about parameters and parameter groups, go to `Amazon Redshift Parameter Groups <http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html>`_ in the *Amazon Redshift Cluster Management Guide* .
 
         
 
@@ -817,21 +912,21 @@ Cluster -> (structure)
             The following are possible statuses and descriptions.
 
              
-            * ``in-sync`` : The parameter value is in sync with the database.
-             
-            * ``pending-reboot`` : The parameter value will be applied after the cluster reboots.
-             
-            * ``applying`` : The parameter value is being applied to the database.
-             
-            * ``invalid-parameter`` : Cannot apply the parameter value because it has an invalid value or syntax.
-             
-            * ``apply-deferred`` : The parameter contains static property changes. The changes are deferred until the cluster reboots.
-             
-            * ``apply-error`` : Cannot connect to the cluster. The parameter change will be applied after the cluster reboots.
-             
-            * ``unknown-error`` : Cannot apply the parameter change right now. The change will be applied after the cluster reboots.
-             
 
+             
+            * ``in-sync`` : The parameter value is in sync with the database. 
+             
+            * ``pending-reboot`` : The parameter value will be applied after the cluster reboots. 
+             
+            * ``applying`` : The parameter value is being applied to the database. 
+             
+            * ``invalid-parameter`` : Cannot apply the parameter value because it has an invalid value or syntax. 
+             
+            * ``apply-deferred`` : The parameter contains static property changes. The changes are deferred until the cluster reboots. 
+             
+            * ``apply-error`` : Cannot connect to the cluster. The parameter change will be applied after the cluster reboots. 
+             
+            * ``unknown-error`` : Cannot apply the parameter change right now. The change will be applied after the cluster reboots. 
              
 
             
@@ -860,7 +955,7 @@ Cluster -> (structure)
 
     
 
-    The name of the subnet group that is associated with the cluster. This parameter is valid only when the cluster is in a VPC. 
+    The name of the subnet group that is associated with the cluster. This parameter is valid only when the cluster is in a VPC.
 
     
 
@@ -870,7 +965,7 @@ Cluster -> (structure)
 
     
 
-    The identifier of the VPC the cluster is in, if the cluster is in a VPC. 
+    The identifier of the VPC the cluster is in, if the cluster is in a VPC.
 
     
 
@@ -880,7 +975,7 @@ Cluster -> (structure)
 
     
 
-    The name of the Availability Zone in which the cluster is located. 
+    The name of the Availability Zone in which the cluster is located.
 
     
 
@@ -890,7 +985,7 @@ Cluster -> (structure)
 
     
 
-    The weekly time range (in UTC) during which system maintenance can occur. 
+    The weekly time range, in Universal Coordinated Time (UTC), during which system maintenance can occur.
 
     
 
@@ -900,7 +995,7 @@ Cluster -> (structure)
 
     
 
-    If present, changes to the cluster are pending. Specific pending changes are identified by subelements. 
+    A value that, if present, indicates that changes to the cluster are pending. Specific pending changes are identified by subelements.
 
     
 
@@ -908,7 +1003,7 @@ Cluster -> (structure)
 
       
 
-      The pending or in-progress change of the master user password for the cluster. 
+      The pending or in-progress change of the master user password for the cluster.
 
       
 
@@ -918,7 +1013,7 @@ Cluster -> (structure)
 
       
 
-      The pending or in-progress change of the cluster's node type. 
+      The pending or in-progress change of the cluster's node type.
 
       
 
@@ -928,7 +1023,7 @@ Cluster -> (structure)
 
       
 
-      The pending or in-progress change of the number of nodes in the cluster. 
+      The pending or in-progress change of the number of nodes in the cluster.
 
       
 
@@ -938,7 +1033,7 @@ Cluster -> (structure)
 
       
 
-      The pending or in-progress change of the cluster type. 
+      The pending or in-progress change of the cluster type.
 
       
 
@@ -948,7 +1043,7 @@ Cluster -> (structure)
 
       
 
-      The pending or in-progress change of the service version. 
+      The pending or in-progress change of the service version.
 
       
 
@@ -958,7 +1053,7 @@ Cluster -> (structure)
 
       
 
-      The pending or in-progress change of the automated snapshot retention period. 
+      The pending or in-progress change of the automated snapshot retention period.
 
       
 
@@ -974,13 +1069,41 @@ Cluster -> (structure)
 
       
 
+    PubliclyAccessible -> (boolean)
+
+      
+
+      The pending or in-progress change of the ability to connect to the cluster from the public network.
+
+      
+
+      
+
+    EnhancedVpcRouting -> (boolean)
+
+      
+
+      An option that specifies whether to create the cluster with enhanced VPC routing enabled. To create a cluster that uses enhanced VPC routing, the cluster must be in a VPC. For more information, see `Enhanced VPC Routing <http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html>`_ in the Amazon Redshift Cluster Management Guide.
+
+       
+
+      If this option is ``true`` , enhanced VPC routing is enabled. 
+
+       
+
+      Default: false
+
+      
+
+      
+
     
 
   ClusterVersion -> (string)
 
     
 
-    The version ID of the Amazon Redshift engine that is running on the cluster. 
+    The version ID of the Amazon Redshift engine that is running on the cluster.
 
     
 
@@ -990,7 +1113,7 @@ Cluster -> (structure)
 
     
 
-    If ``true`` , major version upgrades will be applied automatically to the cluster during the maintenance window. 
+    A Boolean value that, if ``true`` , indicates that major version upgrades will be applied automatically to the cluster during the maintenance window. 
 
     
 
@@ -1000,7 +1123,7 @@ Cluster -> (structure)
 
     
 
-    The number of compute nodes in the cluster. 
+    The number of compute nodes in the cluster.
 
     
 
@@ -1010,7 +1133,7 @@ Cluster -> (structure)
 
     
 
-    If ``true`` , the cluster can be accessed from a public network.
+    A Boolean value that, if ``true`` , indicates that the cluster can be accessed from a public network.
 
     
 
@@ -1020,7 +1143,7 @@ Cluster -> (structure)
 
     
 
-    If ``true`` , data in the cluster is encrypted at rest.
+    A Boolean value that, if ``true`` , indicates that data in the cluster is encrypted at rest.
 
     
 
@@ -1030,7 +1153,7 @@ Cluster -> (structure)
 
     
 
-    Describes the status of a cluster restore action. Returns null if the cluster was not created by restoring a snapshot. 
+    A value that describes the status of a cluster restore action. This parameter returns null if the cluster was not created by restoring a snapshot.
 
     
 
@@ -1038,7 +1161,7 @@ Cluster -> (structure)
 
       
 
-      The status of the restore action. Returns starting, restoring, completed, or failed. 
+      The status of the restore action. Returns starting, restoring, completed, or failed.
 
       
 
@@ -1048,7 +1171,7 @@ Cluster -> (structure)
 
       
 
-      The number of megabytes per second being transferred from the backup storage. Returns the average rate for a completed backup. 
+      The number of megabytes per second being transferred from the backup storage. Returns the average rate for a completed backup.
 
       
 
@@ -1058,7 +1181,7 @@ Cluster -> (structure)
 
       
 
-      The size of the set of snapshot data used to restore the cluster. 
+      The size of the set of snapshot data used to restore the cluster.
 
       
 
@@ -1068,7 +1191,7 @@ Cluster -> (structure)
 
       
 
-      The number of megabytes that have been transferred from snapshot storage. 
+      The number of megabytes that have been transferred from snapshot storage.
 
       
 
@@ -1078,7 +1201,7 @@ Cluster -> (structure)
 
       
 
-      The amount of time an in-progress restore has been running, or the amount of time it took a completed restore to finish. 
+      The amount of time an in-progress restore has been running, or the amount of time it took a completed restore to finish.
 
       
 
@@ -1088,7 +1211,7 @@ Cluster -> (structure)
 
       
 
-      The estimate of the time remaining before the restore will complete. Returns 0 for a completed restore. 
+      The estimate of the time remaining before the restore will complete. Returns 0 for a completed restore.
 
       
 
@@ -1100,7 +1223,7 @@ Cluster -> (structure)
 
     
 
-    Reports whether the Amazon Redshift cluster has finished applying any HSM settings changes specified in a modify cluster command.
+    A value that reports whether the Amazon Redshift cluster has finished applying any hardware security module (HSM) settings changes specified in a modify cluster command.
 
      
 
@@ -1148,7 +1271,7 @@ Cluster -> (structure)
 
     
 
-    Returns the destination region and retention period that are configured for cross-region snapshot copy. 
+    A value that returns the destination region and retention period that are configured for cross-region snapshot copy.
 
     
 
@@ -1198,7 +1321,7 @@ Cluster -> (structure)
 
     
 
-    The nodes in a cluster.
+    The nodes in the cluster.
 
     
 
@@ -1248,7 +1371,7 @@ Cluster -> (structure)
 
     
 
-    Describes the status of the elastic IP (EIP) address.
+    The status of the elastic IP (EIP) address.
 
     
 
@@ -1266,7 +1389,7 @@ Cluster -> (structure)
 
       
 
-      Describes the status of the elastic IP (EIP) address.
+      The status of the elastic IP (EIP) address.
 
       
 
@@ -1328,21 +1451,83 @@ Cluster -> (structure)
 
     
 
-    The AWS Key Management Service (KMS) key ID of the encryption key used to encrypt data in the cluster.
+    The AWS Key Management Service (AWS KMS) key ID of the encryption key used to encrypt data in the cluster.
 
     
+
+    
+
+  EnhancedVpcRouting -> (boolean)
+
+    
+
+    An option that specifies whether to create the cluster with enhanced VPC routing enabled. To create a cluster that uses enhanced VPC routing, the cluster must be in a VPC. For more information, see `Enhanced VPC Routing <http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html>`_ in the Amazon Redshift Cluster Management Guide.
+
+     
+
+    If this option is ``true`` , enhanced VPC routing is enabled. 
+
+     
+
+    Default: false
+
+    
+
+    
+
+  IamRoles -> (list)
+
+    
+
+    A list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services.
+
+    
+
+    (structure)
+
+      
+
+      An AWS Identity and Access Management (IAM) role that can be used by the associated Amazon Redshift cluster to access other AWS services.
+
+      
+
+      IamRoleArn -> (string)
+
+        
+
+        The Amazon Resource Name (ARN) of the IAM role, for example, ``arn:aws:iam::123456789012:role/RedshiftCopyUnload`` . 
+
+        
+
+        
+
+      ApplyStatus -> (string)
+
+        
+
+        A value that describes the status of the IAM role's association with an Amazon Redshift cluster.
+
+         
+
+        The following are possible statuses and descriptions.
+
+         
+
+         
+        * ``in-sync`` : The role is available for use by the cluster. 
+         
+        * ``adding`` : The role is in the process of being associated with the cluster. 
+         
+        * ``removing`` : The role is in the process of being disassociated with the cluster. 
+         
+
+        
+
+        
+
+      
 
     
 
   
 
-
-
-.. _Working with Clusters: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes
-.. _Create a Database: http://docs.aws.amazon.com/redshift/latest/dg/t_creating_database.html
-.. _Amazon Redshift Clusters: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html
-.. _Amazon Redshift Parameter Groups: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html
-.. _Working with Amazon Redshift Parameter Groups: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html
-.. _Reserved Words: http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html
-.. _Maintenance Windows: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-maintenance-windows
-.. _Supported Platforms to Launch Your Cluster: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#cluster-platforms

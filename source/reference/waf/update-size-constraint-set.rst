@@ -20,15 +20,15 @@ Inserts or deletes  SizeConstraint objects (filters) in a  SizeConstraintSet . F
  
 
  
-* Whether to insert or delete the object from the array. If you want to change a ``SizeConstraintSetUpdate`` object, you delete the existing object and add a new one.
+* Whether to insert or delete the object from the array. If you want to change a ``SizeConstraintSetUpdate`` object, you delete the existing object and add a new one. 
  
-* The part of a web request that you want AWS WAF to evaluate, such as the length of a query string or the length of the ``User-Agent`` header.
+* The part of a web request that you want AWS WAF to evaluate, such as the length of a query string or the length of the ``User-Agent`` header. 
  
-* Whether to perform any transformations on the request, such as converting it to lowercase, before checking its length. Note that transformations of the request body are not supported because the AWS resource forwards only the first ``8192`` bytes of your request to AWS WAF.
+* Whether to perform any transformations on the request, such as converting it to lowercase, before checking its length. Note that transformations of the request body are not supported because the AWS resource forwards only the first ``8192`` bytes of your request to AWS WAF. 
  
-* A ``ComparisonOperator`` used for evaluating the selected part of the request against the specified ``Size`` , such as equals, greater than, less than, and so on.
+* A ``ComparisonOperator`` used for evaluating the selected part of the request against the specified ``Size`` , such as equals, greater than, less than, and so on. 
  
-* The length, in bytes, that you want AWS WAF to watch for in selected part of the request. The length is computed after applying the transformation.
+* The length, in bytes, that you want AWS WAF to watch for in selected part of the request. The length is computed after applying the transformation. 
  
 
  
@@ -42,17 +42,20 @@ To create and configure a ``SizeConstraintSet`` , perform the following steps:
  
 
  
-* Create a ``SizeConstraintSet.`` For more information, see  create-size-constraint-set .
+* Create a ``SizeConstraintSet.`` For more information, see  create-size-constraint-set . 
  
-* Use  get-change-token to get the change token that you provide in the ``change-token`` parameter of an ``update-size-constraint-set`` request.
+* Use  get-change-token to get the change token that you provide in the ``change-token`` parameter of an ``update-size-constraint-set`` request. 
  
-* Submit an ``update-size-constraint-set`` request to specify the part of the request that you want AWS WAF to inspect (for example, the header or the URI) and the value that you want AWS WAF to watch for.
- 
-
+* Submit an ``update-size-constraint-set`` request to specify the part of the request that you want AWS WAF to inspect (for example, the header or the URI) and the value that you want AWS WAF to watch for. 
  
 
-For more information about how to use the AWS WAF API to allow or block HTTP requests, see the `AWS WAF Developer Guide`_ .
+ 
 
+For more information about how to use the AWS WAF API to allow or block HTTP requests, see the `AWS WAF Developer Guide <http://docs.aws.amazon.com/waf/latest/developerguide/>`_ .
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateSizeConstraintSet>`_
 
 
 ========
@@ -66,7 +69,7 @@ Synopsis
   --change-token <value>
   --updates <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -97,11 +100,11 @@ Options
    
 
    
-  *  SizeConstraintSetUpdate : Contains ``Action`` and ``SizeConstraint`` 
+  *  SizeConstraintSetUpdate : Contains ``Action`` and ``SizeConstraint``   
    
-  *  SizeConstraint : Contains ``FieldToMatch`` , ``TextTransformation`` , ``ComparisonOperator`` , and ``Size`` 
+  *  SizeConstraint : Contains ``FieldToMatch`` , ``TextTransformation`` , ``ComparisonOperator`` , and ``Size``   
    
-  *  FieldToMatch : Contains ``Data`` and ``Type`` 
+  *  FieldToMatch : Contains ``Data`` and ``Type``   
    
 
   
@@ -138,8 +141,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -157,6 +160,3 @@ ChangeToken -> (string)
 
   
 
-
-
-.. _AWS WAF Developer Guide: http://docs.aws.amazon.com/waf/latest/developerguide/

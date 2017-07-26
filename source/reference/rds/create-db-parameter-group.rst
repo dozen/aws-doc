@@ -15,7 +15,7 @@ Description
 
 
 
-Creates a new DB parameter group. 
+Creates a new DB parameter group.
 
  
 
@@ -27,10 +27,13 @@ A DB parameter group is initially created with the default parameters for the da
 
    
 
-  After you create a DB parameter group, you should wait at least 5 minutes before creating your first DB instance that uses that DB parameter group as the default parameter group. This allows Amazon RDS to fully complete the create action before the parameter group is used as the default for a new DB instance. This is especially important for parameters that are critical when creating the default database for a DB instance, such as the character set for the default database defined by the ``character_set_database`` parameter. You can use the *Parameter Groups* option of the `Amazon RDS console`_ or the *describe-db-parameters* command to verify that your DB parameter group has been created or modified.
+  After you create a DB parameter group, you should wait at least 5 minutes before creating your first DB instance that uses that DB parameter group as the default parameter group. This allows Amazon RDS to fully complete the create action before the parameter group is used as the default for a new DB instance. This is especially important for parameters that are critical when creating the default database for a DB instance, such as the character set for the default database defined by the ``character_set_database`` parameter. You can use the *Parameter Groups* option of the `Amazon RDS console <https://console.aws.amazon.com/rds/>`_ or the *describe-db-parameters* command to verify that your DB parameter group has been created or modified.
 
    
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBParameterGroup>`_
 
 
 ========
@@ -45,7 +48,7 @@ Synopsis
   --description <value>
   [--tags <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -57,41 +60,45 @@ Options
 ``--db-parameter-group-name`` (string)
 
 
-  The name of the DB parameter group. 
+  The name of the DB parameter group.
 
    
 
-  Constraints: 
+  Constraints:
 
    
 
    
-  * Must be 1 to 255 alphanumeric characters
+  * Must be 1 to 255 alphanumeric characters 
    
-  * First character must be a letter
+  * First character must be a letter 
    
-  * Cannot end with a hyphen or contain two consecutive hyphens
+  * Cannot end with a hyphen or contain two consecutive hyphens 
    
 
    
 
   .. note::
 
+     
+
     This value is stored as a lowercase string.
+
+     
 
   
 
 ``--db-parameter-group-family`` (string)
 
 
-  The DB parameter group family name. A DB parameter group can be associated with one and only one DB parameter group family, and can be applied only to a DB instance running a database engine and engine version compatible with that DB parameter group family. 
+  The DB parameter group family name. A DB parameter group can be associated with one and only one DB parameter group family, and can be applied only to a DB instance running a database engine and engine version compatible with that DB parameter group family.
 
   
 
 ``--description`` (string)
 
 
-  The description for the DB parameter group. 
+  The description for the DB parameter group.
 
   
 
@@ -126,8 +133,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -151,7 +158,7 @@ DBParameterGroup -> (structure)
 
     
 
-    Provides the name of the DB parameter group. 
+    Provides the name of the DB parameter group.
 
     
 
@@ -161,7 +168,7 @@ DBParameterGroup -> (structure)
 
     
 
-    Provides the name of the DB parameter group family that this DB parameter group is compatible with. 
+    Provides the name of the DB parameter group family that this DB parameter group is compatible with.
 
     
 
@@ -171,7 +178,17 @@ DBParameterGroup -> (structure)
 
     
 
-    Provides the customer-specified description for this DB parameter group. 
+    Provides the customer-specified description for this DB parameter group.
+
+    
+
+    
+
+  DBParameterGroupArn -> (string)
+
+    
+
+    The Amazon Resource Name (ARN) for the DB parameter group.
 
     
 
@@ -179,6 +196,3 @@ DBParameterGroup -> (structure)
 
   
 
-
-
-.. _Amazon RDS console: https://console.aws.amazon.com/rds/

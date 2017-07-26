@@ -19,6 +19,9 @@ Describes the attributes for the specified load balancer.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeLoadBalancerAttributes>`_
+
+
 ========
 Synopsis
 ========
@@ -28,7 +31,7 @@ Synopsis
     describe-load-balancer-attributes
   --load-balancer-name <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -47,8 +50,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -102,11 +105,11 @@ LoadBalancerAttributes -> (structure)
 
     
 
-    If enabled, the load balancer routes the request traffic evenly across all back-end instances regardless of the Availability Zones.
+    If enabled, the load balancer routes the request traffic evenly across all instances regardless of the Availability Zones.
 
      
 
-    For more information, see `Enable Cross-Zone Load Balancing`_ in the *Elastic Load Balancing Developer Guide* .
+    For more information, see `Configure Cross-Zone Load Balancing <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-crosszone-lb.html>`_ in the *Classic Load Balancer Guide* .
 
     
 
@@ -130,7 +133,7 @@ LoadBalancerAttributes -> (structure)
 
      
 
-    For more information, see `Enable Access Logs`_ in the *Elastic Load Balancing Developer Guide* .
+    For more information, see `Enable Access Logs <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-access-logs.html>`_ in the *Classic Load Balancer Guide* .
 
     
 
@@ -138,7 +141,7 @@ LoadBalancerAttributes -> (structure)
 
       
 
-      Specifies whether access log is enabled for the load balancer.
+      Specifies whether access logs are enabled for the load balancer.
 
       
 
@@ -184,11 +187,11 @@ LoadBalancerAttributes -> (structure)
 
     
 
-    If enabled, the load balancer allows existing requests to complete before the load balancer shifts traffic away from a deregistered or unhealthy back-end instance.
+    If enabled, the load balancer allows existing requests to complete before the load balancer shifts traffic away from a deregistered or unhealthy instance.
 
      
 
-    For more information, see `Enable Connection Draining`_ in the *Elastic Load Balancing Developer Guide* .
+    For more information, see `Configure Connection Draining <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-conn-drain.html>`_ in the *Classic Load Balancer Guide* .
 
     
 
@@ -222,7 +225,7 @@ LoadBalancerAttributes -> (structure)
 
      
 
-    By default, Elastic Load Balancing maintains a 60-second idle connection timeout for both front-end and back-end connections of your load balancer. For more information, see `Configure Idle Connection Timeout`_ in the *Elastic Load Balancing Developer Guide* .
+    By default, Elastic Load Balancing maintains a 60-second idle connection timeout for both front-end and back-end connections of your load balancer. For more information, see `Configure Idle Connection Timeout <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-idle-timeout.html>`_ in the *Classic Load Balancer Guide* .
 
     
 
@@ -280,9 +283,3 @@ LoadBalancerAttributes -> (structure)
 
   
 
-
-
-.. _Enable Access Logs: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/enable-access-logs.html
-.. _Enable Cross-Zone Load Balancing: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/enable-disable-crosszone-lb.html
-.. _Configure Idle Connection Timeout: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/config-idle-timeout.html
-.. _Enable Connection Draining: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/config-conn-drain.html

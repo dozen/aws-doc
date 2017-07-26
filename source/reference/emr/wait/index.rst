@@ -27,6 +27,7 @@ Available Commands
   :titlesonly:
 
   cluster-running
+  cluster-terminated
 
 
 ========

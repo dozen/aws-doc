@@ -15,14 +15,21 @@ Description
 
 
 
-This action deletes a health check. To delete a health check, send a ``DELETE`` request to the ``/*Route 53 API version* /healthcheck/*health check ID*`` resource.
+Deletes a health check.
 
  
 
 .. warning::
 
-  You can delete a health check only if there are no resource record sets associated with this health check. If resource record sets are associated with this health check, you must disassociate them before you can delete your health check. If you try to delete a health check that is associated with resource record sets, Amazon Route 53 will deny your request with a ``HealthCheckInUse`` error. For information about disassociating the records from your health check, see  change-resource-record-sets .
+   
 
+  Amazon Route 53 does not prevent you from deleting a health check even if the health check is associated with one or more resource record sets. If you delete a health check and you don't update the associated resource record sets, the future status of the health check can't be predicted and may change. This will affect the routing of DNS queries for your DNS failover configuration. For more information, see `Replacing and Deleting Health Checks <http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/health-checks-creating-deleting.html#health-checks-deleting.html>`_ in the *Amazon Route 53 Developer Guide* .
+
+   
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteHealthCheck>`_
 
 
 ========
@@ -34,7 +41,7 @@ Synopsis
     delete-health-check
   --health-check-id <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -46,15 +53,15 @@ Options
 ``--health-check-id`` (string)
 
 
-  The ID of the health check to delete.
+  The ID of the health check that you want to delete.
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 

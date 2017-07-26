@@ -19,6 +19,9 @@ Describes your import snapshot tasks.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImportSnapshotTasks>`_
+
+
 ========
 Synopsis
 ========
@@ -27,12 +30,12 @@ Synopsis
 
     describe-import-snapshot-tasks
   [--dry-run | --no-dry-run]
-  [--import-task-ids <value>]
-  [--next-token <value>]
-  [--max-results <value>]
   [--filters <value>]
+  [--import-task-ids <value>]
+  [--max-results <value>]
+  [--next-token <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -45,35 +48,6 @@ Options
 
 
   Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
-
-  
-
-``--import-task-ids`` (list)
-
-
-  A list of import snapshot task IDs.
-
-  
-
-
-
-Syntax::
-
-  "string" "string" ...
-
-
-
-``--next-token`` (string)
-
-
-  A token that indicates the next page of results.
-
-  
-
-``--max-results`` (integer)
-
-
-  The maximum number of results to return in a single request.
 
   
 
@@ -105,11 +79,40 @@ JSON Syntax::
 
 
 
+``--import-task-ids`` (list)
+
+
+  A list of import snapshot task IDs.
+
+  
+
+
+
+Syntax::
+
+  "string" "string" ...
+
+
+
+``--max-results`` (integer)
+
+
+  The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned ``NextToken`` value.
+
+  
+
+``--next-token`` (string)
+
+
+  A token that indicates the next page of results.
+
+  
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -133,6 +136,16 @@ ImportSnapshotTasks -> (list)
 
     
 
+    Description -> (string)
+
+      
+
+      A description of the import snapshot task.
+
+      
+
+      
+
     ImportTaskId -> (string)
 
       
@@ -151,16 +164,6 @@ ImportSnapshotTasks -> (list)
 
       
 
-      DiskImageSize -> (double)
-
-        
-
-        The size of the disk in the snapshot, in GiB.
-
-        
-
-        
-
       Description -> (string)
 
         
@@ -171,11 +174,61 @@ ImportSnapshotTasks -> (list)
 
         
 
+      DiskImageSize -> (double)
+
+        
+
+        The size of the disk in the snapshot, in GiB.
+
+        
+
+        
+
       Format -> (string)
 
         
 
         The format of the disk image from which the snapshot is created.
+
+        
+
+        
+
+      Progress -> (string)
+
+        
+
+        The percentage of completion for the import snapshot task.
+
+        
+
+        
+
+      SnapshotId -> (string)
+
+        
+
+        The snapshot ID of the disk being imported.
+
+        
+
+        
+
+      Status -> (string)
+
+        
+
+        A brief status for the import snapshot task.
+
+        
+
+        
+
+      StatusMessage -> (string)
+
+        
+
+        A detailed status message for the import snapshot task.
 
         
 
@@ -213,63 +266,13 @@ ImportSnapshotTasks -> (list)
 
           
 
-          The key from which the disk image was created.
+          The file name of the disk image.
 
           
 
           
 
         
-
-      SnapshotId -> (string)
-
-        
-
-        The snapshot ID of the disk being imported.
-
-        
-
-        
-
-      Progress -> (string)
-
-        
-
-        The percentage of completion for the import snapshot task.
-
-        
-
-        
-
-      StatusMessage -> (string)
-
-        
-
-        A detailed status message for the import snapshot task.
-
-        
-
-        
-
-      Status -> (string)
-
-        
-
-        A brief status for the import snapshot task.
-
-        
-
-        
-
-      
-
-    Description -> (string)
-
-      
-
-      A description of the import snapshot task.
-
-      
 
       
 

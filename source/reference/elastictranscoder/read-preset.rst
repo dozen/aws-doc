@@ -19,6 +19,9 @@ The read-preset operation gets detailed information about a preset.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elastictranscoder-2012-09-25/ReadPreset>`_
+
+
 ========
 Synopsis
 ========
@@ -28,7 +31,7 @@ Synopsis
     read-preset
   --id <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -47,8 +50,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -140,7 +143,7 @@ Preset -> (structure)
 
        
 
-      ``auto`` , ``22050`` , ``32000`` , ``44100`` , ``48000`` , ``96000`` 
+       ``auto`` , ``22050`` , ``32000`` , ``44100`` , ``48000`` , ``96000``  
 
        
 
@@ -168,7 +171,7 @@ Preset -> (structure)
 
        
 
-      ``auto`` , ``0`` , ``1`` , ``2`` 
+       ``auto`` , ``0`` , ``1`` , ``2``  
 
        
 
@@ -181,13 +184,13 @@ Preset -> (structure)
        
 
        
-      * ``auto`` **channel specified, with any input:** Pass through up to eight input channels.
+      * ``auto``  **channel specified, with any input:** Pass through up to eight input channels. 
        
-      * ``0`` **channels specified, with any input:** Audio omitted from the output.
+      * ``0``  **channels specified, with any input:** Audio omitted from the output. 
        
-      * ``1`` **channel specified, with at least one input channel:** Mono sound.
+      * ``1``  **channel specified, with at least one input channel:** Mono sound. 
        
-      * ``2`` **channels specified, with any input:** Two identical mono channels or stereo. For more information about tracks, see ``Audio:AudioPackingMode.``  
+      * ``2``  **channels specified, with any input:** Two identical mono channels or stereo. For more information about tracks, see ``Audio:AudioPackingMode.``   
        
 
        
@@ -210,7 +213,7 @@ Preset -> (structure)
 
        
 
-      ``SingleTrack`` , ``OneChannelPerTrack`` , and ``OneChannelPerTrackWithMosTo8Tracks`` 
+       ``SingleTrack`` , ``OneChannelPerTrack`` , and ``OneChannelPerTrackWithMosTo8Tracks``  
 
        
 
@@ -223,23 +226,23 @@ Preset -> (structure)
        
 
        
-      * ``0``  **channels with any input:** Audio omitted from the output
+      * ``0``  **channels with any input:** Audio omitted from the output 
        
-      * ``1, 2, or auto``  **channels with no audio input:** Audio omitted from the output
+      * ``1, 2, or auto``  **channels with no audio input:** Audio omitted from the output 
        
-      * ``1``  **channel with any input with audio:** One track with one channel, downmixed if necessary
+      * ``1``  **channel with any input with audio:** One track with one channel, downmixed if necessary 
        
-      * ``2``  **channels with one track with one channel:** One track with two identical channels
+      * ``2``  **channels with one track with one channel:** One track with two identical channels 
        
-      * ``2 or auto``  **channels with two tracks with one channel each:** One track with two channels
+      * ``2 or auto``  **channels with two tracks with one channel each:** One track with two channels 
        
-      * ``2 or auto``  **channels with one track with two channels:** One track with two channels
+      * ``2 or auto``  **channels with one track with two channels:** One track with two channels 
        
-      * ``2``  **channels with one track with multiple channels:** One track with two channels
+      * ``2``  **channels with one track with multiple channels:** One track with two channels 
        
-      * ``auto``  **channels with one track with one channel:** One track with one channel
+      * ``auto``  **channels with one track with one channel:** One track with one channel 
        
-      * ``auto``  **channels with one track with multiple channels:** One track with multiple channels
+      * ``auto``  **channels with one track with multiple channels:** One track with multiple channels 
        
 
        
@@ -253,23 +256,23 @@ Preset -> (structure)
        
 
        
-      * ``0``  **channels with any input:** Audio omitted from the output
+      * ``0``  **channels with any input:** Audio omitted from the output 
        
-      * ``1, 2, or auto``  **channels with no audio input:** Audio omitted from the output
+      * ``1, 2, or auto``  **channels with no audio input:** Audio omitted from the output 
        
-      * ``1``  **channel with any input with audio:** One track with one channel, downmixed if necessary
+      * ``1``  **channel with any input with audio:** One track with one channel, downmixed if necessary 
        
-      * ``2``  **channels with one track with one channel:** Two tracks with one identical channel each
+      * ``2``  **channels with one track with one channel:** Two tracks with one identical channel each 
        
-      * ``2 or auto``  **channels with two tracks with one channel each:** Two tracks with one channel each
+      * ``2 or auto``  **channels with two tracks with one channel each:** Two tracks with one channel each 
        
-      * ``2 or auto``  **channels with one track with two channels:** Two tracks with one channel each
+      * ``2 or auto``  **channels with one track with two channels:** Two tracks with one channel each 
        
-      * ``2``  **channels with one track with multiple channels:** Two tracks with one channel each
+      * ``2``  **channels with one track with multiple channels:** Two tracks with one channel each 
        
-      * ``auto``  **channels with one track with one channel:** One track with one channel
+      * ``auto``  **channels with one track with one channel:** One track with one channel 
        
-      * ``auto``  **channels with one track with multiple channels:** Up to eight tracks with one channel each
+      * ``auto``  **channels with one track with multiple channels:** Up to eight tracks with one channel each 
        
 
        
@@ -283,23 +286,23 @@ Preset -> (structure)
        
 
        
-      * ``0``  **channels with any input:** Audio omitted from the output
+      * ``0``  **channels with any input:** Audio omitted from the output 
        
-      * ``1, 2, or auto``  **channels with no audio input:** Audio omitted from the output
+      * ``1, 2, or auto``  **channels with no audio input:** Audio omitted from the output 
        
-      * ``1``  **channel with any input with audio:** One track with one channel, downmixed if necessary, plus six MOS tracks
+      * ``1``  **channel with any input with audio:** One track with one channel, downmixed if necessary, plus six MOS tracks 
        
-      * ``2``  **channels with one track with one channel:** Two tracks with one identical channel each, plus six MOS tracks
+      * ``2``  **channels with one track with one channel:** Two tracks with one identical channel each, plus six MOS tracks 
        
-      * ``2 or auto``  **channels with two tracks with one channel each:** Two tracks with one channel each, plus six MOS tracks
+      * ``2 or auto``  **channels with two tracks with one channel each:** Two tracks with one channel each, plus six MOS tracks 
        
-      * ``2 or auto``  **channels with one track with two channels:** Two tracks with one channel each, plus six MOS tracks
+      * ``2 or auto``  **channels with one track with two channels:** Two tracks with one channel each, plus six MOS tracks 
        
-      * ``2``  **channels with one track with multiple channels:** Two tracks with one channel each, plus six MOS tracks
+      * ``2``  **channels with one track with multiple channels:** Two tracks with one channel each, plus six MOS tracks 
        
-      * ``auto``  **channels with one track with one channel:** One track with one channel, plus seven MOS tracks
+      * ``auto``  **channels with one track with one channel:** One track with one channel, plus seven MOS tracks 
        
-      * ``auto``  **channels with one track with multiple channels:** Up to eight tracks with one channel each, plus MOS tracks until there are eight tracks in all
+      * ``auto``  **channels with one track with multiple channels:** Up to eight tracks with one channel each, plus MOS tracks until there are eight tracks in all 
        
 
       
@@ -314,7 +317,7 @@ Preset -> (structure)
 
        
 
-      ``auto`` , ``AAC-LC`` , ``HE-AAC`` , ``HE-AACv2`` 
+       ``auto`` , ``AAC-LC`` , ``HE-AAC`` , ``HE-AACv2``  
 
        
 
@@ -335,13 +338,13 @@ Preset -> (structure)
          
 
          
-        * ``auto`` : If you specify ``auto`` , Elastic Transcoder will select the profile based on the bit rate selected for the output file.
+        * ``auto`` : If you specify ``auto`` , Elastic Transcoder selects the profile based on the bit rate selected for the output file. 
          
-        * ``AAC-LC`` : The most common AAC profile. Use for bit rates larger than 64 kbps.
+        * ``AAC-LC`` : The most common AAC profile. Use for bit rates larger than 64 kbps. 
          
-        * ``HE-AAC`` : Not supported on some older players and devices. Use for bit rates between 40 and 80 kbps.
+        * ``HE-AAC`` : Not supported on some older players and devices. Use for bit rates between 40 and 80 kbps. 
          
-        * ``HE-AACv2`` : Not supported on some players and devices. Use for bit rates less than 48 kbps.
+        * ``HE-AACv2`` : Not supported on some players and devices. Use for bit rates less than 48 kbps. 
          
 
          
@@ -352,11 +355,11 @@ Preset -> (structure)
 
         .. note::
 
-          
+           
 
           If you created any presets before AAC profiles were added, Elastic Transcoder automatically updated your presets to use AAC-LC. You can change the value as required.
 
-          
+           
 
         
 
@@ -436,7 +439,7 @@ Preset -> (structure)
 
       
 
-      The video codec for the output file. Valid values include ``gif`` , ``H.264`` , ``mpeg2`` , and ``vp8`` . You can only specify ``vp8`` when the container type is ``webm`` , ``gif`` when the container type is ``gif`` , and ``mpeg2`` when the container type is ``mpg`` .
+      The video codec for the output file. Valid values include ``gif`` , ``H.264`` , ``mpeg2`` , ``vp8`` , and ``vp9`` . You can only specify ``vp8`` and ``vp9`` when the container type is ``webm`` , ``gif`` when the container type is ``gif`` , and ``mpeg2`` when the container type is ``mpg`` .
 
       
 
@@ -446,7 +449,7 @@ Preset -> (structure)
 
       
 
-       **Profile (H.264/VP8 Only)**  
+       **Profile (H.264/VP8/VP9 Only)**  
 
        
 
@@ -455,11 +458,11 @@ Preset -> (structure)
        
 
        
-      * ``baseline`` : The profile most commonly used for videoconferencing and for mobile applications.
+      * ``baseline`` : The profile most commonly used for videoconferencing and for mobile applications. 
        
-      * ``main`` : The profile used for standard-definition digital TV broadcasts.
+      * ``main`` : The profile used for standard-definition digital TV broadcasts. 
        
-      * ``high`` : The profile used for high-definition digital TV broadcasts and for Blu-ray discs.
+      * ``high`` : The profile used for high-definition digital TV broadcasts and for Blu-ray discs. 
        
 
        
@@ -472,7 +475,7 @@ Preset -> (structure)
 
        
 
-      ``1`` , ``1b`` , ``1.1`` , ``1.2`` , ``1.3`` , ``2`` , ``2.1`` , ``2.2`` , ``3`` , ``3.1`` , ``3.2`` , ``4`` , ``4.1`` 
+       ``1`` , ``1b`` , ``1.1`` , ``1.2`` , ``1.3`` , ``2`` , ``2.1`` , ``2.2`` , ``3`` , ``3.1`` , ``3.2`` , ``4`` , ``4.1``  
 
        
 
@@ -493,36 +496,36 @@ Preset -> (structure)
        
 
        
-      * 1 - 396
+      * 1 - 396 
        
-      * 1b - 396
+      * 1b - 396 
        
-      * 1.1 - 900
+      * 1.1 - 900 
        
-      * 1.2 - 2376
+      * 1.2 - 2376 
        
-      * 1.3 - 2376
+      * 1.3 - 2376 
        
-      * 2 - 2376
+      * 2 - 2376 
        
-      * 2.1 - 4752
+      * 2.1 - 4752 
        
-      * 2.2 - 8100
+      * 2.2 - 8100 
        
-      * 3 - 8100
+      * 3 - 8100 
        
-      * 3.1 - 18000
+      * 3.1 - 18000 
        
-      * 3.2 - 20480
+      * 3.2 - 20480 
        
-      * 4 - 32768
+      * 4 - 32768 
        
-      * 4.1 - 32768
-       
-
+      * 4.1 - 32768 
        
 
-       **MaxBitRate (Optional, H.264/MPEG2/VP8 only)**  
+       
+
+       **MaxBitRate (Optional, H.264/MPEG2/VP8/VP9 only)**  
 
        
 
@@ -530,7 +533,7 @@ Preset -> (structure)
 
        
 
-       **BufferSize (Optional, H.264/MPEG2/VP8 only)**  
+       **BufferSize (Optional, H.264/MPEG2/VP8/VP9 only)**  
 
        
 
@@ -575,20 +578,24 @@ Preset -> (structure)
        
 
        
-      * *Standard to HD, 720x480 to 1920x1080* - Elastic Transcoder applies ``Bt601ToBt709``  
+      * *Standard to HD, 720x480 to 1920x1080* - Elastic Transcoder applies ``Bt601ToBt709``   
        
-      * *Standard to HD, 720x576 to 1920x1080* - Elastic Transcoder applies ``Bt601ToBt709``  
+      * *Standard to HD, 720x576 to 1920x1080* - Elastic Transcoder applies ``Bt601ToBt709``   
        
-      * *HD to Standard, 1920x1080 to 720x480* - Elastic Transcoder applies ``Bt709ToBt601``  
+      * *HD to Standard, 1920x1080 to 720x480* - Elastic Transcoder applies ``Bt709ToBt601``   
        
-      * *HD to Standard, 1920x1080 to 720x576* - Elastic Transcoder applies ``Bt709ToBt601``  
+      * *HD to Standard, 1920x1080 to 720x576* - Elastic Transcoder applies ``Bt709ToBt601``   
        
 
        
 
       .. note::
 
+         
+
         Elastic Transcoder may change the behavior of the ``ColorspaceConversionMode``  ``Auto`` mode in the future. All outputs in a playlist must use the same ``ColorSpaceConversionMode`` .
+
+         
 
        
 
@@ -604,7 +611,7 @@ Preset -> (structure)
 
        
 
-      ``yuv420p`` samples the chroma information of every other horizontal and every other vertical line, ``yuv422p`` samples the color information of every horizontal line and every other vertical line.
+       ``yuv420p`` samples the chroma information of every other horizontal and every other vertical line, ``yuv422p`` samples the color information of every horizontal line and every other vertical line.
 
        
 
@@ -669,20 +676,20 @@ Preset -> (structure)
        
 
        
-      * ``true`` : Elastic Transcoder uses the value of ``KeyframesMaxDist`` for the distance between key frames (the number of frames in a group of pictures, or GOP).
+      * ``true`` : Elastic Transcoder uses the value of ``KeyframesMaxDist`` for the distance between key frames (the number of frames in a group of pictures, or GOP). 
        
-      * ``false`` : The distance between key frames can vary.
+      * ``false`` : The distance between key frames can vary. 
        
 
        
 
       .. warning::
 
-        
+         
 
-        ``FixedGOP`` must be set to ``true`` for ``fmp4`` containers.
+         ``FixedGOP`` must be set to ``true`` for ``fmp4`` containers.
 
-        
+         
 
       
 
@@ -701,27 +708,27 @@ Preset -> (structure)
        
 
        
-      * 1 - 64 : 80
+      * 1 - 64 : 80 
        
-      * 1b - 128 : 160
+      * 1b - 128 : 160 
        
-      * 1.1 - 192 : 240
+      * 1.1 - 192 : 240 
        
-      * 1.2 - 384 : 480
+      * 1.2 - 384 : 480 
        
-      * 1.3 - 768 : 960
+      * 1.3 - 768 : 960 
        
-      * 2 - 2000 : 2500
+      * 2 - 2000 : 2500 
        
-      * 3 - 10000 : 12500
+      * 3 - 10000 : 12500 
        
-      * 3.1 - 14000 : 17500
+      * 3.1 - 14000 : 17500 
        
-      * 3.2 - 20000 : 25000
+      * 3.2 - 20000 : 25000 
        
-      * 4 - 20000 : 25000
+      * 4 - 20000 : 25000 
        
-      * 4.1 - 50000 : 62500
+      * 4.1 - 50000 : 62500 
        
 
       
@@ -736,7 +743,7 @@ Preset -> (structure)
 
        
 
-      ``auto`` , ``10`` , ``15`` , ``23.97`` , ``24`` , ``25`` , ``29.97`` , ``30`` , ``60`` 
+       ``auto`` , ``10`` , ``15`` , ``23.97`` , ``24`` , ``25`` , ``29.97`` , ``30`` , ``60``  
 
        
 
@@ -753,9 +760,9 @@ Preset -> (structure)
        
 
        
-      * *width in pixels* and *height in pixels* represent the Resolution of the output video.
+      * *width in pixels* and *height in pixels* represent the Resolution of the output video. 
        
-      * *maximum recommended decoding speed in Luma samples/second* is less than or equal to the maximum value listed in the following table, based on the value that you specified for Level.
+      * *maximum recommended decoding speed in Luma samples/second* is less than or equal to the maximum value listed in the following table, based on the value that you specified for Level. 
        
 
        
@@ -765,31 +772,31 @@ Preset -> (structure)
        
 
        
-      * 1 - 380160
+      * 1 - 380160 
        
-      * 1b - 380160
+      * 1b - 380160 
        
-      * 1.1 - 76800
+      * 1.1 - 76800 
        
-      * 1.2 - 1536000
+      * 1.2 - 1536000 
        
-      * 1.3 - 3041280
+      * 1.3 - 3041280 
        
-      * 2 - 3041280
+      * 2 - 3041280 
        
-      * 2.1 - 5068800
+      * 2.1 - 5068800 
        
-      * 2.2 - 5184000
+      * 2.2 - 5184000 
        
-      * 3 - 10368000
+      * 3 - 10368000 
        
-      * 3.1 - 27648000
+      * 3.1 - 27648000 
        
-      * 3.2 - 55296000
+      * 3.2 - 55296000 
        
-      * 4 - 62914560
+      * 4 - 62914560 
        
-      * 4.1 - 62914560
+      * 4.1 - 62914560 
        
 
       
@@ -825,9 +832,9 @@ Preset -> (structure)
        
 
        
-      * ``auto`` : Elastic Transcoder attempts to preserve the width and height of the input file, subject to the following rules.
+      * ``auto`` : Elastic Transcoder attempts to preserve the width and height of the input file, subject to the following rules. 
        
-      * ``*width* x *height*`` : The width and height of the output video in pixels.
+      * ``*width* x *height* `` : The width and height of the output video in pixels. 
        
 
        
@@ -837,45 +844,45 @@ Preset -> (structure)
        
 
        
-      * The width must be an even integer between 128 and 4096, inclusive.
+      * The width must be an even integer between 128 and 4096, inclusive. 
        
-      * The height must be an even integer between 96 and 3072, inclusive.
+      * The height must be an even integer between 96 and 3072, inclusive. 
        
-      * If you specify a resolution that is less than the resolution of the input file, Elastic Transcoder rescales the output file to the lower resolution.
+      * If you specify a resolution that is less than the resolution of the input file, Elastic Transcoder rescales the output file to the lower resolution. 
        
-      * If you specify a resolution that is greater than the resolution of the input file, Elastic Transcoder rescales the output to the higher resolution.
+      * If you specify a resolution that is greater than the resolution of the input file, Elastic Transcoder rescales the output to the higher resolution. 
        
-      * We recommend that you specify a resolution for which the product of width and height is less than or equal to the applicable value in the following list (*List - Max width x height value* ):
-       
+      * We recommend that you specify a resolution for which the product of width and height is less than or equal to the applicable value in the following list (*List - Max width x height value* ): 
 
          
-        * 1 - 25344
+        * 1 - 25344 
          
-        * 1b - 25344
+        * 1b - 25344 
          
-        * 1.1 - 101376
+        * 1.1 - 101376 
          
-        * 1.2 - 101376
+        * 1.2 - 101376 
          
-        * 1.3 - 101376
+        * 1.3 - 101376 
          
-        * 2 - 101376
+        * 2 - 101376 
          
-        * 2.1 - 202752
+        * 2.1 - 202752 
          
-        * 2.2 - 404720
+        * 2.2 - 404720 
          
-        * 3 - 404720
+        * 3 - 404720 
          
-        * 3.1 - 921600
+        * 3.1 - 921600 
          
-        * 3.2 - 1310720
+        * 3.2 - 1310720 
          
-        * 4 - 2097152
+        * 4 - 2097152 
          
-        * 4.1 - 2097152
+        * 4.1 - 2097152 
          
 
+       
        
 
       
@@ -900,7 +907,7 @@ Preset -> (structure)
 
        
 
-      ``auto`` , ``1:1`` , ``4:3`` , ``3:2`` , ``16:9`` 
+       ``auto`` , ``1:1`` , ``4:3`` , ``3:2`` , ``16:9``  
 
        
 
@@ -953,21 +960,17 @@ Preset -> (structure)
        
 
        
-
+      * ``Fit`` : Elastic Transcoder scales the output video so it matches the value that you specified in either ``MaxWidth`` or ``MaxHeight`` without exceeding the other value. 
        
-      * ``Fit`` : Elastic Transcoder scales the output video so it matches the value that you specified in either ``MaxWidth`` or ``MaxHeight`` without exceeding the other value.
+      * ``Fill`` : Elastic Transcoder scales the output video so it matches the value that you specified in either ``MaxWidth`` or ``MaxHeight`` and matches or exceeds the other value. Elastic Transcoder centers the output video and then crops it in the dimension (if any) that exceeds the maximum value. 
        
-      * ``Fill`` : Elastic Transcoder scales the output video so it matches the value that you specified in either ``MaxWidth`` or ``MaxHeight`` and matches or exceeds the other value. Elastic Transcoder centers the output video and then crops it in the dimension (if any) that exceeds the maximum value.
+      * ``Stretch`` : Elastic Transcoder stretches the output video to match the values that you specified for ``MaxWidth`` and ``MaxHeight`` . If the relative proportions of the input video and the output video are different, the output video will be distorted. 
        
-      * ``Stretch`` : Elastic Transcoder stretches the output video to match the values that you specified for ``MaxWidth`` and ``MaxHeight`` . If the relative proportions of the input video and the output video are different, the output video will be distorted.
+      * ``Keep`` : Elastic Transcoder does not scale the output video. If either dimension of the input video exceeds the values that you specified for ``MaxWidth`` and ``MaxHeight`` , Elastic Transcoder crops the output video. 
        
-      * ``Keep`` : Elastic Transcoder does not scale the output video. If either dimension of the input video exceeds the values that you specified for ``MaxWidth`` and ``MaxHeight`` , Elastic Transcoder crops the output video.
+      * ``ShrinkToFit`` : Elastic Transcoder scales the output video down so that its dimensions match the values that you specified for at least one of ``MaxWidth`` and ``MaxHeight`` without exceeding either value. If you specify this option, Elastic Transcoder does not scale the video up. 
        
-      * ``ShrinkToFit`` : Elastic Transcoder scales the output video down so that its dimensions match the values that you specified for at least one of ``MaxWidth`` and ``MaxHeight`` without exceeding either value. If you specify this option, Elastic Transcoder does not scale the video up.
-       
-      * ``ShrinkToFill`` : Elastic Transcoder scales the output video down so that its dimensions match the values that you specified for at least one of ``MaxWidth`` and ``MaxHeight`` without dropping below either value. If you specify this option, Elastic Transcoder does not scale the video up.
-       
-
+      * ``ShrinkToFill`` : Elastic Transcoder scales the output video down so that its dimensions match the values that you specified for at least one of ``MaxWidth`` and ``MaxHeight`` without dropping below either value. If you specify this option, Elastic Transcoder does not scale the video up. 
        
 
       
@@ -1018,7 +1021,11 @@ Preset -> (structure)
 
         Id -> (string)
 
-          A unique identifier for the settings for one watermark. The value of ``id`` can be up to 40 characters long.
+          
+
+          A unique identifier for the settings for one watermark. The value of ``id`` can be up to 40 characters long. 
+
+          
 
           
 
@@ -1029,12 +1036,12 @@ Preset -> (structure)
           The maximum width of the watermark in one of the following formats: 
 
            
-          * number of pixels (px): The minimum value is 16 pixels, and the maximum value is the value of ``MaxWidth`` .
-           
-          * integer percentage (%): The range of valid values is 0 to 100. Use the value of ``Target`` to specify whether you want Elastic Transcoder to include the black bars that are added by Elastic Transcoder, if any, in the calculation.
-          If you specify the value in pixels, it must be less than or equal to the value of ``MaxWidth`` .
 
-          
+           
+          * number of pixels (px): The minimum value is 16 pixels, and the maximum value is the value of ``MaxWidth`` . 
+           
+          * integer percentage (%): The range of valid values is 0 to 100. Use the value of ``Target`` to specify whether you want Elastic Transcoder to include the black bars that are added by Elastic Transcoder, if any, in the calculation. If you specify the value in pixels, it must be less than or equal to the value of ``MaxWidth`` . 
+           
 
           
 
@@ -1047,9 +1054,13 @@ Preset -> (structure)
           The maximum height of the watermark in one of the following formats: 
 
            
-          * number of pixels (px): The minimum value is 16 pixels, and the maximum value is the value of ``MaxHeight`` .
+
            
-          * integer percentage (%): The range of valid values is 0 to 100. Use the value of ``Target`` to specify whether you want Elastic Transcoder to include the black bars that are added by Elastic Transcoder, if any, in the calculation.
+          * number of pixels (px): The minimum value is 16 pixels, and the maximum value is the value of ``MaxHeight`` . 
+           
+          * integer percentage (%): The range of valid values is 0 to 100. Use the value of ``Target`` to specify whether you want Elastic Transcoder to include the black bars that are added by Elastic Transcoder, if any, in the calculation. 
+           
+
            
 
           If you specify the value in pixels, it must be less than or equal to the value of ``MaxHeight`` .
@@ -1065,13 +1076,13 @@ Preset -> (structure)
           A value that controls scaling of the watermark: 
 
            
-          * **Fit** : Elastic Transcoder scales the watermark so it matches the value that you specified in either ``MaxWidth`` or ``MaxHeight`` without exceeding the other value.
-           
-          * **Stretch** : Elastic Transcoder stretches the watermark to match the values that you specified for ``MaxWidth`` and ``MaxHeight`` . If the relative proportions of the watermark and the values of ``MaxWidth`` and ``MaxHeight`` are different, the watermark will be distorted.
-           
-          * **ShrinkToFit** : Elastic Transcoder scales the watermark down so that its dimensions match the values that you specified for at least one of ``MaxWidth`` and ``MaxHeight`` without exceeding either value. If you specify this option, Elastic Transcoder does not scale the watermark up.
-           
 
+           
+          * **Fit** : Elastic Transcoder scales the watermark so it matches the value that you specified in either ``MaxWidth`` or ``MaxHeight`` without exceeding the other value. 
+           
+          * **Stretch** : Elastic Transcoder stretches the watermark to match the values that you specified for ``MaxWidth`` and ``MaxHeight`` . If the relative proportions of the watermark and the values of ``MaxWidth`` and ``MaxHeight`` are different, the watermark will be distorted. 
+           
+          * **ShrinkToFit** : Elastic Transcoder scales the watermark down so that its dimensions match the values that you specified for at least one of ``MaxWidth`` and ``MaxHeight`` without exceeding either value. If you specify this option, Elastic Transcoder does not scale the watermark up. 
            
 
           
@@ -1085,14 +1096,14 @@ Preset -> (structure)
           The horizontal position of the watermark unless you specify a non-zero value for ``HorizontalOffset`` : 
 
            
-          * **Left** : The left edge of the watermark is aligned with the left border of the video.
-           
-          * **Right** : The right edge of the watermark is aligned with the right border of the video.
-           
-          * **Center** : The watermark is centered between the left and right borders.
-           
 
-          
+           
+          * **Left** : The left edge of the watermark is aligned with the left border of the video. 
+           
+          * **Right** : The right edge of the watermark is aligned with the right border of the video. 
+           
+          * **Center** : The watermark is centered between the left and right borders. 
+           
 
           
 
@@ -1105,16 +1116,20 @@ Preset -> (structure)
           The amount by which you want the horizontal position of the watermark to be offset from the position specified by HorizontalAlign: 
 
            
-          * number of pixels (px): The minimum value is 0 pixels, and the maximum value is the value of MaxWidth.
+
            
-          * integer percentage (%): The range of valid values is 0 to 100.
+          * number of pixels (px): The minimum value is 0 pixels, and the maximum value is the value of MaxWidth. 
+           
+          * integer percentage (%): The range of valid values is 0 to 100. 
+           
+
            
 
           For example, if you specify Left for ``HorizontalAlign`` and 5px for ``HorizontalOffset`` , the left side of the watermark appears 5 pixels from the left border of the output video.
 
            
 
-          ``HorizontalOffset`` is only valid when the value of ``HorizontalAlign`` is ``Left`` or ``Right`` . If you specify an offset that causes the watermark to extend beyond the left or right border and Elastic Transcoder has not added black bars, the watermark is cropped. If Elastic Transcoder has added black bars, the watermark extends into the black bars. If the watermark extends beyond the black bars, it is cropped.
+           ``HorizontalOffset`` is only valid when the value of ``HorizontalAlign`` is ``Left`` or ``Right`` . If you specify an offset that causes the watermark to extend beyond the left or right border and Elastic Transcoder has not added black bars, the watermark is cropped. If Elastic Transcoder has added black bars, the watermark extends into the black bars. If the watermark extends beyond the black bars, it is cropped.
 
            
 
@@ -1131,14 +1146,14 @@ Preset -> (structure)
           The vertical position of the watermark unless you specify a non-zero value for ``VerticalOffset`` : 
 
            
-          * **Top** : The top edge of the watermark is aligned with the top border of the video.
-           
-          * **Bottom** : The bottom edge of the watermark is aligned with the bottom border of the video.
-           
-          * **Center** : The watermark is centered between the top and bottom borders.
-           
 
-          
+           
+          * **Top** : The top edge of the watermark is aligned with the top border of the video. 
+           
+          * **Bottom** : The bottom edge of the watermark is aligned with the bottom border of the video. 
+           
+          * **Center** : The watermark is centered between the top and bottom borders. 
+           
 
           
 
@@ -1146,21 +1161,29 @@ Preset -> (structure)
 
         VerticalOffset -> (string)
 
-          ``VerticalOffset``  
+          
+
+           ``VerticalOffset``  
+
+           
 
           The amount by which you want the vertical position of the watermark to be offset from the position specified by VerticalAlign:
 
            
-          * number of pixels (px): The minimum value is 0 pixels, and the maximum value is the value of ``MaxHeight`` .
+
            
-          * integer percentage (%): The range of valid values is 0 to 100.
+          * number of pixels (px): The minimum value is 0 pixels, and the maximum value is the value of ``MaxHeight`` . 
+           
+          * integer percentage (%): The range of valid values is 0 to 100. 
+           
+
            
 
           For example, if you specify ``Top`` for ``VerticalAlign`` and ``5px`` for ``VerticalOffset`` , the top of the watermark appears 5 pixels from the top border of the output video.
 
            
 
-          ``VerticalOffset`` is only valid when the value of VerticalAlign is Top or Bottom.
+           ``VerticalOffset`` is only valid when the value of VerticalAlign is Top or Bottom.
 
            
 
@@ -1192,15 +1215,15 @@ Preset -> (structure)
 
           
 
-          A value that determines how Elastic Transcoder interprets values that you specified for ``HorizontalOffset`` , ``VerticalOffset`` , ``MaxWidth`` , and ``MaxHeight`` : 
+          A value that determines how Elastic Transcoder interprets values that you specified for ``HorizontalOffset`` , ``VerticalOffset`` , ``MaxWidth`` , and ``MaxHeight`` :
 
            
-          * **Content** : ``HorizontalOffset`` and ``VerticalOffset`` values are calculated based on the borders of the video excluding black bars added by Elastic Transcoder, if any. In addition, ``MaxWidth`` and ``MaxHeight`` , if specified as a percentage, are calculated based on the borders of the video excluding black bars added by Elastic Transcoder, if any.
-           
-          * **Frame** : ``HorizontalOffset`` and ``VerticalOffset`` values are calculated based on the borders of the video including black bars added by Elastic Transcoder, if any.
-          In addition, ``MaxWidth`` and ``MaxHeight`` , if specified as a percentage, are calculated based on the borders of the video including black bars added by Elastic Transcoder, if any.
 
-          
+           
+          * **Content** : ``HorizontalOffset`` and ``VerticalOffset`` values are calculated based on the borders of the video excluding black bars added by Elastic Transcoder, if any. In addition, ``MaxWidth`` and ``MaxHeight`` , if specified as a percentage, are calculated based on the borders of the video excluding black bars added by Elastic Transcoder, if any. 
+           
+          * **Frame** : ``HorizontalOffset`` and ``VerticalOffset`` values are calculated based on the borders of the video including black bars added by Elastic Transcoder, if any. In addition, ``MaxWidth`` and ``MaxHeight`` , if specified as a percentage, are calculated based on the borders of the video including black bars added by Elastic Transcoder, if any. 
+           
 
           
 
@@ -1258,7 +1281,7 @@ Preset -> (structure)
 
        
 
-      The width and height of thumbnail files in pixels. Specify a value in the format ``*width*`` x ``*height*`` where both values are even integers. The values cannot exceed the width and height that you specified in the ``Video:Resolution`` object.
+      The width and height of thumbnail files in pixels. Specify a value in the format `` *width* `` x `` *height* `` where both values are even integers. The values cannot exceed the width and height that you specified in the ``Video:Resolution`` object.
 
       
 
@@ -1282,7 +1305,7 @@ Preset -> (structure)
 
        
 
-      ``auto`` , ``1:1`` , ``4:3`` , ``3:2`` , ``16:9`` 
+       ``auto`` , ``1:1`` , ``4:3`` , ``3:2`` , ``16:9``  
 
        
 
@@ -1296,7 +1319,7 @@ Preset -> (structure)
 
       
 
-      The maximum width of thumbnails in pixels. If you specify auto, Elastic Transcoder uses 1920 (Full HD) as the default value. If you specify a numeric value, enter an even integer between 32 and 4096. 
+      The maximum width of thumbnails in pixels. If you specify auto, Elastic Transcoder uses 1920 (Full HD) as the default value. If you specify a numeric value, enter an even integer between 32 and 4096.
 
       
 
@@ -1306,7 +1329,7 @@ Preset -> (structure)
 
       
 
-      The maximum height of thumbnails in pixels. If you specify auto, Elastic Transcoder uses 1080 (Full HD) as the default value. If you specify a numeric value, enter an even integer between 32 and 3072. 
+      The maximum height of thumbnails in pixels. If you specify auto, Elastic Transcoder uses 1080 (Full HD) as the default value. If you specify a numeric value, enter an even integer between 32 and 3072.
 
       
 
@@ -1321,21 +1344,17 @@ Preset -> (structure)
        
 
        
-
+      * ``Fit`` : Elastic Transcoder scales thumbnails so they match the value that you specified in thumbnail MaxWidth or MaxHeight settings without exceeding the other value.  
        
-      * ``Fit`` : Elastic Transcoder scales thumbnails so they match the value that you specified in thumbnail MaxWidth or MaxHeight settings without exceeding the other value. 
+      * ``Fill`` : Elastic Transcoder scales thumbnails so they match the value that you specified in thumbnail ``MaxWidth`` or ``MaxHeight`` settings and matches or exceeds the other value. Elastic Transcoder centers the image in thumbnails and then crops in the dimension (if any) that exceeds the maximum value. 
        
-      * ``Fill`` : Elastic Transcoder scales thumbnails so they match the value that you specified in thumbnail ``MaxWidth`` or ``MaxHeight`` settings and matches or exceeds the other value. Elastic Transcoder centers the image in thumbnails and then crops in the dimension (if any) that exceeds the maximum value.
+      * ``Stretch`` : Elastic Transcoder stretches thumbnails to match the values that you specified for thumbnail ``MaxWidth`` and ``MaxHeight`` settings. If the relative proportions of the input video and thumbnails are different, the thumbnails will be distorted. 
        
-      * ``Stretch`` : Elastic Transcoder stretches thumbnails to match the values that you specified for thumbnail ``MaxWidth`` and ``MaxHeight`` settings. If the relative proportions of the input video and thumbnails are different, the thumbnails will be distorted.
+      * ``Keep`` : Elastic Transcoder does not scale thumbnails. If either dimension of the input video exceeds the values that you specified for thumbnail ``MaxWidth`` and ``MaxHeight`` settings, Elastic Transcoder crops the thumbnails. 
        
-      * ``Keep`` : Elastic Transcoder does not scale thumbnails. If either dimension of the input video exceeds the values that you specified for thumbnail ``MaxWidth`` and ``MaxHeight`` settings, Elastic Transcoder crops the thumbnails.
+      * ``ShrinkToFit`` : Elastic Transcoder scales thumbnails down so that their dimensions match the values that you specified for at least one of thumbnail ``MaxWidth`` and ``MaxHeight`` without exceeding either value. If you specify this option, Elastic Transcoder does not scale thumbnails up. 
        
-      * ``ShrinkToFit`` : Elastic Transcoder scales thumbnails down so that their dimensions match the values that you specified for at least one of thumbnail ``MaxWidth`` and ``MaxHeight`` without exceeding either value. If you specify this option, Elastic Transcoder does not scale thumbnails up.
-       
-      * ``ShrinkToFill`` : Elastic Transcoder scales thumbnails down so that their dimensions match the values that you specified for at least one of ``MaxWidth`` and ``MaxHeight`` without dropping below either value. If you specify this option, Elastic Transcoder does not scale thumbnails up.
-       
-
+      * ``ShrinkToFill`` : Elastic Transcoder scales thumbnails down so that their dimensions match the values that you specified for at least one of ``MaxWidth`` and ``MaxHeight`` without dropping below either value. If you specify this option, Elastic Transcoder does not scale thumbnails up. 
        
 
       

@@ -19,8 +19,11 @@ Creates or updates a policy for an Auto Scaling group. To update an existing pol
 
  
 
-If you exceed your maximum limit of step adjustments, which by default is 20 per region, the call fails. For information about updating this limit, see `AWS Service Limits`_ in the *Amazon Web Services General Reference* .
+If you exceed your maximum limit of step adjustments, which by default is 20 per region, the call fails. For information about updating this limit, see `AWS Service Limits <http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html>`_ in the *Amazon Web Services General Reference* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutScalingPolicy>`_
 
 
 ========
@@ -33,7 +36,7 @@ Synopsis
   --auto-scaling-group-name <value>
   --policy-name <value>
   [--policy-type <value>]
-  --adjustment-type <value>
+  [--adjustment-type <value>]
   [--min-adjustment-step <value>]
   [--min-adjustment-magnitude <value>]
   [--scaling-adjustment <value>]
@@ -41,8 +44,9 @@ Synopsis
   [--metric-aggregation-type <value>]
   [--step-adjustments <value>]
   [--estimated-instance-warmup <value>]
+  [--target-tracking-configuration <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -68,18 +72,22 @@ Options
 ``--policy-type`` (string)
 
 
-  The policy type. Valid values are ``SimpleScaling`` and ``StepScaling`` . If the policy type is null, the value is treated as ``SimpleScaling`` .
+  The policy type. The valid values are ``SimpleScaling`` , ``StepScaling`` , and ``TargetTrackingScaling`` . If the policy type is null, the value is treated as ``SimpleScaling`` .
 
   
 
 ``--adjustment-type`` (string)
 
 
-  The adjustment type. Valid values are ``ChangeInCapacity`` , ``ExactCapacity`` , and ``PercentChangeInCapacity`` .
+  The adjustment type. The valid values are ``ChangeInCapacity`` , ``ExactCapacity`` , and ``PercentChangeInCapacity`` .
 
    
 
-  For more information, see `Dynamic Scaling`_ in the *Auto Scaling Developer Guide* .
+  This parameter is supported if the policy type is ``SimpleScaling`` or ``StepScaling`` .
+
+   
+
+  For more information, see `Dynamic Scaling <http://docs.aws.amazon.com/autoscaling/latest/userguide/as-scale-based-on-demand.html>`_ in the *Auto Scaling User Guide* .
 
   
 
@@ -94,6 +102,10 @@ Options
 
 
   The minimum number of instances to scale. If the value of ``AdjustmentType`` is ``PercentChangeInCapacity`` , the scaling policy changes the ``DesiredCapacity`` of the Auto Scaling group by at least this many instances. Otherwise, the error is ``ValidationError`` .
+
+   
+
+  This parameter is supported if the policy type is ``SimpleScaling`` or ``StepScaling`` .
 
   
 
@@ -115,22 +127,22 @@ Options
 
    
 
-  This parameter is not supported unless the policy type is ``SimpleScaling`` .
+  This parameter is supported if the policy type is ``SimpleScaling`` .
 
    
 
-  For more information, see `Auto Scaling Cooldowns`_ in the *Auto Scaling Developer Guide* .
+  For more information, see `Auto Scaling Cooldowns <http://docs.aws.amazon.com/autoscaling/latest/userguide/Cooldown.html>`_ in the *Auto Scaling User Guide* .
 
   
 
 ``--metric-aggregation-type`` (string)
 
 
-  The aggregation type for the CloudWatch metrics. Valid values are ``Minimum`` , ``Maximum`` , and ``Average`` . If the aggregation type is null, the value is treated as ``Average`` .
+  The aggregation type for the CloudWatch metrics. The valid values are ``Minimum`` , ``Maximum`` , and ``Average`` . If the aggregation type is null, the value is treated as ``Average`` .
 
    
 
-  This parameter is not supported if the policy type is ``SimpleScaling`` .
+  This parameter is supported if the policy type is ``StepScaling`` .
 
   
 
@@ -174,15 +186,54 @@ JSON Syntax::
 
    
 
-  This parameter is not supported if the policy type is ``SimpleScaling`` .
+  This parameter is supported if the policy type is ``StepScaling`` or ``TargetTrackingScaling`` .
 
   
+
+``--target-tracking-configuration`` (structure)
+
+
+  The configuration of a target tracking policy.
+
+   
+
+  This parameter is required if the policy type is ``TargetTrackingScaling`` and not supported otherwise.
+
+  
+
+
+
+JSON Syntax::
+
+  {
+    "PredefinedMetricSpecification": {
+      "PredefinedMetricType": "ASGAverageCPUUtilization"|"ASGAverageNetworkIn"|"ASGAverageNetworkOut"|"ALBRequestCountPerTarget",
+      "ResourceLabel": "string"
+    },
+    "CustomizedMetricSpecification": {
+      "MetricName": "string",
+      "Namespace": "string",
+      "Dimensions": [
+        {
+          "Name": "string",
+          "Value": "string"
+        }
+        ...
+      ],
+      "Statistic": "Average"|"Minimum"|"Maximum"|"SampleCount"|"Sum",
+      "Unit": "string"
+    },
+    "TargetValue": double,
+    "DisableScaleIn": true|false
+  }
+
+
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -194,18 +245,18 @@ Examples
 
 This example adds the specified policy to the specified Auto Scaling group::
 
-	aws autoscaling put-scaling-policy --auto-scaling-group-name my-auto-scaling-group --policy-name ScaleIn --scaling-adjustment -1 --adjustment-type ChangeInCapacity
+    aws autoscaling put-scaling-policy --auto-scaling-group-name my-auto-scaling-group --policy-name ScaleIn --scaling-adjustment -1 --adjustment-type ChangeInCapacity
 
 To change the size of the Auto Scaling group by a specific number of instances, set the ``adjustment-type`` parameter to ``PercentChangeInCapacity``. Then, assign a value to
 the ``min-adjustment-step`` parameter, where the value represents the number of instances the policy adds or removes from the Auto Scaling group::
 
-	aws autoscaling put-scaling-policy --auto-scaling-group-name my-auto-scaling-group --policy-name ScalePercentChange --scaling-adjustment 25 --adjustment-type PercentChangeInCapacity --cooldown 60 --min-adjustment-step 2
+    aws autoscaling put-scaling-policy --auto-scaling-group-name my-auto-scaling-group --policy-name ScalePercentChange --scaling-adjustment 25 --adjustment-type PercentChangeInCapacity --cooldown 60 --min-adjustment-step 2
 
 The output includes the ARN of the policy. The following is example output::
 
-	{
-		"PolicyARN": "arn:aws:autoscaling:us-west-2:123456789012:scalingPolicy:2233f3d7-6290-403b-b632-93c553560106:autoScalingGroupName/my-auto-scaling-group:policyName/ScaleIn"
-	}
+    {
+        "PolicyARN": "arn:aws:autoscaling:us-west-2:123456789012:scalingPolicy:2233f3d7-6290-403b-b632-93c553560106:autoScalingGroupName/my-auto-scaling-group:policyName/ScaleIn"
+    }
 
 For more information, see `Dynamic Scaling`_ in the *Auto Scaling Developer Guide*.
 
@@ -226,8 +277,43 @@ PolicyARN -> (string)
 
   
 
+Alarms -> (list)
 
+  
 
-.. _Auto Scaling Cooldowns: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/Cooldown.html
-.. _Dynamic Scaling: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/as-scale-based-on-demand.html
-.. _AWS Service Limits: http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html
+  The CloudWatch alarms created for the target tracking policy. This parameter will be empty if the policy type is anything other than ``TargetTrackingScaling`` .
+
+  
+
+  (structure)
+
+    
+
+    Describes an alarm.
+
+    
+
+    AlarmName -> (string)
+
+      
+
+      The name of the alarm.
+
+      
+
+      
+
+    AlarmARN -> (string)
+
+      
+
+      The Amazon Resource Name (ARN) of the alarm.
+
+      
+
+      
+
+    
+
+  
+

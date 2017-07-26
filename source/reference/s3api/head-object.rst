@@ -15,6 +15,9 @@ Description
 
 The HEAD operation retrieves metadata from an object without returning the object itself. This operation is useful if you're only interested in an object's metadata. To use HEAD, you must have READ access to the object.
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/HeadObject>`_
+
+
 ========
 Synopsis
 ========
@@ -34,8 +37,9 @@ Synopsis
   [--sse-customer-key <value>]
   [--sse-customer-key-md5 <value>]
   [--request-payer <value>]
+  [--part-number <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -89,11 +93,14 @@ Confirms that the requester knows that she or he will be charged for the request
 
   
 
+``--part-number`` (integer)
+Part number of the object being read. This is a positive integer between 1 and 10,000. Effectively performs a 'ranged' HEAD request for the part specified. Useful querying about the size of the part and the number of parts in this object.
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -151,7 +158,7 @@ LastModified -> (timestamp)
 
   
 
-ContentLength -> (integer)
+ContentLength -> (long)
 
   Size of the body in bytes.
 
@@ -274,6 +281,12 @@ RequestCharged -> (string)
 ReplicationStatus -> (string)
 
   
+
+  
+
+PartsCount -> (integer)
+
+  The count of parts this object has.
 
   
 

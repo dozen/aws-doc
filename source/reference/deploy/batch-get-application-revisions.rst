@@ -19,6 +19,9 @@ Gets information about one or more application revisions.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetApplicationRevisions>`_
+
+
 ========
 Synopsis
 ========
@@ -29,7 +32,7 @@ Synopsis
   --application-name <value>
   --revisions <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -41,14 +44,14 @@ Options
 ``--application-name`` (string)
 
 
-  The name of an existing AWS CodeDeploy application to get revision information about.
+  The name of an AWS CodeDeploy application about which to get revision information.
 
   
 
 ``--revisions`` (list)
 
 
-  Information to get about the application revisions, including revision type and location.
+  Information to get about the application revisions, including type and location.
 
   
 
@@ -86,8 +89,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -119,7 +122,7 @@ revisions -> (list)
 
   
 
-  Additional information about the revisions, including the revision type and location.
+  Additional information about the revisions, including the type and location.
 
   
 
@@ -135,7 +138,7 @@ revisions -> (list)
 
       
 
-      Information about an application revision's location.
+      Information about the location and type of an application revision.
 
       
 
@@ -143,14 +146,14 @@ revisions -> (list)
 
         
 
-        The application revision's type:
+        The type of application revision:
 
          
 
          
-        * S3: An application revision stored in Amazon S3.
+        * S3: An application revision stored in Amazon S3. 
          
-        * GitHub: An application revision stored in GitHub.
+        * GitHub: An application revision stored in GitHub. 
          
 
         
@@ -161,7 +164,7 @@ revisions -> (list)
 
         
 
-        Information about the location of application artifacts that are stored in Amazon S3.
+        Information about the location of application artifacts stored in Amazon S3. 
 
         
 
@@ -194,11 +197,11 @@ revisions -> (list)
            
 
            
-          * tar: A tar archive file.
+          * tar: A tar archive file. 
            
-          * tgz: A compressed tar archive file.
+          * tgz: A compressed tar archive file. 
            
-          * zip: A zip archive file.
+          * zip: A zip archive file. 
            
 
           
@@ -239,7 +242,7 @@ revisions -> (list)
 
         
 
-        Information about the location of application artifacts that are stored in GitHub.
+        Information about the location of application artifacts stored in GitHub.
 
         
 
@@ -275,7 +278,7 @@ revisions -> (list)
 
       
 
-      Information about an application revision.
+      Information about an application revision, including usage details and associated deployment groups.
 
       
 
@@ -293,7 +296,7 @@ revisions -> (list)
 
         
 
-        The deployment groups where this is the current target revision.
+        The deployment groups for which this is the current target revision.
 
         
 

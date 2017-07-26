@@ -19,8 +19,11 @@ Describes the modifications made to your Reserved Instances. If no parameter is 
 
  
 
-For more information, see `Modifying Reserved Instances`_ in the Amazon Elastic Compute Cloud User Guide.
+For more information, see `Modifying Reserved Instances <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html>`_ in the Amazon Elastic Compute Cloud User Guide.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeReservedInstancesModifications>`_
 
 
 ``describe-reserved-instances-modifications`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
@@ -34,12 +37,12 @@ Synopsis
 ::
 
     describe-reserved-instances-modifications
-  [--reserved-instances-modification-ids <value>]
   [--filters <value>]
+  [--reserved-instances-modification-ids <value>]
   [--cli-input-json <value>]
   [--starting-token <value>]
   [--max-items <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -47,21 +50,6 @@ Synopsis
 =======
 Options
 =======
-
-``--reserved-instances-modification-ids`` (list)
-
-
-  IDs for the submitted modification request.
-
-  
-
-
-
-Syntax::
-
-  "string" "string" ...
-
-
 
 ``--filters`` (list)
 
@@ -121,6 +109,21 @@ JSON Syntax::
 
 
 
+``--reserved-instances-modification-ids`` (list)
+
+
+  IDs for the submitted modification request.
+
+  
+
+
+
+Syntax::
+
+  "string" "string" ...
+
+
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
@@ -131,15 +134,23 @@ Performs service operation based on the JSON string provided. The JSON string fo
 
    
 
-``--max-items`` (integer)
- 
-
-  The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination. This ``NextToken`` response element should **not** be used directly outside of the AWS CLI.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
    
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--max-items`` (integer)
+ 
+
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``NextToken`` is provided in the command's output. To resume pagination, provide the ``NextToken`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``NextToken`` response element directly outside of the AWS CLI.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -200,6 +211,16 @@ Output::
 Output
 ======
 
+NextToken -> (string)
+
+  
+
+  The token to use to retrieve the next page of results. This value is ``null`` when there are no more results to return.
+
+  
+
+  
+
 ReservedInstancesModifications -> (list)
 
   
@@ -216,13 +237,123 @@ ReservedInstancesModifications -> (list)
 
     
 
-    ReservedInstancesModificationId -> (string)
+    ClientToken -> (string)
 
       
 
-      A unique ID for the Reserved Instance modification.
+      A unique, case-sensitive key supplied by the client to ensure that the request is idempotent. For more information, see `Ensuring Idempotency <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html>`_ .
 
       
+
+      
+
+    CreateDate -> (timestamp)
+
+      
+
+      The time when the modification request was created.
+
+      
+
+      
+
+    EffectiveDate -> (timestamp)
+
+      
+
+      The time for the modification to become effective.
+
+      
+
+      
+
+    ModificationResults -> (list)
+
+      
+
+      Contains target configurations along with their corresponding new Reserved Instance IDs.
+
+      
+
+      (structure)
+
+        
+
+        Describes the modification request/s.
+
+        
+
+        ReservedInstancesId -> (string)
+
+          
+
+          The ID for the Reserved Instances that were created as part of the modification request. This field is only available when the modification is fulfilled.
+
+          
+
+          
+
+        TargetConfiguration -> (structure)
+
+          
+
+          The target Reserved Instances configurations supplied as part of the modification request.
+
+          
+
+          AvailabilityZone -> (string)
+
+            
+
+            The Availability Zone for the modified Reserved Instances.
+
+            
+
+            
+
+          InstanceCount -> (integer)
+
+            
+
+            The number of modified Reserved Instances.
+
+            
+
+            
+
+          InstanceType -> (string)
+
+            
+
+            The instance type for the modified Reserved Instances.
+
+            
+
+            
+
+          Platform -> (string)
+
+            
+
+            The network platform of the modified Reserved Instances, which is either EC2-Classic or EC2-VPC.
+
+            
+
+            
+
+          Scope -> (string)
+
+            
+
+            Whether the Reserved Instance is applied to instances in a region or instances in a specific Availability Zone.
+
+            
+
+            
+
+          
+
+        
 
       
 
@@ -256,107 +387,11 @@ ReservedInstancesModifications -> (list)
 
       
 
-    ModificationResults -> (list)
+    ReservedInstancesModificationId -> (string)
 
       
 
-      Contains target configurations along with their corresponding new Reserved Instance IDs.
-
-      
-
-      (structure)
-
-        
-
-        ReservedInstancesId -> (string)
-
-          
-
-          The ID for the Reserved Instances that were created as part of the modification request. This field is only available when the modification is fulfilled.
-
-          
-
-          
-
-        TargetConfiguration -> (structure)
-
-          
-
-          The target Reserved Instances configurations supplied as part of the modification request.
-
-          
-
-          AvailabilityZone -> (string)
-
-            
-
-            The Availability Zone for the modified Reserved Instances.
-
-            
-
-            
-
-          Platform -> (string)
-
-            
-
-            The network platform of the modified Reserved Instances, which is either EC2-Classic or EC2-VPC.
-
-            
-
-            
-
-          InstanceCount -> (integer)
-
-            
-
-            The number of modified Reserved Instances.
-
-            
-
-            
-
-          InstanceType -> (string)
-
-            
-
-            The instance type for the modified Reserved Instances.
-
-            
-
-            
-
-          
-
-        
-
-      
-
-    CreateDate -> (timestamp)
-
-      
-
-      The time when the modification request was created.
-
-      
-
-      
-
-    UpdateDate -> (timestamp)
-
-      
-
-      The time when the modification request was last updated.
-
-      
-
-      
-
-    EffectiveDate -> (timestamp)
-
-      
-
-      The time for the modification to become effective.
+      A unique ID for the Reserved Instance modification.
 
       
 
@@ -382,11 +417,11 @@ ReservedInstancesModifications -> (list)
 
       
 
-    ClientToken -> (string)
+    UpdateDate -> (timestamp)
 
       
 
-      A unique, case-sensitive key supplied by the client to ensure that the request is idempotent. For more information, see `Ensuring Idempotency`_ .
+      The time when the modification request was last updated.
 
       
 
@@ -396,17 +431,3 @@ ReservedInstancesModifications -> (list)
 
   
 
-NextToken -> (string)
-
-  
-
-  The token to use to retrieve the next page of results. This value is ``null`` when there are no more results to return.
-
-  
-
-  
-
-
-
-.. _Ensuring Idempotency: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
-.. _Modifying Reserved Instances: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html

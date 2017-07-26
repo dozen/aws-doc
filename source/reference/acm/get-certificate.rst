@@ -15,14 +15,21 @@ Description
 
 
 
-Retrieves an ACM Certificate and certificate chain for the certificate specified by an ARN. The chain is an ordered list of certificates that contains the root certificate, intermediate certificates of subordinate CAs, and the ACM Certificate. The certificate and certificate chain are base64 encoded. If you want to decode the certificate chain to see the individual certificate fields, you can use OpenSSL. 
+Retrieves an ACM Certificate and certificate chain for the certificate specified by an ARN. The chain is an ordered list of certificates that contains the root certificate, intermediate certificates of subordinate CAs, and the ACM Certificate. The certificate and certificate chain are base64 encoded. If you want to decode the certificate chain to see the individual certificate fields, you can use OpenSSL.
 
  
 
 .. note::
 
-  Currently, ACM Certificates can be used only with Elastic Load Balancing and Amazon CloudFront. 
+   
 
+  Currently, ACM Certificates can be used only with Elastic Load Balancing and Amazon CloudFront.
+
+   
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/GetCertificate>`_
 
 
 ========
@@ -34,7 +41,7 @@ Synopsis
     get-certificate
   --certificate-arn <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -46,7 +53,7 @@ Options
 ``--certificate-arn`` (string)
 
 
-  String that contains a certificate ARN in the following format: 
+  String that contains a certificate ARN in the following format:
 
    
 
@@ -54,15 +61,15 @@ Options
 
    
 
-  For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces`_ . 
+  For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces <http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`_ .
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -155,7 +162,7 @@ Certificate -> (string)
 
   
 
-  String that contains the ACM Certificate represented by the ARN specified at input. 
+  String that contains the ACM Certificate represented by the ARN specified at input.
 
   
 
@@ -165,12 +172,9 @@ CertificateChain -> (string)
 
   
 
-  The certificate chain that contains the root certificate issued by the certificate authority (CA). 
+  The certificate chain that contains the root certificate issued by the certificate authority (CA).
 
   
 
   
 
-
-
-.. _Amazon Resource Names (ARNs) and AWS Service Namespaces: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html

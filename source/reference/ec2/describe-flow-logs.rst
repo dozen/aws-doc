@@ -19,6 +19,9 @@ Describes one or more flow logs. To view the information in your flow logs (the 
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFlowLogs>`_
+
+
 ========
 Synopsis
 ========
@@ -26,12 +29,12 @@ Synopsis
 ::
 
     describe-flow-logs
-  [--flow-log-ids <value>]
   [--filter <value>]
-  [--next-token <value>]
+  [--flow-log-ids <value>]
   [--max-results <value>]
+  [--next-token <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -39,21 +42,6 @@ Synopsis
 =======
 Options
 =======
-
-``--flow-log-ids`` (list)
-
-
-  One or more flow log IDs.
-
-  
-
-
-
-Syntax::
-
-  "string" "string" ...
-
-
 
 ``--filter`` (list)
 
@@ -63,15 +51,15 @@ Syntax::
    
 
    
-  * ``deliver-log-status`` - The status of the logs delivery (``SUCCESS`` | ``FAILED`` ).
+  * ``deliver-log-status`` - The status of the logs delivery (``SUCCESS`` | ``FAILED`` ). 
    
-  * ``flow-log-id`` - The ID of the flow log.
+  * ``flow-log-id`` - The ID of the flow log. 
    
-  * ``log-group-name`` - The name of the log group.
+  * ``log-group-name`` - The name of the log group. 
    
-  * ``resource-id`` - The ID of the VPC, subnet, or network interface.
+  * ``resource-id`` - The ID of the VPC, subnet, or network interface. 
    
-  * ``traffic-type`` - The type of traffic (``ACCEPT`` | ``REJECT`` | ``ALL`` )
+  * ``traffic-type`` - The type of traffic (``ACCEPT`` | ``REJECT`` | ``ALL`` ) 
    
 
   
@@ -97,12 +85,20 @@ JSON Syntax::
 
 
 
-``--next-token`` (string)
+``--flow-log-ids`` (list)
 
 
-  The token to retrieve the next page of results.
+  One or more flow log IDs.
 
   
+
+
+
+Syntax::
+
+  "string" "string" ...
+
+
 
 ``--max-results`` (integer)
 
@@ -111,11 +107,18 @@ JSON Syntax::
 
   
 
+``--next-token`` (string)
+
+
+  The token to retrieve the next page of results.
+
+  
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -183,6 +186,36 @@ FlowLogs -> (list)
 
       
 
+    DeliverLogsErrorMessage -> (string)
+
+      
+
+      Information about the error that occurred. ``Rate limited`` indicates that CloudWatch logs throttling has been applied for one or more network interfaces, or that you've reached the limit on the number of CloudWatch Logs log groups that you can create. ``Access error`` indicates that the IAM role associated with the flow log does not have sufficient permissions to publish to CloudWatch Logs. ``Unknown error`` indicates an internal error.
+
+      
+
+      
+
+    DeliverLogsPermissionArn -> (string)
+
+      
+
+      The ARN of the IAM role that posts logs to CloudWatch Logs.
+
+      
+
+      
+
+    DeliverLogsStatus -> (string)
+
+      
+
+      The status of the logs delivery (``SUCCESS`` | ``FAILED`` ).
+
+      
+
+      
+
     FlowLogId -> (string)
 
       
@@ -203,6 +236,16 @@ FlowLogs -> (list)
 
       
 
+    LogGroupName -> (string)
+
+      
+
+      The name of the flow log group.
+
+      
+
+      
+
     ResourceId -> (string)
 
       
@@ -218,46 +261,6 @@ FlowLogs -> (list)
       
 
       The type of traffic captured for the flow log.
-
-      
-
-      
-
-    LogGroupName -> (string)
-
-      
-
-      The name of the flow log group.
-
-      
-
-      
-
-    DeliverLogsStatus -> (string)
-
-      
-
-      The status of the logs delivery (``SUCCESS`` | ``FAILED`` ).
-
-      
-
-      
-
-    DeliverLogsErrorMessage -> (string)
-
-      
-
-      Information about the error that occurred. ``Rate limited`` indicates that CloudWatch logs throttling has been applied for one or more network interfaces, or that you've reached the limit on the number of CloudWatch Logs log groups that you can create. ``Access error`` indicates that the IAM role associated with the flow log does not have sufficient permissions to publish to CloudWatch Logs. ``Unknown error`` indicates an internal error.
-
-      
-
-      
-
-    DeliverLogsPermissionArn -> (string)
-
-      
-
-      The ARN of the IAM role that posts logs to CloudWatch Logs.
 
       
 

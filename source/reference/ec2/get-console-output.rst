@@ -35,6 +35,9 @@ For Windows instances, the instance console output includes output from the EC2C
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetConsoleOutput>`_
+
+
 ========
 Synopsis
 ========
@@ -42,10 +45,10 @@ Synopsis
 ::
 
     get-console-output
-  [--dry-run | --no-dry-run]
   --instance-id <value>
+  [--dry-run | --no-dry-run]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -54,13 +57,6 @@ Synopsis
 Options
 =======
 
-``--dry-run`` | ``--no-dry-run`` (boolean)
-
-
-  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
-
-  
-
 ``--instance-id`` (string)
 
 
@@ -68,11 +64,18 @@ Options
 
   
 
+``--dry-run`` | ``--no-dry-run`` (boolean)
+
+
+  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
+
+  
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -86,12 +89,12 @@ This example gets the console ouput for the specified Linux instance.
 
 Command::
 
-  aws ec2 get-console-output --instance-id i-10a64379
+  aws ec2 get-console-output --instance-id i-1234567890abcdef0
 
 Output::
 
   {
-      "InstanceId": "i-10a64379",
+      "InstanceId": "i-1234567890abcdef0",
       "Timestamp": "2013-07-25T21:23:53.000Z",
       "Output": "..."
   }
@@ -112,21 +115,21 @@ InstanceId -> (string)
 
   
 
+Output -> (string)
+
+  
+
+  The console output, Base64-encoded. If using a command line tool, the tool decodes the output for you.
+
+  
+
+  
+
 Timestamp -> (timestamp)
 
   
 
   The time the output was last updated.
-
-  
-
-  
-
-Output -> (string)
-
-  
-
-  The console output, Base64 encoded. If using a command line tool, the tools decode the output for you. 
 
   
 

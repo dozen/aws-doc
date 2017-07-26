@@ -21,8 +21,15 @@ Cancels an update on the specified stack. If the call completes successfully, th
 
 .. note::
 
+   
+
   You can cancel only stacks that are in the UPDATE_IN_PROGRESS state.
 
+   
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CancelUpdateStack>`_
 
 
 ========
@@ -33,8 +40,9 @@ Synopsis
 
     cancel-update-stack
   --stack-name <value>
+  [--client-request-token <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -50,11 +58,18 @@ Options
 
   
 
+``--client-request-token`` (string)
+
+
+  A unique identifier for this ``cancel-update-stack`` request. Specify this token if you plan to retry requests so that AWS CloudFormation knows that you're not attempting to cancel an update on a stack with the same name. You might retry ``cancel-update-stack`` requests to ensure that AWS CloudFormation successfully received them.
+
+  
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 

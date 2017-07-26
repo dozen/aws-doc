@@ -15,12 +15,15 @@ Description
 
 
 
-Creates or updates a ``Destination`` . A destination encapsulates a physical resource (such as a Kinesis stream) and allows you to subscribe to a real-time stream of log events of a different account, ingested through ``put-log-events`` requests. Currently, the only supported physical resource is a Amazon Kinesis stream belonging to the same account as the destination. 
+Creates or updates a destination. A destination encapsulates a physical resource (such as a Kinesis stream) and enables you to subscribe to a real-time stream of log events of a different account, ingested using  put-log-events . Currently, the only supported physical resource is a Amazon Kinesis stream belonging to the same account as the destination.
 
  
 
-A destination controls what is written to its Amazon Kinesis stream through an access policy. By default, put-destination does not set any access policy with the destination, which means a cross-account user will not be able to call ``put-subscription-filter`` against this destination. To enable that, the destination owner must call ``put-destination-policy`` after PutDestination. 
+A destination controls what is written to its Amazon Kinesis stream through an access policy. By default, ``put-destination`` does not set any access policy with the destination, which means a cross-account user cannot call  put-subscription-filter against this destination. To enable this, the destination owner must call  put-destination-policy after ``put-destination`` .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutDestination>`_
 
 
 ========
@@ -34,7 +37,7 @@ Synopsis
   --target-arn <value>
   --role-arn <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -60,15 +63,15 @@ Options
 ``--role-arn`` (string)
 
 
-  The ARN of an IAM role that grants CloudWatch Logs permissions to do Amazon Kinesis PutRecord requests on the desitnation stream.
+  The ARN of an IAM role that grants CloudWatch Logs permissions to call Amazon Kinesis PutRecord on the destination stream.
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -80,7 +83,7 @@ destination -> (structure)
 
   
 
-  A cross account destination that is the recipient of subscription log events.
+  The destination.
 
   
 
@@ -88,7 +91,7 @@ destination -> (structure)
 
     
 
-    Name of the destination.
+    The name of the destination.
 
     
 
@@ -98,7 +101,7 @@ destination -> (structure)
 
     
 
-    ARN of the physical target where the log events will be delivered (eg. ARN of a Kinesis stream).
+    The Amazon Resource Name (ARN) of the physical target where the log events will be delivered (for example, a Kinesis stream).
 
     
 
@@ -108,7 +111,7 @@ destination -> (structure)
 
     
 
-    A role for impersonation for delivering log events to the target.
+    A role for impersonation, used when delivering log events to the target.
 
     
 
@@ -128,7 +131,7 @@ destination -> (structure)
 
     
 
-    ARN of this destination.
+    The ARN of this destination.
 
     
 
@@ -138,7 +141,7 @@ destination -> (structure)
 
     
 
-    A point in time expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC specifying when this destination was created.
+    The creation time of the destination, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
 
     
 

@@ -27,6 +27,9 @@ You can change the default behavior to resume I/O operations. We recommend that 
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVolumeAttribute>`_
+
+
 ========
 Synopsis
 ========
@@ -34,11 +37,11 @@ Synopsis
 ::
 
     modify-volume-attribute
-  [--dry-run | --no-dry-run]
-  --volume-id <value>
   [--auto-enable-io | --no-auto-enable-io]
+  --volume-id <value>
+  [--dry-run | --no-dry-run]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -47,10 +50,10 @@ Synopsis
 Options
 =======
 
-``--dry-run`` | ``--no-dry-run`` (boolean)
+``--auto-enable-io`` | ``--no-auto-enable-io`` (structure)
 
 
-  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
+  Indicates whether the volume should be auto-enabled for I/O operations.
 
   
 
@@ -61,18 +64,18 @@ Options
 
   
 
-``--auto-enable-io`` | ``--no-auto-enable-io`` (structure)
+``--dry-run`` | ``--no-dry-run`` (boolean)
 
 
-  Indicates whether the volume should be auto-enabled for I/O operations.
+  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -82,11 +85,11 @@ Examples
 
 **To modify a volume attribute**
 
-This example sets the ``autoEnableIo`` attribute of the volume with the ID ``vol-1a2b3c4d`` to ``true``. If the command succeeds, no output is returned.
+This example sets the ``autoEnableIo`` attribute of the volume with the ID ``vol-1234567890abcdef0`` to ``true``. If the command succeeds, no output is returned.
 
 Command::
 
-  aws ec2 modify-volume-attribute --volume-id vol-1a2b3c4d --auto-enable-io
+  aws ec2 modify-volume-attribute --volume-id vol-1234567890abcdef0 --auto-enable-io
 
 
 ======

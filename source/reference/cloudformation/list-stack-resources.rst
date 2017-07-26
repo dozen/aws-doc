@@ -23,6 +23,9 @@ For deleted stacks, list-stack-resources returns resource information for up to 
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackResources>`_
+
+
 ``list-stack-resources`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
 When using ``--output text`` and the ``--query`` argument on a paginated response, the ``--query`` argument must extract data from the results of the following query expressions: ``StackResourceSummaries``
 
@@ -38,7 +41,7 @@ Synopsis
   [--cli-input-json <value>]
   [--starting-token <value>]
   [--max-items <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -55,9 +58,9 @@ Options
    
 
    
-  * Running stacks: You can specify either the stack's name or its unique stack ID.
+  * Running stacks: You can specify either the stack's name or its unique stack ID. 
    
-  * Deleted stacks: You must specify the unique stack ID.
+  * Deleted stacks: You must specify the unique stack ID. 
    
 
    
@@ -76,15 +79,23 @@ Performs service operation based on the JSON string provided. The JSON string fo
 
    
 
-``--max-items`` (integer)
- 
-
-  The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``next-token`` will be provided in the output that you can use to resume pagination. This ``next-token`` response element should **not** be used directly outside of the AWS CLI.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
    
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--max-items`` (integer)
+ 
+
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``next-token`` is provided in the command's output. To resume pagination, provide the ``next-token`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``next-token`` response element directly outside of the AWS CLI.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -132,7 +143,7 @@ StackResourceSummaries -> (list)
 
       
 
-      Type of resource. (For more information, go to `AWS Resource Types Reference`_ in the AWS CloudFormation User Guide.)
+      Type of resource. (For more information, go to `AWS Resource Types Reference <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html>`_ in the AWS CloudFormation User Guide.)
 
       
 
@@ -176,12 +187,9 @@ NextToken -> (string)
 
   
 
-  If the output exceeds 1 MB in size, a string that identifies the next page of stack resources. If no additional page exists, this value is null.
+  If the output exceeds 1 MB, a string that identifies the next page of stack resources. If no additional page exists, this value is null.
 
   
 
   
 
-
-
-.. _AWS Resource Types Reference: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html

@@ -15,6 +15,9 @@ Description
 
 Returns the notification configuration of a bucket.
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketNotificationConfiguration>`_
+
+
 ========
 Synopsis
 ========
@@ -24,7 +27,7 @@ Synopsis
     get-bucket-notification-configuration
   --bucket <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -34,13 +37,13 @@ Options
 =======
 
 ``--bucket`` (string)
-Name of the buket to get the notification configuration for.
+Name of the bucket to get the notification configuration for.
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -105,7 +108,7 @@ TopicConfigurations -> (list)
 
     Filter -> (structure)
 
-      Container for object key name filtering rules. For information about key name filtering, go to `Configuring Event Notifications`_ in the Amazon Simple Storage Service Developer Guide.
+      Container for object key name filtering rules. For information about key name filtering, go to `Configuring Event Notifications <http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html>`_ in the Amazon Simple Storage Service Developer Guide.
 
       Key -> (structure)
 
@@ -121,7 +124,7 @@ TopicConfigurations -> (list)
 
             Name -> (string)
 
-              Object key name prefix or suffix identifying one or more objects to which the filtering rule applies. Maximum prefix length can be up to 1,024 characters. Overlapping prefixes and suffixes are not supported. For more information, go to `Configuring Event Notifications`_ in the Amazon Simple Storage Service Developer Guide.
+              Object key name prefix or suffix identifying one or more objects to which the filtering rule applies. Maximum prefix length can be up to 1,024 characters. Overlapping prefixes and suffixes are not supported. For more information, go to `Configuring Event Notifications <http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html>`_ in the Amazon Simple Storage Service Developer Guide.
 
               
 
@@ -177,7 +180,7 @@ QueueConfigurations -> (list)
 
     Filter -> (structure)
 
-      Container for object key name filtering rules. For information about key name filtering, go to `Configuring Event Notifications`_ in the Amazon Simple Storage Service Developer Guide.
+      Container for object key name filtering rules. For information about key name filtering, go to `Configuring Event Notifications <http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html>`_ in the Amazon Simple Storage Service Developer Guide.
 
       Key -> (structure)
 
@@ -193,7 +196,7 @@ QueueConfigurations -> (list)
 
             Name -> (string)
 
-              Object key name prefix or suffix identifying one or more objects to which the filtering rule applies. Maximum prefix length can be up to 1,024 characters. Overlapping prefixes and suffixes are not supported. For more information, go to `Configuring Event Notifications`_ in the Amazon Simple Storage Service Developer Guide.
+              Object key name prefix or suffix identifying one or more objects to which the filtering rule applies. Maximum prefix length can be up to 1,024 characters. Overlapping prefixes and suffixes are not supported. For more information, go to `Configuring Event Notifications <http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html>`_ in the Amazon Simple Storage Service Developer Guide.
 
               
 
@@ -249,7 +252,7 @@ LambdaFunctionConfigurations -> (list)
 
     Filter -> (structure)
 
-      Container for object key name filtering rules. For information about key name filtering, go to `Configuring Event Notifications`_ in the Amazon Simple Storage Service Developer Guide.
+      Container for object key name filtering rules. For information about key name filtering, go to `Configuring Event Notifications <http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html>`_ in the Amazon Simple Storage Service Developer Guide.
 
       Key -> (structure)
 
@@ -265,7 +268,7 @@ LambdaFunctionConfigurations -> (list)
 
             Name -> (string)
 
-              Object key name prefix or suffix identifying one or more objects to which the filtering rule applies. Maximum prefix length can be up to 1,024 characters. Overlapping prefixes and suffixes are not supported. For more information, go to `Configuring Event Notifications`_ in the Amazon Simple Storage Service Developer Guide.
+              Object key name prefix or suffix identifying one or more objects to which the filtering rule applies. Maximum prefix length can be up to 1,024 characters. Overlapping prefixes and suffixes are not supported. For more information, go to `Configuring Event Notifications <http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html>`_ in the Amazon Simple Storage Service Developer Guide.
 
               
 
@@ -287,6 +290,3 @@ LambdaFunctionConfigurations -> (list)
 
   
 
-
-
-.. _Configuring Event Notifications: http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html

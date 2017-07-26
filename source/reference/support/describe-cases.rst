@@ -15,11 +15,11 @@ Description
 
 
 
-Returns a list of cases that you specify by passing one or more case IDs. In addition, you can filter the cases by date by setting values for the ``after-time`` and ``before-time`` request parameters. You can set values for the ``no-include-resolved-cases`` and ``no-include-communications`` request parameters to control how much information is returned. 
+Returns a list of cases that you specify by passing one or more case IDs. In addition, you can filter the cases by date by setting values for the ``afterTime`` and ``beforeTime`` request parameters. You can set values for the ``includeResolvedCases`` and ``includeCommunications`` request parameters to control how much information is returned. 
 
  
 
-Case data is available for 12 months after creation. If a case was created more than 12 months ago, a request for data might cause an error. 
+Case data is available for 12 months after creation. If a case was created more than 12 months ago, a request for data might cause an error.
 
  
 
@@ -28,11 +28,14 @@ The response returns the following in JSON format:
  
 
  
-* One or more  CaseDetails data types. 
+* One or more  CaseDetails data types.  
  
-* One or more ``next-token`` values, which specify where to paginate the returned records represented by the ``CaseDetails`` objects.
+* One or more ``nextToken`` values, which specify where to paginate the returned records represented by the ``CaseDetails`` objects. 
  
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeCases>`_
 
 
 ``describe-cases`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
@@ -57,7 +60,7 @@ Synopsis
   [--starting-token <value>]
   [--page-size <value>]
   [--max-items <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -69,7 +72,7 @@ Options
 ``--case-id-list`` (list)
 
 
-  A list of ID numbers of the support cases you want returned. The maximum number of cases is 100. 
+  A list of ID numbers of the support cases you want returned. The maximum number of cases is 100.
 
   
 
@@ -84,7 +87,7 @@ Syntax::
 ``--display-id`` (string)
 
 
-  The ID displayed for a case in the AWS Support Center user interface. 
+  The ID displayed for a case in the AWS Support Center user interface.
 
   
 
@@ -133,26 +136,34 @@ Performs service operation based on the JSON string provided. The JSON string fo
 
    
 
-``--page-size`` (integer)
- 
-
-  The size of each page.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
    
 
-  
+``--page-size`` (integer)
+ 
 
-  
+  The size of each page to get in the AWS service call. This does not affect the number of items returned in the command's output. Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call. This can help prevent the AWS service calls from timing out.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
 
 ``--max-items`` (integer)
  
 
-  The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``next-token`` will be provided in the output that you can use to resume pagination. This ``next-token`` response element should **not** be used directly outside of the AWS CLI.
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``next-token`` is provided in the command's output. To resume pagination, provide the ``next-token`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``next-token`` response element directly outside of the AWS CLI.
 
    
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -177,29 +188,29 @@ cases -> (list)
      
 
      
-    * **CaseID.** The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-*12345678910-2013-c4c1d2bf33c5cf47* .
+    * **caseId.** The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-*12345678910-2013-c4c1d2bf33c5cf47* . 
      
-    * **CategoryCode.** The category of problem for the AWS Support case. Corresponds to the CategoryCode values returned by a call to  describe-services .
+    * **categoryCode.** The category of problem for the AWS Support case. Corresponds to the CategoryCode values returned by a call to  describe-services . 
      
-    * **DisplayId.** The identifier for the case on pages in the AWS Support Center.
+    * **displayId.** The identifier for the case on pages in the AWS Support Center. 
      
-    * **Language.** The ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English ("en") and Japanese ("ja"). language parameters must be passed explicitly for operations that take them.
+    * **language.** The ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English ("en") and Japanese ("ja"). language parameters must be passed explicitly for operations that take them. 
      
-    * **RecentCommunications.** One or more  Communication objects. Fields of these objects are ``Attachments`` , ``Body`` , ``CaseId`` , ``SubmittedBy`` , and ``TimeCreated`` .
+    * **recentCommunications.** One or more  Communication objects. Fields of these objects are ``attachments`` , ``body`` , ``caseId`` , ``submittedBy`` , and ``timeCreated`` . 
      
-    * **NextToken.** A resumption point for pagination.
+    * **nextToken.** A resumption point for pagination. 
      
-    * **ServiceCode.** The identifier for the AWS service that corresponds to the service code defined in the call to  describe-services .
+    * **serviceCode.** The identifier for the AWS service that corresponds to the service code defined in the call to  describe-services . 
      
-    * **SeverityCode.** The severity code assigned to the case. Contains one of the values returned by the call to  describe-severity-levels .
+    * **severityCode.** The severity code assigned to the case. Contains one of the values returned by the call to  describe-severity-levels . 
      
-    * **Status.** The status of the case in the AWS Support Center.
+    * **status.** The status of the case in the AWS Support Center. 
      
-    * **Subject.** The subject line of the case.
+    * **subject.** The subject line of the case. 
      
-    * **SubmittedBy.** The email address of the account that submitted the case.
+    * **submittedBy.** The email address of the account that submitted the case. 
      
-    * **TimeCreated.** The time the case was created, in ISO-8601 format.
+    * **timeCreated.** The time the case was created, in ISO-8601 format. 
      
 
     
@@ -208,7 +219,7 @@ cases -> (list)
 
       
 
-      The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-*12345678910-2013-c4c1d2bf33c5cf47* 
+      The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-*12345678910-2013-c4c1d2bf33c5cf47*  
 
       
 
@@ -218,7 +229,7 @@ cases -> (list)
 
       
 
-      The ID displayed for the case in the AWS Support Center. This is a numeric string. 
+      The ID displayed for the case in the AWS Support Center. This is a numeric string.
 
       
 
@@ -238,7 +249,7 @@ cases -> (list)
 
       
 
-      The status of the case. 
+      The status of the case.
 
       
 
@@ -288,7 +299,7 @@ cases -> (list)
 
       
 
-      The time that the case was case created in the AWS Support Center. 
+      The time that the case was case created in the AWS Support Center.
 
       
 
@@ -322,7 +333,7 @@ cases -> (list)
 
             
 
-            The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-*12345678910-2013-c4c1d2bf33c5cf47* 
+            The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-*12345678910-2013-c4c1d2bf33c5cf47*  
 
             
 
@@ -342,7 +353,7 @@ cases -> (list)
 
             
 
-            The email address of the account that submitted the AWS Support case. 
+            The email address of the account that submitted the AWS Support case.
 
             
 
@@ -352,7 +363,7 @@ cases -> (list)
 
             
 
-            The time the communication was created. 
+            The time the communication was created.
 
             
 
@@ -362,7 +373,7 @@ cases -> (list)
 
             
 
-            Information about the attachments to the case communication. 
+            Information about the attachments to the case communication.
 
             
 

@@ -15,18 +15,19 @@ Description
 
 
 
-Start a task using random placement and the default Amazon ECS scheduler. To use your own scheduler or place a task on a specific container instance, use ``start-task`` instead.
+Starts a new task using the specified task definition.
 
  
 
-.. warning::
+You can allow Amazon ECS to place tasks for you, or you can customize how Amazon ECS places tasks using placement constraints and placement strategies. For more information, see `Scheduling Tasks <http://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html>`_ in the *Amazon EC2 Container Service Developer Guide* .
 
-   
+ 
 
-  The ``count`` parameter is limited to 10 tasks per call.
+Alternatively, you can use  start-task to use your own scheduler or place tasks manually on specific container instances.
 
-   
 
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RunTask>`_
 
 
 ========
@@ -41,8 +42,11 @@ Synopsis
   [--overrides <value>]
   [--count <value>]
   [--started-by <value>]
+  [--group <value>]
+  [--placement-constraints <value>]
+  [--placement-strategy <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -54,7 +58,7 @@ Options
 ``--cluster`` (string)
 
 
-  The short name or full Amazon Resource Name (ARN) of the cluster on which to run your task. If you do not specify a cluster, the default cluster is assumed..
+  The short name or full Amazon Resource Name (ARN) of the cluster on which to run your task. If you do not specify a cluster, the default cluster is assumed.
 
   
 
@@ -97,10 +101,14 @@ JSON Syntax::
             "value": "string"
           }
           ...
-        ]
+        ],
+        "cpu": integer,
+        "memory": integer,
+        "memoryReservation": integer
       }
       ...
-    ]
+    ],
+    "taskRoleArn": "string"
   }
 
 
@@ -108,24 +116,14 @@ JSON Syntax::
 ``--count`` (integer)
 
 
-  The number of instantiations of the specified task to place on your cluster.
-
-   
-
-  .. warning::
-
-     
-
-    The ``count`` parameter is limited to 10 tasks per call.
-
-     
+  The number of instantiations of the specified task to place on your cluster. You can specify up to 10 tasks per call.
 
   
 
 ``--started-by`` (string)
 
 
-  An optional tag specified when a task is started. For example if you automatically trigger a task to run a batch process job, you could apply a unique identifier for that job to your task with the ``startedBy`` parameter. You can then identify which tasks belong to that job by filtering the results of a  list-tasks call with the ``startedBy`` value.
+  An optional tag specified when a task is started. For example if you automatically trigger a task to run a batch process job, you could apply a unique identifier for that job to your task with the ``startedBy`` parameter. You can then identify which tasks belong to that job by filtering the results of a  list-tasks call with the ``startedBy`` value. Up to 36 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed.
 
    
 
@@ -133,11 +131,74 @@ JSON Syntax::
 
   
 
+``--group`` (string)
+
+
+  The name of the task group to associate with the task. The default value is the family name of the task definition (for example, family:my-family-name).
+
+  
+
+``--placement-constraints`` (list)
+
+
+  An array of placement constraint objects to use for the task. You can specify up to 10 constraints per task (including constraints in the task definition and those specified at run time).
+
+  
+
+
+
+Shorthand Syntax::
+
+    type=string,expression=string ...
+
+
+
+
+JSON Syntax::
+
+  [
+    {
+      "type": "distinctInstance"|"memberOf",
+      "expression": "string"
+    }
+    ...
+  ]
+
+
+
+``--placement-strategy`` (list)
+
+
+  The placement strategy objects to use for the task. You can specify a maximum of 5 strategy rules per task.
+
+  
+
+
+
+Shorthand Syntax::
+
+    type=string,field=string ...
+
+
+
+
+JSON Syntax::
+
+  [
+    {
+      "type": "random"|"spread"|"binpack",
+      "field": "string"
+    }
+    ...
+  ]
+
+
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -217,7 +278,7 @@ tasks -> (list)
 
       
 
-      The Amazon Resource Name (ARN) of the of the cluster that hosts the task.
+      The Amazon Resource Name (ARN) of the cluster that hosts the task.
 
       
 
@@ -227,7 +288,7 @@ tasks -> (list)
 
       
 
-      The Amazon Resource Name (ARN) of the of the task definition that creates the task.
+      The Amazon Resource Name (ARN) of the task definition that creates the task.
 
       
 
@@ -271,7 +332,7 @@ tasks -> (list)
 
             
 
-            The name of the container that receives the override.
+            The name of the container that receives the override. This parameter is required if any override is specified.
 
             
 
@@ -281,7 +342,7 @@ tasks -> (list)
 
             
 
-            The command to send to the container that overrides the default command from the Docker image or the task definition.
+            The command to send to the container that overrides the default command from the Docker image or the task definition. You must also specify a container name.
 
             
 
@@ -297,7 +358,7 @@ tasks -> (list)
 
             
 
-            The environment variables to send to the container. You can add new environment variables, which are added to the container at launch, or you can override the existing environment variables from the Docker image or the task definition.
+            The environment variables to send to the container. You can add new environment variables, which are added to the container at launch, or you can override the existing environment variables from the Docker image or the task definition. You must also specify a container name.
 
             
 
@@ -333,7 +394,47 @@ tasks -> (list)
 
             
 
+          cpu -> (integer)
+
+            
+
+            The number of ``cpu`` units reserved for the container, instead of the default value from the task definition. You must also specify a container name.
+
+            
+
+            
+
+          memory -> (integer)
+
+            
+
+            The hard limit (in MiB) of memory to present to the container, instead of the default value from the task definition. If your container attempts to exceed the memory specified here, the container is killed. You must also specify a container name.
+
+            
+
+            
+
+          memoryReservation -> (integer)
+
+            
+
+            The soft limit (in MiB) of memory to reserve for the container, instead of the default value from the task definition. You must also specify a container name.
+
+            
+
+            
+
           
+
+        
+
+      taskRoleArn -> (string)
+
+        
+
+        The Amazon Resource Name (ARN) of the IAM role that containers in this task can assume. All containers in this task are granted the permissions that are specified in this role.
+
+        
 
         
 
@@ -429,7 +530,7 @@ tasks -> (list)
 
           
 
-          A short (255 max characters) human-readable string to provide additional detail about a running or stopped container.
+          A short (255 max characters) human-readable string to provide additional details about a running or stopped container.
 
           
 
@@ -509,6 +610,16 @@ tasks -> (list)
 
       
 
+    version -> (long)
+
+      
+
+      The version counter for the task. Every time a task experiences a change that triggers a CloudWatch event, the version counter is incremented. If you are replicating your Amazon ECS task state with CloudWatch events, you can compare the version of a task reported by the Amazon ECS APIs with the version reported in CloudWatch events for the task (inside the ``detail`` object) to verify that the version in your event stream is current.
+
+      
+
+      
+
     stoppedReason -> (string)
 
       
@@ -523,7 +634,7 @@ tasks -> (list)
 
       
 
-      The Unix time in seconds and milliseconds when the task was created (the task entered the ``PENDING`` state).
+      The Unix timestamp for when the task was created (the task entered the ``PENDING`` state).
 
       
 
@@ -533,7 +644,7 @@ tasks -> (list)
 
       
 
-      The Unix time in seconds and milliseconds when the task was started (the task transitioned from the ``PENDING`` state to the ``RUNNING`` state).
+      The Unix timestamp for when the task was started (the task transitioned from the ``PENDING`` state to the ``RUNNING`` state).
 
       
 
@@ -543,7 +654,17 @@ tasks -> (list)
 
       
 
-      The Unix time in seconds and milliseconds when the task was stopped (the task transitioned from the ``RUNNING`` state to the ``STOPPED`` state).
+      The Unix timestamp for when the task was stopped (the task transitioned from the ``RUNNING`` state to the ``STOPPED`` state).
+
+      
+
+      
+
+    group -> (string)
+
+      
+
+      The name of the task group associated with the task.
 
       
 

@@ -21,16 +21,19 @@ Returns information about a stream, including the current status of the stream, 
 
 .. note::
 
-  
+   
 
-  You can call *describe-stream* at a maximum rate of 10 times per second.
+  You can call ``describe-stream`` at a maximum rate of 10 times per second.
 
-  
+   
 
  
 
-Each shard in the stream has a ``SequenceNumberRange`` associated with it. If the ``SequenceNumberRange`` has a ``StartingSequenceNumber`` but no ``EndingSequenceNumber`` , then the shard is still open (able to receive more stream records). If both ``StartingSequenceNumber`` and ``EndingSequenceNumber`` are present, the that shared is closed and can no longer receive more data.
+Each shard in the stream has a ``SequenceNumberRange`` associated with it. If the ``SequenceNumberRange`` has a ``StartingSequenceNumber`` but no ``EndingSequenceNumber`` , then the shard is still open (able to receive more stream records). If both ``StartingSequenceNumber`` and ``EndingSequenceNumber`` are present, then that shard is closed and can no longer receive more data.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/DescribeStream>`_
 
 
 ========
@@ -44,7 +47,7 @@ Synopsis
   [--limit <value>]
   [--exclusive-start-shard-id <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -77,8 +80,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -112,16 +115,16 @@ StreamDescription -> (structure)
 
      
 
-    Note that *LatestStreamLabel* is not a unique identifier for the stream, because it is possible that a stream from another table might have the same timestamp. However, the combination of the following three elements is guaranteed to be unique:
+    Note that ``LatestStreamLabel`` is not a unique identifier for the stream, because it is possible that a stream from another table might have the same timestamp. However, the combination of the following three elements is guaranteed to be unique:
 
      
 
      
-    * the AWS customer ID.
+    * the AWS customer ID. 
      
-    * the table name
+    * the table name 
      
-    * the *StreamLabel* 
+    * the ``StreamLabel``   
      
 
     
@@ -137,13 +140,13 @@ StreamDescription -> (structure)
      
 
      
-    * ``ENABLING`` - Streams is currently being enabled on the DynamoDB table.
+    * ``ENABLING`` - Streams is currently being enabled on the DynamoDB table. 
      
-    * ``ENABLING`` - the stream is enabled.
+    * ``ENABLED`` - the stream is enabled. 
      
-    * ``DISABLING`` - Streams is currently being disabled on the DynamoDB table.
+    * ``DISABLING`` - Streams is currently being disabled on the DynamoDB table. 
      
-    * ``DISABLED`` - the stream is disabled.
+    * ``DISABLED`` - the stream is disabled. 
      
 
     
@@ -159,13 +162,13 @@ StreamDescription -> (structure)
      
 
      
-    * ``KEYS_ONLY`` - only the key attributes of items that were modified in the DynamoDB table.
+    * ``KEYS_ONLY`` - only the key attributes of items that were modified in the DynamoDB table. 
      
-    * ``NEW_IMAGE`` - entire item from the table, as it appeared after they were modified.
+    * ``NEW_IMAGE`` - entire items from the table, as they appeared after they were modified. 
      
-    * ``OLD_IMAGE`` - entire item from the table, as it appeared before they were modified.
+    * ``OLD_IMAGE`` - entire items from the table, as they appeared before they were modified. 
      
-    * ``NEW_AND_OLD_IMAGES`` - both the new and the old images of the items from the table.
+    * ``NEW_AND_OLD_IMAGES`` - both the new and the old images of the items from the table. 
      
 
     
@@ -208,7 +211,21 @@ StreamDescription -> (structure)
 
        
 
-      A *KeySchemaElement* represents exactly one attribute of the primary key. For example, a hash type primary key would be represented by one *KeySchemaElement* . A hash-and-range type primary key would require one *KeySchemaElement* for the hash attribute, and another *KeySchemaElement* for the range attribute.
+      A ``KeySchemaElement`` represents exactly one attribute of the primary key. For example, a simple primary key (partition key) would be represented by one ``KeySchemaElement`` . A composite primary key (partition key and sort key) would require one ``KeySchemaElement`` for the partition key, and another ``KeySchemaElement`` for the sort key.
+
+       
+
+      .. note::
+
+         
+
+        The partition key of an item is also known as its *hash attribute* . The term "hash attribute" derives from DynamoDB's usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values.
+
+         
+
+        The sort key of an item is also known as its *range attribute* . The term "range attribute" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value.
+
+         
 
       
 

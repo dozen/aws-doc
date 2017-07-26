@@ -15,8 +15,11 @@ Description
 
 
 
-To retrieve the delegation set for a hosted zone, send a ``GET`` request to the ``/*Route 53 API version* /hostedzone/*hosted zone ID*`` resource. The delegation set is the four Amazon Route 53 name servers that were assigned to the hosted zone when you created it.
+Gets information about a specified hosted zone including the four name servers assigned to the hosted zone.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHostedZone>`_
 
 
 ========
@@ -28,7 +31,7 @@ Synopsis
     get-hosted-zone
   --id <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -40,15 +43,15 @@ Options
 ``--id`` (string)
 
 
-  The ID of the hosted zone for which you want to get a list of the name servers in the delegation set.
+  The ID of the hosted zone that you want to get information about.
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -71,7 +74,7 @@ HostedZone -> (structure)
 
   
 
-  A complex type that contains the information about the specified hosted zone.
+  A complex type that contains general information about the specified hosted zone.
 
   
 
@@ -79,7 +82,7 @@ HostedZone -> (structure)
 
     
 
-    The ID of the specified hosted zone.
+    The ID that Amazon Route 53 assigned to the hosted zone when you created it.
 
     
 
@@ -89,11 +92,11 @@ HostedZone -> (structure)
 
     
 
-    The name of the domain. This must be a fully-specified domain, for example, www.example.com. The trailing dot is optional; Amazon Route 53 assumes that the domain name is fully qualified. This means that Amazon Route 53 treats www.example.com (without a trailing dot) and www.example.com. (with a trailing dot) as identical.
+    The name of the domain. For public hosted zones, this is the name that you have registered with your DNS registrar.
 
      
 
-    This is the name you have registered with your DNS registrar. You should ask your registrar to change the authoritative name servers for your domain to the set of ``NameServers`` elements returned in ``DelegationSet`` .
+    For information about how to specify characters other than ``a-z`` , ``0-9`` , and ``-`` (hyphen) and how to specify internationalized domain names, see  create-hosted-zone .
 
     
 
@@ -103,7 +106,7 @@ HostedZone -> (structure)
 
     
 
-    A unique string that identifies the request to create the hosted zone.
+    The value that you specified for ``CallerReference`` when you created the hosted zone.
 
     
 
@@ -113,7 +116,7 @@ HostedZone -> (structure)
 
     
 
-    A complex type that contains the ``Comment`` element.
+    A complex type that includes the ``Comment`` and ``PrivateZone`` elements. If you omitted the ``HostedZoneConfig`` and ``Comment`` elements from the request, the ``Config`` and ``Comment`` elements don't appear in the response.
 
     
 
@@ -121,13 +124,17 @@ HostedZone -> (structure)
 
       
 
-      An optional comment about your hosted zone. If you don't want to specify a comment, you can omit the ``HostedZoneConfig`` and ``Comment`` elements from the XML document.
+      Any comments that you want to include about the hosted zone.
 
       
 
       
 
     PrivateZone -> (boolean)
+
+      
+
+      A value that indicates whether this is a private hosted zone.
 
       
 
@@ -139,7 +146,7 @@ HostedZone -> (structure)
 
     
 
-    Total number of resource record sets in the hosted zone.
+    The number of resource record sets in the hosted zone.
 
     
 
@@ -151,11 +158,15 @@ DelegationSet -> (structure)
 
   
 
-  A complex type that contains information about the name servers for the specified hosted zone.
+  A complex type that lists the Amazon Route 53 name servers for the specified hosted zone.
 
   
 
   Id -> (string)
+
+    
+
+    The ID that Amazon Route 53 assigns to a reusable delegation set.
 
     
 
@@ -165,13 +176,17 @@ DelegationSet -> (structure)
 
     
 
+    The value that you specified for ``CallerReference`` when you created the reusable delegation set.
+
+    
+
     
 
   NameServers -> (list)
 
     
 
-    A complex type that contains the authoritative name servers for the hosted zone. Use the method provided by your domain registrar to add an NS record to your domain for each ``NameServer`` that is assigned to your hosted zone.
+    A complex type that contains a list of the authoritative name servers for a hosted zone or for a reusable delegation set.
 
     
 
@@ -189,7 +204,7 @@ VPCs -> (list)
 
   
 
-  A complex type that contains information about VPCs associated with the specified hosted zone.
+  A complex type that contains information about the VPCs that are associated with the specified hosted zone.
 
   
 
@@ -197,7 +212,15 @@ VPCs -> (list)
 
     
 
+    (Private hosted zones only) A complex type that contains information about an Amazon VPC.
+
+    
+
     VPCRegion -> (string)
+
+      
+
+      (Private hosted zones only) The region in which you created an Amazon VPC.
 
       
 
@@ -207,7 +230,7 @@ VPCs -> (list)
 
       
 
-      A VPC ID
+      (Private hosted zones only) The ID of an Amazon VPC. 
 
       
 

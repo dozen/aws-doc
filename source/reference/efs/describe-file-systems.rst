@@ -15,34 +15,35 @@ Description
 
 
 
-Returns the description of a specific Amazon EFS file system if either the file system ``creation-token`` or the ``file-system-id`` is provided; otherwise, returns descriptions of all file systems owned by the caller's AWS account in the AWS region of the endpoint that you're calling.
+Returns the description of a specific Amazon EFS file system if either the file system ``creation-token`` or the ``file-system-id`` is provided. Otherwise, it returns descriptions of all file systems owned by the caller's AWS account in the AWS Region of the endpoint that you're calling.
 
  
 
-When retrieving all file system descriptions, you can optionally specify the ``max-items`` parameter to limit the number of descriptions in a response. If more file system descriptions remain, Amazon EFS returns a ``NextMarker`` , an opaque token, in the response. In this case, you should send a subsequent request with the ``marker`` request parameter set to the value of ``NextMarker`` . 
+When retrieving all file system descriptions, you can optionally specify the ``MaxItems`` parameter to limit the number of descriptions in a response. If more file system descriptions remain, Amazon EFS returns a ``NextMarker`` , an opaque token, in the response. In this case, you should send a subsequent request with the ``marker`` request parameter set to the value of ``NextMarker`` . 
 
  
 
-So to retrieve a list of your file system descriptions, the expected usage of this API is an iterative process of first calling ``describe-file-systems`` without the ``marker`` and then continuing to call it with the ``marker`` parameter set to the value of the ``NextMarker`` from the previous response until the response has no ``NextMarker`` . 
+To retrieve a list of your file system descriptions, this operation is used in an iterative process, where ``describe-file-systems`` is called first without the ``marker`` and then the operation continues to call it with the ``marker`` parameter set to the value of the ``NextMarker`` from the previous response until the response has no ``NextMarker`` . 
 
  
 
-Note that the implementation may return fewer than ``max-items`` file system descriptions while still including a ``NextMarker`` value. 
+The implementation may return fewer than ``MaxItems`` file system descriptions while still including a ``NextMarker`` value. 
 
  
 
-The order of file systems returned in the response of one ``describe-file-systems`` call, and the order of file systems returned across the responses of a multi-call iteration, is unspecified. 
+The order of file systems returned in the response of one ``describe-file-systems`` call and the order of file systems returned across the responses of a multi-call iteration is unspecified. 
 
  
 
-This operation requires permission for the ``elasticfilesystem:DescribeFileSystems`` action. 
+This operation requires permissions for the ``elasticfilesystem:DescribeFileSystems`` action. 
 
 
 
-.. note::
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeFileSystems>`_
 
-  **AWS CLI support for this service is only available in a preview stage.** You can enable this service by running: ``aws configure set preview.efs true`` 
 
+``describe-file-systems`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
+When using ``--output text`` and the ``--query`` argument on a paginated response, the ``--query`` argument must extract data from the results of the following query expressions: ``FileSystems``
 
 
 ========
@@ -53,11 +54,12 @@ Synopsis
 
     describe-file-systems
   [--max-items <value>]
-  [--marker <value>]
   [--creation-token <value>]
   [--file-system-id <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--starting-token <value>]
+  [--page-size <value>]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -67,38 +69,57 @@ Options
 =======
 
 ``--max-items`` (integer)
+ 
 
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``NextToken`` is provided in the command's output. To resume pagination, provide the ``NextToken`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``NextToken`` response element directly outside of the AWS CLI.
 
-  Optional integer. Specifies the maximum number of file systems to return in the response. This parameter value must be greater than 0. The number of items Amazon EFS returns will be the minimum of the ``max-items`` parameter specified in the request and the service's internal maximum number of items per page. 
+   
 
-  
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
-``--marker`` (string)
-
-
-  Optional string. Opaque pagination token returned from a previous ``describe-file-systems`` operation. If present, specifies to continue the list from where the returning call had left off. 
-
-  
+   
 
 ``--creation-token`` (string)
 
 
-  Optional string. Restricts the list to the file system with this creation token (you specify a creation token at the time of creating an Amazon EFS file system). 
+  (Optional) Restricts the list to the file system with this creation token (String). You specify a creation token when you create an Amazon EFS file system.
 
   
 
 ``--file-system-id`` (string)
 
 
-  Optional string. File system ID whose description you want to retrieve. 
+  (Optional) ID of the file system whose description you want to retrieve (String).
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--starting-token`` (string)
+ 
+
+  A token to specify where to start paginating. This is the ``NextToken`` from a previously truncated response.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--page-size`` (integer)
+ 
+
+  The size of each page to get in the AWS service call. This does not affect the number of items returned in the command's output. Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call. This can help prevent the AWS service calls from timing out.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -110,7 +131,7 @@ Marker -> (string)
 
   
 
-  A string, present if provided by caller in the request.
+  Present if provided by caller in the request (String).
 
   
 
@@ -120,7 +141,7 @@ FileSystems -> (list)
 
   
 
-  An array of file system descriptions.
+  Array of file system descriptions.
 
   
 
@@ -128,7 +149,7 @@ FileSystems -> (list)
 
     
 
-    This object provides description of a file system.
+    Description of the file system.
 
     
 
@@ -136,7 +157,7 @@ FileSystems -> (list)
 
       
 
-      The AWS account that created the file system. If the file system was created by an IAM user, the parent account to which the user belongs is the owner.
+      AWS account that created the file system. If the file system was created by an IAM user, the parent account to which the user belongs is the owner.
 
       
 
@@ -146,7 +167,7 @@ FileSystems -> (list)
 
       
 
-      Opaque string specified in the request. 
+      Opaque string specified in the request.
 
       
 
@@ -156,7 +177,7 @@ FileSystems -> (list)
 
       
 
-      The file system ID assigned by Amazon EFS.
+      ID of the file system, assigned by Amazon EFS.
 
       
 
@@ -166,7 +187,7 @@ FileSystems -> (list)
 
       
 
-      The time at which the file system was created, in seconds, since 1970-01-01T00:00:00Z.
+      Time that the file system was created, in seconds (since 1970-01-01T00:00:00Z).
 
       
 
@@ -176,7 +197,7 @@ FileSystems -> (list)
 
       
 
-      A predefined string value that indicates the lifecycle phase of the file system. 
+      Lifecycle phase of the file system.
 
       
 
@@ -186,7 +207,7 @@ FileSystems -> (list)
 
       
 
-      You can add tags to a file system (see  create-tags ) including a "Name" tag. If the file system has a "Name" tag, Amazon EFS returns the value in this field. 
+      You can add tags to a file system, including a ``Name`` tag. For more information, see  create-tags . If the file system has a ``Name`` tag, Amazon EFS returns the value in this field. 
 
       
 
@@ -196,7 +217,7 @@ FileSystems -> (list)
 
       
 
-      The current number of mount targets (see  create-mount-target ) the file system has.
+      Current number of mount targets that the file system has. For more information, see  create-mount-target .
 
       
 
@@ -206,7 +227,7 @@ FileSystems -> (list)
 
       
 
-      This object provides the latest known metered size of data stored in the file system, in bytes, in its ``Value`` field, and the time at which that size was determined in its ``Timestamp`` field. The ``Timestamp`` value is the integer number of seconds since 1970-01-01T00:00:00Z. Note that the value does not represent the size of a consistent snapshot of the file system, but it is eventually consistent when there are no writes to the file system. That is, the value will represent actual size only if the file system is not modified for a period longer than a couple of hours. Otherwise, the value is not the exact size the file system was at any instant in time. 
+      Latest known metered size (in bytes) of data stored in the file system, in bytes, in its ``Value`` field, and the time at which that size was determined in its ``Timestamp`` field. The ``Timestamp`` value is the integer number of seconds since 1970-01-01T00:00:00Z. Note that the value does not represent the size of a consistent snapshot of the file system, but it is eventually consistent when there are no writes to the file system. That is, the value will represent actual size only if the file system is not modified for a period longer than a couple of hours. Otherwise, the value is not the exact size the file system was at any instant in time. 
 
       
 
@@ -214,7 +235,7 @@ FileSystems -> (list)
 
         
 
-        The latest known metered size, in bytes, of data stored in the file system.
+        Latest known metered size (in bytes) of data stored in the file system.
 
         
 
@@ -224,11 +245,21 @@ FileSystems -> (list)
 
         
 
-        The time at which the size of data, returned in the ``Value`` field, was determined. The value is the integer number of seconds since 1970-01-01T00:00:00Z.
+        Time at which the size of data, returned in the ``Value`` field, was determined. The value is the integer number of seconds since 1970-01-01T00:00:00Z.
 
         
 
         
+
+      
+
+    PerformanceMode -> (string)
+
+      
+
+      The ``PerformanceMode`` of the file system.
+
+      
 
       
 
@@ -240,7 +271,7 @@ NextMarker -> (string)
 
   
 
-  A string, present if there are more file systems than returned in the response. You can use the ``NextMarker`` in the subsequent request to fetch the descriptions.
+  Present if there are more file systems than returned in the response (String). You can use the ``NextMarker`` in the subsequent request to fetch the descriptions.
 
   
 

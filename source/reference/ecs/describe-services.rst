@@ -19,6 +19,9 @@ Describes the specified services running in your cluster.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeServices>`_
+
+
 ========
 Synopsis
 ========
@@ -29,7 +32,7 @@ Synopsis
   [--cluster <value>]
   --services <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -41,14 +44,14 @@ Options
 ``--cluster`` (string)
 
 
-  The name of the cluster that hosts the service to describe. If you do not specify a cluster, the default cluster is assumed.
+  The short name or full Amazon Resource Name (ARN)the cluster that hosts the service to describe. If you do not specify a cluster, the default cluster is assumed.
 
   
 
 ``--services`` (list)
 
 
-  A list of services to describe.
+  A list of services to describe. You may specify up to 10 services to describe in a single operation.
 
   
 
@@ -63,8 +66,8 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -79,42 +82,43 @@ This example command provides descriptive information about the ``my-http-servic
 Command::
 
   aws ecs describe-services --service my-http-service
-  
+
 Output::
 
   {
       "services": [
           {
-              "status": "ACTIVE", 
-              "taskDefinition": "arn:aws:ecs:<region>:<aws_account_id>:task-definition/amazon-ecs-sample:1", 
-              "pendingCount": 0, 
-              "loadBalancers": [], 
-              "desiredCount": 10, 
-              "serviceName": "my-http-service", 
-              "clusterArn": "arn:aws:ecs:<region>:<aws_account_id>:cluster/default", 
-              "serviceArn": "arn:aws:ecs:<region>:<aws_account_id>:service/my-http-service", 
+              "status": "ACTIVE",
+              "taskDefinition": "arn:aws:ecs:<region>:<aws_account_id>:task-definition/amazon-ecs-sample:1",
+              "pendingCount": 0,
+              "loadBalancers": [],
+              "desiredCount": 10,
+              "createdAt": 1466801808.595,
+              "serviceName": "my-http-service",
+              "clusterArn": "arn:aws:ecs:<region>:<aws_account_id>:cluster/default",
+              "serviceArn": "arn:aws:ecs:<region>:<aws_account_id>:service/my-http-service",
               "deployments": [
                   {
-                      "status": "PRIMARY", 
-                      "pendingCount": 0, 
-                      "createdAt": 1428326312.703, 
-                      "desiredCount": 10, 
-                      "taskDefinition": "arn:aws:ecs:<region>:<aws_account_id>:task-definition/amazon-ecs-sample:1", 
-                      "updatedAt": 1428326312.703, 
-                      "id": "ecs-svc/9223370608528463088", 
+                      "status": "PRIMARY",
+                      "pendingCount": 0,
+                      "createdAt": 1466801808.595,
+                      "desiredCount": 10,
+                      "taskDefinition": "arn:aws:ecs:<region>:<aws_account_id>:task-definition/amazon-ecs-sample:1",
+                      "updatedAt": 1428326312.703,
+                      "id": "ecs-svc/9223370608528463088",
                       "runningCount": 10
                   }
-              ], 
+              ],
               "events": [
                   {
-                      "message": "(service my-http-service) has reached a steady state.", 
-                      "id": "97c8a8e0-16a5-4d30-80bd-9e5413f8951b", 
-                      "createdAt": 1428326587.208
+                      "message": "(service my-http-service) has reached a steady state.",
+                      "id": "97c8a8e0-16a5-4d30-80bd-9e5413f8951b",
+                      "createdAt": 1466801812.435
                   }
-              ], 
+              ],
               "runningCount": 10
           }
-      ], 
+      ],
       "failures": []
   }
 
@@ -143,7 +147,7 @@ services -> (list)
 
       
 
-      The Amazon Resource Name (ARN) that identifies the service. The ARN contains the ``arn:aws:ecs`` namespace, followed by the region of the service, the AWS account ID of the service owner, the ``service`` namespace, and then the service name. For example, arn:aws:ecs:*region* :*012345678910* :service/*my-service* .
+      The Amazon Resource Name (ARN) that identifies the service. The ARN contains the ``arn:aws:ecs`` namespace, followed by the region of the service, the AWS account ID of the service owner, the ``service`` namespace, and then the service name. For example, ``arn:aws:ecs:*region* :*012345678910* :service/*my-service* `` .
 
       
 
@@ -163,7 +167,7 @@ services -> (list)
 
       
 
-      The Amazon Resource Name (ARN) of the of the cluster that hosts the service.
+      The Amazon Resource Name (ARN) of the cluster that hosts the service.
 
       
 
@@ -173,7 +177,7 @@ services -> (list)
 
       
 
-      A list of load balancer objects, containing the load balancer name, the container name (as it appears in a container definition), and the container port to access from the load balancer.
+      A list of Elastic Load Balancing load balancer objects, containing the load balancer name, the container name (as it appears in a container definition), and the container port to access from the load balancer.
 
       
 
@@ -185,11 +189,21 @@ services -> (list)
 
         
 
+        targetGroupArn -> (string)
+
+          
+
+          The full Amazon Resource Name (ARN) of the Elastic Load Balancing target group associated with a service.
+
+          
+
+          
+
         loadBalancerName -> (string)
 
           
 
-          The name of the load balancer.
+          The name of a Classic load balancer.
 
           
 
@@ -281,7 +295,7 @@ services -> (list)
 
         
 
-        The upper limit (as a percentage of the service's ``desiredCount`` ) of the number of running tasks that can be running in a service during a deployment. The maximum number of tasks during a deployment is the ``desiredCount`` multiplied by the ``maximumPercent`` /100, rounded down to the nearest integer value.
+        The upper limit (as a percentage of the service's ``desiredCount`` ) of the number of tasks that are allowed in the ``RUNNING`` or ``PENDING`` state in a service during a deployment. The maximum number of tasks during a deployment is the ``desiredCount`` multiplied by ``maximumPercent`` /100, rounded down to the nearest integer value.
 
         
 
@@ -291,7 +305,7 @@ services -> (list)
 
         
 
-        The lower limit (as a percentage of the service's ``desiredCount`` ) of the number of running tasks that must remain running and healthy in a service during a deployment. The minimum healthy tasks during a deployment is the ``desiredCount`` multiplied by the ``minimumHealthyPercent`` /100, rounded up to the nearest integer value.
+        The lower limit (as a percentage of the service's ``desiredCount`` ) of the number of running tasks that must remain in the ``RUNNING`` state in a service during a deployment. The minimum healthy tasks during a deployment is the ``desiredCount`` multiplied by ``minimumHealthyPercent`` /100, rounded up to the nearest integer value.
 
         
 
@@ -379,7 +393,7 @@ services -> (list)
 
           
 
-          The Unix time in seconds and milliseconds when the service was created.
+          The Unix timestamp for when the service was created.
 
           
 
@@ -389,7 +403,7 @@ services -> (list)
 
           
 
-          The Unix time in seconds and milliseconds when the service was last updated.
+          The Unix timestamp for when the service was last updated.
 
           
 
@@ -403,7 +417,7 @@ services -> (list)
 
       
 
-      The Amazon Resource Name (ARN) of the IAM role associated with the service that allows the Amazon ECS container agent to register container instances with a load balancer. 
+      The Amazon Resource Name (ARN) of the IAM role associated with the service that allows the Amazon ECS container agent to register container instances with an Elastic Load Balancing load balancer.
 
       
 
@@ -439,7 +453,7 @@ services -> (list)
 
           
 
-          The Unix time in seconds and milliseconds when the event was triggered.
+          The Unix timestamp for when the event was triggered.
 
           
 
@@ -450,6 +464,96 @@ services -> (list)
           
 
           The event message.
+
+          
+
+          
+
+        
+
+      
+
+    createdAt -> (timestamp)
+
+      
+
+      The Unix timestamp for when the service was created.
+
+      
+
+      
+
+    placementConstraints -> (list)
+
+      
+
+      The placement constraints for the tasks in the service.
+
+      
+
+      (structure)
+
+        
+
+        An object representing a constraint on task placement. For more information, see `Task Placement Constraints <http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html>`_ in the *Amazon EC2 Container Service Developer Guide* .
+
+        
+
+        type -> (string)
+
+          
+
+          The type of constraint. Use ``distinctInstance`` to ensure that each task in a particular group is running on a different container instance. Use ``memberOf`` to restrict selection to a group of valid candidates. Note that ``distinctInstance`` is not supported in task definitions.
+
+          
+
+          
+
+        expression -> (string)
+
+          
+
+          A cluster query language expression to apply to the constraint. Note you cannot specify an expression if the constraint type is ``distinctInstance`` . For more information, see `Cluster Query Language <http://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html>`_ in the *Amazon EC2 Container Service Developer Guide* .
+
+          
+
+          
+
+        
+
+      
+
+    placementStrategy -> (list)
+
+      
+
+      The placement strategy that determines how tasks for the service are placed.
+
+      
+
+      (structure)
+
+        
+
+        The task placement strategy for a task or service. For more information, see `Task Placement Strategies <http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-strategies.html>`_ in the *Amazon EC2 Container Service Developer Guide* .
+
+        
+
+        type -> (string)
+
+          
+
+          The type of placement strategy. The ``random`` placement strategy randomly places tasks on available candidates. The ``spread`` placement strategy spreads placement across available candidates evenly based on the ``field`` parameter. The ``binpack`` strategy places tasks on available candidates that have the least available amount of the resource that is specified with the ``field`` parameter. For example, if you binpack on memory, a task is placed on the instance with the least amount of remaining memory (but still enough to run the task).
+
+          
+
+          
+
+        field -> (string)
+
+          
+
+          The field to apply the placement strategy against. For the ``spread`` placement strategy, valid values are ``instanceId`` (or ``host`` , which has the same effect), or any platform or custom attribute that is applied to a container instance, such as ``attribute:ecs.availability-zone`` . For the ``binpack`` placement strategy, valid values are ``cpu`` and ``memory`` . For the ``random`` placement strategy, this field is not used.
 
           
 

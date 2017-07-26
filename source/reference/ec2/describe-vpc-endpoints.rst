@@ -19,6 +19,9 @@ Describes one or more of your VPC endpoints.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpoints>`_
+
+
 ========
 Synopsis
 ========
@@ -27,12 +30,12 @@ Synopsis
 
     describe-vpc-endpoints
   [--dry-run | --no-dry-run]
-  [--vpc-endpoint-ids <value>]
   [--filters <value>]
   [--max-results <value>]
   [--next-token <value>]
+  [--vpc-endpoint-ids <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -47,21 +50,6 @@ Options
   Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
 
   
-
-``--vpc-endpoint-ids`` (list)
-
-
-  One or more endpoint IDs.
-
-  
-
-
-
-Syntax::
-
-  "string" "string" ...
-
-
 
 ``--filters`` (list)
 
@@ -121,11 +109,26 @@ JSON Syntax::
 
   
 
+``--vpc-endpoint-ids`` (list)
+
+
+  One or more endpoint IDs.
+
+  
+
+
+
+Syntax::
+
+  "string" "string" ...
+
+
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -163,6 +166,16 @@ Output::
 Output
 ======
 
+NextToken -> (string)
+
+  
+
+  The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
+
+  
+
+  
+
 VpcEndpoints -> (list)
 
   
@@ -179,41 +192,11 @@ VpcEndpoints -> (list)
 
     
 
-    VpcEndpointId -> (string)
+    CreationTimestamp -> (timestamp)
 
       
 
-      The ID of the VPC endpoint.
-
-      
-
-      
-
-    VpcId -> (string)
-
-      
-
-      The ID of the VPC to which the endpoint is associated.
-
-      
-
-      
-
-    ServiceName -> (string)
-
-      
-
-      The name of the AWS service to which the endpoint is associated.
-
-      
-
-      
-
-    State -> (string)
-
-      
-
-      The state of the VPC endpoint.
+      The date and time the VPC endpoint was created.
 
       
 
@@ -245,27 +228,47 @@ VpcEndpoints -> (list)
 
       
 
-    CreationTimestamp -> (timestamp)
+    ServiceName -> (string)
 
       
 
-      The date and time the VPC endpoint was created.
+      The name of the AWS service to which the endpoint is associated.
+
+      
+
+      
+
+    State -> (string)
+
+      
+
+      The state of the VPC endpoint.
+
+      
+
+      
+
+    VpcEndpointId -> (string)
+
+      
+
+      The ID of the VPC endpoint.
+
+      
+
+      
+
+    VpcId -> (string)
+
+      
+
+      The ID of the VPC to which the endpoint is associated.
 
       
 
       
 
     
-
-  
-
-NextToken -> (string)
-
-  
-
-  The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
-
-  
 
   
 

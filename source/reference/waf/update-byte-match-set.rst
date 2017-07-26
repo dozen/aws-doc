@@ -20,15 +20,15 @@ Inserts or deletes  ByteMatchTuple objects (filters) in a  ByteMatchSet . For ea
  
 
  
-* Whether to insert or delete the object from the array. If you want to change a ``ByteMatchSetUpdate`` object, you delete the existing object and add a new one.
+* Whether to insert or delete the object from the array. If you want to change a ``ByteMatchSetUpdate`` object, you delete the existing object and add a new one. 
  
-* The part of a web request that you want AWS WAF to inspect, such as a query string or the value of the ``User-Agent`` header. 
+* The part of a web request that you want AWS WAF to inspect, such as a query string or the value of the ``User-Agent`` header.  
  
-* The bytes (typically a string that corresponds with ASCII characters) that you want AWS WAF to look for. For more information, including how you specify the values for the AWS WAF API and the AWS CLI or SDKs, see ``TargetString`` in the  ByteMatchTuple data type. 
+* The bytes (typically a string that corresponds with ASCII characters) that you want AWS WAF to look for. For more information, including how you specify the values for the AWS WAF API and the AWS CLI or SDKs, see ``TargetString`` in the  ByteMatchTuple data type.  
  
-* Where to look, such as at the beginning or the end of a query string.
+* Where to look, such as at the beginning or the end of a query string. 
  
-* Whether to perform any conversions on the request, such as converting it to lowercase, before inspecting it for the specified string.
+* Whether to perform any conversions on the request, such as converting it to lowercase, before inspecting it for the specified string. 
  
 
  
@@ -42,17 +42,20 @@ To create and configure a ``ByteMatchSet`` , perform the following steps:
  
 
  
-* Create a ``ByteMatchSet.`` For more information, see  create-byte-match-set .
+* Create a ``ByteMatchSet.`` For more information, see  create-byte-match-set . 
  
-* Use  get-change-token to get the change token that you provide in the ``change-token`` parameter of an ``update-byte-match-set`` request.
+* Use  get-change-token to get the change token that you provide in the ``change-token`` parameter of an ``update-byte-match-set`` request. 
  
-* Submit an ``update-byte-match-set`` request to specify the part of the request that you want AWS WAF to inspect (for example, the header or the URI) and the value that you want AWS WAF to watch for.
- 
-
+* Submit an ``update-byte-match-set`` request to specify the part of the request that you want AWS WAF to inspect (for example, the header or the URI) and the value that you want AWS WAF to watch for. 
  
 
-For more information about how to use the AWS WAF API to allow or block HTTP requests, see the `AWS WAF Developer Guide`_ .
+ 
 
+For more information about how to use the AWS WAF API to allow or block HTTP requests, see the `AWS WAF Developer Guide <http://docs.aws.amazon.com/waf/latest/developerguide/>`_ .
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateByteMatchSet>`_
 
 
 ========
@@ -66,7 +69,7 @@ Synopsis
   --change-token <value>
   --updates <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -97,11 +100,11 @@ Options
    
 
    
-  *  ByteMatchSetUpdate : Contains ``Action`` and ``ByteMatchTuple`` 
+  *  ByteMatchSetUpdate : Contains ``Action`` and ``ByteMatchTuple``   
    
-  *  ByteMatchTuple : Contains ``FieldToMatch`` , ``PositionalConstraint`` , ``TargetString`` , and ``TextTransformation`` 
+  *  ByteMatchTuple : Contains ``FieldToMatch`` , ``PositionalConstraint`` , ``TargetString`` , and ``TextTransformation``   
    
-  *  FieldToMatch : Contains ``Data`` and ``Type`` 
+  *  FieldToMatch : Contains ``Data`` and ``Type``   
    
 
   
@@ -138,8 +141,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -157,6 +160,3 @@ ChangeToken -> (string)
 
   
 
-
-
-.. _AWS WAF Developer Guide: http://docs.aws.amazon.com/waf/latest/developerguide/

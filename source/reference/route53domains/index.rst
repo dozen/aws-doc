@@ -15,6 +15,10 @@ Description
 
 
 
+Amazon Route 53 API actions let you register domain names and perform related operations.
+
+
+
 ==================
 Available Commands
 ==================
@@ -30,15 +34,20 @@ Available Commands
   disable-domain-transfer-lock
   enable-domain-auto-renew
   enable-domain-transfer-lock
+  get-contact-reachability-status
   get-domain-detail
+  get-domain-suggestions
   get-operation-detail
   list-domains
   list-operations
   list-tags-for-domain
   register-domain
+  renew-domain
+  resend-contact-reachability-email
   retrieve-domain-auth-code
   transfer-domain
   update-domain-contact
   update-domain-contact-privacy
   update-domain-nameservers
   update-tags-for-domain
+  view-billing

@@ -23,8 +23,11 @@ This operation requires permission for the ``lambda:ListFunctions`` action.
 
  
 
-If you are using versioning feature, the response returns list of $LATEST versions of your functions. For information about the versioning feature, see `AWS Lambda Function Versioning and Aliases`_ . 
+If you are using the versioning feature, you can list all of your functions or only ``$LATEST`` versions. For information about the versioning feature, see `AWS Lambda Function Versioning and Aliases <http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html>`_ . 
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctions>`_
 
 
 ``list-functions`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
@@ -38,11 +41,13 @@ Synopsis
 ::
 
     list-functions
+  [--master-region <value>]
+  [--function-version <value>]
   [--max-items <value>]
   [--cli-input-json <value>]
   [--starting-token <value>]
   [--page-size <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -51,10 +56,57 @@ Synopsis
 Options
 =======
 
+``--master-region`` (string)
+
+
+  Optional string. If not specified, will return only regular function versions (i.e., non-replicated versions).
+
+   
+
+  Valid values are:
+
+   
+
+  The region from which the functions are replicated. For example, if you specify ``us-east-1`` , only functions replicated from that region will be returned.
+
+   
+
+   ``ALL`` _ Will return all functions from any region. If specified, you also must specify a valid function-version parameter.
+
+  
+
+``--function-version`` (string)
+
+
+  Optional string. If not specified, only the unqualified functions ARNs (Amazon Resource Names) will be returned.
+
+   
+
+  Valid value:
+
+   
+
+   ``ALL`` _ Will return all versions, including ``$LATEST`` which will have fully qualified ARNs (Amazon Resource Names).
+
+  
+
+  Possible values:
+
+  
+  *   ``ALL``
+
+  
+
+  
+
 ``--max-items`` (integer)
  
 
-  The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination. This ``NextToken`` response element should **not** be used directly outside of the AWS CLI.
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``NextToken`` is provided in the command's output. To resume pagination, provide the ``NextToken`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``NextToken`` response element directly outside of the AWS CLI.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
    
 
@@ -68,19 +120,23 @@ Performs service operation based on the JSON string provided. The JSON string fo
 
    
 
-``--page-size`` (integer)
- 
-
-  The size of each page.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
    
 
-  
+``--page-size`` (integer)
+ 
 
-  
+  The size of each page to get in the AWS service call. This does not affect the number of items returned in the command's output. Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call. This can help prevent the AWS service calls from timing out.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -118,7 +174,7 @@ Functions -> (list)
 
       
 
-      The name of the function.
+      The name of the function. Note that the length constraint applies only to the ARN. If you specify only the function name, it is limited to 64 characters in length.
 
       
 
@@ -148,7 +204,7 @@ Functions -> (list)
 
       
 
-      The Amazon Resource Name (ARN) of the IAM role that Lambda assumes when it executes your function to access any other Amazon Web Services (AWS) resources. 
+      The Amazon Resource Name (ARN) of the IAM role that Lambda assumes when it executes your function to access any other Amazon Web Services (AWS) resources.
 
       
 
@@ -188,7 +244,7 @@ Functions -> (list)
 
       
 
-      The function execution time at which Lambda should terminate the function. Because the execution time has cost implications, we recommend you set this value based on your expected execution time. The default is 3 seconds. 
+      The function execution time at which Lambda should terminate the function. Because the execution time has cost implications, we recommend you set this value based on your expected execution time. The default is 3 seconds.
 
       
 
@@ -208,7 +264,7 @@ Functions -> (list)
 
       
 
-      The time stamp of the last time you updated the function.
+      The time stamp of the last time you updated the function. The time stamp is conveyed as a string complying with ISO-8601 in this way YYYY-MM-DDThh:mm:ssTZD (e.g., 1997-07-16T19:20:30+01:00). For more information, see `Date and Time Formats <https://www.w3.org/TR/NOTE-datetime>`_ .
 
       
 
@@ -286,10 +342,129 @@ Functions -> (list)
 
       
 
+    DeadLetterConfig -> (structure)
+
+      
+
+      The parent object that contains the target ARN (Amazon Resource Name) of an Amazon SQS queue or Amazon SNS topic.
+
+      
+
+      TargetArn -> (string)
+
+        
+
+        The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic you specify as your Dead Letter Queue (DLQ).
+
+        
+
+        
+
+      
+
+    Environment -> (structure)
+
+      
+
+      The parent object that contains your environment's configuration settings.
+
+      
+
+      Variables -> (map)
+
+        
+
+        The key-value pairs returned that represent your environment's configuration settings or error information.
+
+        
+
+        key -> (string)
+
+          
+
+          
+
+        value -> (string)
+
+          
+
+          
+
+        
+
+      Error -> (structure)
+
+        
+
+        The parent object that contains error information associated with your configuration settings.
+
+        
+
+        ErrorCode -> (string)
+
+          
+
+          The error code returned by the environment error object.
+
+          
+
+          
+
+        Message -> (string)
+
+          
+
+          The message returned by the environment error object.
+
+          
+
+          
+
+        
+
+      
+
+    KMSKeyArn -> (string)
+
+      
+
+      The Amazon Resource Name (ARN) of the KMS key used to encrypt your function's environment variables. If empty, it means you are using the AWS Lambda default service key.
+
+      
+
+      
+
+    TracingConfig -> (structure)
+
+      
+
+      The parent object that contains your function's tracing settings.
+
+      
+
+      Mode -> (string)
+
+        
+
+        The tracing mode associated with your Lambda function.
+
+        
+
+        
+
+      
+
+    MasterArn -> (string)
+
+      
+
+      Returns the ARN (Amazon Resource Name) of the master function.
+
+      
+
+      
+
     
 
   
 
-
-
-.. _AWS Lambda Function Versioning and Aliases: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html

@@ -24,19 +24,22 @@ To create and configure a ``ByteMatchSet`` , perform the following steps:
  
 
  
-* Use  get-change-token to get the change token that you provide in the ``change-token`` parameter of a ``create-byte-match-set`` request.
+* Use  get-change-token to get the change token that you provide in the ``change-token`` parameter of a ``create-byte-match-set`` request. 
  
-* Submit a ``create-byte-match-set`` request.
+* Submit a ``create-byte-match-set`` request. 
  
-* Use ``get-change-token`` to get the change token that you provide in the ``change-token`` parameter of an ``update-byte-match-set`` request.
+* Use ``get-change-token`` to get the change token that you provide in the ``change-token`` parameter of an ``update-byte-match-set`` request. 
  
-* Submit an  update-byte-match-set request to specify the part of the request that you want AWS WAF to inspect (for example, the header or the URI) and the value that you want AWS WAF to watch for.
- 
-
+* Submit an  update-byte-match-set request to specify the part of the request that you want AWS WAF to inspect (for example, the header or the URI) and the value that you want AWS WAF to watch for. 
  
 
-For more information about how to use the AWS WAF API to allow or block HTTP requests, see the `AWS WAF Developer Guide`_ .
+ 
 
+For more information about how to use the AWS WAF API to allow or block HTTP requests, see the `AWS WAF Developer Guide <http://docs.aws.amazon.com/waf/latest/developerguide/>`_ .
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateByteMatchSet>`_
 
 
 ========
@@ -49,7 +52,7 @@ Synopsis
   --name <value>
   --change-token <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -75,8 +78,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -96,11 +99,11 @@ ByteMatchSet -> (structure)
 
     
 
-    The ``ByteMatchSetId`` for a ``ByteMatchSet`` . You use ``ByteMatchSetId`` to get information about a ``ByteMatchSet`` (see  get-byte-match-set ), update a ``ByteMatchSet`` (see  update-byte-match-set , insert a ``ByteMatchSet`` into a ``Rule`` or delete one from a ``Rule`` (see  update-rule ), and delete a ``ByteMatchSet`` from AWS WAF (see  delete-byte-match-set ).
+    The ``ByteMatchSetId`` for a ``ByteMatchSet`` . You use ``ByteMatchSetId`` to get information about a ``ByteMatchSet`` (see  get-byte-match-set ), update a ``ByteMatchSet`` (see  update-byte-match-set ), insert a ``ByteMatchSet`` into a ``Rule`` or delete one from a ``Rule`` (see  update-rule ), and delete a ``ByteMatchSet`` from AWS WAF (see  delete-byte-match-set ).
 
      
 
-    ``ByteMatchSetId`` is returned by  create-byte-match-set and by  list-byte-match-sets .
+     ``ByteMatchSetId`` is returned by  create-byte-match-set and by  list-byte-match-sets .
 
     
 
@@ -149,15 +152,15 @@ ByteMatchSet -> (structure)
            
 
            
-          * ``HEADER`` : A specified request header, for example, the value of the ``User-Agent`` or ``Referer`` header. If you choose ``HEADER`` for the type, specify the name of the header in ``Data`` .
+          * ``HEADER`` : A specified request header, for example, the value of the ``User-Agent`` or ``Referer`` header. If you choose ``HEADER`` for the type, specify the name of the header in ``Data`` . 
            
-          * ``METHOD`` : The HTTP method, which indicated the type of operation that the request is asking the origin to perform. Amazon CloudFront supports the following methods: ``DELETE`` , ``GET`` , ``HEAD`` , ``OPTIONS`` , ``PATCH`` , ``POST`` , and ``PUT`` .
+          * ``METHOD`` : The HTTP method, which indicated the type of operation that the request is asking the origin to perform. Amazon CloudFront supports the following methods: ``DELETE`` , ``GET`` , ``HEAD`` , ``OPTIONS`` , ``PATCH`` , ``POST`` , and ``PUT`` . 
            
-          * ``QUERY_STRING`` : A query string, which is the part of a URL that appears after a ``?`` character, if any.
+          * ``QUERY_STRING`` : A query string, which is the part of a URL that appears after a ``?`` character, if any. 
            
-          * ``URI`` : The part of a web request that identifies a resource, for example, ``/images/daily-ad.jpg`` .
+          * ``URI`` : The part of a web request that identifies a resource, for example, ``/images/daily-ad.jpg`` . 
            
-          * ``BODY`` : The part of a request that contains any additional data that you want to send to your web server as the HTTP request body, such as data from a form. The request body immediately follows the request headers. Note that only the first ``8192`` bytes of the request body are forwarded to AWS WAF for inspection. To allow or block requests based on the length of the body, you can create a size constraint set. For more information, see  create-size-constraint-set . 
+          * ``BODY`` : The part of a request that contains any additional data that you want to send to your web server as the HTTP request body, such as data from a form. The request body immediately follows the request headers. Note that only the first ``8192`` bytes of the request body are forwarded to AWS WAF for inspection. To allow or block requests based on the length of the body, you can create a size constraint set. For more information, see  create-size-constraint-set .  
            
 
           
@@ -193,15 +196,15 @@ ByteMatchSet -> (structure)
          
 
          
-        * ``HEADER`` : The value that you want AWS WAF to search for in the request header that you specified in  FieldToMatch , for example, the value of the ``User-Agent`` or ``Referer`` header.
+        * ``HEADER`` : The value that you want AWS WAF to search for in the request header that you specified in  FieldToMatch , for example, the value of the ``User-Agent`` or ``Referer`` header. 
          
-        * ``METHOD`` : The HTTP method, which indicates the type of operation specified in the request. CloudFront supports the following methods: ``DELETE`` , ``GET`` , ``HEAD`` , ``OPTIONS`` , ``PATCH`` , ``POST`` , and ``PUT`` .
+        * ``METHOD`` : The HTTP method, which indicates the type of operation specified in the request. CloudFront supports the following methods: ``DELETE`` , ``GET`` , ``HEAD`` , ``OPTIONS`` , ``PATCH`` , ``POST`` , and ``PUT`` . 
          
-        * ``QUERY_STRING`` : The value that you want AWS WAF to search for in the query string, which is the part of a URL that appears after a ``?`` character.
+        * ``QUERY_STRING`` : The value that you want AWS WAF to search for in the query string, which is the part of a URL that appears after a ``?`` character. 
          
-        * ``URI`` : The value that you want AWS WAF to search for in the part of a URL that identifies a resource, for example, ``/images/daily-ad.jpg`` .
+        * ``URI`` : The value that you want AWS WAF to search for in the part of a URL that identifies a resource, for example, ``/images/daily-ad.jpg`` . 
          
-        * ``BODY`` : The part of a request that contains any additional data that you want to send to your web server as the HTTP request body, such as data from a form. The request body immediately follows the request headers. Note that only the first ``8192`` bytes of the request body are forwarded to AWS WAF for inspection. To allow or block requests based on the length of the body, you can create a size constraint set. For more information, see  create-size-constraint-set . 
+        * ``BODY`` : The part of a request that contains any additional data that you want to send to your web server as the HTTP request body, such as data from a form. The request body immediately follows the request headers. Note that only the first ``8192`` bytes of the request body are forwarded to AWS WAF for inspection. To allow or block requests based on the length of the body, you can create a size constraint set. For more information, see  create-size-constraint-set .  
          
 
          
@@ -210,11 +213,11 @@ ByteMatchSet -> (structure)
 
          
 
-        **If you're using the AWS WAF API** 
+         **If you're using the AWS WAF API**  
 
          
 
-        Specify a base64-encoded version of the value. The maximum length of the value before you base64-encode it is 50 bytes. 
+        Specify a base64-encoded version of the value. The maximum length of the value before you base64-encode it is 50 bytes.
 
          
 
@@ -222,7 +225,7 @@ ByteMatchSet -> (structure)
 
          
 
-        **If you're using the AWS CLI or one of the AWS SDKs** 
+         **If you're using the AWS CLI or one of the AWS SDKs**  
 
          
 
@@ -240,7 +243,7 @@ ByteMatchSet -> (structure)
 
          
 
-        **CMD_LINE** 
+         **CMD_LINE**  
 
          
 
@@ -249,20 +252,20 @@ ByteMatchSet -> (structure)
          
 
          
-        * Delete the following characters: \ " ' ^
+        * Delete the following characters: \ " ' ^ 
          
-        * Delete spaces before the following characters: / (
+        * Delete spaces before the following characters: / ( 
          
-        * Replace the following characters with a space: , ;
+        * Replace the following characters with a space: , ; 
          
-        * Replace multiple spaces with one space
+        * Replace multiple spaces with one space 
          
-        * Convert uppercase letters (A-Z) to lowercase (a-z)
-         
-
+        * Convert uppercase letters (A-Z) to lowercase (a-z) 
          
 
-        **COMPRESS_WHITE_SPACE** 
+         
+
+         **COMPRESS_WHITE_SPACE**  
 
          
 
@@ -271,26 +274,26 @@ ByteMatchSet -> (structure)
          
 
          
-        * \f, formfeed, decimal 12
+        * \f, formfeed, decimal 12 
          
-        * \t, tab, decimal 9
+        * \t, tab, decimal 9 
          
-        * \n, newline, decimal 10
+        * \n, newline, decimal 10 
          
-        * \r, carriage return, decimal 13
+        * \r, carriage return, decimal 13 
          
-        * \v, vertical tab, decimal 11
+        * \v, vertical tab, decimal 11 
          
-        * non-breaking space, decimal 160
+        * non-breaking space, decimal 160 
          
-
-         
-
-        ``COMPRESS_WHITE_SPACE`` also replaces multiple spaces with one space.
 
          
 
-        **HTML_ENTITY_DECODE** 
+         ``COMPRESS_WHITE_SPACE`` also replaces multiple spaces with one space.
+
+         
+
+         **HTML_ENTITY_DECODE**  
 
          
 
@@ -299,22 +302,22 @@ ByteMatchSet -> (structure)
          
 
          
-        * Replaces ``(ampersand)quot;`` with ``"`` 
+        * Replaces ``(ampersand)quot;`` with ``"``   
          
-        * Replaces ``(ampersand)nbsp;`` with a non-breaking space, decimal 160
+        * Replaces ``(ampersand)nbsp;`` with a non-breaking space, decimal 160 
          
-        * Replaces ``(ampersand)lt;`` with a "less than" symbol
+        * Replaces ``(ampersand)lt;`` with a "less than" symbol 
          
-        * Replaces ``(ampersand)gt;`` with ``>`` 
+        * Replaces ``(ampersand)gt;`` with ````   
          
-        * Replaces characters that are represented in hexadecimal format, ``(ampersand)#xhhhh;`` , with the corresponding characters
+        * Replaces characters that are represented in hexadecimal format, ``(ampersand)#xhhhh;`` , with the corresponding characters 
          
-        * Replaces characters that are represented in decimal format, ``(ampersand)#nnnn;`` , with the corresponding characters
-         
-
+        * Replaces characters that are represented in decimal format, ``(ampersand)#nnnn;`` , with the corresponding characters 
          
 
-        **LOWERCASE** 
+         
+
+         **LOWERCASE**  
 
          
 
@@ -322,7 +325,7 @@ ByteMatchSet -> (structure)
 
          
 
-        **URL_DECODE** 
+         **URL_DECODE**  
 
          
 
@@ -330,7 +333,7 @@ ByteMatchSet -> (structure)
 
          
 
-        **NONE** 
+         **NONE**  
 
          
 
@@ -348,7 +351,7 @@ ByteMatchSet -> (structure)
 
          
 
-        **CONTAINS** 
+         **CONTAINS**  
 
          
 
@@ -356,7 +359,7 @@ ByteMatchSet -> (structure)
 
          
 
-        **CONTAINS_WORD** 
+         **CONTAINS_WORD**  
 
          
 
@@ -365,18 +368,18 @@ ByteMatchSet -> (structure)
          
 
          
-        * ``TargetString`` exactly matches the value of the specified part of the web request, such as the value of a header.
+        * ``TargetString`` exactly matches the value of the specified part of the web request, such as the value of a header. 
          
-        * ``TargetString`` is at the beginning of the specified part of the web request and is followed by a character other than an alphanumeric character or underscore (_), for example, ``BadBot;`` .
+        * ``TargetString`` is at the beginning of the specified part of the web request and is followed by a character other than an alphanumeric character or underscore (_), for example, ``BadBot;`` . 
          
-        * ``TargetString`` is at the end of the specified part of the web request and is preceded by a character other than an alphanumeric character or underscore (_), for example, ``;BadBot`` .
+        * ``TargetString`` is at the end of the specified part of the web request and is preceded by a character other than an alphanumeric character or underscore (_), for example, ``;BadBot`` . 
          
-        * ``TargetString`` is in the middle of the specified part of the web request and is preceded and followed by characters other than alphanumeric characters or underscore (_), for example, ``-BadBot;`` .
-         
-
+        * ``TargetString`` is in the middle of the specified part of the web request and is preceded and followed by characters other than alphanumeric characters or underscore (_), for example, ``-BadBot;`` . 
          
 
-        **EXACTLY** 
+         
+
+         **EXACTLY**  
 
          
 
@@ -384,7 +387,7 @@ ByteMatchSet -> (structure)
 
          
 
-        **STARTS_WITH** 
+         **STARTS_WITH**  
 
          
 
@@ -392,7 +395,7 @@ ByteMatchSet -> (structure)
 
          
 
-        **ENDS_WITH** 
+         **ENDS_WITH**  
 
          
 
@@ -418,6 +421,3 @@ ChangeToken -> (string)
 
   
 
-
-
-.. _AWS WAF Developer Guide: http://docs.aws.amazon.com/waf/latest/developerguide/

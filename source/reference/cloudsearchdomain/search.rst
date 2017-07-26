@@ -31,12 +31,15 @@ Retrieves a list of documents that match the specified search criteria. How you 
 
  
 
-For more information, see `Searching Your Data`_ in the *Amazon CloudSearch Developer Guide* .
+For more information, see `Searching Your Data <http://docs.aws.amazon.com/cloudsearch/latest/developerguide/searching.html>`_ in the *Amazon CloudSearch Developer Guide* .
 
  
 
 The endpoint for submitting ``search`` requests is domain-specific. You submit search requests to a domain's search endpoint. To get the search endpoint for your domain, use the Amazon CloudSearch configuration service ``DescribeDomains`` action. A domain's endpoints are also displayed on the domain dashboard in the Amazon CloudSearch console. 
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/cloudsearchdomain-2013-01-01/Search>`_
 
 
 ========
@@ -58,9 +61,10 @@ Synopsis
   [--size <value>]
   [--sort <value>]
   [--start <value>]
+  [--stats <value>]
   --search-query <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -76,7 +80,7 @@ Options
 
    
 
-  For more information, see `Paginating Results`_ in the *Amazon CloudSearch Developer Guide* .
+  For more information, see `Paginating Results <http://docs.aws.amazon.com/cloudsearch/latest/developerguide/paginating-results.html>`_ in the *Amazon CloudSearch Developer Guide* .
 
   
 
@@ -95,7 +99,7 @@ Options
 
    
 
-  For information about the variables, operators, and functions you can use in expressions, see `Writing Expressions`_ in the *Amazon CloudSearch Developer Guide* .
+  For information about the variables, operators, and functions you can use in expressions, see `Writing Expressions <http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html#writing-expressions>`_ in the *Amazon CloudSearch Developer Guide* .
 
   
 
@@ -111,7 +115,7 @@ Options
    
 
    
-  * ``buckets`` specifies an array of the facet values or ranges to count. Ranges are specified using the same syntax that you use to search for a range of values. For more information, see `Searching for a Range of Values`_ in the *Amazon CloudSearch Developer Guide* . Buckets are returned in the order they are specified in the request. The ``sort`` and ``size`` options are not valid if you specify ``buckets`` . 
+  * ``buckets`` specifies an array of the facet values or ranges to count. Ranges are specified using the same syntax that you use to search for a range of values. For more information, see `Searching for a Range of Values <http://docs.aws.amazon.com/cloudsearch/latest/developerguide/searching-ranges.html>`_ in the *Amazon CloudSearch Developer Guide* . Buckets are returned in the order they are specified in the request. The ``sort`` and ``size`` options are not valid if you specify ``buckets`` . 
    
   * ``size`` specifies the maximum number of facets to include in the results. By default, Amazon CloudSearch returns counts for the top 10. The ``size`` parameter is only valid when you specify the ``sort`` option; it cannot be used in conjunction with ``buckets`` . 
    
@@ -148,7 +152,7 @@ Options
 
    
 
-  For more information, see `Getting and Using facet Information`_ in the *Amazon CloudSearch Developer Guide* .
+  For more information, see `Getting and Using facet Information <http://docs.aws.amazon.com/cloudsearch/latest/developerguide/faceting.html>`_ in the *Amazon CloudSearch Developer Guide* .
 
   
 
@@ -159,7 +163,7 @@ Options
 
    
 
-  For more information about using filters, see `Filtering Matching Documents`_ in the *Amazon CloudSearch Developer Guide* .
+  For more information about using filters, see `Filtering Matching Documents <http://docs.aws.amazon.com/cloudsearch/latest/developerguide/filtering-results.html>`_ in the *Amazon CloudSearch Developer Guide* .
 
   
 
@@ -246,13 +250,13 @@ Options
    
 
    
-  * ``simple`` : perform simple searches of ``text`` and ``text-array`` fields. By default, the ``simple`` query parser searches all ``text`` and ``text-array`` fields. You can specify which fields to search by with the ``queryOptions`` parameter. If you prefix a search term with a plus sign (+) documents must contain the term to be considered a match. (This is the default, unless you configure the default operator with the ``queryOptions`` parameter.) You can use the ``-`` (NOT), ``|`` (OR), and ``*`` (wildcard) operators to exclude particular terms, find results that match any of the specified terms, or search for a prefix. To search for a phrase rather than individual terms, enclose the phrase in double quotes. For more information, see `Searching for Text`_ in the *Amazon CloudSearch Developer Guide* . 
+  * ``simple`` : perform simple searches of ``text`` and ``text-array`` fields. By default, the ``simple`` query parser searches all ``text`` and ``text-array`` fields. You can specify which fields to search by with the ``queryOptions`` parameter. If you prefix a search term with a plus sign (+) documents must contain the term to be considered a match. (This is the default, unless you configure the default operator with the ``queryOptions`` parameter.) You can use the ``-`` (NOT), ``|`` (OR), and ``*`` (wildcard) operators to exclude particular terms, find results that match any of the specified terms, or search for a prefix. To search for a phrase rather than individual terms, enclose the phrase in double quotes. For more information, see `Searching for Text <http://docs.aws.amazon.com/cloudsearch/latest/developerguide/searching-text.html>`_ in the *Amazon CloudSearch Developer Guide* . 
    
-  * ``structured`` : perform advanced searches by combining multiple expressions to define the search criteria. You can also search within particular fields, search for values and ranges of values, and use advanced options such as term boosting, ``matchall`` , and ``near`` . For more information, see `Constructing Compound Queries`_ in the *Amazon CloudSearch Developer Guide* . 
+  * ``structured`` : perform advanced searches by combining multiple expressions to define the search criteria. You can also search within particular fields, search for values and ranges of values, and use advanced options such as term boosting, ``matchall`` , and ``near`` . For more information, see `Constructing Compound Queries <http://docs.aws.amazon.com/cloudsearch/latest/developerguide/searching-compound-queries.html>`_ in the *Amazon CloudSearch Developer Guide* . 
    
-  * ``lucene`` : search using the Apache Lucene query parser syntax. For more information, see `Apache Lucene search-query Parser Syntax`_ . 
+  * ``lucene`` : search using the Apache Lucene query parser syntax. For more information, see `Apache Lucene search-query Parser Syntax <http://lucene.apache.org/core/4_6_0/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description>`_ . 
    
-  * ``dismax`` : search using the simplified subset of the Apache Lucene query parser syntax defined by the DisMax query parser. For more information, see `DisMax search-query Parser Syntax`_ . 
+  * ``dismax`` : search using the simplified subset of the Apache Lucene query parser syntax defined by the DisMax query parser. For more information, see `DisMax search-query Parser Syntax <http://wiki.apache.org/solr/DisMaxQParserPlugin#Query_Syntax>`_ . 
    
 
   
@@ -296,7 +300,7 @@ Options
 
    
 
-  For more information, see `Sorting Results`_ in the *Amazon CloudSearch Developer Guide* .
+  For more information, see `Sorting Results <http://docs.aws.amazon.com/cloudsearch/latest/developerguide/sorting-results.html>`_ in the *Amazon CloudSearch Developer Guide* .
 
   
 
@@ -307,7 +311,18 @@ Options
 
    
 
-  For more information, see `Paginating Results`_ in the *Amazon CloudSearch Developer Guide* .
+  For more information, see `Paginating Results <http://docs.aws.amazon.com/cloudsearch/latest/developerguide/paginating-results.html>`_ in the *Amazon CloudSearch Developer Guide* .
+
+  
+
+``--stats`` (string)
+
+
+  Specifies one or more fields for which to get statistics information. Each specified field must be facet-enabled in the domain configuration. The fields are specified in JSON using the form:
+
+   ``{"FIELD-A":{},"FIELD-B":{}}``  
+
+  There are currently no options supported for statistics.
 
   
 
@@ -318,15 +333,15 @@ Options
 
    
 
-  For more information about specifying search criteria, see `Searching Your Data`_ in the *Amazon CloudSearch Developer Guide* .
+  For more information about specifying search criteria, see `Searching Your Data <http://docs.aws.amazon.com/cloudsearch/latest/developerguide/searching.html>`_ in the *Amazon CloudSearch Developer Guide* .
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -572,16 +587,121 @@ facets -> (map)
 
   
 
+stats -> (map)
 
+  
 
-.. _Sorting Results: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/sorting-results.html
-.. _DisMax search-query Parser Syntax: http://wiki.apache.org/solr/DisMaxQParserPlugin#Query_Syntax
-.. _Getting and Using facet Information: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/faceting.html
-.. _Writing Expressions: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html#writing-expressions
-.. _Searching for Text: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/searching-text.html
-.. _Constructing Compound Queries: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/searching-compound-queries.html
-.. _Paginating Results: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/paginating-results.html
-.. _Searching for a Range of Values: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/searching-ranges.html
-.. _Searching Your Data: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/searching.html
-.. _Filtering Matching Documents: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/filtering-results.html
-.. _Apache Lucene search-query Parser Syntax: http://lucene.apache.org/core/4_6_0/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description
+  The requested field statistics information.
+
+  
+
+  key -> (string)
+
+    
+
+    
+
+  value -> (structure)
+
+    
+
+    The statistics for a field calculated in the request.
+
+    
+
+    min -> (string)
+
+      
+
+      The minimum value found in the specified field in the result set.
+
+       
+
+      If the field is numeric (``int`` , ``int-array`` , ``double`` , or ``double-array`` ), ``min`` is the string representation of a double-precision 64-bit floating point value. If the field is ``date`` or ``date-array`` , ``min`` is the string representation of a date with the format specified in `IETF RFC3339 <http://tools.ietf.org/html/rfc3339>`_ : yyyy-mm-ddTHH:mm:ss.SSSZ.
+
+      
+
+      
+
+    max -> (string)
+
+      
+
+      The maximum value found in the specified field in the result set.
+
+       
+
+      If the field is numeric (``int`` , ``int-array`` , ``double`` , or ``double-array`` ), ``max`` is the string representation of a double-precision 64-bit floating point value. If the field is ``date`` or ``date-array`` , ``max`` is the string representation of a date with the format specified in `IETF RFC3339 <http://tools.ietf.org/html/rfc3339>`_ : yyyy-mm-ddTHH:mm:ss.SSSZ.
+
+      
+
+      
+
+    count -> (long)
+
+      
+
+      The number of documents that contain a value in the specified field in the result set.
+
+      
+
+      
+
+    missing -> (long)
+
+      
+
+      The number of documents that do not contain a value in the specified field in the result set.
+
+      
+
+      
+
+    sum -> (double)
+
+      
+
+      The sum of the field values across the documents in the result set. ``null`` for date fields.
+
+      
+
+      
+
+    sumOfSquares -> (double)
+
+      
+
+      The sum of all field values in the result set squared.
+
+      
+
+      
+
+    mean -> (string)
+
+      
+
+      The average of the values found in the specified field in the result set.
+
+       
+
+      If the field is numeric (``int`` , ``int-array`` , ``double`` , or ``double-array`` ), ``mean`` is the string representation of a double-precision 64-bit floating point value. If the field is ``date`` or ``date-array`` , ``mean`` is the string representation of a date with the format specified in `IETF RFC3339 <http://tools.ietf.org/html/rfc3339>`_ : yyyy-mm-ddTHH:mm:ss.SSSZ.
+
+      
+
+      
+
+    stddev -> (double)
+
+      
+
+      The standard deviation of the values in the specified field in the result set.
+
+      
+
+      
+
+    
+
+  
+

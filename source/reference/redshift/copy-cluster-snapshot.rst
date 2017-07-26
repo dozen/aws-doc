@@ -15,16 +15,19 @@ Description
 
 
 
-Copies the specified automated cluster snapshot to a new manual cluster snapshot. The source must be an automated snapshot and it must be in the available state. 
+Copies the specified automated cluster snapshot to a new manual cluster snapshot. The source must be an automated snapshot and it must be in the available state.
 
  
 
-When you delete a cluster, Amazon Redshift deletes any automated snapshots of the cluster. Also, when the retention period of the snapshot expires, Amazon Redshift automatically deletes it. If you want to keep an automated snapshot for a longer period, you can make a manual copy of the snapshot. Manual snapshots are retained until you delete them. 
+When you delete a cluster, Amazon Redshift deletes any automated snapshots of the cluster. Also, when the retention period of the snapshot expires, Amazon Redshift automatically deletes it. If you want to keep an automated snapshot for a longer period, you can make a manual copy of the snapshot. Manual snapshots are retained until you delete them.
 
  
 
-For more information about working with snapshots, go to `Amazon Redshift Snapshots`_ in the *Amazon Redshift Cluster Management Guide* . 
+For more information about working with snapshots, go to `Amazon Redshift Snapshots <http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html>`_ in the *Amazon Redshift Cluster Management Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CopyClusterSnapshot>`_
 
 
 ========
@@ -38,7 +41,7 @@ Synopsis
   [--source-snapshot-cluster-identifier <value>]
   --target-snapshot-identifier <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -50,7 +53,7 @@ Options
 ``--source-snapshot-identifier`` (string)
 
 
-  The identifier for the source snapshot. 
+  The identifier for the source snapshot.
 
    
 
@@ -59,7 +62,7 @@ Options
    
 
    
-  * Must be the identifier for a valid automated snapshot whose state is ``available`` .
+  * Must be the identifier for a valid automated snapshot whose state is ``available`` . 
    
 
   
@@ -67,7 +70,7 @@ Options
 ``--source-snapshot-cluster-identifier`` (string)
 
 
-  The identifier of the cluster the source snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name. 
+  The identifier of the cluster the source snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.
 
    
 
@@ -76,7 +79,7 @@ Options
    
 
    
-  * Must be the identifier for a valid cluster.
+  * Must be the identifier for a valid cluster. 
    
 
   
@@ -84,7 +87,7 @@ Options
 ``--target-snapshot-identifier`` (string)
 
 
-  The identifier given to the new manual snapshot. 
+  The identifier given to the new manual snapshot.
 
    
 
@@ -93,15 +96,15 @@ Options
    
 
    
-  * Cannot be null, empty, or blank.
+  * Cannot be null, empty, or blank. 
    
-  * Must contain from 1 to 255 alphanumeric characters or hyphens.
+  * Must contain from 1 to 255 alphanumeric characters or hyphens. 
    
-  * First character must be a letter.
+  * First character must be a letter. 
    
-  * Cannot end with a hyphen or contain two consecutive hyphens.
+  * Cannot end with a hyphen or contain two consecutive hyphens. 
    
-  * Must be unique for the AWS account that is making the request.
+  * Must be unique for the AWS account that is making the request. 
    
 
   
@@ -109,8 +112,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -169,7 +172,7 @@ Snapshot -> (structure)
 
     
 
-    The snapshot identifier that is provided in the request. 
+    The snapshot identifier that is provided in the request.
 
     
 
@@ -179,7 +182,7 @@ Snapshot -> (structure)
 
     
 
-    The identifier of the cluster for which the snapshot was taken. 
+    The identifier of the cluster for which the snapshot was taken.
 
     
 
@@ -189,7 +192,7 @@ Snapshot -> (structure)
 
     
 
-    The time (UTC) when Amazon Redshift began the snapshot. A snapshot contains a copy of the cluster data as of this exact time. 
+    The time (UTC) when Amazon Redshift began the snapshot. A snapshot contains a copy of the cluster data as of this exact time.
 
     
 
@@ -202,13 +205,13 @@ Snapshot -> (structure)
     The snapshot status. The value of the status depends on the API operation used. 
 
      
-    *  create-cluster-snapshot and  copy-cluster-snapshot returns status as "creating". 
-     
-    *  describe-cluster-snapshots returns status as "creating", "available", "final snapshot", or "failed".
-     
-    *  delete-cluster-snapshot returns status as "deleted".
-     
 
+     
+    *  create-cluster-snapshot and  copy-cluster-snapshot returns status as "creating".  
+     
+    *  describe-cluster-snapshots returns status as "creating", "available", "final snapshot", or "failed". 
+     
+    *  delete-cluster-snapshot returns status as "deleted". 
      
 
     
@@ -219,7 +222,7 @@ Snapshot -> (structure)
 
     
 
-    The port that the cluster is listening on. 
+    The port that the cluster is listening on.
 
     
 
@@ -229,7 +232,7 @@ Snapshot -> (structure)
 
     
 
-    The Availability Zone in which the cluster was created. 
+    The Availability Zone in which the cluster was created.
 
     
 
@@ -239,7 +242,7 @@ Snapshot -> (structure)
 
     
 
-    The time (UTC) when the cluster was originally created. 
+    The time (UTC) when the cluster was originally created.
 
     
 
@@ -249,7 +252,7 @@ Snapshot -> (structure)
 
     
 
-    The master user name for the cluster. 
+    The master user name for the cluster.
 
     
 
@@ -259,7 +262,7 @@ Snapshot -> (structure)
 
     
 
-    The version ID of the Amazon Redshift engine that is running on the cluster. 
+    The version ID of the Amazon Redshift engine that is running on the cluster.
 
     
 
@@ -299,7 +302,7 @@ Snapshot -> (structure)
 
     
 
-    The name of the database that was created when the cluster was created. 
+    The name of the database that was created when the cluster was created.
 
     
 
@@ -357,7 +360,7 @@ Snapshot -> (structure)
 
       
 
-      Describes an AWS customer account authorized to restore a snapshot. 
+      Describes an AWS customer account authorized to restore a snapshot.
 
       
 
@@ -365,7 +368,17 @@ Snapshot -> (structure)
 
         
 
-        The identifier of an AWS customer account authorized to restore a snapshot. 
+        The identifier of an AWS customer account authorized to restore a snapshot.
+
+        
+
+        
+
+      AccountAlias -> (string)
+
+        
+
+        The identifier of an AWS support account authorized to restore a snapshot. For AWS support, the identifier is ``amazon-redshift-support`` . 
 
         
 
@@ -379,7 +392,7 @@ Snapshot -> (structure)
 
     
 
-    For manual snapshots, the AWS customer account used to create or copy the snapshot. For automatic snapshots, the owner of the cluster. The owner can perform all snapshot actions, such as sharing a manual snapshot. 
+    For manual snapshots, the AWS customer account used to create or copy the snapshot. For automatic snapshots, the owner of the cluster. The owner can perform all snapshot actions, such as sharing a manual snapshot.
 
     
 
@@ -389,7 +402,7 @@ Snapshot -> (structure)
 
     
 
-    The size of the complete set of backup data that would be used to restore the cluster. 
+    The size of the complete set of backup data that would be used to restore the cluster.
 
     
 
@@ -399,7 +412,7 @@ Snapshot -> (structure)
 
     
 
-    The size of the incremental backup. 
+    The size of the incremental backup.
 
     
 
@@ -409,7 +422,7 @@ Snapshot -> (structure)
 
     
 
-    The number of megabytes that have been transferred to the snapshot backup. 
+    The number of megabytes that have been transferred to the snapshot backup.
 
     
 
@@ -439,7 +452,7 @@ Snapshot -> (structure)
 
     
 
-    The amount of time an in-progress snapshot backup has been running, or the amount of time it took a completed backup to finish. 
+    The amount of time an in-progress snapshot backup has been running, or the amount of time it took a completed backup to finish.
 
     
 
@@ -449,7 +462,7 @@ Snapshot -> (structure)
 
     
 
-    The source region from which the snapshot was copied. 
+    The source region from which the snapshot was copied.
 
     
 
@@ -511,8 +524,23 @@ Snapshot -> (structure)
 
     
 
+  EnhancedVpcRouting -> (boolean)
+
+    
+
+    An option that specifies whether to create the cluster with enhanced VPC routing enabled. To create a cluster that uses enhanced VPC routing, the cluster must be in a VPC. For more information, see `Enhanced VPC Routing <http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html>`_ in the Amazon Redshift Cluster Management Guide.
+
+     
+
+    If this option is ``true`` , enhanced VPC routing is enabled. 
+
+     
+
+    Default: false
+
+    
+
+    
+
   
 
-
-
-.. _Amazon Redshift Snapshots: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html

@@ -19,7 +19,7 @@ A traditional, clustered relational database requires a sizable upfront capital 
 
  
 
-Visit `http\://aws.amazon.com/simpledb/`_ for more information. 
+Visit `http\://aws.amazon.com/simpledb/ <http://aws.amazon.com/simpledb/>`_ for more information. 
 
 
 
@@ -48,6 +48,3 @@ Available Commands
   list-domains
   put-attributes
   select
-
-
-.. _http\://aws.amazon.com/simpledb/: http://aws.amazon.com/simpledb/

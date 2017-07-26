@@ -23,7 +23,7 @@ This action returns the newly started workflow execution.
 
  
 
-**Access Control** 
+ **Access Control**  
 
  
 
@@ -32,28 +32,28 @@ You can use IAM policies to control this action's access to Amazon SWF resources
  
 
  
-* Use a ``Resource`` element with the domain name to limit the action to only specified domains.
+* Use a ``Resource`` element with the domain name to limit the action to only specified domains. 
  
-* Use an ``Action`` element to allow or deny permission to call this action.
+* Use an ``Action`` element to allow or deny permission to call this action. 
  
 * Constrain the following parameters by using a ``Condition`` element with the appropriate keys. 
 
    
-  * ``tagList.member.0`` : The key is ``swf:tagList.member.0`` .
+  * ``tagList.member.0`` : The key is ``swf:tagList.member.0`` . 
    
-  * ``tagList.member.1`` : The key is ``swf:tagList.member.1`` .
+  * ``tagList.member.1`` : The key is ``swf:tagList.member.1`` . 
    
-  * ``tagList.member.2`` : The key is ``swf:tagList.member.2`` .
+  * ``tagList.member.2`` : The key is ``swf:tagList.member.2`` . 
    
-  * ``tagList.member.3`` : The key is ``swf:tagList.member.3`` .
+  * ``tagList.member.3`` : The key is ``swf:tagList.member.3`` . 
    
-  * ``tagList.member.4`` : The key is ``swf:tagList.member.4`` .
+  * ``tagList.member.4`` : The key is ``swf:tagList.member.4`` . 
    
-  * ``taskList`` : String constraint. The key is ``swf:taskList.name`` .
+  * ``taskList`` : String constraint. The key is ``swf:taskList.name`` . 
    
-  * ``workflowType.name`` : String constraint. The key is ``swf:workflowType.name`` .
+  * ``workflowType.name`` : String constraint. The key is ``swf:workflowType.name`` . 
    
-  * ``workflowType.version`` : String constraint. The key is ``swf:workflowType.version`` .
+  * ``workflowType.version`` : String constraint. The key is ``swf:workflowType.version`` . 
    
 
  
@@ -61,8 +61,11 @@ You can use IAM policies to control this action's access to Amazon SWF resources
 
  
 
-If the caller does not have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's **cause** parameter will be set to OPERATION_NOT_PERMITTED. For details and example IAM policies, see `Using IAM to Manage Access to Amazon SWF Workflows`_ .
+If the caller doesn't have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's ``cause`` parameter is set to ``OPERATION_NOT_PERMITTED`` . For details and example IAM policies, see `Using IAM to Manage Access to Amazon SWF Workflows <http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html>`_ in the *Amazon SWF Developer Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/swf-2012-01-25/StartWorkflowExecution>`_
 
 
 ========
@@ -84,7 +87,7 @@ Synopsis
   [--child-policy <value>]
   [--lambda-role <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -107,7 +110,7 @@ Options
 
    
 
-  The specified string must not start or end with whitespace. It must not contain a ``:`` (colon), ``/`` (slash), ``|`` (vertical bar), or any control characters (\u0000-\u001f | \u007f - \u009f). Also, it must not contain the literal string quotarnquot.
+  The specified string must not start or end with whitespace. It must not contain a ``:`` (colon), ``/`` (slash), ``|`` (vertical bar), or any control characters (``\u0000-\u001f`` | ``\u007f-\u009f`` ). Also, it must not contain the literal string ``arn`` .
 
   
 
@@ -145,11 +148,15 @@ JSON Syntax::
 
   .. note::
 
-    A task list for this workflow execution must be specified either as a default for the workflow type or through this parameter. If neither this parameter is set nor a default task list was specified at registration time then a fault will be returned.
+     
+
+    A task list for this workflow execution must be specified either as a default for the workflow type or through this parameter. If neither this parameter is set nor a default task list was specified at registration time then a fault is returned.
+
+     
 
    
 
-  The specified string must not start or end with whitespace. It must not contain a ``:`` (colon), ``/`` (slash), ``|`` (vertical bar), or any control characters (\u0000-\u001f | \u007f - \u009f). Also, it must not contain the literal string quotarnquot.
+  The specified string must not start or end with whitespace. It must not contain a ``:`` (colon), ``/`` (slash), ``|`` (vertical bar), or any control characters (``\u0000-\u001f`` | ``\u007f-\u009f`` ). Also, it must not contain the literal string ``arn`` .
 
   
 
@@ -173,11 +180,11 @@ JSON Syntax::
 ``--task-priority`` (string)
 
 
-  The task priority to use for this workflow execution. This will override any default priority that was assigned when the workflow type was registered. If not set, then the default task priority for the workflow type will be used. Valid values are integers that range from Java's ``Integer.MIN_VALUE`` (-2147483648) to ``Integer.MAX_VALUE`` (2147483647). Higher numbers indicate higher priority.
+  The task priority to use for this workflow execution. This overrides any default priority that was assigned when the workflow type was registered. If not set, then the default task priority for the workflow type is used. Valid values are integers that range from Java's ``Integer.MIN_VALUE`` (-2147483648) to ``Integer.MAX_VALUE`` (2147483647). Higher numbers indicate higher priority.
 
    
 
-  For more information about setting task priority, see `Setting Task Priority`_ in the *Amazon Simple Workflow Developer Guide* .
+  For more information about setting task priority, see `Setting Task Priority <http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html>`_ in the *Amazon SWF Developer Guide* .
 
   
 
@@ -195,13 +202,17 @@ JSON Syntax::
 
    
 
-  The duration is specified in seconds; an integer greater than or equal to 0. Exceeding this limit will cause the workflow execution to time out. Unlike some of the other timeout parameters in Amazon SWF, you cannot specify a value of "NONE" for this timeout; there is a one-year max limit on the time that a workflow execution can run.
+  The duration is specified in seconds; an integer greater than or equal to ``0`` . Exceeding this limit causes the workflow execution to time out. Unlike some of the other timeout parameters in Amazon SWF, you cannot specify a value of "NONE" for this timeout; there is a one-year max limit on the time that a workflow execution can run.
 
    
 
   .. note::
 
+     
+
     An execution start-to-close timeout must be specified either through this parameter or as a default when the workflow type is registered. If neither this parameter nor a default execution start-to-close timeout is specified, a fault is returned.
+
+     
 
   
 
@@ -227,13 +238,17 @@ Syntax::
 
    
 
-  The duration is specified in seconds; an integer greater than or equal to 0. The value "NONE" can be used to specify unlimited duration.
+  The duration is specified in seconds, an integer greater than or equal to ``0`` . You can use ``NONE`` to specify unlimited duration.
 
    
 
   .. note::
 
-    A task start-to-close timeout for this workflow execution must be specified either as a default for the workflow type or through this parameter. If neither this parameter is set nor a default task start-to-close timeout was specified at registration time then a fault will be returned.
+     
+
+    A task start-to-close timeout for this workflow execution must be specified either as a default for the workflow type or through this parameter. If neither this parameter is set nor a default task start-to-close timeout was specified at registration time then a fault is returned.
+
+     
 
   
 
@@ -249,18 +264,22 @@ Syntax::
    
 
    
-  * **TERMINATE:** the child executions will be terminated.
+  * ``TERMINATE`` – The child executions are terminated. 
    
-  * **REQUEST_CANCEL:** a request to cancel will be attempted for each child execution by recording a ``WorkflowExecutionCancelRequested`` event in its history. It is up to the decider to take appropriate actions when it receives an execution history with this event.
+  * ``REQUEST_CANCEL`` – A request to cancel is attempted for each child execution by recording a ``WorkflowExecutionCancelRequested`` event in its history. It is up to the decider to take appropriate actions when it receives an execution history with this event. 
    
-  * **ABANDON:** no action will be taken. The child executions will continue to run.
+  * ``ABANDON`` – No action is taken. The child executions continue to run. 
    
 
    
 
   .. note::
 
-    A child policy for this workflow execution must be specified either as a default for the workflow type or through this parameter. If neither this parameter is set nor a default child policy was specified at registration time then a fault will be returned.
+     
+
+    A child policy for this workflow execution must be specified either as a default for the workflow type or through this parameter. If neither this parameter is set nor a default child policy was specified at registration time then a fault is returned.
+
+     
 
   
 
@@ -282,21 +301,25 @@ Syntax::
 ``--lambda-role`` (string)
 
 
-  The ARN of an IAM role that authorizes Amazon SWF to invoke AWS Lambda functions.
+  The IAM role to attach to this workflow execution.
 
    
 
   .. note::
 
-    In order for this workflow execution to invoke AWS Lambda functions, an appropriate IAM role must be specified either as a default for the workflow type or through this field.
+     
+
+    Executions of this workflow type need IAM roles to invoke Lambda functions. If you don't attach an IAM role, any attempt to schedule a Lambda task fails. This results in a ``ScheduleLambdaFunctionFailed`` history event. For more information, see `http\://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html <http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html>`_ in the *Amazon SWF Developer Guide* .
+
+     
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -314,7 +337,3 @@ runId -> (string)
 
   
 
-
-
-.. _Using IAM to Manage Access to Amazon SWF Workflows: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
-.. _Setting Task Priority: http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html

@@ -19,7 +19,7 @@ Creates a security group.
 
  
 
-A security group is for use with instances either in the EC2-Classic platform or in a specific VPC. For more information, see `Amazon EC2 Security Groups`_ in the *Amazon Elastic Compute Cloud User Guide* and `Security Groups for Your VPC`_ in the *Amazon Virtual Private Cloud User Guide* .
+A security group is for use with instances either in the EC2-Classic platform or in a specific VPC. For more information, see `Amazon EC2 Security Groups <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html>`_ in the *Amazon Elastic Compute Cloud User Guide* and `Security Groups for Your VPC <http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html>`_ in the *Amazon Virtual Private Cloud User Guide* .
 
  
 
@@ -49,6 +49,9 @@ You can add or remove rules from your security groups using  authorize-security-
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSecurityGroup>`_
+
+
 ========
 Synopsis
 ========
@@ -56,12 +59,12 @@ Synopsis
 ::
 
     create-security-group
-  [--dry-run | --no-dry-run]
-  --group-name <value>
   --description <value>
+  --group-name <value>
   [--vpc-id <value>]
+  [--dry-run | --no-dry-run]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -70,10 +73,22 @@ Synopsis
 Options
 =======
 
-``--dry-run`` | ``--no-dry-run`` (boolean)
+``--description`` (string)
 
 
-  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
+  A description for the security group. This is informational only.
+
+   
+
+  Constraints: Up to 255 characters in length
+
+   
+
+  Constraints for EC2-Classic: ASCII characters
+
+   
+
+  Constraints for EC2-VPC: a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=;{}!$*
 
   
 
@@ -96,25 +111,6 @@ Options
 
   
 
-``--description`` (string)
-
-
-  A description for the security group. This is informational only.
-
-   
-
-  Constraints: Up to 255 characters in length
-
-   
-
-  Constraints for EC2-Classic: ASCII characters
-
-   
-
-  Constraints for EC2-VPC: a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=;{}!$*
-
-  
-
 ``--vpc-id`` (string)
 
 
@@ -122,11 +118,18 @@ Options
 
   
 
+``--dry-run`` | ``--no-dry-run`` (boolean)
+
+
+  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
+
+  
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -181,7 +184,3 @@ GroupId -> (string)
 
   
 
-
-
-.. _Security Groups for Your VPC: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html
-.. _Amazon EC2 Security Groups: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html

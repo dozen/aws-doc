@@ -15,8 +15,11 @@ Description
 
 
 
-Creates a new DB security group. DB security groups control access to a DB instance. 
+Creates a new DB security group. DB security groups control access to a DB instance.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSecurityGroup>`_
 
 
 ========
@@ -30,7 +33,7 @@ Synopsis
   --db-security-group-description <value>
   [--tags <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -42,7 +45,7 @@ Options
 ``--db-security-group-name`` (string)
 
 
-  The name for the DB security group. This value is stored as a lowercase string. 
+  The name for the DB security group. This value is stored as a lowercase string.
 
    
 
@@ -51,27 +54,25 @@ Options
    
 
    
-  * Must be 1 to 255 alphanumeric characters
+  * Must be 1 to 255 alphanumeric characters 
    
-  * First character must be a letter
+  * First character must be a letter 
    
-  * Cannot end with a hyphen or contain two consecutive hyphens
+  * Cannot end with a hyphen or contain two consecutive hyphens 
    
-  * Must not be "Default"
-   
-  * Cannot contain spaces
+  * Must not be "Default" 
    
 
    
 
-  Example: ``mysecuritygroup`` 
+  Example: ``mysecuritygroup``  
 
   
 
 ``--db-security-group-description`` (string)
 
 
-  The description for the DB security group. 
+  The description for the DB security group.
 
   
 
@@ -106,8 +107,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -139,18 +140,18 @@ DBSecurityGroup -> (structure)
 
   
 
-  Contains the result of a successful invocation of the following actions: 
+  Contains the result of a successful invocation of the following actions:
 
    
 
    
-  *  describe-db-security-groups  
+  *  describe-db-security-groups   
    
-  *  authorize-db-security-group-ingress  
+  *  authorize-db-security-group-ingress   
    
-  *  create-db-security-group  
+  *  create-db-security-group   
    
-  *  revoke-db-security-group-ingress  
+  *  revoke-db-security-group-ingress   
    
 
    
@@ -163,7 +164,7 @@ DBSecurityGroup -> (structure)
 
     
 
-    Provides the AWS ID of the owner of a specific DB security group. 
+    Provides the AWS ID of the owner of a specific DB security group.
 
     
 
@@ -173,7 +174,7 @@ DBSecurityGroup -> (structure)
 
     
 
-    Specifies the name of the DB security group. 
+    Specifies the name of the DB security group.
 
     
 
@@ -183,7 +184,7 @@ DBSecurityGroup -> (structure)
 
     
 
-    Provides the description of the DB security group. 
+    Provides the description of the DB security group.
 
     
 
@@ -193,7 +194,7 @@ DBSecurityGroup -> (structure)
 
     
 
-    Provides the VpcId of the DB security group. 
+    Provides the VpcId of the DB security group.
 
     
 
@@ -211,16 +212,16 @@ DBSecurityGroup -> (structure)
 
       
 
-      This data type is used as a response element in the following actions: 
+      This data type is used as a response element in the following actions:
 
        
 
        
-      *  authorize-db-security-group-ingress  
+      *  authorize-db-security-group-ingress   
        
-      *  describe-db-security-groups  
+      *  describe-db-security-groups   
        
-      *  revoke-db-security-group-ingress  
+      *  revoke-db-security-group-ingress   
        
 
       
@@ -229,7 +230,7 @@ DBSecurityGroup -> (structure)
 
         
 
-        Provides the status of the EC2 security group. Status can be "authorizing", "authorized", "revoking", and "revoked". 
+        Provides the status of the EC2 security group. Status can be "authorizing", "authorized", "revoking", and "revoked".
 
         
 
@@ -239,7 +240,7 @@ DBSecurityGroup -> (structure)
 
         
 
-        Specifies the name of the EC2 security group. 
+        Specifies the name of the EC2 security group.
 
         
 
@@ -249,7 +250,7 @@ DBSecurityGroup -> (structure)
 
         
 
-        Specifies the id of the EC2 security group. 
+        Specifies the id of the EC2 security group.
 
         
 
@@ -289,7 +290,7 @@ DBSecurityGroup -> (structure)
 
         
 
-        Specifies the status of the IP range. Status can be "authorizing", "authorized", "revoking", and "revoked". 
+        Specifies the status of the IP range. Status can be "authorizing", "authorized", "revoking", and "revoked".
 
         
 
@@ -299,13 +300,23 @@ DBSecurityGroup -> (structure)
 
         
 
-        Specifies the IP range. 
+        Specifies the IP range.
 
         
 
         
 
       
+
+    
+
+  DBSecurityGroupArn -> (string)
+
+    
+
+    The Amazon Resource Name (ARN) for the DB security group.
+
+    
 
     
 

@@ -21,7 +21,11 @@ Returns AWS resource descriptions for running and deleted stacks. If ``stack-nam
 
 .. note::
 
+   
+
   Only the first 100 resources will be returned. If your stack has more resources than this, you should use ``list-stack-resources`` instead.
+
+   
 
  
 
@@ -29,14 +33,21 @@ For deleted stacks, ``describe-stack-resources`` returns resource information fo
 
  
 
-You must specify either ``stack-name`` or ``physical-resource-id`` , but not both. In addition, you can specify ``logical-resource-id`` to filter the returned result. For more information about resources, the ``logical-resource-id`` and ``physical-resource-id`` , go to the `AWS CloudFormation User Guide`_ .
+You must specify either ``stack-name`` or ``physical-resource-id`` , but not both. In addition, you can specify ``logical-resource-id`` to filter the returned result. For more information about resources, the ``logical-resource-id`` and ``physical-resource-id`` , go to the `AWS CloudFormation User Guide <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/>`_ .
 
  
 
 .. note::
 
+   
+
   A ``ValidationError`` is returned if you specify both ``stack-name`` and ``physical-resource-id`` in the same request.
 
+   
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackResources>`_
 
 
 ========
@@ -50,7 +61,7 @@ Synopsis
   [--logical-resource-id <value>]
   [--physical-resource-id <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -67,9 +78,9 @@ Options
    
 
    
-  * Running stacks: You can specify either the stack's name or its unique stack ID.
+  * Running stacks: You can specify either the stack's name or its unique stack ID. 
    
-  * Deleted stacks: You must specify the unique stack ID.
+  * Deleted stacks: You must specify the unique stack ID. 
    
 
    
@@ -115,8 +126,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -184,7 +195,7 @@ StackResources -> (list)
 
       
 
-      Type of resource. (For more information, go to `AWS Resource Types Reference`_ in the AWS CloudFormation User Guide.)
+      Type of resource. (For more information, go to `AWS Resource Types Reference <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html>`_ in the AWS CloudFormation User Guide.)
 
       
 
@@ -234,7 +245,3 @@ StackResources -> (list)
 
   
 
-
-
-.. _AWS Resource Types Reference: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
-.. _AWS CloudFormation User Guide: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/

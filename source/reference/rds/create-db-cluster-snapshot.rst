@@ -15,8 +15,11 @@ Description
 
 
 
-Creates a snapshot of a DB cluster. For more information on Amazon Aurora, see `Aurora on Amazon RDS`_ in the *Amazon RDS User Guide.* 
+Creates a snapshot of a DB cluster. For more information on Amazon Aurora, see `Aurora on Amazon RDS <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html>`_ in the *Amazon RDS User Guide.*  
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBClusterSnapshot>`_
 
 
 ========
@@ -30,7 +33,7 @@ Synopsis
   --db-cluster-identifier <value>
   [--tags <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -42,7 +45,7 @@ Options
 ``--db-cluster-snapshot-identifier`` (string)
 
 
-  The identifier of the DB cluster snapshot. This parameter is stored as a lowercase string. 
+  The identifier of the DB cluster snapshot. This parameter is stored as a lowercase string.
 
    
 
@@ -51,23 +54,23 @@ Options
    
 
    
-  * Must contain from 1 to 63 alphanumeric characters or hyphens.
+  * Must contain from 1 to 63 alphanumeric characters or hyphens. 
    
-  * First character must be a letter.
+  * First character must be a letter. 
    
-  * Cannot end with a hyphen or contain two consecutive hyphens.
-   
-
+  * Cannot end with a hyphen or contain two consecutive hyphens. 
    
 
-  Example: ``my-cluster1-snapshot1`` 
+   
+
+  Example: ``my-cluster1-snapshot1``  
 
   
 
 ``--db-cluster-identifier`` (string)
 
 
-  The identifier of the DB cluster to create a snapshot for. This parameter is not case-sensitive. 
+  The identifier of the DB cluster to create a snapshot for. This parameter is not case-sensitive.
 
    
 
@@ -76,16 +79,16 @@ Options
    
 
    
-  * Must contain from 1 to 63 alphanumeric characters or hyphens.
+  * Must contain from 1 to 63 alphanumeric characters or hyphens. 
    
-  * First character must be a letter.
+  * First character must be a letter. 
    
-  * Cannot end with a hyphen or contain two consecutive hyphens.
-   
-
+  * Cannot end with a hyphen or contain two consecutive hyphens. 
    
 
-  Example: ``my-cluster1`` 
+   
+
+  Example: ``my-cluster1``  
 
   
 
@@ -120,8 +123,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -133,14 +136,14 @@ DBClusterSnapshot -> (structure)
 
   
 
-  Contains the result of a successful invocation of the following actions: 
+  Contains the result of a successful invocation of the following actions:
 
    
 
    
-  *  create-db-cluster-snapshot  
+  *  create-db-cluster-snapshot   
    
-  *  delete-db-cluster-snapshot  
+  *  delete-db-cluster-snapshot   
    
 
    
@@ -169,7 +172,7 @@ DBClusterSnapshot -> (structure)
 
     
 
-    Specifies the identifier for the DB cluster snapshot. 
+    Specifies the identifier for the DB cluster snapshot.
 
     
 
@@ -179,7 +182,7 @@ DBClusterSnapshot -> (structure)
 
     
 
-    Specifies the DB cluster identifier of the DB cluster that this DB cluster snapshot was created from. 
+    Specifies the DB cluster identifier of the DB cluster that this DB cluster snapshot was created from.
 
     
 
@@ -189,7 +192,7 @@ DBClusterSnapshot -> (structure)
 
     
 
-    Provides the time when the snapshot was taken, in Universal Coordinated Time (UTC). 
+    Provides the time when the snapshot was taken, in Universal Coordinated Time (UTC).
 
     
 
@@ -199,7 +202,7 @@ DBClusterSnapshot -> (structure)
 
     
 
-    Specifies the name of the database engine. 
+    Specifies the name of the database engine.
 
     
 
@@ -209,7 +212,7 @@ DBClusterSnapshot -> (structure)
 
     
 
-    Specifies the allocated storage size in gigabytes (GB). 
+    Specifies the allocated storage size in gigabytes (GB).
 
     
 
@@ -219,7 +222,7 @@ DBClusterSnapshot -> (structure)
 
     
 
-    Specifies the status of this DB cluster snapshot. 
+    Specifies the status of this DB cluster snapshot.
 
     
 
@@ -229,7 +232,7 @@ DBClusterSnapshot -> (structure)
 
     
 
-    Specifies the port that the DB cluster was listening on at the time of the snapshot. 
+    Specifies the port that the DB cluster was listening on at the time of the snapshot.
 
     
 
@@ -239,7 +242,7 @@ DBClusterSnapshot -> (structure)
 
     
 
-    Provides the VPC ID associated with the DB cluster snapshot. 
+    Provides the VPC ID associated with the DB cluster snapshot.
 
     
 
@@ -249,7 +252,7 @@ DBClusterSnapshot -> (structure)
 
     
 
-    Specifies the time when the DB cluster was created, in Universal Coordinated Time (UTC). 
+    Specifies the time when the DB cluster was created, in Universal Coordinated Time (UTC).
 
     
 
@@ -259,7 +262,7 @@ DBClusterSnapshot -> (structure)
 
     
 
-    Provides the master username for the DB cluster snapshot. 
+    Provides the master username for the DB cluster snapshot.
 
     
 
@@ -269,7 +272,7 @@ DBClusterSnapshot -> (structure)
 
     
 
-    Provides the version of the database engine for this DB cluster snapshot. 
+    Provides the version of the database engine for this DB cluster snapshot.
 
     
 
@@ -279,7 +282,7 @@ DBClusterSnapshot -> (structure)
 
     
 
-    Provides the license model information for this DB cluster snapshot. 
+    Provides the license model information for this DB cluster snapshot.
 
     
 
@@ -289,7 +292,7 @@ DBClusterSnapshot -> (structure)
 
     
 
-    Provides the type of the DB cluster snapshot. 
+    Provides the type of the DB cluster snapshot.
 
     
 
@@ -299,7 +302,7 @@ DBClusterSnapshot -> (structure)
 
     
 
-    Specifies the percentage of the estimated data that has been transferred. 
+    Specifies the percentage of the estimated data that has been transferred.
 
     
 
@@ -325,8 +328,35 @@ DBClusterSnapshot -> (structure)
 
     
 
+  DBClusterSnapshotArn -> (string)
+
+    
+
+    The Amazon Resource Name (ARN) for the DB cluster snapshot.
+
+    
+
+    
+
+  SourceDBClusterSnapshotArn -> (string)
+
+    
+
+    If the DB cluster snapshot was copied from a source DB cluster snapshot, the Amazon Resource Name (ARN) for the source DB cluster snapshot; otherwise, a null value.
+
+    
+
+    
+
+  IAMDatabaseAuthenticationEnabled -> (boolean)
+
+    
+
+    True if mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled; otherwise false.
+
+    
+
+    
+
   
 
-
-
-.. _Aurora on Amazon RDS: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html

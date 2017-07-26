@@ -15,7 +15,7 @@ Description
 
 
 
-Updates the environment description, deploys a new application version, updates the configuration settings to an entirely new configuration template, or updates select configuration option values in the running environment. 
+Updates the environment description, deploys a new application version, updates the configuration settings to an entirely new configuration template, or updates select configuration option values in the running environment.
 
  
 
@@ -25,6 +25,9 @@ Attempting to update both the release and configuration is not allowed and AWS E
 
 When updating the configuration settings to a new template or individual settings, a draft configuration is created and  describe-configuration-settings for this environment returns two setting descriptions with different ``DeploymentStatus`` values. 
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateEnvironment>`_
 
 
 ========
@@ -43,10 +46,11 @@ Synopsis
   [--version-label <value>]
   [--template-name <value>]
   [--solution-stack-name <value>]
+  [--platform-arn <value>]
   [--option-settings <value>]
   [--options-to-remove <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -69,7 +73,7 @@ Options
 
    
 
-  If no environment with this ID exists, AWS Elastic Beanstalk returns an ``InvalidParameterValue`` error. 
+  If no environment with this ID exists, AWS Elastic Beanstalk returns an ``InvalidParameterValue`` error.
 
    
 
@@ -91,21 +95,21 @@ Options
 ``--group-name`` (string)
 
 
-  The name of the group to which the target environment belongs. Specify a group name only if the environment's name is specified in an environment manifest and not with the environment name or environment ID parameters. See `Environment Manifest (env.yaml)`_ for details.
+  The name of the group to which the target environment belongs. Specify a group name only if the environment's name is specified in an environment manifest and not with the environment name or environment ID parameters. See `Environment Manifest (env.yaml) <http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html>`_ for details.
 
   
 
 ``--description`` (string)
 
 
-  If this parameter is specified, AWS Elastic Beanstalk updates the description of this environment. 
+  If this parameter is specified, AWS Elastic Beanstalk updates the description of this environment.
 
   
 
 ``--tier`` (structure)
 
 
-  This specifies the tier to use to update the environment. 
+  This specifies the tier to use to update the environment.
 
    
 
@@ -149,14 +153,21 @@ JSON Syntax::
 ``--solution-stack-name`` (string)
 
 
-  This specifies the platform version that the environment will run after the environment is updated. 
+  This specifies the platform version that the environment will run after the environment is updated.
+
+  
+
+``--platform-arn`` (string)
+
+
+  The ARN of the platform, if used.
 
   
 
 ``--option-settings`` (list)
 
 
-  If specified, AWS Elastic Beanstalk updates the configuration set associated with the running environment and sets the specified configuration options to the requested value. 
+  If specified, AWS Elastic Beanstalk updates the configuration set associated with the running environment and sets the specified configuration options to the requested value.
 
   
 
@@ -186,7 +197,7 @@ JSON Syntax::
 ``--options-to-remove`` (list)
 
 
-  A list of custom user-defined configuration options to remove from the configuration set for this environment. 
+  A list of custom user-defined configuration options to remove from the configuration set for this environment.
 
   
 
@@ -215,8 +226,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -337,7 +348,7 @@ EnvironmentId -> (string)
 
   
 
-  The ID of this environment. 
+  The ID of this environment.
 
   
 
@@ -373,11 +384,21 @@ SolutionStackName -> (string)
 
   
 
+PlatformArn -> (string)
+
+  
+
+  The ARN of the custom platform.
+
+  
+
+  
+
 TemplateName -> (string)
 
   
 
-  The name of the configuration template used to originally launch this environment. 
+  The name of the configuration template used to originally launch this environment.
 
   
 
@@ -407,7 +428,7 @@ CNAME -> (string)
 
   
 
-  The URL to the CNAME for this environment. 
+  The URL to the CNAME for this environment.
 
   
 
@@ -437,7 +458,7 @@ Status -> (string)
 
   
 
-  The current operational status of the environment: 
+  The current operational status of the environment:
 
    
 
@@ -479,7 +500,7 @@ Health -> (string)
 
   
 
-  Describes the health status of the environment. AWS Elastic Beanstalk indicates the failure levels for a running environment: 
+  Describes the health status of the environment. AWS Elastic Beanstalk indicates the failure levels for a running environment:
 
    
 
@@ -505,7 +526,7 @@ HealthStatus -> (string)
 
   
 
-  Returns the health status of the application running in your environment. For more information, see `Health Colors and Statuses`_ .
+  Returns the health status of the application running in your environment. For more information, see `Health Colors and Statuses <http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html>`_ .
 
   
 
@@ -643,7 +664,7 @@ EnvironmentLinks -> (list)
 
     
 
-    A link to another environment, defined in the environment's manifest. Links provide connection information in system properties that can be used to connect to another environment in the same group. See `Environment Manifest (env.yaml)`_ for details.
+    A link to another environment, defined in the environment's manifest. Links provide connection information in system properties that can be used to connect to another environment in the same group. See `Environment Manifest (env.yaml) <http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html>`_ for details.
 
     
 
@@ -671,7 +692,3 @@ EnvironmentLinks -> (list)
 
   
 
-
-
-.. _Environment Manifest (env.yaml): http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-mgmt-compose.html#environment-mgmt-compose-envyaml
-.. _Health Colors and Statuses: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html

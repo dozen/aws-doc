@@ -15,8 +15,21 @@ Description
 
 
 
-Retrieves information about the specified role, including the role's path, GUID, ARN, and the policy granting permission to assume the role. For more information about ARNs, go to `ARNs`_ . For more information about roles, go to `Working with Roles`_ . 
+Retrieves information about the specified role, including the role's path, GUID, ARN, and the role's trust policy that grants permission to assume the role. For more information about roles, see `Working with Roles <http://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html>`_ .
 
+ 
+
+.. note::
+
+   
+
+  Policies returned by this API are URL-encoded compliant with `RFC 3986 <https://tools.ietf.org/html/rfc3986>`_ . You can use a URL decoding method to convert the policy back to plain JSON text. For example, if you use Java, you can use the ``decode`` method of the ``java.net.URLDecoder`` utility class in the Java SDK. Other languages and SDKs provide similar functionality.
+
+   
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetRole>`_
 
 
 ========
@@ -28,7 +41,7 @@ Synopsis
     get-role
   --role-name <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -40,15 +53,19 @@ Options
 ``--role-name`` (string)
 
 
-  The name of the role to get information about.
+  The name of the IAM role to get information about.
+
+   
+
+  This parameter allows (per its `regex pattern <http://wikipedia.org/wiki/regex>`_ ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -91,7 +108,7 @@ Role -> (structure)
 
   
 
-  Information about the role.
+  A structure containing details about the IAM role.
 
   
 
@@ -99,7 +116,7 @@ Role -> (structure)
 
     
 
-    The path to the role. For more information about paths, see `IAM Identifiers`_ in the *Using IAM* guide. 
+    The path to the role. For more information about paths, see `IAM Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ in the *Using IAM* guide. 
 
     
 
@@ -119,7 +136,7 @@ Role -> (structure)
 
     
 
-    The stable and unique string identifying the role. For more information about IDs, see `IAM Identifiers`_ in the *Using IAM* guide. 
+    The stable and unique string identifying the role. For more information about IDs, see `IAM Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ in the *Using IAM* guide. 
 
     
 
@@ -129,7 +146,7 @@ Role -> (structure)
 
     
 
-    The Amazon Resource Name (ARN) specifying the role. For more information about ARNs and how to use them in policies, see `IAM Identifiers`_ in the *Using IAM* guide. 
+    The Amazon Resource Name (ARN) specifying the role. For more information about ARNs and how to use them in policies, see `IAM Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ in the *IAM User Guide* guide. 
 
     
 
@@ -139,7 +156,7 @@ Role -> (structure)
 
     
 
-    The date and time, in `ISO 8601 date-time format`_ , when the role was created.
+    The date and time, in `ISO 8601 date-time format <http://www.iso.org/iso/iso8601>`_ , when the role was created.
 
     
 
@@ -155,11 +172,15 @@ Role -> (structure)
 
     
 
+  Description -> (string)
+
+    
+
+    A description of the role that you provide.
+
+    
+
+    
+
   
 
-
-
-.. _ARNs: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html#Identifiers_ARNs
-.. _ISO 8601 date-time format: http://www.iso.org/iso/iso8601
-.. _Working with Roles: http://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html
-.. _IAM Identifiers: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html

@@ -19,6 +19,9 @@ Describes one or more of your network interfaces.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkInterfaces>`_
+
+
 ========
 Synopsis
 ========
@@ -26,11 +29,11 @@ Synopsis
 ::
 
     describe-network-interfaces
+  [--filters <value>]
   [--dry-run | --no-dry-run]
   [--network-interface-ids <value>]
-  [--filters <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -38,32 +41,6 @@ Synopsis
 =======
 Options
 =======
-
-``--dry-run`` | ``--no-dry-run`` (boolean)
-
-
-  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
-
-  
-
-``--network-interface-ids`` (list)
-
-
-  One or more network interface IDs.
-
-   
-
-  Default: Describes all your network interfaces.
-
-  
-
-
-
-Syntax::
-
-  "string" "string" ...
-
-
 
 ``--filters`` (list)
 
@@ -73,23 +50,23 @@ Syntax::
    
 
    
-  * ``addresses.private-ip-address`` - The private IP addresses associated with the network interface. 
+  * ``addresses.private-ip-address`` - The private IPv4 addresses associated with the network interface. 
    
-  * ``addresses.primary`` - Whether the private IP address is the primary IP address associated with the network interface.  
+  * ``addresses.primary`` - Whether the private IPv4 address is the primary IP address associated with the network interface.  
    
-  * ``addresses.association.public-ip`` - The association ID returned when the network interface was associated with the Elastic IP address. 
+  * ``addresses.association.public-ip`` - The association ID returned when the network interface was associated with the Elastic IP address (IPv4). 
    
   * ``addresses.association.owner-id`` - The owner ID of the addresses associated with the network interface. 
    
-  * ``association.association-id`` - The association ID returned when the network interface was associated with an IP address. 
+  * ``association.association-id`` - The association ID returned when the network interface was associated with an IPv4 address. 
    
-  * ``association.allocation-id`` - The allocation ID returned when you allocated the Elastic IP address for your network interface. 
+  * ``association.allocation-id`` - The allocation ID returned when you allocated the Elastic IP address (IPv4) for your network interface. 
    
-  * ``association.ip-owner-id`` - The owner of the Elastic IP address associated with the network interface. 
+  * ``association.ip-owner-id`` - The owner of the Elastic IP address (IPv4) associated with the network interface. 
    
-  * ``association.public-ip`` - The address of the Elastic IP address bound to the network interface. 
+  * ``association.public-ip`` - The address of the Elastic IP address (IPv4) bound to the network interface. 
    
-  * ``association.public-dns-name`` - The public DNS name for the network interface. 
+  * ``association.public-dns-name`` - The public DNS name for the network interface (IPv4). 
    
   * ``attachment.attachment-id`` - The ID of the interface attachment. 
    
@@ -115,15 +92,17 @@ Syntax::
    
   * ``group-name`` - The name of a security group associated with the network interface. 
    
+  * ``ipv6-addresses.ipv6-address`` - An IPv6 address associated with the network interface. 
+   
   * ``mac-address`` - The MAC address of the network interface. 
    
   * ``network-interface-id`` - The ID of the network interface. 
    
   * ``owner-id`` - The AWS account ID of the network interface owner. 
    
-  * ``private-ip-address`` - The private IP address or addresses of the network interface. 
+  * ``private-ip-address`` - The private IPv4 address or addresses of the network interface. 
    
-  * ``private-dns-name`` - The private DNS name of the network interface. 
+  * ``private-dns-name`` - The private DNS name of the network interface (IPv4). 
    
   * ``requester-id`` - The ID of the entity that launched the instance on your behalf (for example, AWS Management Console, Auto Scaling, and so on). 
    
@@ -135,7 +114,7 @@ Syntax::
    
   * ``subnet-id`` - The ID of the subnet for the network interface. 
    
-  * ``tag`` :*key* =*value* - The key/value combination of a tag assigned to the resource. 
+  * ``tag`` :*key* =*value* - The key/value combination of a tag assigned to the resource. Specify the key of the tag in the filter name and the value of the tag in the filter value. For example, for the tag Purpose=X, specify ``tag:Purpose`` for the filter name and ``X`` for the filter value. 
    
   * ``tag-key`` - The key of a tag assigned to the resource. This filter is independent of the ``tag-value`` filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the ``tag`` :*key* =*value* filter. 
    
@@ -167,11 +146,37 @@ JSON Syntax::
 
 
 
+``--dry-run`` | ``--no-dry-run`` (boolean)
+
+
+  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
+
+  
+
+``--network-interface-ids`` (list)
+
+
+  One or more network interface IDs.
+
+   
+
+  Default: Describes all your network interfaces.
+
+  
+
+
+
+Syntax::
+
+  "string" "string" ...
+
+
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -218,13 +223,14 @@ Output::
                 }
             ],
             "RequesterManaged": false,
+            "Ipv6Addresses": [],
             "PrivateDnsName": "ip-10-0-1-17.ec2.internal",
             "AvailabilityZone": "us-east-1d",
             "Attachment": {
                 "Status": "attached",
                 "DeviceIndex": 1,
                 "AttachTime": "2013-11-30T23:36:42.000Z",
-                "InstanceId": "i-640a3c17",
+                "InstanceId": "i-1234567890abcdef0",
                 "DeleteOnTermination": false,
                 "AttachmentId": "eni-attach-66c4350a",
                 "InstanceOwnerId": "123456789012"
@@ -262,12 +268,13 @@ Output::
                 }
             ],
             "RequesterManaged": false,
+            "Ipv6Addresses": [],
             "AvailabilityZone": "us-east-1d",
             "Attachment": {
                 "Status": "attached",
                 "DeviceIndex": 0,
                 "AttachTime": "2013-11-30T23:35:33.000Z",
-                "InstanceId": "i-640a3c17",
+                "InstanceId": "i-0598c7d356eba48d7",
                 "DeleteOnTermination": true,
                 "AttachmentId": "eni-attach-1b9db777",
                 "InstanceOwnerId": "123456789012"
@@ -286,6 +293,58 @@ Output::
     ]
   }
 
+
+This example describes network interfaces that have a tag with the key ``Purpose`` and the value ``Prod``.
+
+Command::
+
+  aws ec2 describe-network-interfaces --filters Name=tag:Purpose,Values=Prod
+
+Output::
+
+  {
+    "NetworkInterfaces": [
+        {
+            "Status": "available", 
+            "MacAddress": "12:2c:bd:f9:bf:17", 
+            "SourceDestCheck": true, 
+            "VpcId": "vpc-8941ebec", 
+            "Description": "ProdENI", 
+            "NetworkInterfaceId": "eni-b9a5ac93", 
+            "PrivateIpAddresses": [
+                {
+                    "PrivateDnsName": "ip-10-0-1-55.ec2.internal", 
+                    "Primary": true, 
+                    "PrivateIpAddress": "10.0.1.55"
+                }, 
+                {
+                    "PrivateDnsName": "ip-10-0-1-117.ec2.internal", 
+                    "Primary": false, 
+                    "PrivateIpAddress": "10.0.1.117"
+                }
+            ], 
+            "RequesterManaged": false, 
+            "PrivateDnsName": "ip-10-0-1-55.ec2.internal", 
+            "AvailabilityZone": "us-east-1d", 
+            "Ipv6Addresses": [], 
+            "Groups": [
+                {
+                    "GroupName": "MySG", 
+                    "GroupId": "sg-905002f5"
+                }
+            ], 
+            "SubnetId": "subnet-31d6c219", 
+            "OwnerId": "123456789012", 
+            "TagSet": [
+                {
+                    "Value": "Prod", 
+                    "Key": "Purpose"
+                }
+            ], 
+            "PrivateIpAddress": "10.0.1.55"
+        }
+    ]
+  }
 
 ======
 Output
@@ -307,33 +366,143 @@ NetworkInterfaces -> (list)
 
     
 
-    NetworkInterfaceId -> (string)
+    Association -> (structure)
 
       
 
-      The ID of the network interface.
+      The association information for an Elastic IP address (IPv4) associated with the network interface.
 
       
 
+      AllocationId -> (string)
+
+        
+
+        The allocation ID.
+
+        
+
+        
+
+      AssociationId -> (string)
+
+        
+
+        The association ID.
+
+        
+
+        
+
+      IpOwnerId -> (string)
+
+        
+
+        The ID of the Elastic IP address owner.
+
+        
+
+        
+
+      PublicDnsName -> (string)
+
+        
+
+        The public DNS name.
+
+        
+
+        
+
+      PublicIp -> (string)
+
+        
+
+        The address of the Elastic IP address bound to the network interface.
+
+        
+
+        
+
       
 
-    SubnetId -> (string)
+    Attachment -> (structure)
 
       
 
-      The ID of the subnet.
+      The network interface attachment.
 
       
 
-      
+      AttachTime -> (timestamp)
 
-    VpcId -> (string)
+        
 
-      
+        The timestamp indicating when the attachment initiated.
 
-      The ID of the VPC.
+        
 
-      
+        
+
+      AttachmentId -> (string)
+
+        
+
+        The ID of the network interface attachment.
+
+        
+
+        
+
+      DeleteOnTermination -> (boolean)
+
+        
+
+        Indicates whether the network interface is deleted when the instance is terminated.
+
+        
+
+        
+
+      DeviceIndex -> (integer)
+
+        
+
+        The device index of the network interface attachment on the instance.
+
+        
+
+        
+
+      InstanceId -> (string)
+
+        
+
+        The ID of the instance.
+
+        
+
+        
+
+      InstanceOwnerId -> (string)
+
+        
+
+        The AWS account ID of the owner of the instance.
+
+        
+
+        
+
+      Status -> (string)
+
+        
+
+        The attachment state.
+
+        
+
+        
 
       
 
@@ -352,86 +521,6 @@ NetworkInterfaces -> (list)
       
 
       A description.
-
-      
-
-      
-
-    OwnerId -> (string)
-
-      
-
-      The AWS account ID of the owner of the network interface.
-
-      
-
-      
-
-    RequesterId -> (string)
-
-      
-
-      The ID of the entity that launched the instance on your behalf (for example, AWS Management Console or Auto Scaling).
-
-      
-
-      
-
-    RequesterManaged -> (boolean)
-
-      
-
-      Indicates whether the network interface is being managed by AWS.
-
-      
-
-      
-
-    Status -> (string)
-
-      
-
-      The status of the network interface.
-
-      
-
-      
-
-    MacAddress -> (string)
-
-      
-
-      The MAC address.
-
-      
-
-      
-
-    PrivateIpAddress -> (string)
-
-      
-
-      The IP address of the network interface within the subnet.
-
-      
-
-      
-
-    PrivateDnsName -> (string)
-
-      
-
-      The private DNS name.
-
-      
-
-      
-
-    SourceDestCheck -> (boolean)
-
-      
-
-      Indicates whether traffic to or from the instance is validated.
 
       
 
@@ -477,143 +566,253 @@ NetworkInterfaces -> (list)
 
       
 
-    Attachment -> (structure)
+    InterfaceType -> (string)
 
       
 
-      The network interface attachment.
+      The type of interface.
 
       
 
-      AttachmentId -> (string)
+      
+
+    Ipv6Addresses -> (list)
+
+      
+
+      The IPv6 addresses associated with the network interface.
+
+      
+
+      (structure)
 
         
 
-        The ID of the network interface attachment.
+        Describes an IPv6 address associated with a network interface.
 
         
 
-        
+        Ipv6Address -> (string)
 
-      InstanceId -> (string)
+          
 
-        
+          The IPv6 address.
 
-        The ID of the instance.
+          
 
-        
-
-        
-
-      InstanceOwnerId -> (string)
-
-        
-
-        The AWS account ID of the owner of the instance.
-
-        
-
-        
-
-      DeviceIndex -> (integer)
-
-        
-
-        The device index of the network interface attachment on the instance.
-
-        
-
-        
-
-      Status -> (string)
-
-        
-
-        The attachment state.
-
-        
-
-        
-
-      AttachTime -> (timestamp)
-
-        
-
-        The timestamp indicating when the attachment initiated.
-
-        
-
-        
-
-      DeleteOnTermination -> (boolean)
-
-        
-
-        Indicates whether the network interface is deleted when the instance is terminated.
-
-        
+          
 
         
 
       
 
-    Association -> (structure)
+    MacAddress -> (string)
 
       
 
-      The association information for an Elastic IP associated with the network interface.
+      The MAC address.
 
       
 
-      PublicIp -> (string)
+      
+
+    NetworkInterfaceId -> (string)
+
+      
+
+      The ID of the network interface.
+
+      
+
+      
+
+    OwnerId -> (string)
+
+      
+
+      The AWS account ID of the owner of the network interface.
+
+      
+
+      
+
+    PrivateDnsName -> (string)
+
+      
+
+      The private DNS name.
+
+      
+
+      
+
+    PrivateIpAddress -> (string)
+
+      
+
+      The IPv4 address of the network interface within the subnet.
+
+      
+
+      
+
+    PrivateIpAddresses -> (list)
+
+      
+
+      The private IPv4 addresses associated with the network interface.
+
+      
+
+      (structure)
 
         
 
-        The address of the Elastic IP address bound to the network interface.
+        Describes the private IPv4 address of a network interface.
 
         
 
+        Association -> (structure)
+
+          
+
+          The association information for an Elastic IP address (IPv4) associated with the network interface.
+
+          
+
+          AllocationId -> (string)
+
+            
+
+            The allocation ID.
+
+            
+
+            
+
+          AssociationId -> (string)
+
+            
+
+            The association ID.
+
+            
+
+            
+
+          IpOwnerId -> (string)
+
+            
+
+            The ID of the Elastic IP address owner.
+
+            
+
+            
+
+          PublicDnsName -> (string)
+
+            
+
+            The public DNS name.
+
+            
+
+            
+
+          PublicIp -> (string)
+
+            
+
+            The address of the Elastic IP address bound to the network interface.
+
+            
+
+            
+
+          
+
+        Primary -> (boolean)
+
+          
+
+          Indicates whether this IPv4 address is the primary private IPv4 address of the network interface.
+
+          
+
+          
+
+        PrivateDnsName -> (string)
+
+          
+
+          The private DNS name.
+
+          
+
+          
+
+        PrivateIpAddress -> (string)
+
+          
+
+          The private IPv4 address.
+
+          
+
+          
+
         
 
-      PublicDnsName -> (string)
+      
 
-        
+    RequesterId -> (string)
 
-        The public DNS name.
+      
 
-        
+      The ID of the entity that launched the instance on your behalf (for example, AWS Management Console or Auto Scaling).
 
-        
+      
 
-      IpOwnerId -> (string)
+      
 
-        
+    RequesterManaged -> (boolean)
 
-        The ID of the Elastic IP address owner.
+      
 
-        
+      Indicates whether the network interface is being managed by AWS.
 
-        
+      
 
-      AllocationId -> (string)
+      
 
-        
+    SourceDestCheck -> (boolean)
 
-        The allocation ID.
+      
 
-        
+      Indicates whether traffic to or from the instance is validated.
 
-        
+      
 
-      AssociationId -> (string)
+      
 
-        
+    Status -> (string)
 
-        The association ID.
+      
 
-        
+      The status of the network interface.
 
-        
+      
+
+      
+
+    SubnetId -> (string)
+
+      
+
+      The ID of the subnet.
+
+      
 
       
 
@@ -637,11 +836,11 @@ NetworkInterfaces -> (list)
 
           
 
-          The key of the tag. 
+          The key of the tag.
 
            
 
-          Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with ``aws:`` 
+          Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with ``aws:``  
 
           
 
@@ -665,121 +864,11 @@ NetworkInterfaces -> (list)
 
       
 
-    PrivateIpAddresses -> (list)
+    VpcId -> (string)
 
       
 
-      The private IP addresses associated with the network interface.
-
-      
-
-      (structure)
-
-        
-
-        Describes the private IP address of a network interface.
-
-        
-
-        PrivateIpAddress -> (string)
-
-          
-
-          The private IP address.
-
-          
-
-          
-
-        PrivateDnsName -> (string)
-
-          
-
-          The private DNS name.
-
-          
-
-          
-
-        Primary -> (boolean)
-
-          
-
-          Indicates whether this IP address is the primary private IP address of the network interface.
-
-          
-
-          
-
-        Association -> (structure)
-
-          
-
-          The association information for an Elastic IP address associated with the network interface.
-
-          
-
-          PublicIp -> (string)
-
-            
-
-            The address of the Elastic IP address bound to the network interface.
-
-            
-
-            
-
-          PublicDnsName -> (string)
-
-            
-
-            The public DNS name.
-
-            
-
-            
-
-          IpOwnerId -> (string)
-
-            
-
-            The ID of the Elastic IP address owner.
-
-            
-
-            
-
-          AllocationId -> (string)
-
-            
-
-            The allocation ID.
-
-            
-
-            
-
-          AssociationId -> (string)
-
-            
-
-            The association ID.
-
-            
-
-            
-
-          
-
-        
-
-      
-
-    InterfaceType -> (string)
-
-      
-
-      The type of interface. 
+      The ID of the VPC.
 
       
 

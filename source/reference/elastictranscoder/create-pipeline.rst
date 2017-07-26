@@ -19,6 +19,9 @@ The create-pipeline operation creates a pipeline with settings that you specify.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elastictranscoder-2012-09-25/CreatePipeline>`_
+
+
 ========
 Synopsis
 ========
@@ -35,7 +38,7 @@ Synopsis
   [--content-config <value>]
   [--thumbnail-config <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -69,25 +72,25 @@ Options
 
    
 
-  Specify this value when all of the following are true: 
+  Specify this value when all of the following are true:
 
    
-  * You want to save transcoded files, thumbnails (if any), and playlists (if any) together in one bucket.
+
    
-  * You do not want to specify the users or groups who have access to the transcoded files, thumbnails, and playlists.
+  * You want to save transcoded files, thumbnails (if any), and playlists (if any) together in one bucket. 
    
-  * You do not want to specify the permissions that Elastic Transcoder grants to the files. 
+  * You do not want to specify the users or groups who have access to the transcoded files, thumbnails, and playlists. 
+   
+  * You do not want to specify the permissions that Elastic Transcoder grants to the files.  
 
   .. warning::
 
-    When Elastic Transcoder saves files in ``OutputBucket`` , it grants full control over the files only to the AWS account that owns the role that is specified by ``role`` .
+     When Elastic Transcoder saves files in ``OutputBucket`` , it grants full control over the files only to the AWS account that owns the role that is specified by ``role`` . 
 
    
    
-  * You want to associate the transcoded files and thumbnails with the Amazon S3 Standard storage class.
+  * You want to associate the transcoded files and thumbnails with the Amazon S3 Standard storage class. 
    
-
-  
 
    
 
@@ -122,18 +125,22 @@ Options
 
   .. warning::
 
+     
+
     To receive notifications, you must also subscribe to the new topic in the Amazon SNS console.
 
+     
+
    
 
    
-  * **Progressing** : The topic ARN for the Amazon Simple Notification Service (Amazon SNS) topic that you want to notify when Elastic Transcoder has started to process a job in this pipeline. This is the ARN that Amazon SNS returned when you created the topic. For more information, see Create a Topic in the Amazon Simple Notification Service Developer Guide.
+  * **Progressing** : The topic ARN for the Amazon Simple Notification Service (Amazon SNS) topic that you want to notify when Elastic Transcoder has started to process a job in this pipeline. This is the ARN that Amazon SNS returned when you created the topic. For more information, see Create a Topic in the Amazon Simple Notification Service Developer Guide. 
    
-  * **Completed** : The topic ARN for the Amazon SNS topic that you want to notify when Elastic Transcoder has finished processing a job in this pipeline. This is the ARN that Amazon SNS returned when you created the topic.
+  * **Completed** : The topic ARN for the Amazon SNS topic that you want to notify when Elastic Transcoder has finished processing a job in this pipeline. This is the ARN that Amazon SNS returned when you created the topic. 
    
-  * **Warning** : The topic ARN for the Amazon SNS topic that you want to notify when Elastic Transcoder encounters a warning condition while processing a job in this pipeline. This is the ARN that Amazon SNS returned when you created the topic.
+  * **Warning** : The topic ARN for the Amazon SNS topic that you want to notify when Elastic Transcoder encounters a warning condition while processing a job in this pipeline. This is the ARN that Amazon SNS returned when you created the topic. 
    
-  * **Error** : The topic ARN for the Amazon SNS topic that you want to notify when Elastic Transcoder encounters an error condition while processing a job in this pipeline. This is the ARN that Amazon SNS returned when you created the topic.
+  * **Error** : The topic ARN for the Amazon SNS topic that you want to notify when Elastic Transcoder encounters an error condition while processing a job in this pipeline. This is the ARN that Amazon SNS returned when you created the topic. 
    
 
   
@@ -174,45 +181,45 @@ JSON Syntax::
    
 
    
-  * **Bucket** : The Amazon S3 bucket in which you want Elastic Transcoder to save transcoded files and playlists.
+  * **Bucket** : The Amazon S3 bucket in which you want Elastic Transcoder to save transcoded files and playlists. 
    
-  * **Permissions** (Optional): The Permissions object specifies which users you want to have access to transcoded files and the type of access you want them to have. You can grant permissions to a maximum of 30 users and/or predefined Amazon S3 groups.
+  * **Permissions** (Optional): The Permissions object specifies which users you want to have access to transcoded files and the type of access you want them to have. You can grant permissions to a maximum of 30 users and/or predefined Amazon S3 groups. 
    
-  * **Grantee Type** : Specify the type of value that appears in the ``Grantee`` object: 
+  * **Grantee Type** : Specify the type of value that appears in the ``Grantee`` object:  
 
      
     * **Canonical** : The value in the ``Grantee`` object is either the canonical user ID for an AWS account or an origin access identity for an Amazon CloudFront distribution. For more information about canonical user IDs, see Access Control List (ACL) Overview in the Amazon Simple Storage Service Developer Guide. For more information about using CloudFront origin access identities to require that users use CloudFront URLs instead of Amazon S3 URLs, see Using an Origin Access Identity to Restrict Access to Your Amazon S3 Content. 
 
     .. warning::
 
-      A canonical user ID is not the same as an AWS account number.
+       A canonical user ID is not the same as an AWS account number. 
 
      
      
-    * **Email** : The value in the ``Grantee`` object is the registered email address of an AWS account.
+    * **Email** : The value in the ``Grantee`` object is the registered email address of an AWS account. 
      
-    * **Group** : The value in the ``Grantee`` object is one of the following predefined Amazon S3 groups: ``AllUsers`` , ``AuthenticatedUsers`` , or ``LogDelivery`` .
+    * **Group** : The value in the ``Grantee`` object is one of the following predefined Amazon S3 groups: ``AllUsers`` , ``AuthenticatedUsers`` , or ``LogDelivery`` . 
      
 
    
    
-  * **Grantee** : The AWS user or group that you want to have access to transcoded files and playlists. To identify the user or group, you can specify the canonical user ID for an AWS account, an origin access identity for a CloudFront distribution, the registered email address of an AWS account, or a predefined Amazon S3 group 
+  * **Grantee** : The AWS user or group that you want to have access to transcoded files and playlists. To identify the user or group, you can specify the canonical user ID for an AWS account, an origin access identity for a CloudFront distribution, the registered email address of an AWS account, or a predefined Amazon S3 group  
    
-  * **Access** : The permission that you want to give to the AWS user that you specified in ``Grantee`` . Permissions are granted on the files that Elastic Transcoder adds to the bucket, including playlists and video files. Valid values include: 
+  * **Access** : The permission that you want to give to the AWS user that you specified in ``Grantee`` . Permissions are granted on the files that Elastic Transcoder adds to the bucket, including playlists and video files. Valid values include:  
 
      
-    * ``READ`` : The grantee can read the objects and metadata for objects that Elastic Transcoder adds to the Amazon S3 bucket.
+    * ``READ`` : The grantee can read the objects and metadata for objects that Elastic Transcoder adds to the Amazon S3 bucket. 
      
     * ``READ_ACP`` : The grantee can read the object ACL for objects that Elastic Transcoder adds to the Amazon S3 bucket. 
      
-    * ``WRITE_ACP`` : The grantee can write the ACL for the objects that Elastic Transcoder adds to the Amazon S3 bucket.
+    * ``WRITE_ACP`` : The grantee can write the ACL for the objects that Elastic Transcoder adds to the Amazon S3 bucket. 
      
-    * ``FULL_CONTROL`` : The grantee has ``READ`` , ``READ_ACP`` , and ``WRITE_ACP`` permissions for the objects that Elastic Transcoder adds to the Amazon S3 bucket.
+    * ``FULL_CONTROL`` : The grantee has ``READ`` , ``READ_ACP`` , and ``WRITE_ACP`` permissions for the objects that Elastic Transcoder adds to the Amazon S3 bucket. 
      
 
    
    
-  * **StorageClass** : The Amazon S3 storage class, ``Standard`` or ``ReducedRedundancy`` , that you want Elastic Transcoder to assign to the video files and playlists that it stores in your Amazon S3 bucket.
+  * **StorageClass** : The Amazon S3 storage class, ``Standard`` or ``ReducedRedundancy`` , that you want Elastic Transcoder to assign to the video files and playlists that it stores in your Amazon S3 bucket. 
    
 
   
@@ -252,45 +259,45 @@ JSON Syntax::
    
 
    
-  * **Bucket** : The Amazon S3 bucket in which you want Elastic Transcoder to save thumbnail files.
+  * **Bucket** : The Amazon S3 bucket in which you want Elastic Transcoder to save thumbnail files. 
    
-  * **Permissions** (Optional): The ``Permissions`` object specifies which users and/or predefined Amazon S3 groups you want to have access to thumbnail files, and the type of access you want them to have. You can grant permissions to a maximum of 30 users and/or predefined Amazon S3 groups.
+  * **Permissions** (Optional): The ``Permissions`` object specifies which users and/or predefined Amazon S3 groups you want to have access to thumbnail files, and the type of access you want them to have. You can grant permissions to a maximum of 30 users and/or predefined Amazon S3 groups. 
    
-  * **GranteeType** : Specify the type of value that appears in the Grantee object: 
+  * **GranteeType** : Specify the type of value that appears in the Grantee object:  
 
      
     * **Canonical** : The value in the ``Grantee`` object is either the canonical user ID for an AWS account or an origin access identity for an Amazon CloudFront distribution. 
 
     .. warning::
 
-      A canonical user ID is not the same as an AWS account number.
+       A canonical user ID is not the same as an AWS account number. 
 
      
      
-    * **Email** : The value in the ``Grantee`` object is the registered email address of an AWS account. 
+    * **Email** : The value in the ``Grantee`` object is the registered email address of an AWS account.  
      
-    * **Group** : The value in the ``Grantee`` object is one of the following predefined Amazon S3 groups: ``AllUsers`` , ``AuthenticatedUsers`` , or ``LogDelivery`` .
+    * **Group** : The value in the ``Grantee`` object is one of the following predefined Amazon S3 groups: ``AllUsers`` , ``AuthenticatedUsers`` , or ``LogDelivery`` . 
      
 
    
    
-  * **Grantee** : The AWS user or group that you want to have access to thumbnail files. To identify the user or group, you can specify the canonical user ID for an AWS account, an origin access identity for a CloudFront distribution, the registered email address of an AWS account, or a predefined Amazon S3 group. 
+  * **Grantee** : The AWS user or group that you want to have access to thumbnail files. To identify the user or group, you can specify the canonical user ID for an AWS account, an origin access identity for a CloudFront distribution, the registered email address of an AWS account, or a predefined Amazon S3 group.  
    
-  * **Access** : The permission that you want to give to the AWS user that you specified in ``Grantee`` . Permissions are granted on the thumbnail files that Elastic Transcoder adds to the bucket. Valid values include: 
+  * **Access** : The permission that you want to give to the AWS user that you specified in ``Grantee`` . Permissions are granted on the thumbnail files that Elastic Transcoder adds to the bucket. Valid values include:  
 
      
-    * ``READ`` : The grantee can read the thumbnails and metadata for objects that Elastic Transcoder adds to the Amazon S3 bucket.
+    * ``READ`` : The grantee can read the thumbnails and metadata for objects that Elastic Transcoder adds to the Amazon S3 bucket. 
      
     * ``READ_ACP`` : The grantee can read the object ACL for thumbnails that Elastic Transcoder adds to the Amazon S3 bucket. 
      
-    * ``WRITE_ACP`` : The grantee can write the ACL for the thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.
+    * ``WRITE_ACP`` : The grantee can write the ACL for the thumbnails that Elastic Transcoder adds to the Amazon S3 bucket. 
      
     * ``FULL_CONTROL`` : The grantee has ``READ`` , ``READ_ACP`` , and ``WRITE_ACP`` permissions for the thumbnails that Elastic Transcoder adds to the Amazon S3 bucket. 
      
 
    
    
-  * **StorageClass** : The Amazon S3 storage class, ``Standard`` or ``ReducedRedundancy`` , that you want Elastic Transcoder to assign to the thumbnails that it stores in your Amazon S3 bucket.
+  * **StorageClass** : The Amazon S3 storage class, ``Standard`` or ``ReducedRedundancy`` , that you want Elastic Transcoder to assign to the thumbnails that it stores in your Amazon S3 bucket. 
    
 
   
@@ -317,8 +324,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -338,7 +345,7 @@ Pipeline -> (structure)
 
     
 
-    The identifier for the pipeline. You use this value to identify the pipeline in which you want to perform a variety of operations, such as creating a job or a preset. 
+    The identifier for the pipeline. You use this value to identify the pipeline in which you want to perform a variety of operations, such as creating a job or a preset.
 
     
 
@@ -377,9 +384,9 @@ Pipeline -> (structure)
      
 
      
-    * ``Active`` : The pipeline is processing jobs.
+    * ``Active`` : The pipeline is processing jobs. 
      
-    * ``Paused`` : The pipeline is not currently processing jobs.
+    * ``Paused`` : The pipeline is not currently processing jobs. 
      
 
     
@@ -440,18 +447,22 @@ Pipeline -> (structure)
 
     .. warning::
 
+       
+
       To receive notifications, you must also subscribe to the new topic in the Amazon SNS console.
 
+       
+
      
 
      
-    * **Progressing** (optional): The Amazon Simple Notification Service (Amazon SNS) topic that you want to notify when Elastic Transcoder has started to process the job.
+    * **Progressing** (optional): The Amazon Simple Notification Service (Amazon SNS) topic that you want to notify when Elastic Transcoder has started to process the job. 
      
-    * **Completed** (optional): The Amazon SNS topic that you want to notify when Elastic Transcoder has finished processing the job.
+    * **Completed** (optional): The Amazon SNS topic that you want to notify when Elastic Transcoder has finished processing the job. 
      
-    * **Warning** (optional): The Amazon SNS topic that you want to notify when Elastic Transcoder encounters a warning condition.
+    * **Warning** (optional): The Amazon SNS topic that you want to notify when Elastic Transcoder encounters a warning condition. 
      
-    * **Error** (optional): The Amazon SNS topic that you want to notify when Elastic Transcoder encounters an error condition.
+    * **Error** (optional): The Amazon SNS topic that you want to notify when Elastic Transcoder encounters an error condition. 
      
 
     
@@ -507,35 +518,35 @@ Pipeline -> (structure)
      
 
      
-    * **Bucket** : The Amazon S3 bucket in which you want Elastic Transcoder to save transcoded files and playlists.
+    * **Bucket** : The Amazon S3 bucket in which you want Elastic Transcoder to save transcoded files and playlists. 
      
-    * **Permissions** : A list of the users and/or predefined Amazon S3 groups you want to have access to transcoded files and playlists, and the type of access that you want them to have. 
+    * **Permissions** : A list of the users and/or predefined Amazon S3 groups you want to have access to transcoded files and playlists, and the type of access that you want them to have.  
 
        
-      * GranteeType: The type of value that appears in the ``Grantee`` object: 
+      * GranteeType: The type of value that appears in the ``Grantee`` object:  
 
          
-        * ``Canonical`` : Either the canonical user ID for an AWS account or an origin access identity for an Amazon CloudFront distribution.
+        * ``Canonical`` : Either the canonical user ID for an AWS account or an origin access identity for an Amazon CloudFront distribution. 
          
-        * ``Email`` : The registered email address of an AWS account.
+        * ``Email`` : The registered email address of an AWS account. 
          
-        * ``Group`` : One of the following predefined Amazon S3 groups: ``AllUsers`` , ``AuthenticatedUsers`` , or ``LogDelivery`` .
+        * ``Group`` : One of the following predefined Amazon S3 groups: ``AllUsers`` , ``AuthenticatedUsers`` , or ``LogDelivery`` . 
          
 
        
        
-      * ``Grantee`` : The AWS user or group that you want to have access to transcoded files and playlists.
+      * ``Grantee`` : The AWS user or group that you want to have access to transcoded files and playlists. 
        
       * ``Access`` : The permission that you want to give to the AWS user that is listed in ``Grantee`` . Valid values include: 
 
          
-        * ``READ`` : The grantee can read the objects and metadata for objects that Elastic Transcoder adds to the Amazon S3 bucket.
+        * ``READ`` : The grantee can read the objects and metadata for objects that Elastic Transcoder adds to the Amazon S3 bucket. 
          
-        * ``READ_ACP`` : The grantee can read the object ACL for objects that Elastic Transcoder adds to the Amazon S3 bucket.
+        * ``READ_ACP`` : The grantee can read the object ACL for objects that Elastic Transcoder adds to the Amazon S3 bucket. 
          
-        * ``WRITE_ACP`` : The grantee can write the ACL for the objects that Elastic Transcoder adds to the Amazon S3 bucket.
+        * ``WRITE_ACP`` : The grantee can write the ACL for the objects that Elastic Transcoder adds to the Amazon S3 bucket. 
          
-        * ``FULL_CONTROL`` : The grantee has ``READ`` , ``READ_ACP`` , and ``WRITE_ACP`` permissions for the objects that Elastic Transcoder adds to the Amazon S3 bucket.
+        * ``FULL_CONTROL`` : The grantee has ``READ`` , ``READ_ACP`` , and ``WRITE_ACP`` permissions for the objects that Elastic Transcoder adds to the Amazon S3 bucket. 
          
 
        
@@ -543,7 +554,7 @@ Pipeline -> (structure)
 
      
      
-    * **StorageClass** : The Amazon S3 storage class, Standard or ReducedRedundancy, that you want Elastic Transcoder to assign to the video files and playlists that it stores in your Amazon S3 bucket. 
+    * **StorageClass** : The Amazon S3 storage class, Standard or ReducedRedundancy, that you want Elastic Transcoder to assign to the video files and playlists that it stores in your Amazon S3 bucket.  
      
 
     
@@ -552,16 +563,20 @@ Pipeline -> (structure)
 
       
 
-      The Amazon S3 bucket in which you want Elastic Transcoder to save the transcoded files. Specify this value when all of the following are true: 
+      The Amazon S3 bucket in which you want Elastic Transcoder to save the transcoded files. Specify this value when all of the following are true:
 
        
-      * You want to save transcoded files, thumbnails (if any), and playlists (if any) together in one bucket.
+
        
-      * You do not want to specify the users or groups who have access to the transcoded files, thumbnails, and playlists.
+      * You want to save transcoded files, thumbnails (if any), and playlists (if any) together in one bucket. 
+       
+      * You do not want to specify the users or groups who have access to the transcoded files, thumbnails, and playlists. 
        
       * You do not want to specify the permissions that Elastic Transcoder grants to the files. 
        
-      * You want to associate the transcoded files and thumbnails with the Amazon S3 Standard storage class.
+      * You want to associate the transcoded files and thumbnails with the Amazon S3 Standard storage class. 
+       
+
        
 
       If you want to save transcoded files and playlists in one bucket and thumbnails in another bucket, specify which users can access the transcoded files or the permissions the users have, or change the Amazon S3 storage class, omit OutputBucket and specify values for ``ContentConfig`` and ``ThumbnailConfig`` instead. 
@@ -608,22 +623,22 @@ Pipeline -> (structure)
 
           
 
-          The type of value that appears in the Grantee object: 
+          The type of value that appears in the Grantee object:
+
+           
 
            
           * ``Canonical`` : Either the canonical user ID for an AWS account or an origin access identity for an Amazon CloudFront distribution. 
 
           .. warning::
 
-            A canonical user ID is not the same as an AWS account number.
+             A canonical user ID is not the same as an AWS account number. 
 
            
            
-          * ``Email`` : The registered email address of an AWS account.
+          * ``Email`` : The registered email address of an AWS account. 
            
-          * ``Group`` : One of the following predefined Amazon S3 groups: ``AllUsers`` , ``AuthenticatedUsers`` , or ``LogDelivery`` .
-           
-
+          * ``Group`` : One of the following predefined Amazon S3 groups: ``AllUsers`` , ``AuthenticatedUsers`` , or ``LogDelivery`` . 
            
 
           
@@ -647,15 +662,15 @@ Pipeline -> (structure)
           The permission that you want to give to the AWS user that is listed in Grantee. Valid values include: 
 
            
-          * ``READ`` : The grantee can read the thumbnails and metadata for thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.
-           
-          * ``READ_ACP`` : The grantee can read the object ACL for thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.
-           
-          * ``WRITE_ACP`` : The grantee can write the ACL for the thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.
-           
-          * ``FULL_CONTROL`` : The grantee has READ, READ_ACP, and WRITE_ACP permissions for the thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.
-           
 
+           
+          * ``READ`` : The grantee can read the thumbnails and metadata for thumbnails that Elastic Transcoder adds to the Amazon S3 bucket. 
+           
+          * ``READ_ACP`` : The grantee can read the object ACL for thumbnails that Elastic Transcoder adds to the Amazon S3 bucket. 
+           
+          * ``WRITE_ACP`` : The grantee can write the ACL for the thumbnails that Elastic Transcoder adds to the Amazon S3 bucket. 
+           
+          * ``FULL_CONTROL`` : The grantee has READ, READ_ACP, and WRITE_ACP permissions for the thumbnails that Elastic Transcoder adds to the Amazon S3 bucket. 
            
 
           
@@ -683,9 +698,9 @@ Pipeline -> (structure)
      
 
      
-    * ``Bucket`` : The Amazon S3 bucket in which you want Elastic Transcoder to save thumbnail files. 
+    * ``Bucket`` : The Amazon S3 bucket in which you want Elastic Transcoder to save thumbnail files.  
      
-    * ``Permissions`` : A list of the users and/or predefined Amazon S3 groups you want to have access to thumbnail files, and the type of access that you want them to have. 
+    * ``Permissions`` : A list of the users and/or predefined Amazon S3 groups you want to have access to thumbnail files, and the type of access that you want them to have.  
 
        
       * GranteeType: The type of value that appears in the Grantee object: 
@@ -695,29 +710,29 @@ Pipeline -> (structure)
 
         .. warning::
 
-          A canonical user ID is not the same as an AWS account number.
+           A canonical user ID is not the same as an AWS account number. 
 
          
          
-        * ``Email`` : The registered email address of an AWS account.
+        * ``Email`` : The registered email address of an AWS account. 
          
-        * ``Group`` : One of the following predefined Amazon S3 groups: ``AllUsers`` , ``AuthenticatedUsers`` , or ``LogDelivery`` .
+        * ``Group`` : One of the following predefined Amazon S3 groups: ``AllUsers`` , ``AuthenticatedUsers`` , or ``LogDelivery`` . 
          
 
        
        
-      * ``Grantee`` : The AWS user or group that you want to have access to thumbnail files.
+      * ``Grantee`` : The AWS user or group that you want to have access to thumbnail files. 
        
-      * Access: The permission that you want to give to the AWS user that is listed in Grantee. Valid values include: 
+      * Access: The permission that you want to give to the AWS user that is listed in Grantee. Valid values include:  
 
          
-        * ``READ`` : The grantee can read the thumbnails and metadata for thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.
+        * ``READ`` : The grantee can read the thumbnails and metadata for thumbnails that Elastic Transcoder adds to the Amazon S3 bucket. 
          
-        * ``READ_ACP`` : The grantee can read the object ACL for thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.
+        * ``READ_ACP`` : The grantee can read the object ACL for thumbnails that Elastic Transcoder adds to the Amazon S3 bucket. 
          
-        * ``WRITE_ACP`` : The grantee can write the ACL for the thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.
+        * ``WRITE_ACP`` : The grantee can write the ACL for the thumbnails that Elastic Transcoder adds to the Amazon S3 bucket. 
          
-        * ``FULL_CONTROL`` : The grantee has READ, READ_ACP, and WRITE_ACP permissions for the thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.
+        * ``FULL_CONTROL`` : The grantee has READ, READ_ACP, and WRITE_ACP permissions for the thumbnails that Elastic Transcoder adds to the Amazon S3 bucket. 
          
 
        
@@ -725,7 +740,7 @@ Pipeline -> (structure)
 
      
      
-    * ``StorageClass`` : The Amazon S3 storage class, ``Standard`` or ``ReducedRedundancy`` , that you want Elastic Transcoder to assign to the thumbnails that it stores in your Amazon S3 bucket.
+    * ``StorageClass`` : The Amazon S3 storage class, ``Standard`` or ``ReducedRedundancy`` , that you want Elastic Transcoder to assign to the thumbnails that it stores in your Amazon S3 bucket. 
      
 
     
@@ -734,16 +749,20 @@ Pipeline -> (structure)
 
       
 
-      The Amazon S3 bucket in which you want Elastic Transcoder to save the transcoded files. Specify this value when all of the following are true: 
+      The Amazon S3 bucket in which you want Elastic Transcoder to save the transcoded files. Specify this value when all of the following are true:
 
        
-      * You want to save transcoded files, thumbnails (if any), and playlists (if any) together in one bucket.
+
        
-      * You do not want to specify the users or groups who have access to the transcoded files, thumbnails, and playlists.
+      * You want to save transcoded files, thumbnails (if any), and playlists (if any) together in one bucket. 
+       
+      * You do not want to specify the users or groups who have access to the transcoded files, thumbnails, and playlists. 
        
       * You do not want to specify the permissions that Elastic Transcoder grants to the files. 
        
-      * You want to associate the transcoded files and thumbnails with the Amazon S3 Standard storage class.
+      * You want to associate the transcoded files and thumbnails with the Amazon S3 Standard storage class. 
+       
+
        
 
       If you want to save transcoded files and playlists in one bucket and thumbnails in another bucket, specify which users can access the transcoded files or the permissions the users have, or change the Amazon S3 storage class, omit OutputBucket and specify values for ``ContentConfig`` and ``ThumbnailConfig`` instead. 
@@ -790,22 +809,22 @@ Pipeline -> (structure)
 
           
 
-          The type of value that appears in the Grantee object: 
+          The type of value that appears in the Grantee object:
+
+           
 
            
           * ``Canonical`` : Either the canonical user ID for an AWS account or an origin access identity for an Amazon CloudFront distribution. 
 
           .. warning::
 
-            A canonical user ID is not the same as an AWS account number.
+             A canonical user ID is not the same as an AWS account number. 
 
            
            
-          * ``Email`` : The registered email address of an AWS account.
+          * ``Email`` : The registered email address of an AWS account. 
            
-          * ``Group`` : One of the following predefined Amazon S3 groups: ``AllUsers`` , ``AuthenticatedUsers`` , or ``LogDelivery`` .
-           
-
+          * ``Group`` : One of the following predefined Amazon S3 groups: ``AllUsers`` , ``AuthenticatedUsers`` , or ``LogDelivery`` . 
            
 
           
@@ -829,15 +848,15 @@ Pipeline -> (structure)
           The permission that you want to give to the AWS user that is listed in Grantee. Valid values include: 
 
            
-          * ``READ`` : The grantee can read the thumbnails and metadata for thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.
-           
-          * ``READ_ACP`` : The grantee can read the object ACL for thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.
-           
-          * ``WRITE_ACP`` : The grantee can write the ACL for the thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.
-           
-          * ``FULL_CONTROL`` : The grantee has READ, READ_ACP, and WRITE_ACP permissions for the thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.
-           
 
+           
+          * ``READ`` : The grantee can read the thumbnails and metadata for thumbnails that Elastic Transcoder adds to the Amazon S3 bucket. 
+           
+          * ``READ_ACP`` : The grantee can read the object ACL for thumbnails that Elastic Transcoder adds to the Amazon S3 bucket. 
+           
+          * ``WRITE_ACP`` : The grantee can write the ACL for the thumbnails that Elastic Transcoder adds to the Amazon S3 bucket. 
+           
+          * ``FULL_CONTROL`` : The grantee has READ, READ_ACP, and WRITE_ACP permissions for the thumbnails that Elastic Transcoder adds to the Amazon S3 bucket. 
            
 
           
@@ -900,7 +919,13 @@ Warnings -> (list)
 
        
 
-      **Note:** AWS KMS keys must be in the same region as the pipeline.
+      .. note::
+
+         
+
+        AWS KMS keys must be in the same region as the pipeline.
+
+         
 
       
 

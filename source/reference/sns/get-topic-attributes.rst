@@ -15,8 +15,11 @@ Description
 
 
 
-Returns all of the properties of a topic. Topic properties returned might differ based on the authorization of the user. 
+Returns all of the properties of a topic. Topic properties returned might differ based on the authorization of the user.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetTopicAttributes>`_
 
 
 ========
@@ -28,7 +31,7 @@ Synopsis
     get-topic-attributes
   --topic-arn <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -47,8 +50,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -89,23 +92,23 @@ Attributes -> (map)
    
 
    
-  * ``TopicArn`` -- the topic's ARN
+  * ``TopicArn`` -- the topic's ARN 
    
-  * ``Owner`` -- the AWS account ID of the topic's owner
+  * ``Owner`` -- the AWS account ID of the topic's owner 
    
-  * ``Policy`` -- the JSON serialization of the topic's access control policy
+  * ``Policy`` -- the JSON serialization of the topic's access control policy 
    
-  * ``DisplayName`` -- the human-readable name used in the "From" field for notifications to email and email-json endpoints
+  * ``DisplayName`` -- the human-readable name used in the "From" field for notifications to email and email-json endpoints 
    
-  * ``SubscriptionsPending`` -- the number of subscriptions pending confirmation on this topic
+  * ``SubscriptionsPending`` -- the number of subscriptions pending confirmation on this topic 
    
-  * ``SubscriptionsConfirmed`` -- the number of confirmed subscriptions on this topic
+  * ``SubscriptionsConfirmed`` -- the number of confirmed subscriptions on this topic 
    
-  * ``SubscriptionsDeleted`` -- the number of deleted subscriptions on this topic
+  * ``SubscriptionsDeleted`` -- the number of deleted subscriptions on this topic 
    
-  * ``DeliveryPolicy`` -- the JSON serialization of the topic's delivery policy
+  * ``DeliveryPolicy`` -- the JSON serialization of the topic's delivery policy 
    
-  * ``EffectiveDeliveryPolicy`` -- the JSON serialization of the effective delivery policy that takes into account system defaults
+  * ``EffectiveDeliveryPolicy`` -- the JSON serialization of the effective delivery policy that takes into account system defaults 
    
 
   

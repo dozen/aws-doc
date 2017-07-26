@@ -19,8 +19,11 @@ Imports the public key from an RSA key pair that you created with a third-party 
 
  
 
-For more information about key pairs, see `Key Pairs`_ in the *Amazon Elastic Compute Cloud User Guide* .
+For more information about key pairs, see `Key Pairs <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html>`_ in the *Amazon Elastic Compute Cloud User Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportKeyPair>`_
 
 
 ========
@@ -34,7 +37,7 @@ Synopsis
   --key-name <value>
   --public-key-material <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -60,15 +63,15 @@ Options
 ``--public-key-material`` (blob)
 
 
-  The public key. You must base64 encode the public key material before sending it to AWS.
+  The public key. For API calls, the text must be base64-encoded. For command line tools, base64 encoding is performed for you.
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -107,16 +110,6 @@ Output::
 Output
 ======
 
-KeyName -> (string)
-
-  
-
-  The key pair name you provided.
-
-  
-
-  
-
 KeyFingerprint -> (string)
 
   
@@ -127,6 +120,13 @@ KeyFingerprint -> (string)
 
   
 
+KeyName -> (string)
 
+  
 
-.. _Key Pairs: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html
+  The key pair name you provided.
+
+  
+
+  
+

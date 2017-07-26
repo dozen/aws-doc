@@ -27,7 +27,6 @@ Available Commands
   :titlesonly:
 
   bundle-task-complete
-  console-output-available
   conversion-task-cancelled
   conversion-task-completed
   conversion-task-deleted
@@ -35,11 +34,15 @@ Available Commands
   export-task-cancelled
   export-task-completed
   image-available
+  image-exists
   instance-exists
   instance-running
   instance-status-ok
   instance-stopped
   instance-terminated
+  key-pair-exists
+  nat-gateway-available
+  network-interface-available
   password-data-available
   snapshot-completed
   spot-instance-request-fulfilled
@@ -49,5 +52,7 @@ Available Commands
   volume-deleted
   volume-in-use
   vpc-available
+  vpc-exists
+  vpc-peering-connection-exists
   vpn-connection-available
   vpn-connection-deleted

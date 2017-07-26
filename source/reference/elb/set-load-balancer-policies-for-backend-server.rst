@@ -15,7 +15,7 @@ Description
 
 
 
-Replaces the set of policies associated with the specified port on which the back-end server is listening with a new set of policies. At this time, only the back-end server authentication policy type can be applied to the back-end ports; this policy type is composed of multiple public key policies.
+Replaces the set of policies associated with the specified port on which the EC2 instance is listening with a new set of policies. At this time, only the back-end server authentication policy type can be applied to the instance ports; this policy type is composed of multiple public key policies.
 
  
 
@@ -23,8 +23,15 @@ Each time you use ``set-load-balancer-policies-for-backend-server`` to enable th
 
  
 
-You can use  describe-load-balancers or  describe-load-balancer-policies to verify that the policy is associated with the back-end server.
+You can use  describe-load-balancers or  describe-load-balancer-policies to verify that the policy is associated with the EC2 instance.
 
+ 
+
+For more information about enabling back-end instance authentication, see `Configure Back-end Instance Authentication <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-create-https-ssl-load-balancer.html#configure_backendauth_clt>`_ in the *Classic Load Balancer Guide* . For more information about Proxy Protocol, see `Configure Proxy Protocol Support <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-proxy-protocol.html>`_ in the *Classic Load Balancer Guide* .
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/SetLoadBalancerPoliciesForBackendServer>`_
 
 
 ========
@@ -38,7 +45,7 @@ Synopsis
   --instance-port <value>
   --policy-names <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -57,14 +64,14 @@ Options
 ``--instance-port`` (integer)
 
 
-  The port number associated with the back-end server.
+  The port number associated with the EC2 instance.
 
   
 
 ``--policy-names`` (list)
 
 
-  The names of the policies. If the list is empty, then all current polices are removed from the back-end server.
+  The names of the policies. If the list is empty, then all current polices are removed from the EC2 instance.
 
   
 
@@ -79,8 +86,8 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 

@@ -23,6 +23,9 @@ A resize operation can be requested using  modify-cluster and specifying a diffe
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeResize>`_
+
+
 ========
 Synopsis
 ========
@@ -32,7 +35,7 @@ Synopsis
     describe-resize
   --cluster-identifier <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -44,19 +47,19 @@ Options
 ``--cluster-identifier`` (string)
 
 
-  The unique identifier of a cluster whose resize progress you are requesting. This parameter is case-sensitive. 
+  The unique identifier of a cluster whose resize progress you are requesting. This parameter is case-sensitive.
 
    
 
-  By default, resize operations for all clusters defined for an AWS account are returned. 
+  By default, resize operations for all clusters defined for an AWS account are returned.
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -119,7 +122,7 @@ TargetClusterType -> (string)
 
    
 
-  Valid Values: ``multi-node`` | ``single-node`` 
+  Valid Values: ``multi-node`` | ``single-node``  
 
   
 
@@ -133,7 +136,7 @@ Status -> (string)
 
    
 
-  Valid Values: ``NONE`` | ``IN_PROGRESS`` | ``FAILED`` | ``SUCCEEDED`` 
+  Valid Values: ``NONE`` | ``IN_PROGRESS`` | ``FAILED`` | ``SUCCEEDED``  
 
   
 
@@ -223,7 +226,7 @@ ProgressInMegaBytes -> (long)
 
   
 
-  While the resize operation is in progress, this value shows the current amount of data, in megabytes, that has been processed so far. When the resize operation is complete, this value shows the total amount of data, in megabytes, on the cluster, which may be more or less than TotalResizeDataInMegaBytes (the estimated total amount of data before resize). 
+  While the resize operation is in progress, this value shows the current amount of data, in megabytes, that has been processed so far. When the resize operation is complete, this value shows the total amount of data, in megabytes, on the cluster, which may be more or less than TotalResizeDataInMegaBytes (the estimated total amount of data before resize).
 
   
 
@@ -233,7 +236,7 @@ ElapsedTimeInSeconds -> (long)
 
   
 
-  The amount of seconds that have elapsed since the resize operation began. After the resize operation completes, this value shows the total actual time, in seconds, for the resize operation. 
+  The amount of seconds that have elapsed since the resize operation began. After the resize operation completes, this value shows the total actual time, in seconds, for the resize operation.
 
   
 
@@ -243,7 +246,7 @@ EstimatedTimeToCompletionInSeconds -> (long)
 
   
 
-  The estimated time remaining, in seconds, until the resize operation is complete. This value is calculated based on the average resize rate and the estimated amount of data remaining to be processed. Once the resize operation is complete, this value will be 0. 
+  The estimated time remaining, in seconds, until the resize operation is complete. This value is calculated based on the average resize rate and the estimated amount of data remaining to be processed. Once the resize operation is complete, this value will be 0.
 
   
 

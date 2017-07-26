@@ -15,28 +15,39 @@ Description
 
 
 
-Changes the visibility timeout of multiple messages. This is a batch version of  change-message-visibility . The result of the action on each message is reported individually in the response. You can send up to 10  change-message-visibility requests with each ``change-message-visibility-batch`` action.
+Changes the visibility timeout of multiple messages. This is a batch version of ``  change-message-visibility .`` The result of the action on each message is reported individually in the response. You can send up to 10 ``  change-message-visibility `` requests with each ``change-message-visibility-batch`` action.
 
  
 
 .. warning::
 
-  Because the batch request can result in a combination of successful and unsuccessful actions, you should check for batch errors even when the call returns an HTTP status code of 200.
+   
+
+  Because the batch request can result in a combination of successful and unsuccessful actions, you should check for batch errors even when the call returns an HTTP status code of ``200`` .
+
+   
 
  
 
 .. note::
 
-  Some API actions take lists of parameters. These lists are specified using the ``param.n`` notation. Values of ``n`` are integers starting from 1. For example, a parameter list with two elements looks like this: 
+   
 
- 
+  Some actions take lists of parameters. These lists are specified using the ``param.n`` notation. Values of ``n`` are integers starting from 1. For example, a parameter list with two elements looks like this:
 
-``Attribute.1=this`` 
+   
 
- 
+   ``Attribute.1=this``  
 
-``Attribute.2=that`` 
+   
 
+   ``Attribute.2=that``  
+
+   
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ChangeMessageVisibilityBatch>`_
 
 
 ========
@@ -49,7 +60,7 @@ Synopsis
   --queue-url <value>
   --entries <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -61,7 +72,11 @@ Options
 ``--queue-url`` (string)
 
 
-  The URL of the Amazon SQS queue to take action on.
+  The URL of the Amazon SQS queue whose messages' visibility is changed.
+
+   
+
+  Queue URLs are case-sensitive.
 
   
 
@@ -97,8 +112,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -152,7 +167,7 @@ Successful -> (list)
 
   
 
-  A list of  ChangeMessageVisibilityBatchResultEntry items.
+  A list of ``  ChangeMessageVisibilityBatchResultEntry `` items.
 
   
 
@@ -160,7 +175,7 @@ Successful -> (list)
 
     
 
-    Encloses the id of an entry in  change-message-visibility-batch .
+    Encloses the ``Id`` of an entry in ``  change-message-visibility-batch .``  
 
     
 
@@ -182,7 +197,7 @@ Failed -> (list)
 
   
 
-  A list of  BatchResultErrorEntry items.
+  A list of ``  BatchResultErrorEntry `` items.
 
   
 
@@ -198,7 +213,7 @@ Failed -> (list)
 
       
 
-      The id of an entry in a batch request.
+      The ``Id`` of an entry in a batch request.
 
       
 
@@ -208,7 +223,7 @@ Failed -> (list)
 
       
 
-      Whether the error happened due to the sender's fault.
+      Specifies whether the error happened due to the sender's fault.
 
       
 

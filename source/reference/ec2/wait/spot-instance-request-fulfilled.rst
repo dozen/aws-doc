@@ -15,6 +15,9 @@ Description
 
 Wait until JMESPath query SpotInstanceRequests[].Status.Code returns fulfilled for all elements when polling with ``describe-spot-instance-requests``. It will poll every 15 seconds until a successful state has been reached. This will exit with a return code of 255 after 40 failed checks.
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotInstanceRequests>`_
+
+
 ========
 Synopsis
 ========
@@ -22,11 +25,11 @@ Synopsis
 ::
 
     spot-instance-request-fulfilled
+  [--filters <value>]
   [--dry-run | --no-dry-run]
   [--spot-instance-request-ids <value>]
-  [--filters <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -34,28 +37,6 @@ Synopsis
 =======
 Options
 =======
-
-``--dry-run`` | ``--no-dry-run`` (boolean)
-
-
-  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
-
-  
-
-``--spot-instance-request-ids`` (list)
-
-
-  One or more Spot instance request IDs.
-
-  
-
-
-
-Syntax::
-
-  "string" "string" ...
-
-
 
 ``--filters`` (list)
 
@@ -85,7 +66,7 @@ Syntax::
    
   * ``launch.block-device-mapping.volume-size`` - The size of the Amazon EBS volume, in GiB. 
    
-  * ``launch.block-device-mapping.volume-type`` - The type of the Amazon EBS volume (``gp2`` | ``standard`` | ``io1`` ). 
+  * ``launch.block-device-mapping.volume-type`` - The type of the Amazon EBS volume: ``gp2`` for General Purpose SSD, ``io1`` for Provisioned IOPS SSD, ``st1`` for Throughput Optimized HDD, ``sc1`` for Cold HDD, or ``standard`` for Magnetic. 
    
   * ``launch.group-id`` - The security group for the instance. 
    
@@ -125,13 +106,13 @@ Syntax::
    
   * ``spot-price`` - The maximum hourly price for any Spot instance launched to fulfill the request. 
    
-  * ``state`` - The state of the Spot instance request (``open`` | ``active`` | ``closed`` | ``cancelled`` | ``failed`` ). Spot bid status information can help you track your Amazon EC2 Spot instance requests. For more information, see `Spot Bid Status`_ in the Amazon Elastic Compute Cloud User Guide. 
+  * ``state`` - The state of the Spot instance request (``open`` | ``active`` | ``closed`` | ``cancelled`` | ``failed`` ). Spot bid status information can help you track your Amazon EC2 Spot instance requests. For more information, see `Spot Bid Status <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-bid-status.html>`_ in the Amazon Elastic Compute Cloud User Guide. 
    
   * ``status-code`` - The short code describing the most recent evaluation of your Spot instance request. 
    
   * ``status-message`` - The message explaining the status of the Spot instance request. 
    
-  * ``tag`` :*key* =*value* - The key/value combination of a tag assigned to the resource. 
+  * ``tag`` :*key* =*value* - The key/value combination of a tag assigned to the resource. Specify the key of the tag in the filter name and the value of the tag in the filter value. For example, for the tag Purpose=X, specify ``tag:Purpose`` for the filter name and ``X`` for the filter value. 
    
   * ``tag-key`` - The key of a tag assigned to the resource. This filter is independent of the ``tag-value`` filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the ``tag`` :*key* =*value* filter. 
    
@@ -169,11 +150,33 @@ JSON Syntax::
 
 
 
+``--dry-run`` | ``--no-dry-run`` (boolean)
+
+
+  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
+
+  
+
+``--spot-instance-request-ids`` (list)
+
+
+  One or more Spot instance request IDs.
+
+  
+
+
+
+Syntax::
+
+  "string" "string" ...
+
+
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -182,5 +185,3 @@ Output
 ======
 
 None
-
-.. _Spot Bid Status: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-bid-status.html

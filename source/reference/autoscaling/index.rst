@@ -29,6 +29,7 @@ Available Commands
   :titlesonly:
 
   attach-instances
+  attach-load-balancer-target-groups
   attach-load-balancers
   complete-lifecycle-action
   create-auto-scaling-group
@@ -49,6 +50,7 @@ Available Commands
   describe-launch-configurations
   describe-lifecycle-hook-types
   describe-lifecycle-hooks
+  describe-load-balancer-target-groups
   describe-load-balancers
   describe-metric-collection-types
   describe-notification-configurations
@@ -59,6 +61,7 @@ Available Commands
   describe-tags
   describe-termination-policy-types
   detach-instances
+  detach-load-balancer-target-groups
   detach-load-balancers
   disable-metrics-collection
   enable-metrics-collection

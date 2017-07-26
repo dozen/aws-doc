@@ -19,8 +19,11 @@ Creates a network ACL in a VPC. Network ACLs provide an optional layer of securi
 
  
 
-For more information about network ACLs, see `Network ACLs`_ in the *Amazon Virtual Private Cloud User Guide* .
+For more information about network ACLs, see `Network ACLs <http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_ACLs.html>`_ in the *Amazon Virtual Private Cloud User Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkAcl>`_
 
 
 ========
@@ -33,7 +36,7 @@ Synopsis
   [--dry-run | --no-dry-run]
   --vpc-id <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -59,8 +62,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -116,166 +119,6 @@ NetworkAcl -> (structure)
 
   
 
-  NetworkAclId -> (string)
-
-    
-
-    The ID of the network ACL.
-
-    
-
-    
-
-  VpcId -> (string)
-
-    
-
-    The ID of the VPC for the network ACL.
-
-    
-
-    
-
-  IsDefault -> (boolean)
-
-    
-
-    Indicates whether this is the default network ACL for the VPC.
-
-    
-
-    
-
-  Entries -> (list)
-
-    
-
-    One or more entries (rules) in the network ACL.
-
-    
-
-    (structure)
-
-      
-
-      Describes an entry in a network ACL.
-
-      
-
-      RuleNumber -> (integer)
-
-        
-
-        The rule number for the entry. ACL entries are processed in ascending order by rule number.
-
-        
-
-        
-
-      Protocol -> (string)
-
-        
-
-        The protocol. A value of ``-1`` means all protocols.
-
-        
-
-        
-
-      RuleAction -> (string)
-
-        
-
-        Indicates whether to allow or deny the traffic that matches the rule.
-
-        
-
-        
-
-      Egress -> (boolean)
-
-        
-
-        Indicates whether the rule is an egress rule (applied to traffic leaving the subnet).
-
-        
-
-        
-
-      CidrBlock -> (string)
-
-        
-
-        The network range to allow or deny, in CIDR notation.
-
-        
-
-        
-
-      IcmpTypeCode -> (structure)
-
-        
-
-        ICMP protocol: The ICMP type and code.
-
-        
-
-        Type -> (integer)
-
-          
-
-          The ICMP code. A value of -1 means all codes for the specified ICMP type.
-
-          
-
-          
-
-        Code -> (integer)
-
-          
-
-          The ICMP type. A value of -1 means all types.
-
-          
-
-          
-
-        
-
-      PortRange -> (structure)
-
-        
-
-        TCP or UDP protocols: The range of ports the rule applies to.
-
-        
-
-        From -> (integer)
-
-          
-
-          The first port in the range.
-
-          
-
-          
-
-        To -> (integer)
-
-          
-
-          The last port in the range.
-
-          
-
-          
-
-        
-
-      
-
-    
-
   Associations -> (list)
 
     
@@ -326,6 +169,166 @@ NetworkAcl -> (structure)
 
     
 
+  Entries -> (list)
+
+    
+
+    One or more entries (rules) in the network ACL.
+
+    
+
+    (structure)
+
+      
+
+      Describes an entry in a network ACL.
+
+      
+
+      CidrBlock -> (string)
+
+        
+
+        The IPv4 network range to allow or deny, in CIDR notation.
+
+        
+
+        
+
+      Egress -> (boolean)
+
+        
+
+        Indicates whether the rule is an egress rule (applied to traffic leaving the subnet).
+
+        
+
+        
+
+      IcmpTypeCode -> (structure)
+
+        
+
+        ICMP protocol: The ICMP type and code.
+
+        
+
+        Code -> (integer)
+
+          
+
+          The ICMP code. A value of -1 means all codes for the specified ICMP type.
+
+          
+
+          
+
+        Type -> (integer)
+
+          
+
+          The ICMP type. A value of -1 means all types.
+
+          
+
+          
+
+        
+
+      Ipv6CidrBlock -> (string)
+
+        
+
+        The IPv6 network range to allow or deny, in CIDR notation.
+
+        
+
+        
+
+      PortRange -> (structure)
+
+        
+
+        TCP or UDP protocols: The range of ports the rule applies to.
+
+        
+
+        From -> (integer)
+
+          
+
+          The first port in the range.
+
+          
+
+          
+
+        To -> (integer)
+
+          
+
+          The last port in the range.
+
+          
+
+          
+
+        
+
+      Protocol -> (string)
+
+        
+
+        The protocol. A value of ``-1`` means all protocols.
+
+        
+
+        
+
+      RuleAction -> (string)
+
+        
+
+        Indicates whether to allow or deny the traffic that matches the rule.
+
+        
+
+        
+
+      RuleNumber -> (integer)
+
+        
+
+        The rule number for the entry. ACL entries are processed in ascending order by rule number.
+
+        
+
+        
+
+      
+
+    
+
+  IsDefault -> (boolean)
+
+    
+
+    Indicates whether this is the default network ACL for the VPC.
+
+    
+
+    
+
+  NetworkAclId -> (string)
+
+    
+
+    The ID of the network ACL.
+
+    
+
+    
+
   Tags -> (list)
 
     
@@ -346,11 +349,11 @@ NetworkAcl -> (structure)
 
         
 
-        The key of the tag. 
+        The key of the tag.
 
          
 
-        Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with ``aws:`` 
+        Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with ``aws:``  
 
         
 
@@ -374,8 +377,15 @@ NetworkAcl -> (structure)
 
     
 
+  VpcId -> (string)
+
+    
+
+    The ID of the VPC for the network ACL.
+
+    
+
+    
+
   
 
-
-
-.. _Network ACLs: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_ACLs.html

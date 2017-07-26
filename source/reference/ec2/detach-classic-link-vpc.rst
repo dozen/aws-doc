@@ -19,6 +19,9 @@ Unlinks (detaches) a linked EC2-Classic instance from a VPC. After the instance 
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DetachClassicLinkVpc>`_
+
+
 ========
 Synopsis
 ========
@@ -30,7 +33,7 @@ Synopsis
   --instance-id <value>
   --vpc-id <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -63,8 +66,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -74,11 +77,11 @@ Examples
 
 **To unlink (detach) an EC2-Classic instance from a VPC**
 
-This example unlinks instance i-1a2b3c4d from VPC vpc-88888888.
+This example unlinks instance i-0598c7d356eba48d7 from VPC vpc-88888888.
 
 Command::
 
-  aws ec2 detach-classic-link-vpc --instance-id i-1a2b3c4d --vpc-id vpc-88888888
+  aws ec2 detach-classic-link-vpc --instance-id i-0598c7d356eba48d7 --vpc-id vpc-88888888
 
 Output::
 

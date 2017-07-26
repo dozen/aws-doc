@@ -15,6 +15,17 @@ Description
 
 
 
+Lists tags for up to 10 health checks or hosted zones.
+
+ 
+
+For information about using tags for cost allocation, see `Using Cost Allocation Tags <http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html>`_ in the *AWS Billing and Cost Management User Guide* .
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTagsForResources>`_
+
+
 ========
 Synopsis
 ========
@@ -25,7 +36,7 @@ Synopsis
   --resource-type <value>
   --resource-ids <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -41,11 +52,11 @@ Options
 
    
 
-  - The resource type for health checks is ``healthcheck`` .
-
    
-
-  - The resource type for hosted zones is ``hostedzone`` .
+  * The resource type for health checks is ``healthcheck`` . 
+   
+  * The resource type for hosted zones is ``hostedzone`` . 
+   
 
   
 
@@ -79,8 +90,8 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -112,11 +123,11 @@ ResourceTagSets -> (list)
 
        
 
-      - The resource type for health checks is ``healthcheck`` .
-
        
-
-      - The resource type for hosted zones is ``hostedzone`` .
+      * The resource type for health checks is ``healthcheck`` . 
+       
+      * The resource type for hosted zones is ``hostedzone`` . 
+       
 
       
 
@@ -144,7 +155,7 @@ ResourceTagSets -> (list)
 
         
 
-        A single tag containing a key and value.
+        A complex type that contains information about a tag that you want to add or edit for the specified health check or hosted zone.
 
         
 
@@ -152,7 +163,19 @@ ResourceTagSets -> (list)
 
           
 
-          The key for a ``Tag`` .
+          The value of ``Key`` depends on the operation that you want to perform:
+
+           
+
+           
+          * **Add a tag to a health check or hosted zone** : ``Key`` is the name that you want to give the new tag. 
+           
+          * **Edit a tag** : ``Key`` is the name of the tag that you want to change the ``Value`` for. 
+           
+          * **Delete a key** : ``Key`` is the name of the tag you want to remove. 
+           
+          * **Give a name to a health check** : Edit the default ``Name`` tag. In the Amazon Route 53 console, the list of your health checks includes a **Name** column that lets you see the name that you've given to each health check. 
+           
 
           
 
@@ -162,7 +185,15 @@ ResourceTagSets -> (list)
 
           
 
-          The value for a ``Tag`` .
+          The value of ``Value`` depends on the operation that you want to perform:
+
+           
+
+           
+          * **Add a tag to a health check or hosted zone** : ``Value`` is the value that you want to give the new tag. 
+           
+          * **Edit a tag** : ``Value`` is the new value that you want to assign the tag. 
+           
 
           
 

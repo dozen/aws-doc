@@ -15,16 +15,19 @@ Description
 
 
 
-Retrieves information about the specified managed policy, including the policy's default version and the total number of users, groups, and roles that the policy is attached to. For a list of the specific users, groups, and roles that the policy is attached to, use the  list-entities-for-policy API. This API returns metadata about the policy. To retrieve the policy document for a specific version of the policy, use  get-policy-version . 
+Retrieves information about the specified managed policy, including the policy's default version and the total number of IAM users, groups, and roles to which the policy is attached. To retrieve the list of the specific users, groups, and roles that the policy is attached to, use the  list-entities-for-policy API. This API returns metadata about the policy. To retrieve the actual policy document for a specific version of the policy, use  get-policy-version .
 
  
 
-This API retrieves information about managed policies. To retrieve information about an inline policy that is embedded with a user, group, or role, use the  get-user-policy ,  get-group-policy , or  get-role-policy API. 
+This API retrieves information about managed policies. To retrieve information about an inline policy that is embedded with an IAM user, group, or role, use the  get-user-policy ,  get-group-policy , or  get-role-policy API.
 
  
 
-For more information about policies, refer to `Managed Policies and Inline Policies`_ in the *IAM User Guide* . 
+For more information about policies, see `Managed Policies and Inline Policies <http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html>`_ in the *IAM User Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetPolicy>`_
 
 
 ========
@@ -36,7 +39,7 @@ Synopsis
     get-policy
   --policy-arn <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -48,19 +51,19 @@ Options
 ``--policy-arn`` (string)
 
 
-  The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS resources. 
+  The Amazon Resource Name (ARN) of the managed policy that you want information about.
 
    
 
-  For more information about ARNs, go to `Amazon Resource Names (ARNs) and AWS Service Namespaces`_ in the *AWS General Reference* . 
+  For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces <http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`_ in the *AWS General Reference* .
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -102,7 +105,7 @@ Policy -> (structure)
 
   
 
-  Information about the policy.
+  A structure containing details about the policy.
 
   
 
@@ -120,11 +123,11 @@ Policy -> (structure)
 
     
 
-    The stable and unique string identifying the policy. 
+    The stable and unique string identifying the policy.
 
      
 
-    For more information about IDs, see `IAM Identifiers`_ in the *Using IAM* guide.
+    For more information about IDs, see `IAM Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ in the *Using IAM* guide.
 
     
 
@@ -134,11 +137,11 @@ Policy -> (structure)
 
     
 
-    The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS resources. 
+    The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS resources.
 
      
 
-    For more information about ARNs, go to `Amazon Resource Names (ARNs) and AWS Service Namespaces`_ in the *AWS General Reference* . 
+    For more information about ARNs, go to `Amazon Resource Names (ARNs) and AWS Service Namespaces <http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`_ in the *AWS General Reference* . 
 
     
 
@@ -152,7 +155,7 @@ Policy -> (structure)
 
      
 
-    For more information about paths, see `IAM Identifiers`_ in the *Using IAM* guide.
+    For more information about paths, see `IAM Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ in the *Using IAM* guide.
 
     
 
@@ -162,7 +165,7 @@ Policy -> (structure)
 
     
 
-    The identifier for the version of the policy that is set as the default version. 
+    The identifier for the version of the policy that is set as the default version.
 
     
 
@@ -182,7 +185,7 @@ Policy -> (structure)
 
     
 
-    Specifies whether the policy can be attached to an IAM user, group, or role. 
+    Specifies whether the policy can be attached to an IAM user, group, or role.
 
     
 
@@ -206,7 +209,7 @@ Policy -> (structure)
 
     
 
-    The date and time, in `ISO 8601 date-time format`_ , when the policy was created.
+    The date and time, in `ISO 8601 date-time format <http://www.iso.org/iso/iso8601>`_ , when the policy was created.
 
     
 
@@ -216,11 +219,11 @@ Policy -> (structure)
 
     
 
-    The date and time, in `ISO 8601 date-time format`_ , when the policy was last updated.
+    The date and time, in `ISO 8601 date-time format <http://www.iso.org/iso/iso8601>`_ , when the policy was last updated.
 
      
 
-    When a policy has only one version, this field contains the date and time when the policy was created. When a policy has more than one version, this field contains the date and time when the most recent policy version was created. 
+    When a policy has only one version, this field contains the date and time when the policy was created. When a policy has more than one version, this field contains the date and time when the most recent policy version was created.
 
     
 
@@ -228,9 +231,3 @@ Policy -> (structure)
 
   
 
-
-
-.. _ISO 8601 date-time format: http://www.iso.org/iso/iso8601
-.. _Amazon Resource Names (ARNs) and AWS Service Namespaces: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
-.. _IAM Identifiers: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
-.. _Managed Policies and Inline Policies: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html

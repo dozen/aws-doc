@@ -13,6 +13,10 @@ cloudfront
 Description
 ===========
 
+ 
+
+This is the *Amazon CloudFront API Reference* . This guide is for developers who need detailed information about the CloudFront API actions, data types, and errors. For detailed information about CloudFront features and their associated API calls, see the *Amazon CloudFront Developer Guide* .
+
 
 
 .. note::
@@ -32,8 +36,10 @@ Available Commands
 
   create-cloud-front-origin-access-identity
   create-distribution
+  create-distribution-with-tags
   create-invalidation
   create-streaming-distribution
+  create-streaming-distribution-with-tags
   delete-cloud-front-origin-access-identity
   delete-distribution
   delete-streaming-distribution
@@ -49,7 +55,10 @@ Available Commands
   list-distributions-by-web-acl-id
   list-invalidations
   list-streaming-distributions
+  list-tags-for-resource
   sign
+  tag-resource
+  untag-resource
   update-cloud-front-origin-access-identity
   update-distribution
   update-streaming-distribution

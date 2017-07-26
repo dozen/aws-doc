@@ -19,6 +19,9 @@ Describes the notification types that are supported by Auto Scaling.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAutoScalingNotificationTypes>`_
+
+
 ========
 Synopsis
 ========
@@ -27,7 +30,7 @@ Synopsis
 
     describe-auto-scaling-notification-types
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -39,8 +42,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -52,19 +55,19 @@ Examples
 
 This example describes the available notification types::
 
-	aws autoscaling describe-auto-scaling-notification-types
+    aws autoscaling describe-auto-scaling-notification-types
 
 The following is example output::
 
-	{
-		"AutoScalingNotificationTypes": [
-			"autoscaling:EC2_INSTANCE_LAUNCH",
-			"autoscaling:EC2_INSTANCE_LAUNCH_ERROR",
-			"autoscaling:EC2_INSTANCE_TERMINATE",
-			"autoscaling:EC2_INSTANCE_TERMINATE_ERROR",
-			"autoscaling:TEST_NOTIFICATION"
-		]
-	}
+    {
+        "AutoScalingNotificationTypes": [
+            "autoscaling:EC2_INSTANCE_LAUNCH",
+            "autoscaling:EC2_INSTANCE_LAUNCH_ERROR",
+            "autoscaling:EC2_INSTANCE_TERMINATE",
+            "autoscaling:EC2_INSTANCE_TERMINATE_ERROR",
+            "autoscaling:TEST_NOTIFICATION"
+        ]
+    }
 
 For more information, see `Configure Your Auto Scaling Group to Send Notifications`_ in the *Auto Scaling Developer Guide*.
 
@@ -79,21 +82,7 @@ AutoScalingNotificationTypes -> (list)
 
   
 
-  One or more of the following notification types:
-
-   
-
-   
-  * ``autoscaling:EC2_INSTANCE_LAUNCH`` 
-   
-  * ``autoscaling:EC2_INSTANCE_LAUNCH_ERROR`` 
-   
-  * ``autoscaling:EC2_INSTANCE_TERMINATE`` 
-   
-  * ``autoscaling:EC2_INSTANCE_TERMINATE_ERROR`` 
-   
-  * ``autoscaling:TEST_NOTIFICATION`` 
-   
+  The notification types.
 
   
 

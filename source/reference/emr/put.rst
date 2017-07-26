@@ -15,7 +15,7 @@ Description
 
 Put file onto the master node.
 
-A value for the variable Key Pair File can be set in the AWS CLI config file using the "aws configure set" command.
+A value for the variable Key Pair File can be set in the AWS CLI config file using the "aws configure set emr.key_pair_file <value>" command.
 
 
 

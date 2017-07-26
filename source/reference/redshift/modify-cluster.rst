@@ -15,12 +15,15 @@ Description
 
 
 
-Modifies the settings for a cluster. For example, you can add another security or parameter group, update the preferred maintenance window, or change the master user password. Resetting a cluster password or modifying the security groups associated with a cluster do not need a reboot. However, modifying a parameter group requires a reboot for parameters to take effect. For more information about managing clusters, go to `Amazon Redshift Clusters`_ in the *Amazon Redshift Cluster Management Guide* . 
+Modifies the settings for a cluster. For example, you can add another security or parameter group, update the preferred maintenance window, or change the master user password. Resetting a cluster password or modifying the security groups associated with a cluster do not need a reboot. However, modifying a parameter group requires a reboot for parameters to take effect. For more information about managing clusters, go to `Amazon Redshift Clusters <http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html>`_ in the *Amazon Redshift Cluster Management Guide* .
 
  
 
 You can also change node type and the number of nodes to scale up or down the cluster. When resizing a cluster, you must specify both the number of nodes and the node type even if one of the parameters does not change.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyCluster>`_
 
 
 ========
@@ -45,8 +48,11 @@ Synopsis
   [--hsm-client-certificate-identifier <value>]
   [--hsm-configuration-identifier <value>]
   [--new-cluster-identifier <value>]
+  [--publicly-accessible | --no-publicly-accessible]
+  [--elastic-ip <value>]
+  [--enhanced-vpc-routing | --no-enhanced-vpc-routing]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -58,18 +64,18 @@ Options
 ``--cluster-identifier`` (string)
 
 
-  The unique identifier of the cluster to be modified. 
+  The unique identifier of the cluster to be modified.
 
    
 
-  Example: ``examplecluster`` 
+  Example: ``examplecluster``  
 
   
 
 ``--cluster-type`` (string)
 
 
-  The new cluster type. 
+  The new cluster type.
 
    
 
@@ -77,14 +83,14 @@ Options
 
    
 
-  Valid Values: ``multi-node | single-node`` 
+  Valid Values: ``multi-node | single-node``  
 
   
 
 ``--node-type`` (string)
 
 
-  The new node type of the cluster. If you specify a new node type, you must also specify the number of nodes parameter. 
+  The new node type of the cluster. If you specify a new node type, you must also specify the number of nodes parameter.
 
    
 
@@ -99,7 +105,7 @@ Options
 ``--number-of-nodes`` (integer)
 
 
-  The new number of nodes of the cluster. If you specify a new number of nodes, you must also specify the node type parameter. 
+  The new number of nodes of the cluster. If you specify a new number of nodes, you must also specify the node type parameter.
 
    
 
@@ -114,7 +120,7 @@ Options
 ``--cluster-security-groups`` (list)
 
 
-  A list of cluster security groups to be authorized on this cluster. This change is asynchronously applied as soon as possible. 
+  A list of cluster security groups to be authorized on this cluster. This change is asynchronously applied as soon as possible.
 
    
 
@@ -127,11 +133,11 @@ Options
    
 
    
-  * Must be 1 to 255 alphanumeric characters or hyphens
+  * Must be 1 to 255 alphanumeric characters or hyphens 
    
-  * First character must be a letter
+  * First character must be a letter 
    
-  * Cannot end with a hyphen or contain two consecutive hyphens
+  * Cannot end with a hyphen or contain two consecutive hyphens 
    
 
   
@@ -147,7 +153,7 @@ Syntax::
 ``--vpc-security-group-ids`` (list)
 
 
-  A list of virtual private cloud (VPC) security groups to be associated with the cluster. 
+  A list of virtual private cloud (VPC) security groups to be associated with the cluster.
 
   
 
@@ -164,11 +170,15 @@ Syntax::
 
   The new password for the cluster master user. This change is asynchronously applied as soon as possible. Between the time of the request and the completion of the request, the ``MasterUserPassword`` element exists in the ``PendingModifiedValues`` element of the operation response. 
 
+   
+
   .. note::
 
-    Operations never return the password, so this operation provides a way to regain access to the master user account for a cluster if the password is lost. 
+     
 
-   
+    Operations never return the password, so this operation provides a way to regain access to the master user account for a cluster if the password is lost.
+
+     
 
    
 
@@ -176,20 +186,20 @@ Syntax::
 
    
 
-  Constraints: 
+  Constraints:
 
    
 
    
-  * Must be between 8 and 64 characters in length.
+  * Must be between 8 and 64 characters in length. 
    
-  * Must contain at least one uppercase letter.
+  * Must contain at least one uppercase letter. 
    
-  * Must contain at least one lowercase letter.
+  * Must contain at least one lowercase letter. 
    
-  * Must contain one number.
+  * Must contain one number. 
    
-  * Can be any printable ASCII character (ASCII code 33 to 126) except ' (single quote), " (double quote), \, /, @, or space.
+  * Can be any printable ASCII character (ASCII code 33 to 126) except ' (single quote), " (double quote), \, /, @, or space. 
    
 
   
@@ -231,11 +241,11 @@ Syntax::
 ``--preferred-maintenance-window`` (string)
 
 
-  The weekly time range (in UTC) during which system maintenance can occur, if necessary. If system maintenance is necessary during the window, it may result in an outage. 
+  The weekly time range (in UTC) during which system maintenance can occur, if necessary. If system maintenance is necessary during the window, it may result in an outage.
 
    
 
-  This maintenance window change is made immediately. If the new maintenance window indicates the current time, there must be at least 120 minutes between the current time and end of the window in order to ensure that pending changes are applied. 
+  This maintenance window change is made immediately. If the new maintenance window indicates the current time, there must be at least 120 minutes between the current time and end of the window in order to ensure that pending changes are applied.
 
    
 
@@ -258,15 +268,15 @@ Syntax::
 ``--cluster-version`` (string)
 
 
-  The new version number of the Amazon Redshift engine to upgrade to. 
+  The new version number of the Amazon Redshift engine to upgrade to.
 
    
 
-  For major version upgrades, if a non-default cluster parameter group is currently in use, a new cluster parameter group in the cluster parameter group family for the new version must be specified. The new cluster parameter group can be the default for that cluster parameter group family. For more information about parameters and parameter groups, go to `Amazon Redshift Parameter Groups`_ in the *Amazon Redshift Cluster Management Guide* . 
+  For major version upgrades, if a non-default cluster parameter group is currently in use, a new cluster parameter group in the cluster parameter group family for the new version must be specified. The new cluster parameter group can be the default for that cluster parameter group family. For more information about parameters and parameter groups, go to `Amazon Redshift Parameter Groups <http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html>`_ in the *Amazon Redshift Cluster Management Guide* .
 
    
 
-  Example: ``1.0`` 
+  Example: ``1.0``  
 
   
 
@@ -277,7 +287,7 @@ Syntax::
 
    
 
-  Default: ``false`` 
+  Default: ``false``  
 
   
 
@@ -307,28 +317,61 @@ Syntax::
    
 
    
-  * Must contain from 1 to 63 alphanumeric characters or hyphens.
+  * Must contain from 1 to 63 alphanumeric characters or hyphens. 
    
-  * Alphabetic characters must be lowercase.
+  * Alphabetic characters must be lowercase. 
    
-  * First character must be a letter.
+  * First character must be a letter. 
    
-  * Cannot end with a hyphen or contain two consecutive hyphens.
+  * Cannot end with a hyphen or contain two consecutive hyphens. 
    
-  * Must be unique for all clusters within an AWS account.
+  * Must be unique for all clusters within an AWS account. 
    
+
+   
+
+  Example: ``examplecluster``  
+
+  
+
+``--publicly-accessible`` | ``--no-publicly-accessible`` (boolean)
+
+
+  If ``true`` , the cluster can be accessed from a public network. Only clusters in VPCs can be set to be publicly available.
+
+  
+
+``--elastic-ip`` (string)
+
+
+  The Elastic IP (EIP) address for the cluster.
 
    
 
-  Example: ``examplecluster`` 
+  Constraints: The cluster must be provisioned in EC2-VPC and publicly-accessible through an Internet gateway. For more information about provisioning clusters in EC2-VPC, go to `Supported Platforms to Launch Your Cluster <http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#cluster-platforms>`_ in the Amazon Redshift Cluster Management Guide.
+
+  
+
+``--enhanced-vpc-routing`` | ``--no-enhanced-vpc-routing`` (boolean)
+
+
+  An option that specifies whether to create the cluster with enhanced VPC routing enabled. To create a cluster that uses enhanced VPC routing, the cluster must be in a VPC. For more information, see `Enhanced VPC Routing <http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html>`_ in the Amazon Redshift Cluster Management Guide.
+
+   
+
+  If this option is ``true`` , enhanced VPC routing is enabled. 
+
+   
+
+  Default: false
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -384,7 +427,7 @@ Cluster -> (structure)
 
     
 
-    The unique identifier of the cluster. 
+    The unique identifier of the cluster.
 
     
 
@@ -394,7 +437,7 @@ Cluster -> (structure)
 
     
 
-    The node type for the nodes in the cluster. 
+    The node type for the nodes in the cluster.
 
     
 
@@ -404,7 +447,43 @@ Cluster -> (structure)
 
     
 
-    The current state of this cluster. Possible values include ``available`` , ``creating`` , ``deleting`` , ``rebooting`` , ``renaming`` , and ``resizing`` . 
+    The current state of the cluster. Possible values are the following:
+
+     
+
+     
+    * ``available``   
+     
+    * ``creating``   
+     
+    * ``deleting``   
+     
+    * ``final-snapshot``   
+     
+    * ``hardware-failure``   
+     
+    * ``incompatible-hsm``   
+     
+    * ``incompatible-network``   
+     
+    * ``incompatible-parameters``   
+     
+    * ``incompatible-restore``   
+     
+    * ``modifying``   
+     
+    * ``rebooting``   
+     
+    * ``renaming``   
+     
+    * ``resizing``   
+     
+    * ``rotating-keys``   
+     
+    * ``storage-full``   
+     
+    * ``updating-hsm``   
+     
 
     
 
@@ -424,7 +503,7 @@ Cluster -> (structure)
 
     
 
-    The master user name for the cluster. This name is used to connect to the database that is specified in **DBName** . 
+    The master user name for the cluster. This name is used to connect to the database that is specified in the **DBName** parameter. 
 
     
 
@@ -434,7 +513,7 @@ Cluster -> (structure)
 
     
 
-    The name of the initial database that was created when the cluster was created. This same name is returned for the life of the cluster. If an initial database was not specified, a database named "dev" was created by default. 
+    The name of the initial database that was created when the cluster was created. This same name is returned for the life of the cluster. If an initial database was not specified, a database named ``dev`` dev was created by default. 
 
     
 
@@ -444,7 +523,7 @@ Cluster -> (structure)
 
     
 
-    The connection endpoint. 
+    The connection endpoint.
 
     
 
@@ -452,7 +531,7 @@ Cluster -> (structure)
 
       
 
-      The DNS address of the Cluster. 
+      The DNS address of the Cluster.
 
       
 
@@ -462,7 +541,7 @@ Cluster -> (structure)
 
       
 
-      The port that the database engine is listening on. 
+      The port that the database engine is listening on.
 
       
 
@@ -474,7 +553,7 @@ Cluster -> (structure)
 
     
 
-    The date and time that the cluster was created. 
+    The date and time that the cluster was created.
 
     
 
@@ -484,7 +563,7 @@ Cluster -> (structure)
 
     
 
-    The number of days that automatic cluster snapshots are retained. 
+    The number of days that automatic cluster snapshots are retained.
 
     
 
@@ -498,7 +577,7 @@ Cluster -> (structure)
 
      
 
-    Cluster security groups are used when the cluster is not created in a VPC. Clusters that are created in a VPC use VPC security groups, which are listed by the **VpcSecurityGroups** parameter. 
+    Cluster security groups are used when the cluster is not created in an Amazon Virtual Private Cloud (VPC). Clusters that are created in a VPC use VPC security groups, which are listed by the **VpcSecurityGroups** parameter. 
 
     
 
@@ -506,7 +585,7 @@ Cluster -> (structure)
 
       
 
-      Describes a security group.
+      Describes a cluster security group.
 
       
 
@@ -514,7 +593,7 @@ Cluster -> (structure)
 
         
 
-        The name of the cluster security group. 
+        The name of the cluster security group.
 
         
 
@@ -524,7 +603,7 @@ Cluster -> (structure)
 
         
 
-        The status of the cluster security group. 
+        The status of the cluster security group.
 
         
 
@@ -538,7 +617,7 @@ Cluster -> (structure)
 
     
 
-    A list of Virtual Private Cloud (VPC) security groups that are associated with the cluster. This parameter is returned only if the cluster is in a VPC. 
+    A list of Amazon Virtual Private Cloud (Amazon VPC) security groups that are associated with the cluster. This parameter is returned only if the cluster is in a VPC.
 
     
 
@@ -554,9 +633,17 @@ Cluster -> (structure)
 
         
 
+        The identifier of the VPC security group.
+
+        
+
         
 
       Status -> (string)
+
+        
+
+        The status of the VPC security group.
 
         
 
@@ -578,7 +665,7 @@ Cluster -> (structure)
 
       
 
-      Describes the status of a parameter group. 
+      Describes the status of a parameter group.
 
       
 
@@ -586,7 +673,7 @@ Cluster -> (structure)
 
         
 
-        The name of the cluster parameter group. 
+        The name of the cluster parameter group.
 
         
 
@@ -596,7 +683,7 @@ Cluster -> (structure)
 
         
 
-        The status of parameter updates. 
+        The status of parameter updates.
 
         
 
@@ -610,7 +697,7 @@ Cluster -> (structure)
 
          
 
-        For more information about parameters and parameter groups, go to `Amazon Redshift Parameter Groups`_ in the *Amazon Redshift Cluster Management Guide* . 
+        For more information about parameters and parameter groups, go to `Amazon Redshift Parameter Groups <http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html>`_ in the *Amazon Redshift Cluster Management Guide* .
 
         
 
@@ -643,21 +730,21 @@ Cluster -> (structure)
             The following are possible statuses and descriptions.
 
              
-            * ``in-sync`` : The parameter value is in sync with the database.
-             
-            * ``pending-reboot`` : The parameter value will be applied after the cluster reboots.
-             
-            * ``applying`` : The parameter value is being applied to the database.
-             
-            * ``invalid-parameter`` : Cannot apply the parameter value because it has an invalid value or syntax.
-             
-            * ``apply-deferred`` : The parameter contains static property changes. The changes are deferred until the cluster reboots.
-             
-            * ``apply-error`` : Cannot connect to the cluster. The parameter change will be applied after the cluster reboots.
-             
-            * ``unknown-error`` : Cannot apply the parameter change right now. The change will be applied after the cluster reboots.
-             
 
+             
+            * ``in-sync`` : The parameter value is in sync with the database. 
+             
+            * ``pending-reboot`` : The parameter value will be applied after the cluster reboots. 
+             
+            * ``applying`` : The parameter value is being applied to the database. 
+             
+            * ``invalid-parameter`` : Cannot apply the parameter value because it has an invalid value or syntax. 
+             
+            * ``apply-deferred`` : The parameter contains static property changes. The changes are deferred until the cluster reboots. 
+             
+            * ``apply-error`` : Cannot connect to the cluster. The parameter change will be applied after the cluster reboots. 
+             
+            * ``unknown-error`` : Cannot apply the parameter change right now. The change will be applied after the cluster reboots. 
              
 
             
@@ -686,7 +773,7 @@ Cluster -> (structure)
 
     
 
-    The name of the subnet group that is associated with the cluster. This parameter is valid only when the cluster is in a VPC. 
+    The name of the subnet group that is associated with the cluster. This parameter is valid only when the cluster is in a VPC.
 
     
 
@@ -696,7 +783,7 @@ Cluster -> (structure)
 
     
 
-    The identifier of the VPC the cluster is in, if the cluster is in a VPC. 
+    The identifier of the VPC the cluster is in, if the cluster is in a VPC.
 
     
 
@@ -706,7 +793,7 @@ Cluster -> (structure)
 
     
 
-    The name of the Availability Zone in which the cluster is located. 
+    The name of the Availability Zone in which the cluster is located.
 
     
 
@@ -716,7 +803,7 @@ Cluster -> (structure)
 
     
 
-    The weekly time range (in UTC) during which system maintenance can occur. 
+    The weekly time range, in Universal Coordinated Time (UTC), during which system maintenance can occur.
 
     
 
@@ -726,7 +813,7 @@ Cluster -> (structure)
 
     
 
-    If present, changes to the cluster are pending. Specific pending changes are identified by subelements. 
+    A value that, if present, indicates that changes to the cluster are pending. Specific pending changes are identified by subelements.
 
     
 
@@ -734,7 +821,7 @@ Cluster -> (structure)
 
       
 
-      The pending or in-progress change of the master user password for the cluster. 
+      The pending or in-progress change of the master user password for the cluster.
 
       
 
@@ -744,7 +831,7 @@ Cluster -> (structure)
 
       
 
-      The pending or in-progress change of the cluster's node type. 
+      The pending or in-progress change of the cluster's node type.
 
       
 
@@ -754,7 +841,7 @@ Cluster -> (structure)
 
       
 
-      The pending or in-progress change of the number of nodes in the cluster. 
+      The pending or in-progress change of the number of nodes in the cluster.
 
       
 
@@ -764,7 +851,7 @@ Cluster -> (structure)
 
       
 
-      The pending or in-progress change of the cluster type. 
+      The pending or in-progress change of the cluster type.
 
       
 
@@ -774,7 +861,7 @@ Cluster -> (structure)
 
       
 
-      The pending or in-progress change of the service version. 
+      The pending or in-progress change of the service version.
 
       
 
@@ -784,7 +871,7 @@ Cluster -> (structure)
 
       
 
-      The pending or in-progress change of the automated snapshot retention period. 
+      The pending or in-progress change of the automated snapshot retention period.
 
       
 
@@ -800,13 +887,41 @@ Cluster -> (structure)
 
       
 
+    PubliclyAccessible -> (boolean)
+
+      
+
+      The pending or in-progress change of the ability to connect to the cluster from the public network.
+
+      
+
+      
+
+    EnhancedVpcRouting -> (boolean)
+
+      
+
+      An option that specifies whether to create the cluster with enhanced VPC routing enabled. To create a cluster that uses enhanced VPC routing, the cluster must be in a VPC. For more information, see `Enhanced VPC Routing <http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html>`_ in the Amazon Redshift Cluster Management Guide.
+
+       
+
+      If this option is ``true`` , enhanced VPC routing is enabled. 
+
+       
+
+      Default: false
+
+      
+
+      
+
     
 
   ClusterVersion -> (string)
 
     
 
-    The version ID of the Amazon Redshift engine that is running on the cluster. 
+    The version ID of the Amazon Redshift engine that is running on the cluster.
 
     
 
@@ -816,7 +931,7 @@ Cluster -> (structure)
 
     
 
-    If ``true`` , major version upgrades will be applied automatically to the cluster during the maintenance window. 
+    A Boolean value that, if ``true`` , indicates that major version upgrades will be applied automatically to the cluster during the maintenance window. 
 
     
 
@@ -826,7 +941,7 @@ Cluster -> (structure)
 
     
 
-    The number of compute nodes in the cluster. 
+    The number of compute nodes in the cluster.
 
     
 
@@ -836,7 +951,7 @@ Cluster -> (structure)
 
     
 
-    If ``true`` , the cluster can be accessed from a public network.
+    A Boolean value that, if ``true`` , indicates that the cluster can be accessed from a public network.
 
     
 
@@ -846,7 +961,7 @@ Cluster -> (structure)
 
     
 
-    If ``true`` , data in the cluster is encrypted at rest.
+    A Boolean value that, if ``true`` , indicates that data in the cluster is encrypted at rest.
 
     
 
@@ -856,7 +971,7 @@ Cluster -> (structure)
 
     
 
-    Describes the status of a cluster restore action. Returns null if the cluster was not created by restoring a snapshot. 
+    A value that describes the status of a cluster restore action. This parameter returns null if the cluster was not created by restoring a snapshot.
 
     
 
@@ -864,7 +979,7 @@ Cluster -> (structure)
 
       
 
-      The status of the restore action. Returns starting, restoring, completed, or failed. 
+      The status of the restore action. Returns starting, restoring, completed, or failed.
 
       
 
@@ -874,7 +989,7 @@ Cluster -> (structure)
 
       
 
-      The number of megabytes per second being transferred from the backup storage. Returns the average rate for a completed backup. 
+      The number of megabytes per second being transferred from the backup storage. Returns the average rate for a completed backup.
 
       
 
@@ -884,7 +999,7 @@ Cluster -> (structure)
 
       
 
-      The size of the set of snapshot data used to restore the cluster. 
+      The size of the set of snapshot data used to restore the cluster.
 
       
 
@@ -894,7 +1009,7 @@ Cluster -> (structure)
 
       
 
-      The number of megabytes that have been transferred from snapshot storage. 
+      The number of megabytes that have been transferred from snapshot storage.
 
       
 
@@ -904,7 +1019,7 @@ Cluster -> (structure)
 
       
 
-      The amount of time an in-progress restore has been running, or the amount of time it took a completed restore to finish. 
+      The amount of time an in-progress restore has been running, or the amount of time it took a completed restore to finish.
 
       
 
@@ -914,7 +1029,7 @@ Cluster -> (structure)
 
       
 
-      The estimate of the time remaining before the restore will complete. Returns 0 for a completed restore. 
+      The estimate of the time remaining before the restore will complete. Returns 0 for a completed restore.
 
       
 
@@ -926,7 +1041,7 @@ Cluster -> (structure)
 
     
 
-    Reports whether the Amazon Redshift cluster has finished applying any HSM settings changes specified in a modify cluster command.
+    A value that reports whether the Amazon Redshift cluster has finished applying any hardware security module (HSM) settings changes specified in a modify cluster command.
 
      
 
@@ -974,7 +1089,7 @@ Cluster -> (structure)
 
     
 
-    Returns the destination region and retention period that are configured for cross-region snapshot copy. 
+    A value that returns the destination region and retention period that are configured for cross-region snapshot copy.
 
     
 
@@ -1024,7 +1139,7 @@ Cluster -> (structure)
 
     
 
-    The nodes in a cluster.
+    The nodes in the cluster.
 
     
 
@@ -1074,7 +1189,7 @@ Cluster -> (structure)
 
     
 
-    Describes the status of the elastic IP (EIP) address.
+    The status of the elastic IP (EIP) address.
 
     
 
@@ -1092,7 +1207,7 @@ Cluster -> (structure)
 
       
 
-      Describes the status of the elastic IP (EIP) address.
+      The status of the elastic IP (EIP) address.
 
       
 
@@ -1154,15 +1269,83 @@ Cluster -> (structure)
 
     
 
-    The AWS Key Management Service (KMS) key ID of the encryption key used to encrypt data in the cluster.
+    The AWS Key Management Service (AWS KMS) key ID of the encryption key used to encrypt data in the cluster.
 
     
+
+    
+
+  EnhancedVpcRouting -> (boolean)
+
+    
+
+    An option that specifies whether to create the cluster with enhanced VPC routing enabled. To create a cluster that uses enhanced VPC routing, the cluster must be in a VPC. For more information, see `Enhanced VPC Routing <http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html>`_ in the Amazon Redshift Cluster Management Guide.
+
+     
+
+    If this option is ``true`` , enhanced VPC routing is enabled. 
+
+     
+
+    Default: false
+
+    
+
+    
+
+  IamRoles -> (list)
+
+    
+
+    A list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services.
+
+    
+
+    (structure)
+
+      
+
+      An AWS Identity and Access Management (IAM) role that can be used by the associated Amazon Redshift cluster to access other AWS services.
+
+      
+
+      IamRoleArn -> (string)
+
+        
+
+        The Amazon Resource Name (ARN) of the IAM role, for example, ``arn:aws:iam::123456789012:role/RedshiftCopyUnload`` . 
+
+        
+
+        
+
+      ApplyStatus -> (string)
+
+        
+
+        A value that describes the status of the IAM role's association with an Amazon Redshift cluster.
+
+         
+
+        The following are possible statuses and descriptions.
+
+         
+
+         
+        * ``in-sync`` : The role is available for use by the cluster. 
+         
+        * ``adding`` : The role is in the process of being associated with the cluster. 
+         
+        * ``removing`` : The role is in the process of being disassociated with the cluster. 
+         
+
+        
+
+        
+
+      
 
     
 
   
 
-
-
-.. _Amazon Redshift Clusters: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html
-.. _Amazon Redshift Parameter Groups: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html

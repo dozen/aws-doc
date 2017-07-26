@@ -19,6 +19,9 @@ Adds a source identifier to an existing RDS event notification subscription.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AddSourceIdentifierToSubscription>`_
+
+
 ========
 Synopsis
 ========
@@ -29,7 +32,7 @@ Synopsis
   --subscription-name <value>
   --source-identifier <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -48,7 +51,7 @@ Options
 ``--source-identifier`` (string)
 
 
-  The identifier of the event source to be added. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens; it cannot end with a hyphen or contain two consecutive hyphens. 
+  The identifier of the event source to be added. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens; it cannot end with a hyphen or contain two consecutive hyphens.
 
    
 
@@ -57,13 +60,13 @@ Options
    
 
    
-  * If the source type is a DB instance, then a ``DBInstanceIdentifier`` must be supplied.
+  * If the source type is a DB instance, then a ``DBInstanceIdentifier`` must be supplied. 
    
-  * If the source type is a DB security group, a ``DBSecurityGroupName`` must be supplied.
+  * If the source type is a DB security group, a ``DBSecurityGroupName`` must be supplied. 
    
-  * If the source type is a DB parameter group, a ``DBParameterGroupName`` must be supplied.
+  * If the source type is a DB parameter group, a ``DBParameterGroupName`` must be supplied. 
    
-  * If the source type is a DB snapshot, a ``DBSnapshotIdentifier`` must be supplied.
+  * If the source type is a DB snapshot, a ``DBSnapshotIdentifier`` must be supplied. 
    
 
   
@@ -71,8 +74,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -197,6 +200,16 @@ EventSubscription -> (structure)
     
 
     A Boolean value indicating if the subscription is enabled. True indicates the subscription is enabled.
+
+    
+
+    
+
+  EventSubscriptionArn -> (string)
+
+    
+
+    The Amazon Resource Name (ARN) for the event subscription.
 
     
 

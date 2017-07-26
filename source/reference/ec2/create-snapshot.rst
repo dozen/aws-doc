@@ -35,8 +35,11 @@ Snapshots that are taken from encrypted volumes are automatically encrypted. Vol
 
  
 
-For more information, see `Amazon Elastic Block Store`_ and `Amazon EBS Encryption`_ in the *Amazon Elastic Compute Cloud User Guide* .
+For more information, see `Amazon Elastic Block Store <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEBS.html>`_ and `Amazon EBS Encryption <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html>`_ in the *Amazon Elastic Compute Cloud User Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSnapshot>`_
 
 
 ========
@@ -46,11 +49,11 @@ Synopsis
 ::
 
     create-snapshot
-  [--dry-run | --no-dry-run]
-  --volume-id <value>
   [--description <value>]
+  --volume-id <value>
+  [--dry-run | --no-dry-run]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -59,10 +62,10 @@ Synopsis
 Options
 =======
 
-``--dry-run`` | ``--no-dry-run`` (boolean)
+``--description`` (string)
 
 
-  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
+  A description for the snapshot.
 
   
 
@@ -73,18 +76,18 @@ Options
 
   
 
-``--description`` (string)
+``--dry-run`` | ``--no-dry-run`` (boolean)
 
 
-  A description for the snapshot.
+  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -94,28 +97,88 @@ Examples
 
 **To create a snapshot**
 
-This example command creates a snapshot of the volume with a volume ID of ``vol-1234abcd`` and a short description to identify the snapshot.
+This example command creates a snapshot of the volume with a volume ID of ``vol-1234567890abcdef0`` and a short description to identify the snapshot.
 
 Command::
 
-  aws ec2 create-snapshot --volume-id vol-1234abcd --description "This is my root volume snapshot."
+  aws ec2 create-snapshot --volume-id vol-1234567890abcdef0 --description "This is my root volume snapshot."
 
 Output::
 
    {
        "Description": "This is my root volume snapshot.",
        "Tags": [],
-       "VolumeId": "vol-1234abcd",
+       "VolumeId": "vol-1234567890abcdef0",
        "State": "pending",
        "VolumeSize": 8,
        "StartTime": "2014-02-28T21:06:01.000Z",
        "OwnerId": "012345678910",
-       "SnapshotId": "snap-1a2b3c4d"
+       "SnapshotId": "snap-066877671789bd71b"
    }
 
 ======
 Output
 ======
+
+DataEncryptionKeyId -> (string)
+
+  
+
+  The data encryption key identifier for the snapshot. This value is a unique identifier that corresponds to the data encryption key that was used to encrypt the original volume or snapshot copy. Because data encryption keys are inherited by volumes created from snapshots, and vice versa, if snapshots share the same data encryption key identifier, then they belong to the same volume/snapshot lineage. This parameter is only returned by the  describe-snapshots API operation.
+
+  
+
+  
+
+Description -> (string)
+
+  
+
+  The description for the snapshot.
+
+  
+
+  
+
+Encrypted -> (boolean)
+
+  
+
+  Indicates whether the snapshot is encrypted.
+
+  
+
+  
+
+KmsKeyId -> (string)
+
+  
+
+  The full ARN of the AWS Key Management Service (AWS KMS) customer master key (CMK) that was used to protect the volume encryption key for the parent volume.
+
+  
+
+  
+
+OwnerId -> (string)
+
+  
+
+  The AWS account ID of the EBS snapshot owner.
+
+  
+
+  
+
+Progress -> (string)
+
+  
+
+  The progress of the snapshot, as a percentage.
+
+  
+
+  
 
 SnapshotId -> (string)
 
@@ -127,11 +190,11 @@ SnapshotId -> (string)
 
   
 
-VolumeId -> (string)
+StartTime -> (timestamp)
 
   
 
-  The ID of the volume that was used to create the snapshot.
+  The time stamp when the snapshot was initiated.
 
   
 
@@ -157,41 +220,11 @@ StateMessage -> (string)
 
   
 
-StartTime -> (timestamp)
+VolumeId -> (string)
 
   
 
-  The time stamp when the snapshot was initiated.
-
-  
-
-  
-
-Progress -> (string)
-
-  
-
-  The progress of the snapshot, as a percentage.
-
-  
-
-  
-
-OwnerId -> (string)
-
-  
-
-  The AWS account ID of the EBS snapshot owner.
-
-  
-
-  
-
-Description -> (string)
-
-  
-
-  The description for the snapshot.
+  The ID of the volume that was used to create the snapshot. Snapshots created by the  copy-snapshot action have an arbitrary volume ID that should not be used for any purpose.
 
   
 
@@ -211,7 +244,7 @@ OwnerAlias -> (string)
 
   
 
-  The AWS account alias (for example, ``amazon`` , ``self`` ) or AWS account ID that owns the snapshot.
+  Value from an Amazon-maintained list (``amazon`` | ``aws-marketplace`` | ``microsoft`` ) of snapshot owners. Not to be confused with the user-configured AWS account alias, which is set from the IAM console. 
 
   
 
@@ -237,11 +270,11 @@ Tags -> (list)
 
       
 
-      The key of the tag. 
+      The key of the tag.
 
        
 
-      Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with ``aws:`` 
+      Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with ``aws:``  
 
       
 
@@ -265,37 +298,3 @@ Tags -> (list)
 
   
 
-Encrypted -> (boolean)
-
-  
-
-  Indicates whether the snapshot is encrypted.
-
-  
-
-  
-
-KmsKeyId -> (string)
-
-  
-
-  The full ARN of the AWS Key Management Service (AWS KMS) customer master key (CMK) that was used to protect the volume encryption key for the parent volume.
-
-  
-
-  
-
-DataEncryptionKeyId -> (string)
-
-  
-
-  The data encryption key identifier for the snapshot. This value is a unique identifier that corresponds to the data encryption key that was used to encrypt the original volume or snapshot copy. Because data encryption keys are inherited by volumes created from snapshots, and vice versa, if snapshots share the same data encryption key identifier, then they belong to the same volume/snapshot lineage. This parameter is only returned by the  describe-snapshots API operation.
-
-  
-
-  
-
-
-
-.. _Amazon EBS Encryption: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
-.. _Amazon Elastic Block Store: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEBS.html

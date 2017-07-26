@@ -15,8 +15,85 @@ Description
 
 
 
-Retrieves the maximum number of instances allowed, per AWS account, for each specified EC2 instance type. The current usage level for the AWS account is also retrieved.
+Retrieves the following information for the specified EC2 instance type:
 
+ 
+
+ 
+* maximum number of instances allowed per AWS account (service limit) 
+ 
+* current usage level for the AWS account 
+ 
+
+ 
+
+Service limits vary depending on region. Available regions for Amazon GameLift can be found in the AWS Management Console for Amazon GameLift (see the drop-down list in the upper right corner).
+
+ 
+
+Fleet-related operations include:
+
+ 
+
+ 
+*  create-fleet   
+ 
+*  list-fleets   
+ 
+* Describe fleets: 
+
+   
+  *  describe-fleet-attributes   
+   
+  *  describe-fleet-port-settings   
+   
+  *  describe-fleet-utilization   
+   
+  *  describe-runtime-configuration   
+   
+  *  describe-fleet-events   
+   
+
+ 
+ 
+* Update fleets: 
+
+   
+  *  update-fleet-attributes   
+   
+  *  update-fleet-capacity   
+   
+  *  update-fleet-port-settings   
+   
+  *  update-runtime-configuration   
+   
+
+ 
+ 
+* Manage fleet capacity: 
+
+   
+  *  describe-fleet-capacity   
+   
+  *  update-fleet-capacity   
+   
+  *  put-scaling-policy (automatic scaling) 
+   
+  *  describe-scaling-policies (automatic scaling) 
+   
+  *  delete-scaling-policy (automatic scaling) 
+   
+  *  describe-ec2-instance-limits   
+   
+
+ 
+ 
+*  delete-fleet   
+ 
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeEC2InstanceLimits>`_
 
 
 ========
@@ -28,7 +105,7 @@ Synopsis
     describe-ec2-instance-limits
   [--ec2-instance-type <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -40,7 +117,7 @@ Options
 ``--ec2-instance-type`` (string)
 
 
-  Type of EC2 instances used in the fleet. EC2 instance types define the CPU, memory, storage, and networking capacity of the fleetaposs hosts. Amazon GameLift supports the EC2 instance types listed below. See `Amazon EC2 Instance Types`_ for detailed descriptions of each. Leave this parameter blank to retrieve limits for all types.
+  Name of an EC2 instance type that is supported in Amazon GameLift. A fleet instance type determines the computing resources of each instance in the fleet, including CPU, memory, storage, and networking capacity. Amazon GameLift supports the following EC2 instance types. See `Amazon EC2 Instance Types <http://aws.amazon.com/ec2/instance-types/>`_ for detailed descriptions. Leave this parameter blank to retrieve limits for all types.
 
   
 
@@ -137,8 +214,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -150,7 +227,7 @@ EC2InstanceLimits -> (list)
 
   
 
-  Object containing the maximum number of instances for the specified instance type.
+  Object that contains the maximum number of instances for the specified instance type.
 
   
 
@@ -166,7 +243,7 @@ EC2InstanceLimits -> (list)
 
       
 
-      Type of EC2 instances used in the fleet. EC2 instance types define the CPU, memory, storage, and networking capacity of the fleetaposs hosts. Amazon GameLift supports the EC2 instance types listed below. See `Amazon EC2 Instance Types`_ for detailed descriptions of each.
+      Name of an EC2 instance type that is supported in Amazon GameLift. A fleet instance type determines the computing resources of each instance in the fleet, including CPU, memory, storage, and networking capacity. Amazon GameLift supports the following EC2 instance types. See `Amazon EC2 Instance Types <http://aws.amazon.com/ec2/instance-types/>`_ for detailed descriptions.
 
       
 
@@ -176,7 +253,7 @@ EC2InstanceLimits -> (list)
 
       
 
-      Number of instances of the specified type that are currently in use by this AWS account. 
+      Number of instances of the specified type that are currently in use by this AWS account.
 
       
 
@@ -196,6 +273,3 @@ EC2InstanceLimits -> (list)
 
   
 
-
-
-.. _Amazon EC2 Instance Types: https://aws.amazon.com/ec2/instance-types/

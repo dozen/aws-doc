@@ -15,53 +15,65 @@ Description
 
 
 
-Welcome to the *Amazon Simple Queue Service API Reference* . This section describes who should read this guide, how the guide is organized, and other resources related to the Amazon Simple Queue Service (Amazon SQS).
+Welcome to the *Amazon Simple Queue Service API Reference* .
 
  
 
-Amazon SQS offers reliable and scalable hosted queues for storing messages as they travel between computers. By using Amazon SQS, you can move data between distributed components of your applications that perform different tasks without losing messages or requiring each component to be always available.
+Amazon Simple Queue Service (Amazon SQS) is a reliable, highly-scalable hosted queue for storing messages as they travel between applications or microservices. Amazon SQS moves data between distributed application components and helps you decouple these components.
 
  
 
-Helpful Links: 
+.. note::
+
+   
+
+   `Standard queues <http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/standard-queues.html>`_ are available in all regions. `FIFO queues <http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html>`_ are available in US West (Oregon) and US East (Ohio).
+
+   
 
  
-* `Current WSDL (2012-11-05)`_ 
- 
-* `Making API Requests`_ 
- 
-* `Amazon SQS product page`_ 
- 
-* `Using Amazon SQS Message Attributes`_ 
- 
-* `Using Amazon SQS Dead Letter Queues`_ 
- 
-* `Regions and Endpoints`_ 
- 
+
+You can use `AWS SDKs <http://aws.amazon.com/tools/#sdk>`_ to access Amazon SQS using your favorite programming language. The SDKs perform tasks such as the following automatically:
 
  
 
  
-
-We also provide SDKs that enable you to access Amazon SQS from your preferred programming language. The SDKs contain functionality that automatically takes care of tasks such as:
-
+* Cryptographically sign your service requests 
+ 
+* Retry requests 
+ 
+* Handle error responses 
  
 
  
 
- 
-* Cryptographically signing your service requests
- 
-* Retrying requests
- 
-* Handling error responses
- 
+ **Additional Information**  
 
  
 
  
+* `Amazon SQS Product Page <http://aws.amazon.com/sqs/>`_   
+ 
+* *Amazon SQS Developer Guide*   
 
-For a list of available SDKs, go to `Tools for Amazon Web Services`_ .
+   
+  * `Making API Requests <http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/MakingRequestsArticle.html>`_   
+   
+  * `Using Amazon SQS Message Attributes <http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html>`_   
+   
+  * `Using Amazon SQS Dead Letter Queues <http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html>`_   
+   
+
+ 
+ 
+* *Amazon Web Services General Reference*   
+
+   
+  * `Regions and Endpoints <http://docs.aws.amazon.com/general/latest/gr/rande.html#sqs_region>`_   
+   
+
+ 
+ 
 
 
 
@@ -91,12 +103,3 @@ Available Commands
   send-message
   send-message-batch
   set-queue-attributes
-
-
-.. _Current WSDL (2012-11-05): http://queue.amazonaws.com/doc/2012-11-05/QueueService.wsdl
-.. _Regions and Endpoints: http://docs.aws.amazon.com/general/latest/gr/rande.html#sqs_region
-.. _Amazon SQS product page: http://aws.amazon.com/sqs/
-.. _Tools for Amazon Web Services: http://aws.amazon.com/tools/
-.. _Making API Requests: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/MakingRequestsArticle.html
-.. _Using Amazon SQS Message Attributes: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/SQSMessageAttributes.html
-.. _Using Amazon SQS Dead Letter Queues: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/SQSDeadLetterQueue.html

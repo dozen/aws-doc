@@ -19,6 +19,9 @@ Returns the  SizeConstraintSet specified by ``SizeConstraintSetId`` .
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetSizeConstraintSet>`_
+
+
 ========
 Synopsis
 ========
@@ -28,7 +31,7 @@ Synopsis
     get-size-constraint-set
   --size-constraint-set-id <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -47,8 +50,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -65,11 +68,11 @@ SizeConstraintSet -> (structure)
    
 
    
-  *  SizeConstraintSet : Contains ``SizeConstraintSetId`` , ``SizeConstraints`` , and ``Name`` 
+  *  SizeConstraintSet : Contains ``SizeConstraintSetId`` , ``SizeConstraints`` , and ``Name``   
    
-  * ``SizeConstraints`` : Contains an array of  SizeConstraint objects. Each ``SizeConstraint`` object contains  FieldToMatch , ``TextTransformation`` , ``ComparisonOperator`` , and ``Size`` 
+  * ``SizeConstraints`` : Contains an array of  SizeConstraint objects. Each ``SizeConstraint`` object contains  FieldToMatch , ``TextTransformation`` , ``ComparisonOperator`` , and ``Size``   
    
-  *  FieldToMatch : Contains ``Data`` and ``Type`` 
+  *  FieldToMatch : Contains ``Data`` and ``Type``   
    
 
   
@@ -78,11 +81,11 @@ SizeConstraintSet -> (structure)
 
     
 
-    A unique identifier for a ``SizeConstraintSet`` . You use ``SizeConstraintSetId`` to get information about a ``SizeConstraintSet`` (see  get-size-constraint-set ), update a ``SizeConstraintSet`` (see  update-size-constraint-set , insert a ``SizeConstraintSet`` into a ``Rule`` or delete one from a ``Rule`` (see  update-rule ), and delete a ``SizeConstraintSet`` from AWS WAF (see  delete-size-constraint-set ).
+    A unique identifier for a ``SizeConstraintSet`` . You use ``SizeConstraintSetId`` to get information about a ``SizeConstraintSet`` (see  get-size-constraint-set ), update a ``SizeConstraintSet`` (see  update-size-constraint-set ), insert a ``SizeConstraintSet`` into a ``Rule`` or delete one from a ``Rule`` (see  update-rule ), and delete a ``SizeConstraintSet`` from AWS WAF (see  delete-size-constraint-set ).
 
      
 
-    ``SizeConstraintSetId`` is returned by  create-size-constraint-set and by  list-size-constraint-sets .
+     ``SizeConstraintSetId`` is returned by  create-size-constraint-set and by  list-size-constraint-sets .
 
     
 
@@ -118,7 +121,7 @@ SizeConstraintSet -> (structure)
 
         
 
-        Specifies where in a web request to look for ``TargetString`` .
+        Specifies where in a web request to look for the size constraint.
 
         
 
@@ -131,15 +134,15 @@ SizeConstraintSet -> (structure)
            
 
            
-          * ``HEADER`` : A specified request header, for example, the value of the ``User-Agent`` or ``Referer`` header. If you choose ``HEADER`` for the type, specify the name of the header in ``Data`` .
+          * ``HEADER`` : A specified request header, for example, the value of the ``User-Agent`` or ``Referer`` header. If you choose ``HEADER`` for the type, specify the name of the header in ``Data`` . 
            
-          * ``METHOD`` : The HTTP method, which indicated the type of operation that the request is asking the origin to perform. Amazon CloudFront supports the following methods: ``DELETE`` , ``GET`` , ``HEAD`` , ``OPTIONS`` , ``PATCH`` , ``POST`` , and ``PUT`` .
+          * ``METHOD`` : The HTTP method, which indicated the type of operation that the request is asking the origin to perform. Amazon CloudFront supports the following methods: ``DELETE`` , ``GET`` , ``HEAD`` , ``OPTIONS`` , ``PATCH`` , ``POST`` , and ``PUT`` . 
            
-          * ``QUERY_STRING`` : A query string, which is the part of a URL that appears after a ``?`` character, if any.
+          * ``QUERY_STRING`` : A query string, which is the part of a URL that appears after a ``?`` character, if any. 
            
-          * ``URI`` : The part of a web request that identifies a resource, for example, ``/images/daily-ad.jpg`` .
+          * ``URI`` : The part of a web request that identifies a resource, for example, ``/images/daily-ad.jpg`` . 
            
-          * ``BODY`` : The part of a request that contains any additional data that you want to send to your web server as the HTTP request body, such as data from a form. The request body immediately follows the request headers. Note that only the first ``8192`` bytes of the request body are forwarded to AWS WAF for inspection. To allow or block requests based on the length of the body, you can create a size constraint set. For more information, see  create-size-constraint-set . 
+          * ``BODY`` : The part of a request that contains any additional data that you want to send to your web server as the HTTP request body, such as data from a form. The request body immediately follows the request headers. Note that only the first ``8192`` bytes of the request body are forwarded to AWS WAF for inspection. To allow or block requests based on the length of the body, you can create a size constraint set. For more information, see  create-size-constraint-set .  
            
 
           
@@ -174,7 +177,7 @@ SizeConstraintSet -> (structure)
 
          
 
-        **NONE** 
+         **NONE**  
 
          
 
@@ -182,7 +185,7 @@ SizeConstraintSet -> (structure)
 
          
 
-        **CMD_LINE** 
+         **CMD_LINE**  
 
          
 
@@ -191,20 +194,20 @@ SizeConstraintSet -> (structure)
          
 
          
-        * Delete the following characters: \ " ' ^
+        * Delete the following characters: \ " ' ^ 
          
-        * Delete spaces before the following characters: / (
+        * Delete spaces before the following characters: / ( 
          
-        * Replace the following characters with a space: , ;
+        * Replace the following characters with a space: , ; 
          
-        * Replace multiple spaces with one space
+        * Replace multiple spaces with one space 
          
-        * Convert uppercase letters (A-Z) to lowercase (a-z)
-         
-
+        * Convert uppercase letters (A-Z) to lowercase (a-z) 
          
 
-        **COMPRESS_WHITE_SPACE** 
+         
+
+         **COMPRESS_WHITE_SPACE**  
 
          
 
@@ -213,26 +216,26 @@ SizeConstraintSet -> (structure)
          
 
          
-        * \f, formfeed, decimal 12
+        * \f, formfeed, decimal 12 
          
-        * \t, tab, decimal 9
+        * \t, tab, decimal 9 
          
-        * \n, newline, decimal 10
+        * \n, newline, decimal 10 
          
-        * \r, carriage return, decimal 13
+        * \r, carriage return, decimal 13 
          
-        * \v, vertical tab, decimal 11
+        * \v, vertical tab, decimal 11 
          
-        * non-breaking space, decimal 160
+        * non-breaking space, decimal 160 
          
-
-         
-
-        ``COMPRESS_WHITE_SPACE`` also replaces multiple spaces with one space.
 
          
 
-        **HTML_ENTITY_DECODE** 
+         ``COMPRESS_WHITE_SPACE`` also replaces multiple spaces with one space.
+
+         
+
+         **HTML_ENTITY_DECODE**  
 
          
 
@@ -241,22 +244,22 @@ SizeConstraintSet -> (structure)
          
 
          
-        * Replaces ``(ampersand)quot;`` with ``"`` 
+        * Replaces ``(ampersand)quot;`` with ``"``   
          
-        * Replaces ``(ampersand)nbsp;`` with a non-breaking space, decimal 160
+        * Replaces ``(ampersand)nbsp;`` with a non-breaking space, decimal 160 
          
-        * Replaces ``(ampersand)lt;`` with a "less than" symbol
+        * Replaces ``(ampersand)lt;`` with a "less than" symbol 
          
-        * Replaces ``(ampersand)gt;`` with ``>`` 
+        * Replaces ``(ampersand)gt;`` with ````   
          
-        * Replaces characters that are represented in hexadecimal format, ``(ampersand)#xhhhh;`` , with the corresponding characters
+        * Replaces characters that are represented in hexadecimal format, ``(ampersand)#xhhhh;`` , with the corresponding characters 
          
-        * Replaces characters that are represented in decimal format, ``(ampersand)#nnnn;`` , with the corresponding characters
-         
-
+        * Replaces characters that are represented in decimal format, ``(ampersand)#nnnn;`` , with the corresponding characters 
          
 
-        **LOWERCASE** 
+         
+
+         **LOWERCASE**  
 
          
 
@@ -264,7 +267,7 @@ SizeConstraintSet -> (structure)
 
          
 
-        **URL_DECODE** 
+         **URL_DECODE**  
 
          
 
@@ -282,27 +285,27 @@ SizeConstraintSet -> (structure)
 
          
 
-        **EQ** : Used to test if the ``Size`` is equal to the size of the ``FieldToMatch`` 
+         **EQ** : Used to test if the ``Size`` is equal to the size of the ``FieldToMatch``  
 
          
 
-        **NE** : Used to test if the ``Size`` is not equal to the size of the ``FieldToMatch`` 
+         **NE** : Used to test if the ``Size`` is not equal to the size of the ``FieldToMatch``  
 
          
 
-        **LE** : Used to test if the ``Size`` is less than or equal to the size of the ``FieldToMatch`` 
+         **LE** : Used to test if the ``Size`` is less than or equal to the size of the ``FieldToMatch``  
 
          
 
-        **LT** : Used to test if the ``Size`` is strictly less than the size of the ``FieldToMatch`` 
+         **LT** : Used to test if the ``Size`` is strictly less than the size of the ``FieldToMatch``  
 
          
 
-        **GE** : Used to test if the ``Size`` is greater than or equal to the size of the ``FieldToMatch`` 
+         **GE** : Used to test if the ``Size`` is greater than or equal to the size of the ``FieldToMatch``  
 
          
 
-        **GT** : Used to test if the ``Size`` is strictly greater than the size of the ``FieldToMatch`` 
+         **GT** : Used to test if the ``Size`` is strictly greater than the size of the ``FieldToMatch``  
 
         
 
@@ -316,7 +319,7 @@ SizeConstraintSet -> (structure)
 
          
 
-        Valid values for size are 0 - 21474836480 bytes (0 - 20 GB). 
+        Valid values for size are 0 - 21474836480 bytes (0 - 20 GB).
 
          
 

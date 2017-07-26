@@ -15,7 +15,7 @@ Description
 
 
 
-Returns details about the specified delivery channel. If a delivery channel is not specified, this action returns the details of all delivery channels associated with the account. 
+Returns details about the specified delivery channel. If a delivery channel is not specified, this action returns the details of all delivery channels associated with the account.
 
  
 
@@ -23,10 +23,13 @@ Returns details about the specified delivery channel. If a delivery channel is n
 
    
 
-  Currently, you can specify only one delivery channel per account.
+  Currently, you can specify only one delivery channel per region in your account.
 
    
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeDeliveryChannels>`_
 
 
 ========
@@ -38,7 +41,7 @@ Synopsis
     describe-delivery-channels
   [--delivery-channel-names <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -65,8 +68,8 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -108,7 +111,7 @@ DeliveryChannels -> (list)
 
     
 
-    A logical container used for storing the configuration changes of an AWS resource.
+    The channel through which AWS Config delivers notifications and updated configuration states.
 
     
 
@@ -116,7 +119,7 @@ DeliveryChannels -> (list)
 
       
 
-      The name of the delivery channel. By default, AWS Config automatically assigns the name defaultwhen creating the delivery channel. You cannot change the assigned name. 
+      The name of the delivery channel. By default, AWS Config assigns the name "default" when creating the delivery channel. To change the delivery channel name, you must use the delete-delivery-channel action to delete your current delivery channel, and then you must use the put-delivery-channel command to create a delivery channel that has the desired name.
 
       
 
@@ -126,7 +129,11 @@ DeliveryChannels -> (list)
 
       
 
-      The name of the Amazon S3 bucket used to store configuration history for the delivery channel.
+      The name of the Amazon S3 bucket to which AWS Config delivers configuration snapshots and configuration history files.
+
+       
+
+      If you specify a bucket that belongs to another AWS account, that bucket must have policies that grant access permissions to AWS Config. For more information, see `Permissions for the Amazon S3 Bucket <http://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-policy.html>`_ in the AWS Config Developer Guide.
 
       
 
@@ -146,7 +153,11 @@ DeliveryChannels -> (list)
 
       
 
-      The Amazon Resource Name (ARN) of the SNS topic that AWS Config delivers notifications to.
+      The Amazon Resource Name (ARN) of the Amazon SNS topic to which AWS Config sends notifications about configuration changes.
+
+       
+
+      If you choose a topic from another account, the topic must have policies that grant access permissions to AWS Config. For more information, see `Permissions for the Amazon SNS Topic <http://docs.aws.amazon.com/config/latest/developerguide/sns-topic-policy.html>`_ in the AWS Config Developer Guide.
 
       
 
@@ -156,7 +167,7 @@ DeliveryChannels -> (list)
 
       
 
-      Options for how AWS Config delivers configuration snapshots to the Amazon S3 bucket in your delivery channel.
+      The options for how often AWS Config delivers configuration snapshots to the Amazon S3 bucket.
 
       
 
@@ -164,7 +175,7 @@ DeliveryChannels -> (list)
 
         
 
-        The frequency with which a AWS Config recurringly delivers configuration snapshots.
+        The frequency with which AWS Config delivers configuration snapshots.
 
         
 

@@ -19,6 +19,9 @@ Provides more detail about the cluster step.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeStep>`_
+
+
 ========
 Synopsis
 ========
@@ -29,7 +32,7 @@ Synopsis
   --cluster-id <value>
   --step-id <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -55,8 +58,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -136,7 +139,7 @@ Step -> (structure)
 
     
 
-    The Hadoop job configuration of the cluster step. 
+    The Hadoop job configuration of the cluster step.
 
     
 
@@ -204,7 +207,7 @@ Step -> (structure)
 
     
 
-    This specifies what action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE. 
+    This specifies what action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE.
 
     
 
@@ -214,7 +217,7 @@ Step -> (structure)
 
     
 
-    The current execution status details of the cluster step. 
+    The current execution status details of the cluster step.
 
     
 
@@ -222,7 +225,7 @@ Step -> (structure)
 
       
 
-      The execution state of the cluster step. 
+      The execution state of the cluster step.
 
       
 
@@ -232,7 +235,7 @@ Step -> (structure)
 
       
 
-      The reason for the step execution status change. 
+      The reason for the step execution status change.
 
       
 
@@ -240,7 +243,7 @@ Step -> (structure)
 
         
 
-        The programmable code for the state change reason. Note: Currently, the service provides no code for the state change. 
+        The programmable code for the state change reason. Note: Currently, the service provides no code for the state change.
 
         
 
@@ -250,7 +253,47 @@ Step -> (structure)
 
         
 
-        The descriptive message for the state change reason. 
+        The descriptive message for the state change reason.
+
+        
+
+        
+
+      
+
+    FailureDetails -> (structure)
+
+      
+
+      The details for the step failure including reason, message, and log file path where the root cause was identified.
+
+      
+
+      Reason -> (string)
+
+        
+
+        The reason for the step failure. In the case where the service cannot successfully determine the root cause of the failure, it returns "Unknown Error" as a reason.
+
+        
+
+        
+
+      Message -> (string)
+
+        
+
+        The descriptive message including the error the EMR service has identified as the cause of step failure. This is text from an error log that describes the root cause of the failure.
+
+        
+
+        
+
+      LogFile -> (string)
+
+        
+
+        The path to the log file where the step failure root cause was originally recorded.
 
         
 
@@ -262,7 +305,7 @@ Step -> (structure)
 
       
 
-      The timeline of the cluster step status over time. 
+      The timeline of the cluster step status over time.
 
       
 
@@ -270,7 +313,7 @@ Step -> (structure)
 
         
 
-        The date and time when the cluster step was created. 
+        The date and time when the cluster step was created.
 
         
 
@@ -280,7 +323,7 @@ Step -> (structure)
 
         
 
-        The date and time when the cluster step execution started. 
+        The date and time when the cluster step execution started.
 
         
 
@@ -290,7 +333,7 @@ Step -> (structure)
 
         
 
-        The date and time when the cluster step execution completed or failed. 
+        The date and time when the cluster step execution completed or failed.
 
         
 

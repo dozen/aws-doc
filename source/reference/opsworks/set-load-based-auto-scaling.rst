@@ -15,7 +15,7 @@ Description
 
 
 
-Specify the load-based auto scaling configuration for a specified layer. For more information, see `Managing Load with Time-based and Load-based Instances`_ .
+Specify the load-based auto scaling configuration for a specified layer. For more information, see `Managing Load with Time-based and Load-based Instances <http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-autoscaling.html>`_ .
 
  
 
@@ -29,8 +29,11 @@ Specify the load-based auto scaling configuration for a specified layer. For mor
 
  
 
-**Required Permissions** : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see `Managing User Permissions`_ .
+ **Required Permissions** : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see `Managing User Permissions <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html>`_ .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/SetLoadBasedAutoScaling>`_
 
 
 ========
@@ -45,7 +48,7 @@ Synopsis
   [--up-scaling <value>]
   [--down-scaling <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -71,7 +74,7 @@ Options
 ``--up-scaling`` (structure)
 
 
-  An ``down-scaling`` object with the upscaling threshold configuration. If the load exceeds these thresholds for a specified amount of time, AWS OpsWorks starts a specified number of instances.
+  An ``up-scaling`` object with the upscaling threshold configuration. If the load exceeds these thresholds for a specified amount of time, AWS OpsWorks Stacks starts a specified number of instances.
 
   
 
@@ -101,7 +104,7 @@ JSON Syntax::
 ``--down-scaling`` (structure)
 
 
-  An ``down-scaling`` object with the downscaling threshold configuration. If the load falls below these thresholds for a specified amount of time, AWS OpsWorks stops a specified number of instances.
+  An ``up-scaling`` object with the downscaling threshold configuration. If the load falls below these thresholds for a specified amount of time, AWS OpsWorks Stacks stops a specified number of instances.
 
   
 
@@ -131,8 +134,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -147,8 +150,6 @@ for that layer.
 You must use ``create-instance`` to add load-based instances to the layer. ::
 
   aws opsworks --region us-east-1 set-load-based-auto-scaling --layer-id 523569ae-2faf-47ac-b39e-f4c4b381f36d --enable --up-scaling file://upscale.json --down-scaling file://downscale.json
-
-**Note**: AWS OpsWorks CLI commands should set the region to ``us-east-1`` regardless of the stack's location.
 
 The example puts the upscaling threshold settings in a separate file in the working directory named ``upscale.json``, which contains the following. ::
 
@@ -187,6 +188,3 @@ Output
 ======
 
 None
-
-.. _Managing User Permissions: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
-.. _Managing Load with Time-based and Load-based Instances: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-autoscaling.html

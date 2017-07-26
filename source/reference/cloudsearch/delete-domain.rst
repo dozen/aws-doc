@@ -15,8 +15,11 @@ Description
 
 
 
-Permanently deletes a search domain and all of its data. Once a domain has been deleted, it cannot be recovered. For more information, see `Deleting a Search Domain`_ in the *Amazon CloudSearch Developer Guide* . 
+Permanently deletes a search domain and all of its data. Once a domain has been deleted, it cannot be recovered. For more information, see `Deleting a Search Domain <http://docs.aws.amazon.com/cloudsearch/latest/developerguide/deleting-domains.html>`_ in the *Amazon CloudSearch Developer Guide* . 
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/cloudsearch-2013-01-01/DeleteDomain>`_
 
 
 ========
@@ -28,7 +31,7 @@ Synopsis
     delete-domain
   --domain-name <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -47,8 +50,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -88,7 +91,7 @@ DomainStatus -> (structure)
 
     
 
-    The Amazon Resource Name (ARN) of the search domain. See `Identifiers for IAM Entities`_ in *Using AWS Identity and Access Management* for more information.
+    The Amazon Resource Name (ARN) of the search domain. See `Identifiers for IAM Entities <http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html>`_ in *Using AWS Identity and Access Management* for more information.
 
     
 
@@ -224,7 +227,3 @@ DomainStatus -> (structure)
 
   
 
-
-
-.. _Identifiers for IAM Entities: http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html
-.. _Deleting a Search Domain: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/deleting-domains.html

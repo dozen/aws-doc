@@ -19,6 +19,9 @@ Gets information about a  Deployment resource.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/apigateway-2015-07-09/GetDeployment>`_
+
+
 ========
 Synopsis
 ========
@@ -28,8 +31,9 @@ Synopsis
     get-deployment
   --rest-api-id <value>
   --deployment-id <value>
+  [--embed <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -41,7 +45,7 @@ Options
 ``--rest-api-id`` (string)
 
 
-  The identifier of the  RestApi resource for the  Deployment resource to get information about.
+  The string identifier of the associated  RestApi .
 
   
 
@@ -52,12 +56,46 @@ Options
 
   
 
+``--embed`` (list)
+
+
+  A query parameter to retrieve the specified embedded resources of the returned  Deployment resource in the response. In a REST API call, this ``embed`` parameter value is a list of comma-separated strings, as in ``GET /restapis/{restapi_id}/deployments/{deployment_id}?embed=var1,var2`` . The SDK and other platform-dependent libraries might use a different format for the list. Currently, this request supports only retrieval of the embedded API summary this way. Hence, the parameter value must be a single-valued list containing only the ``"apisummary"`` string. For example, ``GET /restapis/{restapi_id}/deployments/{deployment_id}?embed=apisummary`` .
+
+  
+
+
+
+Syntax::
+
+  "string" "string" ...
+
+
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
+
+
+========
+Examples
+========
+
+**To get information about a deployment**
+
+Command::
+
+  aws apigateway get-deployment --rest-api-id 1234123412 --deployment-id ztt4m2
+
+Output::
+
+  {
+      "description": "myDeployment",
+      "id": "ztt4m2",
+      "createdDate": 1455218022
+  }
 
 
 ======
@@ -98,7 +136,7 @@ apiSummary -> (map)
 
   
 
-  Gets a summary of the  RestApi at the date and time that the deployment resource was created.
+  A summary of the  RestApi at the date and time that the deployment resource was created.
 
   
 
@@ -130,7 +168,7 @@ apiSummary -> (map)
 
         
 
-        Specifies the type of authorization used for the method.
+        The method's authorization type. Valid values are ``NONE`` for open access, ``AWS_IAM`` for using AWS IAM permissions, ``CUSTOM`` for using a custom authorizer, or ``COGNITO_USER_POOLS`` for using a Cognito user pool.
 
         
 

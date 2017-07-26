@@ -28,23 +28,26 @@ To create and configure a ``WebACL`` , perform the following steps:
  
 
  
-* Create and update the ``ByteMatchSet`` objects and other predicates that you want to include in ``Rules`` . For more information, see  create-byte-match-set ,  update-byte-match-set ,  create-ip-set ,  update-ip-set ,  create-sql-injection-match-set , and  update-sql-injection-match-set .
+* Create and update the ``ByteMatchSet`` objects and other predicates that you want to include in ``Rules`` . For more information, see  create-byte-match-set ,  update-byte-match-set ,  create-ip-set ,  update-ip-set ,  create-sql-injection-match-set , and  update-sql-injection-match-set . 
  
-* Create and update the ``Rules`` that you want to include in the ``WebACL`` . For more information, see  create-rule and  update-rule .
+* Create and update the ``Rules`` that you want to include in the ``WebACL`` . For more information, see  create-rule and  update-rule . 
  
-* Use  get-change-token to get the change token that you provide in the ``change-token`` parameter of a ``create-web-acl`` request.
+* Use  get-change-token to get the change token that you provide in the ``change-token`` parameter of a ``create-web-acl`` request. 
  
-* Submit a ``create-web-acl`` request.
+* Submit a ``create-web-acl`` request. 
  
-* Use ``get-change-token`` to get the change token that you provide in the ``change-token`` parameter of an  update-web-acl request.
+* Use ``get-change-token`` to get the change token that you provide in the ``change-token`` parameter of an  update-web-acl request. 
  
-* Submit an  update-web-acl request to specify the ``Rules`` that you want to include in the ``WebACL`` , to specify the default action, and to associate the ``WebACL`` with a CloudFront distribution.
- 
-
+* Submit an  update-web-acl request to specify the ``Rules`` that you want to include in the ``WebACL`` , to specify the default action, and to associate the ``WebACL`` with a CloudFront distribution. 
  
 
-For more information about how to use the AWS WAF API, see the `AWS WAF Developer Guide`_ .
+ 
 
+For more information about how to use the AWS WAF API, see the `AWS WAF Developer Guide <http://docs.aws.amazon.com/waf/latest/developerguide/>`_ .
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateWebACL>`_
 
 
 ========
@@ -59,7 +62,7 @@ Synopsis
   --default-action <value>
   --change-token <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -116,8 +119,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -137,11 +140,11 @@ WebACL -> (structure)
 
     
 
-    A unique identifier for a ``WebACL`` . You use ``WebACLId`` to get information about a ``WebACL`` (see  get-web-acl ), update a ``WebACL`` (see  update-web-acl , and delete a ``WebACL`` from AWS WAF (see  delete-web-acl ).
+    A unique identifier for a ``WebACL`` . You use ``WebACLId`` to get information about a ``WebACL`` (see  get-web-acl ), update a ``WebACL`` (see  update-web-acl ), and delete a ``WebACL`` from AWS WAF (see  delete-web-acl ).
 
      
 
-    ``WebACLId`` is returned by  create-web-acl and by  list-web-acls .
+     ``WebACLId`` is returned by  create-web-acl and by  list-web-acls .
 
     
 
@@ -158,6 +161,10 @@ WebACL -> (structure)
     
 
   MetricName -> (string)
+
+    
+
+    A friendly name or description for the metrics for this ``WebACL`` . The name can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can't contain whitespace. You can't change ``metric-name`` after you create the ``WebACL`` .
 
     
 
@@ -180,11 +187,11 @@ WebACL -> (structure)
        
 
        
-      * ``ALLOW`` : AWS WAF allows requests
+      * ``ALLOW`` : AWS WAF allows requests 
        
-      * ``BLOCK`` : AWS WAF blocks requests
+      * ``BLOCK`` : AWS WAF blocks requests 
        
-      * ``COUNT`` : AWS WAF increments a counter of the requests that match all of the conditions in the rule. AWS WAF then continues to inspect the web request based on the remaining rules in the web ACL. You can't specify ``COUNT`` for the default action for a ``WebACL`` .
+      * ``COUNT`` : AWS WAF increments a counter of the requests that match all of the conditions in the rule. AWS WAF then continues to inspect the web request based on the remaining rules in the web ACL. You can't specify ``COUNT`` for the default action for a ``WebACL`` . 
        
 
       
@@ -231,7 +238,7 @@ WebACL -> (structure)
 
          
 
-        ``RuleId`` is returned by  create-rule and by  list-rules .
+         ``RuleId`` is returned by  create-rule and by  list-rules .
 
         
 
@@ -246,11 +253,11 @@ WebACL -> (structure)
          
 
          
-        * ``ALLOW`` : CloudFront responds with the requested object.
+        * ``ALLOW`` : CloudFront responds with the requested object. 
          
-        * ``BLOCK`` : CloudFront responds with an HTTP 403 (Forbidden) status code.
+        * ``BLOCK`` : CloudFront responds with an HTTP 403 (Forbidden) status code. 
          
-        * ``COUNT`` : AWS WAF increments a counter of requests that match the conditions in the rule and then continues to inspect the web request based on the remaining rules in the web ACL. 
+        * ``COUNT`` : AWS WAF increments a counter of requests that match the conditions in the rule and then continues to inspect the web request based on the remaining rules in the web ACL.  
          
 
         
@@ -264,16 +271,26 @@ WebACL -> (structure)
            
 
            
-          * ``ALLOW`` : AWS WAF allows requests
+          * ``ALLOW`` : AWS WAF allows requests 
            
-          * ``BLOCK`` : AWS WAF blocks requests
+          * ``BLOCK`` : AWS WAF blocks requests 
            
-          * ``COUNT`` : AWS WAF increments a counter of the requests that match all of the conditions in the rule. AWS WAF then continues to inspect the web request based on the remaining rules in the web ACL. You can't specify ``COUNT`` for the default action for a ``WebACL`` .
+          * ``COUNT`` : AWS WAF increments a counter of the requests that match all of the conditions in the rule. AWS WAF then continues to inspect the web request based on the remaining rules in the web ACL. You can't specify ``COUNT`` for the default action for a ``WebACL`` . 
            
 
           
 
           
+
+        
+
+      Type -> (string)
+
+        
+
+        The rule type, either ``REGULAR`` , as defined by  Rule , or ``RATE_BASED`` , as defined by  RateBasedRule . The default is REGULAR. Although this field is optional, be aware that if you try to add a RATE_BASED rule to a web ACL without setting the type, the  update-web-acl request will fail because the request tries to add a REGULAR rule with the specified ID, which does not exist. 
+
+        
 
         
 
@@ -293,6 +310,3 @@ ChangeToken -> (string)
 
   
 
-
-
-.. _AWS WAF Developer Guide: http://docs.aws.amazon.com/waf/latest/developerguide/

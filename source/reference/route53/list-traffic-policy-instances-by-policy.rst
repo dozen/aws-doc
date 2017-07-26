@@ -21,30 +21,19 @@ Gets information about the traffic policy instances that you created by using a 
 
 .. note::
 
-  After you submit a ``create-traffic-policy-instance`` or an ``update-traffic-policy-instance`` request, there's a brief delay while Amazon Route 53 creates the resource record sets that are specified in the traffic policy definition. For more information, see the  State response element.
+   
 
- 
+  After you submit a ``create-traffic-policy-instance`` or an ``update-traffic-policy-instance`` request, there's a brief delay while Amazon Route 53 creates the resource record sets that are specified in the traffic policy definition. For more information, see the ``State`` response element.
 
-To get information about the traffic policy instances that you created by using a specify traffic policy version, send a ``GET`` request to the ``/*Route 53 API version* /trafficpolicyinstance`` resource and include the ID and version of the traffic policy.
+   
 
  
 
 Amazon Route 53 returns a maximum of 100 items in each response. If you have a lot of traffic policy instances, you can use the ``MaxItems`` parameter to list them in groups of up to 100.
 
- 
 
-The response includes five values that help you navigate from one group of ``MaxItems`` traffic policy instances to the next:
 
- 
-
- 
-* **IsTruncated**  If the value of ``IsTruncated`` in the response is ``true`` , there are more traffic policy instances associated with the specified traffic policy. If ``IsTruncated`` is ``false`` , this response includes the last traffic policy instance that is associated with the specified traffic policy. 
- 
-* **MaxItems**  The value that you specified for the ``MaxItems`` parameter in the request that produced the current response. 
- 
-* **HostedZoneIdMarker** , **TrafficPolicyInstanceNameMarker** , and **TrafficPolicyInstanceTypeMarker**  If ``IsTruncated`` is ``true`` , these values in the response represent the first traffic policy instance in the next group of ``MaxItems`` traffic policy instances. To list more traffic policy instances, make another call to ``list-traffic-policy-instances-by-policy`` , and specify these values in the corresponding request parameters. If ``IsTruncated`` is ``false`` , all three elements are omitted from the response. 
- 
-
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTrafficPolicyInstancesByPolicy>`_
 
 
 ========
@@ -61,7 +50,7 @@ Synopsis
   [--traffic-policy-instance-type-marker <value>]
   [--max-items <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -87,53 +76,45 @@ Options
 ``--hosted-zone-id-marker`` (string)
 
 
-  For the first request to ``list-traffic-policy-instances-by-policy`` , omit this value.
+  If the value of ``IsTruncated`` in the previous response was ``true`` , you have more traffic policy instances. To get more traffic policy instances, submit another ``list-traffic-policy-instances-by-policy`` request. 
 
    
 
-  If the value of ``IsTruncated`` in the previous response was ``true`` , ``HostedZoneIdMarker`` is the ID of the hosted zone for the first traffic policy instance in the next group of ``MaxItems`` traffic policy instances.
+  For the value of ``hostedzoneid`` , specify the value of ``HostedZoneIdMarker`` from the previous response, which is the hosted zone ID of the first traffic policy instance that Amazon Route 53 will return if you submit another request.
 
    
 
-  If the value of ``IsTruncated`` in the previous response was ``false`` , there are no more traffic policy instances to get for this hosted zone.
-
-   
-
-  If the value of ``IsTruncated`` in the previous response was ``false`` , omit this value.
+  If the value of ``IsTruncated`` in the previous response was ``false`` , there are no more traffic policy instances to get.
 
   
 
 ``--traffic-policy-instance-name-marker`` (string)
 
 
-  For the first request to ``list-traffic-policy-instances-by-policy`` , omit this value.
+  If the value of ``IsTruncated`` in the previous response was ``true`` , you have more traffic policy instances. To get more traffic policy instances, submit another ``list-traffic-policy-instances-by-policy`` request.
 
    
 
-  If the value of ``IsTruncated`` in the previous response was ``true`` , ``TrafficPolicyInstanceNameMarker`` is the name of the first traffic policy instance in the next group of ``MaxItems`` traffic policy instances.
+  For the value of ``trafficpolicyinstancename`` , specify the value of ``TrafficPolicyInstanceNameMarker`` from the previous response, which is the name of the first traffic policy instance that Amazon Route 53 will return if you submit another request.
 
    
 
-  If the value of ``IsTruncated`` in the previous response was ``false`` , there are no more traffic policy instances to get for this hosted zone.
-
-   
-
-  If the value of ``IsTruncated`` in the previous response was ``false`` , omit this value.
+  If the value of ``IsTruncated`` in the previous response was ``false`` , there are no more traffic policy instances to get.
 
   
 
 ``--traffic-policy-instance-type-marker`` (string)
 
 
-  For the first request to ``list-traffic-policy-instances-by-policy`` , omit this value.
+  If the value of ``IsTruncated`` in the previous response was ``true`` , you have more traffic policy instances. To get more traffic policy instances, submit another ``list-traffic-policy-instances-by-policy`` request.
 
    
 
-  If the value of ``IsTruncated`` in the previous response was ``true`` , ``TrafficPolicyInstanceTypeMarker`` is the DNS type of the first traffic policy instance in the next group of ``MaxItems`` traffic policy instances.
+  For the value of ``trafficpolicyinstancetype`` , specify the value of ``TrafficPolicyInstanceTypeMarker`` from the previous response, which is the name of the first traffic policy instance that Amazon Route 53 will return if you submit another request.
 
    
 
-  If the value of ``IsTruncated`` in the previous response was ``false`` , there are no more traffic policy instances to get for this hosted zone.
+  If the value of ``IsTruncated`` in the previous response was ``false`` , there are no more traffic policy instances to get.
 
   
 
@@ -158,6 +139,9 @@ Options
   *   ``MX``
 
   
+  *   ``NAPTR``
+
+  
   *   ``PTR``
 
   
@@ -176,15 +160,15 @@ Options
 ``--max-items`` (string)
 
 
-  The maximum number of traffic policy instances to be included in the response body for this request. If you have more than ``MaxItems`` traffic policy instances, the value of the ``IsTruncated`` element in the response is ``true`` , and the values of ``HostedZoneIdMarker`` , ``TrafficPolicyInstanceNameMarker`` , and ``TrafficPolicyInstanceTypeMarker`` represent the first traffic policy instance in the next group of ``MaxItems`` traffic policy instances.
+  The maximum number of traffic policy instances to be included in the response body for this request. If you have more than ``MaxItems`` traffic policy instances, the value of the ``IsTruncated`` element in the response is ``true`` , and the values of ``HostedZoneIdMarker`` , ``TrafficPolicyInstanceNameMarker`` , and ``TrafficPolicyInstanceTypeMarker`` represent the first traffic policy instance that Amazon Route 53 will return if you submit another request.
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -204,7 +188,15 @@ TrafficPolicyInstances -> (list)
 
     
 
+    A complex type that contains settings for the new traffic policy instance.
+
+    
+
     Id -> (string)
+
+      
+
+      The ID that Amazon Route 53 assigned to the new traffic policy instance.
 
       
 
@@ -214,9 +206,17 @@ TrafficPolicyInstances -> (list)
 
       
 
+      The ID of the hosted zone that Amazon Route 53 created resource record sets in.
+
+      
+
       
 
     Name -> (string)
+
+      
+
+      The DNS name, such as www.example.com, for which Amazon Route 53 responds to queries by using the resource record sets that are associated with this traffic policy instance. 
 
       
 
@@ -226,15 +226,39 @@ TrafficPolicyInstances -> (list)
 
       
 
+      The TTL that Amazon Route 53 assigned to all of the resource record sets that it created in the specified hosted zone.
+
+      
+
       
 
     State -> (string)
 
       
 
+      The value of ``State`` is one of the following values:
+
+        Applied  
+
+      Amazon Route 53 has finished creating resource record sets, and changes have propagated to all Amazon Route 53 edge locations.
+
+        Creating  
+
+      Amazon Route 53 is creating the resource record sets. Use ``get-traffic-policy-instance`` to confirm that the ``create-traffic-policy-instance`` request completed successfully.
+
+        Failed  
+
+      Amazon Route 53 wasn't able to create or update the resource record sets. When the value of ``State`` is ``Failed`` , see ``Message`` for an explanation of what caused the request to fail.
+
+        
+
       
 
     Message -> (string)
+
+      
+
+      If ``State`` is ``Failed`` , an explanation of the reason for the failure. If ``State`` is another value, ``Message`` is empty.
 
       
 
@@ -244,15 +268,27 @@ TrafficPolicyInstances -> (list)
 
       
 
+      The ID of the traffic policy that Amazon Route 53 used to create resource record sets in the specified hosted zone.
+
+      
+
       
 
     TrafficPolicyVersion -> (integer)
 
       
 
+      The version of the traffic policy that Amazon Route 53 used to create resource record sets in the specified hosted zone.
+
+      
+
       
 
     TrafficPolicyType -> (string)
+
+      
+
+      The DNS type that Amazon Route 53 assigned to all of the resource record sets that it created for this traffic policy instance. 
 
       
 
@@ -266,7 +302,7 @@ HostedZoneIdMarker -> (string)
 
   
 
-  If ``IsTruncated`` is ``true`` , ``HostedZoneIdMarker`` is the ID of the hosted zone of the first traffic policy instance in the next group of ``MaxItems`` traffic policy instances.
+  If ``IsTruncated`` is ``true`` , ``HostedZoneIdMarker`` is the ID of the hosted zone of the first traffic policy instance in the next group of traffic policy instances.
 
   
 
@@ -296,11 +332,7 @@ IsTruncated -> (boolean)
 
   
 
-  A flag that indicates whether there are more traffic policy instances to be listed. If the response was truncated, you can get the next group of ``MaxItems`` traffic policy instances by calling ``list-traffic-policy-instances-by-policy`` again and specifying the values of the ``HostedZoneIdMarker`` , ``TrafficPolicyInstanceNameMarker`` , and ``TrafficPolicyInstanceTypeMarker`` elements in the corresponding request parameters.
-
-   
-
-  Valid Values: ``true`` | ``false`` 
+  A flag that indicates whether there are more traffic policy instances to be listed. If the response was truncated, you can get the next group of traffic policy instances by calling ``list-traffic-policy-instances-by-policy`` again and specifying the values of the ``HostedZoneIdMarker`` , ``TrafficPolicyInstanceNameMarker`` , and ``TrafficPolicyInstanceTypeMarker`` elements in the corresponding request parameters.
 
   
 

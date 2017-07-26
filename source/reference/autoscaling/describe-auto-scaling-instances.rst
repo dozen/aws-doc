@@ -15,8 +15,11 @@ Description
 
 
 
-Describes one or more Auto Scaling instances. If a list is not provided, the call describes all instances.
+Describes one or more Auto Scaling instances.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAutoScalingInstances>`_
 
 
 ``describe-auto-scaling-instances`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
@@ -35,7 +38,7 @@ Synopsis
   [--starting-token <value>]
   [--page-size <value>]
   [--max-items <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -69,26 +72,34 @@ Performs service operation based on the JSON string provided. The JSON string fo
 
    
 
-``--page-size`` (integer)
- 
-
-  The size of each page.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
    
 
-  
+``--page-size`` (integer)
+ 
 
-  
+  The size of each page to get in the AWS service call. This does not affect the number of items returned in the command's output. Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call. This can help prevent the AWS service calls from timing out.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
 
 ``--max-items`` (integer)
  
 
-  The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination. This ``NextToken`` response element should **not** be used directly outside of the AWS CLI.
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``NextToken`` is provided in the command's output. To resume pagination, provide the ``NextToken`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``NextToken`` response element directly outside of the AWS CLI.
 
    
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -104,40 +115,44 @@ This example describes the specified instance::
 
 The following is example output::
 
-  {
-    "AutoScalingInstances": [
-        {
-            "InstanceId": "i-4ba0837f",
-            "HealthStatus": "HEALTHY",
-            "AvailabilityZone": "us-west-2c",
-            "AutoScalingGroupName": "my-auto-scaling-group",
-            "LifecycleState": "InService"
-        }
-    ]
-  }
+    {
+        "AutoScalingInstances": [
+            {
+                "ProtectedFromScaleIn": false,
+                "AvailabilityZone": "us-west-2c",
+                "InstanceId": "i-4ba0837f",
+                "AutoScalingGroupName": "my-auto-scaling-group",
+                "HealthStatus": "HEALTHY",
+                "LifecycleState": "InService",
+                "LaunchConfigurationName": "my-launch-config"
+            }
+        ]
+    }
 
 This example uses the ``max-items`` parameter to specify how many instances to return with this call::
 
-	aws autoscaling describe-auto-scaling-instances --max-items 1
+    aws autoscaling describe-auto-scaling-instances --max-items 1
 
 The following is example output::
 
-  {
-    "NextToken": "None___1",
-    "AutoScalingInstances": [
-        {
-            "InstanceId": "i-4ba0837f",
-            "HealthStatus": "HEALTHY",
-            "AvailabilityZone": "us-west-2c",
-            "AutoScalingGroupName": "my-auto-scaling-group",
-            "LifecycleState": "InService"
-        }
-    ]
-  }
+    {
+        "NextToken": "Z3M3LMPEXAMPLE",
+        "AutoScalingInstances": [
+            {
+                "ProtectedFromScaleIn": false,
+                "AvailabilityZone": "us-west-2c",
+                "InstanceId": "i-4ba0837f",
+                "AutoScalingGroupName": "my-auto-scaling-group",
+                "HealthStatus": "HEALTHY",
+                "LifecycleState": "InService",
+                "LaunchConfigurationName": "my-launch-config"
+            }
+        ]
+    }
 
 If the output includes a ``NextToken`` field, there are more instances. To get the additional instances, use the value of this field with the ``starting-token`` parameter in a subsequent call as follows::
 
-    aws autoscaling describe-auto-scaling-instances --starting-token None___1
+    aws autoscaling describe-auto-scaling-instances --starting-token Z3M3LMPEXAMPLE
 
 
 ======
@@ -194,7 +209,7 @@ AutoScalingInstances -> (list)
 
       
 
-      The lifecycle state for the instance. For more information, see `Auto Scaling Lifecycle`_ in the *Auto Scaling Developer Guide* .
+      The lifecycle state for the instance. For more information, see `Auto Scaling Lifecycle <http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroupLifecycle.html>`_ in the *Auto Scaling User Guide* .
 
       
 
@@ -204,7 +219,7 @@ AutoScalingInstances -> (list)
 
       
 
-      The health status of this instance. "Healthy" means that the instance is healthy and should remain in service. "Unhealthy" means that the instance is unhealthy and Auto Scaling should terminate and replace it.
+      The last reported health status of this instance. "Healthy" means that the instance is healthy and should remain in service. "Unhealthy" means that the instance is unhealthy and Auto Scaling should terminate and replace it.
 
       
 
@@ -214,7 +229,7 @@ AutoScalingInstances -> (list)
 
       
 
-      The launch configuration associated with the instance.
+      The launch configuration used to launch the instance. This value is not available if you attached the instance to the Auto Scaling group.
 
       
 
@@ -244,6 +259,3 @@ NextToken -> (string)
 
   
 
-
-
-.. _Auto Scaling Lifecycle: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingGroupLifecycle.html

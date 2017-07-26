@@ -19,6 +19,9 @@ Describes the specified the load balancers. If no load balancers are specified, 
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeLoadBalancers>`_
+
+
 ``describe-load-balancers`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
 When using ``--output text`` and the ``--query`` argument on a paginated response, the ``--query`` argument must extract data from the results of the following query expressions: ``LoadBalancerDescriptions``
 
@@ -35,7 +38,7 @@ Synopsis
   [--cli-input-json <value>]
   [--starting-token <value>]
   [--max-items <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -62,13 +65,13 @@ Syntax::
 ``--page-size`` (integer)
  
 
-  The size of each page.
+  The size of each page to get in the AWS service call. This does not affect the number of items returned in the command's output. Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call. This can help prevent the AWS service calls from timing out.
 
    
 
-  
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
-  
+   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
@@ -80,15 +83,23 @@ Performs service operation based on the JSON string provided. The JSON string fo
 
    
 
-``--max-items`` (integer)
- 
-
-  The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination. This ``NextToken`` response element should **not** be used directly outside of the AWS CLI.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
    
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--max-items`` (integer)
+ 
+
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``NextToken`` is provided in the command's output. To resume pagination, provide the ``NextToken`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``NextToken`` response element directly outside of the AWS CLI.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -241,7 +252,7 @@ LoadBalancerDescriptions -> (list)
 
       
 
-      The external DNS name of the load balancer.
+      The DNS name of the load balancer.
 
       
 
@@ -251,11 +262,11 @@ LoadBalancerDescriptions -> (list)
 
       
 
-      The Amazon Route 53 hosted zone associated with the load balancer.
+      The DNS name of the load balancer.
 
        
 
-      For more information, see `Using Domain Names With Elastic Load Balancing`_ in the *Elastic Load Balancing Developer Guide* .
+      For more information, see `Configure a Custom Domain Name <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/using-domain-names-with-elb.html>`_ in the *Classic Load Balancer Guide* .
 
       
 
@@ -265,7 +276,7 @@ LoadBalancerDescriptions -> (list)
 
       
 
-      The ID of the Amazon Route 53 hosted zone name associated with the load balancer.
+      The ID of the Amazon Route 53 hosted zone for the load balancer.
 
       
 
@@ -291,11 +302,7 @@ LoadBalancerDescriptions -> (list)
 
           
 
-          Information about a listener.
-
-           
-
-          For information about the protocols and the ports supported by Elastic Load Balancing, see `Listener Configurations for Elastic Load Balancing`_ in the *Elastic Load Balancing Developer Guide* .
+          The listener.
 
           
 
@@ -323,7 +330,7 @@ LoadBalancerDescriptions -> (list)
 
             
 
-            The protocol to use for routing traffic to back-end instances: HTTP, HTTPS, TCP, or SSL.
+            The protocol to use for routing traffic to instances: HTTP, HTTPS, TCP, or SSL.
 
              
 
@@ -451,7 +458,7 @@ LoadBalancerDescriptions -> (list)
 
             
 
-            The name for the policy being created. The name must be unique within the set of policies for this load balancer.
+            The name of the policy. This name must be unique within the set of policies for this load balancer.
 
             
 
@@ -493,7 +500,7 @@ LoadBalancerDescriptions -> (list)
 
       
 
-      Information about the back-end servers.
+      Information about your EC2 instances.
 
       
 
@@ -501,7 +508,7 @@ LoadBalancerDescriptions -> (list)
 
         
 
-        Information about the configuration of a back-end server.
+        Information about the configuration of an EC2 instance.
 
         
 
@@ -509,7 +516,7 @@ LoadBalancerDescriptions -> (list)
 
           
 
-          The port on which the back-end server is listening.
+          The port on which the EC2 instance is listening.
 
           
 
@@ -519,7 +526,7 @@ LoadBalancerDescriptions -> (list)
 
           
 
-          The names of the policies enabled for the back-end server.
+          The names of the policies enabled for the EC2 instance.
 
           
 
@@ -589,7 +596,7 @@ LoadBalancerDescriptions -> (list)
 
         
 
-        The ID of a back-end instance.
+        The ID of an EC2 instance.
 
         
 
@@ -597,7 +604,7 @@ LoadBalancerDescriptions -> (list)
 
           
 
-          The ID of the instance.
+          The instance ID.
 
           
 
@@ -691,7 +698,7 @@ LoadBalancerDescriptions -> (list)
 
       
 
-      The security group that you can use as part of your inbound rules for your load balancer's back-end application instances. To only allow traffic from load balancers, add a security group rule to your back end instance that specifies this source security group as the inbound source.
+      The security group for the load balancer, which you can use as part of your inbound rules for your registered instances. To only allow traffic from load balancers, add a security group rule that specifies this source security group as the inbound source.
 
       
 
@@ -775,7 +782,3 @@ NextMarker -> (string)
 
   
 
-
-
-.. _Listener Configurations for Elastic Load Balancing: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/elb-listener-config.html
-.. _Using Domain Names With Elastic Load Balancing: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/using-domain-names-with-elb.html

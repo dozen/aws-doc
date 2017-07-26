@@ -19,18 +19,31 @@ Requests a refresh of the Trusted Advisor check that has the specified check ID.
 
  
 
+.. note::
+
+   
+
+  Some checks are refreshed automatically, and they cannot be refreshed by using this operation. Use of the ``refresh-trusted-advisor-check`` operation for these checks causes an ``InvalidParameterValue`` error.
+
+   
+
+ 
+
 The response contains a  TrustedAdvisorCheckRefreshStatus object, which contains these fields:
 
  
 
  
-* **Status.** The refresh status of the check: "none", "enqueued", "processing", "success", or "abandoned".
+* **status.** The refresh status of the check: "none", "enqueued", "processing", "success", or "abandoned". 
  
-* **MillisUntilNextRefreshable.** The amount of time, in milliseconds, until the check is eligible for refresh.
+* **millisUntilNextRefreshable.** The amount of time, in milliseconds, until the check is eligible for refresh. 
  
-* **CheckId.** The unique identifier for the check.
+* **checkId.** The unique identifier for the check. 
  
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/RefreshTrustedAdvisorCheck>`_
 
 
 ========
@@ -42,7 +55,7 @@ Synopsis
     refresh-trusted-advisor-check
   --check-id <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -54,15 +67,15 @@ Options
 ``--check-id`` (string)
 
 
-  The unique identifier for the Trusted Advisor check.
+  The unique identifier for the Trusted Advisor check to refresh. **Note:** Specifying the check ID of a check that is automatically refreshed causes an ``InvalidParameterValue`` error.
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -74,7 +87,7 @@ status -> (structure)
 
   
 
-  The current refresh status for a check, including the amount of time until the check is eligible for refresh. 
+  The current refresh status for a check, including the amount of time until the check is eligible for refresh.
 
   
 

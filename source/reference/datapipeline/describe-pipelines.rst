@@ -23,6 +23,9 @@ To retrieve the full pipeline definition instead of metadata about the pipeline,
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/DescribePipelines>`_
+
+
 ========
 Synopsis
 ========
@@ -32,7 +35,7 @@ Synopsis
     describe-pipelines
   --pipeline-ids <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -59,8 +62,8 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -229,7 +232,7 @@ pipelineDescriptionList -> (list)
 
       
 
-      A list of tags to associated with a pipeline. Tags let you control access to pipelines. For more information, see `Controlling User Access to Pipelines`_ in the *AWS Data Pipeline Developer Guide* .
+      A list of tags to associated with a pipeline. Tags let you control access to pipelines. For more information, see `Controlling User Access to Pipelines <http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html>`_ in the *AWS Data Pipeline Developer Guide* .
 
       
 
@@ -237,7 +240,7 @@ pipelineDescriptionList -> (list)
 
         
 
-        Tags are key/value pairs defined by a user and associated with a pipeline to control access. AWS Data Pipeline allows you to associate ten tags per pipeline. For more information, see `Controlling User Access to Pipelines`_ in the *AWS Data Pipeline Developer Guide* .
+        Tags are key/value pairs defined by a user and associated with a pipeline to control access. AWS Data Pipeline allows you to associate ten tags per pipeline. For more information, see `Controlling User Access to Pipelines <http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html>`_ in the *AWS Data Pipeline Developer Guide* .
 
         
 
@@ -245,7 +248,7 @@ pipelineDescriptionList -> (list)
 
           
 
-          The key name of a tag defined by a user. For more information, see `Controlling User Access to Pipelines`_ in the *AWS Data Pipeline Developer Guide* .
+          The key name of a tag defined by a user. For more information, see `Controlling User Access to Pipelines <http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html>`_ in the *AWS Data Pipeline Developer Guide* .
 
           
 
@@ -255,7 +258,7 @@ pipelineDescriptionList -> (list)
 
           
 
-          The optional value portion of a tag defined by a user. For more information, see `Controlling User Access to Pipelines`_ in the *AWS Data Pipeline Developer Guide* .
+          The optional value portion of a tag defined by a user. For more information, see `Controlling User Access to Pipelines <http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html>`_ in the *AWS Data Pipeline Developer Guide* .
 
           
 
@@ -269,6 +272,3 @@ pipelineDescriptionList -> (list)
 
   
 
-
-
-.. _Controlling User Access to Pipelines: http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html

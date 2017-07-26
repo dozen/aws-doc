@@ -19,6 +19,9 @@ Retrieves information about when the specified access key was last used. The inf
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetAccessKeyLastUsed>`_
+
+
 ========
 Synopsis
 ========
@@ -28,7 +31,7 @@ Synopsis
     get-access-key-last-used
   --access-key-id <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -42,13 +45,17 @@ Options
 
   The identifier of an access key.
 
+   
+
+  This parameter allows (per its `regex pattern <http://wikipedia.org/wiki/regex>`_ ) a string of characters that can consist of any upper or lowercased letter or digit.
+
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -58,7 +65,7 @@ Examples
 
 **To retrieve information about when the specified access key was last used**
 
-The following example retrieves information about when the access key ``ABCDEXAMPLE`` was last used:: 
+The following example retrieves information about when the access key ``ABCDEXAMPLE`` was last used::
 
   aws iam get-access-key-last-used --access-key-id ABCDEXAMPLE
 
@@ -66,12 +73,12 @@ The following example retrieves information about when the access key ``ABCDEXAM
 Output::
 
   {
-      "UserName":  "Bob", {
-	  "AccessKeyLastUsed": 
-		"Region": "us-east-1",
-		"ServiceName": "iam",
-		"LastUsedDate": "2015-06-16T22:45:00Z"
-		}
+    "UserName":  "Bob",
+    "AccessKeyLastUsed": {
+        "Region": "us-east-1",
+        "ServiceName": "iam",
+        "LastUsedDate": "2015-06-16T22:45:00Z"
+    }
   }
 
 For more information, see `Managing Access Keys for IAM Users`_ in the *Using IAM* guide.
@@ -87,6 +94,10 @@ UserName -> (string)
   
 
   The name of the AWS IAM user that owns this access key.
+
+   
+
+  
 
   
 
@@ -104,7 +115,7 @@ AccessKeyLastUsed -> (structure)
 
     
 
-    The date and time, in `ISO 8601 date-time format`_ , when the access key was most recently used. This field is null when:
+    The date and time, in `ISO 8601 date-time format <http://www.iso.org/iso/iso8601>`_ , when the access key was most recently used. This field is null when:
 
      
 
@@ -124,7 +135,7 @@ AccessKeyLastUsed -> (structure)
 
     
 
-    The name of the AWS service with which this access key was most recently used. This field is null when:
+    The name of the AWS service with which this access key was most recently used. This field displays "N/A" when:
 
      
 
@@ -144,7 +155,7 @@ AccessKeyLastUsed -> (structure)
 
     
 
-    The AWS region where this access key was most recently used. This field is null when:
+    The AWS region where this access key was most recently used. This field is displays "N/A" when:
 
      
 
@@ -158,7 +169,7 @@ AccessKeyLastUsed -> (structure)
 
      
 
-    For more information about AWS regions, see `Regions and Endpoints`_ in the Amazon Web Services General Reference.
+    For more information about AWS regions, see `Regions and Endpoints <http://docs.aws.amazon.com/general/latest/gr/rande.html>`_ in the Amazon Web Services General Reference.
 
     
 
@@ -166,7 +177,3 @@ AccessKeyLastUsed -> (structure)
 
   
 
-
-
-.. _ISO 8601 date-time format: http://www.iso.org/iso/iso8601
-.. _Regions and Endpoints: http://docs.aws.amazon.com/general/latest/gr/rande.html

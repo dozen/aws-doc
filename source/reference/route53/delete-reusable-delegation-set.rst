@@ -15,14 +15,25 @@ Description
 
 
 
-This action deletes a reusable delegation set. To delete a reusable delegation set, send a ``DELETE`` request to the ``/*Route 53 API version* /delegationset/*delegation set ID*`` resource.
+Deletes a reusable delegation set.
 
  
 
 .. warning::
 
-  You can delete a reusable delegation set only if there are no associated hosted zones. If your reusable delegation set contains associated hosted zones, you must delete them before you can delete your reusable delegation set. If you try to delete a reusable delegation set that contains associated hosted zones, Amazon Route 53 will deny your request with a ``DelegationSetInUse`` error.
+   
 
+  You can delete a reusable delegation set only if it isn't associated with any hosted zones.
+
+   
+
+ 
+
+To verify that the reusable delegation set is not associated with any hosted zones, submit a  get-reusable-delegation-set request and specify the ID of the reusable delegation set that you want to delete.
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteReusableDelegationSet>`_
 
 
 ========
@@ -34,7 +45,7 @@ Synopsis
     delete-reusable-delegation-set
   --id <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -46,15 +57,15 @@ Options
 ``--id`` (string)
 
 
-  The ID of the reusable delegation set you want to delete.
+  The ID of the reusable delegation set that you want to delete.
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 

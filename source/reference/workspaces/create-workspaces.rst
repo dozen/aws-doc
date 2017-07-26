@@ -29,6 +29,9 @@ Creates one or more WorkSpaces.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspaces>`_
+
+
 ========
 Synopsis
 ========
@@ -38,7 +41,7 @@ Synopsis
     create-workspaces
   --workspaces <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -58,7 +61,7 @@ Options
 
 Shorthand Syntax::
 
-    DirectoryId=string,UserName=string,BundleId=string,VolumeEncryptionKey=string,UserVolumeEncryptionEnabled=boolean,RootVolumeEncryptionEnabled=boolean ...
+    DirectoryId=string,UserName=string,BundleId=string,VolumeEncryptionKey=string,UserVolumeEncryptionEnabled=boolean,RootVolumeEncryptionEnabled=boolean,WorkspaceProperties={RunningMode=string,RunningModeAutoStopTimeoutInMinutes=integer},Tags=[{Key=string,Value=string},{Key=string,Value=string}] ...
 
 
 
@@ -72,7 +75,18 @@ JSON Syntax::
       "BundleId": "string",
       "VolumeEncryptionKey": "string",
       "UserVolumeEncryptionEnabled": true|false,
-      "RootVolumeEncryptionEnabled": true|false
+      "RootVolumeEncryptionEnabled": true|false,
+      "WorkspaceProperties": {
+        "RunningMode": "AUTO_STOP"|"ALWAYS_ON",
+        "RunningModeAutoStopTimeoutInMinutes": integer
+      },
+      "Tags": [
+        {
+          "Key": "string",
+          "Value": "string"
+        }
+        ...
+      ]
     }
     ...
   ]
@@ -82,8 +96,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -153,7 +167,7 @@ FailedRequests -> (list)
 
       
 
-      A  WorkspaceRequest object that contains the information about the WorkSpace that could not be created.
+      A  FailedCreateWorkspaceRequest$WorkspaceRequest object that contains the information about the WorkSpace that could not be created.
 
       
 
@@ -214,6 +228,76 @@ FailedRequests -> (list)
         Specifies whether the data stored on the root volume, or C: drive, is encrypted.
 
         
+
+        
+
+      WorkspaceProperties -> (structure)
+
+        
+
+        Describes the properties of a WorkSpace.
+
+        
+
+        RunningMode -> (string)
+
+          
+
+          The running mode of the WorkSpace. AlwaysOn WorkSpaces are billed monthly. AutoStop WorkSpaces are billed by the hour and stopped when no longer being used in order to save on costs.
+
+          
+
+          
+
+        RunningModeAutoStopTimeoutInMinutes -> (integer)
+
+          
+
+          The time after a user logs off when WorkSpaces are automatically stopped. Configured in 60 minute intervals.
+
+          
+
+          
+
+        
+
+      Tags -> (list)
+
+        
+
+        The tags of the WorkSpace request.
+
+        
+
+        (structure)
+
+          
+
+          Describes the tag of the WorkSpace.
+
+          
+
+          Key -> (string)
+
+            
+
+            The key of the tag.
+
+            
+
+            
+
+          Value -> (string)
+
+            
+
+            The value of the tag.
+
+            
+
+            
+
+          
 
         
 
@@ -390,6 +474,36 @@ PendingRequests -> (list)
       Specifies whether the data stored on the root volume, or C: drive, is encrypted.
 
       
+
+      
+
+    WorkspaceProperties -> (structure)
+
+      
+
+      Describes the properties of a WorkSpace.
+
+      
+
+      RunningMode -> (string)
+
+        
+
+        The running mode of the WorkSpace. AlwaysOn WorkSpaces are billed monthly. AutoStop WorkSpaces are billed by the hour and stopped when no longer being used in order to save on costs.
+
+        
+
+        
+
+      RunningModeAutoStopTimeoutInMinutes -> (integer)
+
+        
+
+        The time after a user logs off when WorkSpaces are automatically stopped. Configured in 60 minute intervals.
+
+        
+
+        
 
       
 

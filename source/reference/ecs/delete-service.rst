@@ -29,6 +29,9 @@ Deletes a specified service within a cluster. You can delete a service if you ha
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteService>`_
+
+
 ========
 Synopsis
 ========
@@ -39,7 +42,7 @@ Synopsis
   [--cluster <value>]
   --service <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -51,7 +54,7 @@ Options
 ``--cluster`` (string)
 
 
-  The name of the cluster that hosts the service to delete. If you do not specify a cluster, the default cluster is assumed.
+  The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service to delete. If you do not specify a cluster, the default cluster is assumed.
 
   
 
@@ -65,8 +68,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -100,7 +103,7 @@ service -> (structure)
 
     
 
-    The Amazon Resource Name (ARN) that identifies the service. The ARN contains the ``arn:aws:ecs`` namespace, followed by the region of the service, the AWS account ID of the service owner, the ``service`` namespace, and then the service name. For example, arn:aws:ecs:*region* :*012345678910* :service/*my-service* .
+    The Amazon Resource Name (ARN) that identifies the service. The ARN contains the ``arn:aws:ecs`` namespace, followed by the region of the service, the AWS account ID of the service owner, the ``service`` namespace, and then the service name. For example, ``arn:aws:ecs:*region* :*012345678910* :service/*my-service* `` .
 
     
 
@@ -120,7 +123,7 @@ service -> (structure)
 
     
 
-    The Amazon Resource Name (ARN) of the of the cluster that hosts the service.
+    The Amazon Resource Name (ARN) of the cluster that hosts the service.
 
     
 
@@ -130,7 +133,7 @@ service -> (structure)
 
     
 
-    A list of load balancer objects, containing the load balancer name, the container name (as it appears in a container definition), and the container port to access from the load balancer.
+    A list of Elastic Load Balancing load balancer objects, containing the load balancer name, the container name (as it appears in a container definition), and the container port to access from the load balancer.
 
     
 
@@ -142,11 +145,21 @@ service -> (structure)
 
       
 
+      targetGroupArn -> (string)
+
+        
+
+        The full Amazon Resource Name (ARN) of the Elastic Load Balancing target group associated with a service.
+
+        
+
+        
+
       loadBalancerName -> (string)
 
         
 
-        The name of the load balancer.
+        The name of a Classic load balancer.
 
         
 
@@ -238,7 +251,7 @@ service -> (structure)
 
       
 
-      The upper limit (as a percentage of the service's ``desiredCount`` ) of the number of running tasks that can be running in a service during a deployment. The maximum number of tasks during a deployment is the ``desiredCount`` multiplied by the ``maximumPercent`` /100, rounded down to the nearest integer value.
+      The upper limit (as a percentage of the service's ``desiredCount`` ) of the number of tasks that are allowed in the ``RUNNING`` or ``PENDING`` state in a service during a deployment. The maximum number of tasks during a deployment is the ``desiredCount`` multiplied by ``maximumPercent`` /100, rounded down to the nearest integer value.
 
       
 
@@ -248,7 +261,7 @@ service -> (structure)
 
       
 
-      The lower limit (as a percentage of the service's ``desiredCount`` ) of the number of running tasks that must remain running and healthy in a service during a deployment. The minimum healthy tasks during a deployment is the ``desiredCount`` multiplied by the ``minimumHealthyPercent`` /100, rounded up to the nearest integer value.
+      The lower limit (as a percentage of the service's ``desiredCount`` ) of the number of running tasks that must remain in the ``RUNNING`` state in a service during a deployment. The minimum healthy tasks during a deployment is the ``desiredCount`` multiplied by ``minimumHealthyPercent`` /100, rounded up to the nearest integer value.
 
       
 
@@ -336,7 +349,7 @@ service -> (structure)
 
         
 
-        The Unix time in seconds and milliseconds when the service was created.
+        The Unix timestamp for when the service was created.
 
         
 
@@ -346,7 +359,7 @@ service -> (structure)
 
         
 
-        The Unix time in seconds and milliseconds when the service was last updated.
+        The Unix timestamp for when the service was last updated.
 
         
 
@@ -360,7 +373,7 @@ service -> (structure)
 
     
 
-    The Amazon Resource Name (ARN) of the IAM role associated with the service that allows the Amazon ECS container agent to register container instances with a load balancer. 
+    The Amazon Resource Name (ARN) of the IAM role associated with the service that allows the Amazon ECS container agent to register container instances with an Elastic Load Balancing load balancer.
 
     
 
@@ -396,7 +409,7 @@ service -> (structure)
 
         
 
-        The Unix time in seconds and milliseconds when the event was triggered.
+        The Unix timestamp for when the event was triggered.
 
         
 
@@ -407,6 +420,96 @@ service -> (structure)
         
 
         The event message.
+
+        
+
+        
+
+      
+
+    
+
+  createdAt -> (timestamp)
+
+    
+
+    The Unix timestamp for when the service was created.
+
+    
+
+    
+
+  placementConstraints -> (list)
+
+    
+
+    The placement constraints for the tasks in the service.
+
+    
+
+    (structure)
+
+      
+
+      An object representing a constraint on task placement. For more information, see `Task Placement Constraints <http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html>`_ in the *Amazon EC2 Container Service Developer Guide* .
+
+      
+
+      type -> (string)
+
+        
+
+        The type of constraint. Use ``distinctInstance`` to ensure that each task in a particular group is running on a different container instance. Use ``memberOf`` to restrict selection to a group of valid candidates. Note that ``distinctInstance`` is not supported in task definitions.
+
+        
+
+        
+
+      expression -> (string)
+
+        
+
+        A cluster query language expression to apply to the constraint. Note you cannot specify an expression if the constraint type is ``distinctInstance`` . For more information, see `Cluster Query Language <http://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html>`_ in the *Amazon EC2 Container Service Developer Guide* .
+
+        
+
+        
+
+      
+
+    
+
+  placementStrategy -> (list)
+
+    
+
+    The placement strategy that determines how tasks for the service are placed.
+
+    
+
+    (structure)
+
+      
+
+      The task placement strategy for a task or service. For more information, see `Task Placement Strategies <http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-strategies.html>`_ in the *Amazon EC2 Container Service Developer Guide* .
+
+      
+
+      type -> (string)
+
+        
+
+        The type of placement strategy. The ``random`` placement strategy randomly places tasks on available candidates. The ``spread`` placement strategy spreads placement across available candidates evenly based on the ``field`` parameter. The ``binpack`` strategy places tasks on available candidates that have the least available amount of the resource that is specified with the ``field`` parameter. For example, if you binpack on memory, a task is placed on the instance with the least amount of remaining memory (but still enough to run the task).
+
+        
+
+        
+
+      field -> (string)
+
+        
+
+        The field to apply the placement strategy against. For the ``spread`` placement strategy, valid values are ``instanceId`` (or ``host`` , which has the same effect), or any platform or custom attribute that is applied to a container instance, such as ``attribute:ecs.availability-zone`` . For the ``binpack`` placement strategy, valid values are ``cpu`` and ``memory`` . For the ``random`` placement strategy, this field is not used.
 
         
 

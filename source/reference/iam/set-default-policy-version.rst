@@ -15,16 +15,19 @@ Description
 
 
 
-Sets the specified version of the specified policy as the policy's default (operative) version. 
+Sets the specified version of the specified policy as the policy's default (operative) version.
 
  
 
-This action affects all users, groups, and roles that the policy is attached to. To list the users, groups, and roles that the policy is attached to, use the  list-entities-for-policy API. 
+This action affects all users, groups, and roles that the policy is attached to. To list the users, groups, and roles that the policy is attached to, use the  list-entities-for-policy API.
 
  
 
-For information about managed policies, refer to `Managed Policies and Inline Policies`_ in the *IAM User Guide* . 
+For information about managed policies, see `Managed Policies and Inline Policies <http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html>`_ in the *IAM User Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SetDefaultPolicyVersion>`_
 
 
 ========
@@ -37,7 +40,7 @@ Synopsis
   --policy-arn <value>
   --version-id <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -49,11 +52,11 @@ Options
 ``--policy-arn`` (string)
 
 
-  The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS resources. 
+  The Amazon Resource Name (ARN) of the IAM policy whose default version you want to set.
 
    
 
-  For more information about ARNs, go to `Amazon Resource Names (ARNs) and AWS Service Namespaces`_ in the *AWS General Reference* . 
+  For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces <http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`_ in the *AWS General Reference* .
 
   
 
@@ -64,15 +67,15 @@ Options
 
    
 
-  For more information about managed policy versions, see `Versioning for Managed Policies`_ in the *IAM User Guide* . 
+  For more information about managed policy versions, see `Versioning for Managed Policies <http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html>`_ in the *IAM User Guide* .
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -96,7 +99,3 @@ Output
 ======
 
 None
-
-.. _Versioning for Managed Policies: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
-.. _Amazon Resource Names (ARNs) and AWS Service Namespaces: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
-.. _Managed Policies and Inline Policies: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html

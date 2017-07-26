@@ -15,11 +15,11 @@ Description
 
 
 
-Merges two adjacent shards in a stream and combines them into a single shard to reduce the stream's capacity to ingest and transport data. Two shards are considered adjacent if the union of the hash key ranges for the two shards form a contiguous set with no gaps. For example, if you have two shards, one with a hash key range of 276...381 and the other with a hash key range of 382...454, then you could merge these two shards into a single shard that would have a hash key range of 276...454. After the merge, the single child shard receives data for all hash key values covered by the two parent shards.
+Merges two adjacent shards in an Amazon Kinesis stream and combines them into a single shard to reduce the stream's capacity to ingest and transport data. Two shards are considered adjacent if the union of the hash key ranges for the two shards form a contiguous set with no gaps. For example, if you have two shards, one with a hash key range of 276...381 and the other with a hash key range of 382...454, then you could merge these two shards into a single shard that would have a hash key range of 276...454. After the merge, the single child shard receives data for all hash key values covered by the two parent shards.
 
  
 
-``merge-shards`` is called when there is a need to reduce the overall capacity of a stream because of excess capacity that is not being used. You must specify the shard to be merged and the adjacent shard for a stream. For more information about merging shards, see `Merge Two Shards`_ in the *Amazon Kinesis Developer Guide* .
+ ``merge-shards`` is called when there is a need to reduce the overall capacity of a stream because of excess capacity that is not being used. You must specify the shard to be merged and the adjacent shard for a stream. For more information about merging shards, see `Merge Two Shards <http://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-resharding-merge.html>`_ in the *Amazon Kinesis Streams Developer Guide* .
 
  
 
@@ -31,7 +31,7 @@ You can use  describe-stream to check the state of the stream, which is returned
 
  
 
-``merge-shards`` is an asynchronous operation. Upon receiving a ``merge-shards`` request, Amazon Kinesis immediately returns a response and sets the ``StreamStatus`` to ``UPDATING`` . After the operation is completed, Amazon Kinesis sets the ``StreamStatus`` to ``ACTIVE`` . Read and write operations continue to work while the stream is in the ``UPDATING`` state. 
+ ``merge-shards`` is an asynchronous operation. Upon receiving a ``merge-shards`` request, Amazon Kinesis immediately returns a response and sets the ``StreamStatus`` to ``UPDATING`` . After the operation is completed, Amazon Kinesis sets the ``StreamStatus`` to ``ACTIVE`` . Read and write operations continue to work while the stream is in the ``UPDATING`` state. 
 
  
 
@@ -43,8 +43,11 @@ If you try to operate on too many streams in parallel using  create-stream ,  de
 
  
 
-``merge-shards`` has limit of 5 transactions per second per account.
+ ``merge-shards`` has limit of 5 transactions per second per account.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/MergeShards>`_
 
 
 ========
@@ -58,7 +61,7 @@ Synopsis
   --shard-to-merge <value>
   --adjacent-shard-to-merge <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -91,8 +94,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -101,5 +104,3 @@ Output
 ======
 
 None
-
-.. _Merge Two Shards: http://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-resharding-merge.html

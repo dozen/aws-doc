@@ -15,18 +15,25 @@ Description
 
 
 
-Creates a new virtual MFA device for the AWS account. After creating the virtual MFA, use  enable-mfa-device to attach the MFA device to an IAM user. For more information about creating and working with virtual MFA devices, go to `Using a Virtual MFA Device`_ in the *Using IAM* guide. 
+Creates a new virtual MFA device for the AWS account. After creating the virtual MFA, use  enable-mfa-device to attach the MFA device to an IAM user. For more information about creating and working with virtual MFA devices, go to `Using a Virtual MFA Device <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_VirtualMFA.html>`_ in the *IAM User Guide* .
 
  
 
-For information about limits on the number of MFA devices you can create, see `Limitations on Entities`_ in the *Using IAM* guide. 
+For information about limits on the number of MFA devices you can create, see `Limitations on Entities <http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html>`_ in the *IAM User Guide* .
 
  
 
 .. warning::
 
-  The seed information contained in the QR code and the Base32 string should be treated like any other secret access information, such as your AWS access keys or your passwords. After you provision your virtual device, you should ensure that the information is destroyed following secure procedures. 
+   
 
+  The seed information contained in the QR code and the Base32 string should be treated like any other secret access information, such as your AWS access keys or your passwords. After you provision your virtual device, you should ensure that the information is destroyed following secure procedures.
+
+   
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateVirtualMFADevice>`_
 
 
 ========
@@ -51,18 +58,26 @@ Options
 ``--path`` (string)
 
 
-  The path for the virtual MFA device. For more information about paths, see `IAM Identifiers`_ in the *Using IAM* guide. 
+  The path for the virtual MFA device. For more information about paths, see `IAM Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ in the *IAM User Guide* .
 
    
 
   This parameter is optional. If it is not included, it defaults to a slash (/).
+
+   
+
+  This paramater allows (per its `regex pattern <http://wikipedia.org/wiki/regex>`_ ) a string of characters consisting of either a forward slash (/) by itself or a string that must begin and end with forward slashes, containing any ASCII character from the ! (\u0021) thru the DEL character (\u007F), including most punctuation characters, digits, and upper and lowercased letters.
 
   
 
 ``--virtual-mfa-device-name`` (string)
 
 
-  The name of the virtual MFA device. Use with path to uniquely identify a virtual MFA device. 
+  The name of the virtual MFA device. Use with path to uniquely identify a virtual MFA device.
+
+   
+
+  This parameter allows (per its `regex pattern <http://wikipedia.org/wiki/regex>`_ ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-
 
   
 
@@ -105,7 +120,7 @@ VirtualMFADevice -> (structure)
 
   
 
-  A newly created virtual MFA device.
+  A structure containing details about the new virtual MFA device.
 
   
 
@@ -123,7 +138,7 @@ VirtualMFADevice -> (structure)
 
     
 
-    The Base32 seed defined as specified in `RFC3548`_ . The ``Base32StringSeed`` is Base64-encoded. 
+    The Base32 seed defined as specified in `RFC3548 <https://tools.ietf.org/html/rfc3548.txt>`_ . The ``Base32StringSeed`` is Base64-encoded. 
 
     
 
@@ -143,21 +158,7 @@ VirtualMFADevice -> (structure)
 
     
 
-    Contains information about an IAM user entity.
-
-     
-
-    This data type is used as a response element in the following actions:
-
-     
-
-     
-    *  create-user   
-     
-    *  get-user   
-     
-    *  list-users   
-     
+    The IAM user associated with this virtual MFA device.
 
     
 
@@ -165,7 +166,7 @@ VirtualMFADevice -> (structure)
 
       
 
-      The path to the user. For more information about paths, see `IAM Identifiers`_ in the *Using IAM* guide.
+      The path to the user. For more information about paths, see `IAM Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ in the *Using IAM* guide.
 
       
 
@@ -185,7 +186,7 @@ VirtualMFADevice -> (structure)
 
       
 
-      The stable and unique string identifying the user. For more information about IDs, see `IAM Identifiers`_ in the *Using IAM* guide.
+      The stable and unique string identifying the user. For more information about IDs, see `IAM Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ in the *Using IAM* guide.
 
       
 
@@ -195,7 +196,7 @@ VirtualMFADevice -> (structure)
 
       
 
-      The Amazon Resource Name (ARN) that identifies the user. For more information about ARNs and how to use ARNs in policies, see `IAM Identifiers`_ in the *Using IAM* guide. 
+      The Amazon Resource Name (ARN) that identifies the user. For more information about ARNs and how to use ARNs in policies, see `IAM Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ in the *Using IAM* guide. 
 
       
 
@@ -205,7 +206,7 @@ VirtualMFADevice -> (structure)
 
       
 
-      The date and time, in `ISO 8601 date-time format`_ , when the user was created.
+      The date and time, in `ISO 8601 date-time format <http://www.iso.org/iso/iso8601>`_ , when the user was created.
 
       
 
@@ -215,7 +216,7 @@ VirtualMFADevice -> (structure)
 
       
 
-      The date and time, in `ISO 8601 date-time format`_ , when the user's password was last used to sign in to an AWS website. For a list of AWS websites that capture a user's last sign-in time, see the `Credential Reports`_ topic in the *Using IAM* guide. If a password is used more than once in a five-minute span, only the first use is returned in this field. This field is null (not present) when:
+      The date and time, in `ISO 8601 date-time format <http://www.iso.org/iso/iso8601>`_ , when the user's password was last used to sign in to an AWS website. For a list of AWS websites that capture a user's last sign-in time, see the `Credential Reports <http://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html>`_ topic in the *Using IAM* guide. If a password is used more than once in a five-minute span, only the first use is returned in this field. This field is null (not present) when:
 
        
 
@@ -249,11 +250,3 @@ VirtualMFADevice -> (structure)
 
   
 
-
-
-.. _RFC3548: http://www.ietf.org/rfc/rfc3548.txt
-.. _ISO 8601 date-time format: http://www.iso.org/iso/iso8601
-.. _IAM Identifiers: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
-.. _Limitations on Entities: http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html
-.. _Using a Virtual MFA Device: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_VirtualMFA.html
-.. _Credential Reports: http://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html

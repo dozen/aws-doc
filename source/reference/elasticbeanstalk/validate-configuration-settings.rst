@@ -15,12 +15,15 @@ Description
 
 
 
-Takes a set of configuration settings and either a configuration template or environment, and determines whether those values are valid. 
+Takes a set of configuration settings and either a configuration template or environment, and determines whether those values are valid.
 
  
 
-This action returns a list of messages indicating any errors or warnings associated with the selection of option values. 
+This action returns a list of messages indicating any errors or warnings associated with the selection of option values.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ValidateConfigurationSettings>`_
 
 
 ========
@@ -35,7 +38,7 @@ Synopsis
   [--environment-name <value>]
   --option-settings <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -47,36 +50,36 @@ Options
 ``--application-name`` (string)
 
 
-  The name of the application that the configuration template or environment belongs to. 
+  The name of the application that the configuration template or environment belongs to.
 
   
 
 ``--template-name`` (string)
 
 
-  The name of the configuration template to validate the settings against. 
+  The name of the configuration template to validate the settings against.
 
    
 
-  Condition: You cannot specify both this and an environment name. 
+  Condition: You cannot specify both this and an environment name.
 
   
 
 ``--environment-name`` (string)
 
 
-  The name of the environment to validate the settings against. 
+  The name of the environment to validate the settings against.
 
    
 
-  Condition: You cannot specify both this and a configuration template name. 
+  Condition: You cannot specify both this and a configuration template name.
 
   
 
 ``--option-settings`` (list)
 
 
-  A list of the options and desired values to evaluate. 
+  A list of the options and desired values to evaluate.
 
   
 
@@ -106,8 +109,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -172,7 +175,7 @@ Messages -> (list)
 
     
 
-    An error or warning for a desired configuration option value. 
+    An error or warning for a desired configuration option value.
 
     
 
@@ -180,7 +183,7 @@ Messages -> (list)
 
       
 
-      A message describing the error or warning. 
+      A message describing the error or warning.
 
       
 
@@ -190,7 +193,7 @@ Messages -> (list)
 
       
 
-      An indication of the severity of this message: 
+      An indication of the severity of this message:
 
        
 
@@ -208,7 +211,7 @@ Messages -> (list)
 
       
 
-      
+      The namespace to which the option belongs.
 
       
 
@@ -218,7 +221,7 @@ Messages -> (list)
 
       
 
-      
+      The name of the option.
 
       
 

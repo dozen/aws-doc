@@ -23,7 +23,7 @@ Amazon SWF gives you full control over implementing tasks and coordinating them 
 
  
 
-This documentation serves as reference only. For a broader overview of the Amazon SWF programming model, see the `Amazon SWF Developer Guide`_ .
+This documentation serves as reference only. For a broader overview of the Amazon SWF programming model, see the * `Amazon SWF Developer Guide <http://docs.aws.amazon.com/amazonswf/latest/developerguide/>`_ * .
 
 
 
@@ -67,6 +67,3 @@ Available Commands
   signal-workflow-execution
   start-workflow-execution
   terminate-workflow-execution
-
-
-.. _Amazon SWF Developer Guide: http://docs.aws.amazon.com/amazonswf/latest/developerguide/

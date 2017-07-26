@@ -23,6 +23,9 @@ All tag operations are eventually consistent; subsequent operations may not imme
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ListTagsForDomain>`_
+
+
 ========
 Synopsis
 ========
@@ -32,7 +35,7 @@ Synopsis
     list-tags-for-domain
   --domain-name <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -51,8 +54,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -65,22 +68,6 @@ TagList -> (list)
   
 
   A list of the tags that are associated with the specified domain.
-
-   
-
-  Type: A complex type containing a list of tags
-
-   
-
-  Each tag includes the following elements.
-
-   
-
-   
-  * Key The key (name) of a tag. Type: String 
-   
-  * Value The value of a tag. Type: String 
-   
 
   
 
@@ -100,23 +87,11 @@ TagList -> (list)
 
        
 
-      Type: String
-
-       
-
-      Default: None
-
-       
-
       Valid values: A-Z, a-z, 0-9, space, ".:/=+\-@"
 
        
 
       Constraints: Each key can be 1-128 characters long.
-
-       
-
-      Required: Yes
 
       
 
@@ -130,23 +105,11 @@ TagList -> (list)
 
        
 
-      Type: String
-
-       
-
-      Default: None
-
-       
-
       Valid values: A-Z, a-z, 0-9, space, ".:/=+\-@"
 
        
 
       Constraints: Each value can be 0-256 characters long.
-
-       
-
-      Required: Yes
 
       
 

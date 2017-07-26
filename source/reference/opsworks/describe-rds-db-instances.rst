@@ -19,8 +19,15 @@ Describes Amazon RDS instances.
 
  
 
-**Required Permissions** : To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see `Managing User Permissions`_ .
+ **Required Permissions** : To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see `Managing User Permissions <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html>`_ .
 
+ 
+
+This call accepts only one resource-identifying parameter.
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeRdsDbInstances>`_
 
 
 ========
@@ -33,7 +40,7 @@ Synopsis
   --stack-id <value>
   [--rds-db-instance-arns <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -67,8 +74,8 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -81,8 +88,6 @@ Examples
 The following example describes the Amazon RDS instances registered with a specified stack. ::
 
   aws opsworks --region us-east-1 describe-rds-db-instances --stack-id d72553d4-8727-448c-9b00-f024f0ba1b06
-
-**Note**: AWS OpsWorks CLI commands should set the region to ``us-east-1`` regardless of the stack's location.
 
 *Output*: The following is the output for a stack with one registered RDS instance. ::
 
@@ -163,7 +168,7 @@ RdsDbInstances -> (list)
 
       
 
-      AWS OpsWorks returns ``*****FILTERED*****`` instead of the actual value.
+      AWS OpsWorks Stacks returns ``*****FILTERED*****`` instead of the actual value.
 
       
 
@@ -203,7 +208,7 @@ RdsDbInstances -> (list)
 
       
 
-      The ID of the stack that the instance is registered with.
+      The ID of the stack with which the instance is registered.
 
       
 
@@ -213,7 +218,7 @@ RdsDbInstances -> (list)
 
       
 
-      Set to ``true`` if AWS OpsWorks was unable to discover the Amazon RDS instance. AWS OpsWorks attempts to discover the instance only once. If this value is set to ``true`` , you must deregister the instance and then register it again.
+      Set to ``true`` if AWS OpsWorks Stacks is unable to discover the Amazon RDS instance. AWS OpsWorks Stacks attempts to discover the instance only once. If this value is set to ``true`` , you must deregister the instance, and then register it again.
 
       
 
@@ -223,6 +228,3 @@ RdsDbInstances -> (list)
 
   
 
-
-
-.. _Managing User Permissions: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html

@@ -25,8 +25,15 @@ For deleted stacks, get-template returns the template for up to 90 days after th
 
 .. note::
 
+   
+
   If the template does not exist, a ``ValidationError`` is returned. 
 
+   
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetTemplate>`_
 
 
 ========
@@ -36,9 +43,11 @@ Synopsis
 ::
 
     get-template
-  --stack-name <value>
+  [--stack-name <value>]
+  [--change-set-name <value>]
+  [--template-stage <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -55,9 +64,9 @@ Options
    
 
    
-  * Running stacks: You can specify either the stack's name or its unique stack ID.
+  * Running stacks: You can specify either the stack's name or its unique stack ID. 
    
-  * Deleted stacks: You must specify the unique stack ID.
+  * Deleted stacks: You must specify the unique stack ID. 
    
 
    
@@ -66,11 +75,41 @@ Options
 
   
 
+``--change-set-name`` (string)
+
+
+  The name or Amazon Resource Name (ARN) of a change set for which AWS CloudFormation returns the associated template. If you specify a name, you must also specify the ``stack-name`` .
+
+  
+
+``--template-stage`` (string)
+
+
+  For templates that include transforms, the stage of the template that AWS CloudFormation returns. To get the user-submitted template, specify ``Original`` . To get the template after AWS CloudFormation has processed all transforms, specify ``Processed`` . 
+
+   
+
+  If the template doesn't include transforms, ``Original`` and ``Processed`` return the same template. By default, AWS CloudFormation specifies ``Original`` . 
+
+  
+
+  Possible values:
+
+  
+  *   ``Original``
+
+  
+  *   ``Processed``
+
+  
+
+  
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -117,12 +156,29 @@ TemplateBody -> (string)
 
   
 
-  Structure containing the template body. (For more information, go to `Template Anatomy`_ in the AWS CloudFormation User Guide.)
+  Structure containing the template body. (For more information, go to `Template Anatomy <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html>`_ in the AWS CloudFormation User Guide.)
+
+   
+
+  AWS CloudFormation returns the same template that was used when the stack was created.
 
   
 
   
 
+StagesAvailable -> (list)
 
+  
 
-.. _Template Anatomy: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
+  The stage of the template that you can retrieve. For stacks, the ``Original`` and ``Processed`` templates are always available. For change sets, the ``Original`` template is always available. After AWS CloudFormation finishes creating the change set, the ``Processed`` template becomes available.
+
+  
+
+  (string)
+
+    
+
+    
+
+  
+

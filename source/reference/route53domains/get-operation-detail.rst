@@ -19,6 +19,9 @@ This operation returns the current status of an operation that is not completed.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetOperationDetail>`_
+
+
 ========
 Synopsis
 ========
@@ -28,7 +31,7 @@ Synopsis
     get-operation-detail
   --operation-id <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -42,25 +45,13 @@ Options
 
   The identifier for the operation for which you want to get the status. Amazon Route 53 returned the identifier in the response to the original request.
 
-   
-
-  Type: String
-
-   
-
-  Default: None
-
-   
-
-  Required: Yes
-
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -74,10 +65,6 @@ OperationId -> (string)
 
   The identifier for the operation.
 
-   
-
-  Type: String
-
   
 
   
@@ -87,10 +74,6 @@ Status -> (string)
   
 
   The current status of the requested operation in the system.
-
-   
-
-  Type: String
 
   
 
@@ -102,10 +85,6 @@ Message -> (string)
 
   Detailed information on the status including possible errors.
 
-   
-
-  Type: String
-
   
 
   
@@ -116,10 +95,6 @@ DomainName -> (string)
 
   The name of a domain.
 
-   
-
-  Type: String
-
   
 
   
@@ -129,10 +104,6 @@ Type -> (string)
   
 
   The type of operation that was requested.
-
-   
-
-  Type: String
 
   
 

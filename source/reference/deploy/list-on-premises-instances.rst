@@ -15,12 +15,15 @@ Description
 
 
 
-Gets a list of one or more on-premises instance names.
+Gets a list of names for one or more on-premises instances.
 
  
 
 Unless otherwise specified, both registered and deregistered on-premises instance names will be listed. To list only registered or deregistered on-premises instance names, use the registration status parameter.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListOnPremisesInstances>`_
 
 
 ========
@@ -34,7 +37,7 @@ Synopsis
   [--tag-filters <value>]
   [--next-token <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -46,14 +49,14 @@ Options
 ``--registration-status`` (string)
 
 
-  The on-premises instances registration status:
+  The registration status of the on-premises instances:
 
    
 
    
-  * Deregistered: Include in the resulting list deregistered on-premises instances.
+  * Deregistered: Include deregistered on-premises instances in the resulting list. 
    
-  * Registered: Include in the resulting list registered on-premises instances.
+  * Registered: Include registered on-premises instances in the resulting list. 
    
 
   
@@ -73,7 +76,7 @@ Options
 ``--tag-filters`` (list)
 
 
-  The on-premises instance tags that will be used to restrict the corresponding on-premises instance names that are returned.
+  The on-premises instance tags that will be used to restrict the corresponding on-premises instance names returned.
 
   
 
@@ -102,15 +105,15 @@ JSON Syntax::
 ``--next-token`` (string)
 
 
-  An identifier that was returned from the previous list on-premises instances call, which can be used to return the next set of on-premises instances in the list.
+  An identifier returned from the previous list on-premises instances call. It can be used to return the next set of on-premises instances in the list.
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -158,7 +161,7 @@ nextToken -> (string)
 
   
 
-  If the amount of information that is returned is significantly large, an identifier will also be returned, which can be used in a subsequent list on-premises instances call to return the next set of on-premises instances in the list.
+  If a large amount of information is returned, an identifier is also returned. It can be used in a subsequent list on-premises instances call to return the next set of on-premises instances in the list.
 
   
 

@@ -1,0 +1,581 @@
+[ :ref:`aws <cli:aws>` . :ref:`dms <cli:aws dms>` ]
+
+.. _cli:aws dms describe-endpoints:
+
+
+******************
+describe-endpoints
+******************
+
+
+
+===========
+Description
+===========
+
+
+
+Returns information about the endpoints for your account in the current region.
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEndpoints>`_
+
+
+========
+Synopsis
+========
+
+::
+
+    describe-endpoints
+  [--filters <value>]
+  [--max-records <value>]
+  [--marker <value>]
+  [--cli-input-json <value>]
+  [--generate-cli-skeleton <value>]
+
+
+
+
+=======
+Options
+=======
+
+``--filters`` (list)
+
+
+  Filters applied to the describe action.
+
+   
+
+  Valid filter names: endpoint-arn | endpoint-type | endpoint-id | engine-name
+
+  
+
+
+
+Shorthand Syntax::
+
+    Name=string,Values=string,string ...
+
+
+
+
+JSON Syntax::
+
+  [
+    {
+      "Name": "string",
+      "Values": ["string", ...]
+    }
+    ...
+  ]
+
+
+
+``--max-records`` (integer)
+
+
+  The maximum number of records to include in the response. If more records exist than the specified ``MaxRecords`` value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. 
+
+   
+
+  Default: 100
+
+   
+
+  Constraints: Minimum 20, maximum 100.
+
+  
+
+``--marker`` (string)
+
+
+  An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by ``MaxRecords`` . 
+
+  
+
+``--cli-input-json`` (string)
+Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
+
+
+
+========
+Examples
+========
+
+The following command describes source endpoints in your account::
+
+  aws dms describe-endpoints --filters Name="endpoint-type",Values="source"
+
+Output::
+
+  {
+    "Endpoints": [{
+      "Username": "dms",
+      "Status": "active",
+      "EndpointArn": "arn:aws:dms:us-east-1:123456789012:endpoint:SF2WOFLWYWKVEOHID2EKLP3SJI",
+      "ServerName": "ec2-52-32-48-61.us-west-2.compute.amazonaws.com",
+      "EndpointType": "SOURCE",
+      "KmsKeyId": "arn:aws:kms:us-east-1:123456789012:key/94d5c4e7-4e4c-44be-b58a-c8da7adf57cd",
+      "DatabaseName": "test",
+      "EngineName": "mysql",
+      "EndpointIdentifier": "pri100",
+      "Port": 8193
+    }, {
+      "Username": "admin",
+      "Status": "active",
+      "EndpointArn": "arn:aws:dms:us-east-1:123456789012:endpoint:TJJZCIH3CJ24TJRU4VC32WEWFR",
+      "ServerName": "test.example.com",
+      "EndpointType": "SOURCE",
+      "KmsKeyId": "arn:aws:kms:us-east-1:123456789012:key/2431021b-1cf2-a2d4-77b2-59a9e4bce323",
+      "DatabaseName": "EMPL",
+      "EngineName": "oracle",
+      "EndpointIdentifier": "test",
+      "Port": 1521
+    }]
+  }
+
+
+======
+Output
+======
+
+Marker -> (string)
+
+  
+
+  An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by ``MaxRecords`` . 
+
+  
+
+  
+
+Endpoints -> (list)
+
+  
+
+  Endpoint description.
+
+  
+
+  (structure)
+
+    
+
+    
+
+    
+
+    EndpointIdentifier -> (string)
+
+      
+
+      The database endpoint identifier. Identifiers must begin with a letter; must contain only ASCII letters, digits, and hyphens; and must not end with a hyphen or contain two consecutive hyphens.
+
+      
+
+      
+
+    EndpointType -> (string)
+
+      
+
+      The type of endpoint.
+
+      
+
+      
+
+    EngineName -> (string)
+
+      
+
+      The database engine name. Valid values, depending on the EndPointType, include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, S3, SYBASE, DYNAMODB, MONGODB, and SQLSERVER.
+
+      
+
+      
+
+    Username -> (string)
+
+      
+
+      The user name used to connect to the endpoint.
+
+      
+
+      
+
+    ServerName -> (string)
+
+      
+
+      The name of the server at the endpoint.
+
+      
+
+      
+
+    Port -> (integer)
+
+      
+
+      The port value used to access the endpoint.
+
+      
+
+      
+
+    DatabaseName -> (string)
+
+      
+
+      The name of the database at the endpoint.
+
+      
+
+      
+
+    ExtraConnectionAttributes -> (string)
+
+      
+
+      Additional connection attributes used to connect to the endpoint.
+
+      
+
+      
+
+    Status -> (string)
+
+      
+
+      The status of the endpoint.
+
+      
+
+      
+
+    KmsKeyId -> (string)
+
+      
+
+      The KMS key identifier that will be used to encrypt the connection parameters. If you do not specify a value for the KmsKeyId parameter, then AWS DMS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS region.
+
+      
+
+      
+
+    EndpointArn -> (string)
+
+      
+
+      The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
+
+      
+
+      
+
+    CertificateArn -> (string)
+
+      
+
+      The Amazon Resource Name (ARN) used for SSL connection to the endpoint.
+
+      
+
+      
+
+    SslMode -> (string)
+
+      
+
+      The SSL mode used to connect to the endpoint.
+
+       
+
+      SSL mode can be one of four values: none, require, verify-ca, verify-full. 
+
+       
+
+      The default value is none.
+
+      
+
+      
+
+    ExternalId -> (string)
+
+      
+
+      Value returned by a call to create-endpoint that can be used for cross-account validation. Use it on a subsequent call to create-endpoint to create the endpoint with a cross-account. 
+
+      
+
+      
+
+    DynamoDbSettings -> (structure)
+
+      
+
+      The settings for the target DynamoDB database. For more information, see the ``DynamoDBSettings`` structure.
+
+      
+
+      ServiceAccessRoleArn -> (string)
+
+        
+
+        The Amazon Resource Name (ARN) used by the service access IAM role. 
+
+        
+
+        
+
+      
+
+    S3Settings -> (structure)
+
+      
+
+      The settings for the S3 target endpoint. For more information, see the ``S3Settings`` structure.
+
+      
+
+      ServiceAccessRoleArn -> (string)
+
+        
+
+        The Amazon Resource Name (ARN) used by the service access IAM role. 
+
+        
+
+        
+
+      ExternalTableDefinition -> (string)
+
+        
+
+         
+
+        
+
+        
+
+      CsvRowDelimiter -> (string)
+
+        
+
+        The delimiter used to separate rows in the source files. The default is a carriage return (\n). 
+
+        
+
+        
+
+      CsvDelimiter -> (string)
+
+        
+
+        The delimiter used to separate columns in the source files. The default is a comma. 
+
+        
+
+        
+
+      BucketFolder -> (string)
+
+        
+
+        An optional parameter to set a folder name in the S3 bucket. If provided, tables are created in the path bucketFolder/schema_name/table_name/. If this parameter is not specified, then the path used is schema_name/table_name/. 
+
+        
+
+        
+
+      BucketName -> (string)
+
+        
+
+        The name of the S3 bucket. 
+
+        
+
+        
+
+      CompressionType -> (string)
+
+        
+
+        An optional parameter to use GZIP to compress the target files. Set to GZIP to compress the target files. Set to NONE (the default) or do not use to leave the files uncompressed. 
+
+        
+
+        
+
+      
+
+    MongoDbSettings -> (structure)
+
+      
+
+      The settings for the MongoDB source endpoint. For more information, see the ``MongoDbSettings`` structure.
+
+      
+
+      Username -> (string)
+
+        
+
+        The user name you use to access the MongoDB source endpoint. 
+
+        
+
+        
+
+      Password -> (string)
+
+        
+
+        The password for the user account you use to access the MongoDB source endpoint. 
+
+        
+
+        
+
+      ServerName -> (string)
+
+        
+
+        The name of the server on the MongoDB source endpoint. 
+
+        
+
+        
+
+      Port -> (integer)
+
+        
+
+        The port value for the MongoDB source endpoint. 
+
+        
+
+        
+
+      DatabaseName -> (string)
+
+        
+
+        The database name on the MongoDB source endpoint. 
+
+        
+
+        
+
+      AuthType -> (string)
+
+        
+
+        The authentication type you use to access the MongoDB source endpoint.
+
+         
+
+        Valid values: NO, PASSWORD 
+
+         
+
+        When NO is selected, user name and password parameters are not used and can be empty. 
+
+        
+
+        
+
+      AuthMechanism -> (string)
+
+        
+
+        The authentication mechanism you use to access the MongoDB source endpoint.
+
+         
+
+        Valid values: DEFAULT, MONGODB_CR, SCRAM_SHA_1 
+
+         
+
+        DEFAULT – For MongoDB version 2.x, use MONGODB_CR. For MongoDB version 3.x, use SCRAM_SHA_1. This attribute is not used when authType=No.
+
+        
+
+        
+
+      NestingLevel -> (string)
+
+        
+
+        Specifies either document or table mode. 
+
+         
+
+        Valid values: NONE, ONE
+
+         
+
+        Default value is NONE. Specify NONE to use document mode. Specify ONE to use table mode.
+
+        
+
+        
+
+      ExtractDocId -> (string)
+
+        
+
+        Specifies the document ID. Use this attribute when ``NestingLevel`` is set to NONE. 
+
+         
+
+        Default value is false. 
+
+        
+
+        
+
+      DocsToInvestigate -> (string)
+
+        
+
+        Indicates the number of documents to preview to determine the document organization. Use this attribute when ``NestingLevel`` is set to ONE. 
+
+         
+
+        Must be a positive value greater than 0. Default value is 1000.
+
+        
+
+        
+
+      AuthSource -> (string)
+
+        
+
+        The MongoDB database name. This attribute is not used when ``authType=NO`` . 
+
+         
+
+        The default is admin.
+
+        
+
+        
+
+      
+
+    
+
+  
+

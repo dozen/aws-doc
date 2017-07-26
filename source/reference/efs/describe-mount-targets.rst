@@ -19,14 +19,15 @@ Returns the descriptions of all the current mount targets, or a specific mount t
 
  
 
-This operation requires permission for the ``elasticfilesystem:DescribeMountTargets`` action, on either the file system id that you specify in ``file-system-id`` , or on the file system of the mount target that you specify in ``mount-target-id`` .
+This operation requires permissions for the ``elasticfilesystem:DescribeMountTargets`` action, on either the file system ID that you specify in ``file-system-id`` , or on the file system of the mount target that you specify in ``mount-target-id`` .
 
 
 
-.. note::
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeMountTargets>`_
 
-  **AWS CLI support for this service is only available in a preview stage.** You can enable this service by running: ``aws configure set preview.efs true`` 
 
+``describe-mount-targets`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
+When using ``--output text`` and the ``--query`` argument on a paginated response, the ``--query`` argument must extract data from the results of the following query expressions: ``MountTargets``
 
 
 ========
@@ -37,11 +38,12 @@ Synopsis
 
     describe-mount-targets
   [--max-items <value>]
-  [--marker <value>]
   [--file-system-id <value>]
   [--mount-target-id <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--starting-token <value>]
+  [--page-size <value>]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -51,38 +53,57 @@ Options
 =======
 
 ``--max-items`` (integer)
+ 
 
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``NextToken`` is provided in the command's output. To resume pagination, provide the ``NextToken`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``NextToken`` response element directly outside of the AWS CLI.
 
-  Optional. Maximum number of mount targets to return in the response. It must be an integer with a value greater than zero.
+   
 
-  
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
-``--marker`` (string)
-
-
-  Optional. String. Opaque pagination token returned from a previous ``describe-mount-targets`` operation. If present, it specifies to continue the list from where the previous returning call left off.
-
-  
+   
 
 ``--file-system-id`` (string)
 
 
-  Optional. String. The ID of the file system whose mount targets you want to list. It must be included in your request if ``mount-target-id`` is not included.
+  (Optional) ID of the file system whose mount targets you want to list (String). It must be included in your request if ``mount-target-id`` is not included.
 
   
 
 ``--mount-target-id`` (string)
 
 
-  Optional. String. The ID of the mount target that you want to have described. It must be included in your request if ``file-system-id`` is not included.
+  (Optional) ID of the mount target that you want to have described (String). It must be included in your request if ``file-system-id`` is not included.
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--starting-token`` (string)
+ 
+
+  A token to specify where to start paginating. This is the ``NextToken`` from a previously truncated response.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--page-size`` (integer)
+ 
+
+  The size of each page to get in the AWS service call. This does not affect the number of items returned in the command's output. Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call. This can help prevent the AWS service calls from timing out.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -112,7 +133,7 @@ MountTargets -> (list)
 
     
 
-    This object provides description of a mount target.
+    Provides a description of a mount target.
 
     
 
@@ -120,7 +141,7 @@ MountTargets -> (list)
 
       
 
-      The AWS account ID that owns the resource.
+      AWS account ID that owns the resource.
 
       
 
@@ -130,7 +151,7 @@ MountTargets -> (list)
 
       
 
-      The system-assigned mount target ID. 
+      System-assigned mount target ID.
 
       
 
@@ -140,7 +161,7 @@ MountTargets -> (list)
 
       
 
-      The ID of the file system for which the mount target is intended.
+      ID of the file system for which the mount target is intended.
 
       
 
@@ -150,7 +171,7 @@ MountTargets -> (list)
 
       
 
-      The ID of the subnet that the mount target is in.
+      ID of the mount target's subnet.
 
       
 
@@ -160,7 +181,7 @@ MountTargets -> (list)
 
       
 
-      The lifecycle state the mount target is in.
+      Lifecycle state of the mount target.
 
       
 
@@ -170,7 +191,7 @@ MountTargets -> (list)
 
       
 
-      The address at which the file system may be mounted via the mount target.
+      Address at which the file system may be mounted via the mount target.
 
       
 
@@ -180,7 +201,7 @@ MountTargets -> (list)
 
       
 
-      The ID of the network interface that Amazon EFS created when it created the mount target.
+      ID of the network interface that Amazon EFS created when it created the mount target.
 
       
 

@@ -19,8 +19,11 @@ Describes one or more of your security groups.
 
  
 
-A security group is for use with instances either in the EC2-Classic platform or in a specific VPC. For more information, see `Amazon EC2 Security Groups`_ in the *Amazon Elastic Compute Cloud User Guide* and `Security Groups for Your VPC`_ in the *Amazon Virtual Private Cloud User Guide* .
+A security group is for use with instances either in the EC2-Classic platform or in a specific VPC. For more information, see `Amazon EC2 Security Groups <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html>`_ in the *Amazon Elastic Compute Cloud User Guide* and `Security Groups for Your VPC <http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html>`_ in the *Amazon Virtual Private Cloud User Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSecurityGroups>`_
 
 
 ========
@@ -30,12 +33,12 @@ Synopsis
 ::
 
     describe-security-groups
-  [--dry-run | --no-dry-run]
-  [--group-names <value>]
-  [--group-ids <value>]
   [--filters <value>]
+  [--group-ids <value>]
+  [--group-names <value>]
+  [--dry-run | --no-dry-run]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -43,51 +46,6 @@ Synopsis
 =======
 Options
 =======
-
-``--dry-run`` | ``--no-dry-run`` (boolean)
-
-
-  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
-
-  
-
-``--group-names`` (list)
-
-
-  [EC2-Classic and default VPC only] One or more security group names. You can specify either the security group name or the security group ID. For security groups in a nondefault VPC, use the ``group-name`` filter to describe security groups by name.
-
-   
-
-  Default: Describes all your security groups.
-
-  
-
-
-
-Syntax::
-
-  "string" "string" ...
-
-
-
-``--group-ids`` (list)
-
-
-  One or more security group IDs. Required for security groups in a nondefault VPC.
-
-   
-
-  Default: Describes all your security groups.
-
-  
-
-
-
-Syntax::
-
-  "string" "string" ...
-
-
 
 ``--filters`` (list)
 
@@ -105,13 +63,15 @@ Syntax::
    
   * ``group-name`` - The name of the security group. 
    
-  * ``ip-permission.cidr`` - A CIDR range that has been granted permission. 
+  * ``ip-permission.cidr`` - An IPv4 CIDR range that has been granted permission in a security group rule. 
    
   * ``ip-permission.from-port`` - The start of port range for the TCP and UDP protocols, or an ICMP type number. 
    
   * ``ip-permission.group-id`` - The ID of a security group that has been granted permission. 
    
   * ``ip-permission.group-name`` - The name of a security group that has been granted permission. 
+   
+  * ``ip-permission.ipv6-cidr`` - An IPv6 CIDR range that has been granted permission in a security group rule. 
    
   * ``ip-permission.protocol`` - The IP protocol for the permission (``tcp`` | ``udp`` | ``icmp`` or a protocol number). 
    
@@ -151,11 +111,56 @@ JSON Syntax::
 
 
 
+``--group-ids`` (list)
+
+
+  One or more security group IDs. Required for security groups in a nondefault VPC.
+
+   
+
+  Default: Describes all your security groups.
+
+  
+
+
+
+Syntax::
+
+  "string" "string" ...
+
+
+
+``--group-names`` (list)
+
+
+  [EC2-Classic and default VPC only] One or more security group names. You can specify either the security group name or the security group ID. For security groups in a nondefault VPC, use the ``group-name`` filter to describe security groups by name.
+
+   
+
+  Default: Describes all your security groups.
+
+  
+
+
+
+Syntax::
+
+  "string" "string" ...
+
+
+
+``--dry-run`` | ``--no-dry-run`` (boolean)
+
+
+  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
+
+  
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -333,11 +338,11 @@ SecurityGroups -> (list)
 
     
 
-    OwnerId -> (string)
+    Description -> (string)
 
       
 
-      The AWS account ID of the owner of the security group.
+      A description of the security group.
 
       
 
@@ -348,26 +353,6 @@ SecurityGroups -> (list)
       
 
       The name of the security group.
-
-      
-
-      
-
-    GroupId -> (string)
-
-      
-
-      The ID of the security group.
-
-      
-
-      
-
-    Description -> (string)
-
-      
-
-      A description of the security group.
 
       
 
@@ -389,87 +374,27 @@ SecurityGroups -> (list)
 
         
 
-        IpProtocol -> (string)
-
-          
-
-          The IP protocol name (for ``tcp`` , ``udp`` , and ``icmp`` ) or number (see `Protocol Numbers`_ ). 
-
-           
-
-          [EC2-VPC only] When you authorize or revoke security group rules, you can use ``-1`` to specify all.
-
-          
-
-          
-
         FromPort -> (integer)
 
           
 
-          The start of port range for the TCP and UDP protocols, or an ICMP type number. A value of ``-1`` indicates all ICMP types.
+          The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type number. A value of ``-1`` indicates all ICMP/ICMPv6 types.
 
           
 
           
 
-        ToPort -> (integer)
+        IpProtocol -> (string)
 
           
 
-          The end of port range for the TCP and UDP protocols, or an ICMP code. A value of ``-1`` indicates all ICMP codes for the specified ICMP type.
+          The IP protocol name (``tcp`` , ``udp`` , ``icmp`` ) or number (see `Protocol Numbers <http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml>`_ ). 
+
+           
+
+          [EC2-VPC only] Use ``-1`` to specify all protocols. When authorizing security group rules, specifying ``-1`` or a protocol number other than ``tcp`` , ``udp`` , ``icmp`` , or ``58`` (ICMPv6) allows traffic on all ports, regardless of any port range you specify. For ``tcp`` , ``udp`` , and ``icmp`` , you must specify a port range. For ``58`` (ICMPv6), you can optionally specify a port range; if you don't, traffic for all types and codes is allowed when authorizing rules. 
 
           
-
-          
-
-        UserIdGroupPairs -> (list)
-
-          
-
-          One or more security group and AWS account ID pairs.
-
-          
-
-          (structure)
-
-            
-
-            Describes a security group and AWS account ID pair. 
-
-            
-
-            UserId -> (string)
-
-              
-
-              The ID of an AWS account. EC2-Classic only.
-
-              
-
-              
-
-            GroupName -> (string)
-
-              
-
-              The name of the security group. In a request, use this parameter for a security group in EC2-Classic or a default VPC only. For a security group in a nondefault VPC, use ``GroupId`` .
-
-              
-
-              
-
-            GroupId -> (string)
-
-              
-
-              The ID of the security group.
-
-              
-
-              
-
-            
 
           
 
@@ -477,7 +402,7 @@ SecurityGroups -> (list)
 
           
 
-          One or more IP ranges.
+          One or more IPv4 ranges.
 
           
 
@@ -485,7 +410,7 @@ SecurityGroups -> (list)
 
             
 
-            Describes an IP range.
+            Describes an IPv4 range.
 
             
 
@@ -493,7 +418,37 @@ SecurityGroups -> (list)
 
               
 
-              The CIDR range. You can either specify a CIDR range or a source security group, not both.
+              The IPv4 CIDR range. You can either specify a CIDR range or a source security group, not both. To specify a single IPv4 address, use the /32 prefix.
+
+              
+
+              
+
+            
+
+          
+
+        Ipv6Ranges -> (list)
+
+          
+
+          [EC2-VPC only] One or more IPv6 ranges.
+
+          
+
+          (structure)
+
+            
+
+            [EC2-VPC only] Describes an IPv6 range.
+
+            
+
+            CidrIpv6 -> (string)
+
+              
+
+              The IPv6 CIDR range. You can either specify a CIDR range or a source security group, not both. To specify a single IPv6 address, use the /128 prefix.
 
               
 
@@ -533,7 +488,121 @@ SecurityGroups -> (list)
 
           
 
+        ToPort -> (integer)
+
+          
+
+          The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code. A value of ``-1`` indicates all ICMP/ICMPv6 codes for the specified ICMP type.
+
+          
+
+          
+
+        UserIdGroupPairs -> (list)
+
+          
+
+          One or more security group and AWS account ID pairs.
+
+          
+
+          (structure)
+
+            
+
+            Describes a security group and AWS account ID pair.
+
+            
+
+            GroupId -> (string)
+
+              
+
+              The ID of the security group.
+
+              
+
+              
+
+            GroupName -> (string)
+
+              
+
+              The name of the security group. In a request, use this parameter for a security group in EC2-Classic or a default VPC only. For a security group in a nondefault VPC, use the security group ID.
+
+              
+
+              
+
+            PeeringStatus -> (string)
+
+              
+
+              The status of a VPC peering connection, if applicable.
+
+              
+
+              
+
+            UserId -> (string)
+
+              
+
+              The ID of an AWS account. For a referenced security group in another VPC, the account ID of the referenced security group is returned.
+
+               
+
+              [EC2-Classic] Required when adding or removing rules that reference a security group in another AWS account.
+
+              
+
+              
+
+            VpcId -> (string)
+
+              
+
+              The ID of the VPC for the referenced security group, if applicable.
+
+              
+
+              
+
+            VpcPeeringConnectionId -> (string)
+
+              
+
+              The ID of the VPC peering connection, if applicable.
+
+              
+
+              
+
+            
+
+          
+
         
+
+      
+
+    OwnerId -> (string)
+
+      
+
+      The AWS account ID of the owner of the security group.
+
+      
+
+      
+
+    GroupId -> (string)
+
+      
+
+      The ID of the security group.
+
+      
 
       
 
@@ -553,87 +622,27 @@ SecurityGroups -> (list)
 
         
 
-        IpProtocol -> (string)
-
-          
-
-          The IP protocol name (for ``tcp`` , ``udp`` , and ``icmp`` ) or number (see `Protocol Numbers`_ ). 
-
-           
-
-          [EC2-VPC only] When you authorize or revoke security group rules, you can use ``-1`` to specify all.
-
-          
-
-          
-
         FromPort -> (integer)
 
           
 
-          The start of port range for the TCP and UDP protocols, or an ICMP type number. A value of ``-1`` indicates all ICMP types.
+          The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type number. A value of ``-1`` indicates all ICMP/ICMPv6 types.
 
           
 
           
 
-        ToPort -> (integer)
+        IpProtocol -> (string)
 
           
 
-          The end of port range for the TCP and UDP protocols, or an ICMP code. A value of ``-1`` indicates all ICMP codes for the specified ICMP type.
+          The IP protocol name (``tcp`` , ``udp`` , ``icmp`` ) or number (see `Protocol Numbers <http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml>`_ ). 
+
+           
+
+          [EC2-VPC only] Use ``-1`` to specify all protocols. When authorizing security group rules, specifying ``-1`` or a protocol number other than ``tcp`` , ``udp`` , ``icmp`` , or ``58`` (ICMPv6) allows traffic on all ports, regardless of any port range you specify. For ``tcp`` , ``udp`` , and ``icmp`` , you must specify a port range. For ``58`` (ICMPv6), you can optionally specify a port range; if you don't, traffic for all types and codes is allowed when authorizing rules. 
 
           
-
-          
-
-        UserIdGroupPairs -> (list)
-
-          
-
-          One or more security group and AWS account ID pairs.
-
-          
-
-          (structure)
-
-            
-
-            Describes a security group and AWS account ID pair. 
-
-            
-
-            UserId -> (string)
-
-              
-
-              The ID of an AWS account. EC2-Classic only.
-
-              
-
-              
-
-            GroupName -> (string)
-
-              
-
-              The name of the security group. In a request, use this parameter for a security group in EC2-Classic or a default VPC only. For a security group in a nondefault VPC, use ``GroupId`` .
-
-              
-
-              
-
-            GroupId -> (string)
-
-              
-
-              The ID of the security group.
-
-              
-
-              
-
-            
 
           
 
@@ -641,7 +650,7 @@ SecurityGroups -> (list)
 
           
 
-          One or more IP ranges.
+          One or more IPv4 ranges.
 
           
 
@@ -649,7 +658,7 @@ SecurityGroups -> (list)
 
             
 
-            Describes an IP range.
+            Describes an IPv4 range.
 
             
 
@@ -657,7 +666,37 @@ SecurityGroups -> (list)
 
               
 
-              The CIDR range. You can either specify a CIDR range or a source security group, not both.
+              The IPv4 CIDR range. You can either specify a CIDR range or a source security group, not both. To specify a single IPv4 address, use the /32 prefix.
+
+              
+
+              
+
+            
+
+          
+
+        Ipv6Ranges -> (list)
+
+          
+
+          [EC2-VPC only] One or more IPv6 ranges.
+
+          
+
+          (structure)
+
+            
+
+            [EC2-VPC only] Describes an IPv6 range.
+
+            
+
+            CidrIpv6 -> (string)
+
+              
+
+              The IPv6 CIDR range. You can either specify a CIDR range or a source security group, not both. To specify a single IPv6 address, use the /128 prefix.
 
               
 
@@ -697,17 +736,101 @@ SecurityGroups -> (list)
 
           
 
+        ToPort -> (integer)
+
+          
+
+          The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code. A value of ``-1`` indicates all ICMP/ICMPv6 codes for the specified ICMP type.
+
+          
+
+          
+
+        UserIdGroupPairs -> (list)
+
+          
+
+          One or more security group and AWS account ID pairs.
+
+          
+
+          (structure)
+
+            
+
+            Describes a security group and AWS account ID pair.
+
+            
+
+            GroupId -> (string)
+
+              
+
+              The ID of the security group.
+
+              
+
+              
+
+            GroupName -> (string)
+
+              
+
+              The name of the security group. In a request, use this parameter for a security group in EC2-Classic or a default VPC only. For a security group in a nondefault VPC, use the security group ID.
+
+              
+
+              
+
+            PeeringStatus -> (string)
+
+              
+
+              The status of a VPC peering connection, if applicable.
+
+              
+
+              
+
+            UserId -> (string)
+
+              
+
+              The ID of an AWS account. For a referenced security group in another VPC, the account ID of the referenced security group is returned.
+
+               
+
+              [EC2-Classic] Required when adding or removing rules that reference a security group in another AWS account.
+
+              
+
+              
+
+            VpcId -> (string)
+
+              
+
+              The ID of the VPC for the referenced security group, if applicable.
+
+              
+
+              
+
+            VpcPeeringConnectionId -> (string)
+
+              
+
+              The ID of the VPC peering connection, if applicable.
+
+              
+
+              
+
+            
+
+          
+
         
-
-      
-
-    VpcId -> (string)
-
-      
-
-      [EC2-VPC] The ID of the VPC for the security group.
-
-      
 
       
 
@@ -731,11 +854,11 @@ SecurityGroups -> (list)
 
           
 
-          The key of the tag. 
+          The key of the tag.
 
            
 
-          Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with ``aws:`` 
+          Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with ``aws:``  
 
           
 
@@ -759,12 +882,17 @@ SecurityGroups -> (list)
 
       
 
+    VpcId -> (string)
+
+      
+
+      [EC2-VPC] The ID of the VPC for the security group.
+
+      
+
+      
+
     
 
   
 
-
-
-.. _Protocol Numbers: http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml
-.. _Security Groups for Your VPC: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html
-.. _Amazon EC2 Security Groups: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html

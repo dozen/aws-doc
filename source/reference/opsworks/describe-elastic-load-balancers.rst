@@ -23,14 +23,17 @@ Describes a stack's Elastic Load Balancing instances.
 
    
 
-  You must specify at least one of the parameters.
+  This call accepts only one resource-identifying parameter.
 
    
 
  
 
-**Required Permissions** : To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see `Managing User Permissions`_ .
+ **Required Permissions** : To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see `Managing User Permissions <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html>`_ .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeElasticLoadBalancers>`_
 
 
 ========
@@ -43,7 +46,7 @@ Synopsis
   [--stack-id <value>]
   [--layer-ids <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -77,8 +80,8 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -90,35 +93,31 @@ Examples
 
 The following ``describe-elastic-load-balancers`` command describes a specified stack's load balancers.  ::
 
-  aws opsworks --region us-west-1 describe-elastic-load-balancers --stack-id d72553d4-8727-448c-9b00-f024f0ba1b06
+  aws opsworks --region us-west-2 describe-elastic-load-balancers --stack-id 6f4660e5-37a6-4e42-bfa0-1358ebd9c182
 
-**Note**: AWS OpsWorks CLI commands should set the region to ``us-east-1`` regardless of the stack's location.
-
-*Output*: This particular stack has one app.
+*Output*: This particular stack has one load balancer.
 
 ::
 
   {
-    "Apps": [
-      {
-        "StackId": "38ee91e2-abdc-4208-a107-0b7168b3cc7a",
-        "AppSource": {
-          "Url": "https://s3-us-west-2.amazonaws.com/opsworks-tomcat/simplejsp.zip",
-          "Type": "archive"
-        },
-        "Name": "SimpleJSP",
-        "EnableSsl": false,
-        "SslConfiguration": {},
-        "AppId": "da1decc1-0dff-43ea-ad7c-bb667cd87c8b",
-        "Attributes": {
-          "RailsEnv": null,
-          "AutoBundleOnDeploy": "true",
-          "DocumentRoot": "ROOT"
-        },
-        "Shortname": "simplejsp",
-        "Type": "other",
-        "CreatedAt": "2013-08-01T21:46:54+00:00"
-      }
+    "ElasticLoadBalancers": [
+        {
+            "SubnetIds": [
+                "subnet-60e4ea04",
+                "subnet-66e1c110"
+            ],
+            "Ec2InstanceIds": [],
+            "ElasticLoadBalancerName": "my-balancer",
+            "Region": "us-west-2",
+            "LayerId": "344973cb-bf2b-4cd0-8d93-51cd819bab04",
+            "AvailabilityZones": [
+                "us-west-2a",
+                "us-west-2b"
+            ],
+            "VpcId": "vpc-b319f9d4",
+            "StackId": "6f4660e5-37a6-4e42-bfa0-1358ebd9c182",
+            "DnsName": "my-balancer-2094040179.us-west-2.elb.amazonaws.com"
+        }
     ]
   }
 
@@ -127,7 +126,6 @@ The following ``describe-elastic-load-balancers`` command describes a specified 
 For more information, see Apps_ in the *AWS OpsWorks User Guide*.
 
 .. _Apps: http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps.html
-
 
 
 ======
@@ -262,6 +260,3 @@ ElasticLoadBalancers -> (list)
 
   
 
-
-
-.. _Managing User Permissions: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html

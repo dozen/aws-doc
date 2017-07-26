@@ -31,6 +31,9 @@ You can also specify a maximum number of return results with the *limit* paramet
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeDirectories>`_
+
+
 ========
 Synopsis
 ========
@@ -42,7 +45,7 @@ Synopsis
   [--next-token <value>]
   [--limit <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -87,8 +90,8 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -440,7 +443,7 @@ DirectoryDescriptions -> (list)
 
         
 
-        The maximum number of times that communication with the RADIUS server is attempted. 
+        The maximum number of times that communication with the RADIUS server is attempted.
 
         
 
@@ -450,7 +453,7 @@ DirectoryDescriptions -> (list)
 
         
 
-        The shared secret code that was specified when your RADIUS endpoints were created.
+        Not currently used.
 
         
 
@@ -513,6 +516,16 @@ DirectoryDescriptions -> (list)
       
 
       Indicates if single-sign on is enabled for the directory. For more information, see  enable-sso and  disable-sso .
+
+      
+
+      
+
+    DesiredNumberOfDomainControllers -> (integer)
+
+      
+
+      The desired number of domain controllers in the directory if the directory is Microsoft AD.
 
       
 

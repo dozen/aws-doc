@@ -15,7 +15,7 @@ Description
 
  
 
-Amazon Kinesis is a managed service that scales elastically for real time processing of streaming big data.
+Amazon Kinesis Streams is a managed service that scales elastically for real time processing of streaming big data.
 
 
 
@@ -32,7 +32,10 @@ Available Commands
   create-stream
   decrease-stream-retention-period
   delete-stream
+  describe-limits
   describe-stream
+  disable-enhanced-monitoring
+  enable-enhanced-monitoring
   get-records
   get-shard-iterator
   increase-stream-retention-period
@@ -43,4 +46,7 @@ Available Commands
   put-records
   remove-tags-from-stream
   split-shard
+  start-stream-encryption
+  stop-stream-encryption
+  update-shard-count
   wait/index

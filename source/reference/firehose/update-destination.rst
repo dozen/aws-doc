@@ -15,24 +15,31 @@ Description
 
 
 
-Updates the specified destination of the specified delivery stream. 
+Updates the specified destination of the specified delivery stream.
 
  
 
-This operation can be used to change the destination type (for example, to replace the Amazon S3 destination with Amazon Redshift) or change the parameters associated with a given destination (for example, to change the bucket name of the Amazon S3 destination). The update may not occur immediately. The target delivery stream remains active while the configurations are updated, so data writes to the delivery stream can continue during this process. The updated configurations are normally effective within a few minutes. 
+You can use this operation to change the destination type (for example, to replace the Amazon S3 destination with Amazon Redshift) or change the parameters associated with a destination (for example, to change the bucket name of the Amazon S3 destination). The update might not occur immediately. The target delivery stream remains active while the configurations are updated, so data writes to the delivery stream can continue during this process. The updated configurations are usually effective within a few minutes.
 
  
 
-If the destination type is the same, Amazon Kinesis Firehose merges the configuration parameters specified in the  update-destination request with the destination configuration that already exists on the delivery stream. If any of the parameters are not specified in the update request, then the existing configuration parameters are retained. For example, in the Amazon S3 destination, if  EncryptionConfiguration is not specified then the existing  EncryptionConfiguration is maintained on the destination.
+Note that switching between Amazon ES and other services is not supported. For an Amazon ES destination, you can only update to another Amazon ES destination.
 
  
 
-If the destination type is not the same, for example, changing the destination from Amazon S3 to Amazon Redshift, Amazon Kinesis Firehose does not merge any parameters. In this case, all parameters must be specified.
+If the destination type is the same, Firehose merges the configuration parameters specified with the destination configuration that already exists on the delivery stream. If any of the parameters are not specified in the call, the existing values are retained. For example, in the Amazon S3 destination, if  EncryptionConfiguration is not specified then the existing  EncryptionConfiguration is maintained on the destination.
 
  
 
-Amazon Kinesis Firehose uses the ``CurrentDeliveryStreamVersionId`` to avoid race conditions and conflicting merges. This is a required field in every request and the service only updates the configuration if the existing configuration matches the ``VersionId`` . After the update is applied successfully, the ``VersionId`` is updated, which can be retrieved with the  describe-delivery-stream operation. The new ``VersionId`` should be uses to set ``CurrentDeliveryStreamVersionId`` in the next  update-destination operation.
+If the destination type is not the same, for example, changing the destination from Amazon S3 to Amazon Redshift, Firehose does not merge any parameters. In this case, all parameters must be specified.
 
+ 
+
+Firehose uses **CurrentDeliveryStreamVersionId** to avoid race conditions and conflicting merges. This is a required field, and the service updates the configuration only if the existing configuration has a version ID that matches. After the update is applied successfully, the version ID is updated, and can be retrieved using  describe-delivery-stream . You should use the new version ID to set **CurrentDeliveryStreamVersionId** in the next call.
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/UpdateDestination>`_
 
 
 ========
@@ -46,9 +53,11 @@ Synopsis
   --current-delivery-stream-version-id <value>
   --destination-id <value>
   [--s3-destination-update <value>]
+  [--extended-s3-destination-update <value>]
   [--redshift-destination-update <value>]
+  [--elasticsearch-destination-update <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -67,7 +76,7 @@ Options
 ``--current-delivery-stream-version-id`` (string)
 
 
-  Obtain this value from the ``VersionId`` result of the  DeliveryStreamDescription operation. This value is required, and helps the service to perform conditional operations. For example, if there is a interleaving update and this value is null, then the update destination fails. After the update is successful, the ``VersionId`` value is updated. The service then performs a merge of the old configuration with the new configuration.
+  Obtain this value from the **VersionId** result of  DeliveryStreamDescription . This value is required, and helps the service to perform conditional operations. For example, if there is a interleaving update and this value is null, then the update destination fails. After the update is successful, the **VersionId** value is updated. The service then performs a merge of the old configuration with the new configuration.
 
   
 
@@ -81,7 +90,7 @@ Options
 ``--s3-destination-update`` (structure)
 
 
-  Describes an update for a destination in Amazon S3.
+  [Deprecated] Describes an update for a destination in Amazon S3.
 
   
 
@@ -89,7 +98,7 @@ Options
 
 Shorthand Syntax::
 
-    RoleARN=string,BucketARN=string,Prefix=string,BufferingHints={SizeInMBs=integer,IntervalInSeconds=integer},CompressionFormat=string,EncryptionConfiguration={NoEncryptionConfig=string,KMSEncryptionConfig={AWSKMSKeyARN=string}}
+    RoleARN=string,BucketARN=string,Prefix=string,BufferingHints={SizeInMBs=integer,IntervalInSeconds=integer},CompressionFormat=string,EncryptionConfiguration={NoEncryptionConfig=string,KMSEncryptionConfig={AWSKMSKeyARN=string}},CloudWatchLoggingOptions={Enabled=boolean,LogGroupName=string,LogStreamName=string}
 
 
 
@@ -109,6 +118,84 @@ JSON Syntax::
       "NoEncryptionConfig": "NoEncryption",
       "KMSEncryptionConfig": {
         "AWSKMSKeyARN": "string"
+      }
+    },
+    "CloudWatchLoggingOptions": {
+      "Enabled": true|false,
+      "LogGroupName": "string",
+      "LogStreamName": "string"
+    }
+  }
+
+
+
+``--extended-s3-destination-update`` (structure)
+
+
+  Describes an update for a destination in Amazon S3.
+
+  
+
+
+
+JSON Syntax::
+
+  {
+    "RoleARN": "string",
+    "BucketARN": "string",
+    "Prefix": "string",
+    "BufferingHints": {
+      "SizeInMBs": integer,
+      "IntervalInSeconds": integer
+    },
+    "CompressionFormat": "UNCOMPRESSED"|"GZIP"|"ZIP"|"Snappy",
+    "EncryptionConfiguration": {
+      "NoEncryptionConfig": "NoEncryption",
+      "KMSEncryptionConfig": {
+        "AWSKMSKeyARN": "string"
+      }
+    },
+    "CloudWatchLoggingOptions": {
+      "Enabled": true|false,
+      "LogGroupName": "string",
+      "LogStreamName": "string"
+    },
+    "ProcessingConfiguration": {
+      "Enabled": true|false,
+      "Processors": [
+        {
+          "Type": "Lambda",
+          "Parameters": [
+            {
+              "ParameterName": "LambdaArn"|"NumberOfRetries",
+              "ParameterValue": "string"
+            }
+            ...
+          ]
+        }
+        ...
+      ]
+    },
+    "S3BackupMode": "Disabled"|"Enabled",
+    "S3BackupUpdate": {
+      "RoleARN": "string",
+      "BucketARN": "string",
+      "Prefix": "string",
+      "BufferingHints": {
+        "SizeInMBs": integer,
+        "IntervalInSeconds": integer
+      },
+      "CompressionFormat": "UNCOMPRESSED"|"GZIP"|"ZIP"|"Snappy",
+      "EncryptionConfiguration": {
+        "NoEncryptionConfig": "NoEncryption",
+        "KMSEncryptionConfig": {
+          "AWSKMSKeyARN": "string"
+        }
+      },
+      "CloudWatchLoggingOptions": {
+        "Enabled": true|false,
+        "LogGroupName": "string",
+        "LogStreamName": "string"
       }
     }
   }
@@ -136,6 +223,9 @@ JSON Syntax::
     },
     "Username": "string",
     "Password": "string",
+    "RetryOptions": {
+      "DurationInSeconds": integer
+    },
     "S3Update": {
       "RoleARN": "string",
       "BucketARN": "string",
@@ -150,7 +240,125 @@ JSON Syntax::
         "KMSEncryptionConfig": {
           "AWSKMSKeyARN": "string"
         }
+      },
+      "CloudWatchLoggingOptions": {
+        "Enabled": true|false,
+        "LogGroupName": "string",
+        "LogStreamName": "string"
       }
+    },
+    "ProcessingConfiguration": {
+      "Enabled": true|false,
+      "Processors": [
+        {
+          "Type": "Lambda",
+          "Parameters": [
+            {
+              "ParameterName": "LambdaArn"|"NumberOfRetries",
+              "ParameterValue": "string"
+            }
+            ...
+          ]
+        }
+        ...
+      ]
+    },
+    "S3BackupMode": "Disabled"|"Enabled",
+    "S3BackupUpdate": {
+      "RoleARN": "string",
+      "BucketARN": "string",
+      "Prefix": "string",
+      "BufferingHints": {
+        "SizeInMBs": integer,
+        "IntervalInSeconds": integer
+      },
+      "CompressionFormat": "UNCOMPRESSED"|"GZIP"|"ZIP"|"Snappy",
+      "EncryptionConfiguration": {
+        "NoEncryptionConfig": "NoEncryption",
+        "KMSEncryptionConfig": {
+          "AWSKMSKeyARN": "string"
+        }
+      },
+      "CloudWatchLoggingOptions": {
+        "Enabled": true|false,
+        "LogGroupName": "string",
+        "LogStreamName": "string"
+      }
+    },
+    "CloudWatchLoggingOptions": {
+      "Enabled": true|false,
+      "LogGroupName": "string",
+      "LogStreamName": "string"
+    }
+  }
+
+
+
+``--elasticsearch-destination-update`` (structure)
+
+
+  Describes an update for a destination in Amazon ES.
+
+  
+
+
+
+JSON Syntax::
+
+  {
+    "RoleARN": "string",
+    "DomainARN": "string",
+    "IndexName": "string",
+    "TypeName": "string",
+    "IndexRotationPeriod": "NoRotation"|"OneHour"|"OneDay"|"OneWeek"|"OneMonth",
+    "BufferingHints": {
+      "IntervalInSeconds": integer,
+      "SizeInMBs": integer
+    },
+    "RetryOptions": {
+      "DurationInSeconds": integer
+    },
+    "S3Update": {
+      "RoleARN": "string",
+      "BucketARN": "string",
+      "Prefix": "string",
+      "BufferingHints": {
+        "SizeInMBs": integer,
+        "IntervalInSeconds": integer
+      },
+      "CompressionFormat": "UNCOMPRESSED"|"GZIP"|"ZIP"|"Snappy",
+      "EncryptionConfiguration": {
+        "NoEncryptionConfig": "NoEncryption",
+        "KMSEncryptionConfig": {
+          "AWSKMSKeyARN": "string"
+        }
+      },
+      "CloudWatchLoggingOptions": {
+        "Enabled": true|false,
+        "LogGroupName": "string",
+        "LogStreamName": "string"
+      }
+    },
+    "ProcessingConfiguration": {
+      "Enabled": true|false,
+      "Processors": [
+        {
+          "Type": "Lambda",
+          "Parameters": [
+            {
+              "ParameterName": "LambdaArn"|"NumberOfRetries",
+              "ParameterValue": "string"
+            }
+            ...
+          ]
+        }
+        ...
+      ]
+    },
+    "CloudWatchLoggingOptions": {
+      "Enabled": true|false,
+      "LogGroupName": "string",
+      "LogStreamName": "string"
     }
   }
 
@@ -159,8 +367,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 

@@ -15,8 +15,11 @@ Description
 
 
 
-Provides information about the cluster instances that Amazon EMR provisions on behalf of a user when it creates the cluster. For example, this operation indicates when the EC2 instances reach the Ready state, when instances become available to Amazon EMR to use for jobs, and the IP addresses for cluster instances, etc. 
+Provides information for all active EC2 instances and EC2 instances terminated in the last 30 days, up to a maximum of 2,000. EC2 instances in any of the following states are considered active: AWAITING_FULFILLMENT, PROVISIONING, BOOTSTRAPPING, RUNNING.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListInstances>`_
 
 
 ``list-instances`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
@@ -33,10 +36,13 @@ Synopsis
   --cluster-id <value>
   [--instance-group-id <value>]
   [--instance-group-types <value>]
+  [--instance-fleet-id <value>]
+  [--instance-fleet-type <value>]
+  [--instance-states <value>]
   [--cli-input-json <value>]
   [--starting-token <value>]
   [--max-items <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -81,6 +87,59 @@ Syntax::
 
 
 
+``--instance-fleet-id`` (string)
+
+
+  The unique identifier of the instance fleet.
+
+  
+
+``--instance-fleet-type`` (string)
+
+
+  The node type of the instance fleet. For example MASTER, CORE, or TASK.
+
+  
+
+  Possible values:
+
+  
+  *   ``MASTER``
+
+  
+  *   ``CORE``
+
+  
+  *   ``TASK``
+
+  
+
+  
+
+``--instance-states`` (list)
+
+
+  A list of instance states that will filter the instances returned with this request.
+
+  
+
+
+
+Syntax::
+
+  "string" "string" ...
+
+  Where valid values are:
+    AWAITING_FULFILLMENT
+    PROVISIONING
+    BOOTSTRAPPING
+    RUNNING
+    TERMINATED
+
+
+
+
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
@@ -91,15 +150,23 @@ Performs service operation based on the JSON string provided. The JSON string fo
 
    
 
-``--max-items`` (integer)
- 
-
-  The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination. This ``NextToken`` response element should **not** be used directly outside of the AWS CLI.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
    
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--max-items`` (integer)
+ 
+
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``NextToken`` is provided in the command's output. To resume pagination, provide the ``NextToken`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``NextToken`` response element directly outside of the AWS CLI.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -113,7 +180,8 @@ The following command lists all of the instances in a cluster with the cluster I
 
 Output::
 
-  {
+  For a uniform instance group based cluster
+    {
       "Instances": [
            {
               "Status": {
@@ -164,7 +232,37 @@ Output::
               "PrivateIpAddress": "172.21.11.214"
           }
       ]
-  }
+    }
+
+
+  For a fleet based cluster:
+     {
+        "Instances": [
+            {
+                "Status": {
+                    "Timeline": {
+                        "ReadyDateTime": 1487810810.878,
+                        "CreationDateTime": 1487810588.367,
+                        "EndDateTime": 1488022990.924
+                    },
+                    "State": "TERMINATED",
+                    "StateChangeReason": {
+                        "Message": "Instance was terminated."
+                    }
+                },
+                "Ec2InstanceId": "i-xxxxx",
+                "InstanceFleetId": "if-xxxxx",
+                "EbsVolumes": [],
+                "PublicDnsName": "ec2-xx-xxx-xxx-xxx.compute-1.amazonaws.com",
+                "InstanceType": "m3.xlarge",
+                "PrivateDnsName": "ip-xx-xx-xxx-xx.ec2.internal",
+                "Market": "SPOT",
+                "PublicIpAddress": "xx.xx.xxx.xxx",
+                "Id": "ci-xxxxx",
+                "PrivateIpAddress": "10.47.191.80"
+            }
+        ]
+    }
 
 
 ======
@@ -342,6 +440,36 @@ Instances -> (list)
       
 
       The identifier of the instance group to which this instance belongs.
+
+      
+
+      
+
+    InstanceFleetId -> (string)
+
+      
+
+      The unique identifier of the instance fleet to which an EC2 instance belongs.
+
+      
+
+      
+
+    Market -> (string)
+
+      
+
+      The instance purchasing option. Valid values are ``ON_DEMAND`` or ``SPOT`` . 
+
+      
+
+      
+
+    InstanceType -> (string)
+
+      
+
+      The EC2 instance type, for example ``m3.xlarge`` .
 
       
 

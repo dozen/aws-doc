@@ -15,19 +15,19 @@ Description
 
 
 
-Adds or updates an AWS Config rule for evaluating whether your AWS resources comply with your desired configurations. 
+Adds or updates an AWS Config rule for evaluating whether your AWS resources comply with your desired configurations.
 
  
 
-You can use this action for customer managed Config rules and AWS managed Config rules. A customer managed Config rule is a custom rule that you develop and maintain. An AWS managed Config rule is a customizable, predefined rule that is provided by AWS Config.
+You can use this action for custom Config rules and AWS managed Config rules. A custom Config rule is a rule that you develop and maintain. An AWS managed Config rule is a customizable, predefined rule that AWS Config provides.
 
  
 
-If you are adding a new customer managed Config rule, you must first create the AWS Lambda function that the rule invokes to evaluate your resources. When you use the ``put-config-rule`` action to add the rule to AWS Config, you must specify the Amazon Resource Name (ARN) that AWS Lambda assigns to the function. Specify the ARN for the ``SourceIdentifier`` key. This key is part of the ``Source`` object, which is part of the ``config-rule`` object. 
+If you are adding a new custom Config rule, you must first create the AWS Lambda function that the rule invokes to evaluate your resources. When you use the ``put-config-rule`` action to add the rule to AWS Config, you must specify the Amazon Resource Name (ARN) that AWS Lambda assigns to the function. Specify the ARN for the ``SourceIdentifier`` key. This key is part of the ``Source`` object, which is part of the ``config-rule`` object. 
 
  
 
-If you are adding a new AWS managed Config rule, specify the rule's identifier for the ``SourceIdentifier`` key. To reference AWS managed Config rule identifiers, see `Using AWS Managed Config Rules`_ .
+If you are adding an AWS managed Config rule, specify the rule's identifier for the ``SourceIdentifier`` key. To reference AWS managed Config rule identifiers, see `About AWS Managed Config Rules <http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html>`_ .
 
  
 
@@ -35,20 +35,23 @@ For any new rule that you add, specify the ``ConfigRuleName`` in the ``config-ru
 
  
 
-If you are updating a rule that you have added previously, specify the rule's ``ConfigRuleName`` , ``ConfigRuleId`` , or ``ConfigRuleArn`` in the ``config-rule`` data type that you use in this request.
+If you are updating a rule that you added previously, you can specify the rule by ``ConfigRuleName`` , ``ConfigRuleId`` , or ``ConfigRuleArn`` in the ``config-rule`` data type that you use in this request.
 
  
 
-The maximum number of rules that AWS Config supports is 25.
+The maximum number of rules that AWS Config supports is 50.
 
  
 
-For more information about developing and using AWS Config rules, see `Evaluating AWS Resource Configurations with AWS Config`_ in the *AWS Config Developer Guide* .
+For more information about requesting a rule limit increase, see `AWS Config Limits <http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_config>`_ in the *AWS General Reference Guide* .
 
  
 
+For more information about developing and using AWS Config rules, see `Evaluating AWS Resource Configurations with AWS Config <http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html>`_ in the *AWS Config Developer Guide* .
 
 
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConfigRule>`_
 
 
 ========
@@ -60,7 +63,7 @@ Synopsis
     put-config-rule
   --config-rule <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -72,11 +75,7 @@ Options
 ``--config-rule`` (structure)
 
 
-  An AWS Lambda function that evaluates configuration items to assess whether your AWS resources comply with your desired configurations. This function can run when AWS Config detects a configuration change or delivers a configuration snapshot.
-
-   
-
-  For more information about developing and using AWS Config rules, see `Evaluating AWS Resource Configurations with AWS Config`_ in the *AWS Config Developer Guide* .
+  The rule that you want to add to your account.
 
   
 
@@ -101,14 +100,15 @@ JSON Syntax::
       "SourceDetails": [
         {
           "EventSource": "aws.config",
-          "MessageType": "ConfigurationItemChangeNotification"|"ConfigurationSnapshotDeliveryCompleted"
+          "MessageType": "ConfigurationItemChangeNotification"|"ConfigurationSnapshotDeliveryCompleted"|"ScheduledNotification"|"OversizedConfigurationItemChangeNotification",
+          "MaximumExecutionFrequency": "One_Hour"|"Three_Hours"|"Six_Hours"|"Twelve_Hours"|"TwentyFour_Hours"
         }
         ...
       ]
     },
     "InputParameters": "string",
     "MaximumExecutionFrequency": "One_Hour"|"Three_Hours"|"Six_Hours"|"Twelve_Hours"|"TwentyFour_Hours",
-    "ConfigRuleState": "ACTIVE"|"DELETING"
+    "ConfigRuleState": "ACTIVE"|"DELETING"|"DELETING_RESULTS"|"EVALUATING"
   }
 
 
@@ -116,8 +116,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -196,6 +196,3 @@ Output
 ======
 
 None
-
-.. _Using AWS Managed Config Rules: http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html
-.. _Evaluating AWS Resource Configurations with AWS Config: http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html

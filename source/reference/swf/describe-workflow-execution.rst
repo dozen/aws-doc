@@ -21,11 +21,15 @@ Returns information about the specified workflow execution including its type an
 
 .. note::
 
+   
+
   This operation is eventually consistent. The results are best effort and may not exactly reflect recent updates and changes.
+
+   
 
  
 
-**Access Control** 
+ **Access Control**  
 
  
 
@@ -34,17 +38,20 @@ You can use IAM policies to control this action's access to Amazon SWF resources
  
 
  
-* Use a ``Resource`` element with the domain name to limit the action to only specified domains.
+* Use a ``Resource`` element with the domain name to limit the action to only specified domains. 
  
-* Use an ``Action`` element to allow or deny permission to call this action.
+* Use an ``Action`` element to allow or deny permission to call this action. 
  
-* You cannot use an IAM policy to constrain this action's parameters.
- 
-
+* You cannot use an IAM policy to constrain this action's parameters. 
  
 
-If the caller does not have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's **cause** parameter will be set to OPERATION_NOT_PERMITTED. For details and example IAM policies, see `Using IAM to Manage Access to Amazon SWF Workflows`_ .
+ 
 
+If the caller doesn't have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's ``cause`` parameter is set to ``OPERATION_NOT_PERMITTED`` . For details and example IAM policies, see `Using IAM to Manage Access to Amazon SWF Workflows <http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html>`_ in the *Amazon SWF Developer Guide* .
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/swf-2012-01-25/DescribeWorkflowExecution>`_
 
 
 ========
@@ -57,7 +64,7 @@ Synopsis
   --domain <value>
   --execution <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -101,8 +108,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -160,13 +167,17 @@ executionInfo -> (structure)
 
       
 
-      **Required.** The name of the workflow type.
+      The name of the workflow type.
 
        
 
       .. note::
 
+         
+
         The combination of workflow type name and version must be unique with in a domain.
+
+         
 
       
 
@@ -176,13 +187,17 @@ executionInfo -> (structure)
 
       
 
-      **Required.** The version of the workflow type.
+      The version of the workflow type.
 
        
 
       .. note::
 
+         
+
         The combination of workflow type name and version must be unique with in a domain.
+
+         
 
       
 
@@ -229,17 +244,17 @@ executionInfo -> (structure)
      
 
      
-    * ``COMPLETED`` : the execution was successfully completed.
+    * ``COMPLETED`` – the execution was successfully completed. 
      
-    * ``CANCELED`` : the execution was canceled.Cancellation allows the implementation to gracefully clean up before the execution is closed.
+    * ``CANCELED`` – the execution was canceled.Cancellation allows the implementation to gracefully clean up before the execution is closed. 
      
-    * ``TERMINATED`` : the execution was force terminated.
+    * ``TERMINATED`` – the execution was force terminated. 
      
-    * ``FAILED`` : the execution failed to complete.
+    * ``FAILED`` – the execution failed to complete. 
      
-    * ``TIMED_OUT`` : the execution did not complete in the alloted time and was automatically timed out.
+    * ``TIMED_OUT`` – the execution did not complete in the alloted time and was automatically timed out. 
      
-    * ``CONTINUED_AS_NEW`` : the execution is logically continued. This means the current execution was completed and a new execution was started to carry on the workflow.
+    * ``CONTINUED_AS_NEW`` – the execution is logically continued. This means the current execution was completed and a new execution was started to carry on the workflow. 
      
 
     
@@ -320,7 +335,7 @@ executionConfiguration -> (structure)
 
      
 
-    The duration is specified in seconds; an integer greater than or equal to 0. The value "NONE" can be used to specify unlimited duration.
+    The duration is specified in seconds, an integer greater than or equal to ``0`` . You can use ``NONE`` to specify unlimited duration.
 
     
 
@@ -334,7 +349,7 @@ executionConfiguration -> (structure)
 
      
 
-    The duration is specified in seconds; an integer greater than or equal to 0. The value "NONE" can be used to specify unlimited duration.
+    The duration is specified in seconds, an integer greater than or equal to ``0`` . You can use ``NONE`` to specify unlimited duration.
 
     
 
@@ -368,7 +383,7 @@ executionConfiguration -> (structure)
 
      
 
-    For more information about setting task priority, see `Setting Task Priority`_ in the *Amazon Simple Workflow Developer Guide* .
+    For more information about setting task priority, see `Setting Task Priority <http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html>`_ in the *Amazon SWF Developer Guide* .
 
     
 
@@ -387,11 +402,11 @@ executionConfiguration -> (structure)
      
 
      
-    * **TERMINATE:** the child executions will be terminated.
+    * ``TERMINATE`` – The child executions are terminated. 
      
-    * **REQUEST_CANCEL:** a request to cancel will be attempted for each child execution by recording a ``WorkflowExecutionCancelRequested`` event in its history. It is up to the decider to take appropriate actions when it receives an execution history with this event.
+    * ``REQUEST_CANCEL`` – A request to cancel is attempted for each child execution by recording a ``WorkflowExecutionCancelRequested`` event in its history. It is up to the decider to take appropriate actions when it receives an execution history with this event. 
      
-    * **ABANDON:** no action will be taken. The child executions will continue to run.
+    * ``ABANDON`` – No action is taken. The child executions continue to run. 
      
 
     
@@ -402,7 +417,7 @@ executionConfiguration -> (structure)
 
     
 
-    The IAM role used by this workflow execution when invoking AWS Lambda functions.
+    The IAM role attached to the child workflow execution.
 
     
 
@@ -422,7 +437,7 @@ openCounts -> (structure)
 
     
 
-    The count of activity tasks whose status is OPEN.
+    The count of activity tasks whose status is ``OPEN`` .
 
     
 
@@ -452,7 +467,7 @@ openCounts -> (structure)
 
     
 
-    The count of child workflow executions whose status is OPEN.
+    The count of child workflow executions whose status is ``OPEN`` .
 
     
 
@@ -462,7 +477,7 @@ openCounts -> (structure)
 
     
 
-    The count of AWS Lambda functions that are currently executing.
+    The count of Lambda tasks whose status is ``OPEN`` .
 
     
 
@@ -490,7 +505,3 @@ latestExecutionContext -> (string)
 
   
 
-
-
-.. _Using IAM to Manage Access to Amazon SWF Workflows: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
-.. _Setting Task Priority: http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html

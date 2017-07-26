@@ -15,8 +15,11 @@ Description
 
 
 
-Validates a specified template.
+Validates a specified template. AWS CloudFormation first checks if the template is valid JSON. If it isn't, AWS CloudFormation checks if the template is valid YAML. If both these checks fail, AWS CloudFormation returns a template validation error.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ValidateTemplate>`_
 
 
 ========
@@ -29,7 +32,7 @@ Synopsis
   [--template-body <value>]
   [--template-url <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -41,7 +44,7 @@ Options
 ``--template-body`` (string)
 
 
-  Structure containing the template body with a minimum length of 1 byte and a maximum length of 51,200 bytes. For more information, go to `Template Anatomy`_ in the AWS CloudFormation User Guide.
+  Structure containing the template body with a minimum length of 1 byte and a maximum length of 51,200 bytes. For more information, go to `Template Anatomy <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html>`_ in the AWS CloudFormation User Guide.
 
    
 
@@ -52,7 +55,7 @@ Options
 ``--template-url`` (string)
 
 
-  Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) that is located in an Amazon S3 bucket. For more information, go to `Template Anatomy`_ in the AWS CloudFormation User Guide.
+  Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) that is located in an Amazon S3 bucket. For more information, go to `Template Anatomy <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html>`_ in the AWS CloudFormation User Guide.
 
    
 
@@ -63,8 +66,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -76,7 +79,7 @@ Examples
 
 The following ``validate-template`` command validates the ``sampletemplate.json`` template::
 
-  aws cloudformation validate-template --template-body file:////home//local//test//sampletemplate.json
+  aws cloudformation validate-template --template-body file://sampletemplate.json
 
 Output::
 
@@ -169,7 +172,11 @@ Capabilities -> (list)
 
   
 
-  The capabilities found within the template. Currently, AWS CloudFormation supports only the CAPABILITY_IAM capability. If your template contains IAM resources, you must specify the CAPABILITY_IAM value for this parameter when you use the  create-stack or  update-stack actions with your template; otherwise, those actions return an InsufficientCapabilities error.
+  The capabilities found within the template. If your template contains IAM resources, you must specify the CAPABILITY_IAM or CAPABILITY_NAMED_IAM value for this parameter when you use the  create-stack or  update-stack actions with your template; otherwise, those actions return an InsufficientCapabilities error.
+
+   
+
+  For more information, see `Acknowledging IAM Resources in AWS CloudFormation Templates <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities>`_ .
 
   
 
@@ -191,6 +198,19 @@ CapabilitiesReason -> (string)
 
   
 
+DeclaredTransforms -> (list)
 
+  
 
-.. _Template Anatomy: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
+  A list of the transforms that are declared in the template.
+
+  
+
+  (string)
+
+    
+
+    
+
+  
+

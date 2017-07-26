@@ -21,8 +21,15 @@ Returns the current status of the specified configuration recorder. If a configu
 
 .. note::
 
-  Currently, you can specify only one configuration recorder per account.
+   
 
+  Currently, you can specify only one configuration recorder per region in your account.
+
+   
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigurationRecorderStatus>`_
 
 
 ========
@@ -34,7 +41,7 @@ Synopsis
     describe-configuration-recorder-status
   [--configuration-recorder-names <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -46,7 +53,7 @@ Options
 ``--configuration-recorder-names`` (list)
 
 
-  The name(s) of the configuration recorder. If the name is not specified, the action returns the current status of all the configuration recorders associated with the account. 
+  The name(s) of the configuration recorder. If the name is not specified, the action returns the current status of all the configuration recorders associated with the account.
 
   
 
@@ -61,8 +68,8 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -99,7 +106,7 @@ ConfigurationRecordersStatus -> (list)
 
   
 
-  A list that contains status of the specified recorders. 
+  A list that contains status of the specified recorders.
 
   
 

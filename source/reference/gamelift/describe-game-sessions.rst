@@ -15,12 +15,51 @@ Description
 
 
 
-Retrieves properties for one or more game sessions. This action can be used in several ways: (1) provide a *game-session-id* parameter to request properties for a specific game session; (2) provide a *fleet-id* or *alias-id* parameter to request properties for all game sessions running on a fleet. 
+Retrieves a set of one or more game sessions. Request a specific game session or request all game sessions on a fleet. Alternatively, use  search-game-sessions to request a set of active game sessions that are filtered by certain criteria. To retrieve protection policy settings for game sessions, use  describe-game-session-details .
 
  
 
-To get game session record(s), specify only one of the following: game session ID, fleet ID, or alias ID. You can filter this request by game session status. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, a  GameSession object is returned for each session matching the request.
+To get game sessions, specify one of the following: game session ID, fleet ID, or alias ID. You can filter this request by game session status. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, a  GameSession object is returned for each game session matching the request.
 
+ 
+
+ *Available in Amazon GameLift Local.*  
+
+ 
+
+Game-session-related operations include:
+
+ 
+
+ 
+*  create-game-session   
+ 
+*  describe-game-sessions   
+ 
+*  describe-game-session-details   
+ 
+*  search-game-sessions   
+ 
+*  update-game-session   
+ 
+*  get-game-session-log-url   
+ 
+* Game session placements 
+
+   
+  *  start-game-session-placement   
+   
+  *  describe-game-session-placement   
+   
+  *  stop-game-session-placement   
+   
+
+ 
+ 
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessions>`_
 
 
 ========
@@ -37,7 +76,7 @@ Synopsis
   [--limit <value>]
   [--next-token <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -49,50 +88,50 @@ Options
 ``--fleet-id`` (string)
 
 
-  Unique identifier for a fleet. Specify a fleet to retrieve information on all game sessions active on the fleet.
+  Unique identifier for a fleet to retrieve all game sessions for.
 
   
 
 ``--game-session-id`` (string)
 
 
-  Unique identifier for a game session. Specify the game session to retrieve information on.
+  Unique identifier for the game session to retrieve. You can use either a ``GameSessionId`` or ``GameSessionArn`` value. 
 
   
 
 ``--alias-id`` (string)
 
 
-  Unique identifier for a fleet alias. Specify an alias to retrieve information on all game sessions active on the fleet.
+  Unique identifier for an alias associated with the fleet to retrieve all game sessions for. 
 
   
 
 ``--status-filter`` (string)
 
 
-  Game session status to filter results on. Possible game session states include ACTIVE, TERMINATED, ACTIVATING and TERMINATING (the last two are transitory). 
+  Game session status to filter results on. Possible game session statuses include ``ACTIVE`` , ``TERMINATED`` , ``ACTIVATING`` , and ``TERMINATING`` (the last two are transitory). 
 
   
 
 ``--limit`` (integer)
 
 
-  Maximum number of results to return. You can use this parameter with *NextToken* to get results as a set of sequential pages.
+  Maximum number of results to return. Use this parameter with ``NextToken`` to get results as a set of sequential pages.
 
   
 
 ``--next-token`` (string)
 
 
-  Token indicating the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value.
+  Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value.
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -114,13 +153,45 @@ GameSessions -> (list)
 
     Properties describing a game session.
 
+     
+
+    Game-session-related operations include:
+
+     
+
+     
+    *  create-game-session   
+     
+    *  describe-game-sessions   
+     
+    *  describe-game-session-details   
+     
+    *  search-game-sessions   
+     
+    *  update-game-session   
+     
+    *  get-game-session-log-url   
+     
+    * Game session placements 
+
+       
+      *  start-game-session-placement   
+       
+      *  describe-game-session-placement   
+       
+      *  stop-game-session-placement   
+       
+
+     
+     
+
     
 
     GameSessionId -> (string)
 
       
 
-      Unique identifier for a game session.
+      Unique identifier for the game session. A game session ID has the following format: ``arn:aws:gamelift:region::gamesession/fleet ID/custom ID string or idempotency token`` .
 
       
 
@@ -130,7 +201,7 @@ GameSessions -> (list)
 
       
 
-      Descriptive label associated with this game session. Session names do not need to be unique.
+      Descriptive label that is associated with a game session. Session names do not need to be unique.
 
       
 
@@ -140,7 +211,7 @@ GameSessions -> (list)
 
       
 
-      Unique identifier for a fleet.
+      Unique identifier for a fleet the game session is running on.
 
       
 
@@ -150,7 +221,7 @@ GameSessions -> (list)
 
       
 
-      Time stamp indicating when this object was created. Format is an integer representing the number of seconds since the Unix epoch (Unix time).
+      Time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (for example "1469498468.057").
 
       
 
@@ -160,7 +231,7 @@ GameSessions -> (list)
 
       
 
-      Time stamp indicating when this fleet was terminated. Format is an integer representing the number of seconds since the Unix epoch (Unix time).
+      Time stamp indicating when this data object was terminated. Format is a number expressed in Unix time as milliseconds (for example "1469498468.057").
 
       
 
@@ -180,7 +251,7 @@ GameSessions -> (list)
 
       
 
-      Maximum number of players allowed in the game session.
+      Maximum number of players that can be connected simultaneously to the game session.
 
       
 
@@ -190,7 +261,7 @@ GameSessions -> (list)
 
       
 
-      Current status of the game session. A game session must be in an ACTIVE state to have player sessions.
+      Current status of the game session. A game session must have an ``ACTIVE`` status to have player sessions.
 
       
 
@@ -200,7 +271,7 @@ GameSessions -> (list)
 
       
 
-      Set of custom properties for the game session.
+      Set of developer-defined properties for a game session. These properties are passed to the server process hosting the game session.
 
       
 
@@ -208,7 +279,7 @@ GameSessions -> (list)
 
         
 
-        Set of key-value pairs containing information your game server requires to set up sessions. This object allows you to pass in any set of data needed for your game. For more information, see the `Amazon GameLift Developer Guide`_ .
+        Set of key-value pairs containing information a server process requires to set up a game session. This object allows you to pass in any set of data needed for your game. For more information, see the `Amazon GameLift Developer Guide <http://docs.aws.amazon.com/gamelift/latest/developerguide/>`_ .
 
         
 
@@ -216,9 +287,17 @@ GameSessions -> (list)
 
           
 
+          TBD
+
+          
+
           
 
         Value -> (string)
+
+          
+
+          TBD
 
           
 
@@ -232,7 +311,17 @@ GameSessions -> (list)
 
       
 
-      IP address of the game session.
+      IP address of the game session. To connect to a Amazon GameLift game server, an app needs both the IP address and port number.
+
+      
+
+      
+
+    Port -> (integer)
+
+      
+
+      Port number for the game session. To connect to a Amazon GameLift game server, an app needs both the IP address and port number.
 
       
 
@@ -248,6 +337,16 @@ GameSessions -> (list)
 
       
 
+    CreatorId -> (string)
+
+      
+
+      Unique identifier for a player. This ID is used to enforce a resource protection policy (if one exists), that limits the number of game sessions a player can create.
+
+      
+
+      
+
     
 
   
@@ -256,22 +355,9 @@ NextToken -> (string)
 
   
 
-  Token indicating where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
-
-   
-
-  .. note::
-
-    
-
-    If a request has a limit that exactly matches the number of remaining results, a token is returned even though there are no more results to retrieve.
-
-    
+  Token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
 
   
 
   
 
-
-
-.. _Amazon GameLift Developer Guide: http://docs.aws.amazon.com/gamelift/latest/developerguide/

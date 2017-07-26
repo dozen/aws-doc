@@ -19,6 +19,9 @@ Describes one or more of your export tasks.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeExportTasks>`_
+
+
 ========
 Synopsis
 ========
@@ -28,7 +31,7 @@ Synopsis
     describe-export-tasks
   [--export-task-ids <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -55,8 +58,8 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -79,7 +82,7 @@ Output::
           {
               "State": "active",
               "InstanceExportDetails": {
-                  "InstanceId": "i-38e485d8",
+                  "InstanceId": "i-1234567890abcdef0",
                   "TargetEnvironment": "vmware"
               },
               "ExportToS3Task": {
@@ -116,16 +119,6 @@ ExportTasks -> (list)
 
     
 
-    ExportTaskId -> (string)
-
-      
-
-      The ID of the export task.
-
-      
-
-      
-
     Description -> (string)
 
       
@@ -136,23 +129,63 @@ ExportTasks -> (list)
 
       
 
-    State -> (string)
+    ExportTaskId -> (string)
 
       
 
-      The state of the export task.
+      The ID of the export task.
 
       
 
       
 
-    StatusMessage -> (string)
+    ExportToS3Task -> (structure)
 
       
 
-      The status message related to the export task.
+      Information about the export task.
 
       
+
+      ContainerFormat -> (string)
+
+        
+
+        The container format used to combine disk images with metadata (such as OVF). If absent, only the disk image is exported.
+
+        
+
+        
+
+      DiskImageFormat -> (string)
+
+        
+
+        The format for the exported image.
+
+        
+
+        
+
+      S3Bucket -> (string)
+
+        
+
+        The S3 bucket for the destination image. The destination bucket must exist and grant WRITE and READ_ACP permissions to the AWS account ``vm-import-export@amazon.com`` .
+
+        
+
+        
+
+      S3Key -> (string)
+
+        
+
+        The encryption key for your S3 bucket.
+
+        
+
+        
 
       
 
@@ -186,53 +219,23 @@ ExportTasks -> (list)
 
       
 
-    ExportToS3Task -> (structure)
+    State -> (string)
 
       
 
-      Information about the export task.
+      The state of the export task.
 
       
 
-      DiskImageFormat -> (string)
+      
 
-        
+    StatusMessage -> (string)
 
-        The format for the exported image.
+      
 
-        
+      The status message related to the export task.
 
-        
-
-      ContainerFormat -> (string)
-
-        
-
-        The container format used to combine disk images with metadata (such as OVF). If absent, only the disk image is exported.
-
-        
-
-        
-
-      S3Bucket -> (string)
-
-        
-
-        The S3 bucket for the destination image. The destination bucket must exist and grant WRITE and READ_ACP permissions to the AWS account ``vm-import-export@amazon.com`` .
-
-        
-
-        
-
-      S3Key -> (string)
-
-        
-
-        The encryption key for your S3 bucket.
-
-        
-
-        
+      
 
       
 

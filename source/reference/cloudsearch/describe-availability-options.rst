@@ -15,8 +15,11 @@ Description
 
 
 
-Gets the availability options configured for a domain. By default, shows the configuration with any pending changes. Set the ``Deployed`` option to ``true`` to show the active configuration and exclude pending changes. For more information, see `Configuring Availability Options`_ in the *Amazon CloudSearch Developer Guide* .
+Gets the availability options configured for a domain. By default, shows the configuration with any pending changes. Set the ``Deployed`` option to ``true`` to show the active configuration and exclude pending changes. For more information, see `Configuring Availability Options <http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-availability-options.html>`_ in the *Amazon CloudSearch Developer Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/cloudsearch-2013-01-01/DescribeAvailabilityOptions>`_
 
 
 ========
@@ -29,7 +32,7 @@ Synopsis
   --domain-name <value>
   [--deployed | --no-deployed]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -55,8 +58,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -156,6 +159,3 @@ AvailabilityOptions -> (structure)
 
   
 
-
-
-.. _Configuring Availability Options: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-availability-options.html

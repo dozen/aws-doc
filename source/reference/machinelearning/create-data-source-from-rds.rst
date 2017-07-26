@@ -15,16 +15,19 @@ Description
 
 
 
-Creates a ``DataSource`` object from an `Amazon Relational Database Service`_ (Amazon RDS). A ``DataSource`` references data that can be used to perform  create-ml-model ,  create-evaluation , or  create-batch-prediction operations.
+Creates a ``DataSource`` object from an `Amazon Relational Database Service <http://aws.amazon.com/rds/>`_ (Amazon RDS). A ``DataSource`` references data that can be used to perform ``create-ml-model`` , ``create-evaluation`` , or ``create-batch-prediction`` operations.
 
  
 
-``create-data-source-from-rds`` is an asynchronous operation. In response to ``create-data-source-from-rds`` , Amazon Machine Learning (Amazon ML) immediately returns and sets the ``DataSource`` status to ``PENDING`` . After the ``DataSource`` is created and ready for use, Amazon ML sets the ``Status`` parameter to ``COMPLETED`` . ``DataSource`` in ``COMPLETED`` or ``PENDING`` status can only be used to perform  create-ml-model ,  create-evaluation , or  create-batch-prediction operations. 
+``create-data-source-from-rds`` is an asynchronous operation. In response to ``create-data-source-from-rds`` , Amazon Machine Learning (Amazon ML) immediately returns and sets the ``DataSource`` status to ``PENDING`` . After the ``DataSource`` is created and ready for use, Amazon ML sets the ``Status`` parameter to ``COMPLETED`` . ``DataSource`` in the ``COMPLETED`` or ``PENDING`` state can be used only to perform ``create-ml-model`` , ``create-evaluation`` , or ``create-batch-prediction`` operations. 
 
  
 
-If Amazon ML cannot accept the input source, it sets the ``Status`` parameter to ``FAILED`` and includes an error message in the ``Message`` attribute of the  get-data-source operation response. 
+If Amazon ML cannot accept the input source, it sets the ``Status`` parameter to ``FAILED`` and includes an error message in the ``Message`` attribute of the ``get-data-source`` operation response. 
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/machinelearning-2014-12-12/CreateDataSourceFromRDS>`_
 
 
 ========
@@ -40,7 +43,7 @@ Synopsis
   --role-arn <value>
   [--compute-statistics | --no-compute-statistics]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -74,9 +77,9 @@ Options
   * DatabaseInformation - 
 
      
-    * ``DatabaseName`` - Name of the Amazon RDS database.
+    * ``DatabaseName`` - The name of the Amazon RDS database.
      
-    * ``InstanceIdentifier`` - Unique identifier for the Amazon RDS database instance.
+    * ``InstanceIdentifier`` - A unique identifier for the Amazon RDS database instance.
      
 
    
@@ -85,21 +88,21 @@ Options
    
   * DatabaseCredentials - AWS Identity and Access Management (IAM) credentials that are used to connect to the Amazon RDS database.
    
-  * ResourceRole - Role (DataPipelineDefaultResourceRole) assumed by an Amazon Elastic Compute Cloud (EC2) instance to carry out the copy task from Amazon RDS to Amazon S3. For more information, see `Role templates`_ for data pipelines.
+  * ResourceRole - A role (DataPipelineDefaultResourceRole) assumed by an EC2 instance to carry out the copy task from Amazon RDS to Amazon Simple Storage Service (Amazon S3). For more information, see `Role templates <http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html>`_ for data pipelines.
    
-  * ServiceRole - Role (DataPipelineDefaultRole) assumed by the AWS Data Pipeline service to monitor the progress of the copy task from Amazon RDS to Amazon Simple Storage Service (S3). For more information, see `Role templates`_ for data pipelines.
+  * ServiceRole - A role (DataPipelineDefaultRole) assumed by the AWS Data Pipeline service to monitor the progress of the copy task from Amazon RDS to Amazon S3. For more information, see `Role templates <http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html>`_ for data pipelines.
    
-  * SecurityInfo - Security information to use to access an Amazon RDS instance. You need to set up appropriate ingress rules for the security entity IDs provided to allow access to the Amazon RDS instance. Specify a [``SubnetId`` , ``SecurityGroupIds`` ] pair for a VPC-based Amazon RDS instance.
+  * SecurityInfo - The security information to use to access an RDS DB instance. You need to set up appropriate ingress rules for the security entity IDs provided to allow access to the Amazon RDS instance. Specify a [``SubnetId`` , ``SecurityGroupIds`` ] pair for a VPC-based RDS DB instance.
    
-  * SelectSqlQuery - Query that is used to retrieve the observation data for the ``Datasource`` .
+  * SelectSqlQuery - A query that is used to retrieve the observation data for the ``Datasource`` .
    
-  * S3StagingLocation - Amazon S3 location for staging RDS data. The data retrieved from Amazon RDS using ``SelectSqlQuery`` is stored in this location.
+  * S3StagingLocation - The Amazon S3 location for staging Amazon RDS data. The data retrieved from Amazon RDS using ``SelectSqlQuery`` is stored in this location.
    
-  * DataSchemaUri - Amazon S3 location of the ``DataSchema`` .
+  * DataSchemaUri - The Amazon S3 location of the ``DataSchema`` .
    
   * DataSchema - A JSON string representing the schema. This is not required if ``DataSchemaUri`` is specified. 
    
-  * DataRearrangement - A JSON string representing the splitting requirement of a ``Datasource`` .   Sample - ``"{\"splitting\":{\"percentBegin\":10,\"percentEnd\":60}}"``   
+  * DataRearrangement - A JSON string that represents the splitting and rearrangement requirements for the ``Datasource`` .   Sample - ``"{\"splitting\":{\"percentBegin\":10,\"percentEnd\":60}}"``   
    
 
   
@@ -140,7 +143,7 @@ JSON Syntax::
 ``--role-arn`` (string)
 
 
-  The role that Amazon ML assumes on behalf of the user to create and activate a data pipeline in the user’s account and copy data (using the ``SelectSqlQuery`` ) query from Amazon RDS to Amazon S3.
+  The role that Amazon ML assumes on behalf of the user to create and activate a data pipeline in the user's account and copy data using the ``SelectSqlQuery`` query from Amazon RDS to Amazon S3.
 
    
 
@@ -151,15 +154,15 @@ JSON Syntax::
 ``--compute-statistics`` | ``--no-compute-statistics`` (boolean)
 
 
-  The compute statistics for a ``DataSource`` . The statistics are generated from the observation data referenced by a ``DataSource`` . Amazon ML uses the statistics internally during an ``MLModel`` training. This parameter must be set to ``true`` if the ```` DataSource```` needs to be used for ``MLModel`` training. 
+  The compute statistics for a ``DataSource`` . The statistics are generated from the observation data referenced by a ``DataSource`` . Amazon ML uses the statistics internally during ``MLModel`` training. This parameter must be set to ``true`` if the ```` DataSource```` needs to be used for ``MLModel`` training. 
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -177,7 +180,3 @@ DataSourceId -> (string)
 
   
 
-
-
-.. _Amazon Relational Database Service: http://aws.amazon.com/rds/
-.. _Role templates: http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html

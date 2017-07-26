@@ -29,6 +29,9 @@ Generates a prediction for the observation using the specified ``ML Model`` .
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/machinelearning-2014-12-12/Predict>`_
+
+
 ========
 Synopsis
 ========
@@ -40,7 +43,7 @@ Synopsis
   --record <value>
   --predict-endpoint <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -85,8 +88,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -103,26 +106,30 @@ Prediction -> (structure)
    
 
    
-  * ``Details`` - Contains the following attributes: DetailsAttributes.PREDICTIVE_MODEL_TYPE - REGRESSION | BINARY | MULTICLASS DetailsAttributes.ALGORITHM - SGD  
+  * ``Details`` - Contains the following attributes: ``DetailsAttributes.PREDICTIVE_MODEL_TYPE - REGRESSION | BINARY | MULTICLASS``  ``DetailsAttributes.ALGORITHM - SGD``   
    
-  * ``PredictedLabel`` - Present for either a BINARY or MULTICLASS ``MLModel`` request.  
+  * ``PredictedLabel`` - Present for either a ``BINARY`` or ``MULTICLASS``  ``MLModel`` request.  
    
   * ``PredictedScores`` - Contains the raw classification score corresponding to each label.  
    
-  * ``PredictedValue`` - Present for a REGRESSION ``MLModel`` request.  
+  * ``PredictedValue`` - Present for a ``REGRESSION``  ``MLModel`` request.  
    
 
   
 
   predictedLabel -> (string)
 
-    The prediction label for either a BINARY or MULTICLASS ``MLModel`` .
+    
+
+    The prediction label for either a ``BINARY`` or ``MULTICLASS``  ``MLModel`` .
+
+    
 
     
 
   predictedValue -> (float)
 
-    The prediction value for REGRESSION ``MLModel`` .
+    The prediction value for ``REGRESSION``  ``MLModel`` .
 
     
 
@@ -150,7 +157,7 @@ Prediction -> (structure)
 
     key -> (string)
 
-      Contains the key values of ``DetailsMap`` : PredictiveModelType - Indicates the type of the ``MLModel`` . Algorithm - Indicates the algorithm was used for the ``MLModel`` .
+      Contains the key values of ``DetailsMap`` : ``PredictiveModelType`` - Indicates the type of the ``MLModel`` . ``Algorithm`` - Indicates the algorithm that was used for the ``MLModel`` .
 
       
 

@@ -24,35 +24,48 @@ There are several important points to know about ``send-raw-email`` :
  
 
  
-* You can only send email from verified email addresses and domains; otherwise, you will get an "Email address not verified" error. If your account is still in the Amazon SES sandbox, you must also verify every recipient email address except for the recipients provided by the Amazon SES mailbox simulator. For more information, go to the `Amazon SES Developer Guide`_ .
+* You can only send email from verified email addresses and domains; otherwise, you will get an "Email address not verified" error. If your account is still in the Amazon SES sandbox, you must also verify every recipient email address except for the recipients provided by the Amazon SES mailbox simulator. For more information, go to the `Amazon SES Developer Guide <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html>`_ . 
  
-* The total size of the message cannot exceed 10 MB. This includes any attachments that are part of the message.
+* The total size of the message cannot exceed 10 MB. This includes any attachments that are part of the message. 
  
-* Amazon SES has a limit on the total number of recipients per message. The combined number of To:, CC: and BCC: email addresses cannot exceed 50. If you need to send an email message to a larger audience, you can divide your recipient list into groups of 50 or fewer, and then call Amazon SES repeatedly to send the message to each group.
+* Amazon SES has a limit on the total number of recipients per message. The combined number of To:, CC: and BCC: email addresses cannot exceed 50. If you need to send an email message to a larger audience, you can divide your recipient list into groups of 50 or fewer, and then call Amazon SES repeatedly to send the message to each group. 
  
-* The To:, CC:, and BCC: headers in the raw message can contain a group list. Note that each recipient in a group list counts towards the 50-recipient limit.
+* The To:, CC:, and BCC: headers in the raw message can contain a group list. Note that each recipient in a group list counts towards the 50-recipient limit. 
  
-* For every message that you send, the total number of recipients (To:, CC: and BCC:) is counted against your sending quota - the maximum number of emails you can send in a 24-hour period. For information about your sending quota, go to the `Amazon SES Developer Guide`_ .
+* Amazon SES overrides any Message-ID and Date headers you provide. 
+ 
+* For every message that you send, the total number of recipients (To:, CC: and BCC:) is counted against your sending quota - the maximum number of emails you can send in a 24-hour period. For information about your sending quota, go to the `Amazon SES Developer Guide <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/manage-sending-limits.html>`_ . 
  
 * If you are using sending authorization to send on behalf of another user, ``send-raw-email`` enables you to specify the cross-account identity for the email's "Source," "From," and "Return-Path" parameters in one of two ways: you can pass optional parameters ``SourceArn`` , ``FromArn`` , and/or ``ReturnPathArn`` to the API, or you can include the following X-headers in the header of your raw email: 
 
    
-  * ``X-SES-SOURCE-ARN`` 
+  * ``X-SES-SOURCE-ARN``   
    
-  * ``X-SES-FROM-ARN`` 
+  * ``X-SES-FROM-ARN``   
    
-  * ``X-SES-RETURN-PATH-ARN`` 
+  * ``X-SES-RETURN-PATH-ARN``   
    
 
  
 
 .. warning::
 
+   
+
   Do not include these X-headers in the DKIM signature, because they are removed by Amazon SES before sending the email.
 
-For the most common sending authorization use case, we recommend that you specify the ``SourceIdentityArn`` and do not specify either the ``FromIdentityArn`` or ``ReturnPathIdentityArn`` . (The same note applies to the corresponding X-headers.) If you only specify the ``SourceIdentityArn`` , Amazon SES will simply set the "From" address and the "Return Path" address to the identity specified in ``SourceIdentityArn`` . For more information about sending authorization, see the `Amazon SES Developer Guide`_ .
+   
+
  
 
+For the most common sending authorization use case, we recommend that you specify the ``SourceIdentityArn`` and do not specify either the ``FromIdentityArn`` or ``ReturnPathIdentityArn`` . (The same note applies to the corresponding X-headers.) If you only specify the ``SourceIdentityArn`` , Amazon SES will simply set the "From" address and the "Return Path" address to the identity specified in ``SourceIdentityArn`` . For more information about sending authorization, see the `Amazon SES Developer Guide <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html>`_ .
+
+ 
+ 
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendRawEmail>`_
 
 
 ========
@@ -68,8 +81,10 @@ Synopsis
   [--from-arn <value>]
   [--source-arn <value>]
   [--return-path-arn <value>]
+  [--tags <value>]
+  [--configuration-set-name <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -85,13 +100,17 @@ Options
 
    
 
-  By default, the string must be 7-bit ASCII. If the text must contain any other characters, then you must use MIME encoded-word syntax (RFC 2047) instead of a literal string. MIME encoded-word syntax uses the following form: ``=?charset?encoding?encoded-text?=`` . For more information, see `RFC 2047`_ . 
+  By default, the string must be 7-bit ASCII. If the text must contain any other characters, then you must use MIME encoded-word syntax (RFC 2047) instead of a literal string. MIME encoded-word syntax uses the following form: ``=?charset?encoding?encoded-text?=`` . For more information, see `RFC 2047 <http://tools.ietf.org/html/rfc2047>`_ . 
 
    
 
   .. note::
 
-    If you specify the ``Source`` parameter and have feedback forwarding enabled, then bounces and complaints will be sent to this email address. This takes precedence over any *Return-Path* header that you might include in the raw text of the message. 
+     
+
+    If you specify the ``Source`` parameter and have feedback forwarding enabled, then bounces and complaints will be sent to this email address. This takes precedence over any *Return-Path* header that you might include in the raw text of the message.
+
+     
 
   
 
@@ -118,19 +137,15 @@ Syntax::
    
 
    
-
+  * Message must contain a header and a body, separated by a blank line. 
    
-  * Message must contain a header and a body, separated by a blank line.
+  * All required header fields must be present. 
    
-  * All required header fields must be present.
+  * Each part of a multipart MIME message must be formatted properly. 
    
-  * Each part of a multipart MIME message must be formatted properly.
+  * MIME content types must be among those supported by Amazon SES. For more information, go to the `Amazon SES Developer Guide <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/mime-types.html>`_ . 
    
-  * MIME content types must be among those supported by Amazon SES. For more information, go to the `Amazon SES Developer Guide`_ . 
-   
-  * Content must be base64-encoded, if MIME requires it.
-   
-
+  * Must be base64-encoded. 
    
 
   
@@ -165,7 +180,11 @@ JSON Syntax::
 
   .. note::
 
-    For information about when to use this parameter, see the description of ``send-raw-email`` in this guide, or see the `Amazon SES Developer Guide`_ . 
+     
+
+    For information about when to use this parameter, see the description of ``send-raw-email`` in this guide, or see the `Amazon SES Developer Guide <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html>`_ .
+
+     
 
   
 
@@ -186,7 +205,11 @@ JSON Syntax::
 
   .. note::
 
-    For information about when to use this parameter, see the description of ``send-raw-email`` in this guide, or see the `Amazon SES Developer Guide`_ . 
+     
+
+    For information about when to use this parameter, see the description of ``send-raw-email`` in this guide, or see the `Amazon SES Developer Guide <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html>`_ .
+
+     
 
   
 
@@ -207,15 +230,54 @@ JSON Syntax::
 
   .. note::
 
-    For information about when to use this parameter, see the description of ``send-raw-email`` in this guide, or see the `Amazon SES Developer Guide`_ . 
+     
+
+    For information about when to use this parameter, see the description of ``send-raw-email`` in this guide, or see the `Amazon SES Developer Guide <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html>`_ .
+
+     
+
+  
+
+``--tags`` (list)
+
+
+  A list of tags, in the form of name/value pairs, to apply to an email that you send using ``send-raw-email`` . Tags correspond to characteristics of the email that you define, so that you can publish email sending events.
+
+  
+
+
+
+Shorthand Syntax::
+
+    Name=string,Value=string ...
+
+
+
+
+JSON Syntax::
+
+  [
+    {
+      "Name": "string",
+      "Value": "string"
+    }
+    ...
+  ]
+
+
+
+``--configuration-set-name`` (string)
+
+
+  The name of the configuration set to use when you send an email using ``send-raw-email`` .
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -271,7 +333,3 @@ MessageId -> (string)
 
   
 
-
-
-.. _RFC 2047: http://tools.ietf.org/html/rfc2047
-.. _Amazon SES Developer Guide: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html

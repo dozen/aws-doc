@@ -15,12 +15,15 @@ Description
 
 
 
-Removes the specified managed policy from the specified group. 
+Removes the specified managed policy from the specified IAM group.
 
  
 
-A group can also have inline policies embedded with it. To delete an inline policy, use the  delete-group-policy API. For information about policies, refer to `Managed Policies and Inline Policies`_ in the *IAM User Guide* . 
+A group can also have inline policies embedded with it. To delete an inline policy, use the  delete-group-policy API. For information about policies, see `Managed Policies and Inline Policies <http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html>`_ in the *IAM User Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DetachGroupPolicy>`_
 
 
 ========
@@ -33,7 +36,7 @@ Synopsis
   --group-name <value>
   --policy-arn <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -45,26 +48,30 @@ Options
 ``--group-name`` (string)
 
 
-  The name (friendly name, not ARN) of the group to detach the policy from.
+  The name (friendly name, not ARN) of the IAM group to detach the policy from.
+
+   
+
+  This parameter allows (per its `regex pattern <http://wikipedia.org/wiki/regex>`_ ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-
 
   
 
 ``--policy-arn`` (string)
 
 
-  The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS resources. 
+  The Amazon Resource Name (ARN) of the IAM policy you want to detach.
 
    
 
-  For more information about ARNs, go to `Amazon Resource Names (ARNs) and AWS Service Namespaces`_ in the *AWS General Reference* . 
+  For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces <http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`_ in the *AWS General Reference* .
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -88,6 +95,3 @@ Output
 ======
 
 None
-
-.. _Amazon Resource Names (ARNs) and AWS Service Namespaces: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
-.. _Managed Policies and Inline Policies: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html

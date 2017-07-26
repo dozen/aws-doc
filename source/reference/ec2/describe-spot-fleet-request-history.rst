@@ -23,6 +23,9 @@ Spot fleet events are delayed by up to 30 seconds before they can be described. 
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotFleetRequestHistory>`_
+
+
 ========
 Synopsis
 ========
@@ -31,13 +34,13 @@ Synopsis
 
     describe-spot-fleet-request-history
   [--dry-run | --no-dry-run]
-  --spot-fleet-request-id <value>
   [--event-type <value>]
-  --start-time <value>
-  [--next-token <value>]
   [--max-results <value>]
+  [--next-token <value>]
+  --spot-fleet-request-id <value>
+  --start-time <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -50,13 +53,6 @@ Options
 
 
   Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
-
-  
-
-``--spot-fleet-request-id`` (string)
-
-
-  The ID of the Spot fleet request.
 
   
 
@@ -82,10 +78,10 @@ Options
 
   
 
-``--start-time`` (timestamp)
+``--max-results`` (integer)
 
 
-  The starting date and time for the events, in UTC format (for example, *YYYY* -*MM* -*DD* T*HH* :*MM* :*SS* Z).
+  The maximum number of results to return in a single call. Specify a value between 1 and 1000. The default value is 1000. To retrieve the remaining results, make another call with the returned ``NextToken`` value.
 
   
 
@@ -96,18 +92,25 @@ Options
 
   
 
-``--max-results`` (integer)
+``--spot-fleet-request-id`` (string)
 
 
-  The maximum number of results to return in a single call. Specify a value between 1 and 1000. The default value is 1000. To retrieve the remaining results, make another call with the returned ``NextToken`` value.
+  The ID of the Spot fleet request.
+
+  
+
+``--start-time`` (timestamp)
+
+
+  The starting date and time for the events, in UTC format (for example, *YYYY* -*MM* -*DD* T*HH* :*MM* :*SS* Z).
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -146,7 +149,7 @@ Output::
         {
             "Timestamp": "2015-05-26T23:21:21.712Z",
             "EventInformation": {
-                "InstanceId": "i-3a52c1cd",
+                "InstanceId": "i-1234567890abcdef0",
                 "EventSubType": "launched"
             },
             "EventType": "instanceChange"
@@ -154,7 +157,7 @@ Output::
         {
             "Timestamp": "2015-05-26T23:21:21.816Z",
             "EventInformation": {
-                "InstanceId": "i-3852c1cf",
+                "InstanceId": "i-1234567890abcdef1",
                 "EventSubType": "launched"
             },
             "EventType": "instanceChange"
@@ -169,40 +172,6 @@ Output::
 ======
 Output
 ======
-
-SpotFleetRequestId -> (string)
-
-  
-
-  The ID of the Spot fleet request.
-
-  
-
-  
-
-StartTime -> (timestamp)
-
-  
-
-  The starting date and time for the events, in UTC format (for example, *YYYY* -*MM* -*DD* T*HH* :*MM* :*SS* Z).
-
-  
-
-  
-
-LastEvaluatedTime -> (timestamp)
-
-  
-
-  The last date and time for the events, in UTC format (for example, *YYYY* -*MM* -*DD* T*HH* :*MM* :*SS* Z). All records up to this time were retrieved.
-
-   
-
-  If ``nextToken`` indicates that there are more results, this value is not present.
-
-  
-
-  
 
 HistoryRecords -> (list)
 
@@ -220,36 +189,6 @@ HistoryRecords -> (list)
 
     
 
-    Timestamp -> (timestamp)
-
-      
-
-      The date and time of the event, in UTC format (for example, *YYYY* -*MM* -*DD* T*HH* :*MM* :*SS* Z).
-
-      
-
-      
-
-    EventType -> (string)
-
-      
-
-      The event type.
-
-       
-
-       
-      * ``error`` - Indicates an error with the Spot fleet request. 
-       
-      * ``fleetRequestChange`` - Indicates a change in the status or configuration of the Spot fleet request. 
-       
-      * ``instanceChange`` - Indicates that an instance was launched or terminated. 
-       
-
-      
-
-      
-
     EventInformation -> (structure)
 
       
@@ -258,11 +197,11 @@ HistoryRecords -> (list)
 
       
 
-      InstanceId -> (string)
+      EventDescription -> (string)
 
         
 
-        The ID of the instance. This information is available only for ``instanceChange`` events.
+        The description of the event.
 
         
 
@@ -332,11 +271,11 @@ HistoryRecords -> (list)
 
         
 
-      EventDescription -> (string)
+      InstanceId -> (string)
 
         
 
-        The description of the event.
+        The ID of the instance. This information is available only for ``instanceChange`` events.
 
         
 
@@ -344,7 +283,51 @@ HistoryRecords -> (list)
 
       
 
+    EventType -> (string)
+
+      
+
+      The event type.
+
+       
+
+       
+      * ``error`` - Indicates an error with the Spot fleet request. 
+       
+      * ``fleetRequestChange`` - Indicates a change in the status or configuration of the Spot fleet request. 
+       
+      * ``instanceChange`` - Indicates that an instance was launched or terminated. 
+       
+
+      
+
+      
+
+    Timestamp -> (timestamp)
+
+      
+
+      The date and time of the event, in UTC format (for example, *YYYY* -*MM* -*DD* T*HH* :*MM* :*SS* Z).
+
+      
+
+      
+
     
+
+  
+
+LastEvaluatedTime -> (timestamp)
+
+  
+
+  The last date and time for the events, in UTC format (for example, *YYYY* -*MM* -*DD* T*HH* :*MM* :*SS* Z). All records up to this time were retrieved.
+
+   
+
+  If ``nextToken`` indicates that there are more results, this value is not present.
+
+  
 
   
 
@@ -353,6 +336,26 @@ NextToken -> (string)
   
 
   The token required to retrieve the next set of results. This value is ``null`` when there are no more results to return.
+
+  
+
+  
+
+SpotFleetRequestId -> (string)
+
+  
+
+  The ID of the Spot fleet request.
+
+  
+
+  
+
+StartTime -> (timestamp)
+
+  
+
+  The starting date and time for the events, in UTC format (for example, *YYYY* -*MM* -*DD* T*HH* :*MM* :*SS* Z).
 
   
 

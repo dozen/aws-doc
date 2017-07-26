@@ -21,24 +21,27 @@ This operation returns information about a job you previously initiated, includi
 
 .. note::
 
-  
+   
 
-  This operation enables you to check the status of your job. However, it is strongly recommended that you set up an Amazon SNS topic and specify it in your initiate job request so that Amazon Glacier can notify the topic after it completes the job. 
+  This operation enables you to check the status of your job. However, it is strongly recommended that you set up an Amazon SNS topic and specify it in your initiate job request so that Amazon Glacier can notify the topic after it completes the job.
 
-  
-
- 
-
-A job ID will not expire for at least 24 hours after Amazon Glacier completes the job. 
+   
 
  
 
-An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see `Access Control Using AWS Identity and Access Management (IAM)`_ .
+A job ID will not expire for at least 24 hours after Amazon Glacier completes the job.
 
  
 
-For information about the underlying REST API, go to `Working with Archives in Amazon Glacier`_ in the *Amazon Glacier Developer Guide* . 
+An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see `Access Control Using AWS Identity and Access Management (IAM) <http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html>`_ .
 
+ 
+
+For information about the underlying REST API, see `Working with Archives in Amazon Glacier <http://docs.aws.amazon.com/amazonglacier/latest/dev/api-describe-job-get.html>`_ in the *Amazon Glacier Developer Guide* . 
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/glacier-2012-06-01/DescribeJob>`_
 
 
 ========
@@ -52,7 +55,7 @@ Synopsis
   --vault-name <value>
   --job-id <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -64,7 +67,7 @@ Options
 ``--account-id`` (string)
 
 
-  The ``AccountId`` value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single apos``-`` apos (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens (apos-apos) in the ID. 
+  The ``AccountId`` value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single '``-`` ' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens ('-') in the ID. 
 
   
 
@@ -83,10 +86,10 @@ Options
   
 
 ``--cli-input-json`` (string)
-Performs service operation based on the JSON job-id provided. The JSON job-id follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
+Performs service operation based on the JSON account-id provided. The JSON account-id follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -124,7 +127,7 @@ JobId -> (string)
 
   
 
-  An opaque job-id that identifies an Amazon Glacier job.
+  An opaque account-id that identifies an Amazon Glacier job.
 
   
 
@@ -174,7 +177,7 @@ CreationDate -> (string)
 
   
 
-  The UTC date when the job was created. A job-id representation of ISO 8601 date format, for example, "2012-03-20T17:03:43.221Z".
+  The UTC date when the job was created. A account-id representation of ISO 8601 date format, for example, "2012-03-20T17:03:43.221Z".
 
   
 
@@ -258,32 +261,32 @@ SHA256TreeHash -> (string)
 
    
 
-  The SHA256 tree hash value for the requested range of an archive. If the Initiate a Job request for an archive specified a tree-hash aligned range, then this field returns a value. 
+  The SHA256 tree hash value for the requested range of an archive. If the Initiate a Job request for an archive specified a tree-hash aligned range, then this field returns a value.
 
    
 
-  For the specific case when the whole archive is retrieved, this value is the same as the ArchiveSHA256TreeHash value. 
+  For the specific case when the whole archive is retrieved, this value is the same as the ArchiveSHA256TreeHash value.
 
    
 
-  This field is null in the following situations: 
-
-   
-  * Archive retrieval jobs that specify a range that is not tree-hash aligned.
-   
+  This field is null in the following situations:
 
    
 
    
-  * Archival jobs that specify a range that is equal to the whole archive and the job status is InProgress.
+  * Archive retrieval jobs that specify a range that is not tree-hash aligned. 
    
 
    
 
    
-  * Inventory jobs.
+  * Archival jobs that specify a range that is equal to the whole archive and the job status is InProgress. 
    
 
+   
+
+   
+  * Inventory jobs. 
    
 
   
@@ -294,7 +297,7 @@ ArchiveSHA256TreeHash -> (string)
 
   
 
-  The SHA256 tree hash of the entire archive for an archive retrieval. For inventory retrieval jobs, this field is null. 
+  The SHA256 tree hash of the entire archive for an archive retrieval. For inventory retrieval jobs, this field is null.
 
   
 
@@ -305,6 +308,16 @@ RetrievalByteRange -> (string)
   
 
   The retrieved byte range for archive retrieval jobs in the form "*StartByteValue* -*EndByteValue* " If no range was specified in the archive retrieval, then the whole archive is retrieved and *StartByteValue* equals 0 and *EndByteValue* equals the size of the archive minus 1. For inventory retrieval jobs this field is null. 
+
+  
+
+  
+
+Tier -> (string)
+
+  
+
+  The retrieval option to use for the archive retrieval. Valid values are ``Expedited`` , ``Standard`` , or ``Bulk`` . ``Standard`` is the default.
 
   
 
@@ -322,7 +335,7 @@ InventoryRetrievalParameters -> (structure)
 
     
 
-    The output format for the vault inventory list, which is set by the **initiate-job** request when initiating a job to retrieve a vault inventory. Valid values are "CSV" and "JSON".
+    The output format for the vault inventory list, which is set by the **initiate-job** request when initiating a job to retrieve a vault inventory. Valid values are ``CSV`` and ``JSON`` .
 
     
 
@@ -332,7 +345,7 @@ InventoryRetrievalParameters -> (structure)
 
     
 
-    The start of the date range in UTC for vault inventory retrieval that includes archives created on or after this date. A job-id representation of ISO 8601 date format, for example, 2013-03-20T17:03:43Z.
+    The start of the date range in Universal Coordinated Time (UTC) for vault inventory retrieval that includes archives created on or after this date. This value should be a account-id in the ISO 8601 date format, for example ``2013-03-20T17:03:43Z`` .
 
     
 
@@ -342,7 +355,7 @@ InventoryRetrievalParameters -> (structure)
 
     
 
-    The end of the date range in UTC for vault inventory retrieval that includes archives created before this date. A job-id representation of ISO 8601 date format, for example, 2013-03-20T17:03:43Z.
+    The end of the date range in UTC for vault inventory retrieval that includes archives created before this date. This value should be a account-id in the ISO 8601 date format, for example ``2013-03-20T17:03:43Z`` .
 
     
 
@@ -352,7 +365,7 @@ InventoryRetrievalParameters -> (structure)
 
     
 
-    Specifies the maximum number of inventory items returned per vault inventory retrieval request. This limit is set when initiating the job with the a **initiate-job** request. 
+    The maximum number of inventory items returned per vault inventory retrieval request. This limit is set when initiating the job with the a **initiate-job** request. 
 
     
 
@@ -362,7 +375,7 @@ InventoryRetrievalParameters -> (structure)
 
     
 
-    An opaque job-id that represents where to continue pagination of the vault inventory retrieval results. You use the marker in a new **initiate-job** request to obtain additional inventory items. If there are no more inventory items, this value is ``null`` . For more information, see `Range Inventory Retrieval`_ .
+    An opaque account-id that represents where to continue pagination of the vault inventory retrieval results. You use the marker in a new **initiate-job** request to obtain additional inventory items. If there are no more inventory items, this value is ``null`` . For more information, see `Range Inventory Retrieval <http://docs.aws.amazon.com/amazonglacier/latest/dev/api-initiate-job-post.html#api-initiate-job-post-vault-inventory-list-filtering>`_ .
 
     
 
@@ -370,8 +383,3 @@ InventoryRetrievalParameters -> (structure)
 
   
 
-
-
-.. _Access Control Using AWS Identity and Access Management (IAM): http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html
-.. _Range Inventory Retrieval: http://docs.aws.amazon.com/amazonglacier/latest/dev/api-initiate-job-post.html#api-initiate-job-post-vault-inventory-list-filtering
-.. _Working with Archives in Amazon Glacier: http://docs.aws.amazon.com/amazonglacier/latest/dev/api-describe-job-get.html

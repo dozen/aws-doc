@@ -15,14 +15,21 @@ Description
 
 
 
-Deletes a DBSnapshot. If the snapshot is being copied, the copy operation is terminated. 
+Deletes a DBSnapshot. If the snapshot is being copied, the copy operation is terminated.
 
  
 
 .. note::
 
+   
+
   The DBSnapshot must be in the ``available`` state to be deleted.
 
+   
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSnapshot>`_
 
 
 ========
@@ -34,7 +41,7 @@ Synopsis
     delete-db-snapshot
   --db-snapshot-identifier <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -46,7 +53,7 @@ Options
 ``--db-snapshot-identifier`` (string)
 
 
-  The DBSnapshot identifier. 
+  The DBSnapshot identifier.
 
    
 
@@ -57,8 +64,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -70,14 +77,14 @@ DBSnapshot -> (structure)
 
   
 
-  Contains the result of a successful invocation of the following actions: 
+  Contains the result of a successful invocation of the following actions:
 
    
 
    
-  *  create-db-snapshot  
+  *  create-db-snapshot   
    
-  *  delete-db-snapshot  
+  *  delete-db-snapshot   
    
 
    
@@ -90,7 +97,7 @@ DBSnapshot -> (structure)
 
     
 
-    Specifies the identifier for the DB snapshot. 
+    Specifies the identifier for the DB snapshot.
 
     
 
@@ -100,7 +107,7 @@ DBSnapshot -> (structure)
 
     
 
-    Specifies the DB instance identifier of the DB instance this DB snapshot was created from. 
+    Specifies the DB instance identifier of the DB instance this DB snapshot was created from.
 
     
 
@@ -110,7 +117,7 @@ DBSnapshot -> (structure)
 
     
 
-    Provides the time when the snapshot was taken, in Universal Coordinated Time (UTC). 
+    Provides the time when the snapshot was taken, in Universal Coordinated Time (UTC).
 
     
 
@@ -120,7 +127,7 @@ DBSnapshot -> (structure)
 
     
 
-    Specifies the name of the database engine. 
+    Specifies the name of the database engine.
 
     
 
@@ -130,7 +137,7 @@ DBSnapshot -> (structure)
 
     
 
-    Specifies the allocated storage size in gigabytes (GB). 
+    Specifies the allocated storage size in gigabytes (GB).
 
     
 
@@ -140,7 +147,7 @@ DBSnapshot -> (structure)
 
     
 
-    Specifies the status of this DB snapshot. 
+    Specifies the status of this DB snapshot.
 
     
 
@@ -150,7 +157,7 @@ DBSnapshot -> (structure)
 
     
 
-    Specifies the port that the database engine was listening on at the time of the snapshot. 
+    Specifies the port that the database engine was listening on at the time of the snapshot.
 
     
 
@@ -160,7 +167,7 @@ DBSnapshot -> (structure)
 
     
 
-    Specifies the name of the Availability Zone the DB instance was located in at the time of the DB snapshot. 
+    Specifies the name of the Availability Zone the DB instance was located in at the time of the DB snapshot.
 
     
 
@@ -170,7 +177,7 @@ DBSnapshot -> (structure)
 
     
 
-    Provides the VPC ID associated with the DB snapshot. 
+    Provides the VPC ID associated with the DB snapshot.
 
     
 
@@ -180,7 +187,7 @@ DBSnapshot -> (structure)
 
     
 
-    Specifies the time when the snapshot was taken, in Universal Coordinated Time (UTC). 
+    Specifies the time when the snapshot was taken, in Universal Coordinated Time (UTC).
 
     
 
@@ -190,7 +197,7 @@ DBSnapshot -> (structure)
 
     
 
-    Provides the master username for the DB snapshot. 
+    Provides the master username for the DB snapshot.
 
     
 
@@ -200,7 +207,7 @@ DBSnapshot -> (structure)
 
     
 
-    Specifies the version of the database engine. 
+    Specifies the version of the database engine.
 
     
 
@@ -210,7 +217,7 @@ DBSnapshot -> (structure)
 
     
 
-    License model information for the restored DB instance. 
+    License model information for the restored DB instance.
 
     
 
@@ -220,7 +227,7 @@ DBSnapshot -> (structure)
 
     
 
-    Provides the type of the DB snapshot. 
+    Provides the type of the DB snapshot.
 
     
 
@@ -230,7 +237,7 @@ DBSnapshot -> (structure)
 
     
 
-    Specifies the Provisioned IOPS (I/O operations per second) value of the DB instance at the time of the snapshot. 
+    Specifies the Provisioned IOPS (I/O operations per second) value of the DB instance at the time of the snapshot.
 
     
 
@@ -240,7 +247,7 @@ DBSnapshot -> (structure)
 
     
 
-    Provides the option group name for the DB snapshot. 
+    Provides the option group name for the DB snapshot.
 
     
 
@@ -250,7 +257,7 @@ DBSnapshot -> (structure)
 
     
 
-    The percentage of the estimated data that has been transferred. 
+    The percentage of the estimated data that has been transferred.
 
     
 
@@ -260,7 +267,7 @@ DBSnapshot -> (structure)
 
     
 
-    The region that the DB snapshot was created in or copied from. 
+    The region that the DB snapshot was created in or copied from.
 
     
 
@@ -270,7 +277,7 @@ DBSnapshot -> (structure)
 
     
 
-    The DB snapshot Arn that the DB snapshot was copied from. It only has value in case of cross customer or cross region copy. 
+    The DB snapshot Arn that the DB snapshot was copied from. It only has value in case of cross customer or cross region copy.
 
     
 
@@ -280,7 +287,7 @@ DBSnapshot -> (structure)
 
     
 
-    Specifies the storage type associated with DB Snapshot. 
+    Specifies the storage type associated with DB snapshot.
 
     
 
@@ -290,7 +297,7 @@ DBSnapshot -> (structure)
 
     
 
-    The ARN from the Key Store with which to associate the instance for TDE encryption. 
+    The ARN from the key store with which to associate the instance for TDE encryption.
 
     
 
@@ -300,7 +307,7 @@ DBSnapshot -> (structure)
 
     
 
-    Specifies whether the DB snapshot is encrypted. 
+    Specifies whether the DB snapshot is encrypted.
 
     
 
@@ -311,6 +318,36 @@ DBSnapshot -> (structure)
     
 
     If ``Encrypted`` is true, the KMS key identifier for the encrypted DB snapshot. 
+
+    
+
+    
+
+  DBSnapshotArn -> (string)
+
+    
+
+    The Amazon Resource Name (ARN) for the DB snapshot.
+
+    
+
+    
+
+  Timezone -> (string)
+
+    
+
+    The time zone of the DB snapshot. In most cases, the ``Timezone`` element is empty. ``Timezone`` content appears only for snapshots taken from Microsoft SQL Server DB instances that were created with a time zone specified. 
+
+    
+
+    
+
+  IAMDatabaseAuthenticationEnabled -> (boolean)
+
+    
+
+    True if mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled; otherwise false.
 
     
 

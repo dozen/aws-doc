@@ -35,6 +35,9 @@ Rule changes are propagated to instances within the security group as quickly as
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RevokeSecurityGroupIngress>`_
+
+
 ========
 Synopsis
 ========
@@ -42,17 +45,17 @@ Synopsis
 ::
 
     revoke-security-group-ingress
-  [--dry-run | --no-dry-run]
-  [--group-name <value>]
   [--group-id <value>]
+  [--group-name <value>]
   [--ip-permissions <value>]
+  [--dry-run | --no-dry-run]
   [--protocol <value>]
   [--port <value>]
   [--cidr <value>]
   [--source-group <value>]
   [--group-owner <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -61,10 +64,10 @@ Synopsis
 Options
 =======
 
-``--dry-run`` | ``--no-dry-run`` (boolean)
+``--group-id`` (string)
 
 
-  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
+  The ID of the security group. Required for a security group in a nondefault VPC.
 
   
 
@@ -72,13 +75,6 @@ Options
 
 
   [EC2-Classic, default VPC] The name of the security group.
-
-  
-
-``--group-id`` (string)
-
-
-  The ID of the security group. Required for a security group in a nondefault VPC.
 
   
 
@@ -93,7 +89,7 @@ Options
 
 Shorthand Syntax::
 
-    IpProtocol=string,FromPort=integer,ToPort=integer,UserIdGroupPairs=[{UserId=string,GroupName=string,GroupId=string},{UserId=string,GroupName=string,GroupId=string}],IpRanges=[{CidrIp=string},{CidrIp=string}],PrefixListIds=[{PrefixListId=string},{PrefixListId=string}] ...
+    FromPort=integer,IpProtocol=string,IpRanges=[{CidrIp=string},{CidrIp=string}],Ipv6Ranges=[{CidrIpv6=string},{CidrIpv6=string}],PrefixListIds=[{PrefixListId=string},{PrefixListId=string}],ToPort=integer,UserIdGroupPairs=[{GroupId=string,GroupName=string,PeeringStatus=string,UserId=string,VpcId=string,VpcPeeringConnectionId=string},{GroupId=string,GroupName=string,PeeringStatus=string,UserId=string,VpcId=string,VpcPeeringConnectionId=string}] ...
 
 
 
@@ -102,26 +98,35 @@ JSON Syntax::
 
   [
     {
-      "IpProtocol": "string",
       "FromPort": integer,
-      "ToPort": integer,
-      "UserIdGroupPairs": [
-        {
-          "UserId": "string",
-          "GroupName": "string",
-          "GroupId": "string"
-        }
-        ...
-      ],
+      "IpProtocol": "string",
       "IpRanges": [
         {
           "CidrIp": "string"
         }
         ...
       ],
+      "Ipv6Ranges": [
+        {
+          "CidrIpv6": "string"
+        }
+        ...
+      ],
       "PrefixListIds": [
         {
           "PrefixListId": "string"
+        }
+        ...
+      ],
+      "ToPort": integer,
+      "UserIdGroupPairs": [
+        {
+          "GroupId": "string",
+          "GroupName": "string",
+          "PeeringStatus": "string",
+          "UserId": "string",
+          "VpcId": "string",
+          "VpcPeeringConnectionId": "string"
         }
         ...
       ]
@@ -131,14 +136,25 @@ JSON Syntax::
 
 
 
-``--protocol`` (string)
+``--dry-run`` | ``--no-dry-run`` (boolean)
 
 
-  The IP protocol of this permission.
+  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
 
   
 
-  Valid protocol values: ``tcp`` , ``udp`` , ``icmp`` 
+``--protocol`` (string)
+
+
+  The IP protocol: ``tcp`` | ``udp`` | ``icmp`` 
+
+   
+
+  (VPC only) Use ``all`` to specify all protocols.
+
+  
+
+  If this argument is provided without also providing the ``port`` argument, then it will be applied to all ports for the specified protocol.
 
   
 
@@ -177,8 +193,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 

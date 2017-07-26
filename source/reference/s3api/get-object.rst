@@ -15,6 +15,9 @@ Description
 
 Retrieves objects from Amazon S3.
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObject>`_
+
+
 ========
 Synopsis
 ========
@@ -40,6 +43,7 @@ Synopsis
   [--sse-customer-key <value>]
   [--sse-customer-key-md5 <value>]
   [--request-payer <value>]
+  [--part-number <value>]
   outfile <value>
 
 
@@ -112,6 +116,9 @@ Confirms that the requester knows that she or he will be charged for the request
 
   
 
+``--part-number`` (integer)
+Part number of the object being read. This is a positive integer between 1 and 10,000. Effectively performs a 'ranged' GET request for the part specified. Useful for downloading just a part of an object.
+
 ``outfile`` (string)
 Filename where the content will be saved
 
@@ -172,7 +179,7 @@ LastModified -> (timestamp)
 
   
 
-ContentLength -> (integer)
+ContentLength -> (long)
 
   Size of the body in bytes.
 
@@ -301,6 +308,18 @@ RequestCharged -> (string)
 ReplicationStatus -> (string)
 
   
+
+  
+
+PartsCount -> (integer)
+
+  The count of parts this object has.
+
+  
+
+TagCount -> (integer)
+
+  The number of tags, if any, on the object.
 
   
 

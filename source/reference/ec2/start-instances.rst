@@ -31,8 +31,11 @@ Performing this operation on an instance that uses an instance store as its root
 
  
 
-For more information, see `Stopping Instances`_ in the *Amazon Elastic Compute Cloud User Guide* .
+For more information, see `Stopping Instances <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html>`_ in the *Amazon Elastic Compute Cloud User Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/StartInstances>`_
 
 
 ========
@@ -46,7 +49,7 @@ Synopsis
   [--additional-info <value>]
   [--dry-run | --no-dry-run]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -87,8 +90,8 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -102,14 +105,14 @@ This example starts the specified Amazon EBS-backed instance.
 
 Command::
 
-  aws ec2 start-instances --instance-ids i-1a2b3c4d
+  aws ec2 start-instances --instance-ids i-1234567890abcdef0
 
 Output::
 
     {
         "StartingInstances": [
             {
-                "InstanceId": "i-1a2b3c4d",
+                "InstanceId": "i-1234567890abcdef0",
                 "CurrentState": {
                     "Code": 0,
                     "Name": "pending"
@@ -148,16 +151,6 @@ StartingInstances -> (list)
 
     
 
-    InstanceId -> (string)
-
-      
-
-      The ID of the instance.
-
-      
-
-      
-
     CurrentState -> (structure)
 
       
@@ -175,17 +168,17 @@ StartingInstances -> (list)
          
 
          
-        * ``0`` : ``pending`` 
+        * ``0`` : ``pending``   
          
-        * ``16`` : ``running`` 
+        * ``16`` : ``running``   
          
-        * ``32`` : ``shutting-down`` 
+        * ``32`` : ``shutting-down``   
          
-        * ``48`` : ``terminated`` 
+        * ``48`` : ``terminated``   
          
-        * ``64`` : ``stopping`` 
+        * ``64`` : ``stopping``   
          
-        * ``80`` : ``stopped`` 
+        * ``80`` : ``stopped``   
          
 
         
@@ -201,6 +194,16 @@ StartingInstances -> (list)
         
 
         
+
+      
+
+    InstanceId -> (string)
+
+      
+
+      The ID of the instance.
+
+      
 
       
 
@@ -221,17 +224,17 @@ StartingInstances -> (list)
          
 
          
-        * ``0`` : ``pending`` 
+        * ``0`` : ``pending``   
          
-        * ``16`` : ``running`` 
+        * ``16`` : ``running``   
          
-        * ``32`` : ``shutting-down`` 
+        * ``32`` : ``shutting-down``   
          
-        * ``48`` : ``terminated`` 
+        * ``48`` : ``terminated``   
          
-        * ``64`` : ``stopping`` 
+        * ``64`` : ``stopping``   
          
-        * ``80`` : ``stopped`` 
+        * ``80`` : ``stopped``   
          
 
         
@@ -254,6 +257,3 @@ StartingInstances -> (list)
 
   
 
-
-
-.. _Stopping Instances: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html

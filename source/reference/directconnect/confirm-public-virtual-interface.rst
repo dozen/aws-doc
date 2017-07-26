@@ -23,6 +23,9 @@ After the virtual interface owner calls this function, the specified virtual int
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmPublicVirtualInterface>`_
+
+
 ========
 Synopsis
 ========
@@ -32,7 +35,7 @@ Synopsis
     confirm-public-virtual-interface
   --virtual-interface-id <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -44,7 +47,7 @@ Options
 ``--virtual-interface-id`` (string)
 
 
-  ID of the virtual interface.
+  The ID of the virtual interface.
 
    
 
@@ -59,10 +62,26 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
+
+========
+Examples
+========
+
+**To accept ownership of a public virtual interface**
+
+The following ``confirm-public-virtual-interface`` command accepts ownership of a public virtual interface created by another customer::
+
+  aws directconnect confirm-public-virtual-interface --virtual-interface-id dxvif-fg9xo9vp
+
+Output::
+
+  {
+      "virtualInterfaceState": "verifying"
+  }
 
 ======
 Output
@@ -70,24 +89,28 @@ Output
 
 virtualInterfaceState -> (string)
 
-  State of the virtual interface. 
+  
+
+  State of the virtual interface.
 
    
-  * **Confirming** : The creation of the virtual interface is pending confirmation from the virtual interface owner. If the owner of the virtual interface is different from the owner of the connection on which it is provisioned, then the virtual interface will remain in this state until it is confirmed by the virtual interface owner.
+
    
-  * **Verifying** : This state only applies to public virtual interfaces. Each public virtual interface needs validation before the virtual interface can be created.
+  * **Confirming** : The creation of the virtual interface is pending confirmation from the virtual interface owner. If the owner of the virtual interface is different from the owner of the connection on which it is provisioned, then the virtual interface will remain in this state until it is confirmed by the virtual interface owner. 
    
-  * **Pending** : A virtual interface is in this state from the time that it is created until the virtual interface is ready to forward traffic.
+  * **Verifying** : This state only applies to public virtual interfaces. Each public virtual interface needs validation before the virtual interface can be created. 
    
-  * **Available** : A virtual interface that is able to forward traffic.
+  * **Pending** : A virtual interface is in this state from the time that it is created until the virtual interface is ready to forward traffic. 
    
-  * **Down** : A virtual interface that is BGP down.
+  * **Available** : A virtual interface that is able to forward traffic. 
    
-  * **Deleting** : A virtual interface is in this state immediately after calling *delete-virtual-interface* until it can no longer forward traffic.
+  * **Down** : A virtual interface that is BGP down. 
    
-  * **Deleted** : A virtual interface that cannot forward traffic.
+  * **Deleting** : A virtual interface is in this state immediately after calling  delete-virtual-interface until it can no longer forward traffic. 
    
-  * **Rejected** : The virtual interface owner has declined creation of the virtual interface. If a virtual interface in the 'Confirming' state is deleted by the virtual interface owner, the virtual interface will enter the 'Rejected' state.
+  * **Deleted** : A virtual interface that cannot forward traffic. 
+   
+  * **Rejected** : The virtual interface owner has declined creation of the virtual interface. If a virtual interface in the 'Confirming' state is deleted by the virtual interface owner, the virtual interface will enter the 'Rejected' state. 
    
 
   

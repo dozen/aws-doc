@@ -15,8 +15,11 @@ Description
 
 
 
-Lists the Amazon CloudWatch Events rules in your account. You can either list all the rules or you can provide a prefix to match to the rule names. If you have more rules in your account than the given limit, the results will be paginated. In that case, use the next token returned in the response and repeat the list-rules action until the next-token in the response is returned as null.
+Lists your Amazon CloudWatch Events rules. You can either list all the rules or you can provide a prefix to match to the rule names.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListRules>`_
 
 
 ========
@@ -30,7 +33,7 @@ Synopsis
   [--next-token <value>]
   [--limit <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -49,7 +52,7 @@ Options
 ``--next-token`` (string)
 
 
-  The token returned by a previous call to indicate that there is more data available.
+  The token returned by a previous call to retrieve the next set of results.
 
   
 
@@ -63,9 +66,26 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
+
+
+========
+Examples
+========
+
+**To display a list of all CloudWatch Events rules**
+
+This example displays all CloudWatch Events rules in the region::
+
+  aws events list-rules
+
+**To display a list of CloudWatch Events rules beginning with a certain string.**
+
+This example displays all CloudWatch Events rules in the region that have a name starting with "Daily"::
+
+  aws events list-rules --name-prefix "Daily"
 
 
 ======
@@ -76,7 +96,7 @@ Rules -> (list)
 
   
 
-  List of rules matching the specified criteria.
+  The rules that match the specified criteria.
 
   
 
@@ -84,7 +104,7 @@ Rules -> (list)
 
     
 
-    Contains information about a rule in Amazon CloudWatch Events. A ListRulesResult contains a list of Rules.
+    Contains information about a rule in Amazon CloudWatch Events.
 
     
 
@@ -92,7 +112,7 @@ Rules -> (list)
 
       
 
-      The rule's name.
+      The name of the rule.
 
       
 
@@ -112,7 +132,7 @@ Rules -> (list)
 
       
 
-      The event pattern of the rule.
+      The event pattern of the rule. For more information, see `Events and Event Patterns <http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html>`_ in the *Amazon CloudWatch Events User Guide* .
 
       
 
@@ -122,7 +142,7 @@ Rules -> (list)
 
       
 
-      The rule's state.
+      The state of the rule.
 
       
 
@@ -152,7 +172,7 @@ Rules -> (list)
 
       
 
-      The Amazon Resource Name (ARN) associated with the role that is used for target invocation.
+      The Amazon Resource Name (ARN) of the role that is used for target invocation.
 
       
 
@@ -166,7 +186,7 @@ NextToken -> (string)
 
   
 
-  Indicates that there are additional results to retrieve.
+  Indicates whether there are additional results to retrieve. If there are no more results, the value is null.
 
   
 

@@ -19,8 +19,11 @@ Describes the specified attribute of the specified volume. You can specify only 
 
  
 
-For more information about EBS volumes, see `Amazon EBS Volumes`_ in the *Amazon Elastic Compute Cloud User Guide* .
+For more information about EBS volumes, see `Amazon EBS Volumes <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumes.html>`_ in the *Amazon Elastic Compute Cloud User Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumeAttribute>`_
 
 
 ========
@@ -30,11 +33,11 @@ Synopsis
 ::
 
     describe-volume-attribute
-  [--dry-run | --no-dry-run]
-  --volume-id <value>
   [--attribute <value>]
+  --volume-id <value>
+  [--dry-run | --no-dry-run]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -43,24 +46,10 @@ Synopsis
 Options
 =======
 
-``--dry-run`` | ``--no-dry-run`` (boolean)
-
-
-  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
-
-  
-
-``--volume-id`` (string)
-
-
-  The ID of the volume.
-
-  
-
 ``--attribute`` (string)
 
 
-  The instance attribute.
+  The attribute of the volume. This parameter is required.
 
   
 
@@ -76,11 +65,25 @@ Options
 
   
 
+``--volume-id`` (string)
+
+
+  The ID of the volume.
+
+  
+
+``--dry-run`` | ``--no-dry-run`` (boolean)
+
+
+  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
+
+  
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -90,11 +93,11 @@ Examples
 
 **To describe a volume attribute**
 
-This example command describes the ``autoEnableIo`` attribute of the volume with the ID ``vol-2725bc51``.
+This example command describes the ``autoEnableIo`` attribute of the volume with the ID ``vol-049df61146c4d7901``.
 
 Command::
 
-  aws ec2 describe-volume-attribute --volume-id vol-2725bc51 --attribute autoEnableIO
+  aws ec2 describe-volume-attribute --volume-id vol-049df61146c4d7901 --attribute autoEnableIO
 
 Output::
 
@@ -102,23 +105,13 @@ Output::
        "AutoEnableIO": {
            "Value": false
        },
-       "ProductCodes": [],
-       "VolumeId": "vol-2725bc51"
+       "VolumeId": "vol-049df61146c4d7901"
    }
+
 
 ======
 Output
 ======
-
-VolumeId -> (string)
-
-  
-
-  The ID of the volume.
-
-  
-
-  
 
 AutoEnableIO -> (structure)
 
@@ -132,7 +125,7 @@ AutoEnableIO -> (structure)
 
     
 
-    Valid values are ``true`` or ``false`` .
+    The attribute value. The valid values are ``true`` or ``false`` .
 
     
 
@@ -180,6 +173,13 @@ ProductCodes -> (list)
 
   
 
+VolumeId -> (string)
 
+  
 
-.. _Amazon EBS Volumes: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumes.html
+  The ID of the volume.
+
+  
+
+  
+

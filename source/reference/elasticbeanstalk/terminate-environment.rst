@@ -15,8 +15,11 @@ Description
 
 
 
-Terminates the specified environment. 
+Terminates the specified environment.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/TerminateEnvironment>`_
 
 
 ========
@@ -31,7 +34,7 @@ Synopsis
   [--terminate-resources | --no-terminate-resources]
   [--force-terminate | --no-force-terminate]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -65,7 +68,7 @@ Options
 ``--terminate-resources`` | ``--no-terminate-resources`` (boolean)
 
 
-  Indicates whether the associated AWS resources should shut down when the environment is terminated: 
+  Indicates whether the associated AWS resources should shut down when the environment is terminated:
 
    
 
@@ -77,7 +80,7 @@ Options
 
    
 
-  For more information, see the `AWS Elastic Beanstalk User Guide.`_  
+  For more information, see the `AWS Elastic Beanstalk User Guide. <http://docs.aws.amazon.com/elasticbeanstalk/latest/ug/>`_  
 
    
 
@@ -99,8 +102,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -154,7 +157,7 @@ EnvironmentId -> (string)
 
   
 
-  The ID of this environment. 
+  The ID of this environment.
 
   
 
@@ -190,11 +193,21 @@ SolutionStackName -> (string)
 
   
 
+PlatformArn -> (string)
+
+  
+
+  The ARN of the custom platform.
+
+  
+
+  
+
 TemplateName -> (string)
 
   
 
-  The name of the configuration template used to originally launch this environment. 
+  The name of the configuration template used to originally launch this environment.
 
   
 
@@ -224,7 +237,7 @@ CNAME -> (string)
 
   
 
-  The URL to the CNAME for this environment. 
+  The URL to the CNAME for this environment.
 
   
 
@@ -254,7 +267,7 @@ Status -> (string)
 
   
 
-  The current operational status of the environment: 
+  The current operational status of the environment:
 
    
 
@@ -296,7 +309,7 @@ Health -> (string)
 
   
 
-  Describes the health status of the environment. AWS Elastic Beanstalk indicates the failure levels for a running environment: 
+  Describes the health status of the environment. AWS Elastic Beanstalk indicates the failure levels for a running environment:
 
    
 
@@ -322,7 +335,7 @@ HealthStatus -> (string)
 
   
 
-  Returns the health status of the application running in your environment. For more information, see `Health Colors and Statuses`_ .
+  Returns the health status of the application running in your environment. For more information, see `Health Colors and Statuses <http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html>`_ .
 
   
 
@@ -460,7 +473,7 @@ EnvironmentLinks -> (list)
 
     
 
-    A link to another environment, defined in the environment's manifest. Links provide connection information in system properties that can be used to connect to another environment in the same group. See `Environment Manifest (env.yaml)`_ for details.
+    A link to another environment, defined in the environment's manifest. Links provide connection information in system properties that can be used to connect to another environment in the same group. See `Environment Manifest (env.yaml) <http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html>`_ for details.
 
     
 
@@ -488,8 +501,3 @@ EnvironmentLinks -> (list)
 
   
 
-
-
-.. _Environment Manifest (env.yaml): http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-mgmt-compose.html#environment-mgmt-compose-envyaml
-.. _AWS Elastic Beanstalk User Guide.: http://docs.aws.amazon.com/elasticbeanstalk/latest/ug/
-.. _Health Colors and Statuses: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html

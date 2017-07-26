@@ -15,18 +15,15 @@ Description
 
 
 
-Deletes the specified tags from a file system. If the ``delete-tags`` request includes a tag key that does not exist, Amazon EFS ignores it; it is not an error. For more information about tags and related restrictions, go to `Tag Restrictions`_ in the *AWS Billing and Cost Management User Guide* .
+Deletes the specified tags from a file system. If the ``delete-tags`` request includes a tag key that does not exist, Amazon EFS ignores it and doesn't cause an error. For more information about tags and related restrictions, see `Tag Restrictions <http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html>`_ in the *AWS Billing and Cost Management User Guide* .
 
  
 
-This operation requires permission for the ``elasticfilesystem:DeleteTags`` action.
+This operation requires permissions for the ``elasticfilesystem:DeleteTags`` action.
 
 
 
-.. note::
-
-  **AWS CLI support for this service is only available in a preview stage.** You can enable this service by running: ``aws configure set preview.efs true`` 
-
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteTags>`_
 
 
 ========
@@ -39,7 +36,7 @@ Synopsis
   --file-system-id <value>
   --tag-keys <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -51,14 +48,14 @@ Options
 ``--file-system-id`` (string)
 
 
-  String. The ID of the file system whose tags you want to delete.
+  ID of the file system whose tags you want to delete (String).
 
   
 
 ``--tag-keys`` (list)
 
 
-  A list of tag keys to delete.
+  List of tag keys to delete.
 
   
 
@@ -73,8 +70,8 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -83,5 +80,3 @@ Output
 ======
 
 None
-
-.. _Tag Restrictions: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html

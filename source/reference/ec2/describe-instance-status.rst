@@ -15,7 +15,7 @@ Description
 
 
 
-Describes the status of one or more instances.
+Describes the status of one or more instances. By default, only running instances are described, unless you specifically indicate to return the status of all instances.
 
  
 
@@ -24,13 +24,16 @@ Instance status includes the following components:
  
 
  
-* **Status checks** - Amazon EC2 performs status checks on running EC2 instances to identify hardware and software issues. For more information, see `Status Checks for Your Instances`_ and `Troubleshooting Instances with Failed Status Checks`_ in the *Amazon Elastic Compute Cloud User Guide* .
+* **Status checks** - Amazon EC2 performs status checks on running EC2 instances to identify hardware and software issues. For more information, see `Status Checks for Your Instances <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-system-instance-status-check.html>`_ and `Troubleshooting Instances with Failed Status Checks <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstances.html>`_ in the *Amazon Elastic Compute Cloud User Guide* . 
  
-* **Scheduled events** - Amazon EC2 can schedule events (such as reboot, stop, or terminate) for your instances related to hardware issues, software updates, or system maintenance. For more information, see `Scheduled Events for Your Instances`_ in the *Amazon Elastic Compute Cloud User Guide* . 
+* **Scheduled events** - Amazon EC2 can schedule events (such as reboot, stop, or terminate) for your instances related to hardware issues, software updates, or system maintenance. For more information, see `Scheduled Events for Your Instances <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-instances-status-check_sched.html>`_ in the *Amazon Elastic Compute Cloud User Guide* . 
  
-* **Instance state** - You can manage your instances from the moment you launch them through their termination. For more information, see `Instance Lifecycle`_ in the *Amazon Elastic Compute Cloud User Guide* . 
+* **Instance state** - You can manage your instances from the moment you launch them through their termination. For more information, see `Instance Lifecycle <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html>`_ in the *Amazon Elastic Compute Cloud User Guide* . 
  
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceStatus>`_
 
 
 ``describe-instance-status`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
@@ -44,15 +47,15 @@ Synopsis
 ::
 
     describe-instance-status
-  [--dry-run | --no-dry-run]
-  [--instance-ids <value>]
   [--filters <value>]
+  [--instance-ids <value>]
+  [--dry-run | --no-dry-run]
   [--include-all-instances | --no-include-all-instances]
   [--cli-input-json <value>]
   [--starting-token <value>]
   [--page-size <value>]
   [--max-items <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -60,36 +63,6 @@ Synopsis
 =======
 Options
 =======
-
-``--dry-run`` | ``--no-dry-run`` (boolean)
-
-
-  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
-
-  
-
-``--instance-ids`` (list)
-
-
-  One or more instance IDs.
-
-   
-
-  Default: Describes all your instances.
-
-   
-
-  Constraints: Maximum 100 explicitly specified instance IDs.
-
-  
-
-
-
-Syntax::
-
-  "string" "string" ...
-
-
 
 ``--filters`` (list)
 
@@ -145,6 +118,36 @@ JSON Syntax::
 
 
 
+``--instance-ids`` (list)
+
+
+  One or more instance IDs.
+
+   
+
+  Default: Describes all your instances.
+
+   
+
+  Constraints: Maximum 100 explicitly specified instance IDs.
+
+  
+
+
+
+Syntax::
+
+  "string" "string" ...
+
+
+
+``--dry-run`` | ``--no-dry-run`` (boolean)
+
+
+  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
+
+  
+
 ``--include-all-instances`` | ``--no-include-all-instances`` (boolean)
 
 
@@ -152,7 +155,7 @@ JSON Syntax::
 
    
 
-  Default: ``false`` 
+  Default: ``false``  
 
   
 
@@ -166,26 +169,34 @@ Performs service operation based on the JSON string provided. The JSON string fo
 
    
 
-``--page-size`` (integer)
- 
-
-  The size of each page.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
    
 
-  
+``--page-size`` (integer)
+ 
 
-  
+  The size of each page to get in the AWS service call. This does not affect the number of items returned in the command's output. Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call. This can help prevent the AWS service calls from timing out.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
 
 ``--max-items`` (integer)
  
 
-  The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination. This ``NextToken`` response element should **not** be used directly outside of the AWS CLI.
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``NextToken`` is provided in the command's output. To resume pagination, provide the ``NextToken`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``NextToken`` response element directly outside of the AWS CLI.
 
    
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -199,14 +210,14 @@ This example describes the current status of the specified instance.
 
 Command::
 
-  aws ec2 describe-instance-status --instance-id i-5203422c
+  aws ec2 describe-instance-status --instance-id i-1234567890abcdef0
 
 Output::
 
   {
       "InstanceStatuses": [
           {
-              "InstanceId": "i-5203422c",
+              "InstanceId": "i-1234567890abcdef0",
               "InstanceState": {
                   "Code": 16,
                   "Name": "running"
@@ -254,16 +265,6 @@ InstanceStatuses -> (list)
     Describes the status of an instance.
 
     
-
-    InstanceId -> (string)
-
-      
-
-      The ID of the instance.
-
-      
-
-      
 
     AvailabilityZone -> (string)
 
@@ -315,16 +316,6 @@ InstanceStatuses -> (list)
 
           
 
-        NotBefore -> (timestamp)
-
-          
-
-          The earliest scheduled start time for the event.
-
-          
-
-          
-
         NotAfter -> (timestamp)
 
           
@@ -335,7 +326,27 @@ InstanceStatuses -> (list)
 
           
 
+        NotBefore -> (timestamp)
+
+          
+
+          The earliest scheduled start time for the event.
+
+          
+
+          
+
         
+
+      
+
+    InstanceId -> (string)
+
+      
+
+      The ID of the instance.
+
+      
 
       
 
@@ -356,17 +367,17 @@ InstanceStatuses -> (list)
          
 
          
-        * ``0`` : ``pending`` 
+        * ``0`` : ``pending``   
          
-        * ``16`` : ``running`` 
+        * ``16`` : ``running``   
          
-        * ``32`` : ``shutting-down`` 
+        * ``32`` : ``shutting-down``   
          
-        * ``48`` : ``terminated`` 
+        * ``48`` : ``terminated``   
          
-        * ``64`` : ``stopping`` 
+        * ``64`` : ``stopping``   
          
-        * ``80`` : ``stopped`` 
+        * ``80`` : ``stopped``   
          
 
         
@@ -385,76 +396,6 @@ InstanceStatuses -> (list)
 
       
 
-    SystemStatus -> (structure)
-
-      
-
-      Reports impaired functionality that stems from issues related to the systems that support an instance, such as hardware failures and network connectivity problems.
-
-      
-
-      Status -> (string)
-
-        
-
-        The status.
-
-        
-
-        
-
-      Details -> (list)
-
-        
-
-        The system instance health or application instance health.
-
-        
-
-        (structure)
-
-          
-
-          Describes the instance status.
-
-          
-
-          Name -> (string)
-
-            
-
-            The type of instance status.
-
-            
-
-            
-
-          Status -> (string)
-
-            
-
-            The status.
-
-            
-
-            
-
-          ImpairedSince -> (timestamp)
-
-            
-
-            The time when a status check failed. For an instance that was launched and impaired, this is the time when the instance was launched.
-
-            
-
-            
-
-          
-
-        
-
-      
-
     InstanceStatus -> (structure)
 
       
@@ -463,16 +404,6 @@ InstanceStatuses -> (list)
 
       
 
-      Status -> (string)
-
-        
-
-        The status.
-
-        
-
-        
-
       Details -> (list)
 
         
@@ -488,6 +419,16 @@ InstanceStatuses -> (list)
           Describes the instance status.
 
           
+
+          ImpairedSince -> (timestamp)
+
+            
+
+            The time when a status check failed. For an instance that was launched and impaired, this is the time when the instance was launched.
+
+            
+
+            
 
           Name -> (string)
 
@@ -509,6 +450,46 @@ InstanceStatuses -> (list)
 
             
 
+          
+
+        
+
+      Status -> (string)
+
+        
+
+        The status.
+
+        
+
+        
+
+      
+
+    SystemStatus -> (structure)
+
+      
+
+      Reports impaired functionality that stems from issues related to the systems that support an instance, such as hardware failures and network connectivity problems.
+
+      
+
+      Details -> (list)
+
+        
+
+        The system instance health or application instance health.
+
+        
+
+        (structure)
+
+          
+
+          Describes the instance status.
+
+          
+
           ImpairedSince -> (timestamp)
 
             
@@ -519,7 +500,37 @@ InstanceStatuses -> (list)
 
             
 
+          Name -> (string)
+
+            
+
+            The type of instance status.
+
+            
+
+            
+
+          Status -> (string)
+
+            
+
+            The status.
+
+            
+
+            
+
           
+
+        
+
+      Status -> (string)
+
+        
+
+        The status.
+
+        
 
         
 
@@ -539,9 +550,3 @@ NextToken -> (string)
 
   
 
-
-
-.. _Scheduled Events for Your Instances: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-instances-status-check_sched.html
-.. _Instance Lifecycle: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html
-.. _Status Checks for Your Instances: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-system-instance-status-check.html
-.. _Troubleshooting Instances with Failed Status Checks: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstances.html

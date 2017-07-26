@@ -15,16 +15,23 @@ Description
 
 
 
-Creates a load balancer.
+Creates a Classic Load Balancer.
 
  
 
-If the call completes successfully, a new load balancer is created with a unique Domain Name Service (DNS) name. The load balancer receives incoming traffic and routes it to the registered instances. For more information, see `How Elastic Load Balancing Works`_ in the *Elastic Load Balancing Developer Guide* .
+You can add listeners, security groups, subnets, and tags when you create your load balancer, or you can add them later using  create-load-balancer-listeners ,  apply-security-groups-to-load-balancer ,  attach-load-balancer-to-subnets , and  add-tags .
 
  
 
-You can create up to 20 load balancers per region per account. You can request an increase for the number of load balancers for your account. For more information, see `Elastic Load Balancing Limits`_ in the *Elastic Load Balancing Developer Guide* .
+To describe your current load balancers, see  describe-load-balancers . When you are finished with a load balancer, you can delete it using  delete-load-balancer .
 
+ 
+
+You can create up to 20 load balancers per region per account. You can request an increase for the number of load balancers for your account. For more information, see `Limits for Your Classic Load Balancer <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-limits.html>`_ in the *Classic Load Balancer Guide* .
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateLoadBalancer>`_
 
 
 ========
@@ -42,7 +49,7 @@ Synopsis
   [--scheme <value>]
   [--tags <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -69,7 +76,7 @@ Options
 
    
 
-  For more information, see `listeners for Your Load Balancer`_ in the *Elastic Load Balancing Developer Guide* .
+  For more information, see `listeners for Your Classic Load Balancer <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html>`_ in the *Classic Load Balancer Guide* .
 
   
 
@@ -100,7 +107,7 @@ JSON Syntax::
 ``--availability-zones`` (list)
 
 
-  One or more Availability Zones from the same region as the load balancer. Traffic is equally distributed across all specified Availability Zones.
+  One or more Availability Zones from the same region as the load balancer.
 
    
 
@@ -157,11 +164,11 @@ Syntax::
 
    
 
-  By default, Elastic Load Balancing creates an Internet-facing load balancer with a publicly resolvable DNS name, which resolves to public IP addresses. For more information about Internet-facing and Internal load balancers, see `Internet-facing and Internal Load Balancers`_ in the *Elastic Load Balancing Developer Guide* .
+  By default, Elastic Load Balancing creates an Internet-facing load balancer with a DNS name that resolves to public IP addresses. For more information about Internet-facing and Internal load balancers, see `Load Balancer Scheme <http://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/how-elastic-load-balancing-works.html#load-balancer-scheme>`_ in the *Elastic Load Balancing User Guide* .
 
    
 
-  Specify ``internal`` to create an internal load balancer with a DNS name that resolves to private IP addresses.
+  Specify ``internal`` to create a load balancer with a DNS name that resolves to private IP addresses.
 
   
 
@@ -172,7 +179,7 @@ Syntax::
 
    
 
-  For more information about tagging your load balancer, see `Tagging`_ in the *Elastic Load Balancing Developer Guide* .
+  For more information about tagging your load balancer, see `Tag Your Classic Load Balancer <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/add-remove-tags.html>`_ in the *Classic Load Balancer Guide* .
 
   
 
@@ -200,8 +207,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -211,7 +218,7 @@ Examples
 
 **To create an HTTP load balancer**
 
-This example creates an HTTP load balancer in a VPC.
+This example creates a load balancer with an HTTP listener in a VPC.
 
 Command::
 
@@ -224,7 +231,7 @@ Output::
   }
 
 
-This example creates an HTTP load balancer in EC2-Classic.
+This example creates a load balancer with an HTTP listener in EC2-Classic.
 
 Command::
 
@@ -238,11 +245,11 @@ Output::
 
 **To create an HTTPS load balancer**
 
-This example creates an HTTPS load balancer in a VPC.
+This example creates a load balancer with an HTTPS listener in a VPC.
 
 Command::
 
-  aws elb create-load-balancer --load-balancer-name my-load-balancer --listeners "Protocol=HTTP,LoadBalancerPort=80,InstanceProtocol=HTTP,InstancePort=80" "Protocol=HTTPS,LoadBalancerPort=443,InstanceProtocol=HTTPS,InstancePort=443,SSLCertificateId=arn:aws:iam::123456789012:server-certificate/my-server-cert" --subnets subnet-15aaab61 --security-groups sg-a61988c3
+  aws elb create-load-balancer --load-balancer-name my-load-balancer --listeners "Protocol=HTTP,LoadBalancerPort=80,InstanceProtocol=HTTP,InstancePort=80" "Protocol=HTTPS,LoadBalancerPort=443,InstanceProtocol=HTTP,InstancePort=80,SSLCertificateId=arn:aws:iam::123456789012:server-certificate/my-server-cert" --subnets subnet-15aaab61 --security-groups sg-a61988c3
 
 Output::
 
@@ -250,11 +257,11 @@ Output::
       "DNSName": "my-load-balancer-1234567890.us-west-2.elb.amazonaws.com"
   }
 
-This example creates an HTTPS load balancer in EC2-Classic.
+This example creates a load balancer with an HTTPS listener in EC2-Classic.
 
 Command::
 
-  aws elb create-load-balancer --load-balancer-name my-load-balancer --listeners "Protocol=HTTP,LoadBalancerPort=80,InstanceProtocol=HTTP,InstancePort=80" "Protocol=HTTPS,LoadBalancerPort=443,InstanceProtocol=HTTPS,InstancePort=443,SSLCertificateId=arn:aws:iam::123456789012:server-certificate/my-server-cert" --availability-zones us-west-2a us-west-2b
+  aws elb create-load-balancer --load-balancer-name my-load-balancer --listeners "Protocol=HTTP,LoadBalancerPort=80,InstanceProtocol=HTTP,InstancePort=80" "Protocol=HTTPS,LoadBalancerPort=443,InstanceProtocol=HTTP,InstancePort=80,SSLCertificateId=arn:aws:iam::123456789012:server-certificate/my-server-cert" --availability-zones us-west-2a us-west-2b
 
 Output::
 
@@ -264,7 +271,7 @@ Output::
 
 **To create an internal load balancer**
 
-This example creates an internal HTTP load balancer in a VPC.
+This example creates an internal load balancer with an HTTP listener in a VPC.
 
 Command::
 
@@ -292,10 +299,3 @@ DNSName -> (string)
 
   
 
-
-
-.. _listeners for Your Load Balancer: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/elb-listener-config.html
-.. _Tagging: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/TerminologyandKeyConcepts.html#tagging-elb
-.. _Internet-facing and Internal Load Balancers: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/vpc-loadbalancer-types.html
-.. _How Elastic Load Balancing Works: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/how-elb-works.html
-.. _Elastic Load Balancing Limits: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/elb-limits.html

@@ -15,8 +15,11 @@ Description
 
 
 
-Sets the attributes of the platform application object for the supported push notification services, such as APNS and GCM. For more information, see `Using Amazon SNS Mobile Push Notifications`_ . 
+Sets the attributes of the platform application object for the supported push notification services, such as APNS and GCM. For more information, see `Using Amazon SNS Mobile Push Notifications <http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html>`_ . For information on configuring attributes for message delivery status, see `Using Amazon SNS Application Attributes for Message Delivery Status <http://docs.aws.amazon.com/sns/latest/dg/sns-msg-status.html>`_ . 
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetPlatformApplicationAttributes>`_
 
 
 ========
@@ -29,7 +32,7 @@ Synopsis
   --platform-application-arn <value>
   --attributes <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -53,17 +56,23 @@ Options
    
 
    
-  * ``PlatformCredential`` -- The credential received from the notification service. For APNS/APNS_SANDBOX, PlatformCredential is "private key". For GCM, PlatformCredential is "API key". For ADM, PlatformCredential is "client secret".
+  * ``PlatformCredential`` -- The credential received from the notification service. For APNS/APNS_SANDBOX, PlatformCredential is private key. For GCM, PlatformCredential is "API key". For ADM, PlatformCredential is "client secret". 
    
-  * ``PlatformPrincipal`` -- The principal received from the notification service. For APNS/APNS_SANDBOX, PlatformPrincipal is "SSL certificate". For GCM, PlatformPrincipal is not applicable. For ADM, PlatformPrincipal is "client id".
+  * ``PlatformPrincipal`` -- The principal received from the notification service. For APNS/APNS_SANDBOX, PlatformPrincipal is SSL certificate. For GCM, PlatformPrincipal is not applicable. For ADM, PlatformPrincipal is "client id". 
    
-  * ``EventEndpointCreated`` -- Topic ARN to which EndpointCreated event notifications should be sent.
+  * ``EventEndpointCreated`` -- Topic ARN to which EndpointCreated event notifications should be sent. 
    
-  * ``EventEndpointDeleted`` -- Topic ARN to which EndpointDeleted event notifications should be sent.
+  * ``EventEndpointDeleted`` -- Topic ARN to which EndpointDeleted event notifications should be sent. 
    
-  * ``EventEndpointUpdated`` -- Topic ARN to which EndpointUpdate event notifications should be sent.
+  * ``EventEndpointUpdated`` -- Topic ARN to which EndpointUpdate event notifications should be sent. 
    
-  * ``EventDeliveryFailure`` -- Topic ARN to which DeliveryFailure event notifications should be sent upon Direct publish delivery failure (permanent) to one of the application's endpoints.
+  * ``EventDeliveryFailure`` -- Topic ARN to which DeliveryFailure event notifications should be sent upon Direct publish delivery failure (permanent) to one of the application's endpoints. 
+   
+  * ``SuccessFeedbackRoleArn`` -- IAM role ARN used to give Amazon SNS write access to use CloudWatch Logs on your behalf. 
+   
+  * ``FailureFeedbackRoleArn`` -- IAM role ARN used to give Amazon SNS write access to use CloudWatch Logs on your behalf. 
+   
+  * ``SuccessFeedbackSampleRate`` -- Sample rate percentage (0-100) of successfully delivered messages. 
    
 
   
@@ -87,8 +96,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -97,5 +106,3 @@ Output
 ======
 
 None
-
-.. _Using Amazon SNS Mobile Push Notifications: http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html

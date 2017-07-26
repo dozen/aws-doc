@@ -15,7 +15,7 @@ Description
 
 
 
-Obtains information about the specified WorkSpaces. 
+Obtains information about the specified WorkSpaces.
 
  
 
@@ -25,6 +25,13 @@ Only one of the filter parameters, such as ``bundle-id`` , ``directory-id`` , or
 
 This operation supports pagination with the use of the ``NextToken`` request and response parameters. If more results are available, the ``NextToken`` response member contains a token that you pass in the next call to this operation to retrieve the next set of items.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaces>`_
+
+
+``describe-workspaces`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
+When using ``--output text`` and the ``--query`` argument on a paginated response, the ``--query`` argument must extract data from the results of the following query expressions: ``Workspaces``
 
 
 ========
@@ -38,10 +45,11 @@ Synopsis
   [--directory-id <value>]
   [--user-name <value>]
   [--bundle-id <value>]
-  [--limit <value>]
-  [--next-token <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--starting-token <value>]
+  [--page-size <value>]
+  [--max-items <value>]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -57,7 +65,7 @@ Options
 
    
 
-  Because the  create-workspaces operation is asynchronous, the identifier returned by  create-workspaces is not immediately available. If you immediately call  describe-workspaces with this identifier, no information will be returned.
+  Because the  create-workspaces operation is asynchronous, the identifier it returns is not immediately available. If you immediately call  describe-workspaces with this identifier, no information is returned.
 
   
 
@@ -79,7 +87,7 @@ Syntax::
 ``--user-name`` (string)
 
 
-  Used with the ``directory-id`` parameter to specify the directory user for which to obtain the WorkSpace.
+  Used with the ``directory-id`` parameter to specify the directory user for whom to obtain the WorkSpace.
 
   
 
@@ -90,25 +98,44 @@ Syntax::
 
   
 
-``--limit`` (integer)
-
-
-  The maximum number of items to return.
-
-  
-
-``--next-token`` (string)
-
-
-  The ``NextToken`` value from a previous call to this operation. Pass null if this is the first call.
-
-  
-
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--starting-token`` (string)
+ 
+
+  A token to specify where to start paginating. This is the ``NextToken`` from a previously truncated response.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--page-size`` (integer)
+ 
+
+  The size of each page to get in the AWS service call. This does not affect the number of items returned in the command's output. Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call. This can help prevent the AWS service calls from timing out.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--max-items`` (integer)
+ 
+
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``NextToken`` is provided in the command's output. To resume pagination, provide the ``NextToken`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``NextToken`` response element directly outside of the AWS CLI.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -311,6 +338,36 @@ Workspaces -> (list)
 
       
 
+    WorkspaceProperties -> (structure)
+
+      
+
+      Describes the properties of a WorkSpace.
+
+      
+
+      RunningMode -> (string)
+
+        
+
+        The running mode of the WorkSpace. AlwaysOn WorkSpaces are billed monthly. AutoStop WorkSpaces are billed by the hour and stopped when no longer being used in order to save on costs.
+
+        
+
+        
+
+      RunningModeAutoStopTimeoutInMinutes -> (integer)
+
+        
+
+        The time after a user logs off when WorkSpaces are automatically stopped. Configured in 60 minute intervals.
+
+        
+
+        
+
+      
+
     
 
   
@@ -319,7 +376,7 @@ NextToken -> (string)
 
   
 
-  If not null, more results are available. Pass this value for the ``NextToken`` parameter in a subsequent call to this operation to retrieve the next set of items. This token is valid for one day and must be used within that timeframe.
+  If not null, more results are available. Pass this value for the ``NextToken`` parameter in a subsequent call to this operation to retrieve the next set of items. This token is valid for one day and must be used within that time frame.
 
   
 

@@ -15,12 +15,15 @@ Description
 
 
 
-Returns the URL of an existing queue. This action provides a simple way to retrieve the URL of an Amazon SQS queue. 
+Returns the URL of an existing queue. This action provides a simple way to retrieve the URL of an Amazon SQS queue.
 
  
 
-To access a queue that belongs to another AWS account, use the ``QueueOwnerAWSAccountId`` parameter to specify the account ID of the queue's owner. The queue's owner must grant you permission to access the queue. For more information about shared queue access, see  add-permission or go to `Shared Queues`_ in the *Amazon SQS Developer Guide* . 
+To access a queue that belongs to another AWS account, use the ``QueueOwnerAWSAccountId`` parameter to specify the account ID of the queue's owner. The queue's owner must grant you permission to access the queue. For more information about shared queue access, see ``  add-permission `` or see `Shared Queues <http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/acp-overview.html>`_ in the *Amazon SQS Developer Guide* . 
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/GetQueueUrl>`_
 
 
 ========
@@ -33,7 +36,7 @@ Synopsis
   --queue-name <value>
   [--queue-owner-aws-account-id <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -45,7 +48,11 @@ Options
 ``--queue-name`` (string)
 
 
-  The name of the queue whose URL must be fetched. Maximum 80 characters; alphanumeric characters, hyphens (-), and underscores (_) are allowed.
+  The name of the queue whose URL must be fetched. Maximum 80 characters. Valid values: alphanumeric characters, hyphens (``-`` ), and underscores (``_`` ).
+
+   
+
+  Queue names are case-sensitive.
 
   
 
@@ -59,8 +66,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -90,12 +97,9 @@ QueueUrl -> (string)
 
   
 
-  The URL for the queue.
+  The URL of the queue.
 
   
 
   
 
-
-
-.. _Shared Queues: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/acp-overview.html

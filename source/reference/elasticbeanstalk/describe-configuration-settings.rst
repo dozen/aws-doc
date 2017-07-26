@@ -15,11 +15,11 @@ Description
 
 
 
-Returns a description of the settings for the specified configuration set, that is, either a configuration template or the configuration set associated with a running environment. 
+Returns a description of the settings for the specified configuration set, that is, either a configuration template or the configuration set associated with a running environment.
 
  
 
-When describing the settings for the configuration set associated with a running environment, it is possible to receive two sets of setting descriptions. One is the deployed configuration set, and the other is a draft configuration of an environment that is either in the process of deployment or that failed to deploy. 
+When describing the settings for the configuration set associated with a running environment, it is possible to receive two sets of setting descriptions. One is the deployed configuration set, and the other is a draft configuration of an environment that is either in the process of deployment or that failed to deploy.
 
  
 
@@ -28,9 +28,12 @@ Related Topics
  
 
  
-*  delete-environment-configuration  
+*  delete-environment-configuration   
  
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeConfigurationSettings>`_
 
 
 ========
@@ -44,7 +47,7 @@ Synopsis
   [--template-name <value>]
   [--environment-name <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -56,14 +59,14 @@ Options
 ``--application-name`` (string)
 
 
-  The application for the environment or configuration template. 
+  The application for the environment or configuration template.
 
   
 
 ``--template-name`` (string)
 
 
-  The name of the configuration template to describe. 
+  The name of the configuration template to describe.
 
    
 
@@ -74,7 +77,7 @@ Options
 ``--environment-name`` (string)
 
 
-  The name of the environment to describe. 
+  The name of the environment to describe.
 
    
 
@@ -85,8 +88,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -164,7 +167,7 @@ ConfigurationSettings -> (list)
 
     
 
-    Describes the settings for a configuration set. 
+    Describes the settings for a configuration set.
 
     
 
@@ -172,7 +175,17 @@ ConfigurationSettings -> (list)
 
       
 
-      The name of the solution stack this configuration set uses. 
+      The name of the solution stack this configuration set uses.
+
+      
+
+      
+
+    PlatformArn -> (string)
+
+      
+
+      The ARN of the custom platform.
 
       
 
@@ -182,7 +195,7 @@ ConfigurationSettings -> (list)
 
       
 
-      The name of the application associated with this configuration set. 
+      The name of the application associated with this configuration set.
 
       
 
@@ -202,7 +215,7 @@ ConfigurationSettings -> (list)
 
       
 
-      Describes this configuration set. 
+      Describes this configuration set.
 
       
 
@@ -244,7 +257,7 @@ ConfigurationSettings -> (list)
 
       
 
-      The date (in UTC time) when this configuration set was created. 
+      The date (in UTC time) when this configuration set was created.
 
       
 
@@ -254,7 +267,7 @@ ConfigurationSettings -> (list)
 
       
 
-      The date (in UTC time) when this configuration set was last modified. 
+      The date (in UTC time) when this configuration set was last modified.
 
       
 
@@ -264,7 +277,7 @@ ConfigurationSettings -> (list)
 
       
 
-      A list of the configuration options and their values in this configuration set. 
+      A list of the configuration options and their values in this configuration set.
 
       
 
@@ -272,7 +285,7 @@ ConfigurationSettings -> (list)
 
         
 
-        A specification identifying an individual configuration option along with its current value. For a list of possible option values, go to `Option Values`_ in the *AWS Elastic Beanstalk Developer Guide* . 
+        A specification identifying an individual configuration option along with its current value. For a list of possible option values, go to `Option Values <http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-options.html>`_ in the *AWS Elastic Beanstalk Developer Guide* . 
 
         
 
@@ -280,7 +293,7 @@ ConfigurationSettings -> (list)
 
           
 
-          A unique resource name for a time-based scaling configuration option. 
+          A unique resource name for a time-based scaling configuration option.
 
           
 
@@ -290,7 +303,7 @@ ConfigurationSettings -> (list)
 
           
 
-          A unique namespace identifying the option's associated AWS resource. 
+          A unique namespace identifying the option's associated AWS resource.
 
           
 
@@ -300,7 +313,7 @@ ConfigurationSettings -> (list)
 
           
 
-          The name of the configuration option. 
+          The name of the configuration option.
 
           
 
@@ -310,7 +323,7 @@ ConfigurationSettings -> (list)
 
           
 
-          The current value for the configuration option. 
+          The current value for the configuration option.
 
           
 
@@ -324,6 +337,3 @@ ConfigurationSettings -> (list)
 
   
 
-
-
-.. _Option Values: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-options.html

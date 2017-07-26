@@ -19,6 +19,9 @@ Imports a disk into an EBS snapshot.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportSnapshot>`_
+
+
 ========
 Synopsis
 ========
@@ -26,14 +29,14 @@ Synopsis
 ::
 
     import-snapshot
-  [--dry-run | --no-dry-run]
-  [--description <value>]
-  [--disk-container <value>]
   [--client-data <value>]
   [--client-token <value>]
+  [--description <value>]
+  [--disk-container <value>]
+  [--dry-run | --no-dry-run]
   [--role-name <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -42,10 +45,37 @@ Synopsis
 Options
 =======
 
-``--dry-run`` | ``--no-dry-run`` (boolean)
+``--client-data`` (structure)
 
 
-  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
+  The client-specific data.
+
+  
+
+
+
+Shorthand Syntax::
+
+    Comment=string,UploadEnd=timestamp,UploadSize=double,UploadStart=timestamp
+
+
+
+
+JSON Syntax::
+
+  {
+    "Comment": "string",
+    "UploadEnd": timestamp,
+    "UploadSize": double,
+    "UploadStart": timestamp
+  }
+
+
+
+``--client-token`` (string)
+
+
+  Token to enable idempotency for VM import requests.
 
   
 
@@ -86,37 +116,10 @@ JSON Syntax::
 
 
 
-``--client-data`` (structure)
+``--dry-run`` | ``--no-dry-run`` (boolean)
 
 
-  The client-specific data.
-
-  
-
-
-
-Shorthand Syntax::
-
-    UploadStart=timestamp,UploadEnd=timestamp,UploadSize=double,Comment=string
-
-
-
-
-JSON Syntax::
-
-  {
-    "UploadStart": timestamp,
-    "UploadEnd": timestamp,
-    "UploadSize": double,
-    "Comment": "string"
-  }
-
-
-
-``--client-token`` (string)
-
-
-  Token to enable idempotency for VM import requests.
+  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
 
   
 
@@ -130,14 +133,24 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
 ======
 Output
 ======
+
+Description -> (string)
+
+  
+
+  A description of the import snapshot task.
+
+  
+
+  
 
 ImportTaskId -> (string)
 
@@ -157,16 +170,6 @@ SnapshotTaskDetail -> (structure)
 
   
 
-  DiskImageSize -> (double)
-
-    
-
-    The size of the disk in the snapshot, in GiB.
-
-    
-
-    
-
   Description -> (string)
 
     
@@ -177,11 +180,61 @@ SnapshotTaskDetail -> (structure)
 
     
 
+  DiskImageSize -> (double)
+
+    
+
+    The size of the disk in the snapshot, in GiB.
+
+    
+
+    
+
   Format -> (string)
 
     
 
     The format of the disk image from which the snapshot is created.
+
+    
+
+    
+
+  Progress -> (string)
+
+    
+
+    The percentage of completion for the import snapshot task.
+
+    
+
+    
+
+  SnapshotId -> (string)
+
+    
+
+    The snapshot ID of the disk being imported.
+
+    
+
+    
+
+  Status -> (string)
+
+    
+
+    A brief status for the import snapshot task.
+
+    
+
+    
+
+  StatusMessage -> (string)
+
+    
+
+    A detailed status message for the import snapshot task.
 
     
 
@@ -219,63 +272,13 @@ SnapshotTaskDetail -> (structure)
 
       
 
-      The key from which the disk image was created.
+      The file name of the disk image.
 
       
 
       
 
     
-
-  SnapshotId -> (string)
-
-    
-
-    The snapshot ID of the disk being imported.
-
-    
-
-    
-
-  Progress -> (string)
-
-    
-
-    The percentage of completion for the import snapshot task.
-
-    
-
-    
-
-  StatusMessage -> (string)
-
-    
-
-    A detailed status message for the import snapshot task.
-
-    
-
-    
-
-  Status -> (string)
-
-    
-
-    A brief status for the import snapshot task.
-
-    
-
-    
-
-  
-
-Description -> (string)
-
-  
-
-  A description of the import snapshot task.
-
-  
 
   
 

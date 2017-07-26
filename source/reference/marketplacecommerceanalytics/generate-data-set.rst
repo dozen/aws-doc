@@ -15,6 +15,9 @@ Description
 
 Given a data set type and data set publication date, asynchronously publishes the requested data set to the specified S3 bucket and notifies the specified SNS topic once the data is available. Returns a unique request identifier that can be used to correlate requests with notifications from the SNS topic. Data sets will be published in comma-separated values (CSV) format with the file name {data_set_type}_YYYY-MM-DD.csv. If a file with the same name already exists (e.g. if the same data set is requested twice), the original file will be overwritten by the new file. Requires a Role with an attached permissions policy providing Allow permissions for the following actions: s3:PutObject, s3:GetBucketLocation, sns:GetTopicAttributes, sns:Publish, iam:GetRolePolicy.
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/marketplacecommerceanalytics-2015-07-01/GenerateDataSet>`_
+
+
 ========
 Synopsis
 ========
@@ -30,7 +33,7 @@ Synopsis
   --sns-topic-arn <value>
   [--customer-defined-values <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -49,41 +52,47 @@ Options
    
 
    
-  * *customer_subscriber_hourly_monthly_subscriptions* - Available daily by 5:00 PM Pacific Time since 2014-07-21.
+  * customer_subscriber_hourly_monthly_subscriptions From 2014-07-21 to present: Available daily by 5:00 PM Pacific Time. 
    
-  * *customer_subscriber_annual_subscriptions* - Available daily by 5:00 PM Pacific Time since 2014-07-21.
+  * customer_subscriber_annual_subscriptions From 2014-07-21 to present: Available daily by 5:00 PM Pacific Time. 
    
-  * *daily_business_usage_by_instance_type* - Available daily by 5:00 PM Pacific Time since 2015-01-26.
+  * daily_business_usage_by_instance_type From 2015-01-26 to present: Available daily by 5:00 PM Pacific Time. 
    
-  * *daily_business_fees* - Available daily by 5:00 PM Pacific Time since 2015-01-26.
+  * daily_business_fees From 2015-01-26 to present: Available daily by 5:00 PM Pacific Time. 
    
-  * *daily_business_free_trial_conversions* - Available daily by 5:00 PM Pacific Time since 2015-01-26.
+  * daily_business_free_trial_conversions From 2015-01-26 to present: Available daily by 5:00 PM Pacific Time. 
    
-  * *daily_business_new_instances* - Available daily by 5:00 PM Pacific Time since 2015-01-26.
+  * daily_business_new_instances From 2015-01-26 to present: Available daily by 5:00 PM Pacific Time. 
    
-  * *daily_business_new_product_subscribers* - Available daily by 5:00 PM Pacific Time since 2015-01-26.
+  * daily_business_new_product_subscribers From 2015-01-26 to present: Available daily by 5:00 PM Pacific Time. 
    
-  * *daily_business_canceled_product_subscribers* - Available daily by 5:00 PM Pacific Time since 2015-01-26.
+  * daily_business_canceled_product_subscribers From 2015-01-26 to present: Available daily by 5:00 PM Pacific Time. 
    
-  * *monthly_revenue_billing_and_revenue_data* - Available monthly on the 4th day of the month by 5:00 PM Pacific Time since 2015-02.
+  * monthly_revenue_billing_and_revenue_data From 2015-02 to 2017-06: Available monthly on the 4th day of the month by 5:00pm Pacific Time. Data includes metered transactions (e.g. hourly) from two months prior. From 2017-07 to present: Available monthly on the 15th day of the month by 5:00pm Pacific Time. Data includes metered transactions (e.g. hourly) from one month prior. 
    
-  * *monthly_revenue_annual_subscriptions* - Available monthly on the 4th day of the month by 5:00 PM Pacific Time since 2015-02.
+  * monthly_revenue_annual_subscriptions From 2015-02 to 2017-06: Available monthly on the 4th day of the month by 5:00pm Pacific Time. Data includes up-front software charges (e.g. annual) from one month prior. From 2017-07 to present: Available monthly on the 15th day of the month by 5:00pm Pacific Time. Data includes up-front software charges (e.g. annual) from one month prior. 
    
-  * *disbursed_amount_by_product* - Available every 30 days by 5:00 PM Pacific Time since 2015-01-26.
+  * disbursed_amount_by_product From 2015-01-26 to present: Available every 30 days by 5:00 PM Pacific Time. 
    
-  * *disbursed_amount_by_product_with_uncollected_funds* -This data set is only available from 2012-04-19 until 2015-01-25. After 2015-01-25, this data set was split into three data sets: disbursed_amount_by_product, disbursed_amount_by_age_of_uncollected_funds, and disbursed_amount_by_age_of_disbursed_funds. 
+  * disbursed_amount_by_product_with_uncollected_funds From 2012-04-19 to 2015-01-25: Available every 30 days by 5:00 PM Pacific Time. From 2015-01-26 to present: This data set was split into three data sets: disbursed_amount_by_product, disbursed_amount_by_age_of_uncollected_funds, and disbursed_amount_by_age_of_disbursed_funds. 
    
-  * *disbursed_amount_by_customer_geo* - Available every 30 days by 5:00 PM Pacific Time since 2012-04-19.
+  * disbursed_amount_by_instance_hours From 2012-09-04 to present: Available every 30 days by 5:00 PM Pacific Time. 
    
-  * *disbursed_amount_by_age_of_uncollected_funds* - Available every 30 days by 5:00 PM Pacific Time since 2015-01-26.
+  * disbursed_amount_by_customer_geo From 2012-04-19 to present: Available every 30 days by 5:00 PM Pacific Time. 
    
-  * *disbursed_amount_by_age_of_disbursed_funds* - Available every 30 days by 5:00 PM Pacific Time since 2015-01-26.
+  * disbursed_amount_by_age_of_uncollected_funds From 2015-01-26 to present: Available every 30 days by 5:00 PM Pacific Time. 
    
-  * *customer_profile_by_industry* - Available daily by 5:00 PM Pacific Time since 2015-10-01.
+  * disbursed_amount_by_age_of_disbursed_funds From 2015-01-26 to present: Available every 30 days by 5:00 PM Pacific Time. 
    
-  * *customer_profile_by_revenue* - Available daily by 5:00 PM Pacific Time since 2015-10-01.
+  * customer_profile_by_industry From 2015-10-01 to 2017-06-29: Available daily by 5:00 PM Pacific Time. From 2017-06-30 to present: This data set is no longer available. 
    
-  * *customer_profile_by_geography* - Available daily by 5:00 PM Pacific Time since 2015-10-01.
+  * customer_profile_by_revenue From 2015-10-01 to 2017-06-29: Available daily by 5:00 PM Pacific Time. From 2017-06-30 to present: This data set is no longer available. 
+   
+  * customer_profile_by_geography From 2015-10-01 to 2017-06-29: Available daily by 5:00 PM Pacific Time. From 2017-06-30 to present: This data set is no longer available. 
+   
+  * sales_compensation_billed_revenue From 2016-12 to 2017-06: Available monthly on the 4th day of the month by 5:00pm Pacific Time. Data includes metered transactions (e.g. hourly) from two months prior, and up-front software charges (e.g. annual) from one month prior. From 2017-06 to present: Available monthly on the 15th day of the month by 5:00pm Pacific Time. Data includes metered transactions (e.g. hourly) from one month prior, and up-front software charges (e.g. annual) from one month prior. 
+   
+  * us_sales_and_use_tax_records From 2017-02-15 to present: Available monthly on the 15th day of the month by 5:00 PM Pacific Time. 
    
 
    
@@ -129,6 +138,9 @@ Options
   *   ``disbursed_amount_by_product_with_uncollected_funds``
 
   
+  *   ``disbursed_amount_by_instance_hours``
+
+  
   *   ``disbursed_amount_by_customer_geo``
 
   
@@ -145,6 +157,12 @@ Options
 
   
   *   ``customer_profile_by_geography``
+
+  
+  *   ``sales_compensation_billed_revenue``
+
+  
+  *   ``us_sales_and_use_tax_records``
 
   
 
@@ -187,8 +205,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 

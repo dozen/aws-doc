@@ -19,8 +19,11 @@ Restores a DB instance to an arbitrary point in time. You can restore to any poi
 
  
 
-The target database is created with most of the original configuration, but in a system-selected availability zone, with the default security group, the default subnet group, and the default DB parameter group. By default, the new DB instance is created as a single-AZ deployment except when the instance is a SQL Server instance that has an option group that is associated with mirroring; in this case, the instance becomes a mirrored deployment and not a single-AZ deployment. 
+The target database is created with most of the original configuration, but in a system-selected availability zone, with the default security group, the default subnet group, and the default DB parameter group. By default, the new DB instance is created as a single-AZ deployment except when the instance is a SQL Server instance that has an option group that is associated with mirroring; in this case, the instance becomes a mirrored deployment and not a single-AZ deployment.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTime>`_
 
 
 ========
@@ -51,8 +54,11 @@ Synopsis
   [--storage-type <value>]
   [--tde-credential-arn <value>]
   [--tde-credential-password <value>]
+  [--domain <value>]
+  [--domain-iam-role-name <value>]
+  [--enable-iam-database-authentication | --no-enable-iam-database-authentication]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -64,7 +70,7 @@ Options
 ``--source-db-instance-identifier`` (string)
 
 
-  The identifier of the source DB instance from which to restore. 
+  The identifier of the source DB instance from which to restore.
 
    
 
@@ -73,13 +79,13 @@ Options
    
 
    
-  * Must be the identifier of an existing database instance
+  * Must be the identifier of an existing database instance 
    
-  * Must contain from 1 to 63 alphanumeric characters or hyphens
+  * Must contain from 1 to 63 alphanumeric characters or hyphens 
    
-  * First character must be a letter
+  * First character must be a letter 
    
-  * Cannot end with a hyphen or contain two consecutive hyphens
+  * Cannot end with a hyphen or contain two consecutive hyphens 
    
 
   
@@ -87,7 +93,7 @@ Options
 ``--target-db-instance-identifier`` (string)
 
 
-  The name of the new database instance to be created. 
+  The name of the new database instance to be created.
 
    
 
@@ -96,11 +102,11 @@ Options
    
 
    
-  * Must contain from 1 to 63 alphanumeric characters or hyphens
+  * Must contain from 1 to 63 alphanumeric characters or hyphens 
    
-  * First character must be a letter
+  * First character must be a letter 
    
-  * Cannot end with a hyphen or contain two consecutive hyphens
+  * Cannot end with a hyphen or contain two consecutive hyphens 
    
 
   
@@ -108,7 +114,7 @@ Options
 ``--restore-time`` (timestamp)
 
 
-  The date and time to restore from. 
+  The date and time to restore from.
 
    
 
@@ -121,14 +127,14 @@ Options
    
 
    
-  * Must be before the latest restorable time for the DB instance
+  * Must be before the latest restorable time for the DB instance 
    
-  * Cannot be specified if UseLatestRestorableTime parameter is true
-   
-
+  * Cannot be specified if UseLatestRestorableTime parameter is true 
    
 
-  Example: ``2009-09-07T23:45:00Z`` 
+   
+
+  Example: ``2009-09-07T23:45:00Z``  
 
   
 
@@ -139,7 +145,7 @@ Options
 
    
 
-  Default: ``false`` 
+  Default: ``false``  
 
    
 
@@ -150,11 +156,11 @@ Options
 ``--db-instance-class`` (string)
 
 
-  The compute and memory capacity of the Amazon RDS DB instance. 
+  The compute and memory capacity of the Amazon RDS DB instance.
 
    
 
-  Valid Values: ``db.t1.micro | db.m1.small | db.m1.medium | db.m1.large | db.m1.xlarge | db.m2.2xlarge | db.m2.4xlarge | db.m3.medium | db.m3.large | db.m3.xlarge | db.m3.2xlarge | db.m4.large | db.m4.xlarge | db.m4.2xlarge | db.m4.4xlarge | db.m4.10xlarge | db.r3.large | db.r3.xlarge | db.r3.2xlarge | db.r3.4xlarge | db.r3.8xlarge | db.t2.micro | db.t2.small | db.t2.medium | db.t2.large`` 
+  Valid Values: ``db.t1.micro | db.m1.small | db.m1.medium | db.m1.large | db.m1.xlarge | db.m2.2xlarge | db.m2.4xlarge | db.m3.medium | db.m3.large | db.m3.xlarge | db.m3.2xlarge | db.m4.large | db.m4.xlarge | db.m4.2xlarge | db.m4.4xlarge | db.m4.10xlarge | db.r3.large | db.r3.xlarge | db.r3.2xlarge | db.r3.4xlarge | db.r3.8xlarge | db.t2.micro | db.t2.small | db.t2.medium | db.t2.large``  
 
    
 
@@ -165,11 +171,11 @@ Options
 ``--port`` (integer)
 
 
-  The port number on which the database accepts connections. 
+  The port number on which the database accepts connections.
 
    
 
-  Constraints: Value must be ``1150-65535`` 
+  Constraints: Value must be ``1150-65535``  
 
    
 
@@ -180,7 +186,7 @@ Options
 ``--availability-zone`` (string)
 
 
-  The EC2 Availability Zone that the database instance will be created in. 
+  The EC2 Availability Zone that the database instance will be created in.
 
    
 
@@ -192,14 +198,14 @@ Options
 
    
 
-  Example: ``us-east-1a`` 
+  Example: ``us-east-1a``  
 
   
 
 ``--db-subnet-group-name`` (string)
 
 
-  The DB subnet group name to use for the new instance. 
+  The DB subnet group name to use for the new instance.
 
    
 
@@ -207,14 +213,14 @@ Options
 
    
 
-  Example: ``mySubnetgroup`` 
+  Example: ``mySubnetgroup``  
 
   
 
 ``--multi-az`` | ``--no-multi-az`` (boolean)
 
 
-  Specifies if the DB instance is a Multi-AZ deployment. 
+  Specifies if the DB instance is a Multi-AZ deployment.
 
    
 
@@ -225,52 +231,52 @@ Options
 ``--publicly-accessible`` | ``--no-publicly-accessible`` (boolean)
 
 
-  Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address. 
+  Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address.
 
    
 
-  Default: The default behavior varies depending on whether a VPC has been requested or not. The following list shows the default behavior in each case. 
+  Default: The default behavior varies depending on whether a VPC has been requested or not. The following list shows the default behavior in each case.
 
    
 
    
-  * **Default VPC:** true
+  * **Default VPC:** true 
    
-  * **VPC:** false
-   
-
+  * **VPC:** false 
    
 
-  If no DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance will be publicly accessible. If a specific DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance will be private. 
+   
+
+  If no DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance will be publicly accessible. If a specific DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance will be private.
 
   
 
 ``--auto-minor-version-upgrade`` | ``--no-auto-minor-version-upgrade`` (boolean)
 
 
-  Indicates that minor version upgrades will be applied automatically to the DB instance during the maintenance window. 
+  Indicates that minor version upgrades will be applied automatically to the DB instance during the maintenance window.
 
   
 
 ``--license-model`` (string)
 
 
-  License model information for the restored DB instance. 
+  License model information for the restored DB instance.
 
    
 
-  Default: Same as source. 
+  Default: Same as source.
 
    
 
-  Valid values: ``license-included`` | ``bring-your-own-license`` | ``general-public-license`` 
+  Valid values: ``license-included`` | ``bring-your-own-license`` | ``general-public-license``  
 
   
 
 ``--db-name`` (string)
 
 
-  The database name for the restored DB instance. 
+  The database name for the restored DB instance.
 
    
 
@@ -287,7 +293,7 @@ Options
 ``--engine`` (string)
 
 
-  The database engine to use for the new instance. 
+  The database engine to use for the new instance.
 
    
 
@@ -299,14 +305,14 @@ Options
 
    
 
-  Valid Values: ``MySQL`` | ``mariadb`` | ``oracle-se1`` | ``oracle-se`` | ``oracle-ee`` | ``sqlserver-ee`` | ``sqlserver-se`` | ``sqlserver-ex`` | ``sqlserver-web`` | ``postgres`` | ``aurora`` 
+  Valid Values: ``MySQL`` | ``mariadb`` | ``oracle-se1`` | ``oracle-se`` | ``oracle-ee`` | ``sqlserver-ee`` | ``sqlserver-se`` | ``sqlserver-ex`` | ``sqlserver-web`` | ``postgres`` | ``aurora``  
 
   
 
 ``--iops`` (integer)
 
 
-  The amount of Provisioned IOPS (input/output operations per second) to be initially allocated for the DB instance. 
+  The amount of Provisioned IOPS (input/output operations per second) to be initially allocated for the DB instance.
 
    
 
@@ -329,7 +335,7 @@ Options
 
    
 
-  Permanent options, such as the TDE option for Oracle Advanced Security TDE, cannot be removed from an option group, and that option group cannot be removed from a DB instance once it is associated with a DB instance 
+  Permanent options, such as the TDE option for Oracle Advanced Security TDE, cannot be removed from an option group, and that option group cannot be removed from a DB instance once it is associated with a DB instance
 
   
 
@@ -371,11 +377,11 @@ JSON Syntax::
 ``--storage-type`` (string)
 
 
-  Specifies the storage type to be associated with the DB instance. 
+  Specifies the storage type to be associated with the DB instance.
 
    
 
-  Valid values: ``standard | gp2 | io1`` 
+  Valid values: ``standard | gp2 | io1``  
 
    
 
@@ -383,29 +389,68 @@ JSON Syntax::
 
    
 
-  Default: ``io1`` if the ``Iops`` parameter is specified; otherwise ``standard`` 
+  Default: ``io1`` if the ``Iops`` parameter is specified; otherwise ``standard``  
 
   
 
 ``--tde-credential-arn`` (string)
 
 
-  The ARN from the Key Store with which to associate the instance for TDE encryption. 
+  The ARN from the Key Store with which to associate the instance for TDE encryption.
 
   
 
 ``--tde-credential-password`` (string)
 
 
-  The password for the given ARN from the Key Store in order to access the device. 
+  The password for the given ARN from the Key Store in order to access the device.
+
+  
+
+``--domain`` (string)
+
+
+  Specify the Active Directory Domain to restore the instance in.
+
+  
+
+``--domain-iam-role-name`` (string)
+
+
+  Specify the name of the IAM role to be used when making API calls to the Directory Service.
+
+  
+
+``--enable-iam-database-authentication`` | ``--no-enable-iam-database-authentication`` (boolean)
+
+
+  True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts; otherwise false.
+
+   
+
+  You can enable IAM database authentication for the following database engines
+
+   
+
+   
+  * For MySQL 5.6, minor version 5.6.34 or higher 
+   
+  * For MySQL 5.7, minor version 5.7.16 or higher 
+   
+  * Aurora 5.6 or higher. 
+   
+
+   
+
+  Default: ``false``  
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -417,16 +462,20 @@ DBInstance -> (structure)
 
   
 
-  Contains the result of a successful invocation of the following actions: 
+  Contains the result of a successful invocation of the following actions:
 
    
 
    
-  *  create-db-instance  
+  *  create-db-instance   
    
-  *  delete-db-instance  
+  *  delete-db-instance   
    
-  *  modify-db-instance  
+  *  modify-db-instance   
+   
+  *  stop-db-instance   
+   
+  *  start-db-instance   
    
 
    
@@ -439,7 +488,7 @@ DBInstance -> (structure)
 
     
 
-    Contains a user-supplied database identifier. This identifier is the unique key that identifies a DB instance. 
+    Contains a user-supplied database identifier. This identifier is the unique key that identifies a DB instance.
 
     
 
@@ -449,7 +498,7 @@ DBInstance -> (structure)
 
     
 
-    Contains the name of the compute and memory capacity class of the DB instance. 
+    Contains the name of the compute and memory capacity class of the DB instance.
 
     
 
@@ -459,7 +508,7 @@ DBInstance -> (structure)
 
     
 
-    Provides the name of the database engine to be used for this DB instance. 
+    Provides the name of the database engine to be used for this DB instance.
 
     
 
@@ -469,7 +518,7 @@ DBInstance -> (structure)
 
     
 
-    Specifies the current state of this database. 
+    Specifies the current state of this database.
 
     
 
@@ -479,7 +528,7 @@ DBInstance -> (structure)
 
     
 
-    Contains the master username for the DB instance. 
+    Contains the master username for the DB instance.
 
     
 
@@ -493,15 +542,15 @@ DBInstance -> (structure)
 
      
 
-     **MySQL, MariaDB, SQL Server, PostgreSQL, Amazon Aurora**  
+     **MySQL, MariaDB, SQL Server, PostgreSQL**  
 
      
 
-    Contains the name of the initial database of this instance that was provided at create time, if one was specified when the DB instance was created. This same name is returned for the life of the DB instance. 
+    Contains the name of the initial database of this instance that was provided at create time, if one was specified when the DB instance was created. This same name is returned for the life of the DB instance.
 
      
 
-    Type: tde-credential-password
+    Type: source-db-instance-identifier
 
      
 
@@ -509,7 +558,7 @@ DBInstance -> (structure)
 
      
 
-    Contains the Oracle System ID (SID) of the created DB instance. Not shown when the returned parameters do not apply to an Oracle DB instance. 
+    Contains the Oracle System ID (SID) of the created DB instance. Not shown when the returned parameters do not apply to an Oracle DB instance.
 
     
 
@@ -519,7 +568,7 @@ DBInstance -> (structure)
 
     
 
-    Specifies the connection endpoint. 
+    Specifies the connection endpoint.
 
     
 
@@ -527,7 +576,7 @@ DBInstance -> (structure)
 
       
 
-      Specifies the DNS address of the DB instance. 
+      Specifies the DNS address of the DB instance.
 
       
 
@@ -537,7 +586,7 @@ DBInstance -> (structure)
 
       
 
-      Specifies the port that the database engine is listening on. 
+      Specifies the port that the database engine is listening on.
 
       
 
@@ -559,7 +608,7 @@ DBInstance -> (structure)
 
     
 
-    Specifies the allocated storage size specified in gigabytes. 
+    Specifies the allocated storage size specified in gigabytes.
 
     
 
@@ -569,7 +618,7 @@ DBInstance -> (structure)
 
     
 
-    Provides the date and time the DB instance was created. 
+    Provides the date and time the DB instance was created.
 
     
 
@@ -589,7 +638,7 @@ DBInstance -> (structure)
 
     
 
-    Specifies the number of days for which automatic DB snapshots are retained. 
+    Specifies the number of days for which automatic DB snapshots are retained.
 
     
 
@@ -607,18 +656,18 @@ DBInstance -> (structure)
 
       
 
-      This data type is used as a response element in the following actions: 
+      This data type is used as a response element in the following actions:
 
        
 
        
-      *  modify-db-instance  
+      *  modify-db-instance   
        
-      *  reboot-db-instance  
+      *  reboot-db-instance   
        
-      *  restore-db-instance-from-db-snapshot  
+      *  restore-db-instance-from-db-snapshot   
        
-      *  restore-db-instance-to-point-in-time  
+      *  restore-db-instance-to-point-in-time   
        
 
       
@@ -627,7 +676,7 @@ DBInstance -> (structure)
 
         
 
-        The name of the DB security group. 
+        The name of the DB security group.
 
         
 
@@ -637,7 +686,7 @@ DBInstance -> (structure)
 
         
 
-        The status of the DB security group. 
+        The status of the DB security group.
 
         
 
@@ -651,7 +700,7 @@ DBInstance -> (structure)
 
     
 
-    Provides List of VPC security group elements that the DB instance belongs to. 
+    Provides a list of VPC security group elements that the DB instance belongs to.
 
     
 
@@ -677,7 +726,7 @@ DBInstance -> (structure)
 
         
 
-        The status of the VPC security group. 
+        The status of the VPC security group.
 
         
 
@@ -691,7 +740,7 @@ DBInstance -> (structure)
 
     
 
-    Provides the list of DB parameter groups applied to this DB instance. 
+    Provides the list of DB parameter groups applied to this DB instance.
 
     
 
@@ -699,7 +748,7 @@ DBInstance -> (structure)
 
       
 
-      The status of the DB parameter group. 
+      The status of the DB parameter group.
 
        
 
@@ -708,17 +757,17 @@ DBInstance -> (structure)
        
 
        
-      *  create-db-instance  
+      *  create-db-instance   
        
-      *  create-db-instance-read-replica  
+      *  create-db-instance-read-replica   
        
-      *  delete-db-instance  
+      *  delete-db-instance   
        
-      *  modify-db-instance  
+      *  modify-db-instance   
        
-      *  reboot-db-instance  
+      *  reboot-db-instance   
        
-      *  restore-db-instance-from-db-snapshot  
+      *  restore-db-instance-from-db-snapshot   
        
 
       
@@ -727,7 +776,7 @@ DBInstance -> (structure)
 
         
 
-        The name of the DP parameter group. 
+        The name of the DP parameter group.
 
         
 
@@ -737,7 +786,7 @@ DBInstance -> (structure)
 
         
 
-        The status of parameter updates. 
+        The status of parameter updates.
 
         
 
@@ -751,7 +800,7 @@ DBInstance -> (structure)
 
     
 
-    Specifies the name of the Availability Zone the DB instance is located in. 
+    Specifies the name of the Availability Zone the DB instance is located in.
 
     
 
@@ -761,7 +810,7 @@ DBInstance -> (structure)
 
     
 
-    Specifies information on the subnet group associated with the DB instance, including the name, description, and subnets in the subnet group. 
+    Specifies information on the subnet group associated with the DB instance, including the name, description, and subnets in the subnet group.
 
     
 
@@ -769,7 +818,7 @@ DBInstance -> (structure)
 
       
 
-      The name of the DB subnet group. 
+      The name of the DB subnet group.
 
       
 
@@ -779,7 +828,7 @@ DBInstance -> (structure)
 
       
 
-      Provides the description of the DB subnet group. 
+      Provides the description of the DB subnet group.
 
       
 
@@ -789,7 +838,7 @@ DBInstance -> (structure)
 
       
 
-      Provides the VpcId of the DB subnet group. 
+      Provides the VpcId of the DB subnet group.
 
       
 
@@ -799,7 +848,7 @@ DBInstance -> (structure)
 
       
 
-      Provides the status of the DB subnet group. 
+      Provides the status of the DB subnet group.
 
       
 
@@ -825,7 +874,7 @@ DBInstance -> (structure)
 
           
 
-          Specifies the identifier of the subnet. 
+          Specifies the identifier of the subnet.
 
           
 
@@ -835,17 +884,17 @@ DBInstance -> (structure)
 
           
 
-          Contains Availability Zone information. 
+          Contains Availability Zone information.
 
            
 
-          This data type is used as an element in the following data type: 
+          This data type is used as an element in the following data type:
 
-          
-          *  OrderableDBInstanceOption 
-          
+           
 
-          
+           
+          *  OrderableDBInstanceOption   
+           
 
           
 
@@ -853,7 +902,7 @@ DBInstance -> (structure)
 
             
 
-            The name of the availability zone. 
+            The name of the availability zone.
 
             
 
@@ -865,7 +914,7 @@ DBInstance -> (structure)
 
           
 
-          Specifies the status of the subnet. 
+          Specifies the status of the subnet.
 
           
 
@@ -875,13 +924,23 @@ DBInstance -> (structure)
 
       
 
+    DBSubnetGroupArn -> (string)
+
+      
+
+      The Amazon Resource Name (ARN) for the DB subnet group.
+
+      
+
+      
+
     
 
   PreferredMaintenanceWindow -> (string)
 
     
 
-    Specifies the weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC). 
+    Specifies the weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).
 
     
 
@@ -891,7 +950,7 @@ DBInstance -> (structure)
 
     
 
-    Specifies that changes to the DB instance are pending. This element is only included when changes are pending. Specific changes are identified by subelements. 
+    Specifies that changes to the DB instance are pending. This element is only included when changes are pending. Specific changes are identified by subelements.
 
     
 
@@ -919,7 +978,7 @@ DBInstance -> (structure)
 
       
 
-      Contains the pending or in-progress change of the master credentials for the DB instance. 
+      Contains the pending or in-progress change of the master credentials for the DB instance.
 
       
 
@@ -929,7 +988,7 @@ DBInstance -> (structure)
 
       
 
-      Specifies the pending port for the DB instance. 
+      Specifies the pending port for the DB instance.
 
       
 
@@ -939,7 +998,7 @@ DBInstance -> (structure)
 
       
 
-      Specifies the pending number of days for which automated backups are retained. 
+      Specifies the pending number of days for which automated backups are retained.
 
       
 
@@ -949,7 +1008,7 @@ DBInstance -> (structure)
 
       
 
-      Indicates that the Single-AZ DB instance is to change to a Multi-AZ deployment. 
+      Indicates that the Single-AZ DB instance is to change to a Multi-AZ deployment.
 
       
 
@@ -959,7 +1018,21 @@ DBInstance -> (structure)
 
       
 
-      Indicates the database engine version. 
+      Indicates the database engine version.
+
+      
+
+      
+
+    LicenseModel -> (string)
+
+      
+
+      The license model for the DB instance.
+
+       
+
+      Valid values: ``license-included`` | ``bring-your-own-license`` | ``general-public-license``  
 
       
 
@@ -969,7 +1042,7 @@ DBInstance -> (structure)
 
       
 
-      Specifies the new Provisioned IOPS value for the DB instance that will be applied or is being applied. 
+      Specifies the new Provisioned IOPS value for the DB instance that will be applied or is being applied.
 
       
 
@@ -989,7 +1062,7 @@ DBInstance -> (structure)
 
       
 
-      Specifies the storage type to be associated with the DB instance. 
+      Specifies the storage type to be associated with the DB instance.
 
       
 
@@ -1005,13 +1078,23 @@ DBInstance -> (structure)
 
       
 
+    DBSubnetGroupName -> (string)
+
+      
+
+      The new DB subnet group for the DB instance. 
+
+      
+
+      
+
     
 
   LatestRestorableTime -> (timestamp)
 
     
 
-    Specifies the latest time to which a database can be restored with point-in-time restore. 
+    Specifies the latest time to which a database can be restored with point-in-time restore.
 
     
 
@@ -1021,7 +1104,7 @@ DBInstance -> (structure)
 
     
 
-    Specifies if the DB instance is a Multi-AZ deployment. 
+    Specifies if the DB instance is a Multi-AZ deployment.
 
     
 
@@ -1031,7 +1114,7 @@ DBInstance -> (structure)
 
     
 
-    Indicates the database engine version. 
+    Indicates the database engine version.
 
     
 
@@ -1041,7 +1124,7 @@ DBInstance -> (structure)
 
     
 
-    Indicates that minor version patches are applied automatically. 
+    Indicates that minor version patches are applied automatically.
 
     
 
@@ -1051,7 +1134,7 @@ DBInstance -> (structure)
 
     
 
-    Contains the identifier of the source DB instance if this DB instance is a Read Replica. 
+    Contains the identifier of the source DB instance if this DB instance is a Read Replica.
 
     
 
@@ -1061,7 +1144,23 @@ DBInstance -> (structure)
 
     
 
-    Contains one or more identifiers of the Read Replicas associated with this DB instance. 
+    Contains one or more identifiers of the Read Replicas associated with this DB instance.
+
+    
+
+    (string)
+
+      
+
+      
+
+    
+
+  ReadReplicaDBClusterIdentifiers -> (list)
+
+    
+
+    Contains one or more identifiers of Aurora DB clusters that are Read Replicas of this DB instance.
 
     
 
@@ -1077,7 +1176,7 @@ DBInstance -> (structure)
 
     
 
-    License model information for this DB instance. 
+    License model information for this DB instance.
 
     
 
@@ -1087,7 +1186,7 @@ DBInstance -> (structure)
 
     
 
-    Specifies the Provisioned IOPS (I/O operations per second) value. 
+    Specifies the Provisioned IOPS (I/O operations per second) value.
 
     
 
@@ -1097,7 +1196,7 @@ DBInstance -> (structure)
 
     
 
-    Provides the list of option group memberships for this DB instance. 
+    Provides the list of option group memberships for this DB instance.
 
     
 
@@ -1105,7 +1204,7 @@ DBInstance -> (structure)
 
       
 
-      Provides information on the option groups the DB instance is a member of. 
+      Provides information on the option groups the DB instance is a member of.
 
       
 
@@ -1113,7 +1212,7 @@ DBInstance -> (structure)
 
         
 
-        The name of the option group that the instance belongs to. 
+        The name of the option group that the instance belongs to.
 
         
 
@@ -1137,7 +1236,7 @@ DBInstance -> (structure)
 
     
 
-    If present, specifies the name of the character set that this instance is associated with. 
+    If present, specifies the name of the character set that this instance is associated with.
 
     
 
@@ -1147,7 +1246,7 @@ DBInstance -> (structure)
 
     
 
-    If present, specifies the name of the secondary Availability Zone for a DB instance with multi-AZ support. 
+    If present, specifies the name of the secondary Availability Zone for a DB instance with multi-AZ support.
 
     
 
@@ -1157,23 +1256,23 @@ DBInstance -> (structure)
 
     
 
-    Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address. 
+    Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address.
 
      
 
-    Default: The default behavior varies depending on whether a VPC has been requested or not. The following list shows the default behavior in each case. 
+    Default: The default behavior varies depending on whether a VPC has been requested or not. The following list shows the default behavior in each case.
 
      
 
      
-    * **Default VPC:** true
+    * **Default VPC:** true 
      
-    * **VPC:** false
-     
-
+    * **VPC:** false 
      
 
-    If no DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance will be publicly accessible. If a specific DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance will be private. 
+     
+
+    If no DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance will be publicly accessible. If a specific DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance will be private.
 
     
 
@@ -1183,7 +1282,7 @@ DBInstance -> (structure)
 
     
 
-    The status of a Read Replica. If the instance is not a Read Replica, this will be blank. 
+    The status of a Read Replica. If the instance is not a Read Replica, this will be blank.
 
     
 
@@ -1199,7 +1298,7 @@ DBInstance -> (structure)
 
         
 
-        This value is currently "read replication." 
+        This value is currently "read replication."
 
         
 
@@ -1209,7 +1308,7 @@ DBInstance -> (structure)
 
         
 
-        no-use-latest-restorable-time value that is true if the instance is operating normally, or false if the instance is in an error state. 
+        use-latest-restorable-time value that is true if the instance is operating normally, or false if the instance is in an error state.
 
         
 
@@ -1219,7 +1318,7 @@ DBInstance -> (structure)
 
         
 
-        Status of the DB instance. For a StatusType of read replica, the values can be replicating, error, stopped, or terminated. 
+        Status of the DB instance. For a StatusType of read replica, the values can be replicating, error, stopped, or terminated.
 
         
 
@@ -1229,7 +1328,7 @@ DBInstance -> (structure)
 
         
 
-        Details of the error if there is an error for the instance. If the instance is not in an error state, this value is blank. 
+        Details of the error if there is an error for the instance. If the instance is not in an error state, this value is blank.
 
         
 
@@ -1243,7 +1342,7 @@ DBInstance -> (structure)
 
     
 
-    Specifies the storage type associated with DB instance. 
+    Specifies the storage type associated with DB instance.
 
     
 
@@ -1253,7 +1352,7 @@ DBInstance -> (structure)
 
     
 
-    The ARN from the Key Store with which the instance is associated for TDE encryption. 
+    The ARN from the key store with which the instance is associated for TDE encryption.
 
     
 
@@ -1263,7 +1362,7 @@ DBInstance -> (structure)
 
     
 
-    Specifies the port that the DB instance listens on. If the DB instance is part of a DB cluster, this can be a different port than the DB cluster port. 
+    Specifies the port that the DB instance listens on. If the DB instance is part of a DB cluster, this can be a different port than the DB cluster port.
 
     
 
@@ -1283,7 +1382,7 @@ DBInstance -> (structure)
 
     
 
-    Specifies whether the DB instance is encrypted. 
+    Specifies whether the DB instance is encrypted.
 
     
 
@@ -1303,7 +1402,7 @@ DBInstance -> (structure)
 
     
 
-    The region-unique, immutable identifier for the DB instance. This identifier is found in AWS CloudTrail log entries whenever the KMS key for the DB instance is accessed. 
+    The region-unique, immutable identifier for the DB instance. This identifier is found in AWS CloudTrail log entries whenever the KMS key for the DB instance is accessed.
 
     
 
@@ -1316,6 +1415,66 @@ DBInstance -> (structure)
     The identifier of the CA certificate for this DB instance.
 
     
+
+    
+
+  DomainMemberships -> (list)
+
+    
+
+    The Active Directory Domain membership records associated with the DB instance.
+
+    
+
+    (structure)
+
+      
+
+      An Active Directory Domain membership record associated with the DB instance.
+
+      
+
+      Domain -> (string)
+
+        
+
+        The identifier of the Active Directory Domain.
+
+        
+
+        
+
+      Status -> (string)
+
+        
+
+        The status of the DB instance's Active Directory Domain membership, such as joined, pending-join, failed etc).
+
+        
+
+        
+
+      FQDN -> (string)
+
+        
+
+        The fully qualified domain name of the Active Directory Domain.
+
+        
+
+        
+
+      IAMRoleName -> (string)
+
+        
+
+        The name of the IAM role to be used when making API calls to the Directory Service.
+
+        
+
+        
+
+      
 
     
 
@@ -1354,6 +1513,60 @@ DBInstance -> (structure)
     
 
     The ARN for the IAM role that permits RDS to send Enhanced Monitoring metrics to CloudWatch Logs.
+
+    
+
+    
+
+  PromotionTier -> (integer)
+
+    
+
+    A value that specifies the order in which an Aurora Replica is promoted to the primary instance after a failure of the existing primary instance. For more information, see `Fault Tolerance for an Aurora DB Cluster <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Managing.html#Aurora.Managing.FaultTolerance>`_ . 
+
+    
+
+    
+
+  DBInstanceArn -> (string)
+
+    
+
+    The Amazon Resource Name (ARN) for the DB instance.
+
+    
+
+    
+
+  Timezone -> (string)
+
+    
+
+    The time zone of the DB instance. In most cases, the ``Timezone`` element is empty. ``Timezone`` content appears only for Microsoft SQL Server DB instances that were created with a time zone specified. 
+
+    
+
+    
+
+  IAMDatabaseAuthenticationEnabled -> (boolean)
+
+    
+
+    True if mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled; otherwise false.
+
+     
+
+    IAM database authentication can be enabled for the following database engines
+
+     
+
+     
+    * For MySQL 5.6, minor version 5.6.34 or higher 
+     
+    * For MySQL 5.7, minor version 5.7.16 or higher 
+     
+    * Aurora 5.6 or higher. To enable IAM database authentication for Aurora, see DBCluster Type. 
+     
 
     
 

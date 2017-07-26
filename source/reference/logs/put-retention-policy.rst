@@ -15,8 +15,11 @@ Description
 
 
 
-Sets the retention of the specified log group. A retention policy allows you to configure the number of days you want to retain log events in the specified log group. 
+Sets the retention of the specified log group. A retention policy allows you to configure the number of days you want to retain log events in the specified log group.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutRetentionPolicy>`_
 
 
 ========
@@ -29,7 +32,7 @@ Synopsis
   --log-group-name <value>
   --retention-in-days <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -41,22 +44,22 @@ Options
 ``--log-group-name`` (string)
 
 
-  The name of the log group to associate the retention policy with.
+  The name of the log group.
 
   
 
 ``--retention-in-days`` (integer)
 
 
-  Specifies the number of days you want to retain log events in the specified log group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827, 3653.
+  The number of days to retain the log events in the specified log group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827, and 3653.
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 

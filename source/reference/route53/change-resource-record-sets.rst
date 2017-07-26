@@ -15,36 +15,91 @@ Description
 
 
 
-Use this action to create or change your authoritative DNS information. To use this action, send a ``POST`` request to the ``/*Route 53 API version* /hostedzone/*hosted Zone ID* /rrset`` resource. The request body must include a document with a ``ChangeResourceRecordSetsRequest`` element.
+Creates, changes, or deletes a resource record set, which contains authoritative DNS information for a specified domain name or subdomain name. For example, you can use ``change-resource-record-sets`` to create a resource record set that routes traffic for test.example.com to a web server that has an IP address of 192.0.2.44.
 
  
 
-Changes are a list of change items and are considered transactional. For more information on transactional changes, also known as change batches, see `POST change-resource-record-sets`_ in the *Amazon Route 53 API Reference* .
+ **Change Batches and Transactional Changes**  
+
+ 
+
+The request body must include a document with a ``ChangeResourceRecordSetsRequest`` element. The request body contains a list of change items, known as a change batch. Change batches are considered transactional changes. When using the Amazon Route 53 API to change resource record sets, Amazon Route 53 either makes all or none of the changes in a change batch request. This ensures that Amazon Route 53 never partially implements the intended changes to the resource record sets in a hosted zone. 
+
+ 
+
+For example, a change batch request that deletes the ``CNAME`` record for www.example.com and creates an alias resource record set for www.example.com. Amazon Route 53 deletes the first resource record set and creates the second resource record set in a single operation. If either the ``DELETE`` or the ``CREATE`` action fails, then both changes (plus any other changes in the batch) fail, and the original ``CNAME`` record continues to exist.
 
  
 
 .. warning::
 
-  Due to the nature of transactional changes, you cannot delete the same resource record set more than once in a single change batch. If you attempt to delete the same change batch more than once, Amazon Route 53 returns an ``InvalidChangeBatch`` error.
+   
+
+  Due to the nature of transactional changes, you can't delete the same resource record set more than once in a single change batch. If you attempt to delete the same change batch more than once, Amazon Route 53 returns an ``InvalidChangeBatch`` error.
+
+   
 
  
 
-In response to a ``change-resource-record-sets`` request, your DNS data is changed on all Amazon Route 53 DNS servers. Initially, the status of a change is ``PENDING`` . This means the change has not yet propagated to all the authoritative Amazon Route 53 DNS servers. When the change is propagated to all hosts, the change returns a status of ``INSYNC`` .
+ **Traffic Flow**  
 
  
 
-Note the following limitations on a ``change-resource-record-sets`` request:
+To create resource record sets for complex routing configurations, use either the traffic flow visual editor in the Amazon Route 53 console or the API actions for traffic policies and traffic policy instances. Save the configuration as a traffic policy, then associate the traffic policy with one or more domain names (such as example.com) or subdomain names (such as www.example.com), in the same hosted zone or in multiple hosted zones. You can roll back the updates if the new configuration isn't performing as expected. For more information, see `Using Traffic Flow to Route DNS Traffic <http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/traffic-flow.html>`_ in the *Amazon Route 53 Developer Guide* .
+
+ 
+
+ **Create, Delete, and Upsert**  
+
+ 
+
+Use ``ChangeResourceRecordsSetsRequest`` to perform the following actions:
 
  
 
  
-* A request cannot contain more than 100 Change elements.
+* ``CREATE`` : Creates a resource record set that has the specified values. 
  
-* A request cannot contain more than 1000 ResourceRecord elements.
+* ``DELETE`` : Deletes an existing resource record set that has the specified values. 
  
-* The sum of the number of characters (including spaces) in all ``Value`` elements in a request cannot exceed 32,000 characters.
+* ``UPSERT`` : If a resource record set does not already exist, AWS creates it. If a resource set does exist, Amazon Route 53 updates it with the values in the request.  
  
 
+ 
+
+ **Syntaxes for Creating, Updating, and Deleting Resource Record Sets**  
+
+ 
+
+The syntax for a request depends on the type of resource record set that you want to create, delete, or update, such as weighted, alias, or failover. The XML elements in your request must appear in the order listed in the syntax. 
+
+ 
+
+For an example for each type of resource record set, see "Examples."
+
+ 
+
+Don't refer to the syntax in the "Parameter Syntax" section, which includes all of the elements for every kind of resource record set that you can create, delete, or update by using ``change-resource-record-sets`` . 
+
+ 
+
+ **Change Propagation to Amazon Route 53 DNS Servers**  
+
+ 
+
+When you submit a ``change-resource-record-sets`` request, Amazon Route 53 propagates your changes to all of the Amazon Route 53 authoritative DNS servers. While your changes are propagating, ``get-change`` returns a status of ``PENDING`` . When propagation is complete, ``get-change`` returns a status of ``INSYNC`` . Changes generally propagate to all Amazon Route 53 name servers within 60 seconds. For more information, see  get-change .
+
+ 
+
+ **Limits on change-resource-record-sets Requests**  
+
+ 
+
+For information about the limits on a ``change-resource-record-sets`` request, see `Limits <http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html>`_ in the *Amazon Route 53 Developer Guide* .
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ChangeResourceRecordSets>`_
 
 
 ========
@@ -57,7 +112,7 @@ Synopsis
   --hosted-zone-id <value>
   --change-batch <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -91,16 +146,17 @@ JSON Syntax::
         "Action": "CREATE"|"DELETE"|"UPSERT",
         "ResourceRecordSet": {
           "Name": "string",
-          "Type": "SOA"|"A"|"TXT"|"NS"|"CNAME"|"MX"|"PTR"|"SRV"|"SPF"|"AAAA",
+          "Type": "SOA"|"A"|"TXT"|"NS"|"CNAME"|"MX"|"NAPTR"|"PTR"|"SRV"|"SPF"|"AAAA",
           "SetIdentifier": "string",
           "Weight": long,
-          "Region": "us-east-1"|"us-west-1"|"us-west-2"|"eu-west-1"|"eu-central-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-northeast-1"|"ap-northeast-2"|"sa-east-1"|"cn-north-1",
+          "Region": "us-east-1"|"us-east-2"|"us-west-1"|"us-west-2"|"ca-central-1"|"eu-west-1"|"eu-west-2"|"eu-central-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-northeast-1"|"ap-northeast-2"|"sa-east-1"|"cn-north-1"|"ap-south-1",
           "GeoLocation": {
             "ContinentCode": "string",
             "CountryCode": "string",
             "SubdivisionCode": "string"
           },
           "Failover": "PRIMARY"|"SECONDARY",
+          "MultiValueAnswer": true|false,
           "TTL": long,
           "ResourceRecords": [
             {
@@ -126,8 +182,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -390,7 +446,7 @@ ChangeInfo -> (structure)
 
     
 
-    The ID of the request. Use this ID to track when the change has completed across all Amazon Route 53 DNS servers.
+    The ID of the request.
 
     
 
@@ -402,10 +458,6 @@ ChangeInfo -> (structure)
 
     The current state of the request. ``PENDING`` indicates that this request has not yet been applied to all Amazon Route 53 DNS servers.
 
-     
-
-    Valid Values: ``PENDING`` | ``INSYNC`` 
-
     
 
     
@@ -414,7 +466,7 @@ ChangeInfo -> (structure)
 
     
 
-    The date and time the change was submitted, in the format ``YYYY-MM-DDThh:mm:ssZ`` , as specified in the ISO 8601 standard (for example, 2009-11-19T19:37:58Z). The ``Z`` after the time indicates that the time is listed in Coordinated Universal Time (UTC).
+    The date and time that the change request was submitted in `ISO 8601 format <https://en.wikipedia.org/wiki/ISO_8601>`_ and Coordinated Universal Time (UTC). For example, the value ``2017-03-27T17:48:16.751Z`` represents March 27, 2017 at 17:48:16.751 UTC.
 
     
 
@@ -436,6 +488,3 @@ ChangeInfo -> (structure)
 
   
 
-
-
-.. _POST change-resource-record-sets: http://docs.aws.amazon.com/Route53/latest/APIReference/API_ChangeResourceRecordSets.html

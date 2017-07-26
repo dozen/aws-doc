@@ -23,8 +23,11 @@ To get a copy of the template for an existing stack, you can use the  get-templa
 
  
 
-For more information about creating an update template, updating a stack, and monitoring the progress of the update, see `Updating a Stack`_ .
+For more information about creating an update template, updating a stack, and monitoring the progress of the update, see `Updating a Stack <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks.html>`_ .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateStack>`_
 
 
 ========
@@ -43,12 +46,14 @@ Synopsis
   [--parameters <value>]
   [--capabilities <value>]
   [--resource-types <value>]
+  [--role-arn <value>]
   [--stack-policy-body <value>]
   [--stack-policy-url <value>]
   [--notification-arns <value>]
   [--tags <value>]
+  [--client-request-token <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -67,22 +72,22 @@ Options
 ``--template-body`` (string)
 
 
-  Structure containing the template body with a minimum length of 1 byte and a maximum length of 51,200 bytes. (For more information, go to `Template Anatomy`_ in the AWS CloudFormation User Guide.)
+  Structure containing the template body with a minimum length of 1 byte and a maximum length of 51,200 bytes. (For more information, go to `Template Anatomy <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html>`_ in the AWS CloudFormation User Guide.)
 
    
 
-  Conditional: You must specify either the ``template-body`` or the ``template-url`` parameter, but not both.
+  Conditional: You must specify only one of the following parameters: ``template-body`` , ``template-url`` , or set the ``use-previous-template`` to ``true`` .
 
   
 
 ``--template-url`` (string)
 
 
-  Location of file containing the template body. The URL must point to a template that is located in an Amazon S3 bucket. For more information, go to `Template Anatomy`_ in the AWS CloudFormation User Guide.
+  Location of file containing the template body. The URL must point to a template that is located in an Amazon S3 bucket. For more information, go to `Template Anatomy <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html>`_ in the AWS CloudFormation User Guide.
 
    
 
-  Conditional: You must specify either the ``template-body`` or the ``template-url`` parameter, but not both.
+  Conditional: You must specify only one of the following parameters: ``template-body`` , ``template-url`` , or set the ``use-previous-template`` to ``true`` .
 
   
 
@@ -90,6 +95,10 @@ Options
 
 
   Reuse the existing template that is associated with the stack that you are updating.
+
+   
+
+  Conditional: You must specify only one of the following parameters: ``template-body`` , ``template-url`` , or set the ``use-previous-template`` to ``true`` .
 
   
 
@@ -118,7 +127,7 @@ Options
 ``--parameters`` (list)
 
 
-  A list of ``Parameter`` structures that specify input parameters for the stack. For more information, see the `Parameter`_ data type.
+  A list of ``Parameter`` structures that specify input parameters for the stack. For more information, see the `Parameter <http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html>`_ data type.
 
   
 
@@ -147,7 +156,19 @@ JSON Syntax::
 ``--capabilities`` (list)
 
 
-  A list of capabilities that you must specify before AWS CloudFormation can create or update certain stacks. Some stack templates might include resources that can affect permissions in your AWS account. For those stacks, you must explicitly acknowledge their capabilities by specifying this parameter. Currently, the only valid value is ``CAPABILITY_IAM`` , which is required for the following resources: `AWS\:\:IAM\:\:AccessKey`_ , `AWS\:\:IAM\:\:Group`_ , `AWS\:\:IAM\:\:InstanceProfile`_ , `AWS\:\:IAM\:\:Policy`_ , `AWS\:\:IAM\:\:Role`_ , `AWS\:\:IAM\:\:User`_ , and `AWS\:\:IAM\:\:UserToGroupAddition`_ . If your stack template contains these resources, we recommend that you review any permissions associated with them. If you don't specify this parameter, this action returns an InsufficientCapabilities error.
+  A list of values that you must specify before AWS CloudFormation can update certain stacks. Some stack templates might include resources that can affect permissions in your AWS account, for example, by creating new AWS Identity and Access Management (IAM) users. For those stacks, you must explicitly acknowledge their capabilities by specifying this parameter.
+
+   
+
+  The only valid values are ``CAPABILITY_IAM`` and ``CAPABILITY_NAMED_IAM`` . The following resources require you to specify this parameter: `AWS\:\:IAM\:\:AccessKey <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html>`_ , `AWS\:\:IAM\:\:Group <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html>`_ , `AWS\:\:IAM\:\:InstanceProfile <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html>`_ , `AWS\:\:IAM\:\:Policy <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html>`_ , `AWS\:\:IAM\:\:Role <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html>`_ , `AWS\:\:IAM\:\:User <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html>`_ , and `AWS\:\:IAM\:\:UserToGroupAddition <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html>`_ . If your stack template contains these resources, we recommend that you review all permissions associated with them and edit their permissions if necessary.
+
+   
+
+  If you have IAM resources, you can specify either capability. If you have IAM resources with custom names, you must specify ``CAPABILITY_NAMED_IAM`` . If you don't specify this parameter, this action returns an ``InsufficientCapabilities`` error.
+
+   
+
+  For more information, see `Acknowledging IAM Resources in AWS CloudFormation Templates <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities>`_ .
 
   
 
@@ -159,6 +180,7 @@ Syntax::
 
   Where valid values are:
     CAPABILITY_IAM
+    CAPABILITY_NAMED_IAM
 
 
 
@@ -171,7 +193,7 @@ Syntax::
 
    
 
-  If the list of resource types doesn't include a resource that you're updating, the stack update fails. By default, AWS CloudFormation grants permissions to all resource types. AWS Identity and Access Management (IAM) uses this parameter for AWS CloudFormation-specific condition keys in IAM policies. For more information, see `Controlling Access with AWS Identity and Access Management`_ .
+  If the list of resource types doesn't include a resource that you're updating, the stack update fails. By default, AWS CloudFormation grants permissions to all resource types. AWS Identity and Access Management (IAM) uses this parameter for AWS CloudFormation-specific condition keys in IAM policies. For more information, see `Controlling Access with AWS Identity and Access Management <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html>`_ .
 
   
 
@@ -182,6 +204,17 @@ Syntax::
   "string" "string" ...
 
 
+
+``--role-arn`` (string)
+
+
+  The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM) role that AWS CloudFormation assumes to update the stack. AWS CloudFormation uses the role's credentials to make calls on your behalf. AWS CloudFormation always uses this role for all future operations on the stack. As long as users have permission to operate on the stack, AWS CloudFormation uses this role even if the users don't have permission to pass it. Ensure that the role grants least privilege.
+
+   
+
+  If you don't specify a value, AWS CloudFormation uses the role that was previously associated with the stack. If no role is available, AWS CloudFormation uses a temporary session that is generated from your user credentials.
+
+  
 
 ``--stack-policy-body`` (string)
 
@@ -223,7 +256,7 @@ Syntax::
 ``--tags`` (list)
 
 
-  Key-value pairs to associate with this stack. AWS CloudFormation also propagates these tags to supported resources in the stack. You can specify a maximum number of 10 tags.
+  Key-value pairs to associate with this stack. AWS CloudFormation also propagates these tags to supported resources in the stack. You can specify a maximum number of 50 tags.
 
    
 
@@ -252,11 +285,26 @@ JSON Syntax::
 
 
 
+``--client-request-token`` (string)
+
+
+  A unique identifier for this ``update-stack`` request. Specify this token if you plan to retry requests so that AWS CloudFormation knows that you're not attempting to update a stack with the same name. You might retry ``update-stack`` requests to ensure that AWS CloudFormation successfully received them.
+
+   
+
+  All events triggered by a given stack operation are assigned the same client request token, which you can use to track operations. For example, if you execute a ``create-stack`` operation with the token ``token1`` , then all the ``StackEvents`` generated by that operation will have ``client-request-token`` set as ``token1`` .
+
+   
+
+  In the console, stack operations display the client request token on the Events tab. Stack operations that are initiated from the console use the token format *Console-StackOperation-ID* , which helps you easily identify the stack operation . For example, if you create a stack using the console, each stack event would be assigned the same token in the following format: ``Console-CreateStack-7f59c3cf-00d2-40c7-b2ff-e75db0987002`` . 
+
+  
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -296,16 +344,3 @@ StackId -> (string)
 
   
 
-
-
-.. _AWS\:\:IAM\:\:Group: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html
-.. _Updating a Stack: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks.html
-.. _AWS\:\:IAM\:\:Role: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
-.. _AWS\:\:IAM\:\:Policy: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html
-.. _Controlling Access with AWS Identity and Access Management: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html
-.. _AWS\:\:IAM\:\:InstanceProfile: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html
-.. _AWS\:\:IAM\:\:UserToGroupAddition: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html
-.. _Template Anatomy: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
-.. _AWS\:\:IAM\:\:User: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html
-.. _AWS\:\:IAM\:\:AccessKey: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html
-.. _Parameter: http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html

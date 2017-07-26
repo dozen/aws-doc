@@ -19,6 +19,9 @@ Gets a summary of all AWS CodePipeline action types associated with your account
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListActionTypes>`_
+
+
 ========
 Synopsis
 ========
@@ -29,7 +32,7 @@ Synopsis
   [--action-owner-filter <value>]
   [--next-token <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -70,8 +73,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -169,7 +172,7 @@ actionTypes -> (list)
 
     
 
-    Returns information about the details of an action type. 
+    Returns information about the details of an action type.
 
     
 
@@ -185,7 +188,7 @@ actionTypes -> (list)
 
         
 
-        A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Valid categories are limited to one of the values below. 
+        A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Valid categories are limited to one of the values below.
 
         
 
@@ -195,7 +198,7 @@ actionTypes -> (list)
 
         
 
-        The creator of the action being called. 
+        The creator of the action being called.
 
         
 
@@ -215,7 +218,7 @@ actionTypes -> (list)
 
         
 
-        A string that identifies the action type. 
+        A string that identifies the action type.
 
         
 
@@ -235,7 +238,7 @@ actionTypes -> (list)
 
         
 
-        The URL of a sign-up page where users can sign up for an external service and perform initial configuration of the action provided by that service. 
+        The URL of a sign-up page where users can sign up for an external service and perform initial configuration of the action provided by that service.
 
         
 

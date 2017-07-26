@@ -15,12 +15,15 @@ Description
 
 
 
-Creates an endpoint for a device and mobile app on one of the supported push notification services, such as GCM and APNS. ``create-platform-endpoint`` requires the PlatformApplicationArn that is returned from ``create-platform-application`` . The EndpointArn that is returned when using ``create-platform-endpoint`` can then be used by the ``publish`` action to send a message to a mobile app or by the ``subscribe`` action for subscription to a topic. The ``create-platform-endpoint`` action is idempotent, so if the requester already owns an endpoint with the same device token and attributes, that endpoint's ARN is returned without creating a new endpoint. For more information, see `Using Amazon SNS Mobile Push Notifications`_ . 
+Creates an endpoint for a device and mobile app on one of the supported push notification services, such as GCM and APNS. ``create-platform-endpoint`` requires the PlatformApplicationArn that is returned from ``create-platform-application`` . The EndpointArn that is returned when using ``create-platform-endpoint`` can then be used by the ``publish`` action to send a message to a mobile app or by the ``subscribe`` action for subscription to a topic. The ``create-platform-endpoint`` action is idempotent, so if the requester already owns an endpoint with the same device token and attributes, that endpoint's ARN is returned without creating a new endpoint. For more information, see `Using Amazon SNS Mobile Push Notifications <http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html>`_ . 
 
  
 
-When using ``create-platform-endpoint`` with Baidu, two attributes must be provided: ChannelId and UserId. The token field must also contain the ChannelId. For more information, see `Creating an Amazon SNS Endpoint for Baidu`_ . 
+When using ``create-platform-endpoint`` with Baidu, two attributes must be provided: ChannelId and UserId. The token field must also contain the ChannelId. For more information, see `Creating an Amazon SNS Endpoint for Baidu <http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePushBaiduEndpoint.html>`_ . 
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreatePlatformEndpoint>`_
 
 
 ========
@@ -35,7 +38,7 @@ Synopsis
   [--custom-user-data <value>]
   [--attributes <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -68,7 +71,7 @@ Options
 ``--attributes`` (map)
 
 
-  For a list of attributes, see `set-endpoint-attributes`_ .
+  For a list of attributes, see `set-endpoint-attributes <http://docs.aws.amazon.com/sns/latest/api/API_SetEndpointAttributes.html>`_ .
 
   
 
@@ -91,8 +94,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -110,8 +113,3 @@ EndpointArn -> (string)
 
   
 
-
-
-.. _Using Amazon SNS Mobile Push Notifications: http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
-.. _set-endpoint-attributes: http://docs.aws.amazon.com/sns/latest/api/API_SetEndpointAttributes.html
-.. _Creating an Amazon SNS Endpoint for Baidu: http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePushBaiduEndpoint.html

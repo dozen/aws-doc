@@ -19,6 +19,13 @@ Returns details about your AWS Config rules.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigRules>`_
+
+
+``describe-config-rules`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
+When using ``--output text`` and the ``--query`` argument on a paginated response, the ``--query`` argument must extract data from the results of the following query expressions: ``ConfigRules``
+
+
 ========
 Synopsis
 ========
@@ -27,9 +34,10 @@ Synopsis
 
     describe-config-rules
   [--config-rule-names <value>]
-  [--next-token <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--starting-token <value>]
+  [--max-items <value>]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -53,18 +61,33 @@ Syntax::
 
 
 
-``--next-token`` (string)
-
-
-  The ``nextToken`` string returned on a previous page that you use to get the next page of results in a paginated response.
-
-  
-
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--starting-token`` (string)
+ 
+
+  A token to specify where to start paginating. This is the ``NextToken`` from a previously truncated response.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--max-items`` (integer)
+ 
+
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``NextToken`` is provided in the command's output. To resume pagination, provide the ``NextToken`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``NextToken`` response element directly outside of the AWS CLI.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -124,11 +147,21 @@ ConfigRules -> (list)
 
     
 
-    An AWS Lambda function that evaluates configuration items to assess whether your AWS resources comply with your desired configurations. This function can run when AWS Config detects a configuration change or delivers a configuration snapshot.
+    An AWS Config rule represents an AWS Lambda function that you create for a custom rule or a predefined function for an AWS managed rule. The function evaluates configuration items to assess whether your AWS resources comply with your desired configurations. This function can run when AWS Config detects a configuration change to an AWS resource and at a periodic frequency that you choose (for example, every 24 hours).
 
      
 
-    For more information about developing and using AWS Config rules, see `Evaluating AWS Resource Configurations with AWS Config`_ in the *AWS Config Developer Guide* .
+    .. note::
+
+       
+
+      You can use the AWS CLI and AWS SDKs if you want to create a rule that triggers evaluations for your resources when AWS Config delivers the configuration snapshot. For more information, see  ConfigSnapshotDeliveryProperties .
+
+       
+
+     
+
+    For more information about developing and using AWS Config rules, see `Evaluating AWS Resource Configurations with AWS Config <http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html>`_ in the *AWS Config Developer Guide* .
 
     
 
@@ -232,7 +265,7 @@ ConfigRules -> (list)
 
       
 
-      Provides the rule owner (AWS or customer), the rule identifier, and the events that cause the function to evaluate your AWS resources.
+      Provides the rule owner (AWS or customer), the rule identifier, and the notifications that cause the function to evaluate your AWS resources.
 
       
 
@@ -250,11 +283,11 @@ ConfigRules -> (list)
 
         
 
-        For AWS managed Config rules, a pre-defined identifier from a list. To reference the list, see `Using AWS Managed Config Rules`_ .
+        For AWS Config managed rules, a predefined identifier from a list. For example, ``IAM_PASSWORD_POLICY`` is a managed rule. To reference a managed rule, see `Using AWS Managed Config Rules <http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html>`_ .
 
          
 
-        For customer managed Config rules, the identifier is the Amazon Resource Name (ARN) of the rule's AWS Lambda function.
+        For custom rules, the identifier is the Amazon Resource Name (ARN) of the rule's AWS Lambda function, such as ``arn:aws:lambda:us-east-1:123456789012:function:custom_rule_name`` .
 
         
 
@@ -272,7 +305,7 @@ ConfigRules -> (list)
 
           
 
-          Provides the source and type of the event that triggers AWS Config to evaluate your AWS resources against a rule.
+          Provides the source and the message types that trigger AWS Config to evaluate your AWS resources against a rule. It also provides the frequency with which you want AWS Config to run evaluations for the rule if the trigger type is periodic. You can specify the parameter values for ``SourceDetail`` only for custom rules. 
 
           
 
@@ -290,7 +323,43 @@ ConfigRules -> (list)
 
             
 
-            The type of SNS message that triggers AWS Config to run an evaluation. For evaluations that are initiated when AWS Config delivers a configuration item change notification, you must use ``ConfigurationItemChangeNotification`` . For evaluations that are initiated when AWS Config delivers a configuration snapshot, you must use ``ConfigurationSnapshotDeliveryCompleted`` . 
+            The type of notification that triggers AWS Config to run an evaluation for a rule. You can specify the following notification types:
+
+             
+
+             
+            * ``ConfigurationItemChangeNotification`` - Triggers an evaluation when AWS Config delivers a configuration item as a result of a resource change. 
+             
+            * ``OversizedConfigurationItemChangeNotification`` - Triggers an evaluation when AWS Config delivers an oversized configuration item. AWS Config may generate this notification type when a resource changes and the notification exceeds the maximum size allowed by Amazon SNS. 
+             
+            * ``ScheduledNotification`` - Triggers a periodic evaluation at the frequency specified for ``MaximumExecutionFrequency`` . 
+             
+            * ``ConfigurationSnapshotDeliveryCompleted`` - Triggers a periodic evaluation when AWS Config delivers a configuration snapshot. 
+             
+
+             
+
+            If you want your custom rule to be triggered by configuration changes, specify both ``ConfigurationItemChangeNotification`` and ``OversizedConfigurationItemChangeNotification`` . 
+
+            
+
+            
+
+          MaximumExecutionFrequency -> (string)
+
+            
+
+            The frequency that you want AWS Config to run evaluations for a custom rule with a periodic trigger. If you specify a value for ``MaximumExecutionFrequency`` , then ``MessageType`` must use the ``ScheduledNotification`` value.
+
+             
+
+            .. note::
+
+               
+
+              By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid value for the ``MaximumExecutionFrequency`` parameter.
+
+               
 
             
 
@@ -316,11 +385,25 @@ ConfigRules -> (list)
 
       
 
-      The maximum frequency at which the AWS Config rule runs evaluations.
+      The maximum frequency with which AWS Config runs evaluations for a rule. You can specify a value for ``MaximumExecutionFrequency`` when:
 
        
 
-      If your rule is periodic, meaning it runs an evaluation when AWS Config delivers a configuration snapshot, then it cannot run evaluations more frequently than AWS Config delivers the snapshots. For periodic rules, set the value of the ``MaximumExecutionFrequency`` key to be equal to or greater than the value of the ``deliveryFrequency`` key, which is part of ``ConfigSnapshotDeliveryProperties`` . To update the frequency with which AWS Config delivers your snapshots, use the ``put-delivery-channel`` action.
+       
+      * You are using an AWS managed rule that is triggered at a periodic frequency. 
+       
+      * Your custom rule is triggered when AWS Config delivers the configuration snapshot. For more information, see  ConfigSnapshotDeliveryProperties . 
+       
+
+       
+
+      .. note::
+
+         
+
+        By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid value for the ``MaximumExecutionFrequency`` parameter.
+
+         
 
       
 
@@ -330,15 +413,19 @@ ConfigRules -> (list)
 
       
 
-      Indicates whether the AWS Config rule is active or currently being deleted by AWS Config.
+      Indicates whether the AWS Config rule is active or is currently being deleted by AWS Config. It can also indicate the evaluation status for the Config rule.
 
        
 
-      AWS Config sets the state of a rule to ``DELETING`` temporarily after you use the ``delete-config-rule`` request to delete the rule. After AWS Config finishes deleting a rule, the rule and all of its evaluations are erased and no longer available.
+      AWS Config sets the state of the rule to ``EVALUATING`` temporarily after you use the ``start-config-rules-evaluation`` request to evaluate your resources against the Config rule.
 
        
 
-      You cannot add a rule to AWS Config that has the state set to ``DELETING`` . If you want to delete a rule, you must use the ``delete-config-rule`` request.
+      AWS Config sets the state of the rule to ``DELETING_RESULTS`` temporarily after you use the ``delete-evaluation-results`` request to delete the current evaluation results for the Config rule.
+
+       
+
+      AWS Config sets the state of a rule to ``DELETING`` temporarily after you use the ``delete-config-rule`` request to delete the rule. After AWS Config deletes the rule, the rule and all of its evaluations are erased and are no longer available.
 
       
 
@@ -358,7 +445,3 @@ NextToken -> (string)
 
   
 
-
-
-.. _Using AWS Managed Config Rules: http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html
-.. _Evaluating AWS Resource Configurations with AWS Config: http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html

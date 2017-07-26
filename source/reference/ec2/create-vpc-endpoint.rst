@@ -19,8 +19,11 @@ Creates a VPC endpoint for a specified AWS service. An endpoint enables you to c
 
  
 
-Currently, only endpoints to Amazon S3 are supported.
+Use  describe-vpc-endpoint-services to get a list of supported AWS services.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcEndpoint>`_
 
 
 ========
@@ -30,14 +33,14 @@ Synopsis
 ::
 
     create-vpc-endpoint
+  [--client-token <value>]
   [--dry-run | --no-dry-run]
-  --vpc-id <value>
-  --service-name <value>
   [--policy-document <value>]
   [--route-table-ids <value>]
-  [--client-token <value>]
+  --service-name <value>
+  --vpc-id <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -46,6 +49,13 @@ Synopsis
 Options
 =======
 
+``--client-token`` (string)
+
+
+  Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see `How to Ensure Idempotency <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html>`_ .
+
+  
+
 ``--dry-run`` | ``--no-dry-run`` (boolean)
 
 
@@ -53,24 +63,10 @@ Options
 
   
 
-``--vpc-id`` (string)
-
-
-  The ID of the VPC in which the endpoint will be used.
-
-  
-
-``--service-name`` (string)
-
-
-  The AWS service name, in the form ``com.amazonaws.*region* .*service*`` . To get a list of available services, use the  describe-vpc-endpoint-services request.
-
-  
-
 ``--policy-document`` (string)
 
 
-  A policy to attach to the endpoint that controls access to the service. The policy must be in valid JSON format. If this parameter is not specified, we attach a default policy that allows full access to the service. 
+  A policy to attach to the endpoint that controls access to the service. The policy must be in valid JSON format. If this parameter is not specified, we attach a default policy that allows full access to the service.
 
   
 
@@ -89,18 +85,25 @@ Syntax::
 
 
 
-``--client-token`` (string)
+``--service-name`` (string)
 
 
-  Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see `How to Ensure Idempotency`_ .
+  The AWS service name, in the form ``com.amazonaws.*region* .*service* `` . To get a list of available services, use the  describe-vpc-endpoint-services request.
+
+  
+
+``--vpc-id`` (string)
+
+
+  The ID of the VPC in which the endpoint will be used.
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -136,6 +139,16 @@ Output::
 Output
 ======
 
+ClientToken -> (string)
+
+  
+
+  Unique, case-sensitive identifier you provide to ensure the idempotency of the request.
+
+  
+
+  
+
 VpcEndpoint -> (structure)
 
   
@@ -144,41 +157,11 @@ VpcEndpoint -> (structure)
 
   
 
-  VpcEndpointId -> (string)
+  CreationTimestamp -> (timestamp)
 
     
 
-    The ID of the VPC endpoint.
-
-    
-
-    
-
-  VpcId -> (string)
-
-    
-
-    The ID of the VPC to which the endpoint is associated.
-
-    
-
-    
-
-  ServiceName -> (string)
-
-    
-
-    The name of the AWS service to which the endpoint is associated.
-
-    
-
-    
-
-  State -> (string)
-
-    
-
-    The state of the VPC endpoint.
+    The date and time the VPC endpoint was created.
 
     
 
@@ -210,11 +193,41 @@ VpcEndpoint -> (structure)
 
     
 
-  CreationTimestamp -> (timestamp)
+  ServiceName -> (string)
 
     
 
-    The date and time the VPC endpoint was created.
+    The name of the AWS service to which the endpoint is associated.
+
+    
+
+    
+
+  State -> (string)
+
+    
+
+    The state of the VPC endpoint.
+
+    
+
+    
+
+  VpcEndpointId -> (string)
+
+    
+
+    The ID of the VPC endpoint.
+
+    
+
+    
+
+  VpcId -> (string)
+
+    
+
+    The ID of the VPC to which the endpoint is associated.
 
     
 
@@ -222,16 +235,3 @@ VpcEndpoint -> (structure)
 
   
 
-ClientToken -> (string)
-
-  
-
-  Unique, case-sensitive identifier you provide to ensure the idempotency of the request.
-
-  
-
-  
-
-
-
-.. _How to Ensure Idempotency: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html

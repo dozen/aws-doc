@@ -15,8 +15,15 @@ Description
 
 
 
-Retrieves a list of the ACM Certificate ARNs, and the domain name for each ARN, owned by the calling account. You can filter the list based on the ``certificate-statuses`` parameter, and you can display up to ``max-items`` certificates at one time. If you have more than ``max-items`` certificates, use the ``next-token`` marker from the response object in your next call to the ``list-certificates`` action to retrieve the next set of certificate ARNs. 
+Retrieves a list of ACM Certificates and the domain name for each. You can optionally filter the list to return only the certificates that match the specified status.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListCertificates>`_
+
+
+``list-certificates`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
+When using ``--output text`` and the ``--query`` argument on a paginated response, the ``--query`` argument must extract data from the results of the following query expressions: ``CertificateSummaryList``
 
 
 ========
@@ -27,10 +34,11 @@ Synopsis
 
     list-certificates
   [--certificate-statuses <value>]
-  [--next-token <value>]
   [--max-items <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--starting-token <value>]
+  [--page-size <value>]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -42,25 +50,7 @@ Options
 ``--certificate-statuses`` (list)
 
 
-  Identifies the statuses of the ACM Certificates for which you want to retrieve the ARNs. This can be one or more of the following values: 
-
-   
-  * ``PENDING_VALIDATION`` 
-   
-  * ``ISSUED`` 
-   
-  * ``INACTIVE`` 
-   
-  * ``EXPIRED`` 
-   
-  * ``VALIDATION_TIMED_OUT`` 
-   
-  * ``REVOKED`` 
-   
-  * ``FAILED`` 
-   
-
-   
+  The status or statuses on which to filter the list of ACM Certificates.
 
   
 
@@ -83,25 +73,44 @@ Syntax::
 
 
 
-``--next-token`` (string)
-
-
-  String that contains an opaque marker of the next ACM Certificate ARN to be displayed. Use this parameter when paginating results, and only in a subsequent request after you've received a response where the results have been truncated. Set it to an empty string the first time you call this action, and set it to the value of the ``next-token`` element you receive in the response object for subsequent calls. 
-
-  
-
 ``--max-items`` (integer)
+ 
 
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``next-token`` is provided in the command's output. To resume pagination, provide the ``next-token`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``next-token`` response element directly outside of the AWS CLI.
 
-  Specify this parameter when paginating results to indicate the maximum number of ACM Certificates that you want to display for each response. If there are additional certificates beyond the maximum you specify, use the ``next-token`` value in your next call to the ``list-certificates`` action. 
+   
 
-  
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--starting-token`` (string)
+ 
+
+  A token to specify where to start paginating. This is the ``next-token`` from a previously truncated response.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--page-size`` (integer)
+ 
+
+  The size of each page to get in the AWS service call. This does not affect the number of items returned in the command's output. Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call. This can help prevent the AWS service calls from timing out.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -167,7 +176,7 @@ NextToken -> (string)
 
   
 
-  If the list has been truncated, this value is present and should be used for the ``next-token`` input parameter on your next call to ``list-certificates`` . 
+  When the list is truncated, this value is present and contains the value to use for the ``next-token`` parameter in a subsequent pagination request.
 
   
 
@@ -177,7 +186,7 @@ CertificateSummaryList -> (list)
 
   
 
-  A list of the certificate ARNs. 
+  A list of ACM Certificates.
 
   
 
@@ -185,7 +194,7 @@ CertificateSummaryList -> (list)
 
     
 
-    This structure is returned in the response object of  list-certificates action. 
+    This structure is returned in the response object of  list-certificates action.
 
     
 
@@ -193,7 +202,7 @@ CertificateSummaryList -> (list)
 
       
 
-      Amazon Resource Name (ARN) of the certificate. This is of the form: 
+      Amazon Resource Name (ARN) of the certificate. This is of the form:
 
        
 
@@ -201,7 +210,7 @@ CertificateSummaryList -> (list)
 
        
 
-      For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces`_ . 
+      For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces <http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`_ .
 
       
 
@@ -211,7 +220,7 @@ CertificateSummaryList -> (list)
 
       
 
-      Fully qualified domain name (FQDN), such as www.example.com or example.com, for the certificate. 
+      Fully qualified domain name (FQDN), such as www.example.com or example.com, for the certificate.
 
       
 
@@ -221,6 +230,3 @@ CertificateSummaryList -> (list)
 
   
 
-
-
-.. _Amazon Resource Names (ARNs) and AWS Service Namespaces: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html

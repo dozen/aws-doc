@@ -37,6 +37,7 @@ Synopsis
   [--ssh-username <value>]
   [--ssh-private-key <value>]
   [--local]
+  [--use-instance-profile]
   [<target>]
 
 
@@ -72,6 +73,9 @@ If provided, the given private key file will be used to connect to the machine.
 
 ``--local`` (boolean)
 If given, instead of a remote machine, the local machine will be imported. Cannot be used together with `target`.
+
+``--use-instance-profile`` (boolean)
+Use the instance profile instead of creating an IAM user.
 
 ``target`` (string)
 Either the EC2 instance ID or the hostname of the instance or machine to be registered with OpsWorks. Cannot be used together with `--local`.

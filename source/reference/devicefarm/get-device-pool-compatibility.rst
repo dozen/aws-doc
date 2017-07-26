@@ -19,6 +19,9 @@ Gets information about compatibility with a device pool.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDevicePoolCompatibility>`_
+
+
 ========
 Synopsis
 ========
@@ -29,8 +32,9 @@ Synopsis
   --device-pool-arn <value>
   [--app-arn <value>]
   [--test-type <value>]
+  [--test <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -65,31 +69,33 @@ Options
    
 
    
-  * BUILTIN_FUZZ: The built-in fuzz type.
+  * BUILTIN_FUZZ: The built-in fuzz type. 
    
-  * BUILTIN_EXPLORER: For Android, an app explorer that will traverse an Android app, interacting with it and capturing screenshots at the same time.
+  * BUILTIN_EXPLORER: For Android, an app explorer that will traverse an Android app, interacting with it and capturing screenshots at the same time. 
    
-  * APPIUM_JAVA_JUNIT: The Appium Java JUnit type.
+  * APPIUM_JAVA_JUNIT: The Appium Java JUnit type. 
    
-  * APPIUM_JAVA_TESTNG: The Appium Java TestNG type.
+  * APPIUM_JAVA_TESTNG: The Appium Java TestNG type. 
    
-  * APPIUM_PYTHON: The Appium Python type.
+  * APPIUM_PYTHON: The Appium Python type. 
    
-  * CALABASH: The Calabash type.
+  * APPIUM_WEB_JAVA_JUNIT: The Appium Java JUnit type for Web apps. 
    
-  * INSTRUMENTATION: The Instrumentation type.
+  * APPIUM_WEB_JAVA_TESTNG: The Appium Java TestNG type for Web apps. 
    
-  * UIAUTOMATION: The uiautomation type.
+  * APPIUM_WEB_PYTHON: The Appium Python type for Web apps. 
    
-  * UIAUTOMATOR: The uiautomator type.
+  * CALABASH: The Calabash type. 
    
-  * XCTEST: The XCode test type.
+  * INSTRUMENTATION: The Instrumentation type. 
    
-  * APPIUM_WEB_JAVA_JUNIT: The Appium Java JUnit type for Web apps.
+  * UIAUTOMATION: The uiautomation type. 
    
-  * APPIUM_WEB_JAVA_TESTNG: The Appium Java TestNG type for Web apps.
+  * UIAUTOMATOR: The uiautomator type. 
    
-  * APPIUM_WEB_PYTHON: The Appium Python type for Web apps.
+  * XCTEST: The XCode test type. 
+   
+  * XCTEST_UI: The XCode UI test type. 
    
 
   
@@ -136,14 +142,45 @@ Options
   *   ``XCTEST``
 
   
+  *   ``XCTEST_UI``
 
   
+
+  
+
+``--test`` (structure)
+
+
+  Information about the uploaded test to be run against the device pool.
+
+  
+
+
+
+Shorthand Syntax::
+
+    type=string,testPackageArn=string,filter=string,parameters={KeyName1=string,KeyName2=string}
+
+
+
+
+JSON Syntax::
+
+  {
+    "type": "BUILTIN_FUZZ"|"BUILTIN_EXPLORER"|"APPIUM_JAVA_JUNIT"|"APPIUM_JAVA_TESTNG"|"APPIUM_PYTHON"|"APPIUM_WEB_JAVA_JUNIT"|"APPIUM_WEB_JAVA_TESTNG"|"APPIUM_WEB_PYTHON"|"CALABASH"|"INSTRUMENTATION"|"UIAUTOMATION"|"UIAUTOMATOR"|"XCTEST"|"XCTEST_UI",
+    "testPackageArn": "string",
+    "filter": "string",
+    "parameters": {"string": "string"
+      ...}
+  }
+
+
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -171,7 +208,7 @@ compatibleDevices -> (list)
 
       
 
-      Represents a device type that an app is tested against.
+      The device (phone or tablet) that you wish to return information about.
 
       
 
@@ -228,9 +265,9 @@ compatibleDevices -> (list)
          
 
          
-        * PHONE: The phone form factor.
+        * PHONE: The phone form factor. 
          
-        * TABLET: The tablet form factor.
+        * TABLET: The tablet form factor. 
          
 
         
@@ -250,9 +287,9 @@ compatibleDevices -> (list)
          
 
          
-        * ANDROID: The Android platform.
+        * ANDROID: The Android platform. 
          
-        * IOS: The iOS platform.
+        * IOS: The iOS platform. 
          
 
         
@@ -313,7 +350,7 @@ compatibleDevices -> (list)
 
         
 
-        Represents the screen resolution of a device in height and width, expressed in pixels.
+        The resolution of the device.
 
         
 
@@ -389,6 +426,36 @@ compatibleDevices -> (list)
 
         
 
+      remoteAccessEnabled -> (boolean)
+
+        
+
+        Specifies whether remote access has been enabled for the specified device.
+
+        
+
+        
+
+      fleetType -> (string)
+
+        
+
+        The type of fleet to which this device belongs. Possible values for fleet type are PRIVATE and PUBLIC.
+
+        
+
+        
+
+      fleetName -> (string)
+
+        
+
+        The name of the fleet to which this device belongs.
+
+        
+
+        
+
       
 
     compatible -> (boolean)
@@ -440,13 +507,17 @@ compatibleDevices -> (list)
            
 
            
-          * ARN: The ARN.
+          * ARN: The ARN. 
            
-          * FORM_FACTOR: The form factor (for example, phone or tablet).
+          * FORM_FACTOR: The form factor (for example, phone or tablet). 
            
-          * MANUFACTURER: The manufacturer.
+          * MANUFACTURER: The manufacturer. 
            
-          * PLATFORM: The platform (for example, Android or iOS).
+          * PLATFORM: The platform (for example, Android or iOS). 
+           
+          * REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access. 
+           
+          * APPIUM_VERSION: The Appium version for the test. 
            
 
           
@@ -481,7 +552,7 @@ incompatibleDevices -> (list)
 
       
 
-      Represents a device type that an app is tested against.
+      The device (phone or tablet) that you wish to return information about.
 
       
 
@@ -538,9 +609,9 @@ incompatibleDevices -> (list)
          
 
          
-        * PHONE: The phone form factor.
+        * PHONE: The phone form factor. 
          
-        * TABLET: The tablet form factor.
+        * TABLET: The tablet form factor. 
          
 
         
@@ -560,9 +631,9 @@ incompatibleDevices -> (list)
          
 
          
-        * ANDROID: The Android platform.
+        * ANDROID: The Android platform. 
          
-        * IOS: The iOS platform.
+        * IOS: The iOS platform. 
          
 
         
@@ -623,7 +694,7 @@ incompatibleDevices -> (list)
 
         
 
-        Represents the screen resolution of a device in height and width, expressed in pixels.
+        The resolution of the device.
 
         
 
@@ -699,6 +770,36 @@ incompatibleDevices -> (list)
 
         
 
+      remoteAccessEnabled -> (boolean)
+
+        
+
+        Specifies whether remote access has been enabled for the specified device.
+
+        
+
+        
+
+      fleetType -> (string)
+
+        
+
+        The type of fleet to which this device belongs. Possible values for fleet type are PRIVATE and PUBLIC.
+
+        
+
+        
+
+      fleetName -> (string)
+
+        
+
+        The name of the fleet to which this device belongs.
+
+        
+
+        
+
       
 
     compatible -> (boolean)
@@ -750,13 +851,17 @@ incompatibleDevices -> (list)
            
 
            
-          * ARN: The ARN.
+          * ARN: The ARN. 
            
-          * FORM_FACTOR: The form factor (for example, phone or tablet).
+          * FORM_FACTOR: The form factor (for example, phone or tablet). 
            
-          * MANUFACTURER: The manufacturer.
+          * MANUFACTURER: The manufacturer. 
            
-          * PLATFORM: The platform (for example, Android or iOS).
+          * PLATFORM: The platform (for example, Android or iOS). 
+           
+          * REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access. 
+           
+          * APPIUM_VERSION: The Appium version for the test. 
            
 
           

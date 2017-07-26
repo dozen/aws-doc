@@ -19,6 +19,9 @@ Uploads an app or test scripts.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateUpload>`_
+
+
 ========
 Synopsis
 ========
@@ -31,7 +34,7 @@ Synopsis
   --type <value>
   [--content-type <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -50,7 +53,7 @@ Options
 ``--name`` (string)
 
 
-  The upload's file name.
+  The upload's file name. The name should not contain the '/' character. If uploading an iOS app, the file name needs to end with the ``.ipa`` extension. If uploading an Android app, the file name needs to end with the ``.apk`` extension. For all others, the file name must end with the ``.zip`` file extension.
 
   
 
@@ -66,36 +69,42 @@ Options
    
 
    
-  * ANDROID_APP: An Android upload.
+  * ANDROID_APP: An Android upload. 
    
-  * IOS_APP: An iOS upload.
+  * IOS_APP: An iOS upload. 
    
-  * EXTERNAL_DATA: An external data upload.
+  * WEB_APP: A web appliction upload. 
    
-  * APPIUM_JAVA_JUNIT_TEST_PACKAGE: An Appium Java JUnit test package upload.
+  * EXTERNAL_DATA: An external data upload. 
    
-  * APPIUM_JAVA_TESTNG_TEST_PACKAGE: An Appium Java TestNG test package upload.
+  * APPIUM_JAVA_JUNIT_TEST_PACKAGE: An Appium Java JUnit test package upload. 
    
-  * APPIUM_PYTHON_TEST_PACKAGE: An Appium Python test package upload.
+  * APPIUM_JAVA_TESTNG_TEST_PACKAGE: An Appium Java TestNG test package upload. 
    
-  * CALABASH_TEST_PACKAGE: A Calabash test package upload.
+  * APPIUM_PYTHON_TEST_PACKAGE: An Appium Python test package upload. 
    
-  * INSTRUMENTATION_TEST_PACKAGE: An instrumentation upload.
+  * APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE: An Appium Java JUnit test package upload. 
    
-  * UIAUTOMATOR_TEST_PACKAGE: A uiautomator test package upload.
+  * APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE: An Appium Java TestNG test package upload. 
    
-  * XCTEST_TEST_PACKAGE: An XCode test package upload.
+  * APPIUM_WEB_PYTHON_TEST_PACKAGE: An Appium Python test package upload. 
    
-  * APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE: An Appium Java JUnit test package upload.
+  * CALABASH_TEST_PACKAGE: A Calabash test package upload. 
    
-  * APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE: An Appium Java TestNG test package upload.
+  * INSTRUMENTATION_TEST_PACKAGE: An instrumentation upload. 
    
-  * APPIUM_WEB_PYTHON_TEST_PACKAGE: An Appium Python test package upload.
+  * UIAUTOMATION_TEST_PACKAGE: A uiautomation test package upload. 
+   
+  * UIAUTOMATOR_TEST_PACKAGE: A uiautomator test package upload. 
+   
+  * XCTEST_TEST_PACKAGE: An XCode test package upload. 
+   
+  * XCTEST_UI_TEST_PACKAGE: An XCode UI test package upload. 
    
 
    
 
-  **Note** If you call ``create-upload`` with ``WEB_APP`` specified, AWS Device Farm throws an ``ArgumentException`` error.
+   **Note** If you call ``create-upload`` with ``WEB_APP`` specified, AWS Device Farm throws an ``ArgumentException`` error.
 
   
 
@@ -147,6 +156,9 @@ Options
   *   ``XCTEST_TEST_PACKAGE``
 
   
+  *   ``XCTEST_UI_TEST_PACKAGE``
+
+  
 
   
 
@@ -160,8 +172,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -220,31 +232,37 @@ upload -> (structure)
      
 
      
-    * ANDROID_APP: An Android upload.
+    * ANDROID_APP: An Android upload. 
      
-    * IOS_APP: An iOS upload.
+    * IOS_APP: An iOS upload. 
      
-    * EXTERNAL_DATA: An external data upload.
+    * WEB_APP: A web appliction upload. 
      
-    * APPIUM_JAVA_JUNIT_TEST_PACKAGE: An Appium Java JUnit test package upload.
+    * EXTERNAL_DATA: An external data upload. 
      
-    * APPIUM_JAVA_TESTNG_TEST_PACKAGE: An Appium Java TestNG test package upload.
+    * APPIUM_JAVA_JUNIT_TEST_PACKAGE: An Appium Java JUnit test package upload. 
      
-    * APPIUM_PYTHON_TEST_PACKAGE: An Appium Python test package upload.
+    * APPIUM_JAVA_TESTNG_TEST_PACKAGE: An Appium Java TestNG test package upload. 
      
-    * CALABASH_TEST_PACKAGE: A Calabash test package upload.
+    * APPIUM_PYTHON_TEST_PACKAGE: An Appium Python test package upload. 
      
-    * INSTRUMENTATION_TEST_PACKAGE: An instrumentation upload.
+    * APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE: An Appium Java JUnit test package upload. 
      
-    * UIAUTOMATOR_TEST_PACKAGE: A uiautomator test package upload.
+    * APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE: An Appium Java TestNG test package upload. 
      
-    * XCTEST_TEST_PACKAGE: An XCode test package upload.
+    * APPIUM_WEB_PYTHON_TEST_PACKAGE: An Appium Python test package upload. 
      
-    * APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE: An Appium Java JUnit test package upload.
+    * CALABASH_TEST_PACKAGE: A Calabash test package upload. 
      
-    * APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE: An Appium Java TestNG test package upload.
+    * INSTRUMENTATION_TEST_PACKAGE: An instrumentation upload. 
      
-    * APPIUM_WEB_PYTHON_TEST_PACKAGE: An Appium Python test package upload.
+    * UIAUTOMATION_TEST_PACKAGE: A uiautomation test package upload. 
+     
+    * UIAUTOMATOR_TEST_PACKAGE: A uiautomator test package upload. 
+     
+    * XCTEST_TEST_PACKAGE: An XCode test package upload. 
+     
+    * XCTEST_UI_TEST_PACKAGE: An XCode UI test package upload. 
      
 
     
@@ -264,13 +282,13 @@ upload -> (structure)
      
 
      
-    * FAILED: A failed status.
+    * FAILED: A failed status. 
      
-    * INITIALIZED: An initialized status.
+    * INITIALIZED: An initialized status. 
      
-    * PROCESSING: A processing status.
+    * PROCESSING: A processing status. 
      
-    * SUCCEEDED: A succeeded status.
+    * SUCCEEDED: A succeeded status. 
      
 
     

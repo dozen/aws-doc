@@ -20,9 +20,9 @@ Enables or disables Easy DKIM signing of email sent from an identity:
  
 
  
-* If Easy DKIM signing is enabled for a domain name identity (e.g., ``example.com`` ), then Amazon SES will DKIM-sign all email sent by addresses under that domain name (e.g., ``user@example.com`` ).
+* If Easy DKIM signing is enabled for a domain name identity (e.g., ``example.com`` ), then Amazon SES will DKIM-sign all email sent by addresses under that domain name (e.g., ``user@example.com`` ). 
  
-* If Easy DKIM signing is enabled for an email address, then Amazon SES will DKIM-sign all email sent by that email address.
+* If Easy DKIM signing is enabled for an email address, then Amazon SES will DKIM-sign all email sent by that email address. 
  
 
  
@@ -35,8 +35,11 @@ This action is throttled at one request per second.
 
  
 
-For more information about Easy DKIM signing, go to the `Amazon SES Developer Guide`_ .
+For more information about Easy DKIM signing, go to the `Amazon SES Developer Guide <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html>`_ .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityDkimEnabled>`_
 
 
 ========
@@ -49,7 +52,7 @@ Synopsis
   --identity <value>
   --dkim-enabled | --no-dkim-enabled
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -75,8 +78,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -100,6 +103,3 @@ For more information about Easy DKIM, see `Easy DKIM in Amazon SES`_ in the *Ama
 Output
 ======
 
-
-
-.. _Amazon SES Developer Guide: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html

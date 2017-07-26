@@ -15,12 +15,19 @@ Description
 
 
 
-Retrieves information about all IAM users, groups, roles, and policies in your account, including their relationships to one another. Use this API to obtain a snapshot of the configuration of IAM permissions (users, groups, roles, and policies) in your account.
+Retrieves information about all IAM users, groups, roles, and policies in your AWS account, including their relationships to one another. Use this API to obtain a snapshot of the configuration of IAM permissions (users, groups, roles, and policies) in your account.
 
  
 
-You can optionally filter the results using the ``Filter`` parameter. You can paginate the results using the ``MaxItems`` and ``Marker`` parameters. 
+You can optionally filter the results using the ``Filter`` parameter. You can paginate the results using the ``MaxItems`` and ``Marker`` parameters.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetAccountAuthorizationDetails>`_
+
+
+``get-account-authorization-details`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
+When using ``--output text`` and the ``--query`` argument on a paginated response, the ``--query`` argument must extract data from the results of the following query expressions: ``UserDetailList``, ``GroupDetailList``, ``RoleDetailList``, ``Policies``
 
 
 ========
@@ -32,9 +39,10 @@ Synopsis
     get-account-authorization-details
   [--filter <value>]
   [--max-items <value>]
-  [--marker <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--starting-token <value>]
+  [--page-size <value>]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -46,7 +54,11 @@ Options
 ``--filter`` (list)
 
 
-  A list of entity types (user, group, role, local managed policy, or AWS managed policy) for filtering the results.
+  A list of entity types used to filter the results. Only the entities that match the types you specify are included in the output. Use the value ``LocalManagedPolicy`` to include customer managed policies.
+
+   
+
+  The format for this parameter is a comma-separated (if more than one) list of strings. Each string value in the list must be one of the valid values listed below.
 
   
 
@@ -68,28 +80,43 @@ Syntax::
 
 
 ``--max-items`` (integer)
+ 
 
-
-  Use this only when paginating results to indicate the maximum number of items you want in the response. If additional items exist beyond the maximum you specify, the ``IsTruncated`` response element is ``true`` .
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``NextToken`` is provided in the command's output. To resume pagination, provide the ``NextToken`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``NextToken`` response element directly outside of the AWS CLI.
 
    
 
-  This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. In that case, the ``IsTruncated`` response element returns ``true`` and ``Marker`` contains a value to include in the subsequent call that tells the service where to continue from. 
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
-  
-
-``--marker`` (string)
-
-
-  Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the ``Marker`` element in the response that you received to indicate where the next call should start.
-
-  
+   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--starting-token`` (string)
+ 
+
+  A token to specify where to start paginating. This is the ``NextToken`` from a previously truncated response.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--page-size`` (integer)
+ 
+
+  The size of each page to get in the AWS service call. This does not affect the number of items returned in the command's output. Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call. This can help prevent the AWS service calls from timing out.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -414,7 +441,7 @@ UserDetailList -> (list)
 
       
 
-      The path to the user. For more information about paths, see `IAM Identifiers`_ in the *Using IAM* guide.
+      The path to the user. For more information about paths, see `IAM Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ in the *Using IAM* guide.
 
       
 
@@ -434,7 +461,7 @@ UserDetailList -> (list)
 
       
 
-      The stable and unique string identifying the user. For more information about IDs, see `IAM Identifiers`_ in the *Using IAM* guide.
+      The stable and unique string identifying the user. For more information about IDs, see `IAM Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ in the *Using IAM* guide.
 
       
 
@@ -444,11 +471,11 @@ UserDetailList -> (list)
 
       
 
-      The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS resources. 
+      The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS resources.
 
        
 
-      For more information about ARNs, go to `Amazon Resource Names (ARNs) and AWS Service Namespaces`_ in the *AWS General Reference* . 
+      For more information about ARNs, go to `Amazon Resource Names (ARNs) and AWS Service Namespaces <http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`_ in the *AWS General Reference* . 
 
       
 
@@ -458,7 +485,7 @@ UserDetailList -> (list)
 
       
 
-      The date and time, in `ISO 8601 date-time format`_ , when the user was created.
+      The date and time, in `ISO 8601 date-time format <http://www.iso.org/iso/iso8601>`_ , when the user was created.
 
       
 
@@ -544,7 +571,7 @@ UserDetailList -> (list)
 
          
 
-        For more information about managed policies, refer to `Managed Policies and Inline Policies`_ in the *Using IAM* guide. 
+        For more information about managed policies, refer to `Managed Policies and Inline Policies <http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html>`_ in the *Using IAM* guide. 
 
         
 
@@ -562,11 +589,11 @@ UserDetailList -> (list)
 
           
 
-          The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS resources. 
+          The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS resources.
 
            
 
-          For more information about ARNs, go to `Amazon Resource Names (ARNs) and AWS Service Namespaces`_ in the *AWS General Reference* . 
+          For more information about ARNs, go to `Amazon Resource Names (ARNs) and AWS Service Namespaces <http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`_ in the *AWS General Reference* . 
 
           
 
@@ -592,7 +619,7 @@ GroupDetailList -> (list)
 
     
 
-    Contains information about an IAM group, including all of the group's policies. 
+    Contains information about an IAM group, including all of the group's policies.
 
      
 
@@ -604,7 +631,7 @@ GroupDetailList -> (list)
 
       
 
-      The path to the group. For more information about paths, see `IAM Identifiers`_ in the *Using IAM* guide.
+      The path to the group. For more information about paths, see `IAM Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ in the *Using IAM* guide.
 
       
 
@@ -624,7 +651,7 @@ GroupDetailList -> (list)
 
       
 
-      The stable and unique string identifying the group. For more information about IDs, see `IAM Identifiers`_ in the *Using IAM* guide.
+      The stable and unique string identifying the group. For more information about IDs, see `IAM Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ in the *Using IAM* guide.
 
       
 
@@ -634,11 +661,11 @@ GroupDetailList -> (list)
 
       
 
-      The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS resources. 
+      The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS resources.
 
        
 
-      For more information about ARNs, go to `Amazon Resource Names (ARNs) and AWS Service Namespaces`_ in the *AWS General Reference* . 
+      For more information about ARNs, go to `Amazon Resource Names (ARNs) and AWS Service Namespaces <http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`_ in the *AWS General Reference* . 
 
       
 
@@ -648,7 +675,7 @@ GroupDetailList -> (list)
 
       
 
-      The date and time, in `ISO 8601 date-time format`_ , when the group was created.
+      The date and time, in `ISO 8601 date-time format <http://www.iso.org/iso/iso8601>`_ , when the group was created.
 
       
 
@@ -718,7 +745,7 @@ GroupDetailList -> (list)
 
          
 
-        For more information about managed policies, refer to `Managed Policies and Inline Policies`_ in the *Using IAM* guide. 
+        For more information about managed policies, refer to `Managed Policies and Inline Policies <http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html>`_ in the *Using IAM* guide. 
 
         
 
@@ -736,11 +763,11 @@ GroupDetailList -> (list)
 
           
 
-          The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS resources. 
+          The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS resources.
 
            
 
-          For more information about ARNs, go to `Amazon Resource Names (ARNs) and AWS Service Namespaces`_ in the *AWS General Reference* . 
+          For more information about ARNs, go to `Amazon Resource Names (ARNs) and AWS Service Namespaces <http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`_ in the *AWS General Reference* . 
 
           
 
@@ -778,7 +805,7 @@ RoleDetailList -> (list)
 
       
 
-      The path to the role. For more information about paths, see `IAM Identifiers`_ in the *Using IAM* guide.
+      The path to the role. For more information about paths, see `IAM Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ in the *Using IAM* guide.
 
       
 
@@ -798,7 +825,7 @@ RoleDetailList -> (list)
 
       
 
-      The stable and unique string identifying the role. For more information about IDs, see `IAM Identifiers`_ in the *Using IAM* guide.
+      The stable and unique string identifying the role. For more information about IDs, see `IAM Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ in the *Using IAM* guide.
 
       
 
@@ -808,11 +835,11 @@ RoleDetailList -> (list)
 
       
 
-      The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS resources. 
+      The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS resources.
 
        
 
-      For more information about ARNs, go to `Amazon Resource Names (ARNs) and AWS Service Namespaces`_ in the *AWS General Reference* . 
+      For more information about ARNs, go to `Amazon Resource Names (ARNs) and AWS Service Namespaces <http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`_ in the *AWS General Reference* . 
 
       
 
@@ -822,7 +849,7 @@ RoleDetailList -> (list)
 
       
 
-      The date and time, in `ISO 8601 date-time format`_ , when the role was created.
+      The date and time, in `ISO 8601 date-time format <http://www.iso.org/iso/iso8601>`_ , when the role was created.
 
       
 
@@ -842,7 +869,7 @@ RoleDetailList -> (list)
 
       
 
-      Contains a list of instance profiles.
+      A list of instance profiles that contain this role.
 
       
 
@@ -874,7 +901,7 @@ RoleDetailList -> (list)
 
           
 
-          The path to the instance profile. For more information about paths, see `IAM Identifiers`_ in the *Using IAM* guide. 
+          The path to the instance profile. For more information about paths, see `IAM Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ in the *Using IAM* guide. 
 
           
 
@@ -894,7 +921,7 @@ RoleDetailList -> (list)
 
           
 
-          The stable and unique string identifying the instance profile. For more information about IDs, see `IAM Identifiers`_ in the *Using IAM* guide. 
+          The stable and unique string identifying the instance profile. For more information about IDs, see `IAM Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ in the *Using IAM* guide. 
 
           
 
@@ -904,7 +931,7 @@ RoleDetailList -> (list)
 
           
 
-          The Amazon Resource Name (ARN) specifying the instance profile. For more information about ARNs and how to use them in policies, see `IAM Identifiers`_ in the *Using IAM* guide. 
+          The Amazon Resource Name (ARN) specifying the instance profile. For more information about ARNs and how to use them in policies, see `IAM Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ in the *Using IAM* guide. 
 
           
 
@@ -932,21 +959,7 @@ RoleDetailList -> (list)
 
             
 
-            Contains information about an IAM role.
-
-             
-
-            This data type is used as a response element in the following actions:
-
-             
-
-             
-            *  create-role   
-             
-            *  get-role   
-             
-            *  list-roles   
-             
+            Contains information about an IAM role. This structure is returned as a response element in several APIs that interact with roles.
 
             
 
@@ -954,7 +967,7 @@ RoleDetailList -> (list)
 
               
 
-              The path to the role. For more information about paths, see `IAM Identifiers`_ in the *Using IAM* guide. 
+              The path to the role. For more information about paths, see `IAM Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ in the *Using IAM* guide. 
 
               
 
@@ -974,7 +987,7 @@ RoleDetailList -> (list)
 
               
 
-              The stable and unique string identifying the role. For more information about IDs, see `IAM Identifiers`_ in the *Using IAM* guide. 
+              The stable and unique string identifying the role. For more information about IDs, see `IAM Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ in the *Using IAM* guide. 
 
               
 
@@ -984,7 +997,7 @@ RoleDetailList -> (list)
 
               
 
-              The Amazon Resource Name (ARN) specifying the role. For more information about ARNs and how to use them in policies, see `IAM Identifiers`_ in the *Using IAM* guide. 
+              The Amazon Resource Name (ARN) specifying the role. For more information about ARNs and how to use them in policies, see `IAM Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ in the *IAM User Guide* guide. 
 
               
 
@@ -994,7 +1007,7 @@ RoleDetailList -> (list)
 
               
 
-              The date and time, in `ISO 8601 date-time format`_ , when the role was created.
+              The date and time, in `ISO 8601 date-time format <http://www.iso.org/iso/iso8601>`_ , when the role was created.
 
               
 
@@ -1005,6 +1018,16 @@ RoleDetailList -> (list)
               
 
               The policy that grants an entity permission to assume the role.
+
+              
+
+              
+
+            Description -> (string)
+
+              
+
+              A description of the role that you provide.
 
               
 
@@ -1082,7 +1105,7 @@ RoleDetailList -> (list)
 
          
 
-        For more information about managed policies, refer to `Managed Policies and Inline Policies`_ in the *Using IAM* guide. 
+        For more information about managed policies, refer to `Managed Policies and Inline Policies <http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html>`_ in the *Using IAM* guide. 
 
         
 
@@ -1100,11 +1123,11 @@ RoleDetailList -> (list)
 
           
 
-          The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS resources. 
+          The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS resources.
 
            
 
-          For more information about ARNs, go to `Amazon Resource Names (ARNs) and AWS Service Namespaces`_ in the *AWS General Reference* . 
+          For more information about ARNs, go to `Amazon Resource Names (ARNs) and AWS Service Namespaces <http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`_ in the *AWS General Reference* . 
 
           
 
@@ -1138,7 +1161,7 @@ Policies -> (list)
 
      
 
-    For more information about managed policies, see `Managed Policies and Inline Policies`_ in the *Using IAM* guide. 
+    For more information about managed policies, see `Managed Policies and Inline Policies <http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html>`_ in the *Using IAM* guide. 
 
     
 
@@ -1156,11 +1179,11 @@ Policies -> (list)
 
       
 
-      The stable and unique string identifying the policy. 
+      The stable and unique string identifying the policy.
 
        
 
-      For more information about IDs, see `IAM Identifiers`_ in the *Using IAM* guide.
+      For more information about IDs, see `IAM Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ in the *Using IAM* guide.
 
       
 
@@ -1170,11 +1193,11 @@ Policies -> (list)
 
       
 
-      The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS resources. 
+      The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS resources.
 
        
 
-      For more information about ARNs, go to `Amazon Resource Names (ARNs) and AWS Service Namespaces`_ in the *AWS General Reference* . 
+      For more information about ARNs, go to `Amazon Resource Names (ARNs) and AWS Service Namespaces <http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`_ in the *AWS General Reference* . 
 
       
 
@@ -1188,7 +1211,7 @@ Policies -> (list)
 
        
 
-      For more information about paths, see `IAM Identifiers`_ in the *Using IAM* guide.
+      For more information about paths, see `IAM Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ in the *Using IAM* guide.
 
       
 
@@ -1198,11 +1221,11 @@ Policies -> (list)
 
       
 
-      The identifier for the version of the policy that is set as the default (operative) version. 
+      The identifier for the version of the policy that is set as the default (operative) version.
 
        
 
-      For more information about policy versions, see `Versioning for Managed Policies`_ in the *Using IAM* guide. 
+      For more information about policy versions, see `Versioning for Managed Policies <http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html>`_ in the *Using IAM* guide. 
 
       
 
@@ -1222,7 +1245,7 @@ Policies -> (list)
 
       
 
-      Specifies whether the policy can be attached to an IAM user, group, or role. 
+      Specifies whether the policy can be attached to an IAM user, group, or role.
 
       
 
@@ -1242,7 +1265,7 @@ Policies -> (list)
 
       
 
-      The date and time, in `ISO 8601 date-time format`_ , when the policy was created.
+      The date and time, in `ISO 8601 date-time format <http://www.iso.org/iso/iso8601>`_ , when the policy was created.
 
       
 
@@ -1252,11 +1275,11 @@ Policies -> (list)
 
       
 
-      The date and time, in `ISO 8601 date-time format`_ , when the policy was last updated.
+      The date and time, in `ISO 8601 date-time format <http://www.iso.org/iso/iso8601>`_ , when the policy was last updated.
 
        
 
-      When a policy has only one version, this field contains the date and time when the policy was created. When a policy has more than one version, this field contains the date and time when the most recent policy version was created. 
+      When a policy has only one version, this field contains the date and time when the policy was created. When a policy has more than one version, this field contains the date and time when the most recent policy version was created.
 
       
 
@@ -1282,7 +1305,7 @@ Policies -> (list)
 
          
 
-        For more information about managed policies, refer to `Managed Policies and Inline Policies`_ in the *Using IAM* guide. 
+        For more information about managed policies, refer to `Managed Policies and Inline Policies <http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html>`_ in the *Using IAM* guide. 
 
         
 
@@ -1328,7 +1351,7 @@ Policies -> (list)
 
           
 
-          The date and time, in `ISO 8601 date-time format`_ , when the policy version was created.
+          The date and time, in `ISO 8601 date-time format <http://www.iso.org/iso/iso8601>`_ , when the policy version was created.
 
           
 
@@ -1362,10 +1385,3 @@ Marker -> (string)
 
   
 
-
-
-.. _ISO 8601 date-time format: http://www.iso.org/iso/iso8601
-.. _Amazon Resource Names (ARNs) and AWS Service Namespaces: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
-.. _IAM Identifiers: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
-.. _Versioning for Managed Policies: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
-.. _Managed Policies and Inline Policies: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html

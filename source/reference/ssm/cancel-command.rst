@@ -19,6 +19,9 @@ Attempts to cancel the command specified by the Command ID. There is no guarante
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CancelCommand>`_
+
+
 ========
 Synopsis
 ========
@@ -29,7 +32,7 @@ Synopsis
   --command-id <value>
   [--instance-ids <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -39,7 +42,11 @@ Options
 =======
 
 ``--command-id`` (string)
-The ID of the command you want to cancel.
+
+
+  The ID of the command you want to cancel.
+
+  
 
 ``--instance-ids`` (list)
 
@@ -59,9 +66,22 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
+
+
+========
+Examples
+========
+
+**To attempt to cancel a command**
+
+This example attempts to cancel a command. There is no output if the operation succeeds.
+
+Command::
+
+  aws ssm cancel-command --command-id "662add3d-5831-4a10-b64a-f2ff3a577858"
 
 
 ======

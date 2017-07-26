@@ -19,6 +19,13 @@ Gets information about device pools.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListDevicePools>`_
+
+
+``list-device-pools`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
+When using ``--output text`` and the ``--query`` argument on a paginated response, the ``--query`` argument must extract data from the results of the following query expressions: ``devicePools``
+
+
 ========
 Synopsis
 ========
@@ -28,9 +35,10 @@ Synopsis
     list-device-pools
   --arn <value>
   [--type <value>]
-  [--next-token <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--starting-token <value>]
+  [--max-items <value>]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -58,9 +66,9 @@ Options
    
 
    
-  * CURATED: A device pool that is created and managed by AWS Device Farm.
+  * CURATED: A device pool that is created and managed by AWS Device Farm. 
    
-  * PRIVATE: A device pool that is created and managed by the device pool developer.
+  * PRIVATE: A device pool that is created and managed by the device pool developer. 
    
 
   
@@ -77,18 +85,33 @@ Options
 
   
 
-``--next-token`` (string)
-
-
-  An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
-
-  
-
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--starting-token`` (string)
+ 
+
+  A token to specify where to start paginating. This is the ``NextToken`` from a previously truncated response.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--max-items`` (integer)
+ 
+
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``NextToken`` is provided in the command's output. To resume pagination, provide the ``NextToken`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``NextToken`` response element directly outside of the AWS CLI.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -155,9 +178,9 @@ devicePools -> (list)
        
 
        
-      * CURATED: A device pool that is created and managed by AWS Device Farm.
+      * CURATED: A device pool that is created and managed by AWS Device Farm. 
        
-      * PRIVATE: A device pool that is created and managed by the device pool developer.
+      * PRIVATE: A device pool that is created and managed by the device pool developer. 
        
 
       
@@ -184,7 +207,7 @@ devicePools -> (list)
 
           
 
-          The rule's attribute.
+          The rule's stringified attribute. For example, specify the value as ``"\"abc\""`` .
 
            
 
@@ -193,13 +216,17 @@ devicePools -> (list)
            
 
            
-          * ARN: The ARN.
+          * ARN: The ARN. 
            
-          * FORM_FACTOR: The form factor (for example, phone or tablet).
+          * FORM_FACTOR: The form factor (for example, phone or tablet). 
            
-          * MANUFACTURER: The manufacturer.
+          * MANUFACTURER: The manufacturer. 
            
-          * PLATFORM: The platform (for example, Android or iOS).
+          * PLATFORM: The platform (for example, Android or iOS). 
+           
+          * REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access. 
+           
+          * APPIUM_VERSION: The Appium version for the test. 
            
 
           
@@ -215,15 +242,17 @@ devicePools -> (list)
            
 
            
-          * EQUALS: The equals operator.
+          * EQUALS: The equals operator. 
            
-          * GREATER_THAN: The greater-than operator.
+          * GREATER_THAN: The greater-than operator. 
            
-          * IN: The in operator.
+          * IN: The in operator. 
            
-          * LESS_THAN: The less-than operator.
+          * LESS_THAN: The less-than operator. 
            
-          * NOT_IN: The not-in operator.
+          * NOT_IN: The not-in operator. 
+           
+          * CONTAINS: The contains operator. 
            
 
           

@@ -15,8 +15,11 @@ Description
 
 
 
-This operation returns detailed information about the domain. The domain's contact information is also returned as part of the output.
+This operation returns detailed information about a specified domain that is associated with the current AWS account. Contact information for the domain is also returned as part of the output.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetDomainDetail>`_
 
 
 ========
@@ -28,7 +31,7 @@ Synopsis
     get-domain-detail
   --domain-name <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -40,31 +43,15 @@ Options
 ``--domain-name`` (string)
 
 
-  The name of a domain.
-
-   
-
-  Type: String
-
-   
-
-  Default: None
-
-   
-
-  Constraints: The domain name can contain only the letters a through z, the numbers 0 through 9, and hyphen (-). Internationalized Domain Names are not supported.
-
-   
-
-  Required: Yes
+  The name of the domain that you want to get detailed information about.
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -78,10 +65,6 @@ DomainName -> (string)
 
   The name of a domain.
 
-   
-
-  Type: String
-
   
 
   
@@ -91,10 +74,6 @@ Nameservers -> (list)
   
 
   The name of the domain.
-
-   
-
-  Type: String
 
   
 
@@ -114,15 +93,7 @@ Nameservers -> (list)
 
        
 
-      Type: String
-
-       
-
-      Constraint: Maximum 255 characterss
-
-       
-
-      Parent: ``Nameservers`` 
+      Constraint: Maximum 255 characters
 
       
 
@@ -136,15 +107,7 @@ Nameservers -> (list)
 
        
 
-      Type: List of IP addresses.
-
-       
-
       Constraints: The list can contain only one IPv4 and one IPv6 address.
-
-       
-
-      Parent: ``Nameservers`` 
 
       
 
@@ -166,10 +129,6 @@ AutoRenew -> (boolean)
 
   Specifies whether the domain registration is set to renew automatically.
 
-   
-
-  Type: Boolean
-
   
 
   
@@ -178,15 +137,7 @@ AdminContact -> (structure)
 
   
 
-  Provides details about the domain administrative contact. 
-
-   
-
-  Type: Complex
-
-   
-
-  Children: ``FirstName`` , ``MiddleName`` , ``LastName`` , ``ContactType`` , ``OrganizationName`` , ``AddressLine1`` , ``AddressLine2`` , ``City`` , ``State`` , ``CountryCode`` , ``ZipCode`` , ``PhoneNumber`` , ``Email`` , ``Fax`` , ``ExtraParams`` 
+  Provides details about the domain administrative contact.
 
   
 
@@ -195,26 +146,6 @@ AdminContact -> (structure)
     
 
     First name of contact.
-
-     
-
-    Type: String
-
-     
-
-    Default: None
-
-     
-
-    Constraints: Maximum 255 characters.
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact``  
-
-     
-
-    Required: Yes
 
     
 
@@ -226,26 +157,6 @@ AdminContact -> (structure)
 
     Last name of contact.
 
-     
-
-    Type: String
-
-     
-
-    Default: None
-
-     
-
-    Constraints: Maximum 255 characters.
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact`` 
-
-     
-
-    Required: Yes
-
     
 
     
@@ -255,30 +166,6 @@ AdminContact -> (structure)
     
 
     Indicates whether the contact is a person, company, association, or public organization. If you choose an option other than ``PERSON`` , you must enter an organization name, and you can't enable privacy protection for the contact.
-
-     
-
-    Type: String
-
-     
-
-    Default: None
-
-     
-
-    Constraints: Maximum 255 characters.
-
-     
-
-    Valid values: ``PERSON`` | ``COMPANY`` | ``ASSOCIATION`` | ``PUBLIC_BODY`` 
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact``  
-
-     
-
-    Required: Yes
 
     
 
@@ -290,26 +177,6 @@ AdminContact -> (structure)
 
     Name of the organization for contact types other than ``PERSON`` .
 
-     
-
-    Type: String
-
-     
-
-    Default: None
-
-     
-
-    Constraints: Maximum 255 characters. Contact type must not be ``PERSON`` .
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact`` 
-
-     
-
-    Required: No
-
     
 
     
@@ -319,26 +186,6 @@ AdminContact -> (structure)
     
 
     First line of the contact's address.
-
-     
-
-    Type: String
-
-     
-
-    Default: None
-
-     
-
-    Constraints: Maximum 255 characters.
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact`` 
-
-     
-
-    Required: Yes
 
     
 
@@ -350,26 +197,6 @@ AdminContact -> (structure)
 
     Second line of contact's address, if any.
 
-     
-
-    Type: String
-
-     
-
-    Default: None
-
-     
-
-    Constraints: Maximum 255 characters.
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact`` 
-
-     
-
-    Required: No
-
     
 
     
@@ -379,26 +206,6 @@ AdminContact -> (structure)
     
 
     The city of the contact's address.
-
-     
-
-    Type: String
-
-     
-
-    Default: None
-
-     
-
-    Constraints: Maximum 255 characters.
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact`` 
-
-     
-
-    Required: Yes
 
     
 
@@ -410,26 +217,6 @@ AdminContact -> (structure)
 
     The state or province of the contact's city.
 
-     
-
-    Type: String
-
-     
-
-    Default: None
-
-     
-
-    Constraints: Maximum 255 characters.
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact`` 
-
-     
-
-    Required: No
-
     
 
     
@@ -440,26 +227,6 @@ AdminContact -> (structure)
 
     Code for the country of the contact's address.
 
-     
-
-    Type: String
-
-     
-
-    Default: None
-
-     
-
-    Constraints: Maximum 255 characters.
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact`` 
-
-     
-
-    Required: Yes
-
     
 
     
@@ -469,26 +236,6 @@ AdminContact -> (structure)
     
 
     The zip or postal code of the contact's address.
-
-     
-
-    Type: String
-
-     
-
-    Default: None
-
-     
-
-    Constraints: Maximum 255 characters.
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact`` 
-
-     
-
-    Required: No
 
     
 
@@ -502,23 +249,7 @@ AdminContact -> (structure)
 
      
 
-    Type: String
-
-     
-
-    Default: None
-
-     
-
     Constraints: Phone number must be specified in the format "+[country dialing code].[number including any area code]". For example, a US phone number might appear as ``"+1.1234567890"`` .
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact`` 
-
-     
-
-    Required: Yes
 
     
 
@@ -529,26 +260,6 @@ AdminContact -> (structure)
     
 
     Email address of the contact.
-
-     
-
-    Type: String
-
-     
-
-    Default: None
-
-     
-
-    Constraints: Maximum 254 characters.
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact``  
-
-     
-
-    Required: Yes
 
     
 
@@ -562,23 +273,7 @@ AdminContact -> (structure)
 
      
 
-    Type: String
-
-     
-
-    Default: None
-
-     
-
     Constraints: Phone number must be specified in the format "+[country dialing code].[number including any area code]". For example, a US phone number might appear as ``"+1.1234567890"`` .
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact`` 
-
-     
-
-    Required: No
 
     
 
@@ -589,26 +284,6 @@ AdminContact -> (structure)
     
 
     A list of name-value pairs for parameters required by certain top-level domains.
-
-     
-
-    Type: Complex
-
-     
-
-    Default: None
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact`` 
-
-     
-
-    Children: ``Name`` , ``Value`` 
-
-     
-
-    Required: No
 
     
 
@@ -626,26 +301,6 @@ AdminContact -> (structure)
 
         Name of the additional parameter required by the top-level domain.
 
-         
-
-        Type: String
-
-         
-
-        Default: None
-
-         
-
-        Valid values: ``DUNS_NUMBER`` | ``BRAND_NUMBER`` | ``BIRTH_DEPARTMENT`` | ``BIRTH_DATE_IN_YYYY_MM_DD`` | ``BIRTH_COUNTRY`` | ``BIRTH_CITY`` | ``DOCUMENT_NUMBER`` | ``AU_ID_NUMBER`` | ``AU_ID_TYPE`` | ``CA_LEGAL_TYPE`` | ``ES_IDENTIFICATION`` | ``ES_IDENTIFICATION_TYPE`` | ``ES_LEGAL_FORM`` | ``FI_BUSINESS_NUMBER`` | ``FI_ID_NUMBER`` | ``IT_PIN`` | ``RU_PASSPORT_DATA`` | ``SE_ID_NUMBER`` | ``SG_ID_NUMBER`` | ``VAT_NUMBER`` 
-
-         
-
-        Parent: ``ExtraParams`` 
-
-         
-
-        Required: Yes
-
         
 
         
@@ -655,26 +310,6 @@ AdminContact -> (structure)
         
 
         Values corresponding to the additional parameter names required by some top-level domains.
-
-         
-
-        Type: String
-
-         
-
-        Default: None
-
-         
-
-        Constraints: Maximum 2048 characters.
-
-         
-
-        Parent: ``ExtraParams`` 
-
-         
-
-        Required: Yes
 
         
 
@@ -690,15 +325,7 @@ RegistrantContact -> (structure)
 
   
 
-  Provides details about the domain registrant. 
-
-   
-
-  Type: Complex
-
-   
-
-  Children: ``FirstName`` , ``MiddleName`` , ``LastName`` , ``ContactType`` , ``OrganizationName`` , ``AddressLine1`` , ``AddressLine2`` , ``City`` , ``State`` , ``CountryCode`` , ``ZipCode`` , ``PhoneNumber`` , ``Email`` , ``Fax`` , ``ExtraParams`` 
+  Provides details about the domain registrant.
 
   
 
@@ -707,26 +334,6 @@ RegistrantContact -> (structure)
     
 
     First name of contact.
-
-     
-
-    Type: String
-
-     
-
-    Default: None
-
-     
-
-    Constraints: Maximum 255 characters.
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact``  
-
-     
-
-    Required: Yes
 
     
 
@@ -738,26 +345,6 @@ RegistrantContact -> (structure)
 
     Last name of contact.
 
-     
-
-    Type: String
-
-     
-
-    Default: None
-
-     
-
-    Constraints: Maximum 255 characters.
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact`` 
-
-     
-
-    Required: Yes
-
     
 
     
@@ -767,30 +354,6 @@ RegistrantContact -> (structure)
     
 
     Indicates whether the contact is a person, company, association, or public organization. If you choose an option other than ``PERSON`` , you must enter an organization name, and you can't enable privacy protection for the contact.
-
-     
-
-    Type: String
-
-     
-
-    Default: None
-
-     
-
-    Constraints: Maximum 255 characters.
-
-     
-
-    Valid values: ``PERSON`` | ``COMPANY`` | ``ASSOCIATION`` | ``PUBLIC_BODY`` 
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact``  
-
-     
-
-    Required: Yes
 
     
 
@@ -802,26 +365,6 @@ RegistrantContact -> (structure)
 
     Name of the organization for contact types other than ``PERSON`` .
 
-     
-
-    Type: String
-
-     
-
-    Default: None
-
-     
-
-    Constraints: Maximum 255 characters. Contact type must not be ``PERSON`` .
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact`` 
-
-     
-
-    Required: No
-
     
 
     
@@ -831,26 +374,6 @@ RegistrantContact -> (structure)
     
 
     First line of the contact's address.
-
-     
-
-    Type: String
-
-     
-
-    Default: None
-
-     
-
-    Constraints: Maximum 255 characters.
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact`` 
-
-     
-
-    Required: Yes
 
     
 
@@ -862,26 +385,6 @@ RegistrantContact -> (structure)
 
     Second line of contact's address, if any.
 
-     
-
-    Type: String
-
-     
-
-    Default: None
-
-     
-
-    Constraints: Maximum 255 characters.
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact`` 
-
-     
-
-    Required: No
-
     
 
     
@@ -891,26 +394,6 @@ RegistrantContact -> (structure)
     
 
     The city of the contact's address.
-
-     
-
-    Type: String
-
-     
-
-    Default: None
-
-     
-
-    Constraints: Maximum 255 characters.
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact`` 
-
-     
-
-    Required: Yes
 
     
 
@@ -922,26 +405,6 @@ RegistrantContact -> (structure)
 
     The state or province of the contact's city.
 
-     
-
-    Type: String
-
-     
-
-    Default: None
-
-     
-
-    Constraints: Maximum 255 characters.
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact`` 
-
-     
-
-    Required: No
-
     
 
     
@@ -952,26 +415,6 @@ RegistrantContact -> (structure)
 
     Code for the country of the contact's address.
 
-     
-
-    Type: String
-
-     
-
-    Default: None
-
-     
-
-    Constraints: Maximum 255 characters.
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact`` 
-
-     
-
-    Required: Yes
-
     
 
     
@@ -981,26 +424,6 @@ RegistrantContact -> (structure)
     
 
     The zip or postal code of the contact's address.
-
-     
-
-    Type: String
-
-     
-
-    Default: None
-
-     
-
-    Constraints: Maximum 255 characters.
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact`` 
-
-     
-
-    Required: No
 
     
 
@@ -1014,23 +437,7 @@ RegistrantContact -> (structure)
 
      
 
-    Type: String
-
-     
-
-    Default: None
-
-     
-
     Constraints: Phone number must be specified in the format "+[country dialing code].[number including any area code]". For example, a US phone number might appear as ``"+1.1234567890"`` .
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact`` 
-
-     
-
-    Required: Yes
 
     
 
@@ -1041,26 +448,6 @@ RegistrantContact -> (structure)
     
 
     Email address of the contact.
-
-     
-
-    Type: String
-
-     
-
-    Default: None
-
-     
-
-    Constraints: Maximum 254 characters.
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact``  
-
-     
-
-    Required: Yes
 
     
 
@@ -1074,23 +461,7 @@ RegistrantContact -> (structure)
 
      
 
-    Type: String
-
-     
-
-    Default: None
-
-     
-
     Constraints: Phone number must be specified in the format "+[country dialing code].[number including any area code]". For example, a US phone number might appear as ``"+1.1234567890"`` .
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact`` 
-
-     
-
-    Required: No
 
     
 
@@ -1101,26 +472,6 @@ RegistrantContact -> (structure)
     
 
     A list of name-value pairs for parameters required by certain top-level domains.
-
-     
-
-    Type: Complex
-
-     
-
-    Default: None
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact`` 
-
-     
-
-    Children: ``Name`` , ``Value`` 
-
-     
-
-    Required: No
 
     
 
@@ -1138,26 +489,6 @@ RegistrantContact -> (structure)
 
         Name of the additional parameter required by the top-level domain.
 
-         
-
-        Type: String
-
-         
-
-        Default: None
-
-         
-
-        Valid values: ``DUNS_NUMBER`` | ``BRAND_NUMBER`` | ``BIRTH_DEPARTMENT`` | ``BIRTH_DATE_IN_YYYY_MM_DD`` | ``BIRTH_COUNTRY`` | ``BIRTH_CITY`` | ``DOCUMENT_NUMBER`` | ``AU_ID_NUMBER`` | ``AU_ID_TYPE`` | ``CA_LEGAL_TYPE`` | ``ES_IDENTIFICATION`` | ``ES_IDENTIFICATION_TYPE`` | ``ES_LEGAL_FORM`` | ``FI_BUSINESS_NUMBER`` | ``FI_ID_NUMBER`` | ``IT_PIN`` | ``RU_PASSPORT_DATA`` | ``SE_ID_NUMBER`` | ``SG_ID_NUMBER`` | ``VAT_NUMBER`` 
-
-         
-
-        Parent: ``ExtraParams`` 
-
-         
-
-        Required: Yes
-
         
 
         
@@ -1167,26 +498,6 @@ RegistrantContact -> (structure)
         
 
         Values corresponding to the additional parameter names required by some top-level domains.
-
-         
-
-        Type: String
-
-         
-
-        Default: None
-
-         
-
-        Constraints: Maximum 2048 characters.
-
-         
-
-        Parent: ``ExtraParams`` 
-
-         
-
-        Required: Yes
 
         
 
@@ -1204,14 +515,6 @@ TechContact -> (structure)
 
   Provides details about the domain technical contact.
 
-   
-
-  Type: Complex
-
-   
-
-  Children: ``FirstName`` , ``MiddleName`` , ``LastName`` , ``ContactType`` , ``OrganizationName`` , ``AddressLine1`` , ``AddressLine2`` , ``City`` , ``State`` , ``CountryCode`` , ``ZipCode`` , ``PhoneNumber`` , ``Email`` , ``Fax`` , ``ExtraParams`` 
-
   
 
   FirstName -> (string)
@@ -1219,26 +522,6 @@ TechContact -> (structure)
     
 
     First name of contact.
-
-     
-
-    Type: String
-
-     
-
-    Default: None
-
-     
-
-    Constraints: Maximum 255 characters.
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact``  
-
-     
-
-    Required: Yes
 
     
 
@@ -1250,26 +533,6 @@ TechContact -> (structure)
 
     Last name of contact.
 
-     
-
-    Type: String
-
-     
-
-    Default: None
-
-     
-
-    Constraints: Maximum 255 characters.
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact`` 
-
-     
-
-    Required: Yes
-
     
 
     
@@ -1279,30 +542,6 @@ TechContact -> (structure)
     
 
     Indicates whether the contact is a person, company, association, or public organization. If you choose an option other than ``PERSON`` , you must enter an organization name, and you can't enable privacy protection for the contact.
-
-     
-
-    Type: String
-
-     
-
-    Default: None
-
-     
-
-    Constraints: Maximum 255 characters.
-
-     
-
-    Valid values: ``PERSON`` | ``COMPANY`` | ``ASSOCIATION`` | ``PUBLIC_BODY`` 
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact``  
-
-     
-
-    Required: Yes
 
     
 
@@ -1314,26 +553,6 @@ TechContact -> (structure)
 
     Name of the organization for contact types other than ``PERSON`` .
 
-     
-
-    Type: String
-
-     
-
-    Default: None
-
-     
-
-    Constraints: Maximum 255 characters. Contact type must not be ``PERSON`` .
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact`` 
-
-     
-
-    Required: No
-
     
 
     
@@ -1343,26 +562,6 @@ TechContact -> (structure)
     
 
     First line of the contact's address.
-
-     
-
-    Type: String
-
-     
-
-    Default: None
-
-     
-
-    Constraints: Maximum 255 characters.
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact`` 
-
-     
-
-    Required: Yes
 
     
 
@@ -1374,26 +573,6 @@ TechContact -> (structure)
 
     Second line of contact's address, if any.
 
-     
-
-    Type: String
-
-     
-
-    Default: None
-
-     
-
-    Constraints: Maximum 255 characters.
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact`` 
-
-     
-
-    Required: No
-
     
 
     
@@ -1403,26 +582,6 @@ TechContact -> (structure)
     
 
     The city of the contact's address.
-
-     
-
-    Type: String
-
-     
-
-    Default: None
-
-     
-
-    Constraints: Maximum 255 characters.
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact`` 
-
-     
-
-    Required: Yes
 
     
 
@@ -1434,26 +593,6 @@ TechContact -> (structure)
 
     The state or province of the contact's city.
 
-     
-
-    Type: String
-
-     
-
-    Default: None
-
-     
-
-    Constraints: Maximum 255 characters.
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact`` 
-
-     
-
-    Required: No
-
     
 
     
@@ -1464,26 +603,6 @@ TechContact -> (structure)
 
     Code for the country of the contact's address.
 
-     
-
-    Type: String
-
-     
-
-    Default: None
-
-     
-
-    Constraints: Maximum 255 characters.
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact`` 
-
-     
-
-    Required: Yes
-
     
 
     
@@ -1493,26 +612,6 @@ TechContact -> (structure)
     
 
     The zip or postal code of the contact's address.
-
-     
-
-    Type: String
-
-     
-
-    Default: None
-
-     
-
-    Constraints: Maximum 255 characters.
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact`` 
-
-     
-
-    Required: No
 
     
 
@@ -1526,23 +625,7 @@ TechContact -> (structure)
 
      
 
-    Type: String
-
-     
-
-    Default: None
-
-     
-
     Constraints: Phone number must be specified in the format "+[country dialing code].[number including any area code]". For example, a US phone number might appear as ``"+1.1234567890"`` .
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact`` 
-
-     
-
-    Required: Yes
 
     
 
@@ -1553,26 +636,6 @@ TechContact -> (structure)
     
 
     Email address of the contact.
-
-     
-
-    Type: String
-
-     
-
-    Default: None
-
-     
-
-    Constraints: Maximum 254 characters.
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact``  
-
-     
-
-    Required: Yes
 
     
 
@@ -1586,23 +649,7 @@ TechContact -> (structure)
 
      
 
-    Type: String
-
-     
-
-    Default: None
-
-     
-
     Constraints: Phone number must be specified in the format "+[country dialing code].[number including any area code]". For example, a US phone number might appear as ``"+1.1234567890"`` .
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact`` 
-
-     
-
-    Required: No
 
     
 
@@ -1613,26 +660,6 @@ TechContact -> (structure)
     
 
     A list of name-value pairs for parameters required by certain top-level domains.
-
-     
-
-    Type: Complex
-
-     
-
-    Default: None
-
-     
-
-    Parents: ``RegistrantContact`` , ``AdminContact`` , ``TechContact`` 
-
-     
-
-    Children: ``Name`` , ``Value`` 
-
-     
-
-    Required: No
 
     
 
@@ -1650,26 +677,6 @@ TechContact -> (structure)
 
         Name of the additional parameter required by the top-level domain.
 
-         
-
-        Type: String
-
-         
-
-        Default: None
-
-         
-
-        Valid values: ``DUNS_NUMBER`` | ``BRAND_NUMBER`` | ``BIRTH_DEPARTMENT`` | ``BIRTH_DATE_IN_YYYY_MM_DD`` | ``BIRTH_COUNTRY`` | ``BIRTH_CITY`` | ``DOCUMENT_NUMBER`` | ``AU_ID_NUMBER`` | ``AU_ID_TYPE`` | ``CA_LEGAL_TYPE`` | ``ES_IDENTIFICATION`` | ``ES_IDENTIFICATION_TYPE`` | ``ES_LEGAL_FORM`` | ``FI_BUSINESS_NUMBER`` | ``FI_ID_NUMBER`` | ``IT_PIN`` | ``RU_PASSPORT_DATA`` | ``SE_ID_NUMBER`` | ``SG_ID_NUMBER`` | ``VAT_NUMBER`` 
-
-         
-
-        Parent: ``ExtraParams`` 
-
-         
-
-        Required: Yes
-
         
 
         
@@ -1679,26 +686,6 @@ TechContact -> (structure)
         
 
         Values corresponding to the additional parameter names required by some top-level domains.
-
-         
-
-        Type: String
-
-         
-
-        Default: None
-
-         
-
-        Constraints: Maximum 2048 characters.
-
-         
-
-        Parent: ``ExtraParams`` 
-
-         
-
-        Required: Yes
 
         
 
@@ -1716,10 +703,6 @@ AdminPrivacy -> (boolean)
 
   Specifies whether contact information for the admin contact is concealed from WHOIS queries. If the value is ``true`` , WHOIS ("who is") queries will return contact information for our registrar partner, Gandi, instead of the contact information that you enter.
 
-   
-
-  Type: Boolean
-
   
 
   
@@ -1729,10 +712,6 @@ RegistrantPrivacy -> (boolean)
   
 
   Specifies whether contact information for the registrant contact is concealed from WHOIS queries. If the value is ``true`` , WHOIS ("who is") queries will return contact information for our registrar partner, Gandi, instead of the contact information that you enter.
-
-   
-
-  Type: Boolean
 
   
 
@@ -1744,10 +723,6 @@ TechPrivacy -> (boolean)
 
   Specifies whether contact information for the tech contact is concealed from WHOIS queries. If the value is ``true`` , WHOIS ("who is") queries will return contact information for our registrar partner, Gandi, instead of the contact information that you enter.
 
-   
-
-  Type: Boolean
-
   
 
   
@@ -1757,10 +732,6 @@ RegistrarName -> (string)
   
 
   Name of the registrar of the domain as identified in the registry. Amazon Route 53 domains are registered by registrar Gandi. The value is ``"GANDI SAS"`` . 
-
-   
-
-  Type: String
 
   
 
@@ -1772,10 +743,6 @@ WhoIsServer -> (string)
 
   The fully qualified name of the WHOIS server that can answer the WHOIS query for the domain.
 
-   
-
-  Type: String
-
   
 
   
@@ -1786,10 +753,6 @@ RegistrarUrl -> (string)
 
   Web address of the registrar.
 
-   
-
-  Type: String
-
   
 
   
@@ -1798,11 +761,7 @@ AbuseContactEmail -> (string)
 
   
 
-  Email address to contact to report incorrect contact information for a domain, to report that the domain is being used to send spam, to report that someone is cybersquatting on a domain name, or report some other type of abuse. 
-
-   
-
-  Type: String
+  Email address to contact to report incorrect contact information for a domain, to report that the domain is being used to send spam, to report that someone is cybersquatting on a domain name, or report some other type of abuse.
 
   
 
@@ -1812,11 +771,7 @@ AbuseContactPhone -> (string)
 
   
 
-  Phone number for reporting abuse. 
-
-   
-
-  Type: String
+  Phone number for reporting abuse.
 
   
 
@@ -1868,10 +823,6 @@ Reseller -> (string)
 
   Reseller of the domain. Domains registered or transferred using Amazon Route 53 domains will have ``"Amazon"`` as the reseller. 
 
-   
-
-  Type: String
-
   
 
   
@@ -1898,11 +849,7 @@ StatusList -> (list)
 
    
 
-  For a current list of domain name status codes and an explanation of what each code means, go to the `ICANN website`_ and search for ``epp status codes`` . (Search on the ICANN website; web searches sometimes return an old version of the document.)
-
-   
-
-  Type: Array of String
+  For a current list of domain name status codes and an explanation of what each code means, go to the `ICANN website <https://www.icann.org/>`_ and search for ``epp status codes`` . (Search on the ICANN website; web searches sometimes return an old version of the document.)
 
   
 
@@ -1914,6 +861,3 @@ StatusList -> (list)
 
   
 
-
-
-.. _ICANN website: https://www.icann.org/

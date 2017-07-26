@@ -15,46 +15,59 @@ Description
 
 
 
-Delivers up to ten messages to the specified queue. This is a batch version of  send-message . The result of the send action on each message is reported individually in the response. The maximum allowed individual message size is 256 KB (262,144 bytes).
+Delivers up to ten messages to the specified queue. This is a batch version of ``  send-message .`` For a FIFO queue, multiple messages within a single batch are enqueued in the order they are sent.
 
  
 
-The maximum total payload size (i.e., the sum of all a batch's individual message lengths) is also 256 KB (262,144 bytes).
+The result of sending each message is reported individually in the response. Because the batch request can result in a combination of successful and unsuccessful actions, you should check for batch errors even when the call returns an HTTP status code of ``200`` .
 
  
 
-If the ``DelaySeconds`` parameter is not specified for an entry, the default for the queue is used.
+The maximum allowed individual message size and the maximum total payload size (the sum of the individual lengths of all of the batched messages) are both 256 KB (262,144 bytes).
 
  
 
 .. warning::
 
-  The following list shows the characters (in Unicode) that are allowed in your message, according to the W3C XML specification. For more information, go to `http\://www.faqs.org/rfcs/rfc1321.html`_ . If you send any characters that are not included in the list, your request will be rejected. 
+   
 
-  #x9 | #xA | #xD | [#x20 to #xD7FF] | [#xE000 to #xFFFD] | [#x10000 to #x10FFFF]
+  A message can include only XML, JSON, and unformatted text. The following Unicode characters are allowed:
+
+   
+
+   ``#x9`` | ``#xA`` | ``#xD`` | ``#x20`` to ``#xD7FF`` | ``#xE000`` to ``#xFFFD`` | ``#x10000`` to ``#x10FFFF``  
+
+   
+
+  Any characters not included in this list will be rejected. For more information, see the `W3C specification for characters <http://www.w3.org/TR/REC-xml/#charsets>`_ .
 
    
 
  
 
-.. warning::
-
-  Because the batch request can result in a combination of successful and unsuccessful actions, you should check for batch errors even when the call returns an HTTP status code of 200. 
+If you don't specify the ``DelaySeconds`` parameter for an entry, Amazon SQS uses the default value for the queue.
 
  
 
 .. note::
 
-  Some API actions take lists of parameters. These lists are specified using the ``param.n`` notation. Values of ``n`` are integers starting from 1. For example, a parameter list with two elements looks like this: 
+   
 
- 
+  Some actions take lists of parameters. These lists are specified using the ``param.n`` notation. Values of ``n`` are integers starting from 1. For example, a parameter list with two elements looks like this:
 
-``Attribute.1=this`` 
+   
 
- 
+   ``Attribute.1=this``  
 
-``Attribute.2=that`` 
+   
 
+   ``Attribute.2=that``  
+
+   
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/SendMessageBatch>`_
 
 
 ========
@@ -67,7 +80,7 @@ Synopsis
   --queue-url <value>
   --entries <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -79,14 +92,18 @@ Options
 ``--queue-url`` (string)
 
 
-  The URL of the Amazon SQS queue to take action on.
+  The URL of the Amazon SQS queue to which batched messages are sent.
+
+   
+
+  Queue URLs are case-sensitive.
 
   
 
 ``--entries`` (list)
 
 
-  A list of  SendMessageBatchRequestEntry items.
+  A list of ``  SendMessageBatchRequestEntry `` items.
 
   
 
@@ -94,7 +111,7 @@ Options
 
 Shorthand Syntax::
 
-    Id=string,MessageBody=string,DelaySeconds=integer,MessageAttributes={KeyName1={StringValue=string,BinaryValue=blob,StringListValues=[string,string],BinaryListValues=[blob,blob],DataType=string},KeyName2={StringValue=string,BinaryValue=blob,StringListValues=[string,string],BinaryListValues=[blob,blob],DataType=string}} ...
+    Id=string,MessageBody=string,DelaySeconds=integer,MessageAttributes={KeyName1={StringValue=string,BinaryValue=blob,StringListValues=[string,string],BinaryListValues=[blob,blob],DataType=string},KeyName2={StringValue=string,BinaryValue=blob,StringListValues=[string,string],BinaryListValues=[blob,blob],DataType=string}},MessageDeduplicationId=string,MessageGroupId=string ...
 
 
 
@@ -113,7 +130,9 @@ JSON Syntax::
             "BinaryListValues": [blob, ...],
             "DataType": "string"
           }
-        ...}
+        ...},
+      "MessageDeduplicationId": "string",
+      "MessageGroupId": "string"
     }
     ...
   ]
@@ -123,8 +142,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -229,7 +248,7 @@ Successful -> (list)
 
   
 
-  A list of  SendMessageBatchResultEntry items.
+  A list of ``  SendMessageBatchResultEntry `` items.
 
   
 
@@ -237,7 +256,7 @@ Successful -> (list)
 
     
 
-    Encloses a message ID for successfully enqueued message of a  send-message-batch .
+    Encloses a ``MessageId`` for a successfully-enqueued message in a ``  send-message-batch .``  
 
     
 
@@ -265,7 +284,7 @@ Successful -> (list)
 
       
 
-      An MD5 digest of the non-URL-encoded message body string. This can be used to verify that Amazon SQS received the message correctly. Amazon SQS first URL decodes the message before creating the MD5 digest. For information about MD5, go to `http\://www.faqs.org/rfcs/rfc1321.html`_ .
+      An MD5 digest of the non-URL-encoded message attribute string. You can use this attribute to verify that Amazon SQS received the message correctly. Amazon SQS URL-decodes the message before creating the MD5 digest. For information about MD5, see `RFC1321 <https://www.ietf.org/rfc/rfc1321.txt>`_ .
 
       
 
@@ -275,7 +294,25 @@ Successful -> (list)
 
       
 
-      An MD5 digest of the non-URL-encoded message attribute string. This can be used to verify that Amazon SQS received the message batch correctly. Amazon SQS first URL decodes the message before creating the MD5 digest. For information about MD5, go to `http\://www.faqs.org/rfcs/rfc1321.html`_ .
+      An MD5 digest of the non-URL-encoded message attribute string. You can use this attribute to verify that Amazon SQS received the message correctly. Amazon SQS URL-decodes the message before creating the MD5 digest. For information about MD5, see `RFC1321 <https://www.ietf.org/rfc/rfc1321.txt>`_ .
+
+      
+
+      
+
+    SequenceNumber -> (string)
+
+      
+
+      This parameter applies only to FIFO (first-in-first-out) queues.
+
+       
+
+      The large, non-consecutive number that Amazon SQS assigns to each message.
+
+       
+
+      The length of ``SequenceNumber`` is 128 bits. As ``SequenceNumber`` continues to increase for a particular ``MessageGroupId`` .
 
       
 
@@ -289,7 +326,7 @@ Failed -> (list)
 
   
 
-  A list of  BatchResultErrorEntry items with the error detail about each message that could not be enqueued.
+  A list of ``  BatchResultErrorEntry `` items with error details about each message that can't be enqueued.
 
   
 
@@ -305,7 +342,7 @@ Failed -> (list)
 
       
 
-      The id of an entry in a batch request.
+      The ``Id`` of an entry in a batch request.
 
       
 
@@ -315,7 +352,7 @@ Failed -> (list)
 
       
 
-      Whether the error happened due to the sender's fault.
+      Specifies whether the error happened due to the sender's fault.
 
       
 
@@ -345,6 +382,3 @@ Failed -> (list)
 
   
 
-
-
-.. _http\://www.faqs.org/rfcs/rfc1321.html: http://www.faqs.org/rfcs/rfc1321.html

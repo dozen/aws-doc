@@ -15,8 +15,11 @@ Description
 
 
 
-Describes the details of the specified rule.
+Describes the specified rule.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeRule>`_
 
 
 ========
@@ -28,7 +31,7 @@ Synopsis
     describe-rule
   --name <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -40,16 +43,27 @@ Options
 ``--name`` (string)
 
 
-  The name of the rule you want to describe details for.
+  The name of the rule.
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
+
+
+========
+Examples
+========
+
+**To display information about a CloudWatch Events rule**
+
+This example displays information about the rule named DailyLambdaFunction::
+
+  aws events describe-rule --name "DailyLambdaFunction"
 
 
 ======
@@ -60,7 +74,7 @@ Name -> (string)
 
   
 
-  The rule's name.
+  The name of the rule.
 
   
 
@@ -70,7 +84,7 @@ Arn -> (string)
 
   
 
-  The Amazon Resource Name (ARN) associated with the rule.
+  The Amazon Resource Name (ARN) of the rule.
 
   
 
@@ -80,7 +94,7 @@ EventPattern -> (string)
 
   
 
-  The event pattern.
+  The event pattern. For more information, see `Events and Event Patterns <http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html>`_ in the *Amazon CloudWatch Events User Guide* .
 
   
 
@@ -110,7 +124,7 @@ Description -> (string)
 
   
 
-  The rule's description.
+  The description of the rule.
 
   
 

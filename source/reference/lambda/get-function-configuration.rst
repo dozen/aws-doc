@@ -19,12 +19,15 @@ Returns the configuration information of the Lambda function. This the same info
 
  
 
-If you are using the versioning feature, you can retrieve this information for a specific function version by using the optional ``qualifier`` parameter and specifying the function version or alias that points to it. If you don't provide it, the API returns information about the $LATEST version of the function. For more information about versioning, see `AWS Lambda Function Versioning and Aliases`_ .
+If you are using the versioning feature, you can retrieve this information for a specific function version by using the optional ``qualifier`` parameter and specifying the function version or alias that points to it. If you don't provide it, the API returns information about the $LATEST version of the function. For more information about versioning, see `AWS Lambda Function Versioning and Aliases <http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html>`_ .
 
  
 
 This operation requires permission for the ``lambda:GetFunctionConfiguration`` operation.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionConfiguration>`_
 
 
 ========
@@ -37,7 +40,7 @@ Synopsis
   --function-name <value>
   [--qualifier <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -53,7 +56,7 @@ Options
 
    
 
-  You can specify a function name (for example, ``Thumbnail`` ) or you can specify Amazon Resource Name (ARN) of the function (for example, ``arn:aws:lambda:us-west-2:account-id:function:ThumbNail`` ). AWS Lambda also allows you to specify a partial ARN (for example, ``account-id:Thumbnail`` ). Note that the length constraint applies only to the ARN. If you specify only the function name, it is limited to 64 character in length. 
+  You can specify a function name (for example, ``Thumbnail`` ) or you can specify Amazon Resource Name (ARN) of the function (for example, ``arn:aws:lambda:us-west-2:account-id:function:ThumbNail`` ). AWS Lambda also allows you to specify a partial ARN (for example, ``account-id:Thumbnail`` ). Note that the length constraint applies only to the ARN. If you specify only the function name, it is limited to 64 characters in length. 
 
   
 
@@ -71,8 +74,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -84,7 +87,7 @@ FunctionName -> (string)
 
   
 
-  The name of the function.
+  The name of the function. Note that the length constraint applies only to the ARN. If you specify only the function name, it is limited to 64 characters in length.
 
   
 
@@ -114,7 +117,7 @@ Role -> (string)
 
   
 
-  The Amazon Resource Name (ARN) of the IAM role that Lambda assumes when it executes your function to access any other Amazon Web Services (AWS) resources. 
+  The Amazon Resource Name (ARN) of the IAM role that Lambda assumes when it executes your function to access any other Amazon Web Services (AWS) resources.
 
   
 
@@ -154,7 +157,7 @@ Timeout -> (integer)
 
   
 
-  The function execution time at which Lambda should terminate the function. Because the execution time has cost implications, we recommend you set this value based on your expected execution time. The default is 3 seconds. 
+  The function execution time at which Lambda should terminate the function. Because the execution time has cost implications, we recommend you set this value based on your expected execution time. The default is 3 seconds.
 
   
 
@@ -174,7 +177,7 @@ LastModified -> (string)
 
   
 
-  The time stamp of the last time you updated the function.
+  The time stamp of the last time you updated the function. The time stamp is conveyed as a string complying with ISO-8601 in this way YYYY-MM-DDThh:mm:ssTZD (e.g., 1997-07-16T19:20:30+01:00). For more information, see `Date and Time Formats <https://www.w3.org/TR/NOTE-datetime>`_ .
 
   
 
@@ -252,6 +255,125 @@ VpcConfig -> (structure)
 
   
 
+DeadLetterConfig -> (structure)
 
+  
 
-.. _AWS Lambda Function Versioning and Aliases: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
+  The parent object that contains the target ARN (Amazon Resource Name) of an Amazon SQS queue or Amazon SNS topic.
+
+  
+
+  TargetArn -> (string)
+
+    
+
+    The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic you specify as your Dead Letter Queue (DLQ).
+
+    
+
+    
+
+  
+
+Environment -> (structure)
+
+  
+
+  The parent object that contains your environment's configuration settings.
+
+  
+
+  Variables -> (map)
+
+    
+
+    The key-value pairs returned that represent your environment's configuration settings or error information.
+
+    
+
+    key -> (string)
+
+      
+
+      
+
+    value -> (string)
+
+      
+
+      
+
+    
+
+  Error -> (structure)
+
+    
+
+    The parent object that contains error information associated with your configuration settings.
+
+    
+
+    ErrorCode -> (string)
+
+      
+
+      The error code returned by the environment error object.
+
+      
+
+      
+
+    Message -> (string)
+
+      
+
+      The message returned by the environment error object.
+
+      
+
+      
+
+    
+
+  
+
+KMSKeyArn -> (string)
+
+  
+
+  The Amazon Resource Name (ARN) of the KMS key used to encrypt your function's environment variables. If empty, it means you are using the AWS Lambda default service key.
+
+  
+
+  
+
+TracingConfig -> (structure)
+
+  
+
+  The parent object that contains your function's tracing settings.
+
+  
+
+  Mode -> (string)
+
+    
+
+    The tracing mode associated with your Lambda function.
+
+    
+
+    
+
+  
+
+MasterArn -> (string)
+
+  
+
+  Returns the ARN (Amazon Resource Name) of the master function.
+
+  
+
+  
+

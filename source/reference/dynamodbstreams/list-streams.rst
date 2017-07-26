@@ -15,18 +15,21 @@ Description
 
 
 
-Returns an array of stream ARNs associated with the current account and endpoint. If the ``table-name`` parameter is present, then *list-streams* will return only the streams ARNs for that table.
+Returns an array of stream ARNs associated with the current account and endpoint. If the ``table-name`` parameter is present, then ``list-streams`` will return only the streams ARNs for that table.
 
  
 
 .. note::
 
-  
+   
 
-  You can call *list-streams* at a maximum rate of 5 times per second.
+  You can call ``list-streams`` at a maximum rate of 5 times per second.
 
-  
+   
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/ListStreams>`_
 
 
 ========
@@ -40,7 +43,7 @@ Synopsis
   [--limit <value>]
   [--exclusive-start-stream-arn <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -73,8 +76,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -126,16 +129,16 @@ Streams -> (list)
 
        
 
-      Note that *LatestStreamLabel* is not a unique identifier for the stream, because it is possible that a stream from another table might have the same timestamp. However, the combination of the following three elements is guaranteed to be unique:
+      Note that ``LatestStreamLabel`` is not a unique identifier for the stream, because it is possible that a stream from another table might have the same timestamp. However, the combination of the following three elements is guaranteed to be unique:
 
        
 
        
-      * the AWS customer ID.
+      * the AWS customer ID. 
        
-      * the table name
+      * the table name 
        
-      * the *StreamLabel* 
+      * the ``StreamLabel``   
        
 
       

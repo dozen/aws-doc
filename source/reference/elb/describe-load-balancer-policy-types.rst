@@ -15,12 +15,19 @@ Description
 
 
 
-Describes the specified load balancer policy types.
+Describes the specified load balancer policy types or all load balancer policy types.
 
  
 
-You can use these policy types with  create-load-balancer-policy to create policy configurations for a load balancer.
+The description of each type indicates how it can be used. For example, some policies can be used only with layer 7 listeners, some policies can be used only with layer 4 listeners, and some policies can be used only with your EC2 instances.
 
+ 
+
+You can use  create-load-balancer-policy to create a policy configuration for any of these policy types. Then, depending on the policy type, use either  set-load-balancer-policies-of-listener or  set-load-balancer-policies-for-backend-server to set the policy.
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeLoadBalancerPolicyTypes>`_
 
 
 ========
@@ -32,7 +39,7 @@ Synopsis
     describe-load-balancer-policy-types
   [--policy-type-names <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -59,8 +66,8 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -257,13 +264,13 @@ PolicyTypeDescriptions -> (list)
            
 
            
-          * ONE(1) : Single value required
+          * ONE(1) : Single value required 
            
-          * ZERO_OR_ONE(0..1) : Up to one value can be supplied
+          * ZERO_OR_ONE(0..1) : Up to one value is allowed 
            
-          * ZERO_OR_MORE(0..*) : Optional. Multiple values are allowed
+          * ZERO_OR_MORE(0..*) : Optional. Multiple values are allowed 
            
-          * ONE_OR_MORE(1..*0) : Required. Multiple values are allowed
+          * ONE_OR_MORE(1..*0) : Required. Multiple values are allowed 
            
 
           

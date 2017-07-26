@@ -19,8 +19,11 @@ Returns a list of ``DBClusterParameterGroup`` descriptions. If a ``DBClusterPara
 
  
 
-For more information on Amazon Aurora, see `Aurora on Amazon RDS`_ in the *Amazon RDS User Guide.* 
+For more information on Amazon Aurora, see `Aurora on Amazon RDS <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html>`_ in the *Amazon RDS User Guide.*  
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterParameterGroups>`_
 
 
 ========
@@ -35,7 +38,7 @@ Synopsis
   [--max-records <value>]
   [--marker <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -47,7 +50,7 @@ Options
 ``--db-cluster-parameter-group-name`` (string)
 
 
-  The name of a specific DB cluster parameter group to return details for. 
+  The name of a specific DB cluster parameter group to return details for.
 
    
 
@@ -56,11 +59,11 @@ Options
    
 
    
-  * Must be 1 to 255 alphanumeric characters
+  * Must be 1 to 255 alphanumeric characters 
    
-  * First character must be a letter
+  * First character must be a letter 
    
-  * Cannot end with a hyphen or contain two consecutive hyphens
+  * Cannot end with a hyphen or contain two consecutive hyphens 
    
 
   
@@ -118,8 +121,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -149,7 +152,7 @@ DBClusterParameterGroups -> (list)
 
     
 
-    Contains the result of a successful invocation of the  create-db-cluster-parameter-group action. 
+    Contains the result of a successful invocation of the  create-db-cluster-parameter-group or  copy-db-cluster-parameter-group action. 
 
      
 
@@ -161,7 +164,7 @@ DBClusterParameterGroups -> (list)
 
       
 
-      Provides the name of the DB cluster parameter group. 
+      Provides the name of the DB cluster parameter group.
 
       
 
@@ -171,7 +174,7 @@ DBClusterParameterGroups -> (list)
 
       
 
-      Provides the name of the DB parameter group family that this DB cluster parameter group is compatible with. 
+      Provides the name of the DB parameter group family that this DB cluster parameter group is compatible with.
 
       
 
@@ -181,7 +184,17 @@ DBClusterParameterGroups -> (list)
 
       
 
-      Provides the customer-specified description for this DB cluster parameter group. 
+      Provides the customer-specified description for this DB cluster parameter group.
+
+      
+
+      
+
+    DBClusterParameterGroupArn -> (string)
+
+      
+
+      The Amazon Resource Name (ARN) for the DB cluster parameter group.
 
       
 
@@ -191,6 +204,3 @@ DBClusterParameterGroups -> (list)
 
   
 
-
-
-.. _Aurora on Amazon RDS: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html

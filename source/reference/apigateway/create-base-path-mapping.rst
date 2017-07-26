@@ -19,6 +19,9 @@ Creates a new  BasePathMapping resource.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/apigateway-2015-07-09/CreateBasePathMapping>`_
+
+
 ========
 Synopsis
 ========
@@ -31,7 +34,7 @@ Synopsis
   --rest-api-id <value>
   [--stage <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -57,7 +60,7 @@ Options
 ``--rest-api-id`` (string)
 
 
-  The name of the API that you want to apply this mapping to.
+  The string identifier of the associated  RestApi .
 
   
 
@@ -71,9 +74,20 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
+
+
+========
+Examples
+========
+
+**To create the base path mapping for a custom domain name**
+
+Command::
+
+  aws apigateway create-base-path-mapping --domain-name subdomain.domain.tld --rest-api-id 1234123412 --stage prod --base-path v1
 
 
 ======
@@ -94,7 +108,7 @@ restApiId -> (string)
 
   
 
-  The name of the API.
+  The string identifier of the associated  RestApi .
 
   
 
@@ -104,7 +118,7 @@ stage -> (string)
 
   
 
-  The name of the API's stage.
+  The name of the associated stage.
 
   
 

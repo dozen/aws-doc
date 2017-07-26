@@ -19,8 +19,11 @@ Exports a running or stopped instance to an S3 bucket.
 
  
 
-For information about the supported operating systems, image formats, and known limitations for the types of instances you can export, see `Exporting EC2 Instances`_ in the *Amazon Elastic Compute Cloud User Guide* .
+For information about the supported operating systems, image formats, and known limitations for the types of instances you can export, see `Exporting an Instance as a VM Using VM Import/Export <http://docs.aws.amazon.com/vm-import/latest/userguide/vmexport.html>`_ in the *VM Import/Export User Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateInstanceExportTask>`_
 
 
 ========
@@ -31,11 +34,11 @@ Synopsis
 
     create-instance-export-task
   [--description <value>]
+  [--export-to-s3-task <value>]
   --instance-id <value>
   [--target-environment <value>]
-  [--export-to-s3-task <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -50,6 +53,33 @@ Options
   A description for the conversion task or the resource being exported. The maximum length is 255 bytes.
 
   
+
+``--export-to-s3-task`` (structure)
+
+
+  The format and location for an instance export task.
+
+  
+
+
+
+Shorthand Syntax::
+
+    ContainerFormat=string,DiskImageFormat=string,S3Bucket=string,S3Prefix=string
+
+
+
+
+JSON Syntax::
+
+  {
+    "ContainerFormat": "ova",
+    "DiskImageFormat": "VMDK"|"RAW"|"VHD",
+    "S3Bucket": "string",
+    "S3Prefix": "string"
+  }
+
+
 
 ``--instance-id`` (string)
 
@@ -80,38 +110,11 @@ Options
 
   
 
-``--export-to-s3-task`` (structure)
-
-
-  The format and location for an instance export task.
-
-  
-
-
-
-Shorthand Syntax::
-
-    DiskImageFormat=string,ContainerFormat=string,S3Bucket=string,S3Prefix=string
-
-
-
-
-JSON Syntax::
-
-  {
-    "DiskImageFormat": "VMDK"|"RAW"|"VHD",
-    "ContainerFormat": "ova",
-    "S3Bucket": "string",
-    "S3Prefix": "string"
-  }
-
-
-
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -121,12 +124,12 @@ Examples
 
 **To export an instance**
 
-This example command creates a task to export the instance i-38e485d8 to the Amazon S3 bucket
+This example command creates a task to export the instance i-1234567890abcdef0 to the Amazon S3 bucket
 myexportbucket.
 
 Command::
 
-  aws ec2 create-instance-export-task --description "RHEL5 instance" --instance-id i-38e485d8 --target-environment vmware --export-to-s3-task DiskImageFormat=vmdk,ContainerFormat=ova,S3Bucket=myexportbucket,S3Prefix=RHEL5
+  aws ec2 create-instance-export-task --description "RHEL5 instance" --instance-id i-1234567890abcdef0 --target-environment vmware --export-to-s3-task DiskImageFormat=vmdk,ContainerFormat=ova,S3Bucket=myexportbucket,S3Prefix=RHEL5
 
 Output::
 
@@ -134,7 +137,7 @@ Output::
       "ExportTask": {
           "State": "active",
           "InstanceExportDetails": {
-              "InstanceId": "i-38e485d8",
+              "InstanceId": "i-1234567890abcdef0",
               "TargetEnvironment": "vmware"
           },
           "ExportToS3Task": {
@@ -161,16 +164,6 @@ ExportTask -> (structure)
 
   
 
-  ExportTaskId -> (string)
-
-    
-
-    The ID of the export task.
-
-    
-
-    
-
   Description -> (string)
 
     
@@ -181,23 +174,63 @@ ExportTask -> (structure)
 
     
 
-  State -> (string)
+  ExportTaskId -> (string)
 
     
 
-    The state of the export task.
+    The ID of the export task.
 
     
 
     
 
-  StatusMessage -> (string)
+  ExportToS3Task -> (structure)
 
     
 
-    The status message related to the export task.
+    Information about the export task.
 
     
+
+    ContainerFormat -> (string)
+
+      
+
+      The container format used to combine disk images with metadata (such as OVF). If absent, only the disk image is exported.
+
+      
+
+      
+
+    DiskImageFormat -> (string)
+
+      
+
+      The format for the exported image.
+
+      
+
+      
+
+    S3Bucket -> (string)
+
+      
+
+      The S3 bucket for the destination image. The destination bucket must exist and grant WRITE and READ_ACP permissions to the AWS account ``vm-import-export@amazon.com`` .
+
+      
+
+      
+
+    S3Key -> (string)
+
+      
+
+      The encryption key for your S3 bucket.
+
+      
+
+      
 
     
 
@@ -231,58 +264,25 @@ ExportTask -> (structure)
 
     
 
-  ExportToS3Task -> (structure)
+  State -> (string)
 
     
 
-    Information about the export task.
+    The state of the export task.
 
     
 
-    DiskImageFormat -> (string)
+    
 
-      
+  StatusMessage -> (string)
 
-      The format for the exported image.
+    
 
-      
+    The status message related to the export task.
 
-      
-
-    ContainerFormat -> (string)
-
-      
-
-      The container format used to combine disk images with metadata (such as OVF). If absent, only the disk image is exported.
-
-      
-
-      
-
-    S3Bucket -> (string)
-
-      
-
-      The S3 bucket for the destination image. The destination bucket must exist and grant WRITE and READ_ACP permissions to the AWS account ``vm-import-export@amazon.com`` .
-
-      
-
-      
-
-    S3Key -> (string)
-
-      
-
-      The encryption key for your S3 bucket.
-
-      
-
-      
+    
 
     
 
   
 
-
-
-.. _Exporting EC2 Instances: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ExportingEC2Instances.html

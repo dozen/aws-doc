@@ -19,6 +19,9 @@ Gets information about the current  ApiKey resource.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/apigateway-2015-07-09/GetApiKey>`_
+
+
 ========
 Synopsis
 ========
@@ -27,8 +30,9 @@ Synopsis
 
     get-api-key
   --api-key <value>
+  [--include-value | --no-include-value]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -44,12 +48,45 @@ Options
 
   
 
+``--include-value`` | ``--no-include-value`` (boolean)
+
+
+  A boolean flag to specify whether (``true`` ) or not (``false`` ) the result contains the key value.
+
+  
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
+
+
+========
+Examples
+========
+
+**To get the information about a specific API key**
+
+Command::
+
+  aws apigateway get-api-key --api-key 8bklk8bl1k3sB38D9B3l0enyWT8c09B30lkq0blk
+
+Output::
+
+  {
+      "description": "My first key", 
+      "enabled": true, 
+      "stageKeys": [
+          "a1b2c3d4e5/dev", 
+          "e5d4c3b2a1/dev"
+      ], 
+      "lastUpdatedDate": 1456184515, 
+      "createdDate": 1456184452, 
+      "id": "8bklk8bl1k3sB38D9B3l0enyWT8c09B30lkq0blk", 
+      "name": "My key"
+  }
 
 
 ======
@@ -66,11 +103,31 @@ id -> (string)
 
   
 
+value -> (string)
+
+  
+
+  The value of the API Key.
+
+  
+
+  
+
 name -> (string)
 
   
 
   The name of the API Key.
+
+  
+
+  
+
+customerId -> (string)
+
+  
+
+  An AWS Marketplace customer identifier , when integrating with the AWS SaaS Marketplace.
 
   
 
@@ -96,6 +153,26 @@ enabled -> (boolean)
 
   
 
+createdDate -> (timestamp)
+
+  
+
+  The timestamp when the API Key was created.
+
+  
+
+  
+
+lastUpdatedDate -> (timestamp)
+
+  
+
+  The timestamp when the API Key was last updated.
+
+  
+
+  
+
 stageKeys -> (list)
 
   
@@ -112,26 +189,3 @@ stageKeys -> (list)
 
   
 
-createdDate -> (timestamp)
-
-  
-
-  The date when the API Key was created, in `ISO 8601 format`_ .
-
-  
-
-  
-
-lastUpdatedDate -> (timestamp)
-
-  
-
-  When the API Key was last updated, in ISO 8601 format.
-
-  
-
-  
-
-
-
-.. _ISO 8601 format: http://www.iso.org/iso/home/standards/iso8601.htm

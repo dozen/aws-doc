@@ -15,8 +15,11 @@ Description
 
 
 
-Copies the specified DB parameter group. 
+Copies the specified DB parameter group.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBParameterGroup>`_
 
 
 ========
@@ -31,7 +34,7 @@ Synopsis
   --target-db-parameter-group-description <value>
   [--tags <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -43,7 +46,7 @@ Options
 ``--source-db-parameter-group-identifier`` (string)
 
 
-  The identifier or ARN for the source DB parameter group. For information about creating an ARN, see `Constructing an RDS Amazon Resource Name (ARN)`_ . 
+  The identifier or ARN for the source DB parameter group. For information about creating an ARN, see `Constructing an RDS Amazon Resource Name (ARN) <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing>`_ . 
 
    
 
@@ -52,11 +55,9 @@ Options
    
 
    
-  * Must specify a valid DB parameter group.
+  * Must specify a valid DB parameter group. 
    
-  * If the source DB parameter group is in the same region as the copy, specify a valid DB parameter group identifier, for example ``my-db-param-group`` , or a valid ARN.
-   
-  * If the source DB parameter group is in a different region than the copy, specify a valid DB parameter group ARN, for example ``arn:aws:rds:us-west-2:123456789012:pg:special-parameters`` .
+  * Must specify a valid DB parameter group identifier, for example ``my-db-param-group`` , or a valid ARN. 
    
 
   
@@ -73,18 +74,18 @@ Options
    
 
    
-  * Cannot be null, empty, or blank
+  * Cannot be null, empty, or blank 
    
-  * Must contain from 1 to 255 alphanumeric characters or hyphens
+  * Must contain from 1 to 255 alphanumeric characters or hyphens 
    
-  * First character must be a letter
+  * First character must be a letter 
    
-  * Cannot end with a hyphen or contain two consecutive hyphens
-   
-
+  * Cannot end with a hyphen or contain two consecutive hyphens 
    
 
-  Example: ``my-db-parameter-group`` 
+   
+
+  Example: ``my-db-parameter-group``  
 
   
 
@@ -126,8 +127,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -151,7 +152,7 @@ DBParameterGroup -> (structure)
 
     
 
-    Provides the name of the DB parameter group. 
+    Provides the name of the DB parameter group.
 
     
 
@@ -161,7 +162,7 @@ DBParameterGroup -> (structure)
 
     
 
-    Provides the name of the DB parameter group family that this DB parameter group is compatible with. 
+    Provides the name of the DB parameter group family that this DB parameter group is compatible with.
 
     
 
@@ -171,7 +172,17 @@ DBParameterGroup -> (structure)
 
     
 
-    Provides the customer-specified description for this DB parameter group. 
+    Provides the customer-specified description for this DB parameter group.
+
+    
+
+    
+
+  DBParameterGroupArn -> (string)
+
+    
+
+    The Amazon Resource Name (ARN) for the DB parameter group.
 
     
 
@@ -179,6 +190,3 @@ DBParameterGroup -> (structure)
 
   
 
-
-
-.. _Constructing an RDS Amazon Resource Name (ARN): http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#USER_Tagging.ARN

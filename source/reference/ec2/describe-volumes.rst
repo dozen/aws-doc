@@ -23,8 +23,11 @@ If you are describing a long list of volumes, you can paginate the output to mak
 
  
 
-For more information about EBS volumes, see `Amazon EBS Volumes`_ in the *Amazon Elastic Compute Cloud User Guide* .
+For more information about EBS volumes, see `Amazon EBS Volumes <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumes.html>`_ in the *Amazon Elastic Compute Cloud User Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumes>`_
 
 
 ``describe-volumes`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
@@ -38,14 +41,14 @@ Synopsis
 ::
 
     describe-volumes
-  [--dry-run | --no-dry-run]
-  [--volume-ids <value>]
   [--filters <value>]
+  [--volume-ids <value>]
+  [--dry-run | --no-dry-run]
   [--cli-input-json <value>]
   [--starting-token <value>]
   [--page-size <value>]
   [--max-items <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -53,28 +56,6 @@ Synopsis
 =======
 Options
 =======
-
-``--dry-run`` | ``--no-dry-run`` (boolean)
-
-
-  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
-
-  
-
-``--volume-ids`` (list)
-
-
-  One or more volume IDs.
-
-  
-
-
-
-Syntax::
-
-  "string" "string" ...
-
-
 
 ``--filters`` (list)
 
@@ -106,7 +87,7 @@ Syntax::
    
   * ``status`` - The status of the volume (``creating`` | ``available`` | ``in-use`` | ``deleting`` | ``deleted`` | ``error`` ). 
    
-  * ``tag`` :*key* =*value* - The key/value combination of a tag assigned to the resource. 
+  * ``tag`` :*key* =*value* - The key/value combination of a tag assigned to the resource. Specify the key of the tag in the filter name and the value of the tag in the filter value. For example, for the tag Purpose=X, specify ``tag:Purpose`` for the filter name and ``X`` for the filter value. 
    
   * ``tag-key`` - The key of a tag assigned to the resource. This filter is independent of the ``tag-value`` filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the ``tag`` :*key* =*value* filter. 
    
@@ -114,7 +95,7 @@ Syntax::
    
   * ``volume-id`` - The volume ID. 
    
-  * ``volume-type`` - The Amazon EBS volume type. This can be ``gp2`` for General Purpose (SSD) volumes, ``io1`` for Provisioned IOPS (SSD) volumes, or ``standard`` for Magnetic volumes. 
+  * ``volume-type`` - The Amazon EBS volume type. This can be ``gp2`` for General Purpose SSD, ``io1`` for Provisioned IOPS SSD, ``st1`` for Throughput Optimized HDD, ``sc1`` for Cold HDD, or ``standard`` for Magnetic volumes. 
    
 
   
@@ -140,6 +121,28 @@ JSON Syntax::
 
 
 
+``--volume-ids`` (list)
+
+
+  One or more volume IDs.
+
+  
+
+
+
+Syntax::
+
+  "string" "string" ...
+
+
+
+``--dry-run`` | ``--no-dry-run`` (boolean)
+
+
+  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
+
+  
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
@@ -150,26 +153,34 @@ Performs service operation based on the JSON string provided. The JSON string fo
 
    
 
-``--page-size`` (integer)
- 
-
-  The size of each page.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
    
 
-  
+``--page-size`` (integer)
+ 
 
-  
+  The size of each page to get in the AWS service call. This does not affect the number of items returned in the command's output. Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call. This can help prevent the AWS service calls from timing out.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
 
 ``--max-items`` (integer)
  
 
-  The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination. This ``NextToken`` response element should **not** be used directly outside of the AWS CLI.
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``NextToken`` is provided in the command's output. To resume pagination, provide the ``NextToken`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``NextToken`` response element directly outside of the AWS CLI.
 
    
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -194,17 +205,17 @@ Output::
                "Attachments": [
                    {
                        "AttachTime": "2013-12-18T22:35:00.000Z",
-                       "InstanceId": "i-abe041d4",
-                       "VolumeId": "vol-21083656",
+                       "InstanceId": "i-1234567890abcdef0",
+                       "VolumeId": "vol-049df61146c4d7901",
                        "State": "attached",
                        "DeleteOnTermination": true,
                        "Device": "/dev/sda1"
                    }
                ],
                "VolumeType": "standard",
-               "VolumeId": "vol-21083656",
+               "VolumeId": "vol-049df61146c4d7901",
                "State": "in-use",
-               "SnapshotId": "snap-b4ef17a9",
+               "SnapshotId": "snap-1234567890abcdef0",
                "CreateTime": "2013-12-18T22:35:00.084Z",
                "Size": 8
            },
@@ -212,7 +223,7 @@ Output::
                "AvailabilityZone": "us-east-1a",
                "Attachments": [],
                "VolumeType": "io1",
-               "VolumeId": "vol-2725bc51",
+               "VolumeId": "vol-1234567890abcdef0",
                "State": "available",
                "Iops": 1000,
                "SnapshotId": null,
@@ -224,11 +235,11 @@ Output::
 
 **To describe volumes that are attached to a specific instance**
 
-This example command describes all volumes that are both attached to the instance with the ID i-abe041d4 and set to delete when the instance terminates.
+This example command describes all volumes that are both attached to the instance with the ID i-1234567890abcdef0 and set to delete when the instance terminates.
 
 Command::
 
-  aws ec2 describe-volumes --region us-east-1 --filters Name=attachment.instance-id,Values=i-abe041d4 Name=attachment.delete-on-termination,Values=true
+  aws ec2 describe-volumes --region us-east-1 --filters Name=attachment.instance-id,Values=i-1234567890abcdef0 Name=attachment.delete-on-termination,Values=true
 
 Output::
 
@@ -239,17 +250,17 @@ Output::
                "Attachments": [
                    {
                        "AttachTime": "2013-12-18T22:35:00.000Z",
-                       "InstanceId": "i-abe041d4",
-                       "VolumeId": "vol-21083656",
+                       "InstanceId": "i-1234567890abcdef0",
+                       "VolumeId": "vol-049df61146c4d7901",
                        "State": "attached",
                        "DeleteOnTermination": true,
                        "Device": "/dev/sda1"
                    }
                ],
                "VolumeType": "standard",
-               "VolumeId": "vol-21083656",
+               "VolumeId": "vol-049df61146c4d7901",
                "State": "in-use",
-               "SnapshotId": "snap-b4ef17a9",
+               "SnapshotId": "snap-1234567890abcdef0",
                "CreateTime": "2013-12-18T22:35:00.084Z",
                "Size": 8
            }
@@ -274,7 +285,7 @@ Output::
                 "Key": "Name"
             }
         ], 
-        "ID": "vol-9de9e9d9"
+        "ID": "vol-1234567890abcdef0"
     }, 
     {
         "Tag": [
@@ -283,7 +294,7 @@ Output::
                 "Key": "Name"
             }
         ], 
-        "ID": "vol-b2242df9"
+        "ID": "vol-049df61146c4d7901"
      }
    ]
 
@@ -309,11 +320,121 @@ Volumes -> (list)
 
     
 
-    VolumeId -> (string)
+    Attachments -> (list)
 
       
 
-      The ID of the volume.
+      Information about the volume attachments.
+
+      
+
+      (structure)
+
+        
+
+        Describes volume attachment details.
+
+        
+
+        AttachTime -> (timestamp)
+
+          
+
+          The time stamp when the attachment initiated.
+
+          
+
+          
+
+        Device -> (string)
+
+          
+
+          The device name.
+
+          
+
+          
+
+        InstanceId -> (string)
+
+          
+
+          The ID of the instance.
+
+          
+
+          
+
+        State -> (string)
+
+          
+
+          The attachment state of the volume.
+
+          
+
+          
+
+        VolumeId -> (string)
+
+          
+
+          The ID of the volume.
+
+          
+
+          
+
+        DeleteOnTermination -> (boolean)
+
+          
+
+          Indicates whether the EBS volume is deleted on instance termination.
+
+          
+
+          
+
+        
+
+      
+
+    AvailabilityZone -> (string)
+
+      
+
+      The Availability Zone for the volume.
+
+      
+
+      
+
+    CreateTime -> (timestamp)
+
+      
+
+      The time stamp when volume creation was initiated.
+
+      
+
+      
+
+    Encrypted -> (boolean)
+
+      
+
+      Indicates whether the volume will be encrypted.
+
+      
+
+      
+
+    KmsKeyId -> (string)
+
+      
+
+      The full ARN of the AWS Key Management Service (AWS KMS) customer master key (CMK) that was used to protect the volume encryption key for the volume.
 
       
 
@@ -339,16 +460,6 @@ Volumes -> (list)
 
       
 
-    AvailabilityZone -> (string)
-
-      
-
-      The Availability Zone for the volume.
-
-      
-
-      
-
     State -> (string)
 
       
@@ -359,93 +470,31 @@ Volumes -> (list)
 
       
 
-    CreateTime -> (timestamp)
+    VolumeId -> (string)
 
       
 
-      The time stamp when volume creation was initiated.
+      The ID of the volume.
 
       
 
       
 
-    Attachments -> (list)
+    Iops -> (integer)
 
       
 
-      Information about the volume attachments.
+      The number of I/O operations per second (IOPS) that the volume supports. For Provisioned IOPS SSD volumes, this represents the number of IOPS that are provisioned for the volume. For General Purpose SSD volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information on General Purpose SSD baseline performance, I/O credits, and bursting, see `Amazon EBS Volume Types <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html>`_ in the *Amazon Elastic Compute Cloud User Guide* .
+
+       
+
+      Constraint: Range is 100-20000 IOPS for io1 volumes and 100-10000 IOPS for ``gp2`` volumes.
+
+       
+
+      Condition: This parameter is required for requests to create ``io1`` volumes; it is not used in requests to create ``gp2`` , ``st1`` , ``sc1`` , or ``standard`` volumes.
 
       
-
-      (structure)
-
-        
-
-        Describes volume attachment details.
-
-        
-
-        VolumeId -> (string)
-
-          
-
-          The ID of the volume.
-
-          
-
-          
-
-        InstanceId -> (string)
-
-          
-
-          The ID of the instance.
-
-          
-
-          
-
-        Device -> (string)
-
-          
-
-          The device name.
-
-          
-
-          
-
-        State -> (string)
-
-          
-
-          The attachment state of the volume.
-
-          
-
-          
-
-        AttachTime -> (timestamp)
-
-          
-
-          The time stamp when the attachment initiated.
-
-          
-
-          
-
-        DeleteOnTermination -> (boolean)
-
-          
-
-          Indicates whether the EBS volume is deleted on instance termination.
-
-          
-
-          
-
-        
 
       
 
@@ -469,11 +518,11 @@ Volumes -> (list)
 
           
 
-          The key of the tag. 
+          The key of the tag.
 
            
 
-          Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with ``aws:`` 
+          Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with ``aws:``  
 
           
 
@@ -501,45 +550,7 @@ Volumes -> (list)
 
       
 
-      The volume type. This can be ``gp2`` for General Purpose (SSD) volumes, ``io1`` for Provisioned IOPS (SSD) volumes, or ``standard`` for Magnetic volumes.
-
-      
-
-      
-
-    Iops -> (integer)
-
-      
-
-      The number of I/O operations per second (IOPS) that the volume supports. For Provisioned IOPS (SSD) volumes, this represents the number of IOPS that are provisioned for the volume. For General Purpose (SSD) volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information on General Purpose (SSD) baseline performance, I/O credits, and bursting, see `Amazon EBS Volume Types`_ in the *Amazon Elastic Compute Cloud User Guide* .
-
-       
-
-      Constraint: Range is 100 to 20000 for Provisioned IOPS (SSD) volumes and 3 to 10000 for General Purpose (SSD) volumes.
-
-       
-
-      Condition: This parameter is required for requests to create ``io1`` volumes; it is not used in requests to create ``standard`` or ``gp2`` volumes.
-
-      
-
-      
-
-    Encrypted -> (boolean)
-
-      
-
-      Indicates whether the volume will be encrypted.
-
-      
-
-      
-
-    KmsKeyId -> (string)
-
-      
-
-      The full ARN of the AWS Key Management Service (AWS KMS) customer master key (CMK) that was used to protect the volume encryption key for the volume.
+      The volume type. This can be ``gp2`` for General Purpose SSD, ``io1`` for Provisioned IOPS SSD, ``st1`` for Throughput Optimized HDD, ``sc1`` for Cold HDD, or ``standard`` for Magnetic volumes.
 
       
 
@@ -559,7 +570,3 @@ NextToken -> (string)
 
   
 
-
-
-.. _Amazon EBS Volume Types: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
-.. _Amazon EBS Volumes: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumes.html

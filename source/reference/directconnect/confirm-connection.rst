@@ -23,6 +23,9 @@ Upon creation, the hosted connection is initially in the 'Ordering' state, and w
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmConnection>`_
+
+
 ========
 Synopsis
 ========
@@ -32,7 +35,7 @@ Synopsis
     confirm-connection
   --connection-id <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -44,7 +47,7 @@ Options
 ``--connection-id`` (string)
 
 
-  ID of the connection.
+  The ID of the connection. This field is also used as the ID type for operations that use multiple connection types (LAG, interconnect, and/or connection).
 
    
 
@@ -59,9 +62,26 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
+
+
+========
+Examples
+========
+
+**To confirm the creation of a hosted connection on an interconnect**
+
+The following ``confirm-connection`` command confirms the creation of a hosted connection on an interconnect::
+
+  aws directconnect confirm-connection --connection-id dxcon-fg2wi7hy
+
+Output::
+
+  {
+      "connectionState": "pending"
+  }
 
 
 ======
@@ -70,24 +90,28 @@ Output
 
 connectionState -> (string)
 
-  State of the connection. 
+  
+
+  State of the connection.
 
    
-  * **Ordering** : The initial state of a hosted connection provisioned on an interconnect. The connection stays in the ordering state until the owner of the hosted connection confirms or declines the connection order.
+
    
-  * **Requested** : The initial state of a standard connection. The connection stays in the requested state until the Letter of Authorization (LOA) is sent to the customer.
+  * **Ordering** : The initial state of a hosted connection provisioned on an interconnect. The connection stays in the ordering state until the owner of the hosted connection confirms or declines the connection order. 
    
-  * **Pending** : The connection has been approved, and is being initialized.
+  * **Requested** : The initial state of a standard connection. The connection stays in the requested state until the Letter of Authorization (LOA) is sent to the customer. 
    
-  * **Available** : The network link is up, and the connection is ready for use.
+  * **Pending** : The connection has been approved, and is being initialized. 
    
-  * **Down** : The network link is down.
+  * **Available** : The network link is up, and the connection is ready for use. 
    
-  * **Deleting** : The connection is in the process of being deleted.
+  * **Down** : The network link is down. 
    
-  * **Deleted** : The connection has been deleted.
+  * **Deleting** : The connection is in the process of being deleted. 
    
-  * **Rejected** : A hosted connection in the 'Ordering' state will enter the 'Rejected' state if it is deleted by the end customer.
+  * **Deleted** : The connection has been deleted. 
+   
+  * **Rejected** : A hosted connection in the 'Ordering' state will enter the 'Rejected' state if it is deleted by the end customer. 
    
 
   

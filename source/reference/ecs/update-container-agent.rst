@@ -19,8 +19,11 @@ Updates the Amazon ECS container agent on a specified container instance. Updati
 
  
 
-``update-container-agent`` requires the Amazon ECS-optimized AMI or Amazon Linux with the ``ecs-init`` service installed and running. For help updating the Amazon ECS container agent on other operating systems, see `Manually Updating the Amazon ECS Container Agent`_ in the *Amazon EC2 Container Service Developer Guide* .
+ ``update-container-agent`` requires the Amazon ECS-optimized AMI or Amazon Linux with the ``ecs-init`` service installed and running. For help updating the Amazon ECS container agent on other operating systems, see `Manually Updating the Amazon ECS Container Agent <http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html#manually_update_agent>`_ in the *Amazon EC2 Container Service Developer Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerAgent>`_
 
 
 ========
@@ -33,7 +36,7 @@ Synopsis
   [--cluster <value>]
   --container-instance <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -59,8 +62,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -99,7 +102,7 @@ containerInstance -> (structure)
 
   
 
-  An EC2 instance that is running the Amazon ECS agent and has been registered with a cluster.
+  The container instance for which the container agent was updated.
 
   
 
@@ -107,7 +110,7 @@ containerInstance -> (structure)
 
     
 
-    The Amazon Resource Name (ARN) of the container instance. The ARN contains the ``arn:aws:ecs`` namespace, followed by the region of the container instance, the AWS account ID of the container instance owner, the ``container-instance`` namespace, and then the container instance ID. For example, arn:aws:ecs:*region* :*aws_account_id* :container-instance/*container_instance_ID* .
+    The Amazon Resource Name (ARN) of the container instance. The ARN contains the ``arn:aws:ecs`` namespace, followed by the region of the container instance, the AWS account ID of the container instance owner, the ``container-instance`` namespace, and then the container instance ID. For example, ``arn:aws:ecs:*region* :*aws_account_id* :container-instance/*container_instance_ID* `` .
 
     
 
@@ -118,6 +121,16 @@ containerInstance -> (structure)
     
 
     The EC2 instance ID of the container instance.
+
+    
+
+    
+
+  version -> (long)
+
+    
+
+    The version counter for the container instance. Every time a container instance experiences a change that triggers a CloudWatch event, the version counter is incremented. If you are replicating your Amazon ECS container instance state with CloudWatch events, you can compare the version of a container instance reported by the Amazon ECS APIs with the version reported in CloudWatch events for the container instance (inside the ``detail`` object) to verify that the version in your event stream is current.
 
     
 
@@ -145,7 +158,7 @@ containerInstance -> (structure)
 
       
 
-      The Git commit hash for the Amazon ECS container agent build on the `amazon-ecs-agent`_ GitHub repository.
+      The Git commit hash for the Amazon ECS container agent build on the `amazon-ecs-agent <https://github.com/aws/amazon-ecs-agent/commits/master>`_ GitHub repository.
 
       
 
@@ -167,7 +180,7 @@ containerInstance -> (structure)
 
     
 
-    The remaining resources of the container instance that are available for new tasks.
+    For most resource types, this parameter describes the remaining resources of the container instance that are available for new tasks. For port resource types, this parameter describes the ports that are reserved by the Amazon ECS container agent and any containers that have reserved port mappings; any port that is not specified here is available for new tasks.
 
     
 
@@ -183,7 +196,7 @@ containerInstance -> (structure)
 
         
 
-        The name of the resource, such as ``CPU`` , ``MEMORY`` , ``PORTS`` , or a user-defined resource.
+        The name of the resource, such as ``cpu`` , ``memory`` , ``ports`` , or a user-defined resource.
 
         
 
@@ -253,7 +266,7 @@ containerInstance -> (structure)
 
     
 
-    The registered resources on the container instance that are in use by current tasks.
+    For most resource types, this parameter describes the registered resources on the container instance that are in use by current tasks. For port resource types, this parameter describes the ports that were reserved by the Amazon ECS container agent when it registered the container instance with Amazon ECS.
 
     
 
@@ -269,7 +282,7 @@ containerInstance -> (structure)
 
         
 
-        The name of the resource, such as ``CPU`` , ``MEMORY`` , ``PORTS`` , or a user-defined resource.
+        The name of the resource, such as ``cpu`` , ``memory`` , ``ports`` , or a user-defined resource.
 
         
 
@@ -339,7 +352,7 @@ containerInstance -> (structure)
 
     
 
-    The status of the container instance. The valid values are ``ACTIVE`` or ``INACTIVE`` . ``ACTIVE`` indicates that the container instance can accept tasks.
+    The status of the container instance. The valid values are ``ACTIVE`` , ``INACTIVE`` , or ``DRAINING`` . ``ACTIVE`` indicates that the container instance can accept tasks. ``DRAINING`` indicates that new tasks are not placed on the container instance and any service tasks running on the container instance are removed if possible. For more information, see `Container Instance Draining <http://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-instance-draining.html>`_ in the *Amazon EC2 Container Service Developer Guide* .
 
     
 
@@ -389,7 +402,7 @@ containerInstance -> (structure)
 
     
 
-    The attributes set for the container instance by the Amazon ECS container agent at instance registration.
+    The attributes set for the container instance, either by the Amazon ECS container agent at instance registration or manually with the  put-attributes operation.
 
     
 
@@ -397,7 +410,7 @@ containerInstance -> (structure)
 
       
 
-      The attributes applicable to a container instance when it is registered.
+      An attribute is a name-value pair associated with an Amazon ECS object. Attributes enable you to extend the Amazon ECS data model by adding custom metadata to your resources. For more information, see `Attributes <http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html#attributes>`_ in the *Amazon EC2 Container Service Developer Guide* .
 
       
 
@@ -405,7 +418,7 @@ containerInstance -> (structure)
 
         
 
-        The name of the container instance attribute.
+        The name of the attribute. Up to 128 letters (uppercase and lowercase), numbers, hyphens, underscores, and periods are allowed.
 
         
 
@@ -415,7 +428,27 @@ containerInstance -> (structure)
 
         
 
-        The value of the container instance attribute (at this time, the value here is ``Null`` , but this could change in future revisions for expandability).
+        The value of the attribute. Up to 128 letters (uppercase and lowercase), numbers, hyphens, underscores, periods, at signs (@), forward slashes, colons, and spaces are allowed.
+
+        
+
+        
+
+      targetType -> (string)
+
+        
+
+        The type of the target with which to attach the attribute. This parameter is required if you use the short form ID for a resource instead of the full Amazon Resource Name (ARN).
+
+        
+
+        
+
+      targetId -> (string)
+
+        
+
+        The ID of the target. You can specify the short form ID for a resource or the full Amazon Resource Name (ARN).
 
         
 
@@ -425,9 +458,15 @@ containerInstance -> (structure)
 
     
 
+  registeredAt -> (timestamp)
+
+    
+
+    The Unix timestamp for when the container instance was registered.
+
+    
+
+    
+
   
 
-
-
-.. _Manually Updating the Amazon ECS Container Agent: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html#manually_update_agent
-.. _amazon-ecs-agent: https://github.com/aws/amazon-ecs-agent/commits/master

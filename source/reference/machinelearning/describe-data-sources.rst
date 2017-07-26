@@ -19,6 +19,9 @@ Returns a list of ``DataSource`` that match the search criteria in the request.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/machinelearning-2014-12-12/DescribeDataSources>`_
+
+
 ``describe-data-sources`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
 When using ``--output text`` and the ``--query`` argument on a paginated response, the ``--query`` argument must extract data from the results of the following query expressions: ``Results``
 
@@ -43,7 +46,7 @@ Synopsis
   [--starting-token <value>]
   [--page-size <value>]
   [--max-items <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -201,26 +204,34 @@ Performs service operation based on the JSON string provided. The JSON string fo
 
    
 
-``--page-size`` (integer)
- 
-
-  The size of each page.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
    
 
-  
+``--page-size`` (integer)
+ 
 
-  
+  The size of each page to get in the AWS service call. This does not affect the number of items returned in the command's output. Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call. This can help prevent the AWS service calls from timing out.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
 
 ``--max-items`` (integer)
  
 
-  The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination. This ``NextToken`` response element should **not** be used directly outside of the AWS CLI.
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``NextToken`` is provided in the command's output. To resume pagination, provide the ``NextToken`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``NextToken`` response element directly outside of the AWS CLI.
 
    
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -240,7 +251,7 @@ Results -> (list)
 
     
 
-    Represents the output of the  get-data-source operation. 
+    Represents the output of the ``get-data-source`` operation. 
 
      
 
@@ -272,7 +283,7 @@ Results -> (list)
 
       
 
-      A JSON string that represents the splitting requirement of a ``Datasource`` . 
+      A JSON string that represents the splitting and rearrangement requirement used when this ``DataSource`` was created.
 
       
 
@@ -414,7 +425,7 @@ Results -> (list)
 
         
 
-        A username to be used by Amazon Machine Learning (Amazon ML)to connect to a database on an Amazon Redshift cluster. The username should have sufficient permissions to execute the ``RedshiftSelectSqlQuery`` query. The username should be valid for an Amazon Redshift `USER`_ .
+        A username to be used by Amazon Machine Learning (Amazon ML)to connect to a database on an Amazon Redshift cluster. The username should have sufficient permissions to execute the ``RedshiftSelectSqlQuery`` query. The username should be valid for an Amazon Redshift `USER <http://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html>`_ .
 
         
 
@@ -494,7 +505,7 @@ Results -> (list)
 
         
 
-        The role (DataPipelineDefaultResourceRole) assumed by an Amazon EC2 instance to carry out the copy task from Amazon RDS to Amazon S3. For more information, see `Role templates`_ for data pipelines.
+        The role (DataPipelineDefaultResourceRole) assumed by an Amazon EC2 instance to carry out the copy task from Amazon RDS to Amazon S3. For more information, see `Role templates <http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html>`_ for data pipelines.
 
         
 
@@ -504,7 +515,7 @@ Results -> (list)
 
         
 
-        The role (DataPipelineDefaultRole) assumed by the Data Pipeline service to monitor the progress of the copy task from Amazon RDS to Amazon S3. For more information, see `Role templates`_ for data pipelines.
+        The role (DataPipelineDefaultRole) assumed by the Data Pipeline service to monitor the progress of the copy task from Amazon RDS to Amazon S3. For more information, see `Role templates <http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html>`_ for data pipelines.
 
         
 
@@ -526,7 +537,7 @@ Results -> (list)
 
       
 
-      The Amazon Resource Name (ARN) of an `AWS IAM Role`_ such as the following: arn:aws:iam::account:role/rolename. 
+      The Amazon Resource Name (ARN) of an `AWS IAM Role <http://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html#roles-about-termsandconcepts>`_ , such as the following: arn:aws:iam::account:role/rolename. 
 
       
 
@@ -537,6 +548,36 @@ Results -> (list)
       
 
       The parameter is ``true`` if statistics need to be generated from the observation data. 
+
+      
+
+      
+
+    ComputeTime -> (long)
+
+      
+
+      Long integer type that is a 64-bit signed number.
+
+      
+
+      
+
+    FinishedAt -> (timestamp)
+
+      
+
+      A timestamp represented in epoch time.
+
+      
+
+      
+
+    StartedAt -> (timestamp)
+
+      
+
+      A timestamp represented in epoch time.
 
       
 
@@ -556,8 +597,3 @@ NextToken -> (string)
 
   
 
-
-
-.. _AWS IAM Role: http://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html#roles-about-termsandconcepts
-.. _USER: http://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html
-.. _Role templates: http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html

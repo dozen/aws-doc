@@ -15,6 +15,13 @@ Description
 
 
 
+Simulate the execution of a  Method in your  RestApi with headers, parameters, and an incoming request body.
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/apigateway-2015-07-09/TestInvokeMethod>`_
+
+
 ========
 Synopsis
 ========
@@ -31,7 +38,7 @@ Synopsis
   [--client-certificate-id <value>]
   [--stage-variables <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -43,20 +50,44 @@ Options
 ``--rest-api-id`` (string)
 
 
+  The string identifier of the associated  RestApi .
+
+  
+
 ``--resource-id`` (string)
 
+
+  Specifies a test invoke method request's resource ID.
+
+  
 
 ``--http-method`` (string)
 
 
+  Specifies a test invoke method request's HTTP method.
+
+  
+
 ``--path-with-query-string`` (string)
 
+
+  The URI path, including query string, of the simulated invocation request. Use this to specify path parameters and query string parameters.
+
+  
 
 ``--body`` (string)
 
 
+  The simulated request body of an incoming invocation request.
+
+  
+
 ``--headers`` (map)
 
+
+  A key-value map of headers to simulate an incoming invocation request.
+
+  
 
 
 
@@ -77,8 +108,16 @@ JSON Syntax::
 ``--client-certificate-id`` (string)
 
 
+  A  ClientCertificate identifier to use in the test invocation. API Gateway will use the certificate when making the HTTPS request to the defined back-end endpoint.
+
+  
+
 ``--stage-variables`` (map)
 
+
+  A key-value map of stage variables to simulate an invocation on a deployed  Stage .
+
+  
 
 
 
@@ -99,9 +138,26 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
+
+
+========
+Examples
+========
+
+**To test invoke the root resource in an API by making a GET request**
+
+Command::
+
+  aws apigateway test-invoke-method --rest-api-id 1234123412 --resource-id avl5sg8fw8 --http-method GET --path-with-query-string '/'
+
+**To test invoke a sub-resource in an API by making a GET request with a path parameter value specified**
+
+Command::
+
+  aws apigateway test-invoke-method --rest-api-id 1234123412 --resource-id 3gapai --http-method GET --path-with-query-string '/pets/1'
 
 
 ======
@@ -122,7 +178,7 @@ body -> (string)
 
   
 
-  The body of HTTP response.
+  The body of the HTTP response.
 
   
 
@@ -132,7 +188,7 @@ headers -> (map)
 
   
 
-  The headers of HTTP response.
+  The headers of the HTTP response.
 
   
 

@@ -15,8 +15,11 @@ Description
 
 
 
-Returns more detailed information about the health of the specified instances (for example, CPU utilization, load average, and causes). The **describe-instances-health** operation is only available with AWS Elastic Beanstalk Enhanced Health.
+Retrives detailed information about the health of instances in your AWS Elastic Beanstalk. This operation requires `enhanced health reporting <http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced.html>`_ .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeInstancesHealth>`_
 
 
 ========
@@ -31,7 +34,7 @@ Synopsis
   [--attribute-names <value>]
   [--next-token <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -43,21 +46,21 @@ Options
 ``--environment-name`` (string)
 
 
-  Specifies the AWS Elastic Beanstalk environment name.
+  Specify the AWS Elastic Beanstalk environment by name.
 
   
 
 ``--environment-id`` (string)
 
 
-  Specifies the AWS Elastic Beanstalk environment ID.
+  Specify the AWS Elastic Beanstalk environment by ID.
 
   
 
 ``--attribute-names`` (list)
 
 
-  Specifies the response elements you wish to receive. If no attribute names are specified, AWS Elastic Beanstalk only returns a list of instances.
+  Specifies the response elements you wish to receive. To retrieve all attributes, set to ``All`` . If no attribute names are specified, returns a list of instances.
 
   
 
@@ -75,6 +78,9 @@ Syntax::
     RefreshedAt
     LaunchedAt
     System
+    Deployment
+    AvailabilityZone
+    InstanceType
     All
 
 
@@ -84,15 +90,15 @@ Syntax::
 ``--next-token`` (string)
 
 
-  Specifies the next token of the request.
+  Specify the pagination token returned by a previous call.
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -170,7 +176,7 @@ InstanceHealthList -> (list)
 
   
 
-  Contains the response body with information about the health of the instance.
+  Detailed health information about each instance.
 
   
 
@@ -178,7 +184,7 @@ InstanceHealthList -> (list)
 
     
 
-    Represents health information from the specified instance that belongs to the AWS Elastic Beanstalk environment. Use the ``InstanceId`` property to specify the application instance for which you'd like to return data.
+    Detailed health information about an Amazon EC2 instance in your Elastic Beanstalk environment.
 
     
 
@@ -196,7 +202,7 @@ InstanceHealthList -> (list)
 
       
 
-      Returns the health status of the specified instance. For more information, see `Health Colors and Statuses`_ .
+      Returns the health status of the specified instance. For more information, see `Health Colors and Statuses <http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html>`_ .
 
       
 
@@ -206,7 +212,7 @@ InstanceHealthList -> (list)
 
       
 
-      Represents the color indicator that gives you information about the health of the EC2 instance. For more information, see `Health Colors and Statuses`_ .
+      Represents the color indicator that gives you information about the health of the EC2 instance. For more information, see `Health Colors and Statuses <http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html>`_ .
 
       
 
@@ -242,7 +248,7 @@ InstanceHealthList -> (list)
 
       
 
-      Represents the application metrics for a specified environment.
+      Request metrics from your application.
 
       
 
@@ -320,7 +326,7 @@ InstanceHealthList -> (list)
 
         
 
-        Represents the average latency for the slowest X percent of requests over the last 10 seconds. Latencies are in seconds with one milisecond resolution.
+        Represents the average latency for the slowest X percent of requests over the last 10 seconds. Latencies are in seconds with one millisecond resolution.
 
         
 
@@ -412,7 +418,7 @@ InstanceHealthList -> (list)
 
       
 
-      Represents CPU utilization and load average information for applications running in the specified environment.
+      Operating system metrics from the instance.
 
       
 
@@ -420,7 +426,7 @@ InstanceHealthList -> (list)
 
         
 
-        Represents CPU utilization information from the specified instance that belongs to the AWS Elastic Beanstalk environment. Use the ``instanceId`` property to specify the application instance for which you'd like to return data.
+        CPU utilization metrics for the instance.
 
         
 
@@ -500,7 +506,7 @@ InstanceHealthList -> (list)
 
         
 
-        Load average in the last 1-minute and 5-minute periods. For more information, see `Operating System Metrics`_ .
+        Load average in the last 1-minute, 5-minute, and 15-minute periods. For more information, see `Operating System Metrics <http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-metrics.html#health-enhanced-metrics-os>`_ .
 
         
 
@@ -514,6 +520,90 @@ InstanceHealthList -> (list)
 
       
 
+    Deployment -> (structure)
+
+      
+
+      Information about the most recent deployment to an instance.
+
+      
+
+      VersionLabel -> (string)
+
+        
+
+        The version label of the application version in the deployment.
+
+        
+
+        
+
+      DeploymentId -> (long)
+
+        
+
+        The ID of the deployment. This number increases by one each time that you deploy source code or change instance configuration settings.
+
+        
+
+        
+
+      Status -> (string)
+
+        
+
+        The status of the deployment:
+
+         
+
+         
+        * ``In Progress`` : The deployment is in progress. 
+         
+        * ``Deployed`` : The deployment succeeded. 
+         
+        * ``Failed`` : The deployment failed. 
+         
+
+        
+
+        
+
+      DeploymentTime -> (timestamp)
+
+        
+
+        For in-progress deployments, the time that the deloyment started.
+
+         
+
+        For completed deployments, the time that the deployment ended.
+
+        
+
+        
+
+      
+
+    AvailabilityZone -> (string)
+
+      
+
+      The availability zone in which the instance runs.
+
+      
+
+      
+
+    InstanceType -> (string)
+
+      
+
+      The instance's type.
+
+      
+
+      
+
     
 
   
@@ -522,7 +612,7 @@ RefreshedAt -> (timestamp)
 
   
 
-  The date and time the information was last refreshed.
+  The date and time that the health information was retrieved.
 
   
 
@@ -532,13 +622,9 @@ NextToken -> (string)
 
   
 
-  The next token.
+  Pagination token for the next page of results, if available.
 
   
 
   
 
-
-
-.. _Operating System Metrics: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-metrics.html#health-enhanced-metrics-os
-.. _Health Colors and Statuses: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html

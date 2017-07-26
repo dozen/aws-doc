@@ -17,6 +17,13 @@ Description
 
 Describes the load balancers for the specified Auto Scaling group.
 
+ 
+
+Note that this operation describes only Classic Load Balancers. If you have Application Load Balancers, use  describe-load-balancer-target-groups instead.
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLoadBalancers>`_
 
 
 ========
@@ -30,7 +37,7 @@ Synopsis
   [--next-token <value>]
   [--max-records <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -56,15 +63,15 @@ Options
 ``--max-records`` (integer)
 
 
-  The maximum number of items to return with this call.
+  The maximum number of items to return with this call. The default value is 50 and the maximum value is 100.
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -76,18 +83,18 @@ Examples
 
 This example describes the load balancers for the specified Auto Scaling group::
 
-	aws autoscaling describe-load-balancers --auto-scaling-group-name my-auto-scaling-group
+    aws autoscaling describe-load-balancers --auto-scaling-group-name my-auto-scaling-group
 
 The following is example output::
 
-  {
-    "LoadBalancers": [
-      {
-        "State": "Added",
-        "LoadBalancerName": "my-load-balancer"
-      }
-    ]
-  }
+    {
+        "LoadBalancers": [
+            {
+                "State": "Added",
+                "LoadBalancerName": "my-load-balancer"
+            }
+        ]
+    }
 
 
 ======
@@ -106,7 +113,15 @@ LoadBalancers -> (list)
 
     
 
-    Describes the state of a load balancer.
+    Describes the state of a Classic Load Balancer.
+
+     
+
+    If you specify a load balancer when creating the Auto Scaling group, the state of the load balancer is ``InService`` .
+
+     
+
+    If you attach a load balancer to an existing Auto Scaling group, the initial state is ``Adding`` . The state transitions to ``Added`` after all instances in the group are registered with the load balancer. If ELB health checks are enabled for the load balancer, the state transitions to ``InService`` after at least one instance in the group passes the health check. If EC2 health checks are enabled instead, the load balancer remains in the ``Added`` state.
 
     
 
@@ -129,13 +144,15 @@ LoadBalancers -> (list)
        
 
        
-      * ``Adding`` - The instances in the group are being registered with the load balancer.
+      * ``Adding`` - The instances in the group are being registered with the load balancer. 
        
-      * ``Added`` - All instances in the group are registered with the load balancer.
+      * ``Added`` - All instances in the group are registered with the load balancer. 
        
-      * ``InService`` - At least one instance in the group passed an ELB health check.
+      * ``InService`` - At least one instance in the group passed an ELB health check. 
        
-      * ``Removing`` - The instances are being deregistered from the load balancer. If connection draining is enabled, Elastic Load Balancing waits for in-flight requests to complete before deregistering the instances.
+      * ``Removing`` - The instances in the group are being deregistered from the load balancer. If connection draining is enabled, Elastic Load Balancing waits for in-flight requests to complete before deregistering the instances. 
+       
+      * ``Removed`` - All instances in the group are deregistered from the load balancer. 
        
 
       

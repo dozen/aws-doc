@@ -19,6 +19,9 @@ Describes a  MethodResponse resource.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/apigateway-2015-07-09/GetMethodResponse>`_
+
+
 ========
 Synopsis
 ========
@@ -31,7 +34,7 @@ Synopsis
   --http-method <value>
   --status-code <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -43,7 +46,7 @@ Options
 ``--rest-api-id`` (string)
 
 
-  The  RestApi identifier for the  MethodResponse resource.
+  The string identifier of the associated  RestApi .
 
   
 
@@ -57,22 +60,43 @@ Options
 ``--http-method`` (string)
 
 
-  The HTTP verb identifier for the parent  Method resource.
+  The HTTP verb of the  Method resource.
 
   
 
 ``--status-code`` (string)
 
 
-  The status code identifier for the  MethodResponse resource.
+  The status code for the  MethodResponse resource.
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
+
+
+
+========
+Examples
+========
+
+**To get the method response resource configuration for a HTTP method defined under a REST API's resource**
+
+Command::
+
+  aws apigateway get-method-response --rest-api-id 1234123412 --resource-id y9h6rt --http-method GET --status-code 200
+
+Output::
+
+  {
+      "responseModels": {
+          "application/json": "Empty"
+      }, 
+      "statusCode": "200"
+  }
 
 
 
@@ -94,7 +118,7 @@ responseParameters -> (map)
 
   
 
-  Represents response parameters that can be sent back to the caller by Amazon API Gateway. Response parameters are represented as a key/value map, with a destination as the key and a boolean flag as the value, which is used to specify whether the parameter is required. A destination must match the pattern ``method.response.header.{name}`` , where ``name`` is a valid, unique header name. Destinations specified here are available to the integration for mapping from integration response parameters.
+  A key-value map specifying required or optional response parameters that Amazon API Gateway can send back to the caller. A key defines a method response header and the value specifies whether the associated method response header is required or not. The expression of the key must match the pattern ``method.response.header.{name}`` , where ``name`` is a valid and unique header name. Amazon API Gateway passes certain integration response data to the method response headers specified here according to the mapping you prescribe in the API's  IntegrationResponse . The integration response data that can be mapped include an integration response header expressed in ``integration.response.header.{name}`` , a static value enclosed within a pair of single quotes (e.g., ``'application/json'`` ), or a JSON expression from the back-end response payload in the form of ``integration.response.body.{JSON-expression}`` , where ``JSON-expression`` is a valid JSON expression without the ``$`` prefix.)
 
   
 

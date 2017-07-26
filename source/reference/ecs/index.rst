@@ -34,6 +34,7 @@ Available Commands
 
   create-cluster
   create-service
+  delete-attributes
   delete-cluster
   delete-service
   deregister-container-instance
@@ -44,12 +45,14 @@ Available Commands
   describe-task-definition
   describe-tasks
   discover-poll-endpoint
+  list-attributes
   list-clusters
   list-container-instances
   list-services
   list-task-definition-families
   list-task-definitions
   list-tasks
+  put-attributes
   register-container-instance
   register-task-definition
   run-task
@@ -58,5 +61,6 @@ Available Commands
   submit-container-state-change
   submit-task-state-change
   update-container-agent
+  update-container-instances-state
   update-service
   wait/index

@@ -15,12 +15,15 @@ Description
 
 
 
-Describes the Spot price history. The prices returned are listed in chronological order, from the oldest to the most recent, for up to the past 90 days. For more information, see `Spot Instance Pricing History`_ in the *Amazon Elastic Compute Cloud User Guide* .
+Describes the Spot price history. For more information, see `Spot Instance Pricing History <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances-history.html>`_ in the *Amazon Elastic Compute Cloud User Guide* .
 
  
 
 When you specify a start and end time, this operation returns the prices of the instance types within the time range that you specified and the time when the price changed. The price is valid within the time period that you specified; the response merely indicates the last time that the price changed.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotPriceHistory>`_
 
 
 ``describe-spot-price-history`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
@@ -34,18 +37,18 @@ Synopsis
 ::
 
     describe-spot-price-history
+  [--filters <value>]
+  [--availability-zone <value>]
   [--dry-run | --no-dry-run]
-  [--start-time <value>]
   [--end-time <value>]
   [--instance-types <value>]
   [--product-descriptions <value>]
-  [--filters <value>]
-  [--availability-zone <value>]
+  [--start-time <value>]
   [--cli-input-json <value>]
   [--starting-token <value>]
   [--page-size <value>]
   [--max-items <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -53,115 +56,6 @@ Synopsis
 =======
 Options
 =======
-
-``--dry-run`` | ``--no-dry-run`` (boolean)
-
-
-  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
-
-  
-
-``--start-time`` (timestamp)
-
-
-  The date and time, up to the past 90 days, from which to start retrieving the price history data, in UTC format (for example, *YYYY* -*MM* -*DD* T*HH* :*MM* :*SS* Z).
-
-  
-
-``--end-time`` (timestamp)
-
-
-  The date and time, up to the current date, from which to stop retrieving the price history data, in UTC format (for example, *YYYY* -*MM* -*DD* T*HH* :*MM* :*SS* Z).
-
-  
-
-``--instance-types`` (list)
-
-
-  Filters the results by the specified instance types.
-
-  
-
-
-
-Syntax::
-
-  "string" "string" ...
-
-  Where valid values are:
-    t1.micro
-    m1.small
-    m1.medium
-    m1.large
-    m1.xlarge
-    m3.medium
-    m3.large
-    m3.xlarge
-    m3.2xlarge
-    m4.large
-    m4.xlarge
-    m4.2xlarge
-    m4.4xlarge
-    m4.10xlarge
-    t2.nano
-    t2.micro
-    t2.small
-    t2.medium
-    t2.large
-    m2.xlarge
-    m2.2xlarge
-    m2.4xlarge
-    cr1.8xlarge
-    i2.xlarge
-    i2.2xlarge
-    i2.4xlarge
-    i2.8xlarge
-    hi1.4xlarge
-    hs1.8xlarge
-    c1.medium
-    c1.xlarge
-    c3.large
-    c3.xlarge
-    c3.2xlarge
-    c3.4xlarge
-    c3.8xlarge
-    c4.large
-    c4.xlarge
-    c4.2xlarge
-    c4.4xlarge
-    c4.8xlarge
-    cc1.4xlarge
-    cc2.8xlarge
-    g2.2xlarge
-    cg1.4xlarge
-    r3.large
-    r3.xlarge
-    r3.2xlarge
-    r3.4xlarge
-    r3.8xlarge
-    d2.xlarge
-    d2.2xlarge
-    d2.4xlarge
-    d2.8xlarge
-
-
-
-
-
-``--product-descriptions`` (list)
-
-
-  Filters the results by the specified basic product descriptions.
-
-  
-
-
-
-Syntax::
-
-  "string" "string" ...
-
-
 
 ``--filters`` (list)
 
@@ -212,6 +106,141 @@ JSON Syntax::
 
   
 
+``--dry-run`` | ``--no-dry-run`` (boolean)
+
+
+  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
+
+  
+
+``--end-time`` (timestamp)
+
+
+  The date and time, up to the current date, from which to stop retrieving the price history data, in UTC format (for example, *YYYY* -*MM* -*DD* T*HH* :*MM* :*SS* Z).
+
+  
+
+``--instance-types`` (list)
+
+
+  Filters the results by the specified instance types. Note that T2 and HS1 instance types are not supported.
+
+  
+
+
+
+Syntax::
+
+  "string" "string" ...
+
+  Where valid values are:
+    t1.micro
+    t2.nano
+    t2.micro
+    t2.small
+    t2.medium
+    t2.large
+    t2.xlarge
+    t2.2xlarge
+    m1.small
+    m1.medium
+    m1.large
+    m1.xlarge
+    m3.medium
+    m3.large
+    m3.xlarge
+    m3.2xlarge
+    m4.large
+    m4.xlarge
+    m4.2xlarge
+    m4.4xlarge
+    m4.10xlarge
+    m4.16xlarge
+    m2.xlarge
+    m2.2xlarge
+    m2.4xlarge
+    cr1.8xlarge
+    r3.large
+    r3.xlarge
+    r3.2xlarge
+    r3.4xlarge
+    r3.8xlarge
+    r4.large
+    r4.xlarge
+    r4.2xlarge
+    r4.4xlarge
+    r4.8xlarge
+    r4.16xlarge
+    x1.16xlarge
+    x1.32xlarge
+    i2.xlarge
+    i2.2xlarge
+    i2.4xlarge
+    i2.8xlarge
+    i3.large
+    i3.xlarge
+    i3.2xlarge
+    i3.4xlarge
+    i3.8xlarge
+    i3.16xlarge
+    hi1.4xlarge
+    hs1.8xlarge
+    c1.medium
+    c1.xlarge
+    c3.large
+    c3.xlarge
+    c3.2xlarge
+    c3.4xlarge
+    c3.8xlarge
+    c4.large
+    c4.xlarge
+    c4.2xlarge
+    c4.4xlarge
+    c4.8xlarge
+    cc1.4xlarge
+    cc2.8xlarge
+    g2.2xlarge
+    g2.8xlarge
+    g3.4xlarge
+    g3.8xlarge
+    g3.16xlarge
+    cg1.4xlarge
+    p2.xlarge
+    p2.8xlarge
+    p2.16xlarge
+    d2.xlarge
+    d2.2xlarge
+    d2.4xlarge
+    d2.8xlarge
+    f1.2xlarge
+    f1.16xlarge
+
+
+
+
+
+``--product-descriptions`` (list)
+
+
+  Filters the results by the specified basic product descriptions.
+
+  
+
+
+
+Syntax::
+
+  "string" "string" ...
+
+
+
+``--start-time`` (timestamp)
+
+
+  The date and time, up to the past 90 days, from which to start retrieving the price history data, in UTC format (for example, *YYYY* -*MM* -*DD* T*HH* :*MM* :*SS* Z).
+
+  
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
@@ -222,26 +251,34 @@ Performs service operation based on the JSON string provided. The JSON string fo
 
    
 
-``--page-size`` (integer)
- 
-
-  The size of each page.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
    
 
-  
+``--page-size`` (integer)
+ 
 
-  
+  The size of each page to get in the AWS service call. This does not affect the number of items returned in the command's output. Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call. This can help prevent the AWS service calls from timing out.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
 
 ``--max-items`` (integer)
  
 
-  The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination. This ``NextToken`` response element should **not** be used directly outside of the AWS CLI.
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``NextToken`` is provided in the command's output. To resume pagination, provide the ``NextToken`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``NextToken`` response element directly outside of the AWS CLI.
 
    
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -319,6 +356,16 @@ Output::
 Output
 ======
 
+NextToken -> (string)
+
+  
+
+  The token required to retrieve the next set of results. This value is ``null`` when there are no more results to return.
+
+  
+
+  
+
 SpotPriceHistory -> (list)
 
   
@@ -335,11 +382,21 @@ SpotPriceHistory -> (list)
 
     
 
+    AvailabilityZone -> (string)
+
+      
+
+      The Availability Zone.
+
+      
+
+      
+
     InstanceType -> (string)
 
       
 
-      The instance type.
+      The instance type. Note that T2 and HS1 instance types are not supported.
 
       
 
@@ -375,30 +432,7 @@ SpotPriceHistory -> (list)
 
       
 
-    AvailabilityZone -> (string)
-
-      
-
-      The Availability Zone.
-
-      
-
-      
-
     
 
   
 
-NextToken -> (string)
-
-  
-
-  The token required to retrieve the next set of results. This value is ``null`` when there are no more results to return.
-
-  
-
-  
-
-
-
-.. _Spot Instance Pricing History: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances-history.html

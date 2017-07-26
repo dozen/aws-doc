@@ -25,6 +25,13 @@ If you specify one or more instance IDs, Amazon EC2 returns information for thos
 
 Recently terminated instances might appear in the returned results. This interval is usually less than one hour.
 
+ 
+
+If you describe instances in the rare case where an Availability Zone is experiencing a service disruption and you specify instance IDs that are in the affected zone, or do not specify any instance IDs at all, the call fails. If you describe instances and specify only instance IDs that are in an unaffected zone, the call works normally.
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstances>`_
 
 
 ``describe-instances`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
@@ -38,14 +45,14 @@ Synopsis
 ::
 
     describe-instances
-  [--dry-run | --no-dry-run]
-  [--instance-ids <value>]
   [--filters <value>]
+  [--instance-ids <value>]
+  [--dry-run | --no-dry-run]
   [--cli-input-json <value>]
   [--starting-token <value>]
   [--page-size <value>]
   [--max-items <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -53,32 +60,6 @@ Synopsis
 =======
 Options
 =======
-
-``--dry-run`` | ``--no-dry-run`` (boolean)
-
-
-  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
-
-  
-
-``--instance-ids`` (list)
-
-
-  One or more instance IDs.
-
-   
-
-  Default: Describes all your instances.
-
-  
-
-
-
-Syntax::
-
-  "string" "string" ...
-
-
 
 ``--filters`` (list)
 
@@ -88,7 +69,7 @@ Syntax::
    
 
    
-  * ``affinity`` - The affinity setting for an instance running on a Dedicated host (``default`` | ``host`` ). 
+  * ``affinity`` - The affinity setting for an instance running on a Dedicated Host (``default`` | ``host`` ). 
    
   * ``architecture`` - The instance architecture (``i386`` | ``x86_64`` ). 
    
@@ -96,7 +77,7 @@ Syntax::
    
   * ``block-device-mapping.attach-time`` - The attach time for an EBS volume mapped to the instance, for example, ``2010-09-15T17:15:20.000Z`` . 
    
-  * ``block-device-mapping.delete-on-termination`` - A no-dry-run that indicates whether the EBS volume is deleted on instance termination. 
+  * ``block-device-mapping.delete-on-termination`` - A dry-run that indicates whether the EBS volume is deleted on instance termination. 
    
   * ``block-device-mapping.device-name`` - The device name for the EBS volume (for example, ``/dev/sdh`` or ``xvdh`` ). 
    
@@ -112,7 +93,7 @@ Syntax::
    
   * ``group-name`` - The name of the security group for the instance. EC2-Classic only. 
    
-  * ``host-Id`` - The ID of the Dedicated host on which the instance is running, if applicable. 
+  * ``host-id`` - The ID of the Dedicated Host on which the instance is running, if applicable. 
    
   * ``hypervisor`` - The hypervisor type of the instance (``ovm`` | ``xen`` ). 
    
@@ -122,7 +103,7 @@ Syntax::
    
   * ``instance-id`` - The ID of the instance. 
    
-  * ``instance-lifecycle`` - Indicates whether this is a Spot Instance (``spot`` ). 
+  * ``instance-lifecycle`` - Indicates whether this is a Spot Instance or a Scheduled Instance (``spot`` | ``scheduled`` ). 
    
   * ``instance-state-code`` - The state of the instance, as a 16-bit unsigned integer. The high byte is an opaque internal value and should be ignored. The low byte is set based on the state represented. The valid values are: 0 (pending), 16 (running), 32 (shutting-down), 48 (terminated), 64 (stopping), and 80 (stopped). 
    
@@ -134,7 +115,7 @@ Syntax::
    
   * ``instance.group-name`` - The name of the security group for the instance.  
    
-  * ``ip-address`` - The public IP address of the instance. 
+  * ``ip-address`` - The public IPv4 address of the instance. 
    
   * ``kernel-id`` - The kernel ID. 
    
@@ -144,7 +125,67 @@ Syntax::
    
   * ``launch-time`` - The time when the instance was launched. 
    
-  * ``monitoring-state`` - Indicates whether monitoring is enabled for the instance (``disabled`` | ``enabled`` ). 
+  * ``monitoring-state`` - Indicates whether detailed monitoring is enabled (``disabled`` | ``enabled`` ). 
+   
+  * ``network-interface.addresses.private-ip-address`` - The private IPv4 address associated with the network interface. 
+   
+  * ``network-interface.addresses.primary`` - Specifies whether the IPv4 address of the network interface is the primary private IPv4 address. 
+   
+  * ``network-interface.addresses.association.public-ip`` - The ID of the association of an Elastic IP address (IPv4) with a network interface. 
+   
+  * ``network-interface.addresses.association.ip-owner-id`` - The owner ID of the private IPv4 address associated with the network interface. 
+   
+  * ``network-interface.association.public-ip`` - The address of the Elastic IP address (IPv4) bound to the network interface. 
+   
+  * ``network-interface.association.ip-owner-id`` - The owner of the Elastic IP address (IPv4) associated with the network interface. 
+   
+  * ``network-interface.association.allocation-id`` - The allocation ID returned when you allocated the Elastic IP address (IPv4) for your network interface. 
+   
+  * ``network-interface.association.association-id`` - The association ID returned when the network interface was associated with an IPv4 address. 
+   
+  * ``network-interface.attachment.attachment-id`` - The ID of the interface attachment. 
+   
+  * ``network-interface.attachment.instance-id`` - The ID of the instance to which the network interface is attached. 
+   
+  * ``network-interface.attachment.instance-owner-id`` - The owner ID of the instance to which the network interface is attached. 
+   
+  * ``network-interface.attachment.device-index`` - The device index to which the network interface is attached. 
+   
+  * ``network-interface.attachment.status`` - The status of the attachment (``attaching`` | ``attached`` | ``detaching`` | ``detached`` ). 
+   
+  * ``network-interface.attachment.attach-time`` - The time that the network interface was attached to an instance. 
+   
+  * ``network-interface.attachment.delete-on-termination`` - Specifies whether the attachment is deleted when an instance is terminated. 
+   
+  * ``network-interface.availability-zone`` - The Availability Zone for the network interface. 
+   
+  * ``network-interface.description`` - The description of the network interface. 
+   
+  * ``network-interface.group-id`` - The ID of a security group associated with the network interface. 
+   
+  * ``network-interface.group-name`` - The name of a security group associated with the network interface. 
+   
+  * ``network-interface.ipv6-addresses.ipv6-address`` - The IPv6 address associated with the network interface. 
+   
+  * ``network-interface.mac-address`` - The MAC address of the network interface. 
+   
+  * ``network-interface.network-interface-id`` - The ID of the network interface. 
+   
+  * ``network-interface.owner-id`` - The ID of the owner of the network interface. 
+   
+  * ``network-interface.private-dns-name`` - The private DNS name of the network interface. 
+   
+  * ``network-interface.requester-id`` - The requester ID for the network interface. 
+   
+  * ``network-interface.requester-managed`` - Indicates whether the network interface is being managed by AWS. 
+   
+  * ``network-interface.status`` - The status of the network interface (``available`` ) | ``in-use`` ). 
+   
+  * ``network-interface.source-dest-check`` - Whether the network interface performs source/destination checking. A value of ``true`` means checking is enabled, and ``false`` means checking is disabled. The value must be ``false`` for the network interface to perform network address translation (NAT) in your VPC. 
+   
+  * ``network-interface.subnet-id`` - The ID of the subnet for the network interface. 
+   
+  * ``network-interface.vpc-id`` - The ID of the VPC for the network interface. 
    
   * ``owner-id`` - The AWS account ID of the instance owner. 
    
@@ -152,9 +193,9 @@ Syntax::
    
   * ``platform`` - The platform. Use ``windows`` if you have Windows instances; otherwise, leave blank. 
    
-  * ``private-dns-name`` - The private DNS name of the instance. 
+  * ``private-dns-name`` - The private IPv4 DNS name of the instance. 
    
-  * ``private-ip-address`` - The private IP address of the instance. 
+  * ``private-ip-address`` - The private IPv4 address of the instance. 
    
   * ``product-code`` - The product code associated with the AMI used to launch the instance. 
    
@@ -182,7 +223,7 @@ Syntax::
    
   * ``subnet-id`` - The ID of the subnet for the instance. 
    
-  * ``tag`` :*key* =*value* - The key/value combination of a tag assigned to the resource, where ``tag`` :*key* is the tag's key.  
+  * ``tag`` :*key* =*value* - The key/value combination of a tag assigned to the resource. Specify the key of the tag in the filter name and the value of the tag in the filter value. For example, for the tag Purpose=X, specify ``tag:Purpose`` for the filter name and ``X`` for the filter value. 
    
   * ``tag-key`` - The key of a tag assigned to the resource. This filter is independent of the ``tag-value`` filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the ``tag`` :*key* =*value* filter. 
    
@@ -193,64 +234,6 @@ Syntax::
   * ``virtualization-type`` - The virtualization type of the instance (``paravirtual`` | ``hvm`` ). 
    
   * ``vpc-id`` - The ID of the VPC that the instance is running in. 
-   
-  * ``network-interface.description`` - The description of the network interface. 
-   
-  * ``network-interface.subnet-id`` - The ID of the subnet for the network interface. 
-   
-  * ``network-interface.vpc-id`` - The ID of the VPC for the network interface. 
-   
-  * ``network-interface.network-interface-id`` - The ID of the network interface. 
-   
-  * ``network-interface.owner-id`` - The ID of the owner of the network interface. 
-   
-  * ``network-interface.availability-zone`` - The Availability Zone for the network interface. 
-   
-  * ``network-interface.requester-id`` - The requester ID for the network interface. 
-   
-  * ``network-interface.requester-managed`` - Indicates whether the network interface is being managed by AWS. 
-   
-  * ``network-interface.status`` - The status of the network interface (``available`` ) | ``in-use`` ). 
-   
-  * ``network-interface.mac-address`` - The MAC address of the network interface. 
-   
-  * ``network-interface.private-dns-name`` - The private DNS name of the network interface. 
-   
-  * ``network-interface.source-dest-check`` - Whether the network interface performs source/destination checking. A value of ``true`` means checking is enabled, and ``false`` means checking is disabled. The value must be ``false`` for the network interface to perform network address translation (NAT) in your VPC. 
-   
-  * ``network-interface.group-id`` - The ID of a security group associated with the network interface. 
-   
-  * ``network-interface.group-name`` - The name of a security group associated with the network interface. 
-   
-  * ``network-interface.attachment.attachment-id`` - The ID of the interface attachment. 
-   
-  * ``network-interface.attachment.instance-id`` - The ID of the instance to which the network interface is attached. 
-   
-  * ``network-interface.attachment.instance-owner-id`` - The owner ID of the instance to which the network interface is attached. 
-   
-  * ``network-interface.addresses.private-ip-address`` - The private IP address associated with the network interface. 
-   
-  * ``network-interface.attachment.device-index`` - The device index to which the network interface is attached. 
-   
-  * ``network-interface.attachment.status`` - The status of the attachment (``attaching`` | ``attached`` | ``detaching`` | ``detached`` ). 
-   
-  * ``network-interface.attachment.attach-time`` - The time that the network interface was attached to an instance. 
-   
-  * ``network-interface.attachment.delete-on-termination`` - Specifies whether the attachment is deleted when an instance is terminated. 
-   
-  * ``network-interface.addresses.primary`` - Specifies whether the IP address of the network interface is the primary private IP address. 
-   
-  * ``network-interface.addresses.association.public-ip`` - The ID of the association of an Elastic IP address with a network interface. 
-   
-  * ``network-interface.addresses.association.ip-owner-id`` - The owner ID of the private IP address associated with the network interface. 
-   
-  * ``association.public-ip`` - The address of the Elastic IP address bound to the network interface. 
-   
-  * ``association.ip-owner-id`` - The owner of the Elastic IP address associated with the network interface. 
-   
-  * ``association.allocation-id`` - The allocation ID returned when you allocated the Elastic IP address for your network interface. 
-   
-  * ``association.association-id`` - The association ID returned when the network interface was associated with an IP address. 
    
 
   
@@ -276,6 +259,32 @@ JSON Syntax::
 
 
 
+``--instance-ids`` (list)
+
+
+  One or more instance IDs.
+
+   
+
+  Default: Describes all your instances.
+
+  
+
+
+
+Syntax::
+
+  "string" "string" ...
+
+
+
+``--dry-run`` | ``--no-dry-run`` (boolean)
+
+
+  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
+
+  
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
@@ -286,26 +295,34 @@ Performs service operation based on the JSON string provided. The JSON string fo
 
    
 
-``--page-size`` (integer)
- 
-
-  The size of each page.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
    
 
-  
+``--page-size`` (integer)
+ 
 
-  
+  The size of each page to get in the AWS service call. This does not affect the number of items returned in the command's output. Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call. This can help prevent the AWS service calls from timing out.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
 
 ``--max-items`` (integer)
  
 
-  The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination. This ``NextToken`` response element should **not** be used directly outside of the AWS CLI.
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``NextToken`` is provided in the command's output. To resume pagination, provide the ``NextToken`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``NextToken`` response element directly outside of the AWS CLI.
 
    
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -317,7 +334,7 @@ Examples
 
 Command::
 
-  aws ec2 describe-instances --instance-ids i-5203422c
+  aws ec2 describe-instances --instance-ids i-1234567890abcdef0
 
 **To describe all instances with the instance type m1.small**
 
@@ -336,6 +353,19 @@ Command::
 Command::
 
   aws ec2 describe-instances --filters "Name=tag:Purpose,Values=test"
+
+**To describe an EC2 instance and filter the result to return the AMI ID, and all tags associated with the instance.**
+
+Command::
+
+  aws ec2 describe-instances --instance-id i-1234567890abcdef0 --query 'Reservations[*].Instances[*].[ImageId,Tags[*]]'
+
+**To describe all instances, and return all instance IDs and AMI IDs, but only show the tag value where the tag key is "Application".**
+
+Command::
+
+  aws ec2 describe-instances --query 'Reservations[*].Instances[*].[InstanceId,ImageId,Tags[?Key==`Application`].Value]'
+
 
 **To describe all EC2 instances that have an instance type of m1.small or m1.medium that are also in the us-west-2c Availability Zone**
 
@@ -388,41 +418,11 @@ Reservations -> (list)
 
     
 
-    ReservationId -> (string)
-
-      
-
-      The ID of the reservation.
-
-      
-
-      
-
-    OwnerId -> (string)
-
-      
-
-      The ID of the AWS account that owns the reservation.
-
-      
-
-      
-
-    RequesterId -> (string)
-
-      
-
-      The ID of the requester that launched the instances on your behalf (for example, AWS Management Console or Auto Scaling).
-
-      
-
-      
-
     Groups -> (list)
 
       
 
-      One or more security groups.
+      [EC2-Classic only] One or more security groups.
 
       
 
@@ -474,11 +474,11 @@ Reservations -> (list)
 
         
 
-        InstanceId -> (string)
+        AmiLaunchIndex -> (integer)
 
           
 
-          The ID of the instance.
+          The AMI launch index, which can be used to find this instance in the launch group.
 
           
 
@@ -494,77 +494,31 @@ Reservations -> (list)
 
           
 
-        State -> (structure)
+        InstanceId -> (string)
 
           
 
-          The current state of the instance.
-
-          
-
-          Code -> (integer)
-
-            
-
-            The low byte represents the state. The high byte is an opaque internal value and should be ignored.
-
-             
-
-             
-            * ``0`` : ``pending`` 
-             
-            * ``16`` : ``running`` 
-             
-            * ``32`` : ``shutting-down`` 
-             
-            * ``48`` : ``terminated`` 
-             
-            * ``64`` : ``stopping`` 
-             
-            * ``80`` : ``stopped`` 
-             
-
-            
-
-            
-
-          Name -> (string)
-
-            
-
-            The current state of the instance.
-
-            
-
-            
-
-          
-
-        PrivateDnsName -> (string)
-
-          
-
-          The private DNS name assigned to the instance. This DNS name can only be used inside the Amazon EC2 network. This name is not available until the instance enters the ``running`` state. For EC2-VPC, this name is only available if you've enabled DNS hostnames for your VPC.
+          The ID of the instance.
 
           
 
           
 
-        PublicDnsName -> (string)
+        InstanceType -> (string)
 
           
 
-          The public DNS name assigned to the instance. This name is not available until the instance enters the ``running`` state. For EC2-VPC, this name is only available if you've enabled DNS hostnames for your VPC.
+          The instance type.
 
           
 
           
 
-        StateTransitionReason -> (string)
+        KernelId -> (string)
 
           
 
-          The reason for the most recent state transition. This might be an empty string.
+          The kernel associated with this instance, if applicable.
 
           
 
@@ -580,11 +534,135 @@ Reservations -> (list)
 
           
 
-        AmiLaunchIndex -> (integer)
+        LaunchTime -> (timestamp)
 
           
 
-          The AMI launch index, which can be used to find this instance in the launch group.
+          The time the instance was launched.
+
+          
+
+          
+
+        Monitoring -> (structure)
+
+          
+
+          The monitoring for the instance.
+
+          
+
+          State -> (string)
+
+            
+
+            Indicates whether detailed monitoring is enabled. Otherwise, basic monitoring is enabled.
+
+            
+
+            
+
+          
+
+        Placement -> (structure)
+
+          
+
+          The location where the instance launched, if applicable.
+
+          
+
+          AvailabilityZone -> (string)
+
+            
+
+            The Availability Zone of the instance.
+
+            
+
+            
+
+          Affinity -> (string)
+
+            
+
+            The affinity setting for the instance on the Dedicated Host. This parameter is not supported for the  import-instance command.
+
+            
+
+            
+
+          GroupName -> (string)
+
+            
+
+            The name of the placement group the instance is in (for cluster compute instances).
+
+            
+
+            
+
+          HostId -> (string)
+
+            
+
+            The ID of the Dedicated Host on which the instance resides. This parameter is not supported for the  import-instance command.
+
+            
+
+            
+
+          Tenancy -> (string)
+
+            
+
+            The tenancy of the instance (if the instance is running in a VPC). An instance with a tenancy of ``dedicated`` runs on single-tenant hardware. The ``host`` tenancy is not supported for the  import-instance command.
+
+            
+
+            
+
+          SpreadDomain -> (string)
+
+            
+
+            Reserved for future use.
+
+            
+
+            
+
+          
+
+        Platform -> (string)
+
+          
+
+          The value is ``Windows`` for Windows instances; otherwise blank.
+
+          
+
+          
+
+        PrivateDnsName -> (string)
+
+          
+
+          (IPv4 only) The private DNS hostname name assigned to the instance. This DNS hostname can only be used inside the Amazon EC2 network. This name is not available until the instance enters the ``running`` state. 
+
+           
+
+          [EC2-VPC] The Amazon-provided DNS server will resolve Amazon-provided private DNS hostnames if you've enabled DNS resolution and DNS hostnames in your VPC. If you are not using the Amazon-provided DNS server in your VPC, your custom domain name servers must resolve the hostname as appropriate.
+
+          
+
+          
+
+        PrivateIpAddress -> (string)
+
+          
+
+          The private IPv4 address assigned to the instance.
 
           
 
@@ -630,91 +708,21 @@ Reservations -> (list)
 
           
 
-        InstanceType -> (string)
+        PublicDnsName -> (string)
 
           
 
-          The instance type.
-
-          
-
-          
-
-        LaunchTime -> (timestamp)
-
-          
-
-          The time the instance was launched.
+          (IPv4 only) The public DNS name assigned to the instance. This name is not available until the instance enters the ``running`` state. For EC2-VPC, this name is only available if you've enabled DNS hostnames for your VPC.
 
           
 
           
 
-        Placement -> (structure)
+        PublicIpAddress -> (string)
 
           
 
-          The location where the instance launched, if applicable.
-
-          
-
-          AvailabilityZone -> (string)
-
-            
-
-            The Availability Zone of the instance.
-
-            
-
-            
-
-          GroupName -> (string)
-
-            
-
-            The name of the placement group the instance is in (for cluster compute instances).
-
-            
-
-            
-
-          Tenancy -> (string)
-
-            
-
-            The tenancy of the instance (if the instance is running in a VPC). An instance with a tenancy of ``dedicated`` runs on single-tenant hardware. The ``host`` tenancy is not supported for the  import-instance command.
-
-            
-
-            
-
-          HostId -> (string)
-
-            
-
-            The ID of the Dedicted host on which the instance resides. This parameter is not support for the  import-instance command.
-
-            
-
-            
-
-          Affinity -> (string)
-
-            
-
-            The affinity setting for the instance on the Dedicated host. This parameter is not supported for the  import-instance command.
-
-            
-
-            
-
-          
-
-        KernelId -> (string)
-
-          
-
-          The kernel associated with this instance, if applicable.
+          The public IPv4 address assigned to the instance, if applicable.
 
           
 
@@ -730,33 +738,59 @@ Reservations -> (list)
 
           
 
-        Platform -> (string)
+        State -> (structure)
 
           
 
-          The value is ``Windows`` for Windows instances; otherwise blank.
+          The current state of the instance.
 
           
 
-          
-
-        Monitoring -> (structure)
-
-          
-
-          The monitoring information for the instance.
-
-          
-
-          State -> (string)
+          Code -> (integer)
 
             
 
-            Indicates whether monitoring is enabled for the instance.
+            The low byte represents the state. The high byte is an opaque internal value and should be ignored.
+
+             
+
+             
+            * ``0`` : ``pending``   
+             
+            * ``16`` : ``running``   
+             
+            * ``32`` : ``shutting-down``   
+             
+            * ``48`` : ``terminated``   
+             
+            * ``64`` : ``stopping``   
+             
+            * ``80`` : ``stopped``   
+             
 
             
 
             
+
+          Name -> (string)
+
+            
+
+            The current state of the instance.
+
+            
+
+            
+
+          
+
+        StateTransitionReason -> (string)
+
+          
+
+          The reason for the most recent state transition. This might be an empty string.
+
+          
 
           
 
@@ -780,101 +814,11 @@ Reservations -> (list)
 
           
 
-        PrivateIpAddress -> (string)
-
-          
-
-          The private IP address assigned to the instance.
-
-          
-
-          
-
-        PublicIpAddress -> (string)
-
-          
-
-          The public IP address assigned to the instance, if applicable.
-
-          
-
-          
-
-        StateReason -> (structure)
-
-          
-
-          The reason for the most recent state transition.
-
-          
-
-          Code -> (string)
-
-            
-
-            The reason code for the state change.
-
-            
-
-            
-
-          Message -> (string)
-
-            
-
-            The message for the state change.
-
-             
-
-             
-            * ``Server.SpotInstanceTermination`` : A Spot instance was terminated due to an increase in the market price.
-             
-            * ``Server.InternalError`` : An internal error occurred during instance launch, resulting in termination.
-             
-            * ``Server.InsufficientInstanceCapacity`` : There was insufficient instance capacity to satisfy the launch request.
-             
-            * ``Client.InternalError`` : A client error caused the instance to terminate on launch.
-             
-            * ``Client.InstanceInitiatedShutdown`` : The instance was shut down using the ``shutdown -h`` command from the instance.
-             
-            * ``Client.UserInitiatedShutdown`` : The instance was shut down using the Amazon EC2 API.
-             
-            * ``Client.VolumeLimitExceeded`` : The limit on the number of EBS volumes or total storage was exceeded. Decrease usage or request an increase in your limits.
-             
-            * ``Client.InvalidSnapshot.NotFound`` : The specified snapshot was not found.
-             
-
-            
-
-            
-
-          
-
         Architecture -> (string)
 
           
 
           The architecture of the image.
-
-          
-
-          
-
-        RootDeviceType -> (string)
-
-          
-
-          The root device type used by the AMI. The AMI can use an EBS volume or an instance store volume.
-
-          
-
-          
-
-        RootDeviceName -> (string)
-
-          
-
-          The root device name (for example, ``/dev/sda1`` or ``/dev/xvda`` ).
 
           
 
@@ -914,26 +858,6 @@ Reservations -> (list)
 
               
 
-              VolumeId -> (string)
-
-                
-
-                The ID of the EBS volume.
-
-                
-
-                
-
-              Status -> (string)
-
-                
-
-                The attachment state.
-
-                
-
-                
-
               AttachTime -> (timestamp)
 
                 
@@ -954,39 +878,29 @@ Reservations -> (list)
 
                 
 
+              Status -> (string)
+
+                
+
+                The attachment state.
+
+                
+
+                
+
+              VolumeId -> (string)
+
+                
+
+                The ID of the EBS volume.
+
+                
+
+                
+
               
 
             
-
-          
-
-        VirtualizationType -> (string)
-
-          
-
-          The virtualization type of the instance.
-
-          
-
-          
-
-        InstanceLifecycle -> (string)
-
-          
-
-          Indicates whether this is a Spot instance.
-
-          
-
-          
-
-        SpotInstanceRequestId -> (string)
-
-          
-
-          If the request is a Spot instance request, the ID of the request.
-
-          
 
           
 
@@ -1000,11 +914,81 @@ Reservations -> (list)
 
           
 
-        Tags -> (list)
+        EbsOptimized -> (boolean)
 
           
 
-          Any tags assigned to the instance.
+          Indicates whether the instance is optimized for EBS I/O. This optimization provides dedicated throughput to Amazon EBS and an optimized configuration stack to provide optimal I/O performance. This optimization isn't available with all instance types. Additional usage charges apply when using an EBS Optimized instance.
+
+          
+
+          
+
+        EnaSupport -> (boolean)
+
+          
+
+          Specifies whether enhanced networking with ENA is enabled.
+
+          
+
+          
+
+        Hypervisor -> (string)
+
+          
+
+          The hypervisor type of the instance.
+
+          
+
+          
+
+        IamInstanceProfile -> (structure)
+
+          
+
+          The IAM instance profile associated with the instance, if applicable.
+
+          
+
+          Arn -> (string)
+
+            
+
+            The Amazon Resource Name (ARN) of the instance profile.
+
+            
+
+            
+
+          Id -> (string)
+
+            
+
+            The ID of the instance profile.
+
+            
+
+            
+
+          
+
+        InstanceLifecycle -> (string)
+
+          
+
+          Indicates whether this is a Spot instance or a Scheduled Instance.
+
+          
+
+          
+
+        NetworkInterfaces -> (list)
+
+          
+
+          [EC2-VPC] One or more network interfaces for the instance.
 
           
 
@@ -1012,39 +996,391 @@ Reservations -> (list)
 
             
 
-            Describes a tag.
+            Describes a network interface.
 
             
 
-            Key -> (string)
+            Association -> (structure)
 
               
 
-              The key of the tag. 
+              The association information for an Elastic IPv4 associated with the network interface.
 
-               
+              
 
-              Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with ``aws:`` 
+              IpOwnerId -> (string)
+
+                
+
+                The ID of the owner of the Elastic IP address.
+
+                
+
+                
+
+              PublicDnsName -> (string)
+
+                
+
+                The public DNS name.
+
+                
+
+                
+
+              PublicIp -> (string)
+
+                
+
+                The public IP address or Elastic IP address bound to the network interface.
+
+                
+
+                
+
+              
+
+            Attachment -> (structure)
+
+              
+
+              The network interface attachment.
+
+              
+
+              AttachTime -> (timestamp)
+
+                
+
+                The time stamp when the attachment initiated.
+
+                
+
+                
+
+              AttachmentId -> (string)
+
+                
+
+                The ID of the network interface attachment.
+
+                
+
+                
+
+              DeleteOnTermination -> (boolean)
+
+                
+
+                Indicates whether the network interface is deleted when the instance is terminated.
+
+                
+
+                
+
+              DeviceIndex -> (integer)
+
+                
+
+                The index of the device on the instance for the network interface attachment.
+
+                
+
+                
+
+              Status -> (string)
+
+                
+
+                The attachment state.
+
+                
+
+                
+
+              
+
+            Description -> (string)
+
+              
+
+              The description.
 
               
 
               
 
-            Value -> (string)
+            Groups -> (list)
 
               
 
-              The value of the tag.
+              One or more security groups.
 
-               
+              
 
-              Constraints: Tag values are case-sensitive and accept a maximum of 255 Unicode characters.
+              (structure)
+
+                
+
+                Describes a security group.
+
+                
+
+                GroupName -> (string)
+
+                  
+
+                  The name of the security group.
+
+                  
+
+                  
+
+                GroupId -> (string)
+
+                  
+
+                  The ID of the security group.
+
+                  
+
+                  
+
+                
+
+              
+
+            Ipv6Addresses -> (list)
+
+              
+
+              One or more IPv6 addresses associated with the network interface.
+
+              
+
+              (structure)
+
+                
+
+                Describes an IPv6 address.
+
+                
+
+                Ipv6Address -> (string)
+
+                  
+
+                  The IPv6 address.
+
+                  
+
+                  
+
+                
+
+              
+
+            MacAddress -> (string)
+
+              
+
+              The MAC address.
+
+              
+
+              
+
+            NetworkInterfaceId -> (string)
+
+              
+
+              The ID of the network interface.
+
+              
+
+              
+
+            OwnerId -> (string)
+
+              
+
+              The ID of the AWS account that created the network interface.
+
+              
+
+              
+
+            PrivateDnsName -> (string)
+
+              
+
+              The private DNS name.
+
+              
+
+              
+
+            PrivateIpAddress -> (string)
+
+              
+
+              The IPv4 address of the network interface within the subnet.
+
+              
+
+              
+
+            PrivateIpAddresses -> (list)
+
+              
+
+              One or more private IPv4 addresses associated with the network interface.
+
+              
+
+              (structure)
+
+                
+
+                Describes a private IPv4 address.
+
+                
+
+                Association -> (structure)
+
+                  
+
+                  The association information for an Elastic IP address for the network interface.
+
+                  
+
+                  IpOwnerId -> (string)
+
+                    
+
+                    The ID of the owner of the Elastic IP address.
+
+                    
+
+                    
+
+                  PublicDnsName -> (string)
+
+                    
+
+                    The public DNS name.
+
+                    
+
+                    
+
+                  PublicIp -> (string)
+
+                    
+
+                    The public IP address or Elastic IP address bound to the network interface.
+
+                    
+
+                    
+
+                  
+
+                Primary -> (boolean)
+
+                  
+
+                  Indicates whether this IPv4 address is the primary private IP address of the network interface.
+
+                  
+
+                  
+
+                PrivateDnsName -> (string)
+
+                  
+
+                  The private IPv4 DNS name.
+
+                  
+
+                  
+
+                PrivateIpAddress -> (string)
+
+                  
+
+                  The private IPv4 address of the network interface.
+
+                  
+
+                  
+
+                
+
+              
+
+            SourceDestCheck -> (boolean)
+
+              
+
+              Indicates whether to validate network traffic to or from this network interface.
+
+              
+
+              
+
+            Status -> (string)
+
+              
+
+              The status of the network interface.
+
+              
+
+              
+
+            SubnetId -> (string)
+
+              
+
+              The ID of the subnet.
+
+              
+
+              
+
+            VpcId -> (string)
+
+              
+
+              The ID of the VPC.
 
               
 
               
 
             
+
+          
+
+        RootDeviceName -> (string)
+
+          
+
+          The root device name (for example, ``/dev/sda1`` or ``/dev/xvda`` ).
+
+          
+
+          
+
+        RootDeviceType -> (string)
+
+          
+
+          The root device type used by the AMI. The AMI can use an EBS volume or an instance store volume.
+
+          
 
           
 
@@ -1092,407 +1428,17 @@ Reservations -> (list)
 
           
 
-          Specifies whether to enable an instance launched in a VPC to perform NAT. This controls whether source/destination checking is enabled on the instance. A value of ``true`` means checking is enabled, and ``false`` means checking is disabled. The value must be ``false`` for the instance to perform NAT. For more information, see `NAT Instances`_ in the *Amazon Virtual Private Cloud User Guide* .
+          Specifies whether to enable an instance launched in a VPC to perform NAT. This controls whether source/destination checking is enabled on the instance. A value of ``true`` means checking is enabled, and ``false`` means checking is disabled. The value must be ``false`` for the instance to perform NAT. For more information, see `NAT Instances <http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_NAT_Instance.html>`_ in the *Amazon Virtual Private Cloud User Guide* .
 
           
 
           
 
-        Hypervisor -> (string)
+        SpotInstanceRequestId -> (string)
 
           
 
-          The hypervisor type of the instance.
-
-          
-
-          
-
-        NetworkInterfaces -> (list)
-
-          
-
-          [EC2-VPC] One or more network interfaces for the instance.
-
-          
-
-          (structure)
-
-            
-
-            Describes a network interface.
-
-            
-
-            NetworkInterfaceId -> (string)
-
-              
-
-              The ID of the network interface.
-
-              
-
-              
-
-            SubnetId -> (string)
-
-              
-
-              The ID of the subnet.
-
-              
-
-              
-
-            VpcId -> (string)
-
-              
-
-              The ID of the VPC.
-
-              
-
-              
-
-            Description -> (string)
-
-              
-
-              The description.
-
-              
-
-              
-
-            OwnerId -> (string)
-
-              
-
-              The ID of the AWS account that created the network interface.
-
-              
-
-              
-
-            Status -> (string)
-
-              
-
-              The status of the network interface.
-
-              
-
-              
-
-            MacAddress -> (string)
-
-              
-
-              The MAC address.
-
-              
-
-              
-
-            PrivateIpAddress -> (string)
-
-              
-
-              The IP address of the network interface within the subnet.
-
-              
-
-              
-
-            PrivateDnsName -> (string)
-
-              
-
-              The private DNS name.
-
-              
-
-              
-
-            SourceDestCheck -> (boolean)
-
-              
-
-              Indicates whether to validate network traffic to or from this network interface.
-
-              
-
-              
-
-            Groups -> (list)
-
-              
-
-              One or more security groups.
-
-              
-
-              (structure)
-
-                
-
-                Describes a security group.
-
-                
-
-                GroupName -> (string)
-
-                  
-
-                  The name of the security group.
-
-                  
-
-                  
-
-                GroupId -> (string)
-
-                  
-
-                  The ID of the security group.
-
-                  
-
-                  
-
-                
-
-              
-
-            Attachment -> (structure)
-
-              
-
-              The network interface attachment.
-
-              
-
-              AttachmentId -> (string)
-
-                
-
-                The ID of the network interface attachment.
-
-                
-
-                
-
-              DeviceIndex -> (integer)
-
-                
-
-                The index of the device on the instance for the network interface attachment.
-
-                
-
-                
-
-              Status -> (string)
-
-                
-
-                The attachment state.
-
-                
-
-                
-
-              AttachTime -> (timestamp)
-
-                
-
-                The time stamp when the attachment initiated.
-
-                
-
-                
-
-              DeleteOnTermination -> (boolean)
-
-                
-
-                Indicates whether the network interface is deleted when the instance is terminated.
-
-                
-
-                
-
-              
-
-            Association -> (structure)
-
-              
-
-              The association information for an Elastic IP associated with the network interface.
-
-              
-
-              PublicIp -> (string)
-
-                
-
-                The public IP address or Elastic IP address bound to the network interface.
-
-                
-
-                
-
-              PublicDnsName -> (string)
-
-                
-
-                The public DNS name.
-
-                
-
-                
-
-              IpOwnerId -> (string)
-
-                
-
-                The ID of the owner of the Elastic IP address.
-
-                
-
-                
-
-              
-
-            PrivateIpAddresses -> (list)
-
-              
-
-              The private IP addresses associated with the network interface.
-
-              
-
-              (structure)
-
-                
-
-                Describes a private IP address.
-
-                
-
-                PrivateIpAddress -> (string)
-
-                  
-
-                  The private IP address of the network interface.
-
-                  
-
-                  
-
-                PrivateDnsName -> (string)
-
-                  
-
-                  The private DNS name.
-
-                  
-
-                  
-
-                Primary -> (boolean)
-
-                  
-
-                  Indicates whether this IP address is the primary private IP address of the network interface.
-
-                  
-
-                  
-
-                Association -> (structure)
-
-                  
-
-                  The association information for an Elastic IP address for the network interface.
-
-                  
-
-                  PublicIp -> (string)
-
-                    
-
-                    The public IP address or Elastic IP address bound to the network interface.
-
-                    
-
-                    
-
-                  PublicDnsName -> (string)
-
-                    
-
-                    The public DNS name.
-
-                    
-
-                    
-
-                  IpOwnerId -> (string)
-
-                    
-
-                    The ID of the owner of the Elastic IP address.
-
-                    
-
-                    
-
-                  
-
-                
-
-              
-
-            
-
-          
-
-        IamInstanceProfile -> (structure)
-
-          
-
-          The IAM instance profile associated with the instance, if applicable.
-
-          
-
-          Arn -> (string)
-
-            
-
-            The Amazon Resource Name (ARN) of the instance profile.
-
-            
-
-            
-
-          Id -> (string)
-
-            
-
-            The ID of the instance profile.
-
-            
-
-            
-
-          
-
-        EbsOptimized -> (boolean)
-
-          
-
-          Indicates whether the instance is optimized for EBS I/O. This optimization provides dedicated throughput to Amazon EBS and an optimized configuration stack to provide optimal I/O performance. This optimization isn't available with all instance types. Additional usage charges apply when using an EBS Optimized instance.
+          If the request is a Spot instance request, the ID of the request.
 
           
 
@@ -1502,13 +1448,153 @@ Reservations -> (list)
 
           
 
-          Specifies whether enhanced networking is enabled. 
+          Specifies whether enhanced networking with the Intel 82599 Virtual Function interface is enabled.
+
+          
+
+          
+
+        StateReason -> (structure)
+
+          
+
+          The reason for the most recent state transition.
+
+          
+
+          Code -> (string)
+
+            
+
+            The reason code for the state change.
+
+            
+
+            
+
+          Message -> (string)
+
+            
+
+            The message for the state change.
+
+             
+
+             
+            * ``Server.InsufficientInstanceCapacity`` : There was insufficient instance capacity to satisfy the launch request. 
+             
+            * ``Server.InternalError`` : An internal error occurred during instance launch, resulting in termination. 
+             
+            * ``Server.ScheduledStop`` : The instance was stopped due to a scheduled retirement. 
+             
+            * ``Server.SpotInstanceTermination`` : A Spot instance was terminated due to an increase in the market price. 
+             
+            * ``Client.InternalError`` : A client error caused the instance to terminate on launch. 
+             
+            * ``Client.InstanceInitiatedShutdown`` : The instance was shut down using the ``shutdown -h`` command from the instance. 
+             
+            * ``Client.UserInitiatedShutdown`` : The instance was shut down using the Amazon EC2 API. 
+             
+            * ``Client.VolumeLimitExceeded`` : The limit on the number of EBS volumes or total storage was exceeded. Decrease usage or request an increase in your limits. 
+             
+            * ``Client.InvalidSnapshot.NotFound`` : The specified snapshot was not found. 
+             
+
+            
+
+            
+
+          
+
+        Tags -> (list)
+
+          
+
+          Any tags assigned to the instance.
+
+          
+
+          (structure)
+
+            
+
+            Describes a tag.
+
+            
+
+            Key -> (string)
+
+              
+
+              The key of the tag.
+
+               
+
+              Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with ``aws:``  
+
+              
+
+              
+
+            Value -> (string)
+
+              
+
+              The value of the tag.
+
+               
+
+              Constraints: Tag values are case-sensitive and accept a maximum of 255 Unicode characters.
+
+              
+
+              
+
+            
+
+          
+
+        VirtualizationType -> (string)
+
+          
+
+          The virtualization type of the instance.
 
           
 
           
 
         
+
+      
+
+    OwnerId -> (string)
+
+      
+
+      The ID of the AWS account that owns the reservation.
+
+      
+
+      
+
+    RequesterId -> (string)
+
+      
+
+      The ID of the requester that launched the instances on your behalf (for example, AWS Management Console or Auto Scaling).
+
+      
+
+      
+
+    ReservationId -> (string)
+
+      
+
+      The ID of the reservation.
+
+      
 
       
 
@@ -1526,6 +1612,3 @@ NextToken -> (string)
 
   
 
-
-
-.. _NAT Instances: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_NAT_Instance.html

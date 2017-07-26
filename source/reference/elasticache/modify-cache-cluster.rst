@@ -15,8 +15,11 @@ Description
 
 
 
-The *modify-cache-cluster* action modifies the settings for a cache cluster. You can use this action to change one or more cluster configuration parameters by specifying the parameters and the new values.
+Modifies the settings for a cache cluster. You can use this operation to change one or more cluster configuration parameters by specifying the parameters and the new values.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyCacheCluster>`_
 
 
 ========
@@ -42,8 +45,9 @@ Synopsis
   [--auto-minor-version-upgrade | --no-auto-minor-version-upgrade]
   [--snapshot-retention-limit <value>]
   [--snapshot-window <value>]
+  [--cache-node-type <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -62,7 +66,7 @@ Options
 ``--num-cache-nodes`` (integer)
 
 
-  The number of cache nodes that the cache cluster should have. If the value for ``NumCacheNodes`` is greater than the sum of the number of current cache nodes and the number of cache nodes pending creation (which may be zero), then more nodes will be added. If the value is less than the number of existing cache nodes, then nodes will be removed. If the value is equal to the number of current cache nodes, then any pending add or remove requests are canceled.
+  The number of cache nodes that the cache cluster should have. If the value for ``NumCacheNodes`` is greater than the sum of the number of current cache nodes and the number of cache nodes pending creation (which may be zero), more nodes are added. If the value is less than the number of existing cache nodes, nodes are removed. If the value is equal to the number of current cache nodes, any pending add or remove requests are canceled.
 
    
 
@@ -74,14 +78,24 @@ Options
 
    
 
-  **Note:** Adding or removing Memcached cache nodes can be applied immediately or as a pending action. See ``ApplyImmediately`` .A pending action to modify the number of cache nodes in a cluster during its maintenance window, whether by adding or removing nodes in accordance with the scale out architecture, is not queued. The customer's latest request to add or remove nodes to the cluster overrides any previous pending actions to modify the number of cache nodes in the cluster. For example, a request to remove 2 nodes would override a previous pending action to remove 3 nodes. Similarly, a request to add 2 nodes would override a previous pending action to remove 3 nodes and vice versa. As Memcached cache nodes may now be provisioned in different Availability Zones with flexible cache node placement, a request to add nodes does not automatically override a previous pending action to add nodes. The customer can modify the previous pending action to add more nodes or explicitly cancel the pending request and retry the new request. To cancel pending actions to modify the number of cache nodes in a cluster, use the ``modify-cache-cluster`` request and set *NumCacheNodes* equal to the number of cache nodes currently in the cache cluster.
+  .. note::
+
+     
+
+    Adding or removing Memcached cache nodes can be applied immediately or as a pending operation (see ``ApplyImmediately`` ).
+
+     
+
+    A pending operation to modify the number of cache nodes in a cluster during its maintenance window, whether by adding or removing nodes in accordance with the scale out architecture, is not queued. The customer's latest request to add or remove nodes to the cluster overrides any previous pending operations to modify the number of cache nodes in the cluster. For example, a request to remove 2 nodes would override a previous pending operation to remove 3 nodes. Similarly, a request to add 2 nodes would override a previous pending operation to remove 3 nodes and vice versa. As Memcached cache nodes may now be provisioned in different Availability Zones with flexible cache node placement, a request to add nodes does not automatically override a previous pending operation to add nodes. The customer can modify the previous pending operation to add more nodes or explicitly cancel the pending request and retry the new request. To cancel pending operations to modify the number of cache nodes in a cluster, use the ``modify-cache-cluster`` request and set ``NumCacheNodes`` equal to the number of cache nodes currently in the cache cluster.
+
+     
 
   
 
 ``--cache-node-ids-to-remove`` (list)
 
 
-  A list of cache node IDs to be removed. A node ID is a numeric identifier (0001, 0002, etc.). This parameter is only valid when *NumCacheNodes* is less than the existing number of cache nodes. The number of cache node IDs supplied in this parameter must match the difference between the existing number of cache nodes in the cluster or pending cache nodes, whichever is greater, and the value of *NumCacheNodes* in the request.
+  A list of cache node IDs to be removed. A node ID is a numeric identifier (0001, 0002, etc.). This parameter is only valid when ``NumCacheNodes`` is less than the existing number of cache nodes. The number of cache node IDs supplied in this parameter must match the difference between the existing number of cache nodes in the cluster or pending cache nodes, whichever is greater, and the value of ``NumCacheNodes`` in the request.
 
    
 
@@ -114,13 +128,13 @@ Syntax::
 
   .. note::
 
-    
+     
 
     You cannot specify ``single-az`` if the Memcached cache cluster already has cache nodes in different Availability Zones. If ``cross-az`` is specified, existing Memcached nodes remain in their current Availability Zone.
 
      
 
-    Only newly created nodes will be located in different Availability Zones. For instructions on how to move existing Memcached nodes to different Availability Zones, see the **Availability Zone Considerations** section of `Cache Node Considerations for Memcached`_ .
+    Only newly created nodes are located in different Availability Zones. For instructions on how to move existing Memcached nodes to different Availability Zones, see the **Availability Zone Considerations** section of `Cache Node Considerations for Memcached <http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheNode.Memcached.html>`_ .
 
      
 
@@ -141,11 +155,11 @@ Syntax::
 ``--new-availability-zones`` (list)
 
 
-  The list of Availability Zones where the new Memcached cache nodes will be created.
+  The list of Availability Zones where the new Memcached cache nodes are created.
 
    
 
-  This parameter is only valid when *NumCacheNodes* in the request is greater than the sum of the number of active cache nodes and the number of cache nodes pending creation (which may be zero). The number of Availability Zones supplied in this list must match the cache nodes being added in this request.
+  This parameter is only valid when ``NumCacheNodes`` in the request is greater than the sum of the number of active cache nodes and the number of cache nodes pending creation (which may be zero). The number of Availability Zones supplied in this list must match the cache nodes being added in this request.
 
    
 
@@ -153,16 +167,16 @@ Syntax::
 
    
 
-  Scenarios: 
+  Scenarios:
 
    
-  * **Scenario 1:** You have 3 active nodes and wish to add 2 nodes.Specify ``NumCacheNodes=5`` (3 + 2) and optionally specify two Availability Zones for the two new nodes.
-   
-  * **Scenario 2:** You have 3 active nodes and 2 nodes pending creation (from the scenario 1 call) and want to add 1 more node.Specify ``NumCacheNodes=6`` ((3 + 2) + 1)
-  and optionally specify an Availability Zone for the new node. 
-  * **Scenario 3:** You want to cancel all pending actions.Specify ``NumCacheNodes=3`` to cancel all pending actions.
-   
 
+   
+  * **Scenario 1:** You have 3 active nodes and wish to add 2 nodes. Specify ``NumCacheNodes=5`` (3 + 2) and optionally specify two Availability Zones for the two new nodes. 
+   
+  * **Scenario 2:** You have 3 active nodes and 2 nodes pending creation (from the scenario 1 call) and want to add 1 more node. Specify ``NumCacheNodes=6`` ((3 + 2) + 1) and optionally specify an Availability Zone for the new node. 
+   
+  * **Scenario 3:** You want to cancel all pending operations. Specify ``NumCacheNodes=3`` to cancel all pending operations. 
    
 
    
@@ -171,15 +185,69 @@ Syntax::
 
    
 
-  If ``cross-az`` is specified, existing Memcached nodes remain in their current Availability Zone. Only newly created nodes can be located in different Availability Zones. For guidance on how to move existing Memcached nodes to different Availability Zones, see the **Availability Zone Considerations** section of `Cache Node Considerations for Memcached`_ .
+  If ``cross-az`` is specified, existing Memcached nodes remain in their current Availability Zone. Only newly created nodes can be located in different Availability Zones. For guidance on how to move existing Memcached nodes to different Availability Zones, see the **Availability Zone Considerations** section of `Cache Node Considerations for Memcached <http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheNode.Memcached.html>`_ .
 
    
 
-  **Impact of new add/remove requests upon pending requests** 
+   **Impact of new add/remove requests upon pending requests**  
 
-     Scenarios Pending action New Request Results   Scenario-1 Delete Delete The new delete, pending or immediate, replaces the pending delete.   Scenario-2 Delete Create The new create, pending or immediate, replaces the pending delete.   Scenario-3 Create Delete The new delete, pending or immediate, replaces the pending create.   Scenario-4 Create Create The new create is added to the pending create. **Important:** If the new create request is **Apply Immediately - Yes** , all creates are performed immediately. If the new create request is **Apply Immediately - No** , all creates are pending.   
+   
 
-  Example: ``NewAvailabilityZones.member.1=us-west-2aNewAvailabilityZones.member.2=us-west-2bNewAvailabilityZones.member.3=us-west-2c`` 
+   
+  * Scenario-1 
+
+     
+    * Pending Action: Delete 
+     
+    * New Request: Delete 
+     
+    * Result: The new delete, pending or immediate, replaces the pending delete. 
+     
+
+   
+   
+  * Scenario-2 
+
+     
+    * Pending Action: Delete 
+     
+    * New Request: Create 
+     
+    * Result: The new create, pending or immediate, replaces the pending delete. 
+     
+
+   
+   
+  * Scenario-3 
+
+     
+    * Pending Action: Create 
+     
+    * New Request: Delete 
+     
+    * Result: The new delete, pending or immediate, replaces the pending create. 
+     
+
+   
+   
+  * Scenario-4 
+
+     
+    * Pending Action: Create 
+     
+    * New Request: Create 
+     
+    * Result: The new create is added to the pending create. 
+
+    .. warning::
+
+        **Important:** If the new create request is **Apply Immediately - Yes** , all creates are performed immediately. If the new create request is **Apply Immediately - No** , all creates are pending. 
+
+     
+     
+
+   
+   
 
   
 
@@ -198,7 +266,7 @@ Syntax::
 
    
 
-  This parameter can be used only with clusters that are created outside of an Amazon Virtual Private Cloud (VPC).
+  You can use this parameter only with clusters that are created outside of an Amazon Virtual Private Cloud (Amazon VPC).
 
    
 
@@ -221,7 +289,7 @@ Syntax::
 
    
 
-  This parameter can be used only with clusters that are created in an Amazon Virtual Private Cloud (VPC).
+  This parameter can be used only with clusters that are created in an Amazon Virtual Private Cloud (Amazon VPC).
 
   
 
@@ -236,85 +304,97 @@ Syntax::
 ``--preferred-maintenance-window`` (string)
 
 
-  Specifies the weekly time range during which maintenance on the cache cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Valid values for ``ddd`` are:
+  Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period.
+
+   
+
+  Valid values for ``ddd`` are:
 
    
 
    
-  * ``sun`` 
+  * ``sun``   
    
-  * ``mon`` 
+  * ``mon``   
    
-  * ``tue`` 
+  * ``tue``   
    
-  * ``wed`` 
+  * ``wed``   
    
-  * ``thu`` 
+  * ``thu``   
    
-  * ``fri`` 
+  * ``fri``   
    
-  * ``sat`` 
-   
-
+  * ``sat``   
    
 
-  Example: ``sun:05:00-sun:09:00`` 
+   
+
+  Example: ``sun:23:00-mon:01:30``  
 
   
 
 ``--notification-topic-arn`` (string)
 
 
-  The Amazon Resource Name (ARN) of the Amazon SNS topic to which notifications will be sent.
+  The Amazon Resource Name (ARN) of the Amazon SNS topic to which notifications are sent.
 
    
 
   .. note::
 
-    The Amazon SNS topic owner must be same as the cache cluster owner. 
+     
+
+    The Amazon SNS topic owner must be same as the cache cluster owner.
+
+     
 
   
 
 ``--cache-parameter-group-name`` (string)
 
 
-  The name of the cache parameter group to apply to this cache cluster. This change is asynchronously applied as soon as possible for parameters when the *ApplyImmediately* parameter is specified as *true* for this request.
+  The name of the cache parameter group to apply to this cache cluster. This change is asynchronously applied as soon as possible for parameters when the ``ApplyImmediately`` parameter is specified as ``true`` for this request.
 
   
 
 ``--notification-topic-status`` (string)
 
 
-  The status of the Amazon SNS notification topic. Notifications are sent only if the status is *active* .
+  The status of the Amazon SNS notification topic. Notifications are sent only if the status is ``active`` .
 
    
 
-  Valid values: ``active`` | ``inactive`` 
+  Valid values: ``active`` | ``inactive``  
 
   
 
 ``--apply-immediately`` | ``--no-apply-immediately`` (boolean)
 
 
-  If ``true`` , this parameter causes the modifications in this request and any pending modifications to be applied, asynchronously and as soon as possible, regardless of the *PreferredMaintenanceWindow* setting for the cache cluster.
+  If ``true`` , this parameter causes the modifications in this request and any pending modifications to be applied, asynchronously and as soon as possible, regardless of the ``PreferredMaintenanceWindow`` setting for the cache cluster.
 
    
 
-  If ``false`` , then changes to the cache cluster are applied on the next maintenance reboot, or the next failure reboot, whichever occurs first.
+  If ``false`` , changes to the cache cluster are applied on the next maintenance reboot, or the next failure reboot, whichever occurs first.
 
    
 
   .. warning::
 
+     
+
     If you perform a ``modify-cache-cluster`` before a pending modification is applied, the pending modification is replaced by the newer modification.
 
-   
-
-  Valid values: ``true`` | ``false`` 
+     
 
    
 
-  Default: ``false`` 
+  Valid values: ``true`` | ``false``  
+
+   
+
+  Default: ``false``  
 
   
 
@@ -322,6 +402,10 @@ Syntax::
 
 
   The upgraded version of the cache engine to be run on the cache nodes.
+
+   
+
+   **Important:** You can upgrade to a newer engine version (see `Selecting a Cache Engine and Version <http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/SelectEngine.html#VersionManagement>`_ ), but you cannot downgrade to an earlier engine version. If you want to use an earlier engine version, you must delete the existing cache cluster and create it anew with the earlier engine version. 
 
   
 
@@ -335,26 +419,39 @@ Syntax::
 ``--snapshot-retention-limit`` (integer)
 
 
-  The number of days for which ElastiCache will retain automatic cache cluster snapshots before deleting them. For example, if you set *SnapshotRetentionLimit* to 5, then a snapshot that was taken today will be retained for 5 days before being deleted.
+  The number of days for which ElastiCache retains automatic cache cluster snapshots before deleting them. For example, if you set ``SnapshotRetentionLimit`` to 5, a snapshot that was taken today is retained for 5 days before being deleted.
 
    
 
-  **Important** If the value of SnapshotRetentionLimit is set to zero (0), backups are turned off.
+  .. note::
+
+     
+
+    If the value of ``SnapshotRetentionLimit`` is set to zero (0), backups are turned off.
+
+     
 
   
 
 ``--snapshot-window`` (string)
 
 
-  The daily time range (in UTC) during which ElastiCache will begin taking a daily snapshot of your cache cluster. 
+  The daily time range (in UTC) during which ElastiCache begins taking a daily snapshot of your cache cluster. 
+
+  
+
+``--cache-node-type`` (string)
+
+
+  A valid cache node type that you want to scale this cache cluster up to.
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -384,7 +481,11 @@ CacheCluster -> (structure)
 
     
 
-    Represents the information required for client programs to connect to a cache node.
+    Represents a Memcached cluster endpoint which, if Automatic Discovery is enabled on the cluster, can be used by an application to connect to any node in the cluster. The configuration endpoint will always have ``.cfg`` in it.
+
+     
+
+    Example: ``mem-3.9dvc4r.cfg.usw2.cache.amazonaws.com:11211``  
 
     
 
@@ -436,43 +537,43 @@ CacheCluster -> (structure)
     * General purpose: 
 
        
-      * Current generation: ``cache.t2.micro`` , ``cache.t2.small`` , ``cache.t2.medium`` , ``cache.m3.medium`` , ``cache.m3.large`` , ``cache.m3.xlarge`` , ``cache.m3.2xlarge`` 
+      * Current generation: ``cache.t2.micro`` , ``cache.t2.small`` , ``cache.t2.medium`` , ``cache.m3.medium`` , ``cache.m3.large`` , ``cache.m3.xlarge`` , ``cache.m3.2xlarge`` , ``cache.m4.large`` , ``cache.m4.xlarge`` , ``cache.m4.2xlarge`` , ``cache.m4.4xlarge`` , ``cache.m4.10xlarge``   
        
-      * Previous generation: ``cache.t1.micro`` , ``cache.m1.small`` , ``cache.m1.medium`` , ``cache.m1.large`` , ``cache.m1.xlarge`` 
-       
-
-    
-     
-    * Compute optimized: ``cache.c1.xlarge`` 
-     
-    * Memory optimized 
-
-       
-      * Current generation: ``cache.r3.large`` , ``cache.r3.xlarge`` , ``cache.r3.2xlarge`` , ``cache.r3.4xlarge`` , ``cache.r3.8xlarge`` 
-       
-      * Previous generation: ``cache.m2.xlarge`` , ``cache.m2.2xlarge`` , ``cache.m2.4xlarge`` 
+      * Previous generation: ``cache.t1.micro`` , ``cache.m1.small`` , ``cache.m1.medium`` , ``cache.m1.large`` , ``cache.m1.xlarge``   
        
 
-    
+     
+     
+    * Compute optimized: ``cache.c1.xlarge``   
+     
+    * Memory optimized: 
+
+       
+      * Current generation: ``cache.r3.large`` , ``cache.r3.xlarge`` , ``cache.r3.2xlarge`` , ``cache.r3.4xlarge`` , ``cache.r3.8xlarge``   
+       
+      * Previous generation: ``cache.m2.xlarge`` , ``cache.m2.2xlarge`` , ``cache.m2.4xlarge``   
+       
+
+     
      
 
      
 
-    **Notes:** 
+     **Notes:**  
 
      
 
      
-    * All t2 instances are created in an Amazon Virtual Private Cloud (VPC).
+    * All T2 instances are created in an Amazon Virtual Private Cloud (Amazon VPC). 
      
-    * Redis backup/restore is not supported for t2 instances.
+    * Redis backup/restore is not supported for Redis (cluster mode disabled) T1 and T2 instances. Backup/restore is supported on Redis (cluster mode enabled) T2 instances. 
      
-    * Redis Append-only files (AOF) functionality is not supported for t1 or t2 instances.
-     
-
+    * Redis Append-only files (AOF) functionality is not supported for T1 or T2 instances. 
      
 
-    For a complete listing of cache node types and specifications, see `Amazon ElastiCache Product Features and Details`_ and `Cache Node Type-Specific Parameters for Memcached`_ or `Cache Node Type-Specific Parameters for Redis`_ . 
+     
+
+    For a complete listing of node types and specifications, see `Amazon ElastiCache Product Features and Details <http://aws.amazon.com/elasticache/details>`_ and either `Cache Node Type-Specific Parameters for Memcached <http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#ParameterGroups.Memcached.NodeSpecific>`_ or `Cache Node Type-Specific Parameters for Redis <http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#ParameterGroups.Redis.NodeSpecific>`_ .
 
     
 
@@ -482,7 +583,7 @@ CacheCluster -> (structure)
 
     
 
-    The name of the cache engine (*memcached* or *redis* ) to be used for this cache cluster.
+    The name of the cache engine (``memcached`` or ``redis`` ) to be used for this cache cluster.
 
     
 
@@ -492,7 +593,7 @@ CacheCluster -> (structure)
 
     
 
-    The version of the cache engine version that is used in this cache cluster.
+    The version of the cache engine that is used in this cache cluster.
 
     
 
@@ -502,7 +603,7 @@ CacheCluster -> (structure)
 
     
 
-    The current state of this cache cluster, one of the following values: *available* , *creating* , *deleted* , *deleting* , *incompatible-network* , *modifying* , *rebooting cache cluster nodes* , *restore-failed* , or *snapshotting* .
+    The current state of this cache cluster, one of the following values: ``available`` , ``creating`` , ``deleted`` , ``deleting`` , ``incompatible-network`` , ``modifying`` , ``rebooting cache cluster nodes`` , ``restore-failed`` , or ``snapshotting`` .
 
     
 
@@ -546,29 +647,33 @@ CacheCluster -> (structure)
 
     
 
-    Specifies the weekly time range during which maintenance on the cache cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Valid values for ``ddd`` are:
+    Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period.
+
+     
+
+    Valid values for ``ddd`` are:
 
      
 
      
-    * ``sun`` 
+    * ``sun``   
      
-    * ``mon`` 
+    * ``mon``   
      
-    * ``tue`` 
+    * ``tue``   
      
-    * ``wed`` 
+    * ``wed``   
      
-    * ``thu`` 
+    * ``thu``   
      
-    * ``fri`` 
+    * ``fri``   
      
-    * ``sat`` 
-     
-
+    * ``sat``   
      
 
-    Example: ``sun:05:00-sun:09:00`` 
+     
+
+    Example: ``sun:23:00-mon:01:30``  
 
     
 
@@ -578,7 +683,7 @@ CacheCluster -> (structure)
 
     
 
-    A group of settings that will be applied to the cache cluster in the future, or that are currently being applied.
+    A group of settings that are applied to the cache cluster in the future, or that are currently being applied.
 
     
 
@@ -616,7 +721,17 @@ CacheCluster -> (structure)
 
       
 
-      The new cache engine version that the cache cluster will run.
+      The new cache engine version that the cache cluster runs.
+
+      
+
+      
+
+    CacheNodeType -> (string)
+
+      
+
+      The cache node type that this cache cluster or replication group is scaled to.
 
       
 
@@ -698,7 +813,7 @@ CacheCluster -> (structure)
 
     
 
-    The status of the cache parameter group.
+    Status of the cache parameter group.
 
     
 
@@ -774,43 +889,43 @@ CacheCluster -> (structure)
       * General purpose: 
 
          
-        * Current generation: ``cache.t2.micro`` , ``cache.t2.small`` , ``cache.t2.medium`` , ``cache.m3.medium`` , ``cache.m3.large`` , ``cache.m3.xlarge`` , ``cache.m3.2xlarge`` 
+        * Current generation: ``cache.t2.micro`` , ``cache.t2.small`` , ``cache.t2.medium`` , ``cache.m3.medium`` , ``cache.m3.large`` , ``cache.m3.xlarge`` , ``cache.m3.2xlarge`` , ``cache.m4.large`` , ``cache.m4.xlarge`` , ``cache.m4.2xlarge`` , ``cache.m4.4xlarge`` , ``cache.m4.10xlarge``   
          
-        * Previous generation: ``cache.t1.micro`` , ``cache.m1.small`` , ``cache.m1.medium`` , ``cache.m1.large`` , ``cache.m1.xlarge`` 
-         
-
-      
-       
-      * Compute optimized: ``cache.c1.xlarge`` 
-       
-      * Memory optimized 
-
-         
-        * Current generation: ``cache.r3.large`` , ``cache.r3.xlarge`` , ``cache.r3.2xlarge`` , ``cache.r3.4xlarge`` , ``cache.r3.8xlarge`` 
-         
-        * Previous generation: ``cache.m2.xlarge`` , ``cache.m2.2xlarge`` , ``cache.m2.4xlarge`` 
+        * Previous generation: ``cache.t1.micro`` , ``cache.m1.small`` , ``cache.m1.medium`` , ``cache.m1.large`` , ``cache.m1.xlarge``   
          
 
-      
+       
+       
+      * Compute optimized: ``cache.c1.xlarge``   
+       
+      * Memory optimized: 
+
+         
+        * Current generation: ``cache.r3.large`` , ``cache.r3.xlarge`` , ``cache.r3.2xlarge`` , ``cache.r3.4xlarge`` , ``cache.r3.8xlarge``   
+         
+        * Previous generation: ``cache.m2.xlarge`` , ``cache.m2.2xlarge`` , ``cache.m2.4xlarge``   
+         
+
+       
        
 
        
 
-      **Notes:** 
+       **Notes:**  
 
        
 
        
-      * All t2 instances are created in an Amazon Virtual Private Cloud (VPC).
+      * All T2 instances are created in an Amazon Virtual Private Cloud (Amazon VPC). 
        
-      * Redis backup/restore is not supported for t2 instances.
+      * Redis backup/restore is not supported for Redis (cluster mode disabled) T1 and T2 instances. Backup/restore is supported on Redis (cluster mode enabled) T2 instances. 
        
-      * Redis Append-only files (AOF) functionality is not supported for t1 or t2 instances.
-       
-
+      * Redis Append-only files (AOF) functionality is not supported for T1 or T2 instances. 
        
 
-      For a complete listing of cache node types and specifications, see `Amazon ElastiCache Product Features and Details`_ and `Cache Node Type-Specific Parameters for Memcached`_ or `Cache Node Type-Specific Parameters for Redis`_ . 
+       
+
+      For a complete listing of node types and specifications, see `Amazon ElastiCache Product Features and Details <http://aws.amazon.com/elasticache/details>`_ and either `Cache Node Type-Specific Parameters for Memcached <http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#ParameterGroups.Memcached.NodeSpecific>`_ or `Cache Node Type-Specific Parameters for Redis <http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#ParameterGroups.Redis.NodeSpecific>`_ .
 
       
 
@@ -888,7 +1003,7 @@ CacheCluster -> (structure)
 
         
 
-        The ID of the primary node to which this read replica node is synchronized. If this field is empty, then this node is not associated with a primary cache cluster.
+        The ID of the primary node to which this read replica node is synchronized. If this field is empty, this node is not associated with a primary cache cluster.
 
         
 
@@ -972,11 +1087,17 @@ CacheCluster -> (structure)
 
     
 
-    The number of days for which ElastiCache will retain automatic cache cluster snapshots before deleting them. For example, if you set *SnapshotRetentionLimit* to 5, then a snapshot that was taken today will be retained for 5 days before being deleted.
+    The number of days for which ElastiCache retains automatic cache cluster snapshots before deleting them. For example, if you set ``SnapshotRetentionLimit`` to 5, a snapshot that was taken today is retained for 5 days before being deleted.
 
      
 
-    **Important** If the value of SnapshotRetentionLimit is set to zero (0), backups are turned off.
+    .. warning::
+
+       
+
+      If the value of SnapshotRetentionLimit is set to zero (0), backups are turned off.
+
+       
 
     
 
@@ -986,11 +1107,11 @@ CacheCluster -> (structure)
 
     
 
-    The daily time range (in UTC) during which ElastiCache will begin taking a daily snapshot of your cache cluster.
+    The daily time range (in UTC) during which ElastiCache begins taking a daily snapshot of your cache cluster.
 
      
 
-    Example: ``05:00-09:00`` 
+    Example: ``05:00-09:00``  
 
     
 
@@ -998,9 +1119,3 @@ CacheCluster -> (structure)
 
   
 
-
-
-.. _Cache Node Type-Specific Parameters for Memcached: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#CacheParameterGroups.Memcached.NodeSpecific
-.. _Cache Node Type-Specific Parameters for Redis: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#CacheParameterGroups.Redis.NodeSpecific
-.. _Amazon ElastiCache Product Features and Details: http://aws.amazon.com/elasticache/details
-.. _Cache Node Considerations for Memcached: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheNode.Memcached.html

@@ -15,8 +15,11 @@ Description
 
 
 
-Returns a list of the fields contained in the specified ACM Certificate. For example, this action returns the certificate status, a flag that indicates whether the certificate is associated with any other AWS service, and the date at which the certificate request was created. The ACM Certificate is specified on input by its Amazon Resource Name (ARN). 
+Returns detailed metadata about the specified ACM Certificate.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DescribeCertificate>`_
 
 
 ========
@@ -28,7 +31,7 @@ Synopsis
     describe-certificate
   --certificate-arn <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -40,7 +43,7 @@ Options
 ``--certificate-arn`` (string)
 
 
-  String that contains an ACM Certificate ARN. The ARN must be of the form: 
+  The Amazon Resource Name (ARN) of the ACM Certificate. The ARN must have the following form:
 
    
 
@@ -48,15 +51,15 @@ Options
 
    
 
-  For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces`_ . 
+  For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces <http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`_ .
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -133,7 +136,7 @@ Certificate -> (structure)
 
   
 
-  Contains a  CertificateDetail structure that lists the fields of an ACM Certificate.
+  Metadata about an ACM certificate.
 
   
 
@@ -141,15 +144,7 @@ Certificate -> (structure)
 
     
 
-    Amazon Resource Name (ARN) of the certificate. This is of the form: 
-
-     
-
-     ``arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012``  
-
-     
-
-    For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces`_ . 
+    The Amazon Resource Name (ARN) of the certificate. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces <http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`_ in the *AWS General Reference* .
 
     
 
@@ -159,7 +154,7 @@ Certificate -> (structure)
 
     
 
-    Fully qualified domain name (FQDN), such as www.example.com or example.com, for the certificate. 
+    The fully qualified domain name for the certificate, such as www.example.com or example.com.
 
     
 
@@ -169,7 +164,7 @@ Certificate -> (structure)
 
     
 
-    One or more domain names (subject alternative names) included in the certificate request. After the certificate is issued, this list includes the domain names bound to the public key contained in the certificate. The subject alternative names include the canonical domain name (CN) of the certificate and additional domain names that can be used to connect to the website. 
+    One or more domain names (subject alternative names) included in the certificate. This list contains the domain names that are bound to the public key that is contained in the certificate. The subject alternative names include the canonical domain name (CN) of the certificate and additional domain names that can be used to connect to the website.
 
     
 
@@ -185,7 +180,7 @@ Certificate -> (structure)
 
     
 
-    References a  DomainValidation structure that contains the domain name in the certificate and the email address that can be used for validation. 
+    Contains information about the initial validation of each domain name that occurs as a result of the  request-certificate request. This field exists only when the certificate type is ``AMAZON_ISSUED`` .
 
     
 
@@ -193,7 +188,7 @@ Certificate -> (structure)
 
       
 
-      Structure that contains the domain name, the base validation domain to which validation email is sent, and the email addresses used to validate the domain identity. 
+      Contains information about the validation of each domain name in the certificate.
 
       
 
@@ -201,7 +196,7 @@ Certificate -> (structure)
 
         
 
-        Fully Qualified Domain Name (FQDN) of the form ``www.example.com or`` ``example.com``  
+        A fully qualified domain name (FQDN) in the certificate. For example, ``www.example.com`` or ``example.com`` .
 
         
 
@@ -211,7 +206,7 @@ Certificate -> (structure)
 
         
 
-        A list of contact address for the domain registrant. 
+        A list of email addresses that ACM used to send domain validation emails.
 
         
 
@@ -227,7 +222,17 @@ Certificate -> (structure)
 
         
 
-        The base validation domain that acts as the suffix of the email addresses that are used to send the emails. 
+        The domain name that ACM used to send domain validation emails.
+
+        
+
+        
+
+      ValidationStatus -> (string)
+
+        
+
+        The validation status of the domain name.
 
         
 
@@ -241,7 +246,7 @@ Certificate -> (structure)
 
     
 
-    String that contains the serial number of the certificate. 
+    The serial number of the certificate.
 
     
 
@@ -251,7 +256,7 @@ Certificate -> (structure)
 
     
 
-    The X.500 distinguished name of the entity associated with the public key contained in the certificate. 
+    The name of the entity that is associated with the public key contained in the certificate.
 
     
 
@@ -261,7 +266,7 @@ Certificate -> (structure)
 
     
 
-    The X.500 distinguished name of the CA that issued and signed the certificate. 
+    The name of the certificate authority that issued and signed the certificate.
 
     
 
@@ -271,7 +276,7 @@ Certificate -> (structure)
 
     
 
-    Time at which the certificate was requested. 
+    The time at which the certificate was requested. This value exists only when the certificate type is ``AMAZON_ISSUED`` .
 
     
 
@@ -281,7 +286,17 @@ Certificate -> (structure)
 
     
 
-    Time at which the certificate was issued. 
+    The time at which the certificate was issued. This value exists only when the certificate type is ``AMAZON_ISSUED`` .
+
+    
+
+    
+
+  ImportedAt -> (timestamp)
+
+    
+
+    The date and time at which the certificate was imported. This value exists only when the certificate type is ``IMPORTED`` .
 
     
 
@@ -291,25 +306,7 @@ Certificate -> (structure)
 
     
 
-    A ``CertificateStatus`` enumeration value that can contain one of the following: 
-
-     
-    * PENDING_VALIDATION
-     
-    * ISSUED
-     
-    * INACTIVE
-     
-    * EXPIRED
-     
-    * REVOKED
-     
-    * FAILED
-     
-    * VALIDATION_TIMED_OUT
-     
-
-     
+    The status of the certificate.
 
     
 
@@ -319,7 +316,7 @@ Certificate -> (structure)
 
     
 
-    The time, if any, at which the certificate was revoked. This value exists only if the certificate has been revoked. 
+    The time at which the certificate was revoked. This value exists only when the certificate status is ``REVOKED`` .
 
     
 
@@ -329,31 +326,7 @@ Certificate -> (structure)
 
     
 
-    A ``RevocationReason`` enumeration value that indicates why the certificate was revoked. This value exists only if the certificate has been revoked. This can be one of the following vales: 
-
-     
-    * UNSPECIFIED
-     
-    * KEY_COMPROMISE
-     
-    * CA_COMPROMISE
-     
-    * AFFILIATION_CHANGED
-     
-    * SUPERCEDED
-     
-    * CESSATION_OF_OPERATION
-     
-    * CERTIFICATE_HOLD
-     
-    * REMOVE_FROM_CRL
-     
-    * PRIVILEGE_WITHDRAWN
-     
-    * A_A_COMPROMISE
-     
-
-     
+    The reason the certificate was revoked. This value exists only when the certificate status is ``REVOKED`` .
 
     
 
@@ -363,7 +336,7 @@ Certificate -> (structure)
 
     
 
-    Time before which the certificate is not valid. 
+    The time before which the certificate is not valid.
 
     
 
@@ -373,7 +346,7 @@ Certificate -> (structure)
 
     
 
-    Time after which the certificate is not valid. 
+    The time after which the certificate is not valid.
 
     
 
@@ -383,7 +356,7 @@ Certificate -> (structure)
 
     
 
-    Asymmetric algorithm used to generate the public and private key pair. Currently the only supported value is ``RSA_2048`` . 
+    The algorithm that was used to generate the key pair (the public and private key).
 
     
 
@@ -393,7 +366,7 @@ Certificate -> (structure)
 
     
 
-    Algorithm used to generate a signature. Currently the only supported value is ``SHA256WITHRSA`` . 
+    The algorithm that was used to sign the certificate.
 
     
 
@@ -403,7 +376,7 @@ Certificate -> (structure)
 
     
 
-    List that identifies ARNs that are using the certificate. A single ACM Certificate can be used by multiple AWS resources. 
+    A list of ARNs for the AWS resources that are using the certificate. A certificate can be used by multiple AWS resources.
 
     
 
@@ -415,8 +388,111 @@ Certificate -> (structure)
 
     
 
+  FailureReason -> (string)
+
+    
+
+    The reason the certificate request failed. This value exists only when the certificate status is ``FAILED`` . For more information, see `Certificate Request Failed <http://docs.aws.amazon.com/acm/latest/userguide/troubleshooting.html#troubleshooting-failed>`_ in the *AWS Certificate Manager User Guide* .
+
+    
+
+    
+
+  Type -> (string)
+
+    
+
+    The source of the certificate. For certificates provided by ACM, this value is ``AMAZON_ISSUED`` . For certificates that you imported with  import-certificate , this value is ``IMPORTED`` . ACM does not provide `managed renewal <http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html>`_ for imported certificates. For more information about the differences between certificates that you import and those that ACM provides, see `Importing Certificates <http://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html>`_ in the *AWS Certificate Manager User Guide* .
+
+    
+
+    
+
+  RenewalSummary -> (structure)
+
+    
+
+    Contains information about the status of ACM's `managed renewal <http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html>`_ for the certificate. This field exists only when the certificate type is ``AMAZON_ISSUED`` .
+
+    
+
+    RenewalStatus -> (string)
+
+      
+
+      The status of ACM's `managed renewal <http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html>`_ of the certificate.
+
+      
+
+      
+
+    DomainValidationOptions -> (list)
+
+      
+
+      Contains information about the validation of each domain name in the certificate, as it pertains to ACM's `managed renewal <http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html>`_ . This is different from the initial validation that occurs as a result of the  request-certificate request. This field exists only when the certificate type is ``AMAZON_ISSUED`` .
+
+      
+
+      (structure)
+
+        
+
+        Contains information about the validation of each domain name in the certificate.
+
+        
+
+        DomainName -> (string)
+
+          
+
+          A fully qualified domain name (FQDN) in the certificate. For example, ``www.example.com`` or ``example.com`` .
+
+          
+
+          
+
+        ValidationEmails -> (list)
+
+          
+
+          A list of email addresses that ACM used to send domain validation emails.
+
+          
+
+          (string)
+
+            
+
+            
+
+          
+
+        ValidationDomain -> (string)
+
+          
+
+          The domain name that ACM used to send domain validation emails.
+
+          
+
+          
+
+        ValidationStatus -> (string)
+
+          
+
+          The validation status of the domain name.
+
+          
+
+          
+
+        
+
+      
+
+    
+
   
 
-
-
-.. _Amazon Resource Names (ARNs) and AWS Service Namespaces: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html

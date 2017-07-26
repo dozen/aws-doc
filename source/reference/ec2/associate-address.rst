@@ -19,20 +19,29 @@ Associates an Elastic IP address with an instance or a network interface.
 
  
 
-An Elastic IP address is for use in either the EC2-Classic platform or in a VPC. For more information, see `Elastic IP Addresses`_ in the *Amazon Elastic Compute Cloud User Guide* .
+An Elastic IP address is for use in either the EC2-Classic platform or in a VPC. For more information, see `Elastic IP Addresses <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html>`_ in the *Amazon Elastic Compute Cloud User Guide* .
 
  
 
-[EC2-Classic, VPC in an EC2-VPC-only account] If the Elastic IP address is already associated with a different instance, it is disassociated from that instance and associated with the specified instance.
+[EC2-Classic, VPC in an EC2-VPC-only account] If the Elastic IP address is already associated with a different instance, it is disassociated from that instance and associated with the specified instance. If you associate an Elastic IP address with an instance that has an existing Elastic IP address, the existing address is disassociated from the instance, but remains allocated to your account.
 
  
 
-[VPC in an EC2-Classic account] If you don't specify a private IP address, the Elastic IP address is associated with the primary IP address. If the Elastic IP address is already associated with a different instance or a network interface, you get an error unless you allow reassociation.
+[VPC in an EC2-Classic account] If you don't specify a private IP address, the Elastic IP address is associated with the primary IP address. If the Elastic IP address is already associated with a different instance or a network interface, you get an error unless you allow reassociation. You cannot associate an Elastic IP address with an instance or network interface that has an existing Elastic IP address.
 
  
 
-This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error.
+.. warning::
 
+   
+
+  This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error, and you may be charged for each time the Elastic IP address is remapped to the same instance. For more information, see the *Elastic IP Addresses* section of `Amazon EC2 Pricing <http://aws.amazon.com/ec2/pricing/>`_ .
+
+   
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateAddress>`_
 
 
 ========
@@ -42,15 +51,15 @@ Synopsis
 ::
 
     associate-address
-  [--dry-run | --no-dry-run]
+  [--allocation-id <value>]
   [--instance-id <value>]
   [--public-ip <value>]
-  [--allocation-id <value>]
+  [--allow-reassociation | --no-allow-reassociation]
+  [--dry-run | --no-dry-run]
   [--network-interface-id <value>]
   [--private-ip-address <value>]
-  [--allow-reassociation | --no-allow-reassociation]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -59,17 +68,17 @@ Synopsis
 Options
 =======
 
-``--dry-run`` | ``--no-dry-run`` (boolean)
+``--allocation-id`` (string)
 
 
-  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
+  [EC2-VPC] The allocation ID. This is required for EC2-VPC.
 
   
 
 ``--instance-id`` (string)
 
 
-  The ID of the instance. This is required for EC2-Classic. For EC2-VPC, you can specify either the instance ID or the network interface ID, but not both. The operation fails if you specify an instance ID unless exactly one network interface is attached. 
+  The ID of the instance. This is required for EC2-Classic. For EC2-VPC, you can specify either the instance ID or the network interface ID, but not both. The operation fails if you specify an instance ID unless exactly one network interface is attached.
 
   
 
@@ -80,10 +89,17 @@ Options
 
   
 
-``--allocation-id`` (string)
+``--allow-reassociation`` | ``--no-allow-reassociation`` (boolean)
 
 
-  [EC2-VPC] The allocation ID. This is required for EC2-VPC.
+  [EC2-VPC] For a VPC in an EC2-Classic account, specify true to allow an Elastic IP address that is already associated with an instance or network interface to be reassociated with the specified instance or network interface. Otherwise, the operation fails. In a VPC in an EC2-VPC-only account, reassociation is automatic, therefore you can specify false to ensure the operation fails if the Elastic IP address is already associated with another resource.
+
+  
+
+``--dry-run`` | ``--no-dry-run`` (boolean)
+
+
+  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
 
   
 
@@ -101,18 +117,11 @@ Options
 
   
 
-``--allow-reassociation`` | ``--no-allow-reassociation`` (boolean)
-
-
-  [EC2-VPC] For a VPC in an EC2-Classic account, specify true to allow an Elastic IP address that is already associated with an instance or network interface to be reassociated with the specified instance or network interface. Otherwise, the operation fails. In a VPC in an EC2-VPC-only account, reassociation is automatic, therefore you can specify false to ensure the operation fails if the Elastic IP address is already associated with another resource.
-
-  
-
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -126,7 +135,7 @@ This example associates an Elastic IP address with an instance in EC2-Classic. I
 
 Command::
 
-  aws ec2 associate-address --instance-id i-5203422c --public-ip 198.51.100.0
+  aws ec2 associate-address --instance-id i-07ffe74c7330ebf53 --public-ip 198.51.100.0
 
 **To associate an Elastic IP address in EC2-VPC**
 
@@ -134,7 +143,7 @@ This example associates an Elastic IP address with an instance in a VPC.
 
 Command::
 
-  aws ec2 associate-address --instance-id i-43a4412a --allocation-id eipalloc-64d5890a
+  aws ec2 associate-address --instance-id i-0b263919b6498b123 --allocation-id eipalloc-64d5890a
 
 Output::
 
@@ -171,6 +180,3 @@ AssociationId -> (string)
 
   
 
-
-
-.. _Elastic IP Addresses: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html

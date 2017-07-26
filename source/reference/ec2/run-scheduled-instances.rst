@@ -23,8 +23,11 @@ Before you can launch a Scheduled Instance, you must purchase it and obtain an i
 
  
 
-You must launch a Scheduled Instance during its scheduled time period. You can't stop or reboot a Scheduled Instance, but you can terminate it as needed. If you terminate a Scheduled Instance before the current scheduled time period ends, you can launch it again after a few minutes.
+You must launch a Scheduled Instance during its scheduled time period. You can't stop or reboot a Scheduled Instance, but you can terminate it as needed. If you terminate a Scheduled Instance before the current scheduled time period ends, you can launch it again after a few minutes. For more information, see `Scheduled Instances <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-scheduled-instances.html>`_ in the *Amazon Elastic Compute Cloud User Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RunScheduledInstances>`_
 
 
 ========
@@ -34,13 +37,13 @@ Synopsis
 ::
 
     run-scheduled-instances
-  [--dry-run | --no-dry-run]
   [--client-token <value>]
+  [--dry-run | --no-dry-run]
   [--instance-count <value>]
-  --scheduled-instance-id <value>
   --launch-specification <value>
+  --scheduled-instance-id <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -49,17 +52,17 @@ Synopsis
 Options
 =======
 
+``--client-token`` (string)
+
+
+  Unique, case-sensitive identifier that ensures the idempotency of the request. For more information, see `Ensuring Idempotency <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html>`_ .
+
+  
+
 ``--dry-run`` | ``--no-dry-run`` (boolean)
 
 
   Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
-
-  
-
-``--client-token`` (string)
-
-
-  Unique, case-sensitive identifier that ensures the idempotency of the request. For more information, see `Ensuring Idempotency`_ .
 
   
 
@@ -74,17 +77,10 @@ Options
 
   
 
-``--scheduled-instance-id`` (string)
-
-
-  The Scheduled Instance ID.
-
-  
-
 ``--launch-specification`` (structure)
 
 
-  The launch specification.
+  The launch specification. You must match the instance type, Availability Zone, network, and platform of the schedule that you purchased.
 
   
 
@@ -93,72 +89,86 @@ Options
 JSON Syntax::
 
   {
-    "ImageId": "string",
-    "KeyName": "string",
-    "SecurityGroupIds": ["string", ...],
-    "UserData": "string",
-    "Placement": {
-      "AvailabilityZone": "string",
-      "GroupName": "string"
-    },
-    "KernelId": "string",
-    "InstanceType": "string",
-    "RamdiskId": "string",
     "BlockDeviceMappings": [
       {
         "DeviceName": "string",
-        "NoDevice": "string",
-        "VirtualName": "string",
         "Ebs": {
+          "DeleteOnTermination": true|false,
+          "Encrypted": true|false,
+          "Iops": integer,
           "SnapshotId": "string",
           "VolumeSize": integer,
-          "DeleteOnTermination": true|false,
-          "VolumeType": "string",
-          "Iops": integer,
-          "Encrypted": true|false
-        }
+          "VolumeType": "string"
+        },
+        "NoDevice": "string",
+        "VirtualName": "string"
       }
       ...
     ],
-    "Monitoring": {
-      "Enabled": true|false
-    },
-    "SubnetId": "string",
-    "NetworkInterfaces": [
-      {
-        "NetworkInterfaceId": "string",
-        "DeviceIndex": integer,
-        "SubnetId": "string",
-        "Description": "string",
-        "PrivateIpAddress": "string",
-        "PrivateIpAddressConfigs": [
-          {
-            "PrivateIpAddress": "string",
-            "Primary": true|false
-          }
-          ...
-        ],
-        "SecondaryPrivateIpAddressCount": integer,
-        "AssociatePublicIpAddress": true|false,
-        "Groups": ["string", ...],
-        "DeleteOnTermination": true|false
-      }
-      ...
-    ],
+    "EbsOptimized": true|false,
     "IamInstanceProfile": {
       "Arn": "string",
       "Name": "string"
     },
-    "EbsOptimized": true|false
+    "ImageId": "string",
+    "InstanceType": "string",
+    "KernelId": "string",
+    "KeyName": "string",
+    "Monitoring": {
+      "Enabled": true|false
+    },
+    "NetworkInterfaces": [
+      {
+        "AssociatePublicIpAddress": true|false,
+        "DeleteOnTermination": true|false,
+        "Description": "string",
+        "DeviceIndex": integer,
+        "Groups": ["string", ...],
+        "Ipv6AddressCount": integer,
+        "Ipv6Addresses": [
+          {
+            "Ipv6Address": "string"
+          }
+          ...
+        ],
+        "NetworkInterfaceId": "string",
+        "PrivateIpAddress": "string",
+        "PrivateIpAddressConfigs": [
+          {
+            "Primary": true|false,
+            "PrivateIpAddress": "string"
+          }
+          ...
+        ],
+        "SecondaryPrivateIpAddressCount": integer,
+        "SubnetId": "string"
+      }
+      ...
+    ],
+    "Placement": {
+      "AvailabilityZone": "string",
+      "GroupName": "string"
+    },
+    "RamdiskId": "string",
+    "SecurityGroupIds": ["string", ...],
+    "SubnetId": "string",
+    "UserData": "string"
   }
 
 
 
+``--scheduled-instance-id`` (string)
+
+
+  The Scheduled Instance ID.
+
+  
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -197,7 +207,7 @@ Output::
 
   {
     "InstanceIdSet": [
-        "i-1a2b3c4d"
+        "i-1234567890abcdef0"
     ]
   }
 
@@ -226,7 +236,7 @@ Output::
 
   {
     "InstanceIdSet": [
-        "i-1a2b3c4d"
+        "i-1234567890abcdef0"
     ]
   }
 
@@ -251,6 +261,3 @@ InstanceIdSet -> (list)
 
   
 
-
-
-.. _Ensuring Idempotency: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html

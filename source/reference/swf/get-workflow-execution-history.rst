@@ -21,11 +21,15 @@ Returns the history of the specified workflow execution. The results may be spli
 
 .. note::
 
+   
+
   This operation is eventually consistent. The results are best effort and may not exactly reflect recent updates and changes.
+
+   
 
  
 
-**Access Control** 
+ **Access Control**  
 
  
 
@@ -34,17 +38,20 @@ You can use IAM policies to control this action's access to Amazon SWF resources
  
 
  
-* Use a ``Resource`` element with the domain name to limit the action to only specified domains.
+* Use a ``Resource`` element with the domain name to limit the action to only specified domains. 
  
-* Use an ``Action`` element to allow or deny permission to call this action.
+* Use an ``Action`` element to allow or deny permission to call this action. 
  
-* You cannot use an IAM policy to constrain this action's parameters.
- 
-
+* You cannot use an IAM policy to constrain this action's parameters. 
  
 
-If the caller does not have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's **cause** parameter will be set to OPERATION_NOT_PERMITTED. For details and example IAM policies, see `Using IAM to Manage Access to Amazon SWF Workflows`_ .
+ 
 
+If the caller doesn't have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's ``cause`` parameter is set to ``OPERATION_NOT_PERMITTED`` . For details and example IAM policies, see `Using IAM to Manage Access to Amazon SWF Workflows <http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html>`_ in the *Amazon SWF Developer Guide* .
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/swf-2012-01-25/GetWorkflowExecutionHistory>`_
 
 
 ``get-workflow-execution-history`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
@@ -65,7 +72,7 @@ Synopsis
   [--starting-token <value>]
   [--page-size <value>]
   [--max-items <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -123,26 +130,34 @@ Performs service operation based on the JSON string provided. The JSON string fo
 
    
 
-``--page-size`` (integer)
- 
-
-  The size of each page.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
    
 
-  
+``--page-size`` (integer)
+ 
 
-  
+  The size of each page to get in the AWS service call. This does not affect the number of items returned in the command's output. Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call. This can help prevent the AWS service calls from timing out.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
 
 ``--max-items`` (integer)
  
 
-  The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination. This ``NextToken`` response element should **not** be used directly outside of the AWS CLI.
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``NextToken`` is provided in the command's output. To resume pagination, provide the ``NextToken`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``NextToken`` response element directly outside of the AWS CLI.
 
    
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -167,103 +182,101 @@ events -> (list)
      
 
      
-    * **WorkflowExecutionStarted** : The workflow execution was started.
+    * ``ActivityTaskCancelRequested`` – A ``RequestCancelActivityTask`` decision was received by the system. 
      
-    * **WorkflowExecutionCompleted** : The workflow execution was closed due to successful completion.
+    * ``ActivityTaskCanceled`` – The activity task was successfully canceled. 
      
-    * **WorkflowExecutionFailed** : The workflow execution closed due to a failure.
+    * ``ActivityTaskCompleted`` – An activity worker successfully completed an activity task by calling  respond-activity-task-completed . 
      
-    * **WorkflowExecutionTimedOut** : The workflow execution was closed because a time out was exceeded.
+    * ``ActivityTaskFailed`` – An activity worker failed an activity task by calling  respond-activity-task-failed . 
      
-    * **WorkflowExecutionCanceled** : The workflow execution was successfully canceled and closed.
+    * ``ActivityTaskScheduled`` – An activity task was scheduled for execution. 
      
-    * **WorkflowExecutionTerminated** : The workflow execution was terminated.
+    * ``ActivityTaskStarted`` – The scheduled activity task was dispatched to a worker. 
      
-    * **WorkflowExecutionContinuedAsNew** : The workflow execution was closed and a new execution of the same type was created with the same workflowId.
+    * ``ActivityTaskTimedOut`` – The activity task timed out. 
      
-    * **WorkflowExecutionCancelRequested** : A request to cancel this workflow execution was made.
+    * ``CancelTimerFailed`` – Failed to process CancelTimer decision. This happens when the decision isn't configured properly, for example no timer exists with the specified timer Id. 
      
-    * **DecisionTaskScheduled** : A decision task was scheduled for the workflow execution.
+    * ``CancelWorkflowExecutionFailed`` – A request to cancel a workflow execution failed. 
      
-    * **DecisionTaskStarted** : The decision task was dispatched to a decider.
+    * ``ChildWorkflowExecutionCanceled`` – A child workflow execution, started by this workflow execution, was canceled and closed. 
      
-    * **DecisionTaskCompleted** : The decider successfully completed a decision task by calling  respond-decision-task-completed .
+    * ``ChildWorkflowExecutionCompleted`` – A child workflow execution, started by this workflow execution, completed successfully and was closed. 
      
-    * **DecisionTaskTimedOut** : The decision task timed out.
+    * ``ChildWorkflowExecutionFailed`` – A child workflow execution, started by this workflow execution, failed to complete successfully and was closed. 
      
-    * **ActivityTaskScheduled** : An activity task was scheduled for execution.
+    * ``ChildWorkflowExecutionStarted`` – A child workflow execution was successfully started. 
      
-    * **ScheduleActivityTaskFailed** : Failed to process ScheduleActivityTask decision. This happens when the decision is not configured properly, for example the activity type specified is not registered.
+    * ``ChildWorkflowExecutionTerminated`` – A child workflow execution, started by this workflow execution, was terminated. 
      
-    * **ActivityTaskStarted** : The scheduled activity task was dispatched to a worker.
+    * ``ChildWorkflowExecutionTimedOut`` – A child workflow execution, started by this workflow execution, timed out and was closed. 
      
-    * **ActivityTaskCompleted** : An activity worker successfully completed an activity task by calling  respond-activity-task-completed .
+    * ``CompleteWorkflowExecutionFailed`` – The workflow execution failed to complete. 
      
-    * **ActivityTaskFailed** : An activity worker failed an activity task by calling  respond-activity-task-failed .
+    * ``ContinueAsNewWorkflowExecutionFailed`` – The workflow execution failed to complete after being continued as a new workflow execution. 
      
-    * **ActivityTaskTimedOut** : The activity task timed out.
+    * ``DecisionTaskCompleted`` – The decider successfully completed a decision task by calling  respond-decision-task-completed . 
      
-    * **ActivityTaskCanceled** : The activity task was successfully canceled.
+    * ``DecisionTaskScheduled`` – A decision task was scheduled for the workflow execution. 
      
-    * **ActivityTaskCancelRequested** : A ``RequestCancelActivityTask`` decision was received by the system.
+    * ``DecisionTaskStarted`` – The decision task was dispatched to a decider. 
      
-    * **RequestCancelActivityTaskFailed** : Failed to process RequestCancelActivityTask decision. This happens when the decision is not configured properly.
+    * ``DecisionTaskTimedOut`` – The decision task timed out. 
      
-    * **WorkflowExecutionSignaled** : An external signal was received for the workflow execution.
+    * ``ExternalWorkflowExecutionCancelRequested`` – Request to cancel an external workflow execution was successfully delivered to the target execution. 
      
-    * **MarkerRecorded** : A marker was recorded in the workflow history as the result of a ``RecordMarker`` decision.
+    * ``ExternalWorkflowExecutionSignaled`` – A signal, requested by this workflow execution, was successfully delivered to the target external workflow execution. 
      
-    * **TimerStarted** : A timer was started for the workflow execution due to a ``StartTimer`` decision.
+    * ``FailWorkflowExecutionFailed`` – A request to mark a workflow execution as failed, itself failed. 
      
-    * **StartTimerFailed** : Failed to process StartTimer decision. This happens when the decision is not configured properly, for example a timer already exists with the specified timer ID.
+    * ``MarkerRecorded`` – A marker was recorded in the workflow history as the result of a ``RecordMarker`` decision. 
      
-    * **TimerFired** : A timer, previously started for this workflow execution, fired.
+    * ``RecordMarkerFailed`` – A ``RecordMarker`` decision was returned as failed. 
      
-    * **TimerCanceled** : A timer, previously started for this workflow execution, was successfully canceled.
+    * ``RequestCancelActivityTaskFailed`` – Failed to process RequestCancelActivityTask decision. This happens when the decision isn't configured properly. 
      
-    * **CancelTimerFailed** : Failed to process CancelTimer decision. This happens when the decision is not configured properly, for example no timer exists with the specified timer ID.
+    * ``RequestCancelExternalWorkflowExecutionFailed`` – Request to cancel an external workflow execution failed. 
      
-    * **StartChildWorkflowExecutionInitiated** : A request was made to start a child workflow execution.
+    * ``RequestCancelExternalWorkflowExecutionInitiated`` – A request was made to request the cancellation of an external workflow execution. 
      
-    * **StartChildWorkflowExecutionFailed** : Failed to process StartChildWorkflowExecution decision. This happens when the decision is not configured properly, for example the workflow type specified is not registered.
+    * ``ScheduleActivityTaskFailed`` – Failed to process ScheduleActivityTask decision. This happens when the decision isn't configured properly, for example the activity type specified isn't registered. 
      
-    * **ChildWorkflowExecutionStarted** : A child workflow execution was successfully started.
+    * ``SignalExternalWorkflowExecutionFailed`` – The request to signal an external workflow execution failed. 
      
-    * **ChildWorkflowExecutionCompleted** : A child workflow execution, started by this workflow execution, completed successfully and was closed.
+    * ``SignalExternalWorkflowExecutionInitiated`` – A request to signal an external workflow was made. 
      
-    * **ChildWorkflowExecutionFailed** : A child workflow execution, started by this workflow execution, failed to complete successfully and was closed.
+    * ``StartActivityTaskFailed`` – A scheduled activity task failed to start. 
      
-    * **ChildWorkflowExecutionTimedOut** : A child workflow execution, started by this workflow execution, timed out and was closed.
+    * ``StartChildWorkflowExecutionFailed`` – Failed to process StartChildWorkflowExecution decision. This happens when the decision isn't configured properly, for example the workflow type specified isn't registered. 
      
-    * **ChildWorkflowExecutionCanceled** : A child workflow execution, started by this workflow execution, was canceled and closed.
+    * ``StartChildWorkflowExecutionInitiated`` – A request was made to start a child workflow execution. 
      
-    * **ChildWorkflowExecutionTerminated** : A child workflow execution, started by this workflow execution, was terminated.
+    * ``StartTimerFailed`` – Failed to process StartTimer decision. This happens when the decision isn't configured properly, for example a timer already exists with the specified timer Id. 
      
-    * **SignalExternalWorkflowExecutionInitiated** : A request to signal an external workflow was made.
+    * ``TimerCanceled`` – A timer, previously started for this workflow execution, was successfully canceled. 
      
-    * **ExternalWorkflowExecutionSignaled** : A signal, requested by this workflow execution, was successfully delivered to the target external workflow execution.
+    * ``TimerFired`` – A timer, previously started for this workflow execution, fired. 
      
-    * **SignalExternalWorkflowExecutionFailed** : The request to signal an external workflow execution failed.
+    * ``TimerStarted`` – A timer was started for the workflow execution due to a ``StartTimer`` decision. 
      
-    * **RequestCancelExternalWorkflowExecutionInitiated** : A request was made to request the cancellation of an external workflow execution.
+    * ``WorkflowExecutionCancelRequested`` – A request to cancel this workflow execution was made. 
      
-    * **ExternalWorkflowExecutionCancelRequested** : Request to cancel an external workflow execution was successfully delivered to the target execution.
+    * ``WorkflowExecutionCanceled`` – The workflow execution was successfully canceled and closed. 
      
-    * **RequestCancelExternalWorkflowExecutionFailed** : Request to cancel an external workflow execution failed.
+    * ``WorkflowExecutionCompleted`` – The workflow execution was closed due to successful completion. 
      
-    * **LambdaFunctionScheduled** : An AWS Lambda function was scheduled for execution.
+    * ``WorkflowExecutionContinuedAsNew`` – The workflow execution was closed and a new execution of the same type was created with the same workflowId. 
      
-    * **LambdaFunctionStarted** : The scheduled function was invoked in the AWS Lambda service.
+    * ``WorkflowExecutionFailed`` – The workflow execution closed due to a failure. 
      
-    * **LambdaFunctionCompleted** : The AWS Lambda function successfully completed.
+    * ``WorkflowExecutionSignaled`` – An external signal was received for the workflow execution. 
      
-    * **LambdaFunctionFailed** : The AWS Lambda function execution failed.
+    * ``WorkflowExecutionStarted`` – The workflow execution was started. 
      
-    * **LambdaFunctionTimedOut** : The AWS Lambda function execution timed out.
+    * ``WorkflowExecutionTerminated`` – The workflow execution was terminated. 
      
-    * **ScheduleLambdaFunctionFailed** : Failed to process ScheduleLambdaFunction decision. This happens when the workflow execution does not have the proper IAM role attached to invoke AWS Lambda functions.
-     
-    * **StartLambdaFunctionFailed** : Failed to invoke the scheduled function in the AWS Lambda service. This happens when the AWS Lambda service is not available in the current region, or received too many requests.
+    * ``WorkflowExecutionTimedOut`` – The workflow execution was closed because a time out was exceeded. 
      
 
     
@@ -302,7 +315,7 @@ events -> (list)
 
       
 
-      If the event is of type ``WorkflowExecutionStarted`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``WorkflowExecutionStarted`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -310,7 +323,7 @@ events -> (list)
 
         
 
-        The input provided to the workflow execution (if any).
+        The input provided to the workflow execution.
 
         
 
@@ -324,7 +337,7 @@ events -> (list)
 
          
 
-        The duration is specified in seconds; an integer greater than or equal to 0. The value "NONE" can be used to specify unlimited duration.
+        The duration is specified in seconds, an integer greater than or equal to ``0`` . You can use ``NONE`` to specify unlimited duration.
 
         
 
@@ -338,7 +351,7 @@ events -> (list)
 
          
 
-        The duration is specified in seconds; an integer greater than or equal to 0. The value "NONE" can be used to specify unlimited duration.
+        The duration is specified in seconds, an integer greater than or equal to ``0`` . You can use ``NONE`` to specify unlimited duration.
 
         
 
@@ -357,11 +370,11 @@ events -> (list)
          
 
          
-        * **TERMINATE:** the child executions will be terminated.
+        * ``TERMINATE`` – The child executions are terminated. 
          
-        * **REQUEST_CANCEL:** a request to cancel will be attempted for each child execution by recording a ``WorkflowExecutionCancelRequested`` event in its history. It is up to the decider to take appropriate actions when it receives an execution history with this event.
+        * ``REQUEST_CANCEL`` – A request to cancel is attempted for each child execution by recording a ``WorkflowExecutionCancelRequested`` event in its history. It is up to the decider to take appropriate actions when it receives an execution history with this event. 
          
-        * **ABANDON:** no action will be taken. The child executions will continue to run.
+        * ``ABANDON`` – No action is taken. The child executions continue to run. 
          
 
         
@@ -388,6 +401,16 @@ events -> (list)
 
         
 
+      taskPriority -> (string)
+
+        
+
+        The priority of the decision tasks in the workflow execution.
+
+        
+
+        
+
       workflowType -> (structure)
 
         
@@ -400,13 +423,17 @@ events -> (list)
 
           
 
-          **Required.** The name of the workflow type.
+          The name of the workflow type.
 
            
 
           .. note::
 
+             
+
             The combination of workflow type name and version must be unique with in a domain.
+
+             
 
           
 
@@ -416,13 +443,17 @@ events -> (list)
 
           
 
-          **Required.** The version of the workflow type.
+          The version of the workflow type.
 
            
 
           .. note::
 
+             
+
             The combination of workflow type name and version must be unique with in a domain.
+
+             
 
           
 
@@ -446,12 +477,6 @@ events -> (list)
 
         
 
-      taskPriority -> (string)
-
-        
-
-        
-
       continuedExecutionRunId -> (string)
 
         
@@ -466,7 +491,7 @@ events -> (list)
 
         
 
-        The source workflow execution that started this workflow execution. The member is not set if the workflow execution was not started by a workflow.
+        The source workflow execution that started this workflow execution. The member isn't set if the workflow execution was not started by a workflow.
 
         
 
@@ -496,7 +521,7 @@ events -> (list)
 
         
 
-        The ID of the ``StartChildWorkflowExecutionInitiated`` event corresponding to the ``StartChildWorkflowExecution`` decision to start this workflow execution. The source event with this ID can be found in the history of the source workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.
+        The ID of the ``StartChildWorkflowExecutionInitiated`` event corresponding to the ``StartChildWorkflowExecution``   Decision to start this workflow execution. The source event with this ID can be found in the history of the source workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.
 
         
 
@@ -506,7 +531,7 @@ events -> (list)
 
         
 
-        The IAM role attached to this workflow execution to use when invoking AWS Lambda functions.
+        The IAM role attached to the workflow execution.
 
         
 
@@ -518,7 +543,7 @@ events -> (list)
 
       
 
-      If the event is of type ``WorkflowExecutionCompleted`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``WorkflowExecutionCompleted`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -548,7 +573,7 @@ events -> (list)
 
       
 
-      If the event is of type ``CompleteWorkflowExecutionFailed`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``CompleteWorkflowExecutionFailed`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -562,7 +587,11 @@ events -> (list)
 
         .. note::
 
-          If **cause** is set to OPERATION_NOT_PERMITTED, the decision failed because it lacked sufficient permissions. For details and example IAM policies, see `Using IAM to Manage Access to Amazon SWF Workflows`_ .
+           
+
+          If ``cause`` is set to ``OPERATION_NOT_PERMITTED`` , the decision failed because it lacked sufficient permissions. For details and example IAM policies, see `Using IAM to Manage Access to Amazon SWF Workflows <http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html>`_ in the *Amazon SWF Developer Guide* .
+
+           
 
         
 
@@ -584,7 +613,7 @@ events -> (list)
 
       
 
-      If the event is of type ``WorkflowExecutionFailed`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``WorkflowExecutionFailed`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -592,7 +621,7 @@ events -> (list)
 
         
 
-        The descriptive reason provided for the failure (if any).
+        The descriptive reason provided for the failure.
 
         
 
@@ -602,7 +631,7 @@ events -> (list)
 
         
 
-        The details of the failure (if any).
+        The details of the failure.
 
         
 
@@ -624,7 +653,7 @@ events -> (list)
 
       
 
-      If the event is of type ``FailWorkflowExecutionFailed`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``FailWorkflowExecutionFailed`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -638,7 +667,11 @@ events -> (list)
 
         .. note::
 
-          If **cause** is set to OPERATION_NOT_PERMITTED, the decision failed because it lacked sufficient permissions. For details and example IAM policies, see `Using IAM to Manage Access to Amazon SWF Workflows`_ .
+           
+
+          If ``cause`` is set to ``OPERATION_NOT_PERMITTED`` , the decision failed because it lacked sufficient permissions. For details and example IAM policies, see `Using IAM to Manage Access to Amazon SWF Workflows <http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html>`_ in the *Amazon SWF Developer Guide* .
+
+           
 
         
 
@@ -660,7 +693,7 @@ events -> (list)
 
       
 
-      If the event is of type ``WorkflowExecutionTimedOut`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``WorkflowExecutionTimedOut`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -687,11 +720,11 @@ events -> (list)
          
 
          
-        * **TERMINATE:** the child executions will be terminated.
+        * ``TERMINATE`` – The child executions are terminated. 
          
-        * **REQUEST_CANCEL:** a request to cancel will be attempted for each child execution by recording a ``WorkflowExecutionCancelRequested`` event in its history. It is up to the decider to take appropriate actions when it receives an execution history with this event.
+        * ``REQUEST_CANCEL`` – A request to cancel is attempted for each child execution by recording a ``WorkflowExecutionCancelRequested`` event in its history. It is up to the decider to take appropriate actions when it receives an execution history with this event. 
          
-        * **ABANDON:** no action will be taken. The child executions will continue to run.
+        * ``ABANDON`` – No action is taken. The child executions continue to run. 
          
 
         
@@ -704,7 +737,7 @@ events -> (list)
 
       
 
-      If the event is of type ``WorkflowExecutionCanceled`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``WorkflowExecutionCanceled`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -712,7 +745,7 @@ events -> (list)
 
         
 
-        Details for the cancellation (if any).
+        The details of the cancellation.
 
         
 
@@ -734,7 +767,7 @@ events -> (list)
 
       
 
-      If the event is of type ``CancelWorkflowExecutionFailed`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``CancelWorkflowExecutionFailed`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -748,7 +781,11 @@ events -> (list)
 
         .. note::
 
-          If **cause** is set to OPERATION_NOT_PERMITTED, the decision failed because it lacked sufficient permissions. For details and example IAM policies, see `Using IAM to Manage Access to Amazon SWF Workflows`_ .
+           
+
+          If ``cause`` is set to ``OPERATION_NOT_PERMITTED`` , the decision failed because it lacked sufficient permissions. For details and example IAM policies, see `Using IAM to Manage Access to Amazon SWF Workflows <http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html>`_ in the *Amazon SWF Developer Guide* .
+
+           
 
         
 
@@ -770,7 +807,7 @@ events -> (list)
 
       
 
-      If the event is of type ``WorkflowExecutionContinuedAsNew`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``WorkflowExecutionContinuedAsNew`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -812,7 +849,7 @@ events -> (list)
 
          
 
-        The duration is specified in seconds; an integer greater than or equal to 0. The value "NONE" can be used to specify unlimited duration.
+        The duration is specified in seconds, an integer greater than or equal to ``0`` . You can use ``NONE`` to specify unlimited duration.
 
         
 
@@ -822,7 +859,7 @@ events -> (list)
 
         
 
-        Represents a task list.
+        The task list to use for the decisions of the new (continued) workflow execution.
 
         
 
@@ -842,6 +879,10 @@ events -> (list)
 
         
 
+        The priority of the task to use for the decisions of the new (continued) workflow execution.
+
+        
+
         
 
       taskStartToCloseTimeout -> (string)
@@ -852,7 +893,7 @@ events -> (list)
 
          
 
-        The duration is specified in seconds; an integer greater than or equal to 0. The value "NONE" can be used to specify unlimited duration.
+        The duration is specified in seconds, an integer greater than or equal to ``0`` . You can use ``NONE`` to specify unlimited duration.
 
         
 
@@ -871,11 +912,11 @@ events -> (list)
          
 
          
-        * **TERMINATE:** the child executions will be terminated.
+        * ``TERMINATE`` – The child executions are terminated. 
          
-        * **REQUEST_CANCEL:** a request to cancel will be attempted for each child execution by recording a ``WorkflowExecutionCancelRequested`` event in its history. It is up to the decider to take appropriate actions when it receives an execution history with this event.
+        * ``REQUEST_CANCEL`` – A request to cancel is attempted for each child execution by recording a ``WorkflowExecutionCancelRequested`` event in its history. It is up to the decider to take appropriate actions when it receives an execution history with this event. 
          
-        * **ABANDON:** no action will be taken. The child executions will continue to run.
+        * ``ABANDON`` – No action is taken. The child executions continue to run. 
          
 
         
@@ -902,7 +943,7 @@ events -> (list)
 
         
 
-        Represents a workflow type.
+        The workflow type of this execution.
 
         
 
@@ -910,13 +951,17 @@ events -> (list)
 
           
 
-          **Required.** The name of the workflow type.
+          The name of the workflow type.
 
            
 
           .. note::
 
+             
+
             The combination of workflow type name and version must be unique with in a domain.
+
+             
 
           
 
@@ -926,13 +971,17 @@ events -> (list)
 
           
 
-          **Required.** The version of the workflow type.
+          The version of the workflow type.
 
            
 
           .. note::
 
+             
+
             The combination of workflow type name and version must be unique with in a domain.
+
+             
 
           
 
@@ -944,7 +993,7 @@ events -> (list)
 
         
 
-        The IAM role attached to this workflow execution to use when invoking AWS Lambda functions.
+        The IAM role to attach to the new (continued) workflow execution.
 
         
 
@@ -956,7 +1005,7 @@ events -> (list)
 
       
 
-      If the event is of type ``ContinueAsNewWorkflowExecutionFailed`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``ContinueAsNewWorkflowExecutionFailed`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -970,7 +1019,11 @@ events -> (list)
 
         .. note::
 
-          If **cause** is set to OPERATION_NOT_PERMITTED, the decision failed because it lacked sufficient permissions. For details and example IAM policies, see `Using IAM to Manage Access to Amazon SWF Workflows`_ .
+           
+
+          If ``cause`` is set to ``OPERATION_NOT_PERMITTED`` , the decision failed because it lacked sufficient permissions. For details and example IAM policies, see `Using IAM to Manage Access to Amazon SWF Workflows <http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html>`_ in the *Amazon SWF Developer Guide* .
+
+           
 
         
 
@@ -992,7 +1045,7 @@ events -> (list)
 
       
 
-      If the event is of type ``WorkflowExecutionTerminated`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``WorkflowExecutionTerminated`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -1000,7 +1053,7 @@ events -> (list)
 
         
 
-        The reason provided for the termination (if any).
+        The reason provided for the termination.
 
         
 
@@ -1010,7 +1063,7 @@ events -> (list)
 
         
 
-        The details provided for the termination (if any).
+        The details provided for the termination.
 
         
 
@@ -1029,11 +1082,11 @@ events -> (list)
          
 
          
-        * **TERMINATE:** the child executions will be terminated.
+        * ``TERMINATE`` – The child executions are terminated. 
          
-        * **REQUEST_CANCEL:** a request to cancel will be attempted for each child execution by recording a ``WorkflowExecutionCancelRequested`` event in its history. It is up to the decider to take appropriate actions when it receives an execution history with this event.
+        * ``REQUEST_CANCEL`` – A request to cancel is attempted for each child execution by recording a ``WorkflowExecutionCancelRequested`` event in its history. It is up to the decider to take appropriate actions when it receives an execution history with this event. 
          
-        * **ABANDON:** no action will be taken. The child executions will continue to run.
+        * ``ABANDON`` – No action is taken. The child executions continue to run. 
          
 
         
@@ -1056,7 +1109,7 @@ events -> (list)
 
       
 
-      If the event is of type ``WorkflowExecutionCancelRequested`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``WorkflowExecutionCancelRequested`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -1116,7 +1169,7 @@ events -> (list)
 
       
 
-      If the event is of type ``DecisionTaskScheduled`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``DecisionTaskScheduled`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -1144,11 +1197,11 @@ events -> (list)
 
         
 
-        *Optional.* A task priority that, if set, specifies the priority for this decision task. Valid values are integers that range from Java's ``Integer.MIN_VALUE`` (-2147483648) to ``Integer.MAX_VALUE`` (2147483647). Higher numbers indicate higher priority.
+        A task priority that, if set, specifies the priority for this decision task. Valid values are integers that range from Java's ``Integer.MIN_VALUE`` (-2147483648) to ``Integer.MAX_VALUE`` (2147483647). Higher numbers indicate higher priority.
 
          
 
-        For more information about setting task priority, see `Setting Task Priority`_ in the *Amazon Simple Workflow Developer Guide* .
+        For more information about setting task priority, see `Setting Task Priority <http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html>`_ in the *Amazon SWF Developer Guide* .
 
         
 
@@ -1158,11 +1211,11 @@ events -> (list)
 
         
 
-        The maximum duration for this decision task. The task is considered timed out if it does not completed within this duration.
+        The maximum duration for this decision task. The task is considered timed out if it doesn't completed within this duration.
 
          
 
-        The duration is specified in seconds; an integer greater than or equal to 0. The value "NONE" can be used to specify unlimited duration.
+        The duration is specified in seconds, an integer greater than or equal to ``0`` . You can use ``NONE`` to specify unlimited duration.
 
         
 
@@ -1174,7 +1227,7 @@ events -> (list)
 
       
 
-      If the event is of type ``DecisionTaskStarted`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``DecisionTaskStarted`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -1204,7 +1257,7 @@ events -> (list)
 
       
 
-      If the event is of type ``DecisionTaskCompleted`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``DecisionTaskCompleted`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -1244,7 +1297,7 @@ events -> (list)
 
       
 
-      If the event is of type ``DecisionTaskTimedOut`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``DecisionTaskTimedOut`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -1284,7 +1337,7 @@ events -> (list)
 
       
 
-      If the event is of type ``ActivityTaskScheduled`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``ActivityTaskScheduled`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -1306,7 +1359,11 @@ events -> (list)
 
           .. note::
 
+             
+
             The combination of activity type name and version must be unique within a domain.
+
+             
 
           
 
@@ -1322,7 +1379,11 @@ events -> (list)
 
           .. note::
 
+             
+
             The combination of activity type name and version must be unique with in a domain.
+
+             
 
           
 
@@ -1354,7 +1415,7 @@ events -> (list)
 
         
 
-        *Optional.* Data attached to the event that can be used by the decider in subsequent workflow tasks. This data is not sent to the activity.
+        Data attached to the event that can be used by the decider in subsequent workflow tasks. This data isn't sent to the activity.
 
         
 
@@ -1414,7 +1475,7 @@ events -> (list)
 
         
 
-        *Optional.* The priority to assign to the scheduled activity task. If set, this will override any default priority value that was assigned when the activity type was registered.
+        The priority to assign to the scheduled activity task. If set, this overrides any default priority value that was assigned when the activity type was registered.
 
          
 
@@ -1422,7 +1483,7 @@ events -> (list)
 
          
 
-        For more information about setting task priority, see `Setting Task Priority`_ in the *Amazon Simple Workflow Developer Guide* .
+        For more information about setting task priority, see `Setting Task Priority <http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html>`_ in the *Amazon SWF Developer Guide* .
 
         
 
@@ -1442,7 +1503,7 @@ events -> (list)
 
         
 
-        The maximum time before which the worker processing this task must report progress by calling  record-activity-task-heartbeat . If the timeout is exceeded, the activity task is automatically timed out. If the worker subsequently attempts to record a heartbeat or return a result, it will be ignored.
+        The maximum time before which the worker processing this task must report progress by calling  record-activity-task-heartbeat . If the timeout is exceeded, the activity task is automatically timed out. If the worker subsequently attempts to record a heartbeat or return a result, it is ignored.
 
         
 
@@ -1454,7 +1515,7 @@ events -> (list)
 
       
 
-      If the event is of type ``ActivityTaskStarted`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``ActivityTaskStarted`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -1484,7 +1545,7 @@ events -> (list)
 
       
 
-      If the event is of type ``ActivityTaskCompleted`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``ActivityTaskCompleted`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -1492,7 +1553,7 @@ events -> (list)
 
         
 
-        The results of the activity task (if any).
+        The results of the activity task.
 
         
 
@@ -1524,7 +1585,7 @@ events -> (list)
 
       
 
-      If the event is of type ``ActivityTaskFailed`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``ActivityTaskFailed`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -1532,7 +1593,7 @@ events -> (list)
 
         
 
-        The reason provided for the failure (if any).
+        The reason provided for the failure.
 
         
 
@@ -1542,7 +1603,7 @@ events -> (list)
 
         
 
-        The details of the failure (if any).
+        The details of the failure.
 
         
 
@@ -1574,7 +1635,7 @@ events -> (list)
 
       
 
-      If the event is of type ``ActivityTaskTimedOut`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``ActivityTaskTimedOut`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -1624,7 +1685,7 @@ events -> (list)
 
       
 
-      If the event is of type ``ActivityTaskCanceled`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``ActivityTaskCanceled`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -1632,7 +1693,7 @@ events -> (list)
 
         
 
-        Details of the cancellation (if any).
+        Details of the cancellation.
 
         
 
@@ -1674,7 +1735,7 @@ events -> (list)
 
       
 
-      If the event is of type ``ActivityTaskcancelRequested`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``ActivityTaskcancelRequested`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -1704,7 +1765,7 @@ events -> (list)
 
       
 
-      If the event is of type ``WorkflowExecutionSignaled`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``WorkflowExecutionSignaled`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -1722,7 +1783,7 @@ events -> (list)
 
         
 
-        Inputs provided with the signal (if any). The decider can use the signal name and inputs to determine how to process the signal.
+        The inputs provided with the signal. The decider can use the signal name and inputs to determine how to process the signal.
 
         
 
@@ -1774,7 +1835,7 @@ events -> (list)
 
       
 
-      If the event is of type ``MarkerRecorded`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``MarkerRecorded`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -1792,7 +1853,7 @@ events -> (list)
 
         
 
-        Details of the marker (if any).
+        The details of the marker.
 
         
 
@@ -1814,7 +1875,7 @@ events -> (list)
 
       
 
-      If the event is of type ``DecisionTaskFailed`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``DecisionTaskFailed`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -1838,7 +1899,11 @@ events -> (list)
 
         .. note::
 
-          If **cause** is set to OPERATION_NOT_PERMITTED, the decision failed because it lacked sufficient permissions. For details and example IAM policies, see `Using IAM to Manage Access to Amazon SWF Workflows`_ .
+           
+
+          If ``cause`` is set to ``OPERATION_NOT_PERMITTED`` , the decision failed because it lacked sufficient permissions. For details and example IAM policies, see `Using IAM to Manage Access to Amazon SWF Workflows <http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html>`_ in the *Amazon SWF Developer Guide* .
+
+           
 
         
 
@@ -1860,7 +1925,7 @@ events -> (list)
 
       
 
-      If the event is of type ``TimerStarted`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``TimerStarted`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -1878,7 +1943,7 @@ events -> (list)
 
         
 
-        *Optional.* Data attached to the event that can be used by the decider in subsequent workflow tasks.
+        Data attached to the event that can be used by the decider in subsequent workflow tasks.
 
         
 
@@ -1888,11 +1953,11 @@ events -> (list)
 
         
 
-        The duration of time after which the timer will fire.
+        The duration of time after which the timer fires.
 
          
 
-        The duration is specified in seconds; an integer greater than or equal to 0.
+        The duration is specified in seconds, an integer greater than or equal to ``0`` .
 
         
 
@@ -1914,7 +1979,7 @@ events -> (list)
 
       
 
-      If the event is of type ``TimerFired`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``TimerFired`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -1944,7 +2009,7 @@ events -> (list)
 
       
 
-      If the event is of type ``TimerCanceled`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``TimerCanceled`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -1952,7 +2017,7 @@ events -> (list)
 
         
 
-        The unique ID of the timer that was canceled. 
+        The unique ID of the timer that was canceled.
 
         
 
@@ -1984,7 +2049,7 @@ events -> (list)
 
       
 
-      If the event is of type ``StartChildWorkflowExecutionInitiated`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``StartChildWorkflowExecutionInitiated`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -2010,13 +2075,17 @@ events -> (list)
 
           
 
-          **Required.** The name of the workflow type.
+          The name of the workflow type.
 
            
 
           .. note::
 
+             
+
             The combination of workflow type name and version must be unique with in a domain.
+
+             
 
           
 
@@ -2026,13 +2095,17 @@ events -> (list)
 
           
 
-          **Required.** The version of the workflow type.
+          The version of the workflow type.
 
            
 
           .. note::
 
+             
+
             The combination of workflow type name and version must be unique with in a domain.
+
+             
 
           
 
@@ -2044,7 +2117,7 @@ events -> (list)
 
         
 
-        *Optional.* Data attached to the event that can be used by the decider in subsequent decision tasks. This data is not sent to the activity.
+        Data attached to the event that can be used by the decider in subsequent decision tasks. This data isn't sent to the activity.
 
         
 
@@ -2054,7 +2127,7 @@ events -> (list)
 
         
 
-        The inputs provided to the child workflow execution (if any).
+        The inputs provided to the child workflow execution.
 
         
 
@@ -2064,11 +2137,11 @@ events -> (list)
 
         
 
-        The maximum duration for the child workflow execution. If the workflow execution is not closed within this duration, it will be timed out and force terminated.
+        The maximum duration for the child workflow execution. If the workflow execution isn't closed within this duration, it is timed out and force-terminated.
 
          
 
-        The duration is specified in seconds; an integer greater than or equal to 0. The value "NONE" can be used to specify unlimited duration.
+        The duration is specified in seconds, an integer greater than or equal to ``0`` . You can use ``NONE`` to specify unlimited duration.
 
         
 
@@ -2098,11 +2171,11 @@ events -> (list)
 
         
 
-        *Optional.* The priority assigned for the decision tasks for this workflow execution. Valid values are integers that range from Java's ``Integer.MIN_VALUE`` (-2147483648) to ``Integer.MAX_VALUE`` (2147483647). Higher numbers indicate higher priority.
+        The priority assigned for the decision tasks for this workflow execution. Valid values are integers that range from Java's ``Integer.MIN_VALUE`` (-2147483648) to ``Integer.MAX_VALUE`` (2147483647). Higher numbers indicate higher priority.
 
          
 
-        For more information about setting task priority, see `Setting Task Priority`_ in the *Amazon Simple Workflow Developer Guide* .
+        For more information about setting task priority, see `Setting Task Priority <http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html>`_ in the *Amazon SWF Developer Guide* .
 
         
 
@@ -2112,7 +2185,7 @@ events -> (list)
 
         
 
-        The ID of the ``DecisionTaskCompleted`` event corresponding to the decision task that resulted in the ``StartChildWorkflowExecution`` decision to request this child workflow execution. This information can be useful for diagnosing problems by tracing back the cause of events.
+        The ID of the ``DecisionTaskCompleted`` event corresponding to the decision task that resulted in the ``StartChildWorkflowExecution``   Decision to request this child workflow execution. This information can be useful for diagnosing problems by tracing back the cause of events.
 
         
 
@@ -2131,11 +2204,11 @@ events -> (list)
          
 
          
-        * **TERMINATE:** the child executions will be terminated.
+        * ``TERMINATE`` – The child executions are terminated. 
          
-        * **REQUEST_CANCEL:** a request to cancel will be attempted for each child execution by recording a ``WorkflowExecutionCancelRequested`` event in its history. It is up to the decider to take appropriate actions when it receives an execution history with this event.
+        * ``REQUEST_CANCEL`` – A request to cancel is attempted for each child execution by recording a ``WorkflowExecutionCancelRequested`` event in its history. It is up to the decider to take appropriate actions when it receives an execution history with this event. 
          
-        * **ABANDON:** no action will be taken. The child executions will continue to run.
+        * ``ABANDON`` – No action is taken. The child executions continue to run. 
          
 
         
@@ -2150,7 +2223,7 @@ events -> (list)
 
          
 
-        The duration is specified in seconds; an integer greater than or equal to 0. The value "NONE" can be used to specify unlimited duration.
+        The duration is specified in seconds, an integer greater than or equal to ``0`` . You can use ``NONE`` to specify unlimited duration.
 
         
 
@@ -2176,7 +2249,7 @@ events -> (list)
 
         
 
-        The IAM role attached to this workflow execution to use when invoking AWS Lambda functions.
+        The IAM role to attach to the child workflow execution.
 
         
 
@@ -2188,7 +2261,7 @@ events -> (list)
 
       
 
-      If the event is of type ``ChildWorkflowExecutionStarted`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``ChildWorkflowExecutionStarted`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -2226,7 +2299,7 @@ events -> (list)
 
         
 
-        The type of the child workflow execution. 
+        The type of the child workflow execution.
 
         
 
@@ -2234,13 +2307,17 @@ events -> (list)
 
           
 
-          **Required.** The name of the workflow type.
+          The name of the workflow type.
 
            
 
           .. note::
 
+             
+
             The combination of workflow type name and version must be unique with in a domain.
+
+             
 
           
 
@@ -2250,13 +2327,17 @@ events -> (list)
 
           
 
-          **Required.** The version of the workflow type.
+          The version of the workflow type.
 
            
 
           .. note::
 
+             
+
             The combination of workflow type name and version must be unique with in a domain.
+
+             
 
           
 
@@ -2268,7 +2349,7 @@ events -> (list)
 
         
 
-        The ID of the ``StartChildWorkflowExecutionInitiated`` event corresponding to the ``StartChildWorkflowExecution`` decision to start this child workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.
+        The ID of the ``StartChildWorkflowExecutionInitiated`` event corresponding to the ``StartChildWorkflowExecution``   Decision to start this child workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.
 
         
 
@@ -2280,7 +2361,7 @@ events -> (list)
 
       
 
-      If the event is of type ``ChildWorkflowExecutionCompleted`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``ChildWorkflowExecutionCompleted`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -2326,13 +2407,17 @@ events -> (list)
 
           
 
-          **Required.** The name of the workflow type.
+          The name of the workflow type.
 
            
 
           .. note::
 
+             
+
             The combination of workflow type name and version must be unique with in a domain.
+
+             
 
           
 
@@ -2342,13 +2427,17 @@ events -> (list)
 
           
 
-          **Required.** The version of the workflow type.
+          The version of the workflow type.
 
            
 
           .. note::
 
+             
+
             The combination of workflow type name and version must be unique with in a domain.
+
+             
 
           
 
@@ -2360,7 +2449,7 @@ events -> (list)
 
         
 
-        The result of the child workflow execution (if any).
+        The result of the child workflow execution.
 
         
 
@@ -2370,7 +2459,7 @@ events -> (list)
 
         
 
-        The ID of the ``StartChildWorkflowExecutionInitiated`` event corresponding to the ``StartChildWorkflowExecution`` decision to start this child workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.
+        The ID of the ``StartChildWorkflowExecutionInitiated`` event corresponding to the ``StartChildWorkflowExecution``   Decision to start this child workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.
 
         
 
@@ -2392,7 +2481,7 @@ events -> (list)
 
       
 
-      If the event is of type ``ChildWorkflowExecutionFailed`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``ChildWorkflowExecutionFailed`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -2438,13 +2527,17 @@ events -> (list)
 
           
 
-          **Required.** The name of the workflow type.
+          The name of the workflow type.
 
            
 
           .. note::
 
+             
+
             The combination of workflow type name and version must be unique with in a domain.
+
+             
 
           
 
@@ -2454,13 +2547,17 @@ events -> (list)
 
           
 
-          **Required.** The version of the workflow type.
+          The version of the workflow type.
 
            
 
           .. note::
 
+             
+
             The combination of workflow type name and version must be unique with in a domain.
+
+             
 
           
 
@@ -2492,7 +2589,7 @@ events -> (list)
 
         
 
-        The ID of the ``StartChildWorkflowExecutionInitiated`` event corresponding to the ``StartChildWorkflowExecution`` decision to start this child workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.
+        The ID of the ``StartChildWorkflowExecutionInitiated`` event corresponding to the ``StartChildWorkflowExecution``   Decision to start this child workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.
 
         
 
@@ -2514,7 +2611,7 @@ events -> (list)
 
       
 
-      If the event is of type ``ChildWorkflowExecutionTimedOut`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``ChildWorkflowExecutionTimedOut`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -2560,13 +2657,17 @@ events -> (list)
 
           
 
-          **Required.** The name of the workflow type.
+          The name of the workflow type.
 
            
 
           .. note::
 
+             
+
             The combination of workflow type name and version must be unique with in a domain.
+
+             
 
           
 
@@ -2576,13 +2677,17 @@ events -> (list)
 
           
 
-          **Required.** The version of the workflow type.
+          The version of the workflow type.
 
            
 
           .. note::
 
+             
+
             The combination of workflow type name and version must be unique with in a domain.
+
+             
 
           
 
@@ -2604,7 +2709,7 @@ events -> (list)
 
         
 
-        The ID of the ``StartChildWorkflowExecutionInitiated`` event corresponding to the ``StartChildWorkflowExecution`` decision to start this child workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.
+        The ID of the ``StartChildWorkflowExecutionInitiated`` event corresponding to the ``StartChildWorkflowExecution``   Decision to start this child workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.
 
         
 
@@ -2626,7 +2731,7 @@ events -> (list)
 
       
 
-      If the event is of type ``ChildWorkflowExecutionCanceled`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``ChildWorkflowExecutionCanceled`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -2672,13 +2777,17 @@ events -> (list)
 
           
 
-          **Required.** The name of the workflow type.
+          The name of the workflow type.
 
            
 
           .. note::
 
+             
+
             The combination of workflow type name and version must be unique with in a domain.
+
+             
 
           
 
@@ -2688,13 +2797,17 @@ events -> (list)
 
           
 
-          **Required.** The version of the workflow type.
+          The version of the workflow type.
 
            
 
           .. note::
 
+             
+
             The combination of workflow type name and version must be unique with in a domain.
+
+             
 
           
 
@@ -2716,7 +2829,7 @@ events -> (list)
 
         
 
-        The ID of the ``StartChildWorkflowExecutionInitiated`` event corresponding to the ``StartChildWorkflowExecution`` decision to start this child workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.
+        The ID of the ``StartChildWorkflowExecutionInitiated`` event corresponding to the ``StartChildWorkflowExecution``   Decision to start this child workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.
 
         
 
@@ -2738,7 +2851,7 @@ events -> (list)
 
       
 
-      If the event is of type ``ChildWorkflowExecutionTerminated`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``ChildWorkflowExecutionTerminated`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -2784,13 +2897,17 @@ events -> (list)
 
           
 
-          **Required.** The name of the workflow type.
+          The name of the workflow type.
 
            
 
           .. note::
 
+             
+
             The combination of workflow type name and version must be unique with in a domain.
+
+             
 
           
 
@@ -2800,13 +2917,17 @@ events -> (list)
 
           
 
-          **Required.** The version of the workflow type.
+          The version of the workflow type.
 
            
 
           .. note::
 
+             
+
             The combination of workflow type name and version must be unique with in a domain.
+
+             
 
           
 
@@ -2818,7 +2939,7 @@ events -> (list)
 
         
 
-        The ID of the ``StartChildWorkflowExecutionInitiated`` event corresponding to the ``StartChildWorkflowExecution`` decision to start this child workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.
+        The ID of the ``StartChildWorkflowExecutionInitiated`` event corresponding to the ``StartChildWorkflowExecution``   Decision to start this child workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.
 
         
 
@@ -2840,7 +2961,7 @@ events -> (list)
 
       
 
-      If the event is of type ``SignalExternalWorkflowExecutionInitiated`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``SignalExternalWorkflowExecutionInitiated`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -2878,7 +2999,7 @@ events -> (list)
 
         
 
-        Input provided to the signal (if any).
+        The input provided to the signal.
 
         
 
@@ -2898,7 +3019,7 @@ events -> (list)
 
         
 
-        *Optional.* data attached to the event that can be used by the decider in subsequent decision tasks.
+        Data attached to the event that can be used by the decider in subsequent decision tasks.
 
         
 
@@ -2910,7 +3031,7 @@ events -> (list)
 
       
 
-      If the event is of type ``ExternalWorkflowExecutionSignaled`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``ExternalWorkflowExecutionSignaled`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -2960,7 +3081,7 @@ events -> (list)
 
       
 
-      If the event is of type ``SignalExternalWorkflowExecutionFailed`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``SignalExternalWorkflowExecutionFailed`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -2994,7 +3115,11 @@ events -> (list)
 
         .. note::
 
-          If **cause** is set to OPERATION_NOT_PERMITTED, the decision failed because it lacked sufficient permissions. For details and example IAM policies, see `Using IAM to Manage Access to Amazon SWF Workflows`_ .
+           
+
+          If ``cause`` is set to ``OPERATION_NOT_PERMITTED`` , the decision failed because it lacked sufficient permissions. For details and example IAM policies, see `Using IAM to Manage Access to Amazon SWF Workflows <http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html>`_ in the *Amazon SWF Developer Guide* .
+
+           
 
         
 
@@ -3024,6 +3149,10 @@ events -> (list)
 
         
 
+        The data attached to the event that the decider can use in subsequent workflow tasks. This data isn't sent to the workflow execution.
+
+        
+
         
 
       
@@ -3032,7 +3161,7 @@ events -> (list)
 
       
 
-      If the event is of type ``ExternalWorkflowExecutionCancelRequested`` then this member is set and provides detailed information about the event. It is not set for other event types. 
+      If the event is of type ``ExternalWorkflowExecutionCancelRequested`` then this member is set and provides detailed information about the event. It isn't set for other event types. 
 
       
 
@@ -3082,7 +3211,7 @@ events -> (list)
 
       
 
-      If the event is of type ``RequestCancelExternalWorkflowExecutionInitiated`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``RequestCancelExternalWorkflowExecutionInitiated`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -3120,7 +3249,7 @@ events -> (list)
 
         
 
-        *Optional.* Data attached to the event that can be used by the decider in subsequent workflow tasks.
+        Data attached to the event that can be used by the decider in subsequent workflow tasks.
 
         
 
@@ -3132,7 +3261,7 @@ events -> (list)
 
       
 
-      If the event is of type ``RequestCancelExternalWorkflowExecutionFailed`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``RequestCancelExternalWorkflowExecutionFailed`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -3166,7 +3295,11 @@ events -> (list)
 
         .. note::
 
-          If **cause** is set to OPERATION_NOT_PERMITTED, the decision failed because it lacked sufficient permissions. For details and example IAM policies, see `Using IAM to Manage Access to Amazon SWF Workflows`_ .
+           
+
+          If ``cause`` is set to ``OPERATION_NOT_PERMITTED`` , the decision failed because it lacked sufficient permissions. For details and example IAM policies, see `Using IAM to Manage Access to Amazon SWF Workflows <http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html>`_ in the *Amazon SWF Developer Guide* .
+
+           
 
         
 
@@ -3196,6 +3329,10 @@ events -> (list)
 
         
 
+        The data attached to the event that the decider can use in subsequent workflow tasks. This data isn't sent to the workflow execution.
+
+        
+
         
 
       
@@ -3204,7 +3341,7 @@ events -> (list)
 
       
 
-      If the event is of type ``ScheduleActivityTaskFailed`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``ScheduleActivityTaskFailed`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -3226,7 +3363,11 @@ events -> (list)
 
           .. note::
 
+             
+
             The combination of activity type name and version must be unique within a domain.
+
+             
 
           
 
@@ -3242,7 +3383,11 @@ events -> (list)
 
           .. note::
 
+             
+
             The combination of activity type name and version must be unique with in a domain.
+
+             
 
           
 
@@ -3270,7 +3415,11 @@ events -> (list)
 
         .. note::
 
-          If **cause** is set to OPERATION_NOT_PERMITTED, the decision failed because it lacked sufficient permissions. For details and example IAM policies, see `Using IAM to Manage Access to Amazon SWF Workflows`_ .
+           
+
+          If ``cause`` is set to ``OPERATION_NOT_PERMITTED`` , the decision failed because it lacked sufficient permissions. For details and example IAM policies, see `Using IAM to Manage Access to Amazon SWF Workflows <http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html>`_ in the *Amazon SWF Developer Guide* .
+
+           
 
         
 
@@ -3292,7 +3441,7 @@ events -> (list)
 
       
 
-      If the event is of type ``RequestCancelActivityTaskFailed`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``RequestCancelActivityTaskFailed`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -3316,7 +3465,11 @@ events -> (list)
 
         .. note::
 
-          If **cause** is set to OPERATION_NOT_PERMITTED, the decision failed because it lacked sufficient permissions. For details and example IAM policies, see `Using IAM to Manage Access to Amazon SWF Workflows`_ .
+           
+
+          If ``cause`` is set to ``OPERATION_NOT_PERMITTED`` , the decision failed because it lacked sufficient permissions. For details and example IAM policies, see `Using IAM to Manage Access to Amazon SWF Workflows <http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html>`_ in the *Amazon SWF Developer Guide* .
+
+           
 
         
 
@@ -3338,7 +3491,7 @@ events -> (list)
 
       
 
-      If the event is of type ``StartTimerFailed`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``StartTimerFailed`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -3362,7 +3515,11 @@ events -> (list)
 
         .. note::
 
-          If **cause** is set to OPERATION_NOT_PERMITTED, the decision failed because it lacked sufficient permissions. For details and example IAM policies, see `Using IAM to Manage Access to Amazon SWF Workflows`_ .
+           
+
+          If ``cause`` is set to ``OPERATION_NOT_PERMITTED`` , the decision failed because it lacked sufficient permissions. For details and example IAM policies, see `Using IAM to Manage Access to Amazon SWF Workflows <http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html>`_ in the *Amazon SWF Developer Guide* .
+
+           
 
         
 
@@ -3384,7 +3541,7 @@ events -> (list)
 
       
 
-      If the event is of type ``CancelTimerFailed`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``CancelTimerFailed`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -3408,7 +3565,11 @@ events -> (list)
 
         .. note::
 
-          If **cause** is set to OPERATION_NOT_PERMITTED, the decision failed because it lacked sufficient permissions. For details and example IAM policies, see `Using IAM to Manage Access to Amazon SWF Workflows`_ .
+           
+
+          If ``cause`` is set to ``OPERATION_NOT_PERMITTED`` , the decision failed because it lacked sufficient permissions. For details and example IAM policies, see `Using IAM to Manage Access to Amazon SWF Workflows <http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html>`_ in the *Amazon SWF Developer Guide* .
+
+           
 
         
 
@@ -3430,7 +3591,7 @@ events -> (list)
 
       
 
-      If the event is of type ``StartChildWorkflowExecutionFailed`` then this member is set and provides detailed information about the event. It is not set for other event types.
+      If the event is of type ``StartChildWorkflowExecutionFailed`` then this member is set and provides detailed information about the event. It isn't set for other event types.
 
       
 
@@ -3438,7 +3599,7 @@ events -> (list)
 
         
 
-        The workflow type provided in the ``StartChildWorkflowExecution`` decision that failed.
+        The workflow type provided in the ``StartChildWorkflowExecution``   Decision that failed.
 
         
 
@@ -3446,13 +3607,17 @@ events -> (list)
 
           
 
-          **Required.** The name of the workflow type.
+          The name of the workflow type.
 
            
 
           .. note::
 
+             
+
             The combination of workflow type name and version must be unique with in a domain.
+
+             
 
           
 
@@ -3462,13 +3627,17 @@ events -> (list)
 
           
 
-          **Required.** The version of the workflow type.
+          The version of the workflow type.
 
            
 
           .. note::
 
+             
+
             The combination of workflow type name and version must be unique with in a domain.
+
+             
 
           
 
@@ -3486,7 +3655,11 @@ events -> (list)
 
         .. note::
 
-          If **cause** is set to OPERATION_NOT_PERMITTED, the decision failed because it lacked sufficient permissions. For details and example IAM policies, see `Using IAM to Manage Access to Amazon SWF Workflows`_ .
+           
+
+          When ``cause`` is set to ``OPERATION_NOT_PERMITTED`` , the decision fails because it lacks sufficient permissions. For details and example IAM policies, see `Using IAM to Manage Access to Amazon SWF Workflows <http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html>`_ in the *Amazon SWF Developer Guide* .
+
+           
 
         
 
@@ -3506,7 +3679,11 @@ events -> (list)
 
         
 
-        The ID of the ``StartChildWorkflowExecutionInitiated`` event corresponding to the ``StartChildWorkflowExecution`` decision to start this child workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.
+        When the ``cause`` is ``WORKFLOW_ALREADY_RUNNING`` , ``initiatedEventId`` is the ID of the ``StartChildWorkflowExecutionInitiated`` event that corresponds to the ``StartChildWorkflowExecution``   Decision to start the workflow execution. You can use this information to diagnose problems by tracing back the chain of events leading up to this event.
+
+         
+
+        When the ``cause`` isn't ``WORKFLOW_ALREADY_RUNNING`` , ``initiatedEventId`` is set to ``0`` because the ``StartChildWorkflowExecutionInitiated`` event doesn't exist.
 
         
 
@@ -3516,13 +3693,17 @@ events -> (list)
 
         
 
-        The ID of the ``DecisionTaskCompleted`` event corresponding to the decision task that resulted in the ``StartChildWorkflowExecution`` decision to request this child workflow execution. This information can be useful for diagnosing problems by tracing back the cause of events.
+        The ID of the ``DecisionTaskCompleted`` event corresponding to the decision task that resulted in the ``StartChildWorkflowExecution``   Decision to request this child workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events.
 
         
 
         
 
       control -> (string)
+
+        
+
+        The data attached to the event that the decider can use in subsequent workflow tasks. This data isn't sent to the child workflow execution.
 
         
 
@@ -3534,7 +3715,7 @@ events -> (list)
 
       
 
-      Provides details for the ``LambdaFunctionScheduled`` event.
+      Provides the details of the ``LambdaFunctionScheduled`` event. It isn't set for other event types.
 
       
 
@@ -3542,7 +3723,7 @@ events -> (list)
 
         
 
-        The unique Amazon SWF ID for the AWS Lambda task.
+        The unique ID of the Lambda task.
 
         
 
@@ -3552,7 +3733,17 @@ events -> (list)
 
         
 
-        The name of the scheduled AWS Lambda function.
+        The name of the Lambda function.
+
+        
+
+        
+
+      control -> (string)
+
+        
+
+        Data attached to the event that the decider can use in subsequent workflow tasks. This data isn't sent to the Lambda task.
 
         
 
@@ -3562,7 +3753,7 @@ events -> (list)
 
         
 
-        Input provided to the AWS Lambda function.
+        The input provided to the Lambda task.
 
         
 
@@ -3572,7 +3763,7 @@ events -> (list)
 
         
 
-        The maximum time, in seconds, that the AWS Lambda function can take to execute from start to close before it is marked as failed.
+        The maximum amount of time a worker can take to process the Lambda task.
 
         
 
@@ -3582,7 +3773,7 @@ events -> (list)
 
         
 
-        The ID of the ``DecisionTaskCompleted`` event for the decision that resulted in the scheduling of this AWS Lambda function. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.
+        The ID of the ``LambdaFunctionCompleted`` event corresponding to the decision that resulted in scheduling this activity task. To help diagnose issues, use this information to trace back the chain of events leading up to this event.
 
         
 
@@ -3594,7 +3785,7 @@ events -> (list)
 
       
 
-      Provides details for the ``LambdaFunctionStarted`` event.
+      Provides the details of the ``LambdaFunctionStarted`` event. It isn't set for other event types.
 
       
 
@@ -3602,7 +3793,7 @@ events -> (list)
 
         
 
-        The ID of the ``LambdaFunctionScheduled`` event that was recorded when this AWS Lambda function was scheduled. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.
+        The ID of the ``LambdaFunctionScheduled`` event that was recorded when this activity task was scheduled. To help diagnose issues, use this information to trace back the chain of events leading up to this event.
 
         
 
@@ -3614,7 +3805,7 @@ events -> (list)
 
       
 
-      Provides details for the ``LambdaFunctionCompleted`` event.
+      Provides the details of the ``LambdaFunctionCompleted`` event. It isn't set for other event types.
 
       
 
@@ -3622,7 +3813,7 @@ events -> (list)
 
         
 
-        The ID of the ``LambdaFunctionScheduled`` event that was recorded when this AWS Lambda function was scheduled. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.
+        The ID of the ``LambdaFunctionScheduled`` event that was recorded when this Lambda task was scheduled. To help diagnose issues, use this information to trace back the chain of events leading up to this event.
 
         
 
@@ -3632,7 +3823,7 @@ events -> (list)
 
         
 
-        The ID of the ``LambdaFunctionStarted`` event recorded in the history.
+        The ID of the ``LambdaFunctionStarted`` event recorded when this activity task started. To help diagnose issues, use this information to trace back the chain of events leading up to this event.
 
         
 
@@ -3642,7 +3833,7 @@ events -> (list)
 
         
 
-        The result of the function execution (if any).
+        The results of the Lambda task.
 
         
 
@@ -3654,7 +3845,7 @@ events -> (list)
 
       
 
-      Provides details for the ``LambdaFunctionFailed`` event.
+      Provides the details of the ``LambdaFunctionFailed`` event. It isn't set for other event types.
 
       
 
@@ -3662,7 +3853,7 @@ events -> (list)
 
         
 
-        The ID of the ``LambdaFunctionScheduled`` event that was recorded when this AWS Lambda function was scheduled. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.
+        The ID of the ``LambdaFunctionScheduled`` event that was recorded when this activity task was scheduled. To help diagnose issues, use this information to trace back the chain of events leading up to this event.
 
         
 
@@ -3672,7 +3863,7 @@ events -> (list)
 
         
 
-        The ID of the ``LambdaFunctionStarted`` event recorded in the history.
+        The ID of the ``LambdaFunctionStarted`` event recorded when this activity task started. To help diagnose issues, use this information to trace back the chain of events leading up to this event.
 
         
 
@@ -3682,7 +3873,7 @@ events -> (list)
 
         
 
-        The reason provided for the failure (if any).
+        The reason provided for the failure.
 
         
 
@@ -3692,7 +3883,7 @@ events -> (list)
 
         
 
-        The details of the failure (if any).
+        The details of the failure.
 
         
 
@@ -3704,7 +3895,7 @@ events -> (list)
 
       
 
-      Provides details for the ``LambdaFunctionTimedOut`` event.
+      Provides the details of the ``LambdaFunctionTimedOut`` event. It isn't set for other event types.
 
       
 
@@ -3712,7 +3903,7 @@ events -> (list)
 
         
 
-        The ID of the ``LambdaFunctionScheduled`` event that was recorded when this AWS Lambda function was scheduled. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.
+        The ID of the ``LambdaFunctionScheduled`` event that was recorded when this activity task was scheduled. To help diagnose issues, use this information to trace back the chain of events leading up to this event.
 
         
 
@@ -3722,7 +3913,7 @@ events -> (list)
 
         
 
-        The ID of the ``LambdaFunctionStarted`` event recorded in the history.
+        The ID of the ``ActivityTaskStarted`` event that was recorded when this activity task started. To help diagnose issues, use this information to trace back the chain of events leading up to this event.
 
         
 
@@ -3744,7 +3935,7 @@ events -> (list)
 
       
 
-      Provides details for the ``ScheduleLambdaFunctionFailed`` event.
+      Provides the details of the ``ScheduleLambdaFunctionFailed`` event. It isn't set for other event types.
 
       
 
@@ -3752,7 +3943,7 @@ events -> (list)
 
         
 
-        The unique Amazon SWF ID of the AWS Lambda task.
+        The ID provided in the ``ScheduleLambdaFunction`` decision that failed. 
 
         
 
@@ -3762,7 +3953,7 @@ events -> (list)
 
         
 
-        The name of the scheduled AWS Lambda function.
+        The name of the Lambda function.
 
         
 
@@ -3772,13 +3963,17 @@ events -> (list)
 
         
 
-        The cause of the failure. This information is generated by the system and can be useful for diagnostic purposes.
+        The cause of the failure. To help diagnose issues, use this information to trace back the chain of events leading up to this event.
 
          
 
         .. note::
 
-          If **cause** is set to OPERATION_NOT_PERMITTED, the decision failed because it lacked sufficient permissions. For details and example IAM policies, see `Using IAM to Manage Access to Amazon SWF Workflows`_ .
+           
+
+          If ``cause`` is set to ``OPERATION_NOT_PERMITTED`` , the decision failed because it lacked sufficient permissions. For details and example IAM policies, see `Using IAM to Manage Access to Amazon SWF Workflows <http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html>`_ in the *Amazon SWF Developer Guide* .
+
+           
 
         
 
@@ -3788,7 +3983,7 @@ events -> (list)
 
         
 
-        The ID of the ``DecisionTaskCompleted`` event corresponding to the decision that resulted in the scheduling of this AWS Lambda function. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.
+        The ID of the ``LambdaFunctionCompleted`` event corresponding to the decision that resulted in scheduling this Lambda task. To help diagnose issues, use this information to trace back the chain of events leading up to this event.
 
         
 
@@ -3800,7 +3995,7 @@ events -> (list)
 
       
 
-      Provides details for the ``StartLambdaFunctionFailed`` event.
+      Provides the details of the ``StartLambdaFunctionFailed`` event. It isn't set for other event types.
 
       
 
@@ -3808,7 +4003,7 @@ events -> (list)
 
         
 
-        The ID of the ``LambdaFunctionScheduled`` event that was recorded when this AWS Lambda function was scheduled. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.
+        The ID of the ``ActivityTaskScheduled`` event that was recorded when this activity task was scheduled. To help diagnose issues, use this information to trace back the chain of events leading up to this event.
 
         
 
@@ -3818,13 +4013,17 @@ events -> (list)
 
         
 
-        The cause of the failure. This information is generated by the system and can be useful for diagnostic purposes.
+        The cause of the failure. To help diagnose issues, use this information to trace back the chain of events leading up to this event.
 
          
 
         .. note::
 
-          If **cause** is set to OPERATION_NOT_PERMITTED, the decision failed because it lacked sufficient permissions. For details and example IAM policies, see `Using IAM to Manage Access to Amazon SWF Workflows`_ .
+           
+
+          If ``cause`` is set to ``OPERATION_NOT_PERMITTED`` , the decision failed because the IAM role attached to the execution lacked sufficient permissions. For details and example IAM policies, see `Lambda Tasks <http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html>`_ in the *Amazon SWF Developer Guide* .
+
+           
 
         
 
@@ -3834,7 +4033,7 @@ events -> (list)
 
         
 
-        The error message (if any).
+        A description that can help diagnose the cause of the fault.
 
         
 
@@ -3860,7 +4059,3 @@ nextPageToken -> (string)
 
   
 
-
-
-.. _Using IAM to Manage Access to Amazon SWF Workflows: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
-.. _Setting Task Priority: http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html

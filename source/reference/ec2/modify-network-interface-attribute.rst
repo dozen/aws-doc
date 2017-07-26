@@ -19,6 +19,9 @@ Modifies the specified network interface attribute. You can specify only one att
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyNetworkInterfaceAttribute>`_
+
+
 ========
 Synopsis
 ========
@@ -26,14 +29,14 @@ Synopsis
 ::
 
     modify-network-interface-attribute
-  [--dry-run | --no-dry-run]
-  --network-interface-id <value>
-  [--description <value>]
-  [--source-dest-check | --no-source-dest-check]
-  [--groups <value>]
   [--attachment <value>]
+  [--description <value>]
+  [--dry-run | --no-dry-run]
+  [--groups <value>]
+  --network-interface-id <value>
+  [--source-dest-check | --no-source-dest-check]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -41,49 +44,6 @@ Synopsis
 =======
 Options
 =======
-
-``--dry-run`` | ``--no-dry-run`` (boolean)
-
-
-  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
-
-  
-
-``--network-interface-id`` (string)
-
-
-  The ID of the network interface.
-
-  
-
-``--description`` (structure)
-
-
-  A description for the network interface.
-
-  
-
-``--source-dest-check`` | ``--no-source-dest-check`` (structure)
-
-
-  Indicates whether source/destination checking is enabled. A value of ``true`` means checking is enabled, and ``false`` means checking is disabled. This value must be ``false`` for a NAT instance to perform NAT. For more information, see `NAT Instances`_ in the *Amazon Virtual Private Cloud User Guide* .
-
-  
-
-``--groups`` (list)
-
-
-  Changes the security groups for the network interface. The new set of groups you specify replaces the current set. You must specify at least one group, even if it's just the default security group in the VPC. You must specify the ID of the security group, not the name.
-
-  
-
-
-
-Syntax::
-
-  "string" "string" ...
-
-
 
 ``--attachment`` (structure)
 
@@ -110,11 +70,54 @@ JSON Syntax::
 
 
 
+``--description`` (structure)
+
+
+  A description for the network interface.
+
+  
+
+``--dry-run`` | ``--no-dry-run`` (boolean)
+
+
+  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
+
+  
+
+``--groups`` (list)
+
+
+  Changes the security groups for the network interface. The new set of groups you specify replaces the current set. You must specify at least one group, even if it's just the default security group in the VPC. You must specify the ID of the security group, not the name.
+
+  
+
+
+
+Syntax::
+
+  "string" "string" ...
+
+
+
+``--network-interface-id`` (string)
+
+
+  The ID of the network interface.
+
+  
+
+``--source-dest-check`` | ``--no-source-dest-check`` (structure)
+
+
+  Indicates whether source/destination checking is enabled. A value of ``true`` means checking is enabled, and ``false`` means checking is disabled. This value must be ``false`` for a NAT instance to perform NAT. For more information, see `NAT Instances <http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_NAT_Instance.html>`_ in the *Amazon Virtual Private Cloud User Guide* .
+
+  
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -163,5 +166,3 @@ Output
 ======
 
 None
-
-.. _NAT Instances: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_NAT_Instance.html

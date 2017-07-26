@@ -15,8 +15,11 @@ Description
 
 
 
-Describes the configuration options that are used in a particular configuration template or environment, or that a specified solution stack defines. The description includes the values the options, their default values, and an indication of the required action on a running environment if an option value is changed. 
+Describes the configuration options that are used in a particular configuration template or environment, or that a specified solution stack defines. The description includes the values the options, their default values, and an indication of the required action on a running environment if an option value is changed.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeConfigurationOptions>`_
 
 
 ========
@@ -30,9 +33,10 @@ Synopsis
   [--template-name <value>]
   [--environment-name <value>]
   [--solution-stack-name <value>]
+  [--platform-arn <value>]
   [--options <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -44,35 +48,42 @@ Options
 ``--application-name`` (string)
 
 
-  The name of the application associated with the configuration template or environment. Only needed if you want to describe the configuration options associated with either the configuration template or environment. 
+  The name of the application associated with the configuration template or environment. Only needed if you want to describe the configuration options associated with either the configuration template or environment.
 
   
 
 ``--template-name`` (string)
 
 
-  The name of the configuration template whose configuration options you want to describe. 
+  The name of the configuration template whose configuration options you want to describe.
 
   
 
 ``--environment-name`` (string)
 
 
-  The name of the environment whose configuration options you want to describe. 
+  The name of the environment whose configuration options you want to describe.
 
   
 
 ``--solution-stack-name`` (string)
 
 
-  The name of the solution stack whose configuration options you want to describe. 
+  The name of the solution stack whose configuration options you want to describe.
+
+  
+
+``--platform-arn`` (string)
+
+
+  The ARN of the custom platform.
 
   
 
 ``--options`` (list)
 
 
-  If specified, restricts the descriptions to only the specified options. 
+  If specified, restricts the descriptions to only the specified options.
 
   
 
@@ -101,8 +112,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -172,7 +183,17 @@ SolutionStackName -> (string)
 
   
 
-  The name of the solution stack these configuration options belong to. 
+  The name of the solution stack these configuration options belong to.
+
+  
+
+  
+
+PlatformArn -> (string)
+
+  
+
+  The ARN of the custom platform.
 
   
 
@@ -190,7 +211,7 @@ Options -> (list)
 
     
 
-    Describes the possible values for a configuration option. 
+    Describes the possible values for a configuration option.
 
     
 
@@ -198,7 +219,7 @@ Options -> (list)
 
       
 
-      A unique namespace identifying the option's associated AWS resource. 
+      A unique namespace identifying the option's associated AWS resource.
 
       
 
@@ -208,7 +229,7 @@ Options -> (list)
 
       
 
-      The name of the configuration option. 
+      The name of the configuration option.
 
       
 
@@ -218,7 +239,7 @@ Options -> (list)
 
       
 
-      The default value for this configuration option. 
+      The default value for this configuration option.
 
       
 
@@ -228,7 +249,7 @@ Options -> (list)
 
       
 
-      An indication of which action is required if the value for this configuration option changes: 
+      An indication of which action is required if the value for this configuration option changes:
 
        
 
@@ -248,7 +269,7 @@ Options -> (list)
 
       
 
-      An indication of whether the user defined this configuration option: 
+      An indication of whether the user defined this configuration option:
 
        
 
@@ -264,7 +285,7 @@ Options -> (list)
 
        
 
-      Valid Values: ``true`` | ``false`` 
+      Valid Values: ``true`` | ``false``  
 
       
 
@@ -274,7 +295,7 @@ Options -> (list)
 
       
 
-      An indication of which type of values this option has and whether it is allowable to select one or more than one of the possible values: 
+      An indication of which type of values this option has and whether it is allowable to select one or more than one of the possible values:
 
        
 
@@ -296,7 +317,7 @@ Options -> (list)
 
       
 
-      If specified, values for the configuration option are selected from this list. 
+      If specified, values for the configuration option are selected from this list.
 
       
 
@@ -312,7 +333,7 @@ Options -> (list)
 
       
 
-      If specified, the configuration option must be a numeric value greater than this value. 
+      If specified, the configuration option must be a numeric value greater than this value.
 
       
 
@@ -322,7 +343,7 @@ Options -> (list)
 
       
 
-      If specified, the configuration option must be a numeric value less than this value. 
+      If specified, the configuration option must be a numeric value less than this value.
 
       
 
@@ -332,7 +353,7 @@ Options -> (list)
 
       
 
-      If specified, the configuration option must be a string value no longer than this value. 
+      If specified, the configuration option must be a string value no longer than this value.
 
       
 
@@ -342,7 +363,7 @@ Options -> (list)
 
       
 
-      If specified, the configuration option must be a string value that satisfies this regular expression. 
+      If specified, the configuration option must be a string value that satisfies this regular expression.
 
       
 
@@ -350,7 +371,7 @@ Options -> (list)
 
         
 
-        The regular expression pattern that a string configuration option value with this restriction must match. 
+        The regular expression pattern that a string configuration option value with this restriction must match.
 
         
 
@@ -360,7 +381,7 @@ Options -> (list)
 
         
 
-        A unique name representing this regular expression. 
+        A unique name representing this regular expression.
 
         
 

@@ -15,14 +15,21 @@ Description
 
 
 
-Returns the SAML provider metadocument that was uploaded when the provider was created or updated. 
+Returns the SAML provider metadocument that was uploaded when the IAM SAML provider resource object was created or updated.
 
  
 
 .. note::
 
-  This operation requires `Signature Version 4`_ . 
+   
 
+  This operation requires `Signature Version 4 <http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html>`_ .
+
+   
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetSAMLProvider>`_
 
 
 ========
@@ -34,7 +41,7 @@ Synopsis
     get-saml-provider
   --saml-provider-arn <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -46,15 +53,19 @@ Options
 ``--saml-provider-arn`` (string)
 
 
-  The Amazon Resource Name (ARN) of the SAML provider to get information about.
+  The Amazon Resource Name (ARN) of the SAML provider resource object in IAM to get information about.
+
+   
+
+  For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces <http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`_ in the *AWS General Reference* .
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -109,6 +120,3 @@ ValidUntil -> (timestamp)
 
   
 
-
-
-.. _Signature Version 4: http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html

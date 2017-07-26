@@ -15,7 +15,7 @@ Description
 
 
 
-Describes `Elastic IP addresses`_ .
+Describes `Elastic IP addresses <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html>`_ .
 
  
 
@@ -23,14 +23,17 @@ Describes `Elastic IP addresses`_ .
 
    
 
-  You must specify at least one of the parameters.
+  This call accepts only one resource-identifying parameter.
 
    
 
  
 
-**Required Permissions** : To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see `Managing User Permissions`_ .
+ **Required Permissions** : To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see `Managing User Permissions <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html>`_ .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeElasticIps>`_
 
 
 ========
@@ -44,7 +47,7 @@ Synopsis
   [--stack-id <value>]
   [--ips <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -85,8 +88,8 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -99,8 +102,6 @@ Examples
 The following ``describe-elastic-ips`` commmand describes the Elastic IP addresses in a specified instance. ::
 
   aws opsworks --region us-east-1 describe-elastic-ips --instance-id b62f3e04-e9eb-436c-a91f-d9e9a396b7b0
-
-**Note**: AWS OpsWorks CLI commands should set the region to ``us-east-1`` regardless of the stack's location.
 
 *Output*::
 
@@ -176,7 +177,7 @@ ElasticIps -> (list)
 
       
 
-      The AWS region. For more information, see `Regions and Endpoints`_ .
+      The AWS region. For more information, see `Regions and Endpoints <http://docs.aws.amazon.com/general/latest/gr/rande.html>`_ .
 
       
 
@@ -196,8 +197,3 @@ ElasticIps -> (list)
 
   
 
-
-
-.. _Elastic IP addresses: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
-.. _Managing User Permissions: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
-.. _Regions and Endpoints: http://docs.aws.amazon.com/general/latest/gr/rande.html

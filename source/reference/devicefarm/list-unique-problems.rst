@@ -19,6 +19,13 @@ Gets information about unique problems.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListUniqueProblems>`_
+
+
+``list-unique-problems`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
+When using ``--output text`` and the ``--query`` argument on a paginated response, the ``--query`` argument must extract data from the results of the following query expressions: ``uniqueProblems``
+
+
 ========
 Synopsis
 ========
@@ -27,9 +34,10 @@ Synopsis
 
     list-unique-problems
   --arn <value>
-  [--next-token <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--starting-token <value>]
+  [--max-items <value>]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -45,18 +53,33 @@ Options
 
   
 
-``--next-token`` (string)
-
-
-  An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
-
-  
-
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--starting-token`` (string)
+ 
+
+  A token to specify where to start paginating. This is the ``NextToken`` from a previously truncated response.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--max-items`` (integer)
+ 
+
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``NextToken`` is provided in the command's output. To resume pagination, provide the ``NextToken`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``NextToken`` response element directly outside of the AWS CLI.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -77,19 +100,19 @@ uniqueProblems -> (map)
    
 
    
-  * ERRORED: An error condition.
+  * PENDING: A pending condition. 
    
-  * FAILED: A failed condition.
+  * PASSED: A passing condition. 
    
-  * SKIPPED: A skipped condition.
+  * WARNED: A warning condition. 
    
-  * STOPPED: A stopped condition.
+  * FAILED: A failed condition. 
    
-  * PASSED: A passing condition.
+  * SKIPPED: A skipped condition. 
    
-  * PENDING: A pending condition.
+  * ERRORED: An error condition. 
    
-  * WARNED: A warning condition.
+  * STOPPED: A stopped condition. 
    
 
   
@@ -319,9 +342,9 @@ uniqueProblems -> (map)
                
 
                
-              * PHONE: The phone form factor.
+              * PHONE: The phone form factor. 
                
-              * TABLET: The tablet form factor.
+              * TABLET: The tablet form factor. 
                
 
               
@@ -341,9 +364,9 @@ uniqueProblems -> (map)
                
 
                
-              * ANDROID: The Android platform.
+              * ANDROID: The Android platform. 
                
-              * IOS: The iOS platform.
+              * IOS: The iOS platform. 
                
 
               
@@ -404,7 +427,7 @@ uniqueProblems -> (map)
 
               
 
-              Represents the screen resolution of a device in height and width, expressed in pixels.
+              The resolution of the device.
 
               
 
@@ -480,6 +503,36 @@ uniqueProblems -> (map)
 
               
 
+            remoteAccessEnabled -> (boolean)
+
+              
+
+              Specifies whether remote access has been enabled for the specified device.
+
+              
+
+              
+
+            fleetType -> (string)
+
+              
+
+              The type of fleet to which this device belongs. Possible values for fleet type are PRIVATE and PUBLIC.
+
+              
+
+              
+
+            fleetName -> (string)
+
+              
+
+              The name of the fleet to which this device belongs.
+
+              
+
+              
+
             
 
           result -> (string)
@@ -495,19 +548,19 @@ uniqueProblems -> (map)
              
 
              
-            * ERRORED: An error condition.
+            * PENDING: A pending condition. 
              
-            * FAILED: A failed condition.
+            * PASSED: A passing condition. 
              
-            * SKIPPED: A skipped condition.
+            * WARNED: A warning condition. 
              
-            * STOPPED: A stopped condition.
+            * FAILED: A failed condition. 
              
-            * PASSED: A passing condition.
+            * SKIPPED: A skipped condition. 
              
-            * PENDING: A pending condition.
+            * ERRORED: An error condition. 
              
-            * WARNED: A warning condition.
+            * STOPPED: A stopped condition. 
              
 
             

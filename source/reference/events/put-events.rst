@@ -19,6 +19,9 @@ Sends custom events to Amazon CloudWatch Events so that they can be matched to r
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutEvents>`_
+
+
 ========
 Synopsis
 ========
@@ -28,7 +31,7 @@ Synopsis
     put-events
   --entries <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -71,9 +74,43 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
+
+
+========
+Examples
+========
+
+**To send a custom event to CloudWatch Events**
+
+This example sends a custom event to CloudWatch Events. The event is contained within the putevents.json file::
+
+  aws events put-events --entries file://putevents.json            
+
+Here are the contents of the putevents.json file::
+
+  [
+    {
+      "Source": "com.mycompany.myapp",
+      "Detail": "{ \"key1\": \"value1\", \"key2\": \"value2\" }",
+      "Resources": [
+        "resource1",
+        "resource2"
+      ],
+      "DetailType": "myDetailType"
+    },
+    {
+      "Source": "com.mycompany.myapp",
+      "Detail": "{ \"key1\": \"value3\", \"key2\": \"value4\" }",
+      "Resources": [
+        "resource1",
+        "resource2"
+      ],
+      "DetailType": "myDetailType"
+     }
+  ]
 
 
 ======
@@ -94,7 +131,7 @@ Entries -> (list)
 
   
 
-  A list of successfully and unsuccessfully ingested events results. If the ingestion was successful, the entry will have the event ID in it. If not, then the ErrorCode and ErrorMessage can be used to identify the problem with the entry.
+  The successfully and unsuccessfully ingested events results. If the ingestion was successful, the entry has the event ID in it. Otherwise, you can use the error code and error message to identify the problem with the entry.
 
   
 
@@ -102,7 +139,7 @@ Entries -> (list)
 
     
 
-    A PutEventsResult contains a list of PutEventsResultEntry.
+    Represents an event that failed to be submitted.
 
     
 
@@ -110,7 +147,7 @@ Entries -> (list)
 
       
 
-      The ID of the event submitted to Amazon CloudWatch Events.
+      The ID of the event.
 
       
 
@@ -120,7 +157,7 @@ Entries -> (list)
 
       
 
-      The error code representing why the event submission failed on this entry.
+      The error code that indicates why the event submission failed.
 
       
 
@@ -130,7 +167,7 @@ Entries -> (list)
 
       
 
-      The error message explaining why the event submission failed on this entry.
+      The error message that explains why the event submission failed.
 
       
 

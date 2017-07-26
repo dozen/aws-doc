@@ -20,11 +20,11 @@ Inserts or deletes  SqlInjectionMatchTuple objects (filters) in a  SqlInjectionM
  
 
  
-* ``Action`` : Whether to insert the object into or delete the object from the array. To change a ``SqlInjectionMatchTuple`` , you delete the existing object and add a new one.
+* ``Action`` : Whether to insert the object into or delete the object from the array. To change a ``SqlInjectionMatchTuple`` , you delete the existing object and add a new one. 
  
-* ``FieldToMatch`` : The part of web requests that you want AWS WAF to inspect and, if you want AWS WAF to inspect a header, the name of the header.
+* ``FieldToMatch`` : The part of web requests that you want AWS WAF to inspect and, if you want AWS WAF to inspect a header, the name of the header. 
  
-* ``TextTransformation`` : Which text transformation, if any, to perform on the web request before inspecting the request for snippets of malicious SQL code.
+* ``TextTransformation`` : Which text transformation, if any, to perform on the web request before inspecting the request for snippets of malicious SQL code. 
  
 
  
@@ -38,17 +38,20 @@ To create and configure a ``SqlInjectionMatchSet`` , perform the following steps
  
 
  
-* Submit a  create-sql-injection-match-set request.
+* Submit a  create-sql-injection-match-set request. 
  
-* Use  get-change-token to get the change token that you provide in the ``change-token`` parameter of an  update-ip-set request.
+* Use  get-change-token to get the change token that you provide in the ``change-token`` parameter of an  update-ip-set request. 
  
-* Submit an ``update-sql-injection-match-set`` request to specify the parts of web requests that you want AWS WAF to inspect for snippets of SQL code.
- 
-
+* Submit an ``update-sql-injection-match-set`` request to specify the parts of web requests that you want AWS WAF to inspect for snippets of SQL code. 
  
 
-For more information about how to use the AWS WAF API to allow or block HTTP requests, see the `AWS WAF Developer Guide`_ .
+ 
 
+For more information about how to use the AWS WAF API to allow or block HTTP requests, see the `AWS WAF Developer Guide <http://docs.aws.amazon.com/waf/latest/developerguide/>`_ .
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateSqlInjectionMatchSet>`_
 
 
 ========
@@ -62,7 +65,7 @@ Synopsis
   --change-token <value>
   --updates <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -93,11 +96,11 @@ Options
    
 
    
-  *  SqlInjectionMatchSetUpdate : Contains ``Action`` and ``SqlInjectionMatchTuple`` 
+  *  SqlInjectionMatchSetUpdate : Contains ``Action`` and ``SqlInjectionMatchTuple``   
    
-  *  SqlInjectionMatchTuple : Contains ``FieldToMatch`` and ``TextTransformation`` 
+  *  SqlInjectionMatchTuple : Contains ``FieldToMatch`` and ``TextTransformation``   
    
-  *  FieldToMatch : Contains ``Data`` and ``Type`` 
+  *  FieldToMatch : Contains ``Data`` and ``Type``   
    
 
   
@@ -132,8 +135,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -151,6 +154,3 @@ ChangeToken -> (string)
 
   
 
-
-
-.. _AWS WAF Developer Guide: http://docs.aws.amazon.com/waf/latest/developerguide/

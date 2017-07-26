@@ -35,6 +35,7 @@ Available Commands
   create-repository
   delete-repository
   delete-repository-policy
+  describe-images
   describe-repositories
   get-authorization-token
   get-download-url-for-layer

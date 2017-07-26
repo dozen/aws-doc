@@ -40,7 +40,7 @@ Options
 The identifier of the pipeline.
 
 ``--status`` (string)
-Filters the list to include only runs in the specified statuses. The valid statuses are as follows: waiting, pending, cancelled, running, finished, failed, waiting_for_runner, and waiting_on_dependencies. You can combine statuses as a comma-separated list. For example: ``--status pending,waiting_on_dependencies`` 
+Filters the list to include only runs in the specified statuses. The valid statuses are as follows: waiting, pending, cancelled, running, finished, failed, waiting_for_runner, and waiting_on_dependencies.
 
 ``--start-interval`` (string)
 Filters the list to include only runs that started within the specified interval.

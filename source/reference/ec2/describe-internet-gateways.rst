@@ -19,6 +19,9 @@ Describes one or more of your Internet gateways.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInternetGateways>`_
+
+
 ========
 Synopsis
 ========
@@ -26,11 +29,11 @@ Synopsis
 ::
 
     describe-internet-gateways
+  [--filters <value>]
   [--dry-run | --no-dry-run]
   [--internet-gateway-ids <value>]
-  [--filters <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -38,32 +41,6 @@ Synopsis
 =======
 Options
 =======
-
-``--dry-run`` | ``--no-dry-run`` (boolean)
-
-
-  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
-
-  
-
-``--internet-gateway-ids`` (list)
-
-
-  One or more Internet gateway IDs.
-
-   
-
-  Default: Describes all your Internet gateways.
-
-  
-
-
-
-Syntax::
-
-  "string" "string" ...
-
-
 
 ``--filters`` (list)
 
@@ -79,7 +56,7 @@ Syntax::
    
   * ``internet-gateway-id`` - The ID of the Internet gateway. 
    
-  * ``tag`` :*key* =*value* - The key/value combination of a tag assigned to the resource. 
+  * ``tag`` :*key* =*value* - The key/value combination of a tag assigned to the resource. Specify the key of the tag in the filter name and the value of the tag in the filter value. For example, for the tag Purpose=X, specify ``tag:Purpose`` for the filter name and ``X`` for the filter value. 
    
   * ``tag-key`` - The key of a tag assigned to the resource. This filter is independent of the ``tag-value`` filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the ``tag`` :*key* =*value* filter. 
    
@@ -109,11 +86,37 @@ JSON Syntax::
 
 
 
+``--dry-run`` | ``--no-dry-run`` (boolean)
+
+
+  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
+
+  
+
+``--internet-gateway-ids`` (list)
+
+
+  One or more Internet gateway IDs.
+
+   
+
+  Default: Describes all your Internet gateways.
+
+  
+
+
+
+Syntax::
+
+  "string" "string" ...
+
+
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -197,16 +200,6 @@ InternetGateways -> (list)
 
     
 
-    InternetGatewayId -> (string)
-
-      
-
-      The ID of the Internet gateway.
-
-      
-
-      
-
     Attachments -> (list)
 
       
@@ -219,19 +212,9 @@ InternetGateways -> (list)
 
         
 
-        Describes the attachment of a VPC to an Internet gateway.
+        Describes the attachment of a VPC to an Internet gateway or an egress-only Internet gateway.
 
         
-
-        VpcId -> (string)
-
-          
-
-          The ID of the VPC.
-
-          
-
-          
 
         State -> (string)
 
@@ -243,7 +226,27 @@ InternetGateways -> (list)
 
           
 
+        VpcId -> (string)
+
+          
+
+          The ID of the VPC.
+
+          
+
+          
+
         
+
+      
+
+    InternetGatewayId -> (string)
+
+      
+
+      The ID of the Internet gateway.
+
+      
 
       
 
@@ -267,11 +270,11 @@ InternetGateways -> (list)
 
           
 
-          The key of the tag. 
+          The key of the tag.
 
            
 
-          Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with ``aws:`` 
+          Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with ``aws:``  
 
           
 

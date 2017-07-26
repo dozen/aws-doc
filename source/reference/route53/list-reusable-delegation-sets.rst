@@ -15,14 +15,11 @@ Description
 
 
 
-To retrieve a list of your reusable delegation sets, send a ``GET`` request to the ``/*Route 53 API version* /delegationset`` resource. The response to this request includes a ``DelegationSets`` element with zero, one, or multiple ``DelegationSet`` child elements. By default, the list of delegation sets is displayed on a single page. You can control the length of the page that is displayed by using the ``MaxItems`` parameter. You can use the ``Marker`` parameter to control the delegation set that the list begins with. 
+Retrieves a list of the reusable delegation sets that are associated with the current AWS account.
 
- 
 
-.. note::
 
-  Amazon Route 53 returns a maximum of 100 items. If you set MaxItems to a value greater than 100, Amazon Route 53 returns only the first 100.
-
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListReusableDelegationSets>`_
 
 
 ========
@@ -35,7 +32,7 @@ Synopsis
   [--marker <value>]
   [--max-items <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -47,22 +44,30 @@ Options
 ``--marker`` (string)
 
 
-  If the request returned more than one page of results, submit another request and specify the value of ``NextMarker`` from the last response in the ``marker`` parameter to get the next page of results.
+  If the value of ``IsTruncated`` in the previous response was ``true`` , you have more reusable delegation sets. To get another group, submit another ``list-reusable-delegation-sets`` request. 
+
+   
+
+  For the value of ``marker`` , specify the value of ``NextMarker`` from the previous response, which is the ID of the first reusable delegation set that Amazon Route 53 will return if you submit another request.
+
+   
+
+  If the value of ``IsTruncated`` in the previous response was ``false`` , there are no more reusable delegation sets to get.
 
   
 
 ``--max-items`` (string)
 
 
-  Specify the maximum number of reusable delegation sets to return per page of results.
+  The number of reusable delegation sets that you want Amazon Route 53 to return in the response to this request. If you specify a value greater than 100, Amazon Route 53 returns only the first 100 reusable delegation sets.
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -74,7 +79,7 @@ DelegationSets -> (list)
 
   
 
-  A complex type that contains information about the reusable delegation sets associated with the current AWS account.
+  A complex type that contains one ``DelegationSet`` element for each reusable delegation set that was created by the current AWS account.
 
   
 
@@ -82,11 +87,15 @@ DelegationSets -> (list)
 
     
 
-    A complex type that contains name server information.
+    A complex type that lists the name servers in a delegation set, as well as the ``CallerReference`` and the ``ID`` for the delegation set.
 
     
 
     Id -> (string)
+
+      
+
+      The ID that Amazon Route 53 assigns to a reusable delegation set.
 
       
 
@@ -96,13 +105,17 @@ DelegationSets -> (list)
 
       
 
+      The value that you specified for ``CallerReference`` when you created the reusable delegation set.
+
+      
+
       
 
     NameServers -> (list)
 
       
 
-      A complex type that contains the authoritative name servers for the hosted zone. Use the method provided by your domain registrar to add an NS record to your domain for each ``NameServer`` that is assigned to your hosted zone.
+      A complex type that contains a list of the authoritative name servers for a hosted zone or for a reusable delegation set.
 
       
 
@@ -122,7 +135,7 @@ Marker -> (string)
 
   
 
-  If the request returned more than one page of results, submit another request and specify the value of ``NextMarker`` from the last response in the ``marker`` parameter to get the next page of results.
+  For the second and subsequent calls to ``list-reusable-delegation-sets`` , ``Marker`` is the value that you specified for the ``marker`` parameter in the request that produced the current response.
 
   
 
@@ -132,11 +145,7 @@ IsTruncated -> (boolean)
 
   
 
-  A flag indicating whether there are more reusable delegation sets to be listed. If your results were truncated, you can make a follow-up request for the next page of results by using the ``Marker`` element.
-
-   
-
-  Valid Values: ``true`` | ``false`` 
+  A flag that indicates whether there are more reusable delegation sets to be listed.
 
   
 
@@ -146,7 +155,7 @@ NextMarker -> (string)
 
   
 
-  Indicates where to continue listing reusable delegation sets. If  ListReusableDelegationSetsResponse$IsTruncated is ``true`` , make another request to ``list-reusable-delegation-sets`` and include the value of the ``NextMarker`` element in the ``Marker`` element to get the next page of results.
+  If ``IsTruncated`` is ``true`` , the value of ``NextMarker`` identifies the next reusable delegation set that Amazon Route 53 will return if you submit another ``list-reusable-delegation-sets`` request and specify the value of ``NextMarker`` in the ``marker`` parameter.
 
   
 
@@ -156,7 +165,7 @@ MaxItems -> (string)
 
   
 
-  The maximum number of reusable delegation sets to be included in the response body. If the number of reusable delegation sets associated with this AWS account exceeds ``MaxItems`` , the value of  ListReusablDelegationSetsResponse$IsTruncated in the response is ``true`` . Call ``list-reusable-delegation-sets`` again and specify the value of  ListReusableDelegationSetsResponse$NextMarker in the  ListReusableDelegationSetsRequest$Marker element to get the next page of results.
+  The value that you specified for the ``maxitems`` parameter in the call to ``list-reusable-delegation-sets`` that produced the current response.
 
   
 

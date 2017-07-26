@@ -21,12 +21,15 @@ Returns information about any jobs for AWS CodePipeline to act upon.
 
 .. warning::
 
-  
+   
 
   When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts. Additionally, this API returns any secret values defined for the action.
 
-  
+   
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PollForJobs>`_
 
 
 ========
@@ -40,7 +43,7 @@ Synopsis
   [--max-batch-size <value>]
   [--query-param <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -68,7 +71,7 @@ Shorthand Syntax::
 JSON Syntax::
 
   {
-    "category": "Source"|"Build"|"Deploy"|"Test"|"Invoke",
+    "category": "Source"|"Build"|"Deploy"|"Test"|"Invoke"|"Approval",
     "owner": "AWS"|"ThirdParty"|"Custom",
     "provider": "string",
     "version": "string"
@@ -109,8 +112,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -248,7 +251,7 @@ jobs -> (list)
 
           
 
-          A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Valid categories are limited to one of the values below. 
+          A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Valid categories are limited to one of the values below.
 
           
 
@@ -258,7 +261,7 @@ jobs -> (list)
 
           
 
-          The creator of the action being called. 
+          The creator of the action being called.
 
           
 
@@ -278,7 +281,7 @@ jobs -> (list)
 
           
 
-          A string that identifies the action type. 
+          A string that identifies the action type.
 
           
 
@@ -360,7 +363,7 @@ jobs -> (list)
 
           
 
-          Represents the context of an action within the stage of a pipeline to a job worker.
+          
 
           
 
@@ -444,7 +447,7 @@ jobs -> (list)
 
                 
 
-                The name of the Amazon S3 bucket. 
+                The name of the Amazon S3 bucket.
 
                 
 
@@ -454,7 +457,7 @@ jobs -> (list)
 
                 
 
-                The key of the object in the Amazon S3 bucket, which uniquely identifies the object in the bucket. 
+                The key of the object in the Amazon S3 bucket, which uniquely identifies the object in the bucket.
 
                 
 
@@ -534,7 +537,7 @@ jobs -> (list)
 
                 
 
-                The name of the Amazon S3 bucket. 
+                The name of the Amazon S3 bucket.
 
                 
 
@@ -544,7 +547,7 @@ jobs -> (list)
 
                 
 
-                The key of the object in the Amazon S3 bucket, which uniquely identifies the object in the bucket. 
+                The key of the object in the Amazon S3 bucket, which uniquely identifies the object in the bucket.
 
                 
 
@@ -612,7 +615,7 @@ jobs -> (list)
 
         
 
-        Represents information about the AWS Key Management Service (AWS KMS) key used to encrypt data in the artifact store.
+        Represents information about the key used to encrypt data in the artifact store, such as an AWS Key Management Service (AWS KMS) key. 
 
         
 
@@ -620,7 +623,7 @@ jobs -> (list)
 
           
 
-          The ID of the AWS KMS key.
+          The ID used to identify the key. For an AWS KMS key, this is the key ID or key ARN.
 
           
 
@@ -630,7 +633,7 @@ jobs -> (list)
 
           
 
-          The type of AWS KMS key, such as a customer master key.
+          The type of encryption key, such as an AWS Key Management Service (AWS KMS) key. When creating or updating a pipeline, the value must be set to 'KMS'.
 
           
 
@@ -644,7 +647,7 @@ jobs -> (list)
 
       
 
-      A system-generated random number that AWS CodePipeline uses to ensure that the job is being worked on by only one job worker. This number must be returned in the response.
+      A system-generated random number that AWS CodePipeline uses to ensure that the job is being worked on by only one job worker. Use this number in an  acknowledge-job request.
 
       
 

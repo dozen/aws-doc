@@ -15,35 +15,35 @@ Description
 
 
 
-Creates a new case in the AWS Support Center. This operation is modeled on the behavior of the AWS Support Center `Create Case`_ page. Its parameters require you to specify the following information: 
+Creates a new case in the AWS Support Center. This operation is modeled on the behavior of the AWS Support Center `Create Case <https://console.aws.amazon.com/support/home#/case/create>`_ page. Its parameters require you to specify the following information: 
 
  
 
  
-* **IssueType.** The type of issue for the case. You can specify either "customer-service" or "technical." If you do not indicate a value, the default is "technical." 
+* **issueType.** The type of issue for the case. You can specify either "customer-service" or "technical." If you do not indicate a value, the default is "technical."  
  
-* **ServiceCode.** The code for an AWS service. You obtain the ``service-code`` by calling  describe-services . 
+* **serviceCode.** The code for an AWS service. You obtain the ``serviceCode`` by calling  describe-services .  
  
-* **CategoryCode.** The category for the service defined for the ``service-code`` value. You also obtain the category code for a service by calling  describe-services . Each AWS service defines its own set of category codes. 
+* **categoryCode.** The category for the service defined for the ``serviceCode`` value. You also obtain the category code for a service by calling  describe-services . Each AWS service defines its own set of category codes.  
  
-* **SeverityCode.** A value that indicates the urgency of the case, which in turn determines the response time according to your service level agreement with AWS Support. You obtain the severity-code by calling  describe-severity-levels .
+* **severityCode.** A value that indicates the urgency of the case, which in turn determines the response time according to your service level agreement with AWS Support. You obtain the severity-code by calling  describe-severity-levels . 
  
-* **Subject.** The **subject** field on the AWS Support Center `Create Case`_ page.
+* **subject.** The **subject** field on the AWS Support Center `Create Case <https://console.aws.amazon.com/support/home#/case/create>`_ page. 
  
-* **CommunicationBody.** The **Description** field on the AWS Support Center `Create Case`_ page.
+* **communicationBody.** The **Description** field on the AWS Support Center `Create Case <https://console.aws.amazon.com/support/home#/case/create>`_ page. 
  
-* **AttachmentSetId.** The ID of a set of attachments that has been created by using  add-attachments-to-set .
+* **attachmentSetId.** The ID of a set of attachments that has been created by using  add-attachments-to-set . 
  
-* **Language.** The human language in which AWS Support handles the case. English and Japanese are currently supported.
+* **language.** The human language in which AWS Support handles the case. English and Japanese are currently supported. 
  
-* **CcEmailAddresses.** The AWS Support Center **CC** field on the `Create Case`_ page. You can list email addresses to be copied on any correspondence about the case. The account that opens the case is already identified by passing the AWS Credentials in the HTTP POST method or in a method or function call from one of the programming languages supported by an `AWS SDK`_ . 
+* **ccEmailAddresses.** The AWS Support Center **CC** field on the `Create Case <https://console.aws.amazon.com/support/home#/case/create>`_ page. You can list email addresses to be copied on any correspondence about the case. The account that opens the case is already identified by passing the AWS Credentials in the HTTP POST method or in a method or function call from one of the programming languages supported by an `AWS SDK <http://aws.amazon.com/tools/>`_ .  
  
 
  
 
 .. note::
 
-  
+   
 
   To add additional communication or attachments to an existing case, use  add-communication-to-case .
 
@@ -53,6 +53,9 @@ Creates a new case in the AWS Support Center. This operation is modeled on the b
 
 A successful  create-case request returns an AWS Support case number. Case numbers are used by the  describe-cases operation to retrieve existing AWS Support cases. 
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/CreateCase>`_
 
 
 ========
@@ -72,7 +75,7 @@ Synopsis
   [--issue-type <value>]
   [--attachment-set-id <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -104,18 +107,18 @@ Options
 
   .. note::
 
-    
+     
 
     The availability of severity levels depends on each customer's support subscription. In other words, your subscription may not necessarily require the urgent level of response time.
 
-    
+     
 
   
 
 ``--category-code`` (string)
 
 
-  The category of problem for the AWS Support case. 
+  The category of problem for the AWS Support case.
 
   
 
@@ -151,7 +154,7 @@ Syntax::
 ``--issue-type`` (string)
 
 
-  The type of issue for the case. You can specify either "customer-service" or "technical." If you do not indicate a value, the default is "technical." 
+  The type of issue for the case. You can specify either "customer-service" or "technical." If you do not indicate a value, the default is "technical."
 
   
 
@@ -165,8 +168,8 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -178,13 +181,9 @@ caseId -> (string)
 
   
 
-  The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-*12345678910-2013-c4c1d2bf33c5cf47* 
+  The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-*12345678910-2013-c4c1d2bf33c5cf47*  
 
   
 
   
 
-
-
-.. _Create Case: https://console.aws.amazon.com/support/home#/case/create
-.. _AWS SDK: http://aws.amazon.com/tools/

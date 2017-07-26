@@ -15,32 +15,35 @@ Description
 
 
 
-Uploads a batch of log events to the specified log stream. 
+Uploads a batch of log events to the specified log stream.
 
  
 
-Every put-log-events request must include the ``sequenceToken`` obtained from the response of the previous request. An upload in a newly created log stream does not require a ``sequenceToken`` . 
+You must include the sequence token obtained from the response of the previous call. An upload in a newly created log stream does not require a sequence token. You can also get the sequence token using  describe-log-streams .
 
  
 
-The batch of events must satisfy the following constraints: 
-
- 
-* The maximum batch size is 1,048,576 bytes, and this size is calculated as the sum of all event messages in UTF-8, plus 26 bytes for each log event.
- 
-* None of the log events in the batch can be more than 2 hours in the future.
- 
-* None of the log events in the batch can be older than 14 days or the retention period of the log group.
- 
-* The log events in the batch must be in chronological ordered by their ``timestamp`` .
- 
-* The maximum number of log events in a batch is 10,000.
- 
-* A batch of log events in a single put-log-events request cannot span more than 24 hours. Otherwise, the put-log-events operation will fail.
- 
+The batch of events must satisfy the following constraints:
 
  
 
+ 
+* The maximum batch size is 1,048,576 bytes, and this size is calculated as the sum of all event messages in UTF-8, plus 26 bytes for each log event. 
+ 
+* None of the log events in the batch can be more than 2 hours in the future. 
+ 
+* None of the log events in the batch can be older than 14 days or the retention period of the log group. 
+ 
+* The log events in the batch must be in chronological ordered by their timestamp (the time the event occurred, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC). 
+ 
+* The maximum number of log events in a batch is 10,000. 
+ 
+* A batch of log events in a single request cannot span more than 24 hours. Otherwise, the operation fails. 
+ 
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutLogEvents>`_
 
 
 ========
@@ -55,7 +58,7 @@ Synopsis
   --log-events <value>
   [--sequence-token <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -67,21 +70,21 @@ Options
 ``--log-group-name`` (string)
 
 
-  The name of the log group to put log events to.
+  The name of the log group.
 
   
 
 ``--log-stream-name`` (string)
 
 
-  The name of the log stream to put log events to.
+  The name of the log stream.
 
   
 
 ``--log-events`` (list)
 
 
-  A list of log events belonging to a log stream.
+  The log events.
 
   
 
@@ -109,15 +112,15 @@ JSON Syntax::
 ``--sequence-token`` (string)
 
 
-  A string token that must be obtained from the response of the previous ``put-log-events`` request. 
+  The sequence token.
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -171,7 +174,7 @@ nextSequenceToken -> (string)
 
   
 
-  A string token used for making put-log-events requests. A ``sequenceToken`` can only be used once, and put-log-events requests must include the ``sequenceToken`` obtained from the response of the previous request.
+  The next sequence token.
 
   
 
@@ -181,7 +184,15 @@ rejectedLogEventsInfo -> (structure)
 
   
 
+  The rejected events.
+
+  
+
   tooNewLogEventStartIndex -> (integer)
+
+    
+
+    The log events that are too new.
 
     
 
@@ -191,9 +202,17 @@ rejectedLogEventsInfo -> (structure)
 
     
 
+    The log events that are too old.
+
+    
+
     
 
   expiredLogEventEndIndex -> (integer)
+
+    
+
+    The expired log events.
 
     
 

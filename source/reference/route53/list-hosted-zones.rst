@@ -15,14 +15,15 @@ Description
 
 
 
-To retrieve a list of your hosted zones, send a ``GET`` request to the ``/*Route 53 API version* /hostedzone`` resource. The response to this request includes a ``HostedZones`` element with zero, one, or multiple ``HostedZone`` child elements. By default, the list of hosted zones is displayed on a single page. You can control the length of the page that is displayed by using the ``MaxItems`` parameter. You can use the ``Marker`` parameter to control the hosted zone that the list begins with. 
+Retrieves a list of the public and private hosted zones that are associated with the current AWS account. The response includes a ``HostedZones`` child element for each hosted zone.
 
  
 
-.. note::
+Amazon Route 53 returns a maximum of 100 items in each response. If you have a lot of hosted zones, you can use the ``maxitems`` parameter to list them in groups of up to 100.
 
-  Amazon Route 53 returns a maximum of 100 items. If you set MaxItems to a value greater than 100, Amazon Route 53 returns only the first 100.
 
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListHostedZones>`_
 
 
 ``list-hosted-zones`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
@@ -41,7 +42,7 @@ Synopsis
   [--cli-input-json <value>]
   [--starting-token <value>]
   [--page-size <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -53,12 +54,20 @@ Options
 ``--max-items`` (string)
  
 
-  The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination. This ``NextToken`` response element should **not** be used directly outside of the AWS CLI.
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``NextToken`` is provided in the command's output. To resume pagination, provide the ``NextToken`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``NextToken`` response element directly outside of the AWS CLI.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
    
 
 ``--delegation-set-id`` (string)
 
+
+  If you're using reusable delegation sets and you want to list all of the hosted zones that are associated with a reusable delegation set, specify the ID of that reusable delegation set. 
+
+  
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
@@ -70,19 +79,23 @@ Performs service operation based on the JSON string provided. The JSON string fo
 
    
 
-``--page-size`` (string)
- 
-
-  The size of each page.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
    
 
-  
+``--page-size`` (string)
+ 
 
-  
+  The size of each page to get in the AWS service call. This does not affect the number of items returned in the command's output. Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call. This can help prevent the AWS service calls from timing out.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -114,7 +127,7 @@ HostedZones -> (list)
 
   
 
-  A complex type that contains information about the hosted zones associated with the current AWS account.
+  A complex type that contains general information about the hosted zone.
 
   
 
@@ -122,7 +135,7 @@ HostedZones -> (list)
 
     
 
-    A complex type that contain information about the specified hosted zone.
+    A complex type that contains general information about the hosted zone.
 
     
 
@@ -130,7 +143,7 @@ HostedZones -> (list)
 
       
 
-      The ID of the specified hosted zone.
+      The ID that Amazon Route 53 assigned to the hosted zone when you created it.
 
       
 
@@ -140,11 +153,11 @@ HostedZones -> (list)
 
       
 
-      The name of the domain. This must be a fully-specified domain, for example, www.example.com. The trailing dot is optional; Amazon Route 53 assumes that the domain name is fully qualified. This means that Amazon Route 53 treats www.example.com (without a trailing dot) and www.example.com. (with a trailing dot) as identical.
+      The name of the domain. For public hosted zones, this is the name that you have registered with your DNS registrar.
 
        
 
-      This is the name you have registered with your DNS registrar. You should ask your registrar to change the authoritative name servers for your domain to the set of ``NameServers`` elements returned in ``DelegationSet`` .
+      For information about how to specify characters other than ``a-z`` , ``0-9`` , and ``-`` (hyphen) and how to specify internationalized domain names, see  create-hosted-zone .
 
       
 
@@ -154,7 +167,7 @@ HostedZones -> (list)
 
       
 
-      A unique string that identifies the request to create the hosted zone.
+      The value that you specified for ``CallerReference`` when you created the hosted zone.
 
       
 
@@ -164,7 +177,7 @@ HostedZones -> (list)
 
       
 
-      A complex type that contains the ``Comment`` element.
+      A complex type that includes the ``Comment`` and ``PrivateZone`` elements. If you omitted the ``HostedZoneConfig`` and ``Comment`` elements from the request, the ``Config`` and ``Comment`` elements don't appear in the response.
 
       
 
@@ -172,13 +185,17 @@ HostedZones -> (list)
 
         
 
-        An optional comment about your hosted zone. If you don't want to specify a comment, you can omit the ``HostedZoneConfig`` and ``Comment`` elements from the XML document.
+        Any comments that you want to include about the hosted zone.
 
         
 
         
 
       PrivateZone -> (boolean)
+
+        
+
+        A value that indicates whether this is a private hosted zone.
 
         
 
@@ -190,7 +207,7 @@ HostedZones -> (list)
 
       
 
-      Total number of resource record sets in the hosted zone.
+      The number of resource record sets in the hosted zone.
 
       
 
@@ -204,7 +221,7 @@ Marker -> (string)
 
   
 
-  If the request returned more than one page of results, submit another request and specify the value of ``NextMarker`` from the last response in the ``marker`` parameter to get the next page of results.
+  For the second and subsequent calls to ``list-hosted-zones`` , ``Marker`` is the value that you specified for the ``marker`` parameter in the request that produced the current response.
 
   
 
@@ -214,11 +231,7 @@ IsTruncated -> (boolean)
 
   
 
-  A flag indicating whether there are more hosted zones to be listed. If your results were truncated, you can make a follow-up request for the next page of results by using the ``Marker`` element.
-
-   
-
-  Valid Values: ``true`` | ``false`` 
+  A flag indicating whether there are more hosted zones to be listed. If the response was truncated, you can get more hosted zones by submitting another ``list-hosted-zones`` request and specifying the value of ``NextMarker`` in the ``marker`` parameter.
 
   
 
@@ -228,7 +241,11 @@ NextMarker -> (string)
 
   
 
-  Indicates where to continue listing hosted zones. If  ListHostedZonesResponse$IsTruncated is ``true`` , make another request to ``list-hosted-zones`` and include the value of the ``NextMarker`` element in the ``Marker`` element to get the next page of results.
+  If ``IsTruncated`` is ``true`` , the value of ``NextMarker`` identifies the first hosted zone in the next group of hosted zones. Submit another ``list-hosted-zones`` request, and specify the value of ``NextMarker`` from the response in the ``marker`` parameter.
+
+   
+
+  This element is present only if ``IsTruncated`` is ``true`` .
 
   
 
@@ -238,7 +255,7 @@ MaxItems -> (string)
 
   
 
-  The maximum number of hosted zones to be included in the response body. If the number of hosted zones associated with this AWS account exceeds ``MaxItems`` , the value of  ListHostedZonesResponse$IsTruncated in the response is ``true`` . Call ``list-hosted-zones`` again and specify the value of  ListHostedZonesResponse$NextMarker in the  ListHostedZonesRequest$Marker element to get the next page of results.
+  The value that you specified for the ``maxitems`` parameter in the call to ``list-hosted-zones`` that produced the current response.
 
   
 

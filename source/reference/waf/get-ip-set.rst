@@ -19,6 +19,9 @@ Returns the  IPSet that is specified by ``IPSetId`` .
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetIPSet>`_
+
+
 ========
 Synopsis
 ========
@@ -28,7 +31,7 @@ Synopsis
     get-ip-set
   --ip-set-id <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -47,8 +50,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -65,9 +68,9 @@ IPSet -> (structure)
    
 
    
-  *  IPSet : Contains ``IPSetDescriptors`` , ``IPSetId`` , and ``Name`` 
+  *  IPSet : Contains ``IPSetDescriptors`` , ``IPSetId`` , and ``Name``   
    
-  * ``IPSetDescriptors`` : Contains an array of  IPSetDescriptor objects. Each ``IPSetDescriptor`` object contains ``Type`` and ``Value`` 
+  * ``IPSetDescriptors`` : Contains an array of  IPSetDescriptor objects. Each ``IPSetDescriptor`` object contains ``Type`` and ``Value``   
    
 
   
@@ -80,7 +83,7 @@ IPSet -> (structure)
 
      
 
-    ``IPSetId`` is returned by  create-ip-set and by  list-ip-sets .
+     ``IPSetId`` is returned by  create-ip-set and by  list-ip-sets .
 
     
 
@@ -100,15 +103,7 @@ IPSet -> (structure)
 
     
 
-    The IP address type (``IPV4`` ) and the IP address range (in CIDR notation) that web requests originate from. If the ``WebACL`` is associated with a CloudFront distribution, this is the value of one of the following fields in CloudFront access logs:
-
-     
-
-     
-    * ``c-ip`` , if the viewer did not use an HTTP proxy or a load balancer to send the request
-     
-    * ``x-forwarded-for`` , if the viewer did use an HTTP proxy or a load balancer to send the request
-     
+    The IP address type (``IPV4`` or ``IPV6`` ) and the IP address range (in CIDR notation) that web requests originate from. If the ``WebACL`` is associated with a CloudFront distribution and the viewer did not use an HTTP proxy or a load balancer to send the request, this is the value of the c-ip field in the CloudFront access logs.
 
     
 
@@ -116,7 +111,7 @@ IPSet -> (structure)
 
       
 
-      Specifies the IP address type (``IPV4`` ) and the IP address range (in CIDR format) that web requests originate from.
+      Specifies the IP address type (``IPV4`` or ``IPV6`` ) and the IP address range (in CIDR format) that web requests originate from.
 
       
 
@@ -124,7 +119,7 @@ IPSet -> (structure)
 
         
 
-        Specify ``IPV4`` .
+        Specify ``IPV4`` or ``IPV6`` .
 
         
 
@@ -139,18 +134,26 @@ IPSet -> (structure)
          
 
          
-        * To configure AWS WAF to allow, block, or count requests that originated from the IP address 192.0.2.44, specify ``192.0.2.44/32`` .
+        * To configure AWS WAF to allow, block, or count requests that originated from the IP address 192.0.2.44, specify ``192.0.2.44/32`` . 
          
-        * To configure AWS WAF to allow, block, or count requests that originated from IP addresses from 192.0.2.0 to 192.0.2.255, specify ``192.0.2.0/24`` .
+        * To configure AWS WAF to allow, block, or count requests that originated from IP addresses from 192.0.2.0 to 192.0.2.255, specify ``192.0.2.0/24`` . 
          
-
-         
-
-        AWS WAF supports only /8, /16, /24, and /32 IP addresses.
 
          
 
-        For more information about CIDR notation, see the Wikipedia entry `Classless Inter-Domain Routing`_ .
+        For more information about CIDR notation, see the Wikipedia entry `Classless Inter-Domain Routing <https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing>`_ .
+
+         
+
+        Specify an IPv6 address by using CIDR notation. For example:
+
+         
+
+         
+        * To configure AWS WAF to allow, block, or count requests that originated from the IP address 1111:0000:0000:0000:0000:0000:0000:0111, specify ``1111:0000:0000:0000:0000:0000:0000:0111/128`` . 
+         
+        * To configure AWS WAF to allow, block, or count requests that originated from IP addresses 1111:0000:0000:0000:0000:0000:0000:0000 to 1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify ``1111:0000:0000:0000:0000:0000:0000:0000/64`` . 
+         
 
         
 
@@ -162,6 +165,3 @@ IPSet -> (structure)
 
   
 
-
-
-.. _Classless Inter-Domain Routing: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing

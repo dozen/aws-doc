@@ -19,8 +19,21 @@ Stops a running task.
 
  
 
-When  stop-task is called on a task, the equivalent of ``docker stop`` is issued to the containers running in the task. This results in a ``SIGTERM`` and a 30-second timeout, after which ``SIGKILL`` is sent and the containers are forcibly stopped. If the container handles the ``SIGTERM`` gracefully and exits within 30 seconds from receiving it, no ``SIGKILL`` is sent.
+When  stop-task is called on a task, the equivalent of ``docker stop`` is issued to the containers running in the task. This results in a ``SIGTERM`` and a default 30-second timeout, after which ``SIGKILL`` is sent and the containers are forcibly stopped. If the container handles the ``SIGTERM`` gracefully and exits within 30 seconds from receiving it, no ``SIGKILL`` is sent.
 
+ 
+
+.. note::
+
+   
+
+  The default 30-second timeout can be configured on the Amazon ECS container agent with the ``ECS_CONTAINER_STOP_TIMEOUT`` variable. For more information, see `Amazon ECS Container Agent Configuration <http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html>`_ in the *Amazon EC2 Container Service Developer Guide* .
+
+   
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StopTask>`_
 
 
 ========
@@ -34,7 +47,7 @@ Synopsis
   --task <value>
   [--reason <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -46,7 +59,7 @@ Options
 ``--cluster`` (string)
 
 
-  The short name or full Amazon Resource Name (ARN) of the cluster that hosts the task to stop. If you do not specify a cluster, the default cluster is assumed..
+  The short name or full Amazon Resource Name (ARN) of the cluster that hosts the task to stop. If you do not specify a cluster, the default cluster is assumed.
 
   
 
@@ -67,8 +80,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -80,7 +93,7 @@ task -> (structure)
 
   
 
-  Details on a task in a cluster.
+  The task that was stopped.
 
   
 
@@ -98,7 +111,7 @@ task -> (structure)
 
     
 
-    The Amazon Resource Name (ARN) of the of the cluster that hosts the task.
+    The Amazon Resource Name (ARN) of the cluster that hosts the task.
 
     
 
@@ -108,7 +121,7 @@ task -> (structure)
 
     
 
-    The Amazon Resource Name (ARN) of the of the task definition that creates the task.
+    The Amazon Resource Name (ARN) of the task definition that creates the task.
 
     
 
@@ -152,7 +165,7 @@ task -> (structure)
 
           
 
-          The name of the container that receives the override.
+          The name of the container that receives the override. This parameter is required if any override is specified.
 
           
 
@@ -162,7 +175,7 @@ task -> (structure)
 
           
 
-          The command to send to the container that overrides the default command from the Docker image or the task definition.
+          The command to send to the container that overrides the default command from the Docker image or the task definition. You must also specify a container name.
 
           
 
@@ -178,7 +191,7 @@ task -> (structure)
 
           
 
-          The environment variables to send to the container. You can add new environment variables, which are added to the container at launch, or you can override the existing environment variables from the Docker image or the task definition.
+          The environment variables to send to the container. You can add new environment variables, which are added to the container at launch, or you can override the existing environment variables from the Docker image or the task definition. You must also specify a container name.
 
           
 
@@ -214,7 +227,47 @@ task -> (structure)
 
           
 
+        cpu -> (integer)
+
+          
+
+          The number of ``cpu`` units reserved for the container, instead of the default value from the task definition. You must also specify a container name.
+
+          
+
+          
+
+        memory -> (integer)
+
+          
+
+          The hard limit (in MiB) of memory to present to the container, instead of the default value from the task definition. If your container attempts to exceed the memory specified here, the container is killed. You must also specify a container name.
+
+          
+
+          
+
+        memoryReservation -> (integer)
+
+          
+
+          The soft limit (in MiB) of memory to reserve for the container, instead of the default value from the task definition. You must also specify a container name.
+
+          
+
+          
+
         
+
+      
+
+    taskRoleArn -> (string)
+
+      
+
+      The Amazon Resource Name (ARN) of the IAM role that containers in this task can assume. All containers in this task are granted the permissions that are specified in this role.
+
+      
 
       
 
@@ -310,7 +363,7 @@ task -> (structure)
 
         
 
-        A short (255 max characters) human-readable string to provide additional detail about a running or stopped container.
+        A short (255 max characters) human-readable string to provide additional details about a running or stopped container.
 
         
 
@@ -390,6 +443,16 @@ task -> (structure)
 
     
 
+  version -> (long)
+
+    
+
+    The version counter for the task. Every time a task experiences a change that triggers a CloudWatch event, the version counter is incremented. If you are replicating your Amazon ECS task state with CloudWatch events, you can compare the version of a task reported by the Amazon ECS APIs with the version reported in CloudWatch events for the task (inside the ``detail`` object) to verify that the version in your event stream is current.
+
+    
+
+    
+
   stoppedReason -> (string)
 
     
@@ -404,7 +467,7 @@ task -> (structure)
 
     
 
-    The Unix time in seconds and milliseconds when the task was created (the task entered the ``PENDING`` state).
+    The Unix timestamp for when the task was created (the task entered the ``PENDING`` state).
 
     
 
@@ -414,7 +477,7 @@ task -> (structure)
 
     
 
-    The Unix time in seconds and milliseconds when the task was started (the task transitioned from the ``PENDING`` state to the ``RUNNING`` state).
+    The Unix timestamp for when the task was started (the task transitioned from the ``PENDING`` state to the ``RUNNING`` state).
 
     
 
@@ -424,7 +487,17 @@ task -> (structure)
 
     
 
-    The Unix time in seconds and milliseconds when the task was stopped (the task transitioned from the ``RUNNING`` state to the ``STOPPED`` state).
+    The Unix timestamp for when the task was stopped (the task transitioned from the ``RUNNING`` state to the ``STOPPED`` state).
+
+    
+
+    
+
+  group -> (string)
+
+    
+
+    The name of the task group associated with the task.
 
     
 

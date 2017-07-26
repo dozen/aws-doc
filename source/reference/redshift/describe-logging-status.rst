@@ -19,6 +19,9 @@ Describes whether information, such as queries and connection attempts, is being
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeLoggingStatus>`_
+
+
 ========
 Synopsis
 ========
@@ -28,7 +31,7 @@ Synopsis
     describe-logging-status
   --cluster-identifier <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -40,19 +43,19 @@ Options
 ``--cluster-identifier`` (string)
 
 
-  The identifier of the cluster to get the logging status from. 
+  The identifier of the cluster from which to get the logging status.
 
    
 
-  Example: ``examplecluster`` 
+  Example: ``examplecluster``  
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -64,7 +67,7 @@ LoggingEnabled -> (boolean)
 
   
 
-  ``true`` if logging is on, ``false`` if logging is off.
+   ``true`` if logging is on, ``false`` if logging is off.
 
   
 
@@ -94,7 +97,7 @@ LastSuccessfulDeliveryTime -> (timestamp)
 
   
 
-  The last time when logs were delivered. 
+  The last time that logs were delivered.
 
   
 
@@ -104,7 +107,7 @@ LastFailureTime -> (timestamp)
 
   
 
-  The last time when logs failed to be delivered. 
+  The last time when logs failed to be delivered.
 
   
 
@@ -114,7 +117,7 @@ LastFailureMessage -> (string)
 
   
 
-  The message indicating that logs failed to be delivered. 
+  The message indicating that logs failed to be delivered.
 
   
 

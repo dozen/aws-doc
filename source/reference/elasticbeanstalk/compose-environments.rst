@@ -15,8 +15,11 @@ Description
 
 
 
-Create or update a group of environments that each run a separate component of a single application. Takes a list of version labels that specify application source bundles for each of the environments to create or update. The name of each environment and other required information must be included in the source bundles in an environment manifest named ``env.yaml`` . See `Compose Environments`_ for details.
+Create or update a group of environments that each run a separate component of a single application. Takes a list of version labels that specify application source bundles for each of the environments to create or update. The name of each environment and other required information must be included in the source bundles in an environment manifest named ``env.yaml`` . See `Compose Environments <http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-mgmt-compose.html>`_ for details.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ComposeEnvironments>`_
 
 
 ========
@@ -30,7 +33,7 @@ Synopsis
   [--group-name <value>]
   [--version-labels <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -49,7 +52,7 @@ Options
 ``--group-name`` (string)
 
 
-  The name of the group to which the target environments belong. Specify a group name only if the environment name defined in each target environment's manifest ends with a + (plus) character. See `Environment Manifest (env.yaml)`_ for details.
+  The name of the group to which the target environments belong. Specify a group name only if the environment name defined in each target environment's manifest ends with a + (plus) character. See `Environment Manifest (env.yaml) <http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html>`_ for details.
 
   
 
@@ -71,8 +74,8 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -110,7 +113,7 @@ Environments -> (list)
 
       
 
-      The ID of this environment. 
+      The ID of this environment.
 
       
 
@@ -146,11 +149,21 @@ Environments -> (list)
 
       
 
+    PlatformArn -> (string)
+
+      
+
+      The ARN of the custom platform.
+
+      
+
+      
+
     TemplateName -> (string)
 
       
 
-      The name of the configuration template used to originally launch this environment. 
+      The name of the configuration template used to originally launch this environment.
 
       
 
@@ -180,7 +193,7 @@ Environments -> (list)
 
       
 
-      The URL to the CNAME for this environment. 
+      The URL to the CNAME for this environment.
 
       
 
@@ -210,7 +223,7 @@ Environments -> (list)
 
       
 
-      The current operational status of the environment: 
+      The current operational status of the environment:
 
        
 
@@ -252,7 +265,7 @@ Environments -> (list)
 
       
 
-      Describes the health status of the environment. AWS Elastic Beanstalk indicates the failure levels for a running environment: 
+      Describes the health status of the environment. AWS Elastic Beanstalk indicates the failure levels for a running environment:
 
        
 
@@ -278,7 +291,7 @@ Environments -> (list)
 
       
 
-      Returns the health status of the application running in your environment. For more information, see `Health Colors and Statuses`_ .
+      Returns the health status of the application running in your environment. For more information, see `Health Colors and Statuses <http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html>`_ .
 
       
 
@@ -416,7 +429,7 @@ Environments -> (list)
 
         
 
-        A link to another environment, defined in the environment's manifest. Links provide connection information in system properties that can be used to connect to another environment in the same group. See `Environment Manifest (env.yaml)`_ for details.
+        A link to another environment, defined in the environment's manifest. Links provide connection information in system properties that can be used to connect to another environment in the same group. See `Environment Manifest (env.yaml) <http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html>`_ for details.
 
         
 
@@ -448,8 +461,3 @@ Environments -> (list)
 
   
 
-
-
-.. _Environment Manifest (env.yaml): http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-mgmt-compose.html#environment-mgmt-compose-envyaml
-.. _Compose Environments: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-mgmt-compose.html
-.. _Health Colors and Statuses: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html

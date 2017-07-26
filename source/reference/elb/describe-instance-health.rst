@@ -19,6 +19,9 @@ Describes the state of the specified instances with respect to the specified loa
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeInstanceHealth>`_
+
+
 ========
 Synopsis
 ========
@@ -29,7 +32,7 @@ Synopsis
   --load-balancer-name <value>
   [--instances <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -75,8 +78,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -84,7 +87,7 @@ Prints a sample input JSON to standard output. Note the specified operation is n
 Examples
 ========
 
-**To describe the health the instances for a load balancer**
+**To describe the health of the instances for a load balancer**
 
 This example describes the health of the instances for the specified load balancer.
 
@@ -107,7 +110,7 @@ Output::
             "ReasonCode": "N/A",
             "State": "InService",
             "Description": "N/A"
-        },
+        }
     ]
   }
 
@@ -166,7 +169,7 @@ InstanceStates -> (list)
 
     
 
-    Information about the state of a back-end instance.
+    Information about the state of an EC2 instance.
 
     
 
@@ -188,7 +191,7 @@ InstanceStates -> (list)
 
        
 
-      Valid values: ``InService`` | ``OutOfService`` | ``Unknown`` 
+      Valid values: ``InService`` | ``OutOfService`` | ``Unknown``  
 
       
 
@@ -202,7 +205,7 @@ InstanceStates -> (list)
 
        
 
-      Valid values: ``ELB`` | ``Instance`` | ``N/A`` 
+      Valid values: ``ELB`` | ``Instance`` | ``N/A``  
 
       
 
@@ -217,29 +220,29 @@ InstanceStates -> (list)
        
 
        
-      * ``N/A``  
+      * ``N/A``   
        
-      * ``A transient error occurred. Please try again later.``  
+      * ``A transient error occurred. Please try again later.``   
        
-      * ``Instance has failed at least the UnhealthyThreshold number of health checks consecutively.``  
+      * ``Instance has failed at least the UnhealthyThreshold number of health checks consecutively.``   
        
-      * ``Instance has not passed the configured HealthyThreshold number of health checks consecutively.``  
+      * ``Instance has not passed the configured HealthyThreshold number of health checks consecutively.``   
        
-      * ``Instance registration is still in progress.``  
+      * ``Instance registration is still in progress.``   
        
-      * ``Instance is in the EC2 Availability Zone for which LoadBalancer is not configured to route traffic to.``  
+      * ``Instance is in the EC2 Availability Zone for which LoadBalancer is not configured to route traffic to.``   
        
-      * ``Instance is not currently registered with the LoadBalancer.``  
+      * ``Instance is not currently registered with the LoadBalancer.``   
        
-      * ``Instance deregistration currently in progress.``  
+      * ``Instance deregistration currently in progress.``   
        
-      * ``Disable Availability Zone is currently in progress.``  
+      * ``Disable Availability Zone is currently in progress.``   
        
-      * ``Instance is in pending state.``  
+      * ``Instance is in pending state.``   
        
-      * ``Instance is in stopped state.``  
+      * ``Instance is in stopped state.``   
        
-      * ``Instance is in terminated state.``  
+      * ``Instance is in terminated state.``   
        
 
       

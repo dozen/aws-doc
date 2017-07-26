@@ -15,22 +15,33 @@ Description
 
 
 
-Uploads a server certificate entity for the AWS account. The server certificate entity includes a public key certificate, a private key, and an optional certificate chain, which should all be PEM-encoded. 
+Uploads a server certificate entity for the AWS account. The server certificate entity includes a public key certificate, a private key, and an optional certificate chain, which should all be PEM-encoded.
 
  
 
-For more information about working with server certificates, including a list of AWS services that can use the server certificates that you manage with IAM, go to `Working with Server Certificates`_ in the *IAM User Guide* .
+We recommend that you use `AWS Certificate Manager <https://aws.amazon.com/certificate-manager/>`_ to provision, manage, and deploy your server certificates. With ACM you can request a certificate, deploy it to AWS resources, and let ACM handle certificate renewals for you. Certificates provided by ACM are free. For more information about using ACM, see the `AWS Certificate Manager User Guide <http://docs.aws.amazon.com/acm/latest/userguide/>`_ .
 
  
 
-For information about the number of server certificates you can upload, see `Limitations on IAM Entities and Objects`_ in the *IAM User Guide* . 
+For more information about working with server certificates, including a list of AWS services that can use the server certificates that you manage with IAM, go to `Working with Server Certificates <http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html>`_ in the *IAM User Guide* .
+
+ 
+
+For information about the number of server certificates you can upload, see `Limitations on IAM Entities and Objects <http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-limits.html>`_ in the *IAM User Guide* .
 
  
 
 .. note::
 
-  Because the body of the public key certificate, private key, and the certificate chain can be large, you should use POST rather than GET when calling ``upload-server-certificate`` . For information about setting up signatures and authorization through the API, go to `Signing AWS API Requests`_ in the *AWS General Reference* . For general information about using the Query API with IAM, go to `Calling the API by Making HTTP Query Requests`_ in the *IAM User Guide* . 
+   
 
+  Because the body of the public key certificate, private key, and the certificate chain can be large, you should use POST rather than GET when calling ``upload-server-certificate`` . For information about setting up signatures and authorization through the API, go to `Signing AWS API Requests <http://docs.aws.amazon.com/general/latest/gr/signing_aws_api_requests.html>`_ in the *AWS General Reference* . For general information about using the Query API with IAM, go to `Calling the API by Making HTTP Query Requests <http://docs.aws.amazon.com/IAM/latest/UserGuide/programming.html>`_ in the *IAM User Guide* .
+
+   
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UploadServerCertificate>`_
 
 
 ========
@@ -46,7 +57,7 @@ Synopsis
   --private-key <value>
   [--certificate-chain <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -58,17 +69,21 @@ Options
 ``--path`` (string)
 
 
-  The path for the server certificate. For more information about paths, see `IAM Identifiers`_ in the *Using IAM* guide. 
+  The path for the server certificate. For more information about paths, see `IAM Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ in the *IAM User Guide* .
 
    
 
-  This parameter is optional. If it is not included, it defaults to a slash (/).
+  This parameter is optional. If it is not included, it defaults to a slash (/). This paramater allows (per its `regex pattern <http://wikipedia.org/wiki/regex>`_ ) a string of characters consisting of either a forward slash (/) by itself or a string that must begin and end with forward slashes, containing any ASCII character from the ! (\u0021) thru the DEL character (\u007F), including most punctuation characters, digits, and upper and lowercased letters.
 
    
 
   .. note::
 
-    If you are uploading a server certificate specifically for use with Amazon CloudFront distributions, you must specify a path using the ``--path`` option. The path must begin with ``/cloudfront`` and must include a trailing slash (for example, ``/cloudfront/test/`` ). 
+     
+
+    If you are uploading a server certificate specifically for use with Amazon CloudFront distributions, you must specify a path using the ``--path`` option. The path must begin with ``/cloudfront`` and must include a trailing slash (for example, ``/cloudfront/test/`` ).
+
+     
 
   
 
@@ -77,12 +92,20 @@ Options
 
   The name for the server certificate. Do not include the path in this value. The name of the certificate cannot contain any spaces.
 
+   
+
+  This parameter allows (per its `regex pattern <http://wikipedia.org/wiki/regex>`_ ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-
+
   
 
 ``--certificate-body`` (string)
 
 
   The contents of the public key certificate in PEM-encoded format.
+
+   
+
+  The `regex pattern <http://wikipedia.org/wiki/regex>`_ used to validate this parameter is a string of characters consisting of any printable ASCII character ranging from the space character (\u0020) through end of the ASCII character range as well as the printable characters in the Basic Latin and Latin-1 Supplement character set (through \u00FF). It also includes the special characters tab (\u0009), line feed (\u000A), and carriage return (\u000D).
 
   
 
@@ -91,20 +114,28 @@ Options
 
   The contents of the private key in PEM-encoded format.
 
+   
+
+  The `regex pattern <http://wikipedia.org/wiki/regex>`_ used to validate this parameter is a string of characters consisting of any printable ASCII character ranging from the space character (\u0020) through end of the ASCII character range as well as the printable characters in the Basic Latin and Latin-1 Supplement character set (through \u00FF). It also includes the special characters tab (\u0009), line feed (\u000A), and carriage return (\u000D).
+
   
 
 ``--certificate-chain`` (string)
 
 
-  The contents of the certificate chain. This is typically a concatenation of the PEM-encoded public key certificates of the chain. 
+  The contents of the certificate chain. This is typically a concatenation of the PEM-encoded public key certificates of the chain.
+
+   
+
+  The `regex pattern <http://wikipedia.org/wiki/regex>`_ used to validate this parameter is a string of characters consisting of any printable ASCII character ranging from the space character (\u0020) through end of the ASCII character range as well as the printable characters in the Basic Latin and Latin-1 Supplement character set (through \u00FF). It also includes the special characters tab (\u0009), line feed (\u000A), and carriage return (\u000D).
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -139,7 +170,7 @@ ServerCertificateMetadata -> (structure)
 
   
 
-  The meta information of the uploaded server certificate without its certificate body, certificate chain, and private key. 
+  The meta information of the uploaded server certificate without its certificate body, certificate chain, and private key.
 
   
 
@@ -147,7 +178,7 @@ ServerCertificateMetadata -> (structure)
 
     
 
-    The path to the server certificate. For more information about paths, see `IAM Identifiers`_ in the *Using IAM* guide. 
+    The path to the server certificate. For more information about paths, see `IAM Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ in the *Using IAM* guide. 
 
     
 
@@ -167,7 +198,7 @@ ServerCertificateMetadata -> (structure)
 
     
 
-    The stable and unique string identifying the server certificate. For more information about IDs, see `IAM Identifiers`_ in the *Using IAM* guide. 
+    The stable and unique string identifying the server certificate. For more information about IDs, see `IAM Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ in the *Using IAM* guide. 
 
     
 
@@ -177,7 +208,7 @@ ServerCertificateMetadata -> (structure)
 
     
 
-    The Amazon Resource Name (ARN) specifying the server certificate. For more information about ARNs and how to use them in policies, see `IAM Identifiers`_ in the *Using IAM* guide. 
+    The Amazon Resource Name (ARN) specifying the server certificate. For more information about ARNs and how to use them in policies, see `IAM Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ in the *Using IAM* guide. 
 
     
 
@@ -205,10 +236,3 @@ ServerCertificateMetadata -> (structure)
 
   
 
-
-
-.. _Working with Server Certificates: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html
-.. _Calling the API by Making HTTP Query Requests: http://docs.aws.amazon.com/IAM/latest/UserGuide/programming.html
-.. _IAM Identifiers: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
-.. _Signing AWS API Requests: http://docs.aws.amazon.com/general/latest/gr/signing_aws_api_requests.html
-.. _Limitations on IAM Entities and Objects: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-limits.html

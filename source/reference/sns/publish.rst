@@ -15,12 +15,19 @@ Description
 
 
 
-Sends a message to all of a topic's subscribed endpoints. When a ``messageId`` is returned, the message has been saved and Amazon SNS will attempt to deliver it to the topic's subscribers shortly. The format of the outgoing message to each subscribed endpoint depends on the notification protocol selected.
+Sends a message to all of a topic's subscribed endpoints. When a ``messageId`` is returned, the message has been saved and Amazon SNS will attempt to deliver it to the topic's subscribers shortly. The format of the outgoing message to each subscribed endpoint depends on the notification protocol.
 
  
 
-To use the ``publish`` action for sending a message to a mobile endpoint, such as an app on a Kindle device or mobile phone, you must specify the EndpointArn. The EndpointArn is returned when making a call with the ``create-platform-endpoint`` action. The second example below shows a request and response for publishing to a mobile endpoint. 
+To use the ``publish`` action for sending a message to a mobile endpoint, such as an app on a Kindle device or mobile phone, you must specify the EndpointArn for the TargetArn parameter. The EndpointArn is returned when making a call with the ``create-platform-endpoint`` action. 
 
+ 
+
+For more information about formatting messages, see `Send Custom Platform-Specific Payloads in Messages to Mobile Devices <http://docs.aws.amazon.com/sns/latest/dg/mobile-push-send-custommessage.html>`_ . 
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/Publish>`_
 
 
 ========
@@ -32,12 +39,13 @@ Synopsis
     publish
   [--topic-arn <value>]
   [--target-arn <value>]
+  [--phone-number <value>]
   --message <value>
   [--subject <value>]
   [--message-structure <value>]
   [--message-attributes <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -51,12 +59,31 @@ Options
 
   The topic you want to publish to.
 
+   
+
+  If you don't specify a value for the ``TopicArn`` parameter, you must specify a value for the ``PhoneNumber`` or ``TargetArn`` parameters.
+
   
 
 ``--target-arn`` (string)
 
 
   Either TopicArn or EndpointArn, but not both.
+
+   
+
+  If you don't specify a value for the ``TargetArn`` parameter, you must specify a value for the ``PhoneNumber`` or ``TopicArn`` parameters.
+
+  
+
+``--phone-number`` (string)
+
+
+  The phone number to which you want to deliver an SMS message. Use E.164 format.
+
+   
+
+  If you don't specify a value for the ``PhoneNumber`` parameter, you must specify a value for the ``TargetArn`` or ``TopicArn`` parameters.
 
   
 
@@ -71,7 +98,7 @@ Options
 
    
 
-  If you want to send different messages for each transport protocol, set the value of the ``MessageStructure`` parameter to ``json`` and use a JSON object for the ``Message`` parameter. See the Examples section for the format of the JSON object. 
+  If you want to send different messages for each transport protocol, set the value of the ``MessageStructure`` parameter to ``json`` and use a JSON object for the ``Message`` parameter. 
 
    
 
@@ -79,28 +106,28 @@ Options
 
    
 
-  JSON-specific constraints: 
+  JSON-specific constraints:
+
+   
 
    
   * Keys in the JSON object that correspond to supported transport protocols must have simple JSON string values. 
    
-  * The values will be parsed (unescaped) before they are used in outgoing messages.
+  * The values will be parsed (unescaped) before they are used in outgoing messages. 
    
-  * Outbound notifications are JSON encoded (meaning that the characters will be reescaped for sending).
+  * Outbound notifications are JSON encoded (meaning that the characters will be reescaped for sending). 
    
-  * Values have a minimum length of 0 (the empty string, "", is allowed).
+  * Values have a minimum length of 0 (the empty string, "", is allowed). 
    
-  * Values have a maximum length bounded by the overall message size (so, including multiple protocols may limit message sizes).
+  * Values have a maximum length bounded by the overall message size (so, including multiple protocols may limit message sizes). 
    
-  * Non-string values will cause the key to be ignored.
+  * Non-string values will cause the key to be ignored. 
    
-  * Keys that do not correspond to supported transport protocols are ignored.
+  * Keys that do not correspond to supported transport protocols are ignored. 
    
-  * Duplicate keys are not allowed.
+  * Duplicate keys are not allowed. 
    
-  * Failure to parse or validate any key or value in the message will cause the ``publish`` call to return an error (no partial delivery).
-   
-
+  * Failure to parse or validate any key or value in the message will cause the ``publish`` call to return an error (no partial delivery). 
    
 
   
@@ -124,22 +151,22 @@ Options
    
 
    
-  * be a syntactically valid JSON object; and
+  * be a syntactically valid JSON object; and 
    
-  * contain at least a top-level JSON key of "default" with a value that is a string.
+  * contain at least a top-level JSON key of "default" with a value that is a string. 
    
-
-   
-
-  You can define other top-level keys that define the message you want to send to a specific transport protocol (e.g., "http"). 
 
    
 
-  For information about sending different messages for each protocol using the AWS Management Console, go to `Create Different Messages for Each Protocol`_ in the *Amazon Simple Notification Service Getting Started Guide* . 
+  You can define other top-level keys that define the message you want to send to a specific transport protocol (e.g., "http").
 
    
 
-  Valid value: ``json`` 
+  For information about sending different messages for each protocol using the AWS Management Console, go to `Create Different Messages for Each Protocol <http://docs.aws.amazon.com/sns/latest/gsg/Publish.html#sns-message-formatting-by-protocol>`_ in the *Amazon Simple Notification Service Getting Started Guide* . 
+
+   
+
+  Valid value: ``json``  
 
   
 
@@ -173,8 +200,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -211,6 +238,3 @@ MessageId -> (string)
 
   
 
-
-
-.. _Create Different Messages for Each Protocol: http://docs.aws.amazon.com/sns/latest/gsg/Publish.html#sns-message-formatting-by-protocol

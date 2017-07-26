@@ -15,12 +15,19 @@ Description
 
 
 
-Removes target(s) from a rule so that when the rule is triggered, those targets will no longer be invoked.
+Removes the specified targets from the specified rule. When the rule is triggered, those targets are no longer be invoked.
 
  
 
- **Note:** When you make a change with this action, when the associated rule triggers, removed targets might still continue to be invoked. Please allow a short period of time for changes to take effect. 
+When you remove a target, when the associated rule triggers, removed targets might continue to be invoked. Please allow a short period of time for changes to take effect.
 
+ 
+
+This action can partially fail if too many requests are made at the same time. If that happens, ``FailedEntryCount`` is non-zero in the response and each entry in ``FailedEntries`` provides the ID of the failed target and the error code.
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/RemoveTargets>`_
 
 
 ========
@@ -33,7 +40,7 @@ Synopsis
   --rule <value>
   --ids <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -45,14 +52,14 @@ Options
 ``--rule`` (string)
 
 
-  The name of the rule you want to remove targets from.
+  The name of the rule.
 
   
 
 ``--ids`` (list)
 
 
-  The list of target IDs to remove from the rule.
+  The IDs of the targets to remove from the rule.
 
   
 
@@ -67,9 +74,20 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
+
+
+========
+Examples
+========
+
+**To remove a target for an event**
+
+This example removes the Amazon Kinesis stream named MyStream1 from being a target of the rule DailyLambdaFunction. When DailyLambdaFunction was created, this stream was set as a target with an ID of Target1::
+
+  aws events remove-targets --rule "DailyLambdaFunction" --ids "Target1"
 
 
 ======
@@ -90,7 +108,7 @@ FailedEntries -> (list)
 
   
 
-  An array of failed target entries.
+  The failed target entries.
 
   
 
@@ -98,7 +116,7 @@ FailedEntries -> (list)
 
     
 
-    The ID of the target requested to be removed from the rule by Amazon CloudWatch Events.
+    Represents a target that failed to be removed from a rule.
 
     
 
@@ -106,7 +124,7 @@ FailedEntries -> (list)
 
       
 
-      The ID of the target requested to be removed by Amazon CloudWatch Events.
+      The ID of the target.
 
       
 
@@ -116,7 +134,7 @@ FailedEntries -> (list)
 
       
 
-      The error code representing why the target removal failed on this entry.
+      The error code that indicates why the target removal failed. If the value is ``ConcurrentModificationException`` , too many requests were made at the same time.
 
       
 
@@ -126,7 +144,7 @@ FailedEntries -> (list)
 
       
 
-      The error message explaining why the target removal failed on this entry.
+      The error message that explains why the target removal failed.
 
       
 

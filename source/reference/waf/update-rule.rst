@@ -20,9 +20,9 @@ Inserts or deletes  Predicate objects in a ``Rule`` . Each ``Predicate`` object 
  
 
  
-* A ``ByteMatchSet`` that matches the value ``BadBot`` in the ``User-Agent`` header
+* A ``ByteMatchSet`` that matches the value ``BadBot`` in the ``User-Agent`` header 
  
-* An ``IPSet`` that matches the IP address ``192.0.2.44`` 
+* An ``IPSet`` that matches the IP address ``192.0.2.44``   
  
 
  
@@ -36,15 +36,15 @@ To create and configure a ``Rule`` , perform the following steps:
  
 
  
-* Create and update the predicates that you want to include in the ``Rule`` .
+* Create and update the predicates that you want to include in the ``Rule`` . 
  
-* Create the ``Rule`` . See  create-rule .
+* Create the ``Rule`` . See  create-rule . 
  
-* Use ``get-change-token`` to get the change token that you provide in the ``change-token`` parameter of an  update-rule request.
+* Use ``get-change-token`` to get the change token that you provide in the ``change-token`` parameter of an  update-rule request. 
  
-* Submit an ``update-rule`` request to add predicates to the ``Rule`` .
+* Submit an ``update-rule`` request to add predicates to the ``Rule`` . 
  
-* Create and update a ``WebACL`` that contains the ``Rule`` . See  create-web-acl .
+* Create and update a ``WebACL`` that contains the ``Rule`` . See  create-web-acl . 
  
 
  
@@ -53,8 +53,11 @@ If you want to replace one ``ByteMatchSet`` or ``IPSet`` with another, you delet
 
  
 
-For more information about how to use the AWS WAF API to allow or block HTTP requests, see the `AWS WAF Developer Guide`_ .
+For more information about how to use the AWS WAF API to allow or block HTTP requests, see the `AWS WAF Developer Guide <http://docs.aws.amazon.com/waf/latest/developerguide/>`_ .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateRule>`_
 
 
 ========
@@ -68,7 +71,7 @@ Synopsis
   --change-token <value>
   --updates <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -99,11 +102,11 @@ Options
    
 
    
-  *  RuleUpdate : Contains ``Action`` and ``Predicate`` 
+  *  RuleUpdate : Contains ``Action`` and ``Predicate``   
    
-  *  Predicate : Contains ``DataId`` , ``Negated`` , and ``Type`` 
+  *  Predicate : Contains ``DataId`` , ``Negated`` , and ``Type``   
    
-  *  FieldToMatch : Contains ``Data`` and ``Type`` 
+  *  FieldToMatch : Contains ``Data`` and ``Type``   
    
 
   
@@ -124,7 +127,7 @@ JSON Syntax::
       "Action": "INSERT"|"DELETE",
       "Predicate": {
         "Negated": true|false,
-        "Type": "IPMatch"|"ByteMatch"|"SqlInjectionMatch"|"SizeConstraint",
+        "Type": "IPMatch"|"ByteMatch"|"SqlInjectionMatch"|"SizeConstraint"|"XssMatch",
         "DataId": "string"
       }
     }
@@ -136,8 +139,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -155,6 +158,3 @@ ChangeToken -> (string)
 
   
 
-
-
-.. _AWS WAF Developer Guide: http://docs.aws.amazon.com/waf/latest/developerguide/

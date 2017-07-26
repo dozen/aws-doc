@@ -15,7 +15,7 @@ Description
 
 Create a socks tunnel on port 8157 from your machine to the master.
 
-A value for the variable Key Pair File can be set in the AWS CLI config file using the "aws configure set" command.
+A value for the variable Key Pair File can be set in the AWS CLI config file using the "aws configure set emr.key_pair_file <value>" command.
 
 
 

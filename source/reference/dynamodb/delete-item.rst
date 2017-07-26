@@ -19,16 +19,19 @@ Deletes a single item in a table by primary key. You can perform a conditional d
 
  
 
-In addition to deleting an item, you can also return the item's attribute values in the same operation, using the *ReturnValues* parameter.
+In addition to deleting an item, you can also return the item's attribute values in the same operation, using the ``ReturnValues`` parameter.
 
  
 
-Unless you specify conditions, the *delete-item* is an idempotent operation; running it multiple times on the same item or attribute does *not* result in an error response.
+Unless you specify conditions, the ``delete-item`` is an idempotent operation; running it multiple times on the same item or attribute does *not* result in an error response.
 
  
 
-Conditional deletes are useful for deleting items only if specific conditions are met. If those conditions are met, DynamoDB performs the delete. Otherwise, the item is not deleted. 
+Conditional deletes are useful for deleting items only if specific conditions are met. If those conditions are met, DynamoDB performs the delete. Otherwise, the item is not deleted.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteItem>`_
 
 
 ========
@@ -49,7 +52,7 @@ Synopsis
   [--expression-attribute-names <value>]
   [--expression-attribute-values <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -68,11 +71,11 @@ Options
 ``--key`` (map)
 
 
-  A map of attribute names to *AttributeValue* objects, representing the primary key of the item to delete.
+  A map of attribute names to ``AttributeValue`` objects, representing the primary key of the item to delete.
 
    
 
-  For the primary key, you must provide all of the attributes. For example, with a hash type primary key, you only need to provide the hash attribute. For a hash-and-range type primary key, you must provide both the hash attribute and the range attribute.
+  For the primary key, you must provide all of the attributes. For example, with a simple primary key, you only need to provide a value for the partition key. For a composite primary key, you must provide values for both the partition key and the sort key.
 
   
 
@@ -133,125 +136,7 @@ JSON Syntax::
 ``--expected`` (map)
 
 
-  .. warning::
-
-     
-
-    This is a legacy parameter, for backward compatibility. New applications should use *condition-expression* instead. Do not combine legacy parameters and expression parameters in a single API call; otherwise, DynamoDB will return a *ValidationException* exception.
-
-     
-
-   
-
-  A map of attribute/condition pairs. *Expected* provides a conditional block for the *delete-item* operation.
-
-   
-
-  Each element of *Expected* consists of an attribute name, a comparison operator, and one or more values. DynamoDB compares the attribute with the value(s) you supplied, using the comparison operator. For each *Expected* element, the result of the evaluation is either true or false.
-
-   
-
-  If you specify more than one element in the *Expected* map, then by default all of the conditions must evaluate to true. In other words, the conditions are ANDed together. (You can use the *conditional-operator* parameter to OR the conditions instead. If you do this, then at least one of the conditions must evaluate to true, rather than all of them.)
-
-   
-
-  If the *Expected* map evaluates to true, then the conditional operation succeeds; otherwise, it fails.
-
-   
-
-  *Expected* contains the following:
-
-   
-
-   
-  * *AttributeValueList* - One or more values to evaluate against the supplied attribute. The number of values in the list depends on the *ComparisonOperator* being used. For type Number, value comparisons are numeric. String value comparisons for greater than, equals, or less than are based on ASCII character code values. For example, ``a`` is greater than ``A`` , and ``a`` is greater than ``B`` . For a list of code values, see `http\://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters`_ . For type Binary, DynamoDB treats each byte of the binary data as unsigned when it compares binary values. 
-   
-  * *ComparisonOperator* - A comparator for evaluating attributes in the *AttributeValueList* . When performing the comparison, DynamoDB uses strongly consistent reads. The following comparison operators are available: ``EQ | NE | LE | LT | GE | GT | NOT_NULL | NULL | CONTAINS | NOT_CONTAINS | BEGINS_WITH | IN | BETWEEN``  The following are descriptions of each comparison operator. 
-
-     
-    * ``EQ`` : Equal. ``EQ`` is supported for all datatypes, including lists and maps. *AttributeValueList* can contain only one *AttributeValue* element of type String, Number, Binary, String Set, Number Set, or Binary Set. If an item contains an *AttributeValue* element of a different type than the one provided in the request, the value does not match. For example, ``{"S":"6"}`` does not equal ``{"N":"6"}`` . Also, ``{"N":"6"}`` does not equal ``{"NS":["6", "2", "1"]}`` .  
-     
-    * ``NE`` : Not equal. ``NE`` is supported for all datatypes, including lists and maps. *AttributeValueList* can contain only one *AttributeValue* of type String, Number, Binary, String Set, Number Set, or Binary Set. If an item contains an *AttributeValue* of a different type than the one provided in the request, the value does not match. For example, ``{"S":"6"}`` does not equal ``{"N":"6"}`` . Also, ``{"N":"6"}`` does not equal ``{"NS":["6", "2", "1"]}`` .  
-     
-    * ``LE`` : Less than or equal.  *AttributeValueList* can contain only one *AttributeValue* element of type String, Number, or Binary (not a set type). If an item contains an *AttributeValue* element of a different type than the one provided in the request, the value does not match. For example, ``{"S":"6"}`` does not equal ``{"N":"6"}`` . Also, ``{"N":"6"}`` does not compare to ``{"NS":["6", "2", "1"]}`` .  
-     
-    * ``LT`` : Less than.  *AttributeValueList* can contain only one *AttributeValue* of type String, Number, or Binary (not a set type). If an item contains an *AttributeValue* element of a different type than the one provided in the request, the value does not match. For example, ``{"S":"6"}`` does not equal ``{"N":"6"}`` . Also, ``{"N":"6"}`` does not compare to ``{"NS":["6", "2", "1"]}`` .  
-     
-    * ``GE`` : Greater than or equal.  *AttributeValueList* can contain only one *AttributeValue* element of type String, Number, or Binary (not a set type). If an item contains an *AttributeValue* element of a different type than the one provided in the request, the value does not match. For example, ``{"S":"6"}`` does not equal ``{"N":"6"}`` . Also, ``{"N":"6"}`` does not compare to ``{"NS":["6", "2", "1"]}`` .  
-     
-    * ``GT`` : Greater than.  *AttributeValueList* can contain only one *AttributeValue* element of type String, Number, or Binary (not a set type). If an item contains an *AttributeValue* element of a different type than the one provided in the request, the value does not match. For example, ``{"S":"6"}`` does not equal ``{"N":"6"}`` . Also, ``{"N":"6"}`` does not compare to ``{"NS":["6", "2", "1"]}`` .  
-     
-    * ``NOT_NULL`` : The attribute exists. ``NOT_NULL`` is supported for all datatypes, including lists and maps. 
-
-    .. note::
-
-      This operator tests for the existence of an attribute, not its data type. If the data type of attribute "``a`` " is null, and you evaluate it using ``NOT_NULL`` , the result is a Boolean *true* . This result is because the attribute "``a`` " exists; its data type is not relevant to the ``NOT_NULL`` comparison operator. 
-
-     
-     
-    * ``NULL`` : The attribute does not exist. ``NULL`` is supported for all datatypes, including lists and maps. 
-
-    .. note::
-
-      This operator tests for the nonexistence of an attribute, not its data type. If the data type of attribute "``a`` " is null, and you evaluate it using ``NULL`` , the result is a Boolean *false* . This is because the attribute "``a`` " exists; its data type is not relevant to the ``NULL`` comparison operator. 
-
-     
-     
-    * ``CONTAINS`` : Checks for a subsequence, or value in a set. *AttributeValueList* can contain only one *AttributeValue* element of type String, Number, or Binary (not a set type). If the target attribute of the comparison is of type String, then the operator checks for a substring match. If the target attribute of the comparison is of type Binary, then the operator looks for a subsequence of the target that matches the input. If the target attribute of the comparison is a set ("``SS`` ", "``NS`` ", or "``BS`` "), then the operator evaluates to true if it finds an exact match with any member of the set. CONTAINS is supported for lists: When evaluating "``a CONTAINS b`` ", "``a`` " can be a list; however, "``b`` " cannot be a set, a map, or a list. 
-     
-    * ``NOT_CONTAINS`` : Checks for absence of a subsequence, or absence of a value in a set. *AttributeValueList* can contain only one *AttributeValue* element of type String, Number, or Binary (not a set type). If the target attribute of the comparison is a String, then the operator checks for the absence of a substring match. If the target attribute of the comparison is Binary, then the operator checks for the absence of a subsequence of the target that matches the input. If the target attribute of the comparison is a set ("``SS`` ", "``NS`` ", or "``BS`` "), then the operator evaluates to true if it *does not* find an exact match with any member of the set. NOT_CONTAINS is supported for lists: When evaluating "``a NOT CONTAINS b`` ", "``a`` " can be a list; however, "``b`` " cannot be a set, a map, or a list. 
-     
-    * ``BEGINS_WITH`` : Checks for a prefix.  *AttributeValueList* can contain only one *AttributeValue* of type String or Binary (not a Number or a set type). The target attribute of the comparison must be of type String or Binary (not a Number or a set type).  
-     
-    * ``IN`` : Checks for matching elements within two sets. *AttributeValueList* can contain one or more *AttributeValue* elements of type String, Number, or Binary (not a set type). These attributes are compared against an existing set type attribute of an item. If any elements of the input set are present in the item attribute, the expression evaluates to true. 
-     
-    * ``BETWEEN`` : Greater than or equal to the first value, and less than or equal to the second value.  *AttributeValueList* must contain two *AttributeValue* elements of the same type, either String, Number, or Binary (not a set type). A target attribute matches if the target value is greater than, or equal to, the first element and less than, or equal to, the second element. If an item contains an *AttributeValue* element of a different type than the one provided in the request, the value does not match. For example, ``{"S":"6"}`` does not compare to ``{"N":"6"}`` . Also, ``{"N":"6"}`` does not compare to ``{"NS":["6", "2", "1"]}``  
-     
-
-   
-   
-
-   
-
-  For usage examples of *AttributeValueList* and *ComparisonOperator* , see `Legacy Conditional Parameters`_ in the *Amazon DynamoDB Developer Guide* .
-
-   
-
-  For backward compatibility with previous DynamoDB releases, the following parameters can be used instead of *AttributeValueList* and *ComparisonOperator* :
-
-   
-
-   
-  * *Value* - A value for DynamoDB to compare with an attribute. 
-   
-  * *Exists* - A Boolean value that causes DynamoDB to evaluate the value before attempting the conditional operation: 
-
-     
-    * If *Exists* is ``true`` , DynamoDB will check to see if that attribute value already exists in the table. If it is found, then the condition evaluates to true; otherwise the condition evaluate to false. 
-     
-    * If *Exists* is ``false`` , DynamoDB assumes that the attribute value does *not* exist in the table. If in fact the value does not exist, then the assumption is valid and the condition evaluates to true. If the value is found, despite the assumption that it does not exist, the condition evaluates to false.
-     
-
-   
-
-  Note that the default value for *Exists* is ``true`` .
-
-   
-   
-
-   
-
-  The *Value* and *Exists* parameters are incompatible with *AttributeValueList* and *ComparisonOperator* . Note that if you use both sets of parameters at once, DynamoDB will return a *ValidationException* exception.
-
-   
-
-  .. note::
-
-    
-
-    This parameter does not support attributes of type List or Map.
-
-    
+  This is a legacy parameter. Use ``ConditionExpresssion`` instead. For more information, see `Expected <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.Expected.html>`_ in the *Amazon DynamoDB Developer Guide* .
 
   
 
@@ -365,43 +250,7 @@ JSON Syntax::
 ``--conditional-operator`` (string)
 
 
-  .. warning::
-
-     
-
-    This is a legacy parameter, for backward compatibility. New applications should use *condition-expression* instead. Do not combine legacy parameters and expression parameters in a single API call; otherwise, DynamoDB will return a *ValidationException* exception.
-
-     
-
-   
-
-  A logical operator to apply to the conditions in the *Expected* map:
-
-   
-
-   
-  * ``AND`` - If all of the conditions evaluate to true, then the entire map evaluates to true.
-   
-  * ``OR`` - If at least one of the conditions evaluate to true, then the entire map evaluates to true.
-   
-
-   
-
-  If you omit *conditional-operator* , then ``AND`` is the default.
-
-   
-
-  The operation will succeed only if the entire map evaluates to true.
-
-   
-
-  .. note::
-
-    
-
-    This parameter does not support attributes of type List or Map.
-
-    
+  This is a legacy parameter. Use ``condition-expression`` instead. For more information, see `conditional-operator <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html>`_ in the *Amazon DynamoDB Developer Guide* .
 
   
 
@@ -420,15 +269,25 @@ JSON Syntax::
 ``--return-values`` (string)
 
 
-  Use *ReturnValues* if you want to get the item attributes as they appeared before they were deleted. For *delete-item* , the valid values are:
+  Use ``ReturnValues`` if you want to get the item attributes as they appeared before they were deleted. For ``delete-item`` , the valid values are:
 
    
 
    
-  * ``NONE`` - If *ReturnValues* is not specified, or if its value is ``NONE`` , then nothing is returned. (This setting is the default for *ReturnValues* .) 
+  * ``NONE`` - If ``ReturnValues`` is not specified, or if its value is ``NONE`` , then nothing is returned. (This setting is the default for ``ReturnValues`` .) 
    
   * ``ALL_OLD`` - The content of the old item is returned. 
    
+
+   
+
+  .. note::
+
+     
+
+    The ``ReturnValues`` parameter is used by several DynamoDB operations; however, ``delete-item`` does not recognize any values other than ``NONE`` or ``ALL_OLD`` .
+
+     
 
   
 
@@ -461,11 +320,11 @@ JSON Syntax::
    
 
    
-  * *INDEXES* - The response includes the aggregate *ConsumedCapacity* for the operation, together with *ConsumedCapacity* for each table and secondary index that was accessed. Note that some operations, such as *get-item* and *batch-get-item* , do not access any indexes at all. In these cases, specifying *INDEXES* will only return *ConsumedCapacity* information for table(s). 
+  * ``INDEXES`` - The response includes the aggregate ``ConsumedCapacity`` for the operation, together with ``ConsumedCapacity`` for each table and secondary index that was accessed. Note that some operations, such as ``get-item`` and ``batch-get-item`` , do not access any indexes at all. In these cases, specifying ``INDEXES`` will only return ``ConsumedCapacity`` information for table(s). 
    
-  * *TOTAL* - The response includes only the aggregate *ConsumedCapacity* for the operation.
+  * ``TOTAL`` - The response includes only the aggregate ``ConsumedCapacity`` for the operation. 
    
-  * *NONE* - No *ConsumedCapacity* details are included in the response.
+  * ``NONE`` - No ``ConsumedCapacity`` details are included in the response. 
    
 
   
@@ -507,7 +366,7 @@ JSON Syntax::
 ``--condition-expression`` (string)
 
 
-  A condition that must be satisfied in order for a conditional *delete-item* to succeed.
+  A condition that must be satisfied in order for a conditional ``delete-item`` to succeed.
 
    
 
@@ -516,33 +375,23 @@ JSON Syntax::
    
 
    
-  * Functions: ``attribute_exists | attribute_not_exists | attribute_type | contains | begins_with | size``  These function names are case-sensitive. 
+  * Functions: ``attribute_exists | attribute_not_exists | attribute_type | contains | begins_with | size``   These function names are case-sensitive. 
    
   * Comparison operators: ``= | | | | = | = | BETWEEN | IN``   
    
-  * Logical operators: ``AND | OR | NOT``  
+  * Logical operators: ``AND | OR | NOT``   
    
 
    
 
-  For more information on condition expressions, see `Specifying Conditions`_ in the *Amazon DynamoDB Developer Guide* .
-
-   
-
-  .. note::
-
-    
-
-    *condition-expression* replaces the legacy *conditional-operator* and *Expected* parameters.
-
-    
+  For more information on condition expressions, see `Specifying Conditions <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html>`_ in the *Amazon DynamoDB Developer Guide* .
 
   
 
 ``--expression-attribute-names`` (map)
 
 
-  One or more substitution tokens for attribute names in an expression. The following are some use cases for using *ExpressionAttributeNames* :
+  One or more substitution tokens for attribute names in an expression. The following are some use cases for using ``ExpressionAttributeNames`` :
 
    
 
@@ -560,19 +409,19 @@ JSON Syntax::
 
    
 
-  
-  * ``Percentile`` 
-  
+   
+  * ``Percentile``   
+   
 
    
 
-  The name of this attribute conflicts with a reserved word, so it cannot be used directly in an expression. (For the complete list of reserved words, see `Reserved Words`_ in the *Amazon DynamoDB Developer Guide* ). To work around this, you could specify the following for *ExpressionAttributeNames* :
+  The name of this attribute conflicts with a reserved word, so it cannot be used directly in an expression. (For the complete list of reserved words, see `Reserved Words <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html>`_ in the *Amazon DynamoDB Developer Guide* ). To work around this, you could specify the following for ``ExpressionAttributeNames`` :
 
    
 
-  
-  * ``{"#P":"Percentile"}`` 
-  
+   
+  * ``{"#P":"Percentile"}``   
+   
 
    
 
@@ -580,23 +429,23 @@ JSON Syntax::
 
    
 
-  
-  * ``#P = :val`` 
-  
+   
+  * ``#P = :val``   
+   
 
    
 
   .. note::
 
-    
+     
 
     Tokens that begin with the **:** character are *expression attribute values* , which are placeholders for the actual value at runtime.
 
-    
+     
 
    
 
-  For more information on expression attribute names, see `Accessing Item Attributes`_ in the *Amazon DynamoDB Developer Guide* .
+  For more information on expression attribute names, see `Accessing Item Attributes <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html>`_ in the *Amazon DynamoDB Developer Guide* .
 
   
 
@@ -627,15 +476,15 @@ JSON Syntax::
 
    
 
-  ``Available | Backordered | Discontinued`` 
+   ``Available | Backordered | Discontinued``  
 
    
 
-  You would first need to specify *ExpressionAttributeValues* as follows:
+  You would first need to specify ``ExpressionAttributeValues`` as follows:
 
    
 
-  ``{ ":avail":{"S":"Available"}, ":back":{"S":"Backordered"}, ":disc":{"S":"Discontinued"} }`` 
+   ``{ ":avail":{"S":"Available"}, ":back":{"S":"Backordered"}, ":disc":{"S":"Discontinued"} }``  
 
    
 
@@ -643,11 +492,11 @@ JSON Syntax::
 
    
 
-  ``ProductStatus IN (:avail, :back, :disc)`` 
+   ``ProductStatus IN (:avail, :back, :disc)``  
 
    
 
-  For more information on expression attribute values, see `Specifying Conditions`_ in the *Amazon DynamoDB Developer Guide* .
+  For more information on expression attribute values, see `Specifying Conditions <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html>`_ in the *Amazon DynamoDB Developer Guide* .
 
   
 
@@ -708,8 +557,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -750,7 +599,7 @@ Attributes -> (map)
 
   
 
-  A map of attribute names to *AttributeValue* objects, representing the item as it appeared before the *delete-item* operation. This map appears in the response only if *ReturnValues* was specified as ``ALL_OLD`` in the request.
+  A map of attribute names to ``AttributeValue`` objects, representing the item as it appeared before the ``delete-item`` operation. This map appears in the response only if ``ReturnValues`` was specified as ``ALL_OLD`` in the request.
 
   
 
@@ -764,11 +613,15 @@ Attributes -> (map)
 
     
 
-    Represents the data for an attribute. You can set one, and only one, of the elements.
+    Represents the data for an attribute.
 
      
 
-    Each attribute in an item is a name-value pair. An attribute can be single-valued or multi-valued set. For example, a book item can have title and authors attributes. Each book has one title but can have many authors. The multi-valued attribute is a set; duplicate values are not allowed. 
+    Each attribute value is described as a name-value pair. The name is the data type, and the value is the data itself.
+
+     
+
+    For more information, see `Data Types <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes>`_ in the *Amazon DynamoDB Developer Guide* .
 
     
 
@@ -776,7 +629,11 @@ Attributes -> (map)
 
       
 
-      A String data type.
+      An attribute of type String. For example:
+
+       
+
+       ``"S": "Hello"``  
 
       
 
@@ -786,7 +643,15 @@ Attributes -> (map)
 
       
 
-      A Number data type.
+      An attribute of type Number. For example:
+
+       
+
+       ``"N": "123.45"``  
+
+       
+
+      Numbers are sent across the network to DynamoDB as strings, to maximize compatibility across languages and libraries. However, DynamoDB treats them as number type attributes for mathematical operations.
 
       
 
@@ -796,7 +661,11 @@ Attributes -> (map)
 
       
 
-      A Binary data type.
+      An attribute of type Binary. For example:
+
+       
+
+       ``"B": "dGhpcyB0ZXh0IGlzIGJhc2U2NC1lbmNvZGVk"``  
 
       
 
@@ -806,7 +675,11 @@ Attributes -> (map)
 
       
 
-      A String Set data type.
+      An attribute of type String Set. For example:
+
+       
+
+       ``"SS": ["Giraffe", "Hippo" ,"Zebra"]``  
 
       
 
@@ -822,7 +695,15 @@ Attributes -> (map)
 
       
 
-      A Number Set data type.
+      An attribute of type Number Set. For example:
+
+       
+
+       ``"NS": ["42.2", "-19", "7.5", "3.14"]``  
+
+       
+
+      Numbers are sent across the network to DynamoDB as strings, to maximize compatibility across languages and libraries. However, DynamoDB treats them as number type attributes for mathematical operations.
 
       
 
@@ -838,7 +719,11 @@ Attributes -> (map)
 
       
 
-      A Binary Set data type.
+      An attribute of type Binary Set. For example:
+
+       
+
+       ``"BS": ["U3Vubnk=", "UmFpbnk=", "U25vd3k="]``  
 
       
 
@@ -854,7 +739,11 @@ Attributes -> (map)
 
       
 
-      A Map of attribute values.
+      An attribute of type Map. For example:
+
+       
+
+       ``"M": {"Name": {"S": "Joe"}, "Age": {"N": "35"}}``  
 
       
 
@@ -868,11 +757,15 @@ Attributes -> (map)
 
         
 
-        Represents the data for an attribute. You can set one, and only one, of the elements.
+        Represents the data for an attribute.
 
          
 
-        Each attribute in an item is a name-value pair. An attribute can be single-valued or multi-valued set. For example, a book item can have title and authors attributes. Each book has one title but can have many authors. The multi-valued attribute is a set; duplicate values are not allowed. 
+        Each attribute value is described as a name-value pair. The name is the data type, and the value is the data itself.
+
+         
+
+        For more information, see `Data Types <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes>`_ in the *Amazon DynamoDB Developer Guide* .
 
         
 
@@ -880,7 +773,11 @@ Attributes -> (map)
 
           
 
-          A String data type.
+          An attribute of type String. For example:
+
+           
+
+           ``"S": "Hello"``  
 
           
 
@@ -890,7 +787,15 @@ Attributes -> (map)
 
           
 
-          A Number data type.
+          An attribute of type Number. For example:
+
+           
+
+           ``"N": "123.45"``  
+
+           
+
+          Numbers are sent across the network to DynamoDB as strings, to maximize compatibility across languages and libraries. However, DynamoDB treats them as number type attributes for mathematical operations.
 
           
 
@@ -900,7 +805,11 @@ Attributes -> (map)
 
           
 
-          A Binary data type.
+          An attribute of type Binary. For example:
+
+           
+
+           ``"B": "dGhpcyB0ZXh0IGlzIGJhc2U2NC1lbmNvZGVk"``  
 
           
 
@@ -910,7 +819,11 @@ Attributes -> (map)
 
           
 
-          A String Set data type.
+          An attribute of type String Set. For example:
+
+           
+
+           ``"SS": ["Giraffe", "Hippo" ,"Zebra"]``  
 
           
 
@@ -926,7 +839,15 @@ Attributes -> (map)
 
           
 
-          A Number Set data type.
+          An attribute of type Number Set. For example:
+
+           
+
+           ``"NS": ["42.2", "-19", "7.5", "3.14"]``  
+
+           
+
+          Numbers are sent across the network to DynamoDB as strings, to maximize compatibility across languages and libraries. However, DynamoDB treats them as number type attributes for mathematical operations.
 
           
 
@@ -942,7 +863,11 @@ Attributes -> (map)
 
           
 
-          A Binary Set data type.
+          An attribute of type Binary Set. For example:
+
+           
+
+           ``"BS": ["U3Vubnk=", "UmFpbnk=", "U25vd3k="]``  
 
           
 
@@ -958,7 +883,11 @@ Attributes -> (map)
 
           
 
-          A Map of attribute values.
+          An attribute of type Map. For example:
+
+           
+
+           ``"M": {"Name": {"S": "Joe"}, "Age": {"N": "35"}}``  
 
           
 
@@ -974,7 +903,11 @@ Attributes -> (map)
 
           
 
-          A List of attribute values.
+          An attribute of type List. For example:
+
+           
+
+           ``"L": ["Cookies", "Coffee", 3.14159]``  
 
           
 
@@ -984,7 +917,11 @@ Attributes -> (map)
 
           
 
-          A Null data type.
+          An attribute of type Null. For example:
+
+           
+
+           ``"NULL": true``  
 
           
 
@@ -994,7 +931,11 @@ Attributes -> (map)
 
           
 
-          A Boolean data type.
+          An attribute of type Boolean. For example:
+
+           
+
+           ``"BOOL": true``  
 
           
 
@@ -1008,7 +949,11 @@ Attributes -> (map)
 
       
 
-      A List of attribute values.
+      An attribute of type List. For example:
+
+       
+
+       ``"L": ["Cookies", "Coffee", 3.14159]``  
 
       
 
@@ -1016,11 +961,15 @@ Attributes -> (map)
 
         
 
-        Represents the data for an attribute. You can set one, and only one, of the elements.
+        Represents the data for an attribute.
 
          
 
-        Each attribute in an item is a name-value pair. An attribute can be single-valued or multi-valued set. For example, a book item can have title and authors attributes. Each book has one title but can have many authors. The multi-valued attribute is a set; duplicate values are not allowed. 
+        Each attribute value is described as a name-value pair. The name is the data type, and the value is the data itself.
+
+         
+
+        For more information, see `Data Types <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes>`_ in the *Amazon DynamoDB Developer Guide* .
 
         
 
@@ -1028,7 +977,11 @@ Attributes -> (map)
 
           
 
-          A String data type.
+          An attribute of type String. For example:
+
+           
+
+           ``"S": "Hello"``  
 
           
 
@@ -1038,7 +991,15 @@ Attributes -> (map)
 
           
 
-          A Number data type.
+          An attribute of type Number. For example:
+
+           
+
+           ``"N": "123.45"``  
+
+           
+
+          Numbers are sent across the network to DynamoDB as strings, to maximize compatibility across languages and libraries. However, DynamoDB treats them as number type attributes for mathematical operations.
 
           
 
@@ -1048,7 +1009,11 @@ Attributes -> (map)
 
           
 
-          A Binary data type.
+          An attribute of type Binary. For example:
+
+           
+
+           ``"B": "dGhpcyB0ZXh0IGlzIGJhc2U2NC1lbmNvZGVk"``  
 
           
 
@@ -1058,7 +1023,11 @@ Attributes -> (map)
 
           
 
-          A String Set data type.
+          An attribute of type String Set. For example:
+
+           
+
+           ``"SS": ["Giraffe", "Hippo" ,"Zebra"]``  
 
           
 
@@ -1074,7 +1043,15 @@ Attributes -> (map)
 
           
 
-          A Number Set data type.
+          An attribute of type Number Set. For example:
+
+           
+
+           ``"NS": ["42.2", "-19", "7.5", "3.14"]``  
+
+           
+
+          Numbers are sent across the network to DynamoDB as strings, to maximize compatibility across languages and libraries. However, DynamoDB treats them as number type attributes for mathematical operations.
 
           
 
@@ -1090,7 +1067,11 @@ Attributes -> (map)
 
           
 
-          A Binary Set data type.
+          An attribute of type Binary Set. For example:
+
+           
+
+           ``"BS": ["U3Vubnk=", "UmFpbnk=", "U25vd3k="]``  
 
           
 
@@ -1106,7 +1087,11 @@ Attributes -> (map)
 
           
 
-          A Map of attribute values.
+          An attribute of type Map. For example:
+
+           
+
+           ``"M": {"Name": {"S": "Joe"}, "Age": {"N": "35"}}``  
 
           
 
@@ -1122,7 +1107,11 @@ Attributes -> (map)
 
           
 
-          A List of attribute values.
+          An attribute of type List. For example:
+
+           
+
+           ``"L": ["Cookies", "Coffee", 3.14159]``  
 
           
 
@@ -1132,7 +1121,11 @@ Attributes -> (map)
 
           
 
-          A Null data type.
+          An attribute of type Null. For example:
+
+           
+
+           ``"NULL": true``  
 
           
 
@@ -1142,7 +1135,11 @@ Attributes -> (map)
 
           
 
-          A Boolean data type.
+          An attribute of type Boolean. For example:
+
+           
+
+           ``"BOOL": true``  
 
           
 
@@ -1156,7 +1153,11 @@ Attributes -> (map)
 
       
 
-      A Null data type.
+      An attribute of type Null. For example:
+
+       
+
+       ``"NULL": true``  
 
       
 
@@ -1166,7 +1167,11 @@ Attributes -> (map)
 
       
 
-      A Boolean data type.
+      An attribute of type Boolean. For example:
+
+       
+
+       ``"BOOL": true``  
 
       
 
@@ -1180,7 +1185,7 @@ ConsumedCapacity -> (structure)
 
   
 
-  The capacity units consumed by an operation. The data returned includes the total provisioned throughput consumed, along with statistics for the table and any indexes involved in the operation. *ConsumedCapacity* is only returned if the request asked for it. For more information, see `Provisioned Throughput`_ in the *Amazon DynamoDB Developer Guide* .
+  The capacity units consumed by the ``delete-item`` operation. The data returned includes the total provisioned throughput consumed, along with statistics for the table and any indexes involved in the operation. ``ConsumedCapacity`` is only returned if the ``return-consumed-capacity`` parameter was specified. For more information, see `Provisioned Throughput <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html>`_ in the *Amazon DynamoDB Developer Guide* .
 
   
 
@@ -1242,7 +1247,7 @@ ConsumedCapacity -> (structure)
 
       
 
-      Represents the amount of provisioned throughput capacity consumed on a table or an index. 
+      Represents the amount of provisioned throughput capacity consumed on a table or an index.
 
       
 
@@ -1278,7 +1283,7 @@ ConsumedCapacity -> (structure)
 
       
 
-      Represents the amount of provisioned throughput capacity consumed on a table or an index. 
+      Represents the amount of provisioned throughput capacity consumed on a table or an index.
 
       
 
@@ -1302,18 +1307,18 @@ ItemCollectionMetrics -> (structure)
 
   
 
-  Information about item collections, if any, that were affected by the operation. *ItemCollectionMetrics* is only returned if the request asked for it. If the table does not have any local secondary indexes, this information is not returned in the response.
+  Information about item collections, if any, that were affected by the ``delete-item`` operation. ``ItemCollectionMetrics`` is only returned if the ``return-item-collection-metrics`` parameter was specified. If the table does not have any local secondary indexes, this information is not returned in the response.
 
    
 
-  Each *ItemCollectionMetrics* element consists of:
+  Each ``ItemCollectionMetrics`` element consists of:
 
    
 
    
-  * *ItemCollectionKey* - The hash key value of the item collection. This is the same as the hash key of the item.
+  * ``ItemCollectionKey`` - The partition key value of the item collection. This is the same as the partition key value of the item itself. 
    
-  * *SizeEstimateRange* - An estimate of item collection size, in gigabytes. This value is a two-element array containing a lower bound and an upper bound for the estimate. The estimate includes the size of all the items in the table, plus the size of all attributes projected into all of the local secondary indexes on that table. Use this estimate to measure whether a local secondary index is approaching its size limit. The estimate is subject to change over time; therefore, do not rely on the precision or accuracy of the estimate. 
+  * ``SizeEstimateRange`` - An estimate of item collection size, in gigabytes. This value is a two-element array containing a lower bound and an upper bound for the estimate. The estimate includes the size of all the items in the table, plus the size of all attributes projected into all of the local secondary indexes on that table. Use this estimate to measure whether a local secondary index is approaching its size limit. The estimate is subject to change over time; therefore, do not rely on the precision or accuracy of the estimate. 
    
 
   
@@ -1322,7 +1327,7 @@ ItemCollectionMetrics -> (structure)
 
     
 
-    The hash key value of the item collection. This value is the same as the hash key of the item.
+    The partition key value of the item collection. This value is the same as the partition key value of the item.
 
     
 
@@ -1336,11 +1341,15 @@ ItemCollectionMetrics -> (structure)
 
       
 
-      Represents the data for an attribute. You can set one, and only one, of the elements.
+      Represents the data for an attribute.
 
        
 
-      Each attribute in an item is a name-value pair. An attribute can be single-valued or multi-valued set. For example, a book item can have title and authors attributes. Each book has one title but can have many authors. The multi-valued attribute is a set; duplicate values are not allowed. 
+      Each attribute value is described as a name-value pair. The name is the data type, and the value is the data itself.
+
+       
+
+      For more information, see `Data Types <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes>`_ in the *Amazon DynamoDB Developer Guide* .
 
       
 
@@ -1348,7 +1357,11 @@ ItemCollectionMetrics -> (structure)
 
         
 
-        A String data type.
+        An attribute of type String. For example:
+
+         
+
+         ``"S": "Hello"``  
 
         
 
@@ -1358,7 +1371,15 @@ ItemCollectionMetrics -> (structure)
 
         
 
-        A Number data type.
+        An attribute of type Number. For example:
+
+         
+
+         ``"N": "123.45"``  
+
+         
+
+        Numbers are sent across the network to DynamoDB as strings, to maximize compatibility across languages and libraries. However, DynamoDB treats them as number type attributes for mathematical operations.
 
         
 
@@ -1368,7 +1389,11 @@ ItemCollectionMetrics -> (structure)
 
         
 
-        A Binary data type.
+        An attribute of type Binary. For example:
+
+         
+
+         ``"B": "dGhpcyB0ZXh0IGlzIGJhc2U2NC1lbmNvZGVk"``  
 
         
 
@@ -1378,7 +1403,11 @@ ItemCollectionMetrics -> (structure)
 
         
 
-        A String Set data type.
+        An attribute of type String Set. For example:
+
+         
+
+         ``"SS": ["Giraffe", "Hippo" ,"Zebra"]``  
 
         
 
@@ -1394,7 +1423,15 @@ ItemCollectionMetrics -> (structure)
 
         
 
-        A Number Set data type.
+        An attribute of type Number Set. For example:
+
+         
+
+         ``"NS": ["42.2", "-19", "7.5", "3.14"]``  
+
+         
+
+        Numbers are sent across the network to DynamoDB as strings, to maximize compatibility across languages and libraries. However, DynamoDB treats them as number type attributes for mathematical operations.
 
         
 
@@ -1410,7 +1447,11 @@ ItemCollectionMetrics -> (structure)
 
         
 
-        A Binary Set data type.
+        An attribute of type Binary Set. For example:
+
+         
+
+         ``"BS": ["U3Vubnk=", "UmFpbnk=", "U25vd3k="]``  
 
         
 
@@ -1426,7 +1467,11 @@ ItemCollectionMetrics -> (structure)
 
         
 
-        A Map of attribute values.
+        An attribute of type Map. For example:
+
+         
+
+         ``"M": {"Name": {"S": "Joe"}, "Age": {"N": "35"}}``  
 
         
 
@@ -1440,11 +1485,15 @@ ItemCollectionMetrics -> (structure)
 
           
 
-          Represents the data for an attribute. You can set one, and only one, of the elements.
+          Represents the data for an attribute.
 
            
 
-          Each attribute in an item is a name-value pair. An attribute can be single-valued or multi-valued set. For example, a book item can have title and authors attributes. Each book has one title but can have many authors. The multi-valued attribute is a set; duplicate values are not allowed. 
+          Each attribute value is described as a name-value pair. The name is the data type, and the value is the data itself.
+
+           
+
+          For more information, see `Data Types <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes>`_ in the *Amazon DynamoDB Developer Guide* .
 
           
 
@@ -1452,7 +1501,11 @@ ItemCollectionMetrics -> (structure)
 
             
 
-            A String data type.
+            An attribute of type String. For example:
+
+             
+
+             ``"S": "Hello"``  
 
             
 
@@ -1462,7 +1515,15 @@ ItemCollectionMetrics -> (structure)
 
             
 
-            A Number data type.
+            An attribute of type Number. For example:
+
+             
+
+             ``"N": "123.45"``  
+
+             
+
+            Numbers are sent across the network to DynamoDB as strings, to maximize compatibility across languages and libraries. However, DynamoDB treats them as number type attributes for mathematical operations.
 
             
 
@@ -1472,7 +1533,11 @@ ItemCollectionMetrics -> (structure)
 
             
 
-            A Binary data type.
+            An attribute of type Binary. For example:
+
+             
+
+             ``"B": "dGhpcyB0ZXh0IGlzIGJhc2U2NC1lbmNvZGVk"``  
 
             
 
@@ -1482,7 +1547,11 @@ ItemCollectionMetrics -> (structure)
 
             
 
-            A String Set data type.
+            An attribute of type String Set. For example:
+
+             
+
+             ``"SS": ["Giraffe", "Hippo" ,"Zebra"]``  
 
             
 
@@ -1498,7 +1567,15 @@ ItemCollectionMetrics -> (structure)
 
             
 
-            A Number Set data type.
+            An attribute of type Number Set. For example:
+
+             
+
+             ``"NS": ["42.2", "-19", "7.5", "3.14"]``  
+
+             
+
+            Numbers are sent across the network to DynamoDB as strings, to maximize compatibility across languages and libraries. However, DynamoDB treats them as number type attributes for mathematical operations.
 
             
 
@@ -1514,7 +1591,11 @@ ItemCollectionMetrics -> (structure)
 
             
 
-            A Binary Set data type.
+            An attribute of type Binary Set. For example:
+
+             
+
+             ``"BS": ["U3Vubnk=", "UmFpbnk=", "U25vd3k="]``  
 
             
 
@@ -1530,7 +1611,11 @@ ItemCollectionMetrics -> (structure)
 
             
 
-            A Map of attribute values.
+            An attribute of type Map. For example:
+
+             
+
+             ``"M": {"Name": {"S": "Joe"}, "Age": {"N": "35"}}``  
 
             
 
@@ -1546,7 +1631,11 @@ ItemCollectionMetrics -> (structure)
 
             
 
-            A List of attribute values.
+            An attribute of type List. For example:
+
+             
+
+             ``"L": ["Cookies", "Coffee", 3.14159]``  
 
             
 
@@ -1556,7 +1645,11 @@ ItemCollectionMetrics -> (structure)
 
             
 
-            A Null data type.
+            An attribute of type Null. For example:
+
+             
+
+             ``"NULL": true``  
 
             
 
@@ -1566,7 +1659,11 @@ ItemCollectionMetrics -> (structure)
 
             
 
-            A Boolean data type.
+            An attribute of type Boolean. For example:
+
+             
+
+             ``"BOOL": true``  
 
             
 
@@ -1580,7 +1677,11 @@ ItemCollectionMetrics -> (structure)
 
         
 
-        A List of attribute values.
+        An attribute of type List. For example:
+
+         
+
+         ``"L": ["Cookies", "Coffee", 3.14159]``  
 
         
 
@@ -1588,11 +1689,15 @@ ItemCollectionMetrics -> (structure)
 
           
 
-          Represents the data for an attribute. You can set one, and only one, of the elements.
+          Represents the data for an attribute.
 
            
 
-          Each attribute in an item is a name-value pair. An attribute can be single-valued or multi-valued set. For example, a book item can have title and authors attributes. Each book has one title but can have many authors. The multi-valued attribute is a set; duplicate values are not allowed. 
+          Each attribute value is described as a name-value pair. The name is the data type, and the value is the data itself.
+
+           
+
+          For more information, see `Data Types <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes>`_ in the *Amazon DynamoDB Developer Guide* .
 
           
 
@@ -1600,7 +1705,11 @@ ItemCollectionMetrics -> (structure)
 
             
 
-            A String data type.
+            An attribute of type String. For example:
+
+             
+
+             ``"S": "Hello"``  
 
             
 
@@ -1610,7 +1719,15 @@ ItemCollectionMetrics -> (structure)
 
             
 
-            A Number data type.
+            An attribute of type Number. For example:
+
+             
+
+             ``"N": "123.45"``  
+
+             
+
+            Numbers are sent across the network to DynamoDB as strings, to maximize compatibility across languages and libraries. However, DynamoDB treats them as number type attributes for mathematical operations.
 
             
 
@@ -1620,7 +1737,11 @@ ItemCollectionMetrics -> (structure)
 
             
 
-            A Binary data type.
+            An attribute of type Binary. For example:
+
+             
+
+             ``"B": "dGhpcyB0ZXh0IGlzIGJhc2U2NC1lbmNvZGVk"``  
 
             
 
@@ -1630,7 +1751,11 @@ ItemCollectionMetrics -> (structure)
 
             
 
-            A String Set data type.
+            An attribute of type String Set. For example:
+
+             
+
+             ``"SS": ["Giraffe", "Hippo" ,"Zebra"]``  
 
             
 
@@ -1646,7 +1771,15 @@ ItemCollectionMetrics -> (structure)
 
             
 
-            A Number Set data type.
+            An attribute of type Number Set. For example:
+
+             
+
+             ``"NS": ["42.2", "-19", "7.5", "3.14"]``  
+
+             
+
+            Numbers are sent across the network to DynamoDB as strings, to maximize compatibility across languages and libraries. However, DynamoDB treats them as number type attributes for mathematical operations.
 
             
 
@@ -1662,7 +1795,11 @@ ItemCollectionMetrics -> (structure)
 
             
 
-            A Binary Set data type.
+            An attribute of type Binary Set. For example:
+
+             
+
+             ``"BS": ["U3Vubnk=", "UmFpbnk=", "U25vd3k="]``  
 
             
 
@@ -1678,7 +1815,11 @@ ItemCollectionMetrics -> (structure)
 
             
 
-            A Map of attribute values.
+            An attribute of type Map. For example:
+
+             
+
+             ``"M": {"Name": {"S": "Joe"}, "Age": {"N": "35"}}``  
 
             
 
@@ -1694,7 +1835,11 @@ ItemCollectionMetrics -> (structure)
 
             
 
-            A List of attribute values.
+            An attribute of type List. For example:
+
+             
+
+             ``"L": ["Cookies", "Coffee", 3.14159]``  
 
             
 
@@ -1704,7 +1849,11 @@ ItemCollectionMetrics -> (structure)
 
             
 
-            A Null data type.
+            An attribute of type Null. For example:
+
+             
+
+             ``"NULL": true``  
 
             
 
@@ -1714,7 +1863,11 @@ ItemCollectionMetrics -> (structure)
 
             
 
-            A Boolean data type.
+            An attribute of type Boolean. For example:
+
+             
+
+             ``"BOOL": true``  
 
             
 
@@ -1728,7 +1881,11 @@ ItemCollectionMetrics -> (structure)
 
         
 
-        A Null data type.
+        An attribute of type Null. For example:
+
+         
+
+         ``"NULL": true``  
 
         
 
@@ -1738,7 +1895,11 @@ ItemCollectionMetrics -> (structure)
 
         
 
-        A Boolean data type.
+        An attribute of type Boolean. For example:
+
+         
+
+         ``"BOOL": true``  
 
         
 
@@ -1770,11 +1931,3 @@ ItemCollectionMetrics -> (structure)
 
   
 
-
-
-.. _Provisioned Throughput: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html
-.. _Reserved Words: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
-.. _Legacy Conditional Parameters: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.html
-.. _Accessing Item Attributes: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
-.. _Specifying Conditions: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
-.. _http\://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters: http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters

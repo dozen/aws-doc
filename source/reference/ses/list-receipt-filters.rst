@@ -15,16 +15,19 @@ Description
 
 
 
-Lists the IP address filters associated with your account.
+Lists the IP address filters associated with your AWS account.
 
  
 
-For information about managing IP address filters, see the `Amazon SES Developer Guide`_ .
+For information about managing IP address filters, see the `Amazon SES Developer Guide <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-ip-filters.html>`_ .
 
  
 
 This action is throttled at one request per second.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListReceiptFilters>`_
 
 
 ========
@@ -35,7 +38,7 @@ Synopsis
 
     list-receipt-filters
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -47,8 +50,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -72,7 +75,7 @@ Filters -> (list)
 
      
 
-    For information about setting up IP address filters, see the `Amazon SES Developer Guide`_ .
+    For information about setting up IP address filters, see the `Amazon SES Developer Guide <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-ip-filters.html>`_ .
 
     
 
@@ -85,11 +88,11 @@ Filters -> (list)
        
 
        
-      * Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-).
+      * Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-). 
        
-      * Start and end with a letter or number.
+      * Start and end with a letter or number. 
        
-      * Contain less than 64 characters.
+      * Contain less than 64 characters. 
        
 
       
@@ -118,7 +121,7 @@ Filters -> (list)
 
         
 
-        A single IP address or a range of IP addresses that you want to block or allow, specified in Classless Inter-Domain Routing (CIDR) notation. An example of a single email address is 10.0.0.1. An example of a range of IP addresses is 10.0.0.1/24. For more information about CIDR notation, see `RFC 2317`_ .
+        A single IP address or a range of IP addresses that you want to block or allow, specified in Classless Inter-Domain Routing (CIDR) notation. An example of a single email address is 10.0.0.1. An example of a range of IP addresses is 10.0.0.1/24. For more information about CIDR notation, see `RFC 2317 <https://tools.ietf.org/html/rfc2317>`_ .
 
         
 
@@ -130,7 +133,3 @@ Filters -> (list)
 
   
 
-
-
-.. _RFC 2317: https://tools.ietf.org/html/rfc2317
-.. _Amazon SES Developer Guide: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-ip-filters.html

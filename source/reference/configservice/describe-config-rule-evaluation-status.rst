@@ -19,6 +19,9 @@ Returns status information for each of your AWS managed Config rules. The status
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigRuleEvaluationStatus>`_
+
+
 ========
 Synopsis
 ========
@@ -27,8 +30,10 @@ Synopsis
 
     describe-config-rule-evaluation-status
   [--config-rule-names <value>]
+  [--next-token <value>]
+  [--limit <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -40,7 +45,7 @@ Options
 ``--config-rule-names`` (list)
 
 
-  The name of the AWS managed Config rules for which you want status information. If you do not specify any names, AWS Config returns status information for all AWS managed Config rules that you use. 
+  The name of the AWS managed Config rules for which you want status information. If you do not specify any names, AWS Config returns status information for all AWS managed Config rules that you use.
 
   
 
@@ -52,11 +57,33 @@ Syntax::
 
 
 
+``--next-token`` (string)
+
+
+  The ``NextToken`` string returned on a previous page that you use to get the next page of results in a paginated response.
+
+  
+
+``--limit`` (integer)
+
+
+  The number of rule evaluation results that you want returned.
+
+   
+
+  This parameter is required if the rule limit for your account is more than the default of 50 rules.
+
+   
+
+  For more information about requesting a rule limit increase, see `AWS Config Limits <http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_config>`_ in the *AWS General Reference Guide* .
+
+  
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -104,7 +131,7 @@ ConfigRulesEvaluationStatus -> (list)
 
      
 
-    This action does not return status information about customer managed Config rules.
+    This action does not return status information about custom Config rules.
 
     
 
@@ -217,9 +244,9 @@ ConfigRulesEvaluationStatus -> (list)
        
 
        
-      * ``true`` - AWS Config has evaluated your AWS resources against the rule at least once.
+      * ``true`` - AWS Config has evaluated your AWS resources against the rule at least once. 
        
-      * ``false`` - AWS Config has not once finished evaluating your AWS resources against the rule.
+      * ``false`` - AWS Config has not once finished evaluating your AWS resources against the rule. 
        
 
       
@@ -227,6 +254,16 @@ ConfigRulesEvaluationStatus -> (list)
       
 
     
+
+  
+
+NextToken -> (string)
+
+  
+
+  The string that you use in a subsequent request to get the next page of results in a paginated response.
+
+  
 
   
 

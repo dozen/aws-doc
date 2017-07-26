@@ -15,12 +15,15 @@ Description
 
 
 
-Lists the roles that have the specified path prefix. If there are none, the action returns an empty list. For more information about roles, go to `Working with Roles`_ . 
+Lists the IAM roles that have the specified path prefix. If there are none, the action returns an empty list. For more information about roles, go to `Working with Roles <http://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html>`_ .
 
  
 
-You can paginate the results using the ``MaxItems`` and ``Marker`` parameters. 
+You can paginate the results using the ``MaxItems`` and ``Marker`` parameters.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListRoles>`_
 
 
 ``list-roles`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
@@ -39,7 +42,7 @@ Synopsis
   [--cli-input-json <value>]
   [--starting-token <value>]
   [--page-size <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -51,18 +54,22 @@ Options
 ``--path-prefix`` (string)
 
 
-  The path prefix for filtering the results. For example, the prefix ``/application_abc/component_xyz/`` gets all roles whose path starts with ``/application_abc/component_xyz/`` . 
+  The path prefix for filtering the results. For example, the prefix ``/application_abc/component_xyz/`` gets all roles whose path starts with ``/application_abc/component_xyz/`` .
 
    
 
-  This parameter is optional. If it is not included, it defaults to a slash (/), listing all roles. 
+  This parameter is optional. If it is not included, it defaults to a slash (/), listing all roles. This paramater allows (per its `regex pattern <http://wikipedia.org/wiki/regex>`_ ) a string of characters consisting of either a forward slash (/) by itself or a string that must begin and end with forward slashes, containing any ASCII character from the ! (\u0021) thru the DEL character (\u007F), including most punctuation characters, digits, and upper and lowercased letters.
 
   
 
 ``--max-items`` (integer)
  
 
-  The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination. This ``NextToken`` response element should **not** be used directly outside of the AWS CLI.
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``NextToken`` is provided in the command's output. To resume pagination, provide the ``NextToken`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``NextToken`` response element directly outside of the AWS CLI.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
    
 
@@ -76,19 +83,23 @@ Performs service operation based on the JSON string provided. The JSON string fo
 
    
 
-``--page-size`` (integer)
- 
-
-  The size of each page.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
    
 
-  
+``--page-size`` (integer)
+ 
 
-  
+  The size of each page to get in the AWS service call. This does not affect the number of items returned in the command's output. Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call. This can help prevent the AWS service calls from timing out.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -171,21 +182,7 @@ Roles -> (list)
 
     
 
-    Contains information about an IAM role.
-
-     
-
-    This data type is used as a response element in the following actions:
-
-     
-
-     
-    *  create-role   
-     
-    *  get-role   
-     
-    *  list-roles   
-     
+    Contains information about an IAM role. This structure is returned as a response element in several APIs that interact with roles.
 
     
 
@@ -193,7 +190,7 @@ Roles -> (list)
 
       
 
-      The path to the role. For more information about paths, see `IAM Identifiers`_ in the *Using IAM* guide. 
+      The path to the role. For more information about paths, see `IAM Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ in the *Using IAM* guide. 
 
       
 
@@ -213,7 +210,7 @@ Roles -> (list)
 
       
 
-      The stable and unique string identifying the role. For more information about IDs, see `IAM Identifiers`_ in the *Using IAM* guide. 
+      The stable and unique string identifying the role. For more information about IDs, see `IAM Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ in the *Using IAM* guide. 
 
       
 
@@ -223,7 +220,7 @@ Roles -> (list)
 
       
 
-      The Amazon Resource Name (ARN) specifying the role. For more information about ARNs and how to use them in policies, see `IAM Identifiers`_ in the *Using IAM* guide. 
+      The Amazon Resource Name (ARN) specifying the role. For more information about ARNs and how to use them in policies, see `IAM Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ in the *IAM User Guide* guide. 
 
       
 
@@ -233,7 +230,7 @@ Roles -> (list)
 
       
 
-      The date and time, in `ISO 8601 date-time format`_ , when the role was created.
+      The date and time, in `ISO 8601 date-time format <http://www.iso.org/iso/iso8601>`_ , when the role was created.
 
       
 
@@ -244,6 +241,16 @@ Roles -> (list)
       
 
       The policy that grants an entity permission to assume the role.
+
+      
+
+      
+
+    Description -> (string)
+
+      
+
+      A description of the role that you provide.
 
       
 
@@ -273,8 +280,3 @@ Marker -> (string)
 
   
 
-
-
-.. _ISO 8601 date-time format: http://www.iso.org/iso/iso8601
-.. _Working with Roles: http://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html
-.. _IAM Identifiers: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html

@@ -22,13 +22,13 @@ Returns a list of tags. You can return tags from a specific resource by specifyi
 The following are limitations for ``describe-tags`` : 
 
  
-* You cannot specify an ARN and a resource-type value together in the same request.
- 
-* You cannot use the ``MaxRecords`` and ``Marker`` parameters together with the ARN parameter.
- 
-* The ``MaxRecords`` parameter can be a range from 10 to 50 results to return in a request.
- 
 
+ 
+* You cannot specify an ARN and a resource-type value together in the same request. 
+ 
+* You cannot use the ``MaxRecords`` and ``Marker`` parameters together with the ARN parameter. 
+ 
+* The ``MaxRecords`` parameter can be a range from 10 to 50 results to return in a request. 
  
 
  
@@ -39,6 +39,9 @@ If you specify both tag keys and tag values in the same request, Amazon Redshift
 
 If both tag keys and values are omitted from the request, resources are returned regardless of whether they have tag keys or values associated with them.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeTags>`_
 
 
 ========
@@ -55,7 +58,7 @@ Synopsis
   [--tag-keys <value>]
   [--tag-values <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -77,32 +80,32 @@ Options
   The type of resource with which you want to view tags. Valid resource types are: 
 
    
-  * Cluster
+
    
-  * CIDR/IP
+  * Cluster 
    
-  * EC2 security group
+  * CIDR/IP 
    
-  * Snapshot
+  * EC2 security group 
    
-  * Cluster security group
+  * Snapshot 
    
-  * Subnet group
+  * Cluster security group 
    
-  * HSM connection
+  * Subnet group 
    
-  * HSM certificate
+  * HSM connection 
    
-  * Parameter group
+  * HSM certificate 
    
-  * Snapshot copy grant
+  * Parameter group 
+   
+  * Snapshot copy grant 
    
 
    
 
-   
-
-  For more information about Amazon Redshift resource types and constructing ARNs, go to `Constructing an Amazon Redshift Amazon Resource Name (ARN)`_ in the Amazon Redshift Cluster Management Guide. 
+  For more information about Amazon Redshift resource types and constructing ARNs, go to `Constructing an Amazon Redshift Amazon Resource Name (ARN) <http://docs.aws.amazon.com/redshift/latest/mgmt/constructing-redshift-arn.html>`_ in the Amazon Redshift Cluster Management Guide. 
 
   
 
@@ -153,8 +156,8 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -166,7 +169,7 @@ TaggedResources -> (list)
 
   
 
-  A list of tags with their associated resources. 
+  A list of tags with their associated resources.
 
   
 
@@ -174,7 +177,7 @@ TaggedResources -> (list)
 
     
 
-    A tag and its associated resource. 
+    A tag and its associated resource.
 
     
 
@@ -182,7 +185,7 @@ TaggedResources -> (list)
 
       
 
-      The tag for the resource. 
+      The tag for the resource.
 
       
 
@@ -225,30 +228,30 @@ TaggedResources -> (list)
       The type of resource with which the tag is associated. Valid resource types are: 
 
        
-      * Cluster
+
        
-      * CIDR/IP
+      * Cluster 
        
-      * EC2 security group
+      * CIDR/IP 
        
-      * Snapshot
+      * EC2 security group 
        
-      * Cluster security group
+      * Snapshot 
        
-      * Subnet group
+      * Cluster security group 
        
-      * HSM connection
+      * Subnet group 
        
-      * HSM certificate
+      * HSM connection 
        
-      * Parameter group
+      * HSM certificate 
+       
+      * Parameter group 
        
 
        
 
-       
-
-      For more information about Amazon Redshift resource types and constructing ARNs, go to `Constructing an Amazon Redshift Amazon Resource Name (ARN)`_ in the Amazon Redshift Cluster Management Guide. 
+      For more information about Amazon Redshift resource types and constructing ARNs, go to `Constructing an Amazon Redshift Amazon Resource Name (ARN) <http://docs.aws.amazon.com/redshift/latest/mgmt/constructing-redshift-arn.html>`_ in the Amazon Redshift Cluster Management Guide. 
 
       
 
@@ -268,6 +271,3 @@ Marker -> (string)
 
   
 
-
-
-.. _Constructing an Amazon Redshift Amazon Resource Name (ARN): http://docs.aws.amazon.com/redshift/latest/mgmt/constructing-redshift-arn.html

@@ -19,7 +19,7 @@ AWS IoT provides secure, bi-directional communication between Internet-connected
 
  
 
-For more information about how AWS IoT works, see the `Developer Guide`_ .
+For more information about how AWS IoT works, see the `Developer Guide <http://docs.aws.amazon.com/iot/latest/developerguide/aws-iot-how-it-works.html>`_ .
 
 
 
@@ -41,15 +41,22 @@ Available Commands
   create-policy
   create-policy-version
   create-thing
+  create-thing-type
   create-topic-rule
+  delete-ca-certificate
   delete-certificate
   delete-policy
   delete-policy-version
+  delete-registration-code
   delete-thing
+  delete-thing-type
   delete-topic-rule
+  deprecate-thing-type
+  describe-ca-certificate
   describe-certificate
   describe-endpoint
   describe-thing
+  describe-thing-type
   detach-principal-policy
   detach-thing-principal
   disable-topic-rule
@@ -57,22 +64,28 @@ Available Commands
   get-logging-options
   get-policy
   get-policy-version
+  get-registration-code
   get-topic-rule
+  list-ca-certificates
   list-certificates
+  list-certificates-by-ca
+  list-outgoing-certificates
   list-policies
+  list-policy-principals
   list-policy-versions
   list-principal-policies
   list-principal-things
   list-thing-principals
+  list-thing-types
   list-things
   list-topic-rules
+  register-ca-certificate
+  register-certificate
   reject-certificate-transfer
   replace-topic-rule
   set-default-policy-version
   set-logging-options
   transfer-certificate
+  update-ca-certificate
   update-certificate
   update-thing
-
-
-.. _Developer Guide: http://docs.aws.amazon.com/iot/latest/developerguide/aws-iot-how-it-works.html

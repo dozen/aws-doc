@@ -19,8 +19,11 @@ Describes one or more of the Reserved Instances that you purchased.
 
  
 
-For more information about Reserved Instances, see `Reserved Instances`_ in the *Amazon Elastic Compute Cloud User Guide* .
+For more information about Reserved Instances, see `Reserved Instances <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts-on-demand-reserved-instances.html>`_ in the *Amazon Elastic Compute Cloud User Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeReservedInstances>`_
 
 
 ========
@@ -30,12 +33,13 @@ Synopsis
 ::
 
     describe-reserved-instances
-  [--dry-run | --no-dry-run]
-  [--reserved-instances-ids <value>]
   [--filters <value>]
+  [--offering-class <value>]
+  [--reserved-instances-ids <value>]
+  [--dry-run | --no-dry-run]
   [--offering-type <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -43,32 +47,6 @@ Synopsis
 =======
 Options
 =======
-
-``--dry-run`` | ``--no-dry-run`` (boolean)
-
-
-  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
-
-  
-
-``--reserved-instances-ids`` (list)
-
-
-  One or more Reserved Instance IDs.
-
-   
-
-  Default: Describes all your Reserved Instances, or only those otherwise specified.
-
-  
-
-
-
-Syntax::
-
-  "string" "string" ...
-
-
 
 ``--filters`` (list)
 
@@ -88,6 +66,8 @@ Syntax::
    
   * ``instance-type`` - The instance type that is covered by the reservation. 
    
+  * ``scope`` - The scope of the Reserved Instance (``Region`` or ``Availability Zone`` ). 
+   
   * ``product-description`` - The Reserved Instance product platform description. Instances that include ``(Amazon VPC)`` in the product platform description will only be displayed to EC2-Classic account holders and are for use with Amazon VPC (``Linux/UNIX`` | ``Linux/UNIX (Amazon VPC)`` | ``SUSE Linux`` | ``SUSE Linux (Amazon VPC)`` | ``Red Hat Enterprise Linux`` | ``Red Hat Enterprise Linux (Amazon VPC)`` | ``Windows`` | ``Windows (Amazon VPC)`` | ``Windows with SQL Server Standard`` | ``Windows with SQL Server Standard (Amazon VPC)`` | ``Windows with SQL Server Web`` | ``Windows with SQL Server Web (Amazon VPC)`` | ``Windows with SQL Server Enterprise`` | ``Windows with SQL Server Enterprise (Amazon VPC)`` ). 
    
   * ``reserved-instances-id`` - The ID of the Reserved Instance. 
@@ -96,7 +76,7 @@ Syntax::
    
   * ``state`` - The state of the Reserved Instance (``payment-pending`` | ``active`` | ``payment-failed`` | ``retired`` ). 
    
-  * ``tag`` :*key* =*value* - The key/value combination of a tag assigned to the resource. 
+  * ``tag`` :*key* =*value* - The key/value combination of a tag assigned to the resource. Specify the key of the tag in the filter name and the value of the tag in the filter value. For example, for the tag Purpose=X, specify ``tag:Purpose`` for the filter name and ``X`` for the filter value. 
    
   * ``tag-key`` - The key of a tag assigned to the resource. This filter is independent of the ``tag-value`` filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the ``tag`` :*key* =*value* filter. 
    
@@ -128,10 +108,55 @@ JSON Syntax::
 
 
 
+``--offering-class`` (string)
+
+
+  Describes whether the Reserved Instance is Standard or Convertible.
+
+  
+
+  Possible values:
+
+  
+  *   ``standard``
+
+  
+  *   ``convertible``
+
+  
+
+  
+
+``--reserved-instances-ids`` (list)
+
+
+  One or more Reserved Instance IDs.
+
+   
+
+  Default: Describes all your Reserved Instances, or only those otherwise specified.
+
+  
+
+
+
+Syntax::
+
+  "string" "string" ...
+
+
+
+``--dry-run`` | ``--no-dry-run`` (boolean)
+
+
+  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
+
+  
+
 ``--offering-type`` (string)
 
 
-  The Reserved Instance offering type. If you are using tools that predate the 2011-11-01 API version, you only have access to the ``Medium Utilization`` Reserved Instance offering type. 
+  The Reserved Instance offering type. If you are using tools that predate the 2011-11-01 API version, you only have access to the ``Medium Utilization`` Reserved Instance offering type.
 
   
 
@@ -162,8 +187,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -267,51 +292,11 @@ ReservedInstances -> (list)
 
     
 
-    ReservedInstancesId -> (string)
-
-      
-
-      The ID of the Reserved Instance.
-
-      
-
-      
-
-    InstanceType -> (string)
-
-      
-
-      The instance type on which the Reserved Instance can be used.
-
-      
-
-      
-
     AvailabilityZone -> (string)
 
       
 
       The Availability Zone in which the Reserved Instance can be used.
-
-      
-
-      
-
-    Start -> (timestamp)
-
-      
-
-      The date and time the Reserved Instance started.
-
-      
-
-      
-
-    End -> (timestamp)
-
-      
-
-      The time when the Reserved Instance expires.
 
       
 
@@ -327,11 +312,11 @@ ReservedInstances -> (list)
 
       
 
-    UsagePrice -> (float)
+    End -> (timestamp)
 
       
 
-      The usage price of the Reserved Instance, per hour.
+      The time when the Reserved Instance expires.
 
       
 
@@ -357,11 +342,41 @@ ReservedInstances -> (list)
 
       
 
+    InstanceType -> (string)
+
+      
+
+      The instance type on which the Reserved Instance can be used.
+
+      
+
+      
+
     ProductDescription -> (string)
 
       
 
       The Reserved Instance product platform description.
+
+      
+
+      
+
+    ReservedInstancesId -> (string)
+
+      
+
+      The ID of the Reserved Instance.
+
+      
+
+      
+
+    Start -> (timestamp)
+
+      
+
+      The date and time the Reserved Instance started.
 
       
 
@@ -377,51 +392,23 @@ ReservedInstances -> (list)
 
       
 
-    Tags -> (list)
+    UsagePrice -> (float)
 
       
 
-      Any tags assigned to the resource.
+      The usage price of the Reserved Instance, per hour.
 
       
 
-      (structure)
+      
 
-        
+    CurrencyCode -> (string)
 
-        Describes a tag.
+      
 
-        
+      The currency of the Reserved Instance. It's specified using ISO 4217 standard currency codes. At this time, the only supported currency is ``USD`` .
 
-        Key -> (string)
-
-          
-
-          The key of the tag. 
-
-           
-
-          Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with ``aws:`` 
-
-          
-
-          
-
-        Value -> (string)
-
-          
-
-          The value of the tag.
-
-           
-
-          Constraints: Tag values are case-sensitive and accept a maximum of 255 Unicode characters.
-
-          
-
-          
-
-        
+      
 
       
 
@@ -435,11 +422,11 @@ ReservedInstances -> (list)
 
       
 
-    CurrencyCode -> (string)
+    OfferingClass -> (string)
 
       
 
-      The currency of the Reserved Instance. It's specified using ISO 4217 standard currency codes. At this time, the only supported currency is ``USD`` .
+      The offering class of the Reserved Instance.
 
       
 
@@ -471,6 +458,16 @@ ReservedInstances -> (list)
 
         
 
+        Amount -> (double)
+
+          
+
+          The amount of the recurring charge.
+
+          
+
+          
+
         Frequency -> (string)
 
           
@@ -481,11 +478,59 @@ ReservedInstances -> (list)
 
           
 
-        Amount -> (double)
+        
+
+      
+
+    Scope -> (string)
+
+      
+
+      The scope of the Reserved Instance.
+
+      
+
+      
+
+    Tags -> (list)
+
+      
+
+      Any tags assigned to the resource.
+
+      
+
+      (structure)
+
+        
+
+        Describes a tag.
+
+        
+
+        Key -> (string)
 
           
 
-          The amount of the recurring charge.
+          The key of the tag.
+
+           
+
+          Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with ``aws:``  
+
+          
+
+          
+
+        Value -> (string)
+
+          
+
+          The value of the tag.
+
+           
+
+          Constraints: Tag values are case-sensitive and accept a maximum of 255 Unicode characters.
 
           
 
@@ -499,6 +544,3 @@ ReservedInstances -> (list)
 
   
 
-
-
-.. _Reserved Instances: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts-on-demand-reserved-instances.html

@@ -15,12 +15,15 @@ Description
 
 
 
-Retrieves log events from the specified log stream. You can provide an optional time range to filter the results on the event ``timestamp`` . 
+Lists log events from the specified log stream. You can list all the log events or filter using a time range.
 
  
 
-By default, this operation returns as much log events as can fit in a response size of 1MB, up to 10,000 log events. The response will always include a ``nextForwardToken`` and a ``nextBackwardToken`` in the response body. You can use any of these tokens in subsequent ``get-log-events`` requests to paginate through events in either forward or backward direction. You can also limit the number of log events returned in the response by specifying the ``limit`` parameter in the request. 
+By default, this operation returns as many log events as can fit in a response size of 1MB (up to 10,000 log events). If the results include tokens, there are more log events available. You can get additional log events by specifying one of the tokens in a subsequent call.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogEvents>`_
 
 
 ========
@@ -38,7 +41,7 @@ Synopsis
   [--limit <value>]
   [--start-from-head | --no-start-from-head]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -50,57 +53,57 @@ Options
 ``--log-group-name`` (string)
 
 
-  The name of the log group to query.
+  The name of the log group.
 
   
 
 ``--log-stream-name`` (string)
 
 
-  The name of the log stream to query.
+  The name of the log stream.
 
   
 
 ``--start-time`` (long)
 
 
-  A point in time expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
+  The start of the time range, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC. Events with a timestamp earlier than this time are not included.
 
   
 
 ``--end-time`` (long)
 
 
-  A point in time expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
+  The end of the time range, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than this time are not included.
 
   
 
 ``--next-token`` (string)
 
 
-  A string token used for pagination that points to the next page of results. It must be a value obtained from the ``nextForwardToken`` or ``nextBackwardToken`` fields in the response of the previous ``get-log-events`` request. 
+  The token for the next set of items to return. (You received this token from a previous call.)
 
   
 
 ``--limit`` (integer)
 
 
-  The maximum number of log events returned in the response. If you don't specify a value, the request would return as many log events as can fit in a response size of 1MB, up to 10,000 log events. 
+  The maximum number of log events returned. If you don't specify a value, the maximum is as many log events as can fit in a response size of 1MB, up to 10,000 log events.
 
   
 
 ``--start-from-head`` | ``--no-start-from-head`` (boolean)
 
 
-  If set to true, the earliest log events would be returned first. The default is false (the latest log events are returned first).
+  If the value is true, the earliest log events are returned first. If the value is false, the latest log events are returned first. The default value is false.
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -145,7 +148,15 @@ events -> (list)
 
   
 
+  The events.
+
+  
+
   (structure)
+
+    
+
+    Represents a log event.
 
     
 
@@ -153,7 +164,7 @@ events -> (list)
 
       
 
-      A point in time expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
+      The time the event occurred, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
 
       
 
@@ -163,13 +174,17 @@ events -> (list)
 
       
 
+      The data contained in the log event.
+
+      
+
       
 
     ingestionTime -> (long)
 
       
 
-      A point in time expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
+      The time the event was ingested, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
 
       
 
@@ -183,7 +198,7 @@ nextForwardToken -> (string)
 
   
 
-  A string token used for pagination that points to the next page of results. It must be a value obtained from the response of the previous request. The token expires after 24 hours.
+  The token for the next set of items in the forward direction. The token expires after 24 hours.
 
   
 
@@ -193,7 +208,7 @@ nextBackwardToken -> (string)
 
   
 
-  A string token used for pagination that points to the next page of results. It must be a value obtained from the response of the previous request. The token expires after 24 hours.
+  The token for the next set of items in the backward direction. The token expires after 24 hours.
 
   
 

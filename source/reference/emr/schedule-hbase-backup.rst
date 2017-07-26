@@ -102,7 +102,10 @@ Options
 Examples
 ========
 
-**1. To schedule a full hbase backup**
+**Note: This command can only be used with HBase on AMI version 2.x and 3.x**
+
+**1. To schedule a full HBase backup**
+>>>>>>> 06ab6d6e13564b5733d75abaf3b599f93cf39a23
 
 - Command::
 
@@ -114,7 +117,8 @@ Examples
 
     None
 
-**2. To schedule an incremental hbase backup**
+
+**2. To schedule an incremental HBase backup**
 
 - Command::
 
@@ -125,3 +129,4 @@ Examples
 - Output::
 
     None
+

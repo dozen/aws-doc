@@ -21,8 +21,15 @@ Deletes an ACM Certificate and its associated private key. If this action succee
 
 .. note::
 
-  You cannot delete an ACM Certificate that is being used by another AWS service. To delete a certificate that is in use, the certificate association must first be removed. 
+   
 
+  You cannot delete an ACM Certificate that is being used by another AWS service. To delete a certificate that is in use, the certificate association must first be removed.
+
+   
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DeleteCertificate>`_
 
 
 ========
@@ -34,7 +41,7 @@ Synopsis
     delete-certificate
   --certificate-arn <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -46,7 +53,7 @@ Options
 ``--certificate-arn`` (string)
 
 
-  String that contains the ARN of the ACM Certificate to be deleted. This must be of the form: 
+  String that contains the ARN of the ACM Certificate to be deleted. This must be of the form:
 
    
 
@@ -54,15 +61,15 @@ Options
 
    
 
-  For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces`_ . 
+  For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces <http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`_ .
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -81,5 +88,3 @@ Output
 ======
 
 None
-
-.. _Amazon Resource Names (ARNs) and AWS Service Namespaces: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html

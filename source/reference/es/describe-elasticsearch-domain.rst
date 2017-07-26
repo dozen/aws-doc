@@ -19,6 +19,9 @@ Returns domain configuration information about the specified Elasticsearch domai
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/es-2015-01-01/DescribeElasticsearchDomain>`_
+
+
 ========
 Synopsis
 ========
@@ -28,7 +31,7 @@ Synopsis
     describe-elasticsearch-domain
   --domain-name <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -47,8 +50,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -88,7 +91,7 @@ DomainStatus -> (structure)
 
     
 
-    The Amazon resource name (ARN) of an Elasticsearch domain. See `Identifiers for IAM Entities`_ in *Using AWS Identity and Access Management* for more information.
+    The Amazon resource name (ARN) of an Elasticsearch domain. See `Identifiers for IAM Entities <http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html>`_ in *Using AWS Identity and Access Management* for more information.
 
     
 
@@ -134,6 +137,12 @@ DomainStatus -> (structure)
 
     
 
+  ElasticsearchVersion -> (string)
+
+    
+
+    
+
   ElasticsearchClusterConfig -> (structure)
 
     
@@ -166,7 +175,7 @@ DomainStatus -> (structure)
 
       
 
-      A boolean value to indicate whether a dedicated master node is enabled. See `About Dedicated Master Nodes`_ for more information.
+      A boolean value to indicate whether a dedicated master node is enabled. See `About Dedicated Master Nodes <http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-dedicatedmasternodes>`_ for more information.
 
       
 
@@ -176,7 +185,7 @@ DomainStatus -> (structure)
 
       
 
-      A boolean value to indicate whether zone awareness is enabled. See `About Zone Awareness`_ for more information.
+      A boolean value to indicate whether zone awareness is enabled. See `About Zone Awareness <http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-zoneawareness>`_ for more information.
 
       
 
@@ -208,7 +217,7 @@ DomainStatus -> (structure)
 
     
 
-    The ``EBSOptions`` for the specified domain. See `Configuring EBS-based Storage`_ for more information.
+    The ``EBSOptions`` for the specified domain. See `Configuring EBS-based Storage <http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs>`_ for more information.
 
     
 
@@ -308,9 +317,3 @@ DomainStatus -> (structure)
 
   
 
-
-
-.. _Configuring EBS-based Storage: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs
-.. _Identifiers for IAM Entities: http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html
-.. _About Zone Awareness: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-zoneawareness
-.. _About Dedicated Master Nodes: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-dedicatedmasternodes

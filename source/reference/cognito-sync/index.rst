@@ -19,11 +19,11 @@ Amazon Cognito Sync provides an AWS service and client library that enable cross
 
  
 
-With Amazon Cognito Sync, the data stored for each identity is accessible only to credentials assigned to that identity. In order to use the Cognito Sync service, you need to make API calls using credentials retrieved with `Amazon Cognito Identity service`_ .
+With Amazon Cognito Sync, the data stored for each identity is accessible only to credentials assigned to that identity. In order to use the Cognito Sync service, you need to make API calls using credentials retrieved with `Amazon Cognito Identity service <http://docs.aws.amazon.com/cognitoidentity/latest/APIReference/Welcome.html>`_ .
 
  
 
-If you want to use Cognito Sync in an Android or iOS application, you will probably want to make API calls via the AWS Mobile SDK. To learn more, see the `Developer Guide for Android`_ and the `Developer Guide for iOS`_ .
+If you want to use Cognito Sync in an Android or iOS application, you will probably want to make API calls via the AWS Mobile SDK. To learn more, see the `Developer Guide for Android <http://docs.aws.amazon.com/mobile/sdkforandroid/developerguide/cognito-sync.html>`_ and the `Developer Guide for iOS <http://docs.aws.amazon.com/mobile/sdkforios/developerguide/cognito-sync.html>`_ .
 
 
 
@@ -53,8 +53,3 @@ Available Commands
   subscribe-to-dataset
   unsubscribe-from-dataset
   update-records
-
-
-.. _Developer Guide for iOS: http://docs.aws.amazon.com/mobile/sdkforios/developerguide/cognito-sync.html
-.. _Developer Guide for Android: http://docs.aws.amazon.com/mobile/sdkforandroid/developerguide/cognito-sync.html
-.. _Amazon Cognito Identity service: http://docs.aws.amazon.com/cognitoidentity/latest/APIReference/Welcome.html

@@ -23,8 +23,11 @@ If you have listed your own Reserved Instances for sale in the Reserved Instance
 
  
 
-For more information, see `Reserved Instance Marketplace`_ in the *Amazon Elastic Compute Cloud User Guide* .
+For more information, see `Reserved Instance Marketplace <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html>`_ in the *Amazon Elastic Compute Cloud User Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeReservedInstancesOfferings>`_
 
 
 ``describe-reserved-instances-offerings`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
@@ -38,23 +41,24 @@ Synopsis
 ::
 
     describe-reserved-instances-offerings
-  [--dry-run | --no-dry-run]
-  [--reserved-instances-offering-ids <value>]
-  [--instance-type <value>]
   [--availability-zone <value>]
-  [--product-description <value>]
   [--filters <value>]
-  [--instance-tenancy <value>]
-  [--offering-type <value>]
   [--include-marketplace | --no-include-marketplace]
-  [--min-duration <value>]
+  [--instance-type <value>]
   [--max-duration <value>]
   [--max-instance-count <value>]
+  [--min-duration <value>]
+  [--offering-class <value>]
+  [--product-description <value>]
+  [--reserved-instances-offering-ids <value>]
+  [--dry-run | --no-dry-run]
+  [--instance-tenancy <value>]
+  [--offering-type <value>]
   [--cli-input-json <value>]
   [--starting-token <value>]
   [--page-size <value>]
   [--max-items <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -63,32 +67,74 @@ Synopsis
 Options
 =======
 
-``--dry-run`` | ``--no-dry-run`` (boolean)
+``--availability-zone`` (string)
 
 
-  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
-
-  
-
-``--reserved-instances-offering-ids`` (list)
-
-
-  One or more Reserved Instances offering IDs.
+  The Availability Zone in which the Reserved Instance can be used.
 
   
 
+``--filters`` (list)
 
 
-Syntax::
+  One or more filters.
 
-  "string" "string" ...
+   
+
+   
+  * ``availability-zone`` - The Availability Zone where the Reserved Instance can be used. 
+   
+  * ``duration`` - The duration of the Reserved Instance (for example, one year or three years), in seconds (``31536000`` | ``94608000`` ). 
+   
+  * ``fixed-price`` - The purchase price of the Reserved Instance (for example, 9800.0). 
+   
+  * ``instance-type`` - The instance type that is covered by the reservation. 
+   
+  * ``marketplace`` - Set to ``true`` to show only Reserved Instance Marketplace offerings. When this filter is not used, which is the default behavior, all offerings from both AWS and the Reserved Instance Marketplace are listed. 
+   
+  * ``product-description`` - The Reserved Instance product platform description. Instances that include ``(Amazon VPC)`` in the product platform description will only be displayed to EC2-Classic account holders and are for use with Amazon VPC. (``Linux/UNIX`` | ``Linux/UNIX (Amazon VPC)`` | ``SUSE Linux`` | ``SUSE Linux (Amazon VPC)`` | ``Red Hat Enterprise Linux`` | ``Red Hat Enterprise Linux (Amazon VPC)`` | ``Windows`` | ``Windows (Amazon VPC)`` | ``Windows with SQL Server Standard`` | ``Windows with SQL Server Standard (Amazon VPC)`` | ``Windows with SQL Server Web`` | ``Windows with SQL Server Web (Amazon VPC)`` | ``Windows with SQL Server Enterprise`` | ``Windows with SQL Server Enterprise (Amazon VPC)`` )  
+   
+  * ``reserved-instances-offering-id`` - The Reserved Instances offering ID. 
+   
+  * ``scope`` - The scope of the Reserved Instance (``Availability Zone`` or ``Region`` ). 
+   
+  * ``usage-price`` - The usage price of the Reserved Instance, per hour (for example, 0.84). 
+   
+
+  
 
 
+
+Shorthand Syntax::
+
+    Name=string,Values=string,string ...
+
+
+
+
+JSON Syntax::
+
+  [
+    {
+      "Name": "string",
+      "Values": ["string", ...]
+    }
+    ...
+  ]
+
+
+
+``--include-marketplace`` | ``--no-include-marketplace`` (boolean)
+
+
+  Include Reserved Instance Marketplace offerings in the response.
+
+  
 
 ``--instance-type`` (string)
 
 
-  The instance type that the reservation will cover (for example, ``m1.small`` ). For more information, see `Instance Types`_ in the *Amazon Elastic Compute Cloud User Guide* .
+  The instance type that the reservation will cover (for example, ``m1.small`` ). For more information, see `Instance Types <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html>`_ in the *Amazon Elastic Compute Cloud User Guide* .
 
   
 
@@ -96,6 +142,27 @@ Syntax::
 
   
   *   ``t1.micro``
+
+  
+  *   ``t2.nano``
+
+  
+  *   ``t2.micro``
+
+  
+  *   ``t2.small``
+
+  
+  *   ``t2.medium``
+
+  
+  *   ``t2.large``
+
+  
+  *   ``t2.xlarge``
+
+  
+  *   ``t2.2xlarge``
 
   
   *   ``m1.small``
@@ -137,19 +204,7 @@ Syntax::
   *   ``m4.10xlarge``
 
   
-  *   ``t2.nano``
-
-  
-  *   ``t2.micro``
-
-  
-  *   ``t2.small``
-
-  
-  *   ``t2.medium``
-
-  
-  *   ``t2.large``
+  *   ``m4.16xlarge``
 
   
   *   ``m2.xlarge``
@@ -164,6 +219,45 @@ Syntax::
   *   ``cr1.8xlarge``
 
   
+  *   ``r3.large``
+
+  
+  *   ``r3.xlarge``
+
+  
+  *   ``r3.2xlarge``
+
+  
+  *   ``r3.4xlarge``
+
+  
+  *   ``r3.8xlarge``
+
+  
+  *   ``r4.large``
+
+  
+  *   ``r4.xlarge``
+
+  
+  *   ``r4.2xlarge``
+
+  
+  *   ``r4.4xlarge``
+
+  
+  *   ``r4.8xlarge``
+
+  
+  *   ``r4.16xlarge``
+
+  
+  *   ``x1.16xlarge``
+
+  
+  *   ``x1.32xlarge``
+
+  
   *   ``i2.xlarge``
 
   
@@ -174,6 +268,24 @@ Syntax::
 
   
   *   ``i2.8xlarge``
+
+  
+  *   ``i3.large``
+
+  
+  *   ``i3.xlarge``
+
+  
+  *   ``i3.2xlarge``
+
+  
+  *   ``i3.4xlarge``
+
+  
+  *   ``i3.8xlarge``
+
+  
+  *   ``i3.16xlarge``
 
   
   *   ``hi1.4xlarge``
@@ -227,22 +339,28 @@ Syntax::
   *   ``g2.2xlarge``
 
   
+  *   ``g2.8xlarge``
+
+  
+  *   ``g3.4xlarge``
+
+  
+  *   ``g3.8xlarge``
+
+  
+  *   ``g3.16xlarge``
+
+  
   *   ``cg1.4xlarge``
 
   
-  *   ``r3.large``
+  *   ``p2.xlarge``
 
   
-  *   ``r3.xlarge``
+  *   ``p2.8xlarge``
 
   
-  *   ``r3.2xlarge``
-
-  
-  *   ``r3.4xlarge``
-
-  
-  *   ``r3.8xlarge``
+  *   ``p2.16xlarge``
 
   
   *   ``d2.xlarge``
@@ -257,13 +375,64 @@ Syntax::
   *   ``d2.8xlarge``
 
   
+  *   ``f1.2xlarge``
+
+  
+  *   ``f1.16xlarge``
 
   
 
-``--availability-zone`` (string)
+  
+
+``--max-duration`` (long)
 
 
-  The Availability Zone in which the Reserved Instance can be used.
+  The maximum duration (in seconds) to filter when searching for offerings.
+
+   
+
+  Default: 94608000 (3 years)
+
+  
+
+``--max-instance-count`` (integer)
+
+
+  The maximum number of instances to filter when searching for offerings.
+
+   
+
+  Default: 20
+
+  
+
+``--min-duration`` (long)
+
+
+  The minimum duration (in seconds) to filter when searching for offerings.
+
+   
+
+  Default: 2592000 (1 month)
+
+  
+
+``--offering-class`` (string)
+
+
+  The offering class of the Reserved Instance. Can be ``standard`` or ``convertible`` .
+
+  
+
+  Possible values:
+
+  
+  *   ``standard``
+
+  
+  *   ``convertible``
+
+  
 
   
 
@@ -292,53 +461,27 @@ Syntax::
 
   
 
-``--filters`` (list)
+``--reserved-instances-offering-ids`` (list)
 
 
-  One or more filters.
-
-   
-
-   
-  * ``availability-zone`` - The Availability Zone where the Reserved Instance can be used. 
-   
-  * ``duration`` - The duration of the Reserved Instance (for example, one year or three years), in seconds (``31536000`` | ``94608000`` ). 
-   
-  * ``fixed-price`` - The purchase price of the Reserved Instance (for example, 9800.0). 
-   
-  * ``instance-type`` - The instance type that is covered by the reservation. 
-   
-  * ``marketplace`` - Set to ``true`` to show only Reserved Instance Marketplace offerings. When this filter is not used, which is the default behavior, all offerings from both AWS and the Reserved Instance Marketplace are listed. 
-   
-  * ``product-description`` - The Reserved Instance product platform description. Instances that include ``(Amazon VPC)`` in the product platform description will only be displayed to EC2-Classic account holders and are for use with Amazon VPC. (``Linux/UNIX`` | ``Linux/UNIX (Amazon VPC)`` | ``SUSE Linux`` | ``SUSE Linux (Amazon VPC)`` | ``Red Hat Enterprise Linux`` | ``Red Hat Enterprise Linux (Amazon VPC)`` | ``Windows`` | ``Windows (Amazon VPC)`` | ``Windows with SQL Server Standard`` | ``Windows with SQL Server Standard (Amazon VPC)`` | ``Windows with SQL Server Web`` | ``Windows with SQL Server Web (Amazon VPC)`` | ``Windows with SQL Server Enterprise`` | ``Windows with SQL Server Enterprise (Amazon VPC)`` )  
-   
-  * ``reserved-instances-offering-id`` - The Reserved Instances offering ID. 
-   
-  * ``usage-price`` - The usage price of the Reserved Instance, per hour (for example, 0.84). 
-   
+  One or more Reserved Instances offering IDs.
 
   
 
 
 
-Shorthand Syntax::
+Syntax::
 
-    Name=string,Values=string,string ...
-
-
+  "string" "string" ...
 
 
-JSON Syntax::
 
-  [
-    {
-      "Name": "string",
-      "Values": ["string", ...]
-    }
-    ...
-  ]
+``--dry-run`` | ``--no-dry-run`` (boolean)
 
 
+  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
+
+  
 
 ``--instance-tenancy`` (string)
 
@@ -347,7 +490,11 @@ JSON Syntax::
 
    
 
-  Default: ``default`` 
+   **Important:** The ``host`` value cannot be used with this parameter. Use the ``default`` or ``dedicated`` values only.
+
+   
+
+  Default: ``default``  
 
   
 
@@ -397,46 +544,6 @@ JSON Syntax::
 
   
 
-``--include-marketplace`` | ``--no-include-marketplace`` (boolean)
-
-
-  Include Reserved Instance Marketplace offerings in the response.
-
-  
-
-``--min-duration`` (long)
-
-
-  The minimum duration (in seconds) to filter when searching for offerings.
-
-   
-
-  Default: 2592000 (1 month)
-
-  
-
-``--max-duration`` (long)
-
-
-  The maximum duration (in seconds) to filter when searching for offerings.
-
-   
-
-  Default: 94608000 (3 years)
-
-  
-
-``--max-instance-count`` (integer)
-
-
-  The maximum number of instances to filter when searching for offerings.
-
-   
-
-  Default: 20
-
-  
-
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
@@ -447,26 +554,34 @@ Performs service operation based on the JSON string provided. The JSON string fo
 
    
 
-``--page-size`` (integer)
- 
-
-  The size of each page.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
    
 
-  
+``--page-size`` (integer)
+ 
 
-  
+  The size of each page to get in the AWS service call. This does not affect the number of items returned in the command's output. Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call. This can help prevent the AWS service calls from timing out.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
 
 ``--max-items`` (integer)
  
 
-  The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination. This ``NextToken`` response element should **not** be used directly outside of the AWS CLI.
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``NextToken`` is provided in the command's output. To resume pagination, provide the ``NextToken`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``NextToken`` response element directly outside of the AWS CLI.
 
    
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -608,26 +723,6 @@ ReservedInstancesOfferings -> (list)
 
     
 
-    ReservedInstancesOfferingId -> (string)
-
-      
-
-      The ID of the Reserved Instance offering.
-
-      
-
-      
-
-    InstanceType -> (string)
-
-      
-
-      The instance type on which the Reserved Instance can be used.
-
-      
-
-      
-
     AvailabilityZone -> (string)
 
       
@@ -648,21 +743,21 @@ ReservedInstancesOfferings -> (list)
 
       
 
-    UsagePrice -> (float)
-
-      
-
-      The usage price of the Reserved Instance, per hour.
-
-      
-
-      
-
     FixedPrice -> (float)
 
       
 
       The purchase price of the Reserved Instance.
+
+      
+
+      
+
+    InstanceType -> (string)
+
+      
+
+      The instance type on which the Reserved Instance can be used.
 
       
 
@@ -678,11 +773,21 @@ ReservedInstancesOfferings -> (list)
 
       
 
-    InstanceTenancy -> (string)
+    ReservedInstancesOfferingId -> (string)
 
       
 
-      The tenancy of the instance.
+      The ID of the Reserved Instance offering. This is the offering ID used in  get-reserved-instances-exchange-quote to confirm that an exchange can be made.
+
+      
+
+      
+
+    UsagePrice -> (float)
+
+      
+
+      The usage price of the Reserved Instance, per hour.
 
       
 
@@ -698,53 +803,13 @@ ReservedInstancesOfferings -> (list)
 
       
 
-    OfferingType -> (string)
+    InstanceTenancy -> (string)
 
       
 
-      The Reserved Instance offering type.
+      The tenancy of the instance.
 
       
-
-      
-
-    RecurringCharges -> (list)
-
-      
-
-      The recurring charge tag assigned to the resource.
-
-      
-
-      (structure)
-
-        
-
-        Describes a recurring charge.
-
-        
-
-        Frequency -> (string)
-
-          
-
-          The frequency of the recurring charge.
-
-          
-
-          
-
-        Amount -> (double)
-
-          
-
-          The amount of the recurring charge.
-
-          
-
-          
-
-        
 
       
 
@@ -753,6 +818,26 @@ ReservedInstancesOfferings -> (list)
       
 
       Indicates whether the offering is available through the Reserved Instance Marketplace (resale) or AWS. If it's a Reserved Instance Marketplace offering, this is ``true`` .
+
+      
+
+      
+
+    OfferingClass -> (string)
+
+      
+
+      If ``convertible`` it can be exchanged for Reserved Instances of the same or higher monetary value, with different configurations. If ``standard`` , it is not possible to perform an exchange.
+
+      
+
+      
+
+    OfferingType -> (string)
+
+      
+
+      The Reserved Instance offering type.
 
       
 
@@ -774,16 +859,6 @@ ReservedInstancesOfferings -> (list)
 
         
 
-        Price -> (double)
-
-          
-
-          The price per instance.
-
-          
-
-          
-
         Count -> (integer)
 
           
@@ -794,7 +869,67 @@ ReservedInstancesOfferings -> (list)
 
           
 
+        Price -> (double)
+
+          
+
+          The price per instance.
+
+          
+
+          
+
         
+
+      
+
+    RecurringCharges -> (list)
+
+      
+
+      The recurring charge tag assigned to the resource.
+
+      
+
+      (structure)
+
+        
+
+        Describes a recurring charge.
+
+        
+
+        Amount -> (double)
+
+          
+
+          The amount of the recurring charge.
+
+          
+
+          
+
+        Frequency -> (string)
+
+          
+
+          The frequency of the recurring charge.
+
+          
+
+          
+
+        
+
+      
+
+    Scope -> (string)
+
+      
+
+      Whether the Reserved Instance is applied to instances in a region or an Availability Zone.
+
+      
 
       
 
@@ -812,7 +947,3 @@ NextToken -> (string)
 
   
 
-
-
-.. _Instance Types: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
-.. _Reserved Instance Marketplace: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html

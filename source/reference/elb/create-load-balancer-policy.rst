@@ -19,8 +19,11 @@ Creates a policy with the specified attributes for the specified load balancer.
 
  
 
-Policies are settings that are saved for your load balancer and that can be applied to the front-end listener or the back-end application server, depending on the policy type.
+Policies are settings that are saved for your load balancer and that can be applied to the listener or the application server, depending on the policy type.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateLoadBalancerPolicy>`_
 
 
 ========
@@ -35,7 +38,7 @@ Synopsis
   --policy-type-name <value>
   [--policy-attributes <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -68,7 +71,7 @@ Options
 ``--policy-attributes`` (list)
 
 
-  The attributes for the policy.
+  The policy attributes.
 
   
 
@@ -96,8 +99,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 

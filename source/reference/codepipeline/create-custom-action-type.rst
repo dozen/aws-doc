@@ -19,6 +19,9 @@ Creates a new custom action that can be used in all pipelines associated with th
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/CreateCustomActionType>`_
+
+
 ========
 Synopsis
 ========
@@ -34,7 +37,7 @@ Synopsis
   --output-artifact-details <value>
   --action-version <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -46,7 +49,17 @@ Options
 ``--category`` (string)
 
 
-  The category of the custom action, such as a source action or a build action.
+  The category of the custom action, such as a build action or a test action.
+
+   
+
+  .. note::
+
+     
+
+    Although Source and Approval are listed as valid values, they are not currently functional. These values are reserved for future use.
+
+     
 
   
 
@@ -68,6 +81,9 @@ Options
   *   ``Invoke``
 
   
+  *   ``Approval``
+
+  
 
   
 
@@ -81,7 +97,7 @@ Options
 ``--settings`` (structure)
 
 
-  Returns information about the settings for an action type. 
+  Returns information about the settings for an action type.
 
   
 
@@ -109,6 +125,16 @@ JSON Syntax::
 
 
   The configuration properties for the custom action.
+
+   
+
+  .. note::
+
+     
+
+    You can refer to a name in the configuration properties of the custom action within the URL templates by following the format of {Config:name}, as long as the configuration property is both required and not secret. For more information, see `Create a Custom Action for a Pipeline <http://docs.aws.amazon.com/codepipeline/latest/userguide/how-to-create-custom-action.html>`_ .
+
+     
 
   
 
@@ -141,7 +167,7 @@ JSON Syntax::
 ``--input-artifact-details`` (structure)
 
 
-  Returns information about the details of an artifact.
+  The details of the input artifact for the action, such as its commit ID.
 
   
 
@@ -166,7 +192,7 @@ JSON Syntax::
 ``--output-artifact-details`` (structure)
 
 
-  Returns information about the details of an artifact.
+  The details of the output artifact of the action, such as its commit ID.
 
   
 
@@ -191,21 +217,15 @@ JSON Syntax::
 ``--action-version`` (string)
 
 
-  The version number of the custom action. 
-
-   
-
-  .. note::
-
-    A newly-created custom action is always assigned a version number of ``1`` . This is required.
+  The version identifier of the custom action.
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -224,38 +244,33 @@ Command::
 JSON file sample contents::
   
   {
-   "actionType": {
-    "actionConfigurationProperties": [
-      {
-        "description": "The name of the build project must be provided when this action is added to the pipeline.",
-        "key": true,
-        "name": "MyJenkinsExampleBuildProject",
-        "queryable": false,
-        "required": true,
-        "secret": false
-      }
-    ],
-    "id": {
-      "__type": "ActionTypeId",
-      "category": "Build",
-      "owner": "Custom",
-      "provider": "MyJenkinsProviderName",
-      "version": "1"
+    "category": "Build",
+    "provider": "MyJenkinsProviderName",
+    "version": "1",
+    "settings": {
+        "entityUrlTemplate": "https://192.0.2.4/job/{Config:ProjectName}/",
+        "executionUrlTemplate": "https://192.0.2.4/job/{Config:ProjectName}/lastSuccessfulBuild/{ExternalExecutionId}/"
     },
+    "configurationProperties": [
+        {
+            "name": "MyJenkinsExampleBuildProject",
+            "required": true,
+            "key": true,
+            "secret": false,
+            "queryable": false,
+            "description": "The name of the build project must be provided when this action is added to the pipeline.",
+            "type": "String"
+        }
+    ],
     "inputArtifactDetails": {
-      "maximumCount": 1,
-      "minimumCount": 0
+        "maximumCount": 1,
+        "minimumCount": 0
     },
     "outputArtifactDetails": {
-      "maximumCount": 1,
-      "minimumCount": 0
-    },
-    "settings": {
-      "entityUrlTemplate": "https://192.0.2.4/job/{Config:ProjectName}/",
-      "executionUrlTemplate": "https://192.0.2.4/job/{Config:ProjectName}/lastSuccessfulBuild/{ExternalExecutionId}/"
+        "maximumCount": 1,
+        "minimumCount": 0
     }
-   }
-  }
+}
 
 Output::
 
@@ -269,7 +284,7 @@ actionType -> (structure)
 
   
 
-  Returns information about the details of an action type. 
+  Returns information about the details of an action type.
 
   
 
@@ -285,7 +300,7 @@ actionType -> (structure)
 
       
 
-      A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Valid categories are limited to one of the values below. 
+      A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Valid categories are limited to one of the values below.
 
       
 
@@ -295,7 +310,7 @@ actionType -> (structure)
 
       
 
-      The creator of the action being called. 
+      The creator of the action being called.
 
       
 
@@ -315,7 +330,7 @@ actionType -> (structure)
 
       
 
-      A string that identifies the action type. 
+      A string that identifies the action type.
 
       
 
@@ -335,7 +350,7 @@ actionType -> (structure)
 
       
 
-      The URL of a sign-up page where users can sign up for an external service and perform initial configuration of the action provided by that service. 
+      The URL of a sign-up page where users can sign up for an external service and perform initial configuration of the action provided by that service.
 
       
 

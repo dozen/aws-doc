@@ -15,8 +15,11 @@ Description
 
 
 
-Tests the filter pattern of a metric filter against a sample of log event messages. You can use this operation to validate the correctness of a metric filter pattern. 
+Tests the filter pattern of a metric filter against a sample of log event messages. You can use this operation to validate the correctness of a metric filter pattern.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/TestMetricFilter>`_
 
 
 ========
@@ -29,7 +32,7 @@ Synopsis
   --filter-pattern <value>
   --log-event-messages <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -48,7 +51,7 @@ Options
 ``--log-event-messages`` (list)
 
 
-  A list of log event messages to test.
+  The log event messages to test.
 
   
 
@@ -63,8 +66,8 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -76,11 +79,23 @@ matches -> (list)
 
   
 
+  The matched events.
+
+  
+
   (structure)
 
     
 
+    Represents a matched event.
+
+    
+
     eventNumber -> (long)
+
+      
+
+      The event number.
 
       
 
@@ -90,9 +105,17 @@ matches -> (list)
 
       
 
+      The raw event data.
+
+      
+
       
 
     extractedValues -> (map)
+
+      
+
+      The values extracted from the event data by the filter.
 
       
 

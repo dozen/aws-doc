@@ -23,6 +23,9 @@ Returns a ``DataSource`` that includes metadata and data file information, as we
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/machinelearning-2014-12-12/GetDataSource>`_
+
+
 ========
 Synopsis
 ========
@@ -33,7 +36,7 @@ Synopsis
   --data-source-id <value>
   [--verbose | --no-verbose]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -67,8 +70,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -100,7 +103,7 @@ DataRearrangement -> (string)
 
   
 
-  A JSON string that captures the splitting rearrangement requirement of the ``DataSource`` .
+  A JSON string that represents the splitting and rearrangement requirement used when this ``DataSource`` was created.
 
   
 
@@ -175,7 +178,7 @@ Status -> (string)
    
 
    
-  * ``PENDING`` - Amazon Machine Language (Amazon ML) submitted a request to create a ``DataSource`` .
+  * ``PENDING`` - Amazon ML submitted a request to create a ``DataSource`` .
    
   * ``INPROGRESS`` - The creation process is underway.
    
@@ -194,7 +197,7 @@ LogUri -> (string)
 
   
 
-  A link to the file containining logs of either create ``DataSource`` operation.
+  A link to the file containing logs of ``CreateDataSourceFrom*`` operations.
 
   
 
@@ -204,7 +207,7 @@ Message -> (string)
 
   
 
-  The description of the most recent details about creating the ``DataSource`` .
+  The user-supplied description of the most recent details about creating the ``DataSource`` .
 
   
 
@@ -252,7 +255,7 @@ RedshiftMetadata -> (structure)
 
     
 
-    A username to be used by Amazon Machine Learning (Amazon ML)to connect to a database on an Amazon Redshift cluster. The username should have sufficient permissions to execute the ``RedshiftSelectSqlQuery`` query. The username should be valid for an Amazon Redshift `USER`_ .
+    A username to be used by Amazon Machine Learning (Amazon ML)to connect to a database on an Amazon Redshift cluster. The username should have sufficient permissions to execute the ``RedshiftSelectSqlQuery`` query. The username should be valid for an Amazon Redshift `USER <http://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html>`_ .
 
     
 
@@ -262,7 +265,7 @@ RedshiftMetadata -> (structure)
 
     
 
-    The SQL query that is specified during  create-data-source-from-redshift . Returns only if ``no-verbose`` is true in GetDataSourceInput. 
+    The SQL query that is specified during  create-data-source-from-redshift . Returns only if ``verbose`` is true in GetDataSourceInput. 
 
     
 
@@ -322,7 +325,7 @@ RDSMetadata -> (structure)
 
     
 
-    The SQL query that is supplied during  create-data-source-from-rds . Returns only if ``no-verbose`` is true in ``GetDataSourceInput`` . 
+    The SQL query that is supplied during  create-data-source-from-rds . Returns only if ``verbose`` is true in ``GetDataSourceInput`` . 
 
     
 
@@ -332,7 +335,7 @@ RDSMetadata -> (structure)
 
     
 
-    The role (DataPipelineDefaultResourceRole) assumed by an Amazon EC2 instance to carry out the copy task from Amazon RDS to Amazon S3. For more information, see `Role templates`_ for data pipelines.
+    The role (DataPipelineDefaultResourceRole) assumed by an Amazon EC2 instance to carry out the copy task from Amazon RDS to Amazon S3. For more information, see `Role templates <http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html>`_ for data pipelines.
 
     
 
@@ -342,7 +345,7 @@ RDSMetadata -> (structure)
 
     
 
-    The role (DataPipelineDefaultRole) assumed by the Data Pipeline service to monitor the progress of the copy task from Amazon RDS to Amazon S3. For more information, see `Role templates`_ for data pipelines.
+    The role (DataPipelineDefaultRole) assumed by the Data Pipeline service to monitor the progress of the copy task from Amazon RDS to Amazon S3. For more information, see `Role templates <http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html>`_ for data pipelines.
 
     
 
@@ -364,7 +367,7 @@ RoleARN -> (string)
 
   
 
-  The Amazon Resource Name (ARN) of an `AWS IAM Role`_ such as the following: arn:aws:iam::account:role/rolename. 
+  The Amazon Resource Name (ARN) of an `AWS IAM Role <http://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html#roles-about-termsandconcepts>`_ , such as the following: arn:aws:iam::account:role/rolename. 
 
   
 
@@ -375,6 +378,36 @@ ComputeStatistics -> (boolean)
   
 
   The parameter is ``true`` if statistics need to be generated from the observation data. 
+
+  
+
+  
+
+ComputeTime -> (long)
+
+  
+
+  The approximate CPU time in milliseconds that Amazon Machine Learning spent processing the ``DataSource`` , normalized and scaled on computation resources. ``ComputeTime`` is only available if the ``DataSource`` is in the ``COMPLETED`` state and the ``ComputeStatistics`` is set to true.
+
+  
+
+  
+
+FinishedAt -> (timestamp)
+
+  
+
+  The epoch time when Amazon Machine Learning marked the ``DataSource`` as ``COMPLETED`` or ``FAILED`` . ``FinishedAt`` is only available when the ``DataSource`` is in the ``COMPLETED`` or ``FAILED`` state.
+
+  
+
+  
+
+StartedAt -> (timestamp)
+
+  
+
+  The epoch time when Amazon Machine Learning marked the ``DataSource`` as ``INPROGRESS`` . ``StartedAt`` isn't available if the ``DataSource`` is in the ``PENDING`` state.
 
   
 
@@ -400,8 +433,3 @@ DataSourceSchema -> (string)
 
   
 
-
-
-.. _AWS IAM Role: http://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html#roles-about-termsandconcepts
-.. _USER: http://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html
-.. _Role templates: http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html

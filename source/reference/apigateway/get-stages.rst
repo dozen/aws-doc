@@ -19,6 +19,9 @@ Gets information about one or more  Stage resources.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/apigateway-2015-07-09/GetStages>`_
+
+
 ========
 Synopsis
 ========
@@ -29,7 +32,7 @@ Synopsis
   --rest-api-id <value>
   [--deployment-id <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -41,7 +44,7 @@ Options
 ``--rest-api-id`` (string)
 
 
-  The stages' API identifiers.
+  The string identifier of the associated  RestApi .
 
   
 
@@ -55,9 +58,48 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
+
+
+========
+Examples
+========
+
+**To get the list of stages for a REST API**
+
+Command::
+
+  aws apigateway get-stages --rest-api-id 1234123412
+
+Output::
+
+  {
+      "item": [
+          {
+              "stageName": "dev", 
+              "cacheClusterSize": "0.5", 
+              "cacheClusterEnabled": true, 
+              "cacheClusterStatus": "AVAILABLE", 
+              "deploymentId": "123h64", 
+              "lastUpdatedDate": 1456185138, 
+              "createdDate": 1453589092, 
+              "methodSettings": {
+                  "~1resource~1subresource/POST": {
+                      "cacheTtlInSeconds": 300, 
+                      "loggingLevel": "INFO", 
+                      "dataTraceEnabled": true, 
+                      "metricsEnabled": true, 
+                      "throttlingRateLimit": 500.0, 
+                      "cacheDataEncrypted": false, 
+                      "cachingEnabled": false, 
+                      "throttlingBurstLimit": 1000
+                  }
+              }
+          }
+      ]
+  }
 
 
 ======
@@ -68,7 +110,7 @@ item -> (list)
 
   
 
-  An individual  Stage resource.
+  The current page of elements from this collection.
 
   
 
@@ -78,7 +120,7 @@ item -> (list)
 
     Represents a unique identifier for a version of a deployed  RestApi that is callable by users.
 
-    
+      `Deploy an API <http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-deploy-api.html>`_  
 
     deploymentId -> (string)
 
@@ -91,6 +133,10 @@ item -> (list)
       
 
     clientCertificateId -> (string)
+
+      
+
+      The identifier of a client certificate for an API stage.
 
       
 
@@ -150,7 +196,7 @@ item -> (list)
 
       
 
-      A map that defines the method settings for a  Stage resource. Keys are defined as ``{resource_path}/{http_method}`` for an individual method override, or ``\*/\*`` for the settings applied to all methods in the stage.
+      A map that defines the method settings for a  Stage resource. Keys (designated as ``/{method_setting_key`` below) are method paths defined as ``{resource_path}/{http_method}`` for an individual method override, or ``/\*/\*`` for overriding all methods in the stage. 
 
       
 
@@ -192,7 +238,7 @@ item -> (list)
 
           
 
-          Specifies the whether data trace logging is enabled for this method, which effects the log entries pushed to Amazon CloudWatch Logs. The PATCH path for this setting is ``/{method_setting_key}/logging/dataTrace`` , and the value is a Boolean.
+          Specifies whether data trace logging is enabled for this method, which effects the log entries pushed to Amazon CloudWatch Logs. The PATCH path for this setting is ``/{method_setting_key}/logging/dataTrace`` , and the value is a Boolean.
 
           
 
@@ -232,7 +278,7 @@ item -> (list)
 
           
 
-          Specifies the time to live (TTL) in seconds, for cached responses. The higher a the TTL, the longer the response will be cached. The PATCH path for this setting is ``/{method_setting_key}/caching/ttlInSeconds`` , and the value is an integer.
+          Specifies the time to live (TTL), in seconds, for cached responses. The higher the TTL, the longer the response will be cached. The PATCH path for this setting is ``/{method_setting_key}/caching/ttlInSeconds`` , and the value is an integer.
 
           
 
@@ -248,6 +294,26 @@ item -> (list)
 
           
 
+        requireAuthorizationForCacheControl -> (boolean)
+
+          
+
+          Specifies whether authorization is required for a cache invalidation request. The PATCH path for this setting is ``/{method_setting_key}/caching/requireAuthorizationForCacheControl`` , and the value is a Boolean.
+
+          
+
+          
+
+        unauthorizedCacheControlHeaderStrategy -> (string)
+
+          
+
+          Specifies how to handle unauthorized requests for cache invalidation. The PATCH path for this setting is ``/{method_setting_key}/caching/unauthorizedCacheControlHeaderStrategy`` , and the available values are ``FAIL_WITH_403`` , ``SUCCEED_WITH_RESPONSE_HEADER`` , ``SUCCEED_WITHOUT_RESPONSE_HEADER`` .
+
+          
+
+          
+
         
 
       
@@ -256,7 +322,7 @@ item -> (list)
 
       
 
-      A map that defines the stage variables for a  Stage resource. Variable names can have alphanumeric characters, and the values must match ``[A-Za-z0-9-._~:/?#=,]+`` .
+      A map that defines the stage variables for a  Stage resource. Variable names can have alphanumeric and underscore characters, and the values must match ``[A-Za-z0-9-._~:/?#=,]+`` .
 
       
 
@@ -274,11 +340,21 @@ item -> (list)
 
       
 
+    documentationVersion -> (string)
+
+      
+
+      The version of the associated API documentation.
+
+      
+
+      
+
     createdDate -> (timestamp)
 
       
 
-      The date and time that the stage was created, in `ISO 8601 format`_ .
+      The timestamp when the stage was created.
 
       
 
@@ -288,7 +364,7 @@ item -> (list)
 
       
 
-      The date and time that information about the stage was last updated, in `ISO 8601 format`_ .
+      The timestamp when the stage last updated.
 
       
 
@@ -298,6 +374,3 @@ item -> (list)
 
   
 
-
-
-.. _ISO 8601 format: http://www.iso.org/iso/home/standards/iso8601.htm

@@ -21,12 +21,15 @@ Determines whether there are any third party jobs for a job worker to act on. On
 
 .. warning::
 
-  
+   
 
   When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts.
 
-  
+   
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PollForThirdPartyJobs>`_
 
 
 ========
@@ -39,7 +42,7 @@ Synopsis
   --action-type-id <value>
   [--max-batch-size <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -67,7 +70,7 @@ Shorthand Syntax::
 JSON Syntax::
 
   {
-    "category": "Source"|"Build"|"Deploy"|"Test"|"Invoke",
+    "category": "Source"|"Build"|"Deploy"|"Test"|"Invoke"|"Approval",
     "owner": "AWS"|"ThirdParty"|"Custom",
     "provider": "string",
     "version": "string"
@@ -85,8 +88,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 

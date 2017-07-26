@@ -19,8 +19,11 @@ Adds a grant to a key to specify who can use the key and under what conditions. 
 
  
 
-For more information about grants, see `Grants`_ in the *AWS Key Management Service Developer Guide* .
+For more information about grants, see `Grants <http://docs.aws.amazon.com/kms/latest/developerguide/grants.html>`_ in the *AWS Key Management Service Developer Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateGrant>`_
 
 
 ========
@@ -38,7 +41,7 @@ Synopsis
   [--grant-tokens <value>]
   [--name <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -54,14 +57,14 @@ Options
 
    
 
-  To specify this value, use the globally unique key ID or the Amazon Resource Name (ARN) of the key. Examples: 
+  To specify this value, use the globally unique key ID or the Amazon Resource Name (ARN) of the key. Examples:
 
    
-  * Globally unique key ID: 12345678-1234-1234-1234-123456789012
-   
-  * Key ARN: arn:aws:kms:us-west-2:123456789012:key/12345678-1234-1234-1234-123456789012
-   
 
+   
+  * Globally unique key ID: 12345678-1234-1234-1234-123456789012 
+   
+  * Key ARN: arn:aws:kms:us-west-2:123456789012:key/12345678-1234-1234-1234-123456789012 
    
 
   
@@ -73,7 +76,7 @@ Options
 
    
 
-  To specify the principal, use the `Amazon Resource Name (ARN)`_ of an AWS principal. Valid AWS principals include AWS accounts (root), IAM users, federated users, and assumed role users. For examples of the ARN syntax to use for specifying a principal, see `AWS Identity and Access Management (IAM)`_ in the Example ARNs section of the *AWS General Reference* .
+  To specify the principal, use the `Amazon Resource Name (ARN) <http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`_ of an AWS principal. Valid AWS principals include AWS accounts (root), IAM users, IAM roles, federated users, and assumed role users. For examples of the ARN syntax to use for specifying a principal, see `AWS Identity and Access Management (IAM) <http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam>`_ in the Example ARNs section of the *AWS General Reference* .
 
   
 
@@ -84,34 +87,14 @@ Options
 
    
 
-  To specify the principal, use the `Amazon Resource Name (ARN)`_ of an AWS principal. Valid AWS principals include AWS accounts (root), IAM users, federated users, and assumed role users. For examples of the ARN syntax to use for specifying a principal, see `AWS Identity and Access Management (IAM)`_ in the Example ARNs section of the *AWS General Reference* .
+  To specify the principal, use the `Amazon Resource Name (ARN) <http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`_ of an AWS principal. Valid AWS principals include AWS accounts (root), IAM users, federated users, and assumed role users. For examples of the ARN syntax to use for specifying a principal, see `AWS Identity and Access Management (IAM) <http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam>`_ in the Example ARNs section of the *AWS General Reference* .
 
   
 
 ``--operations`` (list)
 
 
-  A list of operations that the grant permits. The list can contain any combination of one or more of the following values: 
-
-   
-  * Decrypt
-   
-  * Encrypt
-   
-  * GenerateDataKey
-   
-  * GenerateDataKeyWithoutPlaintext
-   
-  * ReEncryptFrom
-   
-  * ReEncryptTo
-   
-  * CreateGrant
-   
-  * RetireGrant
-   
-
-   
+  A list of operations that the grant permits.
 
   
 
@@ -139,11 +122,7 @@ Syntax::
 ``--constraints`` (structure)
 
 
-  The conditions under which the operations permitted by the grant are allowed.
-
-   
-
-  You can use this value to allow the operations permitted by the grant only when a specified encryption context is present. For more information, see `Encryption Context`_ in the *AWS Key Management Service Developer Guide* .
+  A structure that you can use to allow certain operations in the grant only when the desired encryption context is present. For more information about encryption context, see `Encryption Context <http://docs.aws.amazon.com/kms/latest/developerguide/encryption-context.html>`_ in the *AWS Key Management Service Developer Guide* .
 
   
 
@@ -174,7 +153,7 @@ JSON Syntax::
 
    
 
-  For more information, go to `Grant Tokens`_ in the *AWS Key Management Service Developer Guide* .
+  For more information, see `Grant Tokens <http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token>`_ in the *AWS Key Management Service Developer Guide* .
 
   
 
@@ -204,8 +183,8 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -221,7 +200,7 @@ GrantToken -> (string)
 
    
 
-  For more information about using grant tokens, see `Grant Tokens`_ in the *AWS Key Management Service Developer Guide* . 
+  For more information, see `Grant Tokens <http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token>`_ in the *AWS Key Management Service Developer Guide* .
 
   
 
@@ -241,10 +220,3 @@ GrantId -> (string)
 
   
 
-
-
-.. _Grant Tokens: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
-.. _Encryption Context: http://docs.aws.amazon.com/kms/latest/developerguide/encrypt-context.html
-.. _Grants: http://docs.aws.amazon.com/kms/latest/developerguide/grants.html
-.. _AWS Identity and Access Management (IAM): http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam
-.. _Amazon Resource Name (ARN): http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html

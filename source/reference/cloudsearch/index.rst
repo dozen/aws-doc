@@ -19,7 +19,7 @@ You use the Amazon CloudSearch configuration service to create, configure, and m
 
  
 
-The endpoint for configuration service requests is region-specific: cloudsearch.*region* .amazonaws.com. For example, cloudsearch.us-east-1.amazonaws.com. For a current list of supported regions and endpoints, see `Regions and Endpoints`_ .
+The endpoint for configuration service requests is region-specific: cloudsearch.*region* .amazonaws.com. For example, cloudsearch.us-east-1.amazonaws.com. For a current list of supported regions and endpoints, see `Regions and Endpoints <http://docs.aws.amazon.com/general/latest/gr/rande.html#cloudsearch_region>`_ .
 
 
 
@@ -56,6 +56,3 @@ Available Commands
   update-availability-options
   update-scaling-parameters
   update-service-access-policies
-
-
-.. _Regions and Endpoints: http://docs.aws.amazon.com/general/latest/gr/rande.html#cloudsearch_region

@@ -15,12 +15,15 @@ Description
 
 
 
-Specifies a user's permissions. For more information, see `Security and Permissions`_ .
+Specifies a user's permissions. For more information, see `Security and Permissions <http://docs.aws.amazon.com/opsworks/latest/userguide/workingsecurity.html>`_ .
 
  
 
-**Required Permissions** : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see `Managing User Permissions`_ .
+ **Required Permissions** : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see `Managing User Permissions <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html>`_ .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/SetPermission>`_
 
 
 ========
@@ -36,7 +39,7 @@ Synopsis
   [--allow-sudo | --no-allow-sudo]
   [--level <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -55,7 +58,7 @@ Options
 ``--iam-user-arn`` (string)
 
 
-  The user's IAM ARN.
+  The user's IAM ARN. This can also be a federated user's ARN.
 
   
 
@@ -81,28 +84,28 @@ Options
    
 
    
-  * ``deny``  
+  * ``deny``   
    
-  * ``show``  
+  * ``show``   
    
-  * ``deploy``  
+  * ``deploy``   
    
-  * ``manage``  
+  * ``manage``   
    
-  * ``iam_only``  
-   
-
+  * ``iam_only``   
    
 
-  For more information on the permissions associated with these levels, see `Managing User Permissions`_ .
+   
+
+  For more information on the permissions associated with these levels, see `Managing User Permissions <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html>`_ .
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -124,7 +127,6 @@ instances. ::
 
   aws opsworks set-permission --region us-east-1 --stack-id 71c7ca72-55ae-4b6a-8ee1-a8dcded3fa0f --level manage  --iam-user-arn arn:aws:iam::123456789102:user/cli-user-test --allow-ssh --allow-sudo
   
-**Note**: AWS OpsWorks CLI commands should set the region to ``us-east-1`` regardless of the stack's location.
 
 *Output*: None.
 
@@ -141,6 +143,3 @@ Output
 ======
 
 None
-
-.. _Managing User Permissions: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
-.. _Security and Permissions: http://docs.aws.amazon.com/opsworks/latest/userguide/workingsecurity.html

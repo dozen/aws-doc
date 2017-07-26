@@ -19,8 +19,11 @@ Requests a description of one or more stacks.
 
  
 
-**Required Permissions** : To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see `Managing User Permissions`_ .
+ **Required Permissions** : To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see `Managing User Permissions <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html>`_ .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeStacks>`_
 
 
 ========
@@ -32,7 +35,7 @@ Synopsis
     describe-stacks
   [--stack-ids <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -59,8 +62,8 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -73,8 +76,6 @@ Examples
 The following ``describe-stacks`` command describes an account's stacks. ::
 
   aws opsworks --region us-east-1 describe-stacks
-
-**Note**: AWS OpsWorks CLI commands should set the region to us-east-1 regardless of the stack's location.
 
 *Output*::
 
@@ -191,7 +192,7 @@ Stacks -> (list)
 
       
 
-      The stack AWS region, such as "us-east-1". For more information about AWS regions, see `Regions and Endpoints`_ .
+      The stack AWS region, such as "ap-northeast-2". For more information about AWS regions, see `Regions and Endpoints <http://docs.aws.amazon.com/general/latest/gr/rande.html>`_ .
 
       
 
@@ -243,7 +244,7 @@ Stacks -> (list)
 
       
 
-      The ARN of an IAM profile that is the default profile for all of the stack's EC2 instances. For more information about IAM ARNs, see `Using Identifiers`_ .
+      The ARN of an IAM profile that is the default profile for all of the stack's EC2 instances. For more information about IAM ARNs, see `Using Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ .
 
       
 
@@ -253,7 +254,7 @@ Stacks -> (list)
 
       
 
-      The stack's default operating system. 
+      The stack's default operating system.
 
       
 
@@ -273,7 +274,7 @@ Stacks -> (list)
 
       
 
-      The stack's default Availability Zone. For more information, see `Regions and Endpoints`_ .
+      The stack's default Availability Zone. For more information, see `Regions and Endpoints <http://docs.aws.amazon.com/general/latest/gr/rande.html>`_ .
 
       
 
@@ -293,7 +294,7 @@ Stacks -> (list)
 
       
 
-      A JSON object that contains user-defined attributes to be added to the stack configuration and deployment attributes. You can use custom JSON to override the corresponding default stack configuration attribute values or to pass data to recipes. The string should be in the following format and must escape characters such as '"':
+      A JSON object that contains user-defined attributes to be added to the stack configuration and deployment attributes. You can use custom JSON to override the corresponding default stack configuration attribute values or to pass data to recipes. The string should be in the following format:
 
        
 
@@ -301,7 +302,7 @@ Stacks -> (list)
 
        
 
-      For more information on custom JSON, see `Use Custom JSON to Modify the Stack Configuration Attributes`_ .
+      For more information on custom JSON, see `Use Custom JSON to Modify the Stack Configuration Attributes <http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html>`_ .
 
       
 
@@ -341,7 +342,7 @@ Stacks -> (list)
 
       
 
-      A ``ChefConfiguration`` object that specifies whether to enable Berkshelf and the Berkshelf version. For more information, see `Create a New Stack`_ .
+      A ``ChefConfiguration`` object that specifies whether to enable Berkshelf and the Berkshelf version. For more information, see `Create a New Stack <http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html>`_ .
 
       
 
@@ -381,7 +382,7 @@ Stacks -> (list)
 
       
 
-      Whether the stack automatically associates the AWS OpsWorks built-in security groups with the stack's layers.
+      Whether the stack automatically associates the AWS OpsWorks Stacks built-in security groups with the stack's layers.
 
       
 
@@ -391,7 +392,7 @@ Stacks -> (list)
 
       
 
-      Contains the information required to retrieve an app or cookbook from a repository. For more information, see `Creating Apps`_ or `Custom Recipes and Cookbooks`_ .
+      Contains the information required to retrieve an app or cookbook from a repository. For more information, see `Creating Apps <http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html>`_ or `Custom Recipes and Cookbooks <http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html>`_ .
 
       
 
@@ -409,7 +410,7 @@ Stacks -> (list)
 
         
 
-        The source URL. 
+        The source URL. The following is an example of an Amazon S3 source URL: ``https://s3.amazonaws.com/opsworks-demo-bucket/opsworks_cookbook_demo.tar.gz`` .
 
         
 
@@ -419,14 +420,14 @@ Stacks -> (list)
 
         
 
-        This parameter depends on the repository type. 
+        This parameter depends on the repository type.
 
          
 
          
-        * For Amazon S3 bundles, set ``Username`` to the appropriate IAM access key ID.
+        * For Amazon S3 bundles, set ``Username`` to the appropriate IAM access key ID. 
          
-        * For HTTP bundles, Git repositories, and Subversion repositories, set ``Username`` to the user name.
+        * For HTTP bundles, Git repositories, and Subversion repositories, set ``Username`` to the user name. 
          
 
         
@@ -437,23 +438,23 @@ Stacks -> (list)
 
         
 
-        When included in a request, the parameter depends on the repository type. 
+        When included in a request, the parameter depends on the repository type.
 
          
 
          
-        * For Amazon S3 bundles, set ``Password`` to the appropriate IAM secret access key.
+        * For Amazon S3 bundles, set ``Password`` to the appropriate IAM secret access key. 
          
-        * For HTTP bundles and Subversion repositories, set ``Password`` to the password.
+        * For HTTP bundles and Subversion repositories, set ``Password`` to the password. 
          
-
-         
-
-        For more information on how to safely handle IAM credentials, see `<http://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html>`_ .
 
          
 
-        In responses, AWS OpsWorks returns ``*****FILTERED*****`` instead of the actual value.
+        For more information on how to safely handle IAM credentials, see `http\://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html <http://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html>`_ .
+
+         
+
+        In responses, AWS OpsWorks Stacks returns ``*****FILTERED*****`` instead of the actual value.
 
         
 
@@ -467,7 +468,7 @@ Stacks -> (list)
 
          
 
-        In responses, AWS OpsWorks returns ``*****FILTERED*****`` instead of the actual value.
+        In responses, AWS OpsWorks Stacks returns ``*****FILTERED*****`` instead of the actual value.
 
         
 
@@ -477,7 +478,7 @@ Stacks -> (list)
 
         
 
-        The application's version. AWS OpsWorks enables you to easily deploy new versions of an application. One of the simplest approaches is to have branches or revisions in your repository that represent different versions that can potentially be deployed.
+        The application's version. AWS OpsWorks Stacks enables you to easily deploy new versions of an application. One of the simplest approaches is to have branches or revisions in your repository that represent different versions that can potentially be deployed.
 
         
 
@@ -509,7 +510,7 @@ Stacks -> (list)
 
       
 
-      The default root device type. This value is used by default for all instances in the stack, but you can override it when you create an instance. For more information, see `Storage for the Root Device`_ .
+      The default root device type. This value is used by default for all instances in the stack, but you can override it when you create an instance. For more information, see `Storage for the Root Device <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device>`_ .
 
       
 
@@ -529,13 +530,3 @@ Stacks -> (list)
 
   
 
-
-
-.. _Creating Apps: http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html
-.. _Custom Recipes and Cookbooks: http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html
-.. _Use Custom JSON to Modify the Stack Configuration Attributes: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html
-.. _Using Identifiers: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
-.. _Regions and Endpoints: http://docs.aws.amazon.com/general/latest/gr/rande.html
-.. _Create a New Stack: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
-.. _Storage for the Root Device: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device
-.. _Managing User Permissions: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html

@@ -15,8 +15,11 @@ Description
 
 
 
-Creates a password for the specified user, giving the user the ability to access AWS services through the AWS Management Console. For more information about managing passwords, see `Managing Passwords`_ in the *Using IAM* guide. 
+Creates a password for the specified user, giving the user the ability to access AWS services through the AWS Management Console. For more information about managing passwords, see `Managing Passwords <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html>`_ in the *IAM User Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateLoginProfile>`_
 
 
 ========
@@ -30,7 +33,7 @@ Synopsis
   --password <value>
   [--password-reset-required | --no-password-reset-required]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -42,7 +45,11 @@ Options
 ``--user-name`` (string)
 
 
-  The name of the user to create a password for.
+  The name of the IAM user to create a password for. The user must already exist.
+
+   
+
+  This parameter allows (per its `regex pattern <http://wikipedia.org/wiki/regex>`_ ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-
 
   
 
@@ -51,20 +58,24 @@ Options
 
   The new password for the user.
 
+   
+
+  The `regex pattern <http://wikipedia.org/wiki/regex>`_ used to validate this parameter is a string of characters consisting of almost any printable ASCII character from the space (\u0020) through the end of the ASCII character range (\u00FF). You can also include the tab (\u0009), line feed (\u000A), and carriage return (\u000D) characters. Although any of these characters are valid in a password, note that many tools, such as the AWS Management Console, might restrict the ability to enter certain characters because they have special meaning within that tool.
+
   
 
 ``--password-reset-required`` | ``--no-password-reset-required`` (boolean)
 
 
-  Specifies whether the user is required to set a new password on next sign-in. 
+  Specifies whether the user is required to set a new password on next sign-in.
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -120,7 +131,7 @@ LoginProfile -> (structure)
 
   
 
-  The user name and password create date.
+  A structure containing the user name and password create date.
 
   
 
@@ -156,6 +167,3 @@ LoginProfile -> (structure)
 
   
 
-
-
-.. _Managing Passwords: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html

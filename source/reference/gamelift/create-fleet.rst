@@ -15,38 +15,115 @@ Description
 
 
 
-Creates a new fleet to host game servers. A fleet consists of a set of Amazon Elastic Compute Cloud (Amazon EC2) instances of a certain type, which defines the CPU, memory, storage, and networking capacity of each host in the fleet. See `Amazon EC2 Instance Types`_ for more information. Each instance in the fleet hosts a game server created from the specified game build. Once a fleet is in an ACTIVE state, it can begin hosting game sessions.
+Creates a new fleet to run your game servers. A fleet is a set of Amazon Elastic Compute Cloud (Amazon EC2) instances, each of which can run multiple server processes to host game sessions. You configure a fleet to create instances with certain hardware specifications (see `Amazon EC2 Instance Types <http://aws.amazon.com/ec2/instance-types/>`_ for more information), and deploy a specified game build to each instance. A newly created fleet passes through several statuses; once it reaches the ``ACTIVE`` status, it can begin hosting game sessions.
 
  
 
-To create a new fleet, provide a name and the EC2 instance type for the new fleet, and specify the build and server launch path. Builds must be in a READY state before they can be used to build fleets. When configuring the new fleet, you can optionally (1) provide a set of launch parameters to be passed to a game server when activated; (2) limit incoming traffic to a specified range of IP addresses and port numbers; and (3) configure Amazon GameLift to store game session logs by specifying the path to the logs stored in your game server files. If the call is successful, Amazon GameLift performs the following tasks:
+To create a new fleet, you must specify the following: (1) fleet name, (2) build ID of an uploaded game build, (3) an EC2 instance type, and (4) a run-time configuration that describes which server processes to run on each instance in the fleet. (Although the run-time configuration is not a required parameter, the fleet cannot be successfully activated without it.)
 
  
 
- 
-* Creates a fleet record and sets the state to NEW.
- 
-* Sets the fleet's capacity to 1 "desired" and 1 "active" EC2 instance count.
- 
-* Creates an EC2 instance and begins the process of initializing the fleet and activating a game server on the instance.
- 
-* Begins writing events to the fleet event log, which can be accessed in the GameLift console.
- 
-
- 
-
-Once a fleet is created, use the following actions to change certain fleet properties (server launch parameters and log paths cannot be changed):
+You can also configure the new fleet with the following settings:
 
  
 
  
-*  update-fleet-attributes -- Update fleet metadata, including name and description.
+* Fleet description 
  
-*  update-fleet-capacity -- Increase or decrease the number of instances you want the fleet to maintain.
+* Access permissions for inbound traffic 
  
-*  update-fleet-port-settings -- Change the IP addresses and ports that allow access to incoming traffic.
+* Fleetwide game session protection 
+ 
+* Resource creation limit 
  
 
+ 
+
+If you use Amazon CloudWatch for metrics, you can add the new fleet to a metric group. This allows you to view aggregated metrics for a set of fleets. Once you specify a metric group, the new fleet's metrics are included in the metric group's data.
+
+ 
+
+If the create-fleet call is successful, Amazon GameLift performs the following tasks:
+
+ 
+
+ 
+* Creates a fleet record and sets the status to ``NEW`` (followed by other statuses as the fleet is activated). 
+ 
+* Sets the fleet's target capacity to 1 (desired instances), which causes Amazon GameLift to start one new EC2 instance. 
+ 
+* Starts launching server processes on the instance. If the fleet is configured to run multiple server processes per instance, Amazon GameLift staggers each launch by a few seconds. 
+ 
+* Begins writing events to the fleet event log, which can be accessed in the Amazon GameLift console. 
+ 
+* Sets the fleet's status to ``ACTIVE`` as soon as one server process in the fleet is ready to host a game session. 
+ 
+
+ 
+
+Fleet-related operations include:
+
+ 
+
+ 
+*  create-fleet   
+ 
+*  list-fleets   
+ 
+* Describe fleets: 
+
+   
+  *  describe-fleet-attributes   
+   
+  *  describe-fleet-port-settings   
+   
+  *  describe-fleet-utilization   
+   
+  *  describe-runtime-configuration   
+   
+  *  describe-fleet-events   
+   
+
+ 
+ 
+* Update fleets: 
+
+   
+  *  update-fleet-attributes   
+   
+  *  update-fleet-capacity   
+   
+  *  update-fleet-port-settings   
+   
+  *  update-runtime-configuration   
+   
+
+ 
+ 
+* Manage fleet capacity: 
+
+   
+  *  describe-fleet-capacity   
+   
+  *  update-fleet-capacity   
+   
+  *  put-scaling-policy (automatic scaling) 
+   
+  *  describe-scaling-policies (automatic scaling) 
+   
+  *  delete-scaling-policy (automatic scaling) 
+   
+  *  describe-ec2-instance-limits   
+   
+
+ 
+ 
+*  delete-fleet   
+ 
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateFleet>`_
 
 
 ========
@@ -59,13 +136,17 @@ Synopsis
   --name <value>
   [--description <value>]
   --build-id <value>
-  --server-launch-path <value>
+  [--server-launch-path <value>]
   [--server-launch-parameters <value>]
   [--log-paths <value>]
   --ec2-instance-type <value>
   [--ec2-inbound-permissions <value>]
+  [--new-game-session-protection-policy <value>]
+  [--runtime-configuration <value>]
+  [--resource-creation-limit-policy <value>]
+  [--metric-groups <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -77,42 +158,42 @@ Options
 ``--name`` (string)
 
 
-  Descriptive label associated with this fleet. Fleet names do not need to be unique.
+  Descriptive label that is associated with a fleet. Fleet names do not need to be unique.
 
   
 
 ``--description`` (string)
 
 
-  Human-readable description of the fleet.
+  Human-readable description of a fleet.
 
   
 
 ``--build-id`` (string)
 
 
-  Unique identifier for the build you want the new fleet to use.
+  Unique identifier for a build to be deployed on the new fleet. The build must have been successfully uploaded to Amazon GameLift and be in a ``READY`` status. This fleet setting cannot be changed once the fleet is created.
 
   
 
 ``--server-launch-path`` (string)
 
 
-  Path to the launch executable for the game server. A game server is built into a ``C:\game`` drive. This value must be expressed as ``C:\game\[launchpath]`` . Example: If, when built, your game server files are in a folder called "MyGame", your log path should be ``C:\game\MyGame\server.exe`` .
+  This parameter is no longer used. Instead, specify a server launch path using the ``runtime-configuration`` parameter. (Requests that specify a server launch path and launch parameters instead of a run-time configuration will continue to work.)
 
   
 
 ``--server-launch-parameters`` (string)
 
 
-  Parameters required to launch your game server. These parameters should be expressed as a string of command-line parameters. Example: "+sv_port 33435 +start_lobby".
+  This parameter is no longer used. Instead, specify server launch parameters in the ``runtime-configuration`` parameter. (Requests that specify a server launch path and launch parameters instead of a run-time configuration will continue to work.)
 
   
 
 ``--log-paths`` (list)
 
 
-  Path to game-session log files generated by your game server. Once a game session has been terminated, Amazon GameLift captures and stores the logs on Amazon S3. Use the GameLift console to access the stored logs.
+  This parameter is no longer used. Instead, to specify where Amazon GameLift should store log files once a server process shuts down, use the Amazon GameLift server API ``ProcessReady()`` and specify one or more directory paths in ``logParameters`` . See more information in the `Server API Reference <http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api-ref.html#gamelift-sdk-server-api-ref-dataypes-process>`_ . 
 
   
 
@@ -127,7 +208,7 @@ Syntax::
 ``--ec2-instance-type`` (string)
 
 
-  Type of EC2 instances used in the fleet. EC2 instance types define the CPU, memory, storage, and networking capacity of the fleetaposs hosts. Amazon GameLift supports the EC2 instance types listed below. See `Amazon EC2 Instance Types`_ for detailed descriptions of each.
+  Name of an EC2 instance type that is supported in Amazon GameLift. A fleet instance type determines the computing resources of each instance in the fleet, including CPU, memory, storage, and networking capacity. Amazon GameLift supports the following EC2 instance types. See `Amazon EC2 Instance Types <http://aws.amazon.com/ec2/instance-types/>`_ for detailed descriptions.
 
   
 
@@ -224,7 +305,7 @@ Syntax::
 ``--ec2-inbound-permissions`` (list)
 
 
-  Access limits for incoming traffic. Setting these values limits game server access to incoming traffic using specified IP ranges and port numbers. Some ports in a range may be restricted. You can provide one or more sets of permissions for the fleet.
+  Range of IP addresses and port settings that permit inbound traffic to access server processes running on the fleet. If no inbound permissions are set, including both IP address range and port range, the server processes in the fleet cannot accept connections. You can specify one or more sets of permissions for a fleet.
 
   
 
@@ -251,11 +332,111 @@ JSON Syntax::
 
 
 
+``--new-game-session-protection-policy`` (string)
+
+
+  Game session protection policy to apply to all instances in this fleet. If this parameter is not set, instances in this fleet default to no protection. You can change a fleet's protection policy using UpdateFleetAttributes, but this change will only affect sessions created after the policy change. You can also set protection for individual instances using  update-game-session .
+
+   
+
+   
+  * **NoProtection** – The game session can be terminated during a scale-down event. 
+   
+  * **FullProtection** – If the game session is in an ``ACTIVE`` status, it cannot be terminated during a scale-down event. 
+   
+
+  
+
+  Possible values:
+
+  
+  *   ``NoProtection``
+
+  
+  *   ``FullProtection``
+
+  
+
+  
+
+``--runtime-configuration`` (structure)
+
+
+  Instructions for launching server processes on each instance in the fleet. The run-time configuration for a fleet has a collection of server process configurations, one for each type of server process to run on an instance. A server process configuration specifies the location of the server executable, launch parameters, and the number of concurrent processes with that configuration to maintain on each instance. A create-fleet request must include a run-time configuration with at least one server process configuration; otherwise the request fails with an invalid request exception. (This parameter replaces the parameters ``ServerLaunchPath`` and ``ServerLaunchParameters`` ; requests that contain values for these parameters instead of a run-time configuration will continue to work.) 
+
+  
+
+
+
+Shorthand Syntax::
+
+    ServerProcesses=[{LaunchPath=string,Parameters=string,ConcurrentExecutions=integer},{LaunchPath=string,Parameters=string,ConcurrentExecutions=integer}],MaxConcurrentGameSessionActivations=integer,GameSessionActivationTimeoutSeconds=integer
+
+
+
+
+JSON Syntax::
+
+  {
+    "ServerProcesses": [
+      {
+        "LaunchPath": "string",
+        "Parameters": "string",
+        "ConcurrentExecutions": integer
+      }
+      ...
+    ],
+    "MaxConcurrentGameSessionActivations": integer,
+    "GameSessionActivationTimeoutSeconds": integer
+  }
+
+
+
+``--resource-creation-limit-policy`` (structure)
+
+
+  Policy that limits the number of game sessions an individual player can create over a span of time for this fleet.
+
+  
+
+
+
+Shorthand Syntax::
+
+    NewGameSessionsPerCreator=integer,PolicyPeriodInMinutes=integer
+
+
+
+
+JSON Syntax::
+
+  {
+    "NewGameSessionsPerCreator": integer,
+    "PolicyPeriodInMinutes": integer
+  }
+
+
+
+``--metric-groups`` (list)
+
+
+  Names of metric groups to add this fleet to. Use an existing metric group name to add this fleet to the group. Or use a new name to create a new metric group. A fleet can only be included in one metric group at a time.
+
+  
+
+
+
+Syntax::
+
+  "string" "string" ...
+
+
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -281,6 +462,16 @@ FleetAttributes -> (structure)
 
     
 
+  FleetArn -> (string)
+
+    
+
+    Identifier for a fleet that is unique across all regions.
+
+    
+
+    
+
   Description -> (string)
 
     
@@ -295,7 +486,7 @@ FleetAttributes -> (structure)
 
     
 
-    Descriptive label associated with this fleet. Fleet names do not need to be unique.
+    Descriptive label that is associated with a fleet. Fleet names do not need to be unique.
 
     
 
@@ -305,7 +496,7 @@ FleetAttributes -> (structure)
 
     
 
-    Time stamp indicating when this object was created. Format is an integer representing the number of seconds since the Unix epoch (Unix time).
+    Time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (for example "1469498468.057").
 
     
 
@@ -315,7 +506,7 @@ FleetAttributes -> (structure)
 
     
 
-    Time stamp indicating when this fleet was terminated. Format is an integer representing the number of seconds since the Unix epoch (Unix time).
+    Time stamp indicating when this data object was terminated. Format is a number expressed in Unix time as milliseconds (for example "1469498468.057").
 
     
 
@@ -325,23 +516,27 @@ FleetAttributes -> (structure)
 
     
 
-    Current status of the fleet. Possible fleet states include: 
+    Current status of the fleet.
 
-    
-    * NEW: A new fleet has been defined and hosts allocated.
-    
-    * DOWNLOADING/VALIDATING/BUILDING/ACTIVATING: The new fleet is being set up with the game build, and new hosts are being started.
-    
-    * ACTIVE: Hosts can now accept game sessions.
-    
-    * ERROR: An error occurred when downloading, validating, building, or activating the fleet.
-    
-    * DELETING: Hosts are responding to a delete fleet request.
-    
-    * TERMINATED: The fleet no longer exists.
-    
+     
 
-    
+    Possible fleet statuses include the following:
+
+     
+
+     
+    * **NEW** – A new fleet has been defined and desired instances is set to 1.  
+     
+    * **DOWNLOADING/VALIDATING/BUILDING/ACTIVATING** – Amazon GameLift is setting up the new fleet, creating new instances with the game build and starting server processes. 
+     
+    * **ACTIVE** – Hosts can now accept game sessions. 
+     
+    * **ERROR** – An error occurred when downloading, validating, building, or activating the fleet. 
+     
+    * **DELETING** – Hosts are responding to a delete fleet request. 
+     
+    * **TERMINATED** – The fleet no longer exists. 
+     
 
     
 
@@ -361,7 +556,7 @@ FleetAttributes -> (structure)
 
     
 
-    Path to the launch executable for the game server. A game server is built into a ``C:\game`` drive. This value must be expressed as ``C:\game\[launchpath]`` . Example: If, when built, your game server files are in a folder called "MyGame", your log path should be ``C:\game\MyGame\server.exe`` .
+    Path to a game server executable in the fleet's build, specified for fleets created before 2016-08-04 (or AWS SDK v. 0.12.16). Server launch paths for fleets created after this date are specified in the fleet's  runtime-configuration .
 
     
 
@@ -371,7 +566,7 @@ FleetAttributes -> (structure)
 
     
 
-    Parameters required to launch your game server. These parameters should be expressed as a string of command-line parameters. Example: "+sv_port 33435 +start_lobby".
+    Game server launch parameters specified for fleets created before 2016-08-04 (or AWS SDK v. 0.12.16). Server launch parameters for fleets created after this date are specified in the fleet's  runtime-configuration .
 
     
 
@@ -381,7 +576,81 @@ FleetAttributes -> (structure)
 
     
 
-    Path to game-session log files generated by your game server. Once a game session has been terminated, Amazon GameLift captures and stores the logs on Amazon S3. Use the GameLift console to access the stored logs.
+    Location of default log files. When a server process is shut down, Amazon GameLift captures and stores any log files in this location. These logs are in addition to game session logs; see more on game session logs in the `Amazon GameLift Developer Guide <http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-api-server-code>`_ . If no default log path for a fleet is specified, Amazon GameLift automatically uploads logs that are stored on each instance at ``C:\game\logs`` (for Windows) or ``/local/game/logs`` (for Linux). Use the Amazon GameLift console to access stored logs. 
+
+    
+
+    (string)
+
+      
+
+      
+
+    
+
+  NewGameSessionProtectionPolicy -> (string)
+
+    
+
+    Type of game session protection to set for all new instances started in the fleet.
+
+     
+
+     
+    * **NoProtection** – The game session can be terminated during a scale-down event. 
+     
+    * **FullProtection** – If the game session is in an ``ACTIVE`` status, it cannot be terminated during a scale-down event. 
+     
+
+    
+
+    
+
+  OperatingSystem -> (string)
+
+    
+
+    Operating system of the fleet's computing resources. A fleet's operating system depends on the OS specified for the build that is deployed on this fleet.
+
+    
+
+    
+
+  ResourceCreationLimitPolicy -> (structure)
+
+    
+
+    Fleet policy to limit the number of game sessions an individual player can create over a span of time.
+
+    
+
+    NewGameSessionsPerCreator -> (integer)
+
+      
+
+      Maximum number of game sessions that an individual can create during the policy period. 
+
+      
+
+      
+
+    PolicyPeriodInMinutes -> (integer)
+
+      
+
+      Time span used in evaluating the resource creation limit policy. 
+
+      
+
+      
+
+    
+
+  MetricGroups -> (list)
+
+    
+
+    Names of metric groups that this fleet is included in. In Amazon CloudWatch, you can view metrics for an individual fleet or aggregated metrics for fleets that are in a fleet metric group. A fleet can be included in only one metric group at a time.
 
     
 
@@ -395,6 +664,3 @@ FleetAttributes -> (structure)
 
   
 
-
-
-.. _Amazon EC2 Instance Types: https://aws.amazon.com/ec2/instance-types/

@@ -15,8 +15,11 @@ Description
 
 
 
-Launches an environment for the specified application using the specified configuration. 
+Launches an environment for the specified application using the specified configuration.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateEnvironment>`_
 
 
 ========
@@ -36,10 +39,11 @@ Synopsis
   [--version-label <value>]
   [--template-name <value>]
   [--solution-stack-name <value>]
+  [--platform-arn <value>]
   [--option-settings <value>]
   [--options-to-remove <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -51,7 +55,7 @@ Options
 ``--application-name`` (string)
 
 
-  The name of the application that contains the version to be deployed. 
+  The name of the application that contains the version to be deployed.
 
    
 
@@ -62,11 +66,11 @@ Options
 ``--environment-name`` (string)
 
 
-  A unique name for the deployment environment. Used in the application URL. 
+  A unique name for the deployment environment. Used in the application URL.
 
    
 
-  Constraint: Must be from 4 to 23 characters in length. The name can contain only letters, numbers, and hyphens. It cannot start or end with a hyphen. This name must be unique in your account. If the specified name already exists, AWS Elastic Beanstalk returns an ``InvalidParameterValue`` error. 
+  Constraint: Must be from 4 to 40 characters in length. The name can contain only letters, numbers, and hyphens. It cannot start or end with a hyphen. This name must be unique in your account. If the specified name already exists, AWS Elastic Beanstalk returns an ``InvalidParameterValue`` error. 
 
    
 
@@ -77,7 +81,7 @@ Options
 ``--group-name`` (string)
 
 
-  The name of the group to which the target environment belongs. Specify a group name only if the environment's name is specified in an environment manifest and not with the environment name parameter. See `Environment Manifest (env.yaml)`_ for details.
+  The name of the group to which the target environment belongs. Specify a group name only if the environment's name is specified in an environment manifest and not with the environment name parameter. See `Environment Manifest (env.yaml) <http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html>`_ for details.
 
   
 
@@ -91,14 +95,14 @@ Options
 ``--cname-prefix`` (string)
 
 
-  If specified, the environment attempts to use this value as the prefix for the CNAME. If not specified, the CNAME is generated automatically by appending a random alphanumeric string to the environment name. 
+  If specified, the environment attempts to use this value as the prefix for the CNAME. If not specified, the CNAME is generated automatically by appending a random alphanumeric string to the environment name.
 
   
 
 ``--tier`` (structure)
 
 
-  This specifies the tier to use for creating this environment. 
+  This specifies the tier to use for creating this environment.
 
   
 
@@ -124,7 +128,7 @@ JSON Syntax::
 ``--tags`` (list)
 
 
-  This specifies the tags applied to resources in the environment. 
+  This specifies the tags applied to resources in the environment.
 
   
 
@@ -160,7 +164,7 @@ JSON Syntax::
 
    
 
-  Default: If not specified, AWS Elastic Beanstalk attempts to launch the sample application in the container. 
+  Default: If not specified, AWS Elastic Beanstalk attempts to launch the sample application in the container.
 
   
 
@@ -169,27 +173,26 @@ JSON Syntax::
 
   The name of the configuration template to use in deployment. If no configuration template is found with this name, AWS Elastic Beanstalk returns an ``InvalidParameterValue`` error. 
 
-   
-
-  Condition: You must specify either this parameter or a ``solution-stack-name`` , but not both. If you specify both, AWS Elastic Beanstalk returns an ``InvalidParameterCombination`` error. If you do not specify either, AWS Elastic Beanstalk returns a ``MissingRequiredParameter`` error. 
-
   
 
 ``--solution-stack-name`` (string)
 
 
-  This is an alternative to specifying a template name. If specified, AWS Elastic Beanstalk sets the configuration values to the default values associated with the specified solution stack. 
+  This is an alternative to specifying a template name. If specified, AWS Elastic Beanstalk sets the configuration values to the default values associated with the specified solution stack.
 
-   
+  
 
-  Condition: You must specify either this or a ``TemplateName`` , but not both. If you specify both, AWS Elastic Beanstalk returns an ``InvalidParameterCombination`` error. If you do not specify either, AWS Elastic Beanstalk returns a ``MissingRequiredParameter`` error. 
+``--platform-arn`` (string)
+
+
+  The ARN of the custom platform.
 
   
 
 ``--option-settings`` (list)
 
 
-  If specified, AWS Elastic Beanstalk sets the specified configuration options to the requested value in the configuration set for the new environment. These override the values obtained from the solution stack or the configuration template. 
+  If specified, AWS Elastic Beanstalk sets the specified configuration options to the requested value in the configuration set for the new environment. These override the values obtained from the solution stack or the configuration template.
 
   
 
@@ -219,7 +222,7 @@ JSON Syntax::
 ``--options-to-remove`` (list)
 
 
-  A list of custom user-defined configuration options to remove from the configuration set for this new environment. 
+  A list of custom user-defined configuration options to remove from the configuration set for this new environment.
 
   
 
@@ -248,8 +251,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -315,7 +318,7 @@ EnvironmentId -> (string)
 
   
 
-  The ID of this environment. 
+  The ID of this environment.
 
   
 
@@ -351,11 +354,21 @@ SolutionStackName -> (string)
 
   
 
+PlatformArn -> (string)
+
+  
+
+  The ARN of the custom platform.
+
+  
+
+  
+
 TemplateName -> (string)
 
   
 
-  The name of the configuration template used to originally launch this environment. 
+  The name of the configuration template used to originally launch this environment.
 
   
 
@@ -385,7 +398,7 @@ CNAME -> (string)
 
   
 
-  The URL to the CNAME for this environment. 
+  The URL to the CNAME for this environment.
 
   
 
@@ -415,7 +428,7 @@ Status -> (string)
 
   
 
-  The current operational status of the environment: 
+  The current operational status of the environment:
 
    
 
@@ -457,7 +470,7 @@ Health -> (string)
 
   
 
-  Describes the health status of the environment. AWS Elastic Beanstalk indicates the failure levels for a running environment: 
+  Describes the health status of the environment. AWS Elastic Beanstalk indicates the failure levels for a running environment:
 
    
 
@@ -483,7 +496,7 @@ HealthStatus -> (string)
 
   
 
-  Returns the health status of the application running in your environment. For more information, see `Health Colors and Statuses`_ .
+  Returns the health status of the application running in your environment. For more information, see `Health Colors and Statuses <http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html>`_ .
 
   
 
@@ -621,7 +634,7 @@ EnvironmentLinks -> (list)
 
     
 
-    A link to another environment, defined in the environment's manifest. Links provide connection information in system properties that can be used to connect to another environment in the same group. See `Environment Manifest (env.yaml)`_ for details.
+    A link to another environment, defined in the environment's manifest. Links provide connection information in system properties that can be used to connect to another environment in the same group. See `Environment Manifest (env.yaml) <http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html>`_ for details.
 
     
 
@@ -649,7 +662,3 @@ EnvironmentLinks -> (list)
 
   
 
-
-
-.. _Environment Manifest (env.yaml): http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-mgmt-compose.html#environment-mgmt-compose-envyaml
-.. _Health Colors and Statuses: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html

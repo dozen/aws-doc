@@ -19,6 +19,9 @@ Gets information about an application revision.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetApplicationRevision>`_
+
+
 ========
 Synopsis
 ========
@@ -31,7 +34,7 @@ Synopsis
   [--s3-location <value>]
   [--github-location <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -50,7 +53,7 @@ Options
 ``--revision`` (structure)
 
 
-  Information about the application revision to get, including the revision's type and its location.
+  Information about the application revision to get, including type and location.
 
   
 
@@ -130,8 +133,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -187,7 +190,7 @@ revision -> (structure)
 
   
 
-  Additional information about the revision, including the revision's type and its location.
+  Additional information about the revision, including type and location.
 
   
 
@@ -195,14 +198,14 @@ revision -> (structure)
 
     
 
-    The application revision's type:
+    The type of application revision:
 
      
 
      
-    * S3: An application revision stored in Amazon S3.
+    * S3: An application revision stored in Amazon S3. 
      
-    * GitHub: An application revision stored in GitHub.
+    * GitHub: An application revision stored in GitHub. 
      
 
     
@@ -213,7 +216,7 @@ revision -> (structure)
 
     
 
-    Information about the location of application artifacts that are stored in Amazon S3.
+    Information about the location of application artifacts stored in Amazon S3. 
 
     
 
@@ -246,11 +249,11 @@ revision -> (structure)
        
 
        
-      * tar: A tar archive file.
+      * tar: A tar archive file. 
        
-      * tgz: A compressed tar archive file.
+      * tgz: A compressed tar archive file. 
        
-      * zip: A zip archive file.
+      * zip: A zip archive file. 
        
 
       
@@ -291,7 +294,7 @@ revision -> (structure)
 
     
 
-    Information about the location of application artifacts that are stored in GitHub.
+    Information about the location of application artifacts stored in GitHub.
 
     
 
@@ -345,7 +348,7 @@ revisionInfo -> (structure)
 
     
 
-    The deployment groups where this is the current target revision.
+    The deployment groups for which this is the current target revision.
 
     
 

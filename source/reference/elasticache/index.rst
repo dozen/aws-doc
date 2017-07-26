@@ -19,7 +19,7 @@ Amazon ElastiCache is a web service that makes it easier to set up, operate, and
 
  
 
-With ElastiCache, customers gain all of the benefits of a high-performance, in-memory cache with far less of the administrative burden of launching and managing a distributed cache. The service makes setup, scaling, and cluster failure handling much simpler than in a self-managed cache deployment.
+With ElastiCache, customers get all of the benefits of a high-performance, in-memory cache with less of the administrative burden involved in launching and managing a distributed cache. The service makes setup, scaling, and cluster failure handling much simpler than in a self-managed cache deployment.
 
  
 
@@ -63,6 +63,7 @@ Available Commands
   describe-reserved-cache-nodes
   describe-reserved-cache-nodes-offerings
   describe-snapshots
+  list-allowed-node-type-modifications
   list-tags-for-resource
   modify-cache-cluster
   modify-cache-parameter-group
@@ -73,4 +74,5 @@ Available Commands
   remove-tags-from-resource
   reset-cache-parameter-group
   revoke-cache-security-group-ingress
+  test-failover
   wait/index

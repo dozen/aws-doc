@@ -15,18 +15,29 @@ Description
 
 
 
-Registers instances with a specified stack that were created outside of AWS OpsWorks.
+Registers instances that were created outside of AWS OpsWorks Stacks with a specified stack.
 
  
 
 .. note::
 
-  We do not recommend using this action to register instances. The complete registration operation has two primary steps, installing the AWS OpsWorks agent on the instance and registering the instance with the stack. ``register-instance`` handles only the second step. You should instead use the AWS CLI ``register`` command, which performs the entire registration operation. For more information, see `Registering an Instance with an AWS OpsWorks Stack`_ .
+   
+
+  We do not recommend using this action to register instances. The complete registration operation includes two tasks: installing the AWS OpsWorks Stacks agent on the instance, and registering the instance with the stack. ``register-instance`` handles only the second step. You should instead use the AWS CLI ``register`` command, which performs the entire registration operation. For more information, see `Registering an Instance with an AWS OpsWorks Stacks Stack <http://docs.aws.amazon.com/opsworks/latest/userguide/registered-instances-register.html>`_ .
+
+   
 
  
 
-**Required Permissions** : To use this action, an IAM user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see `Managing User Permissions`_ .
+Registered instances have the same requirements as instances that are created by using the  create-instance API. For example, registered instances must be running a supported Linux-based operating system, and they must have a supported instance type. For more information about requirements for instances that you want to register, see `Preparing the Instance <http://docs.aws.amazon.com/opsworks/latest/userguide/registered-instances-register-registering-preparer.html>`_ .
 
+ 
+
+ **Required Permissions** : To use this action, an IAM user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see `Managing User Permissions <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html>`_ .
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterInstance>`_
 
 
 ========
@@ -44,7 +55,7 @@ Synopsis
   [--rsa-public-key-fingerprint <value>]
   [--instance-identity <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -123,8 +134,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -136,13 +147,9 @@ InstanceId -> (string)
 
   
 
-  The registered instance's AWS OpsWorks ID.
+  The registered instance's AWS OpsWorks Stacks ID.
 
   
 
   
 
-
-
-.. _Registering an Instance with an AWS OpsWorks Stack: http://docs.aws.amazon.com/opsworks/latest/userguide/registered-instances-register.html
-.. _Managing User Permissions: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html

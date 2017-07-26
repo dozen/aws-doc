@@ -15,8 +15,11 @@ Description
 
 
 
-Retrieves alarms with the specified names. If no name is specified, all alarms for the user are returned. Alarms can be retrieved by using only a prefix for the alarm name, the alarm state, or a prefix for any action. 
+Retrieves the specified alarms. If no alarms are specified, all alarms are returned. Alarms can be retrieved by using only a prefix for the alarm name, the alarm state, or a prefix for any action.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarms>`_
 
 
 ``describe-alarms`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
@@ -38,7 +41,7 @@ Synopsis
   [--starting-token <value>]
   [--page-size <value>]
   [--max-items <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -50,7 +53,7 @@ Options
 ``--alarm-names`` (list)
 
 
-  A list of alarm names to retrieve information for. 
+  The names of the alarms.
 
   
 
@@ -65,14 +68,14 @@ Syntax::
 ``--alarm-name-prefix`` (string)
 
 
-  The alarm name prefix. ``alarm-names`` cannot be specified if this parameter is specified. 
+  The alarm name prefix. If this parameter is specified, you cannot specify ``alarm-names`` .
 
   
 
 ``--state-value`` (string)
 
 
-  The state value to be used in matching alarms. 
+  The state value to be used in matching alarms.
 
   
 
@@ -94,7 +97,7 @@ Syntax::
 ``--action-prefix`` (string)
 
 
-  The action name prefix. 
+  The action name prefix.
 
   
 
@@ -108,26 +111,34 @@ Performs service operation based on the JSON string provided. The JSON string fo
 
    
 
-``--page-size`` (integer)
- 
-
-  The size of each page.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
    
 
-  
+``--page-size`` (integer)
+ 
 
-  
+  The size of each page to get in the AWS service call. This does not affect the number of items returned in the command's output. Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call. This can help prevent the AWS service calls from timing out.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
 
 ``--max-items`` (integer)
  
 
-  The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``next-token`` will be provided in the output that you can use to resume pagination. This ``next-token`` response element should **not** be used directly outside of the AWS CLI.
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``next-token`` is provided in the command's output. To resume pagination, provide the ``next-token`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``next-token`` response element directly outside of the AWS CLI.
 
    
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -186,7 +197,7 @@ MetricAlarms -> (list)
 
   
 
-  A list of information for the specified alarms. 
+  The information for the specified alarms.
 
   
 
@@ -194,7 +205,7 @@ MetricAlarms -> (list)
 
     
 
-    The  MetricAlarm data type represents an alarm. You can use  put-metric-alarm to create or update an alarm. 
+    Represents an alarm.
 
     
 
@@ -202,7 +213,7 @@ MetricAlarms -> (list)
 
       
 
-      The name of the alarm. 
+      The name of the alarm.
 
       
 
@@ -212,7 +223,7 @@ MetricAlarms -> (list)
 
       
 
-      The Amazon Resource Name (ARN) of the alarm. 
+      The Amazon Resource Name (ARN) of the alarm.
 
       
 
@@ -222,7 +233,7 @@ MetricAlarms -> (list)
 
       
 
-      The description for the alarm. 
+      The description of the alarm.
 
       
 
@@ -232,7 +243,7 @@ MetricAlarms -> (list)
 
       
 
-      The time stamp of the last update to the alarm configuration. 
+      The time stamp of the last update to the alarm configuration.
 
       
 
@@ -242,7 +253,7 @@ MetricAlarms -> (list)
 
       
 
-      Indicates whether actions should be executed during any changes to the alarm's state. 
+      Indicates whether actions should be executed during any changes to the alarm state.
 
       
 
@@ -252,7 +263,7 @@ MetricAlarms -> (list)
 
       
 
-      The list of actions to execute when this alarm transitions into an ``OK`` state from any other state. Each action is specified as an Amazon Resource Name (ARN). 
+      The actions to execute when this alarm transitions to the ``OK`` state from any other state. Each action is specified as an Amazon Resource Name (ARN).
 
       
 
@@ -268,7 +279,7 @@ MetricAlarms -> (list)
 
       
 
-      The list of actions to execute when this alarm transitions into an ``ALARM`` state from any other state. Each action is specified as an Amazon Resource Name (ARN). 
+      The actions to execute when this alarm transitions to the ``ALARM`` state from any other state. Each action is specified as an Amazon Resource Name (ARN).
 
       
 
@@ -284,13 +295,7 @@ MetricAlarms -> (list)
 
       
 
-      The list of actions to execute when this alarm transitions into an ``INSUFFICIENT_DATA`` state from any other state. Each action is specified as an Amazon Resource Name (ARN). 
-
-       
-
-      .. warning::
-
-        The current WSDL lists this attribute as ``UnknownActions`` .
+      The actions to execute when this alarm transitions to the ``INSUFFICIENT_DATA`` state from any other state. Each action is specified as an Amazon Resource Name (ARN).
 
       
 
@@ -306,7 +311,7 @@ MetricAlarms -> (list)
 
       
 
-      The state value for the alarm. 
+      The state value for the alarm.
 
       
 
@@ -316,7 +321,7 @@ MetricAlarms -> (list)
 
       
 
-      A human-readable explanation for the alarm's state. 
+      An explanation for the alarm state, in text format.
 
       
 
@@ -326,7 +331,7 @@ MetricAlarms -> (list)
 
       
 
-      An explanation for the alarm's state in machine-readable JSON format 
+      An explanation for the alarm state, in JSON format.
 
       
 
@@ -336,7 +341,7 @@ MetricAlarms -> (list)
 
       
 
-      The time stamp of the last update to the alarm's state. 
+      The time stamp of the last update to the alarm state.
 
       
 
@@ -346,7 +351,7 @@ MetricAlarms -> (list)
 
       
 
-      The name of the alarm's metric. 
+      The name of the metric associated with the alarm.
 
       
 
@@ -356,7 +361,7 @@ MetricAlarms -> (list)
 
       
 
-      The namespace of alarm's associated metric. 
+      The namespace of the metric associated with the alarm.
 
       
 
@@ -366,7 +371,17 @@ MetricAlarms -> (list)
 
       
 
-      The statistic to apply to the alarm's associated metric. 
+      The statistic for the metric associated with the alarm, other than percentile. For percentile statistics, use ``ExtendedStatistic`` .
+
+      
+
+      
+
+    ExtendedStatistic -> (string)
+
+      
+
+      The percentile statistic for the metric associated with the alarm. Specify a value between p0.0 and p100.
 
       
 
@@ -376,7 +391,7 @@ MetricAlarms -> (list)
 
       
 
-      The list of dimensions associated with the alarm's associated metric. 
+      The dimensions for the metric associated with the alarm.
 
       
 
@@ -384,11 +399,7 @@ MetricAlarms -> (list)
 
         
 
-        The ``Dimension`` data type further expands on the identity of a metric using a Name, Value pair. 
-
-         
-
-        For examples that use one or more dimensions, see  put-metric-data .
+        Expands the identity of a metric.
 
         
 
@@ -396,7 +407,7 @@ MetricAlarms -> (list)
 
           
 
-          The name of the dimension. 
+          The name of the dimension.
 
           
 
@@ -406,7 +417,7 @@ MetricAlarms -> (list)
 
           
 
-          The value representing the dimension measurement 
+          The value representing the dimension measurement.
 
           
 
@@ -420,7 +431,7 @@ MetricAlarms -> (list)
 
       
 
-      The period in seconds over which the statistic is applied. 
+      The period, in seconds, over which the statistic is applied.
 
       
 
@@ -430,7 +441,7 @@ MetricAlarms -> (list)
 
       
 
-      The unit of the alarm's associated metric. 
+      The unit of the metric associated with the alarm.
 
       
 
@@ -440,7 +451,7 @@ MetricAlarms -> (list)
 
       
 
-      The number of periods over which data is compared to the specified threshold. 
+      The number of periods over which data is compared to the specified threshold.
 
       
 
@@ -450,7 +461,7 @@ MetricAlarms -> (list)
 
       
 
-      The value against which the specified statistic is compared. 
+      The value to compare with the specified statistic.
 
       
 
@@ -460,7 +471,27 @@ MetricAlarms -> (list)
 
       
 
-      The arithmetic operation to use when comparing the specified ``Statistic`` and ``Threshold`` . The specified ``Statistic`` value is used as the first operand. 
+      The arithmetic operation to use when comparing the specified statistic and threshold. The specified statistic value is used as the first operand.
+
+      
+
+      
+
+    TreatMissingData -> (string)
+
+      
+
+      Sets how this alarm is to handle missing data points. If this parameter is omitted, the default behavior of ``missing`` is used.
+
+      
+
+      
+
+    EvaluateLowSampleCountPercentile -> (string)
+
+      
+
+      Used only for alarms based on percentiles. If ``ignore`` , the alarm state does not change during periods with too few data points to be statistically significant. If ``evaluate`` or this parameter is not used, the alarm will always be evaluated and possibly change state no matter how many data points are available.
 
       
 
@@ -474,7 +505,7 @@ NextToken -> (string)
 
   
 
-  A string that marks the start of the next batch of returned results. 
+  The token that marks the start of the next batch of returned results.
 
   
 

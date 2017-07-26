@@ -19,6 +19,9 @@ Modifies the cluster configuration of the specified Elasticsearch domain, settin
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/es-2015-01-01/UpdateElasticsearchDomainConfig>`_
+
+
 ========
 Synopsis
 ========
@@ -33,7 +36,7 @@ Synopsis
   [--advanced-options <value>]
   [--access-policies <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -68,11 +71,11 @@ Shorthand Syntax::
 JSON Syntax::
 
   {
-    "InstanceType": "m3.medium.elasticsearch"|"m3.large.elasticsearch"|"m3.xlarge.elasticsearch"|"m3.2xlarge.elasticsearch"|"t2.micro.elasticsearch"|"t2.small.elasticsearch"|"t2.medium.elasticsearch"|"r3.large.elasticsearch"|"r3.xlarge.elasticsearch"|"r3.2xlarge.elasticsearch"|"r3.4xlarge.elasticsearch"|"r3.8xlarge.elasticsearch"|"i2.xlarge.elasticsearch"|"i2.2xlarge.elasticsearch",
+    "InstanceType": "m3.medium.elasticsearch"|"m3.large.elasticsearch"|"m3.xlarge.elasticsearch"|"m3.2xlarge.elasticsearch"|"m4.large.elasticsearch"|"m4.xlarge.elasticsearch"|"m4.2xlarge.elasticsearch"|"m4.4xlarge.elasticsearch"|"m4.10xlarge.elasticsearch"|"t2.micro.elasticsearch"|"t2.small.elasticsearch"|"t2.medium.elasticsearch"|"r3.large.elasticsearch"|"r3.xlarge.elasticsearch"|"r3.2xlarge.elasticsearch"|"r3.4xlarge.elasticsearch"|"r3.8xlarge.elasticsearch"|"i2.xlarge.elasticsearch"|"i2.2xlarge.elasticsearch"|"d2.xlarge.elasticsearch"|"d2.2xlarge.elasticsearch"|"d2.4xlarge.elasticsearch"|"d2.8xlarge.elasticsearch"|"c4.large.elasticsearch"|"c4.xlarge.elasticsearch"|"c4.2xlarge.elasticsearch"|"c4.4xlarge.elasticsearch"|"c4.8xlarge.elasticsearch"|"r4.large.elasticsearch"|"r4.xlarge.elasticsearch"|"r4.2xlarge.elasticsearch"|"r4.4xlarge.elasticsearch"|"r4.8xlarge.elasticsearch"|"r4.16xlarge.elasticsearch",
     "InstanceCount": integer,
     "DedicatedMasterEnabled": true|false,
     "ZoneAwarenessEnabled": true|false,
-    "DedicatedMasterType": "m3.medium.elasticsearch"|"m3.large.elasticsearch"|"m3.xlarge.elasticsearch"|"m3.2xlarge.elasticsearch"|"t2.micro.elasticsearch"|"t2.small.elasticsearch"|"t2.medium.elasticsearch"|"r3.large.elasticsearch"|"r3.xlarge.elasticsearch"|"r3.2xlarge.elasticsearch"|"r3.4xlarge.elasticsearch"|"r3.8xlarge.elasticsearch"|"i2.xlarge.elasticsearch"|"i2.2xlarge.elasticsearch",
+    "DedicatedMasterType": "m3.medium.elasticsearch"|"m3.large.elasticsearch"|"m3.xlarge.elasticsearch"|"m3.2xlarge.elasticsearch"|"m4.large.elasticsearch"|"m4.xlarge.elasticsearch"|"m4.2xlarge.elasticsearch"|"m4.4xlarge.elasticsearch"|"m4.10xlarge.elasticsearch"|"t2.micro.elasticsearch"|"t2.small.elasticsearch"|"t2.medium.elasticsearch"|"r3.large.elasticsearch"|"r3.xlarge.elasticsearch"|"r3.2xlarge.elasticsearch"|"r3.4xlarge.elasticsearch"|"r3.8xlarge.elasticsearch"|"i2.xlarge.elasticsearch"|"i2.2xlarge.elasticsearch"|"d2.xlarge.elasticsearch"|"d2.2xlarge.elasticsearch"|"d2.4xlarge.elasticsearch"|"d2.8xlarge.elasticsearch"|"c4.large.elasticsearch"|"c4.xlarge.elasticsearch"|"c4.2xlarge.elasticsearch"|"c4.4xlarge.elasticsearch"|"c4.8xlarge.elasticsearch"|"r4.large.elasticsearch"|"r4.xlarge.elasticsearch"|"r4.2xlarge.elasticsearch"|"r4.4xlarge.elasticsearch"|"r4.8xlarge.elasticsearch"|"r4.16xlarge.elasticsearch",
     "DedicatedMasterCount": integer
   }
 
@@ -132,7 +135,7 @@ JSON Syntax::
 ``--advanced-options`` (map)
 
 
-  Modifies the advanced option to allow references to indices in an HTTP request body. Must be ``false`` when configuring access to individual sub-resources. By default, the value is ``true`` . See `Configuration Advanced Options`_ for more information.
+  Modifies the advanced option to allow references to indices in an HTTP request body. Must be ``false`` when configuring access to individual sub-resources. By default, the value is ``true`` . See `Configuration Advanced Options <http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options>`_ for more information.
 
   
 
@@ -162,8 +165,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -178,6 +181,86 @@ DomainConfig -> (structure)
   The status of the updated Elasticsearch domain. 
 
   
+
+  ElasticsearchVersion -> (structure)
+
+    
+
+    String of format X.Y to specify version for the Elasticsearch domain.
+
+    
+
+    Options -> (string)
+
+      
+
+      Specifies the Elasticsearch version for the specified Elasticsearch domain.
+
+      
+
+      
+
+    Status -> (structure)
+
+      
+
+      Specifies the status of the Elasticsearch version options for the specified Elasticsearch domain.
+
+      
+
+      CreationDate -> (timestamp)
+
+        
+
+        Timestamp which tells the creation date for the entity.
+
+        
+
+        
+
+      UpdateDate -> (timestamp)
+
+        
+
+        Timestamp which tells the last updated time for the entity.
+
+        
+
+        
+
+      UpdateVersion -> (integer)
+
+        
+
+        Specifies the latest version for the entity.
+
+        
+
+        
+
+      State -> (string)
+
+        
+
+        Provides the ``OptionState`` for the Elasticsearch domain.
+
+        
+
+        
+
+      PendingDeletion -> (boolean)
+
+        
+
+        Indicates whether the Elasticsearch domain is being deleted.
+
+        
+
+        
+
+      
+
+    
 
   ElasticsearchClusterConfig -> (structure)
 
@@ -219,7 +302,7 @@ DomainConfig -> (structure)
 
         
 
-        A boolean value to indicate whether a dedicated master node is enabled. See `About Dedicated Master Nodes`_ for more information.
+        A boolean value to indicate whether a dedicated master node is enabled. See `About Dedicated Master Nodes <http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-dedicatedmasternodes>`_ for more information.
 
         
 
@@ -229,7 +312,7 @@ DomainConfig -> (structure)
 
         
 
-        A boolean value to indicate whether zone awareness is enabled. See `About Zone Awareness`_ for more information.
+        A boolean value to indicate whether zone awareness is enabled. See `About Zone Awareness <http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-zoneawareness>`_ for more information.
 
         
 
@@ -451,7 +534,7 @@ DomainConfig -> (structure)
 
       
 
-      The access policy configured for the Elasticsearch domain. Access policies may be resource-based, IP-based, or IAM-based. See `Configuring Access Policies`_ for more information.
+      The access policy configured for the Elasticsearch domain. Access policies may be resource-based, IP-based, or IAM-based. See `Configuring Access Policies <http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-access-policies>`_ for more information.
 
       
 
@@ -613,7 +696,7 @@ DomainConfig -> (structure)
 
     
 
-    Specifies the ``advanced-options`` for the domain. See `Configuring Advanced Options`_ for more information.
+    Specifies the ``advanced-options`` for the domain. See `Configuring Advanced Options <http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options>`_ for more information.
 
     
 
@@ -703,10 +786,3 @@ DomainConfig -> (structure)
 
   
 
-
-
-.. _Configuration Advanced Options: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options
-.. _Configuring Access Policies: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-access-policies
-.. _About Zone Awareness: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-zoneawareness
-.. _About Dedicated Master Nodes: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-dedicatedmasternodes
-.. _Configuring Advanced Options: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options

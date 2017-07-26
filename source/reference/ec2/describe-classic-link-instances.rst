@@ -19,6 +19,9 @@ Describes one or more of your linked EC2-Classic instances. This request only re
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClassicLinkInstances>`_
+
+
 ========
 Synopsis
 ========
@@ -26,13 +29,13 @@ Synopsis
 ::
 
     describe-classic-link-instances
+  [--filters <value>]
   [--dry-run | --no-dry-run]
   [--instance-ids <value>]
-  [--filters <value>]
-  [--next-token <value>]
   [--max-results <value>]
+  [--next-token <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -40,28 +43,6 @@ Synopsis
 =======
 Options
 =======
-
-``--dry-run`` | ``--no-dry-run`` (boolean)
-
-
-  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
-
-  
-
-``--instance-ids`` (list)
-
-
-  One or more instance IDs. Must be instances linked to a VPC through ClassicLink.
-
-  
-
-
-
-Syntax::
-
-  "string" "string" ...
-
-
 
 ``--filters`` (list)
 
@@ -71,7 +52,7 @@ Syntax::
    
 
    
-  * ``group-id`` - The ID of a VPC security group that's associated with the instance.
+  * ``group-id`` - The ID of a VPC security group that's associated with the instance. 
    
   * ``instance-id`` - The ID of the instance. 
    
@@ -107,12 +88,27 @@ JSON Syntax::
 
 
 
-``--next-token`` (string)
+``--dry-run`` | ``--no-dry-run`` (boolean)
 
 
-  The token to retrieve the next page of results.
+  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
 
   
+
+``--instance-ids`` (list)
+
+
+  One or more instance IDs. Must be instances linked to a VPC through ClassicLink.
+
+  
+
+
+
+Syntax::
+
+  "string" "string" ...
+
+
 
 ``--max-results`` (integer)
 
@@ -125,11 +121,18 @@ JSON Syntax::
 
   
 
+``--next-token`` (string)
+
+
+  The token to retrieve the next page of results.
+
+  
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -150,7 +153,7 @@ Output::
 	{
 		"Instances": [
 			{
-				"InstanceId": "i-1a2b3c4d", 
+				"InstanceId": "i-1234567890abcdef0", 
 				"VpcId": "vpc-88888888", 
 				"Groups": [
 					{
@@ -165,7 +168,7 @@ Output::
 				]
 			}, 
 			{
-				"InstanceId": "i-ab12cd34", 
+				"InstanceId": "i-0598c7d356eba48d7", 
 				"VpcId": "vpc-12312312", 
 				"Groups": [
 					{
@@ -193,7 +196,7 @@ Output::
 	{
 		"Instances": [
 			{
-				"InstanceId": "i-1a2b3c4d", 
+				"InstanceId": "i-1234567890abcdef0", 
 				"VpcId": "vpc-88888888", 
 				"Groups": [
 					{
@@ -230,26 +233,6 @@ Instances -> (list)
     Describes a linked EC2-Classic instance.
 
     
-
-    InstanceId -> (string)
-
-      
-
-      The ID of the instance.
-
-      
-
-      
-
-    VpcId -> (string)
-
-      
-
-      The ID of the VPC.
-
-      
-
-      
 
     Groups -> (list)
 
@@ -291,6 +274,16 @@ Instances -> (list)
 
       
 
+    InstanceId -> (string)
+
+      
+
+      The ID of the instance.
+
+      
+
+      
+
     Tags -> (list)
 
       
@@ -311,11 +304,11 @@ Instances -> (list)
 
           
 
-          The key of the tag. 
+          The key of the tag.
 
            
 
-          Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with ``aws:`` 
+          Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with ``aws:``  
 
           
 
@@ -336,6 +329,16 @@ Instances -> (list)
           
 
         
+
+      
+
+    VpcId -> (string)
+
+      
+
+      The ID of the VPC.
+
+      
 
       
 

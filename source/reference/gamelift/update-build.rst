@@ -15,8 +15,29 @@ Description
 
 
 
-Updates metadata in a build record, including the build name and version. To update the metadata, specify the build ID to update and provide the new values. If successful, a build object containing the updated metadata is returned. 
+Updates metadata in a build record, including the build name and version. To update the metadata, specify the build ID to update and provide the new values. If successful, a build object containing the updated metadata is returned.
 
+ 
+
+Build-related operations include:
+
+ 
+
+ 
+*  create-build   
+ 
+*  list-builds   
+ 
+*  describe-build   
+ 
+*  update-build   
+ 
+*  delete-build   
+ 
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateBuild>`_
 
 
 ========
@@ -30,7 +51,7 @@ Synopsis
   [--name <value>]
   [--build-version <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -42,29 +63,29 @@ Options
 ``--build-id`` (string)
 
 
-  Unique identifier for the build you want to update. 
+  Unique identifier for a build to update.
 
   
 
 ``--name`` (string)
 
 
-  Descriptive label associated with this build. Build names do not need to be unique.
+  Descriptive label that is associated with a build. Build names do not need to be unique. 
 
   
 
 ``--build-version`` (string)
 
 
-  Version associated with this build. Version strings do not need to be unique to a build.
+  Version that is associated with this build. Version strings do not need to be unique.
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -76,7 +97,7 @@ Build -> (structure)
 
   
 
-  Object containing the updated build record.
+  Object that contains the updated build record.
 
   
 
@@ -94,7 +115,7 @@ Build -> (structure)
 
     
 
-    Descriptive label associated with this build. Build names do not need to be unique. It can be set using  create-build or  update-build .
+    Descriptive label that is associated with a build. Build names do not need to be unique. It can be set using  create-build or  update-build .
 
     
 
@@ -104,7 +125,7 @@ Build -> (structure)
 
     
 
-    Version associated with this build. Version strings do not need to be unique to a build. This value can be set using  create-build or  update-build .
+    Version that is associated with this build. Version strings do not need to be unique. This value can be set using  create-build or  update-build .
 
     
 
@@ -114,17 +135,21 @@ Build -> (structure)
 
     
 
-    Current status of the build. Possible build states include: 
+    Current status of the build.
 
-    
-    * INITIALIZED: A new build has been defined, but no files have been uploaded. You cannot create fleets for builds that are in this state. When a build is successfully created, the build state is set to this value. 
-    
-    * READY: The game build has been successfully uploaded. You can now create new fleets for this build.
-    
-    * FAILED: The game build upload failed. You cannot create new fleets for this build. 
-    
+     
 
-    
+    Possible build statuses include the following:
+
+     
+
+     
+    * **INITIALIZED** – A new build has been defined, but no files have been uploaded. You cannot create fleets for builds that are in this status. When a build is successfully created, the build status is set to this value.  
+     
+    * **READY** – The game build has been successfully uploaded. You can now create new fleets for this build. 
+     
+    * **FAILED** – The game build upload failed. You cannot create new fleets for this build.  
+     
 
     
 
@@ -134,7 +159,17 @@ Build -> (structure)
 
     
 
-    File size of the uploaded game build, expressed in bytes. When the build state is INITIALIZED, this value is 0.
+    File size of the uploaded game build, expressed in bytes. When the build status is ``INITIALIZED`` , this value is 0.
+
+    
+
+    
+
+  OperatingSystem -> (string)
+
+    
+
+    Operating system that the game server binaries are built to run on. This value determines the type of fleet resources that you can use for this build.
 
     
 
@@ -144,7 +179,7 @@ Build -> (structure)
 
     
 
-    Time stamp indicating when this object was created. Format is an integer representing the number of seconds since the Unix epoch (Unix time).
+    Time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (for example "1469498468.057").
 
     
 

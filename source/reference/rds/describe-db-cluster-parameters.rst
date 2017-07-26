@@ -15,12 +15,15 @@ Description
 
 
 
-Returns the detailed parameter list for a particular DB cluster parameter group. 
+Returns the detailed parameter list for a particular DB cluster parameter group.
 
  
 
-For more information on Amazon Aurora, see `Aurora on Amazon RDS`_ in the *Amazon RDS User Guide.* 
+For more information on Amazon Aurora, see `Aurora on Amazon RDS <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html>`_ in the *Amazon RDS User Guide.*  
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterParameters>`_
 
 
 ========
@@ -36,7 +39,7 @@ Synopsis
   [--max-records <value>]
   [--marker <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -48,7 +51,7 @@ Options
 ``--db-cluster-parameter-group-name`` (string)
 
 
-  The name of a specific DB cluster parameter group to return parameter details for. 
+  The name of a specific DB cluster parameter group to return parameter details for.
 
    
 
@@ -57,11 +60,11 @@ Options
    
 
    
-  * Must be 1 to 255 alphanumeric characters
+  * Must be 1 to 255 alphanumeric characters 
    
-  * First character must be a letter
+  * First character must be a letter 
    
-  * Cannot end with a hyphen or contain two consecutive hyphens
+  * Cannot end with a hyphen or contain two consecutive hyphens 
    
 
   
@@ -126,8 +129,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -159,7 +162,7 @@ Parameters -> (list)
 
       
 
-      Specifies the name of the parameter. 
+      Specifies the name of the parameter.
 
       
 
@@ -169,7 +172,7 @@ Parameters -> (list)
 
       
 
-      Specifies the value of the parameter. 
+      Specifies the value of the parameter.
 
       
 
@@ -179,7 +182,7 @@ Parameters -> (list)
 
       
 
-      Provides a description of the parameter. 
+      Provides a description of the parameter.
 
       
 
@@ -189,7 +192,7 @@ Parameters -> (list)
 
       
 
-      Indicates the source of the parameter value. 
+      Indicates the source of the parameter value.
 
       
 
@@ -199,7 +202,7 @@ Parameters -> (list)
 
       
 
-      Specifies the engine specific parameters type. 
+      Specifies the engine specific parameters type.
 
       
 
@@ -209,7 +212,7 @@ Parameters -> (list)
 
       
 
-      Specifies the valid data type for the parameter. 
+      Specifies the valid data type for the parameter.
 
       
 
@@ -219,7 +222,7 @@ Parameters -> (list)
 
       
 
-      Specifies the valid range of values for the parameter. 
+      Specifies the valid range of values for the parameter.
 
       
 
@@ -239,7 +242,7 @@ Parameters -> (list)
 
       
 
-      The earliest engine version to which the parameter can apply. 
+      The earliest engine version to which the parameter can apply.
 
       
 
@@ -249,7 +252,7 @@ Parameters -> (list)
 
       
 
-      Indicates when to apply parameter updates. 
+      Indicates when to apply parameter updates.
 
       
 
@@ -269,6 +272,3 @@ Marker -> (string)
 
   
 
-
-
-.. _Aurora on Amazon RDS: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html

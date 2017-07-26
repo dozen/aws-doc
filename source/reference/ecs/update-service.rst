@@ -31,11 +31,11 @@ You can also update the deployment configuration of a service. When a deployment
 
  
 
-If the ``minimumHealthyPercent`` is below 100%, the scheduler can ignore the ``desiredCount`` temporarily during a deployment. For example, if your service has a ``desiredCount`` of four tasks, a ``minimumHealthyPercent`` of 50% allows the scheduler to stop two existing tasks before starting two new tasks. Tasks for services that *do not* use a load balancer are considered healthy if they are in the ``RUNNING`` state; tasks for services that *do* use a load balancer are considered healthy if they are in the ``RUNNING`` state and the container instance it is hosted on is reported as healthy by the load balancer.
-
  
-
-The ``maximumPercent`` parameter represents an upper limit on the number of running tasks during a deployment, which enables you to define the deployment batch size. For example, if your service has a ``desiredCount`` of four tasks, a ``maximumPercent`` value of 200% starts four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available).
+* If ``minimumHealthyPercent`` is below 100%, the scheduler can ignore ``desiredCount`` temporarily during a deployment. For example, if ``desiredCount`` is four tasks, a minimum of 50% allows the scheduler to stop two existing tasks before starting two new tasks. Tasks for services that do not use a load balancer are considered healthy if they are in the ``RUNNING`` state. Tasks for services that use a load balancer are considered healthy if they are in the ``RUNNING`` state and the container instance they are hosted on is reported as healthy by the load balancer. 
+ 
+* The ``maximumPercent`` parameter represents an upper limit on the number of running tasks during a deployment, which enables you to define the deployment batch size. For example, if ``desiredCount`` is four tasks, a maximum of 200% starts four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available). 
+ 
 
  
 
@@ -43,18 +43,39 @@ When  update-service stops a task during a deployment, the equivalent of ``docke
 
  
 
-When the service scheduler launches new tasks, it attempts to balance them across the Availability Zones in your cluster with the following logic:
+When the service scheduler launches new tasks, it determines task placement in your cluster with the following logic:
 
  
 
  
 * Determine which of the container instances in your cluster can support your service's task definition (for example, they have the required CPU, memory, ports, and container instance attributes). 
  
-* Sort the valid container instances by the fewest number of running tasks for this service in the same Availability Zone as the instance. For example, if zone A has one running service task and zones B and C each have zero, valid container instances in either zone B or C are considered optimal for placement. 
+* By default, the service scheduler attempts to balance tasks across Availability Zones in this manner (although you can choose a different placement strategy): 
+
+   
+  * Sort the valid container instances by the fewest number of running tasks for this service in the same Availability Zone as the instance. For example, if zone A has one running service task and zones B and C each have zero, valid container instances in either zone B or C are considered optimal for placement. 
+   
+  * Place the new service task on a valid container instance in an optimal Availability Zone (based on the previous steps), favoring container instances with the fewest number of running tasks for this service. 
+   
+
  
-* Place the new service task on a valid container instance in an optimal Availability Zone (based on the previous steps), favoring container instances with the fewest number of running tasks for this service. 
  
 
+ 
+
+When the service scheduler stops running tasks, it attempts to maintain balance across the Availability Zones in your cluster using the following logic: 
+
+ 
+
+ 
+* Sort the container instances by the largest number of running tasks for this service in the same Availability Zone as the instance. For example, if zone A has one running service task and zones B and C each have two, container instances in either zone B or C are considered optimal for termination. 
+ 
+* Stop the task on a container instance in an optimal Availability Zone (based on the previous steps), favoring container instances with the largest number of running tasks for this service. 
+ 
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateService>`_
 
 
 ========
@@ -70,7 +91,7 @@ Synopsis
   [--task-definition <value>]
   [--deployment-configuration <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -110,7 +131,7 @@ Options
 ``--deployment-configuration`` (structure)
 
 
-  Optional deployment parameters that control how many tasks run during the deployment and the ordering of stopping and starting tasks. 
+  Optional deployment parameters that control how many tasks run during the deployment and the ordering of stopping and starting tasks.
 
   
 
@@ -135,8 +156,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -176,7 +197,7 @@ service -> (structure)
 
     
 
-    The Amazon Resource Name (ARN) that identifies the service. The ARN contains the ``arn:aws:ecs`` namespace, followed by the region of the service, the AWS account ID of the service owner, the ``service`` namespace, and then the service name. For example, arn:aws:ecs:*region* :*012345678910* :service/*my-service* .
+    The Amazon Resource Name (ARN) that identifies the service. The ARN contains the ``arn:aws:ecs`` namespace, followed by the region of the service, the AWS account ID of the service owner, the ``service`` namespace, and then the service name. For example, ``arn:aws:ecs:*region* :*012345678910* :service/*my-service* `` .
 
     
 
@@ -196,7 +217,7 @@ service -> (structure)
 
     
 
-    The Amazon Resource Name (ARN) of the of the cluster that hosts the service.
+    The Amazon Resource Name (ARN) of the cluster that hosts the service.
 
     
 
@@ -206,7 +227,7 @@ service -> (structure)
 
     
 
-    A list of load balancer objects, containing the load balancer name, the container name (as it appears in a container definition), and the container port to access from the load balancer.
+    A list of Elastic Load Balancing load balancer objects, containing the load balancer name, the container name (as it appears in a container definition), and the container port to access from the load balancer.
 
     
 
@@ -218,11 +239,21 @@ service -> (structure)
 
       
 
+      targetGroupArn -> (string)
+
+        
+
+        The full Amazon Resource Name (ARN) of the Elastic Load Balancing target group associated with a service.
+
+        
+
+        
+
       loadBalancerName -> (string)
 
         
 
-        The name of the load balancer.
+        The name of a Classic load balancer.
 
         
 
@@ -314,7 +345,7 @@ service -> (structure)
 
       
 
-      The upper limit (as a percentage of the service's ``desiredCount`` ) of the number of running tasks that can be running in a service during a deployment. The maximum number of tasks during a deployment is the ``desiredCount`` multiplied by the ``maximumPercent`` /100, rounded down to the nearest integer value.
+      The upper limit (as a percentage of the service's ``desiredCount`` ) of the number of tasks that are allowed in the ``RUNNING`` or ``PENDING`` state in a service during a deployment. The maximum number of tasks during a deployment is the ``desiredCount`` multiplied by ``maximumPercent`` /100, rounded down to the nearest integer value.
 
       
 
@@ -324,7 +355,7 @@ service -> (structure)
 
       
 
-      The lower limit (as a percentage of the service's ``desiredCount`` ) of the number of running tasks that must remain running and healthy in a service during a deployment. The minimum healthy tasks during a deployment is the ``desiredCount`` multiplied by the ``minimumHealthyPercent`` /100, rounded up to the nearest integer value.
+      The lower limit (as a percentage of the service's ``desiredCount`` ) of the number of running tasks that must remain in the ``RUNNING`` state in a service during a deployment. The minimum healthy tasks during a deployment is the ``desiredCount`` multiplied by ``minimumHealthyPercent`` /100, rounded up to the nearest integer value.
 
       
 
@@ -412,7 +443,7 @@ service -> (structure)
 
         
 
-        The Unix time in seconds and milliseconds when the service was created.
+        The Unix timestamp for when the service was created.
 
         
 
@@ -422,7 +453,7 @@ service -> (structure)
 
         
 
-        The Unix time in seconds and milliseconds when the service was last updated.
+        The Unix timestamp for when the service was last updated.
 
         
 
@@ -436,7 +467,7 @@ service -> (structure)
 
     
 
-    The Amazon Resource Name (ARN) of the IAM role associated with the service that allows the Amazon ECS container agent to register container instances with a load balancer. 
+    The Amazon Resource Name (ARN) of the IAM role associated with the service that allows the Amazon ECS container agent to register container instances with an Elastic Load Balancing load balancer.
 
     
 
@@ -472,7 +503,7 @@ service -> (structure)
 
         
 
-        The Unix time in seconds and milliseconds when the event was triggered.
+        The Unix timestamp for when the event was triggered.
 
         
 
@@ -483,6 +514,96 @@ service -> (structure)
         
 
         The event message.
+
+        
+
+        
+
+      
+
+    
+
+  createdAt -> (timestamp)
+
+    
+
+    The Unix timestamp for when the service was created.
+
+    
+
+    
+
+  placementConstraints -> (list)
+
+    
+
+    The placement constraints for the tasks in the service.
+
+    
+
+    (structure)
+
+      
+
+      An object representing a constraint on task placement. For more information, see `Task Placement Constraints <http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html>`_ in the *Amazon EC2 Container Service Developer Guide* .
+
+      
+
+      type -> (string)
+
+        
+
+        The type of constraint. Use ``distinctInstance`` to ensure that each task in a particular group is running on a different container instance. Use ``memberOf`` to restrict selection to a group of valid candidates. Note that ``distinctInstance`` is not supported in task definitions.
+
+        
+
+        
+
+      expression -> (string)
+
+        
+
+        A cluster query language expression to apply to the constraint. Note you cannot specify an expression if the constraint type is ``distinctInstance`` . For more information, see `Cluster Query Language <http://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html>`_ in the *Amazon EC2 Container Service Developer Guide* .
+
+        
+
+        
+
+      
+
+    
+
+  placementStrategy -> (list)
+
+    
+
+    The placement strategy that determines how tasks for the service are placed.
+
+    
+
+    (structure)
+
+      
+
+      The task placement strategy for a task or service. For more information, see `Task Placement Strategies <http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-strategies.html>`_ in the *Amazon EC2 Container Service Developer Guide* .
+
+      
+
+      type -> (string)
+
+        
+
+        The type of placement strategy. The ``random`` placement strategy randomly places tasks on available candidates. The ``spread`` placement strategy spreads placement across available candidates evenly based on the ``field`` parameter. The ``binpack`` strategy places tasks on available candidates that have the least available amount of the resource that is specified with the ``field`` parameter. For example, if you binpack on memory, a task is placed on the instance with the least amount of remaining memory (but still enough to run the task).
+
+        
+
+        
+
+      field -> (string)
+
+        
+
+        The field to apply the placement strategy against. For the ``spread`` placement strategy, valid values are ``instanceId`` (or ``host`` , which has the same effect), or any platform or custom attribute that is applied to a container instance, such as ``attribute:ecs.availability-zone`` . For the ``binpack`` placement strategy, valid values are ``cpu`` and ``memory`` . For the ``random`` placement strategy, this field is not used.
 
         
 

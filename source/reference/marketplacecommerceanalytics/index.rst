@@ -25,3 +25,4 @@ Available Commands
   :titlesonly:
 
   generate-data-set
+  start-support-data-export

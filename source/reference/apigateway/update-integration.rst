@@ -19,6 +19,9 @@ Represents an update integration.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/apigateway-2015-07-09/UpdateIntegration>`_
+
+
 ========
 Synopsis
 ========
@@ -31,7 +34,7 @@ Synopsis
   --http-method <value>
   [--patch-operations <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -43,7 +46,7 @@ Options
 ``--rest-api-id`` (string)
 
 
-  Represents an update integration request's API identifier.
+  The string identifier of the associated  RestApi .
 
   
 
@@ -64,7 +67,7 @@ Options
 ``--patch-operations`` (list)
 
 
-  A list of operations describing the updates to apply to the specified resource. The patches are applied in the order specified in the list.
+  A list of update operations to be applied to the specified resource and in the order specified in this list.
 
   
 
@@ -94,8 +97,38 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
+
+
+
+========
+Examples
+========
+
+**To add the 'Content-Type: application/json' Mapping Template configured with Input Passthrough**
+
+Command::
+
+  aws apigateway update-integration --rest-api-id a1b2c3d4e5 --resource-id a1b2c3 --http-method POST --patch-operations op='add',path='/requestTemplates/application~1json'
+
+**To update (replace) the 'Content-Type: application/json' Mapping Template configured with a custom template**
+
+Command::
+
+  aws apigateway update-integration --rest-api-id a1b2c3d4e5 --resource-id a1b2c3 --http-method POST --patch-operations op='replace',path='/requestTemplates/application~1json',value='{"example": "json"}'
+
+**To update (replace) a custom template associated with 'Content-Type: application/json' with Input Passthrough**
+
+Command::
+
+  aws apigateway update-integration --rest-api-id a1b2c3d4e5 --resource-id a1b2c3 --http-method POST --patch-operations op='replace',path='requestTemplates/application~1json'
+
+**To remove the 'Content-Type: application/json' Mapping Template**
+
+Command::
+
+  aws apigateway update-integration --rest-api-id a1b2c3d4e5 --resource-id a1b2c3 --http-method POST --patch-operations op='remove',path='/requestTemplates/application~1json'
 
 
 
@@ -107,7 +140,7 @@ type -> (string)
 
   
 
-  Specifies the integration's type.
+  Specifies the integration's type. The valid value is ``HTTP`` for integrating with an HTTP back end, ``AWS`` for any AWS service endpoints, ``MOCK`` for testing without actually invoking the back end, ``HTTP_PROXY`` for integrating with the HTTP proxy integration, or ``AWS_PROXY`` for integrating with the Lambda proxy integration type.
 
   
 
@@ -127,7 +160,7 @@ uri -> (string)
 
   
 
-  Specifies the integration's Uniform Resource Identifier (URI). For HTTP integrations, the URI must be a fully formed, encoded HTTP(S) URL according to the `RFC-3986 specification`_ . For AWS integrations, the URI should be of the form ``arn:aws:apigateway:{region}:{subdomain.service|service}:{path|action}/{service_api}`` . ``Region`` , ``subdomain`` and ``service`` are used to determine the right endpoint. For AWS services that use the ``Action=`` query string parameter, ``service_api`` should be a valid action for the desired service. For RESTful AWS service APIs, ``path`` is used to indicate that the remaining substring in the URI should be treated as the path to the resource, including the initial ``/`` .
+  Specifies the integration's Uniform Resource Identifier (URI). For HTTP integrations, the URI must be a fully formed, encoded HTTP(S) URL according to the `RFC-3986 specification <https://en.wikipedia.org/wiki/Uniform_Resource_Identifier>`_ . For AWS integrations, the URI should be of the form ``arn:aws:apigateway:{region}:{subdomain.service|service}:{path|action}/{service_api}`` . ``Region`` , ``subdomain`` and ``service`` are used to determine the right endpoint. For AWS services that use the ``Action=`` query string parameter, ``service_api`` should be a valid action for the desired service. For RESTful AWS service APIs, ``path`` is used to indicate that the remaining substring in the URI should be treated as the path to the resource, including the initial ``/`` .
 
   
 
@@ -147,7 +180,7 @@ requestParameters -> (map)
 
   
 
-  Represents requests parameters that are sent with the backend request. Request parameters are represented as a key/value map, with a destination as the key and a source as the value. A source must match an existing method request parameter, or a static value. Static values must be enclosed with single quotes, and be pre-encoded based on their destination in the request. The destination must match the pattern ``integration.request.{location}.{name}`` , where ``location`` is either querystring, path, or header. ``name`` must be a valid, unique parameter name.
+  A key-value map specifying request parameters that are passed from the method request to the back end. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the back end. The method request parameter value must match the pattern of ``method.request.{location}.{name}`` , where ``location`` is ``querystring`` , ``path`` , or ``header`` and ``name`` must be a valid and unique method request parameter name.
 
   
 
@@ -169,7 +202,7 @@ requestTemplates -> (map)
 
   
 
-  Specifies the integration's request templates.
+  Represents a map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client. The content type value is the key in this map, and the template (as a String) is the value.
 
   
 
@@ -184,6 +217,48 @@ requestTemplates -> (map)
     
 
     
+
+  
+
+passthroughBehavior -> (string)
+
+   
+
+  Specifies how the method request body of an unmapped content type will be passed through the integration request to the back end without transformation. A content type is unmapped if no mapping template is defined in the integration or the content type does not match any of the mapped content types, as specified in ``requestTemplates`` . There are three valid values: ``WHEN_NO_MATCH`` , ``WHEN_NO_TEMPLATES`` , and ``NEVER`` . 
+
+   
+
+   
+  * ``WHEN_NO_MATCH`` passes the method request body through the integration request to the back end without transformation when the method request content type does not match any content type associated with the mapping templates defined in the integration request. 
+   
+  * ``WHEN_NO_TEMPLATES`` passes the method request body through the integration request to the back end without transformation when no mapping template is defined in the integration request. If a template is defined when this option is selected, the method request of an unmapped content-type will be rejected with an HTTP ``415 Unsupported Media Type`` response. 
+   
+  * ``NEVER`` rejects the method request with an HTTP ``415 Unsupported Media Type`` response when either the method request content type does not match any content type associated with the mapping templates defined in the integration request or no mapping template is defined in the integration request. 
+   
+
+   
+
+  
+
+contentHandling -> (string)
+
+  
+
+  Specifies how to handle request payload content type conversions. Supported values are ``CONVERT_TO_BINARY`` and ``CONVERT_TO_TEXT`` , with the following behaviors:
+
+   
+
+   
+  * ``CONVERT_TO_BINARY`` : Converts a request payload from a Base64-encoded string to the corresponding binary blob.
+   
+  * ``CONVERT_TO_TEXT`` : Converts a request payload from a binary blob to a Base64-encoded string.
+   
+
+   
+
+  If this property is not defined, the request payload will be passed through from the method request to integration request without modification, provided that the ``passthroughBehaviors`` is configured to support payload pass-through.
+
+  
 
   
 
@@ -219,7 +294,23 @@ integrationResponses -> (map)
 
   Specifies the integration's responses.
 
+    
+
   
+
+   Example: Get integration responses of a method Request 
+
+  
+
+   ``GET /restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200 HTTP/1.1 Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com X-Amz-Date: 20160607T191449Z Authorization: AWS4-HMAC-SHA256 Credential={access_key_ID}/20160607/us-east-1/apigateway/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash}``  Response 
+
+  The successful response returns ``200 OK`` status and a payload as follows:
+
+   ``{ "_links": { "curies": { "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-{rel}.html", "name": "integrationresponse", "templated": true }, "self": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200", "title": "200" }, "integrationresponse:delete": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" }, "integrationresponse:update": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" } }, "responseParameters": { "method.response.header.Content-Type": "'application/xml'" }, "responseTemplates": { "application/json": "$util.urlDecode(\"%3CkinesisStreams%3E#foreach($stream in $input.path('$.StreamNames'))%3Cstream%3E%3Cname%3E$stream%3C/name%3E%3C/stream%3E#end%3C/kinesisStreams%3E\")\n" }, "statusCode": "200" }``  
+
+  
+
+     `Creating an API <http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html>`_  
 
   key -> (string)
 
@@ -231,9 +322,9 @@ integrationResponses -> (map)
 
     
 
-    Represents an integration response. The status code must map to an existing  MethodResponse , and parameters and templates can be used to transform the backend response.
+    Represents an integration response. The status code must map to an existing  MethodResponse , and parameters and templates can be used to transform the back-end response.
 
-    
+      `Creating an API <http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html>`_  
 
     statusCode -> (string)
 
@@ -249,7 +340,7 @@ integrationResponses -> (map)
 
       
 
-      Specifies the regular expression (regex) pattern used to choose an integration response based on the response from the backend. If the backend is an AWS Lambda function, the AWS Lambda function error header is matched. For all other HTTP and AWS backends, the HTTP status code is matched.
+      Specifies the regular expression (regex) pattern used to choose an integration response based on the response from the back end. For example, if the success response returns nothing and the error response returns some string, you could use the ``.+`` regex to match error response. However, make sure that the error response does not contain any newline (``\n`` ) character in such cases. If the back end is an AWS Lambda function, the AWS Lambda function error header is matched. For all other HTTP and AWS back ends, the HTTP status code is matched.
 
       
 
@@ -259,7 +350,7 @@ integrationResponses -> (map)
 
       
 
-      Represents response parameters that can be read from the backend response. Response parameters are represented as a key/value map, with a destination as the key and a source as the value. A destination must match an existing response parameter in the  MethodResponse . The source can be a header from the backend response, or a static value. Static values are specified using enclosing single quotes, and backend response headers can be read using the pattern ``integration.response.header.{name}`` .
+      A key-value map specifying response parameters that are passed to the method response from the back end. The key is a method response header parameter name and the mapped value is an integration response header value, a static value enclosed within a pair of single quotes, or a JSON expression from the integration response body. The mapping key must match the pattern of ``method.response.header.{name}`` , where ``name`` is a valid and unique header name. The mapped non-static value must match the pattern of ``integration.response.header.{name}`` or ``integration.response.body.{JSON-expression}`` , where ``name`` is a valid and unique response header name and ``JSON-expression`` is a valid JSON expression without the ``$`` prefix.
 
       
 
@@ -299,10 +390,29 @@ integrationResponses -> (map)
 
       
 
+    contentHandling -> (string)
+
+      
+
+      Specifies how to handle response payload content type conversions. Supported values are ``CONVERT_TO_BINARY`` and ``CONVERT_TO_TEXT`` , with the following behaviors:
+
+       
+
+       
+      * ``CONVERT_TO_BINARY`` : Converts a response payload from a Base64-encoded string to the corresponding binary blob.
+       
+      * ``CONVERT_TO_TEXT`` : Converts a response payload from a binary blob to a Base64-encoded string.
+       
+
+       
+
+      If this property is not defined, the response payload will be passed through from the integration response to the method response without modification.
+
+      
+
+      
+
     
 
   
 
-
-
-.. _RFC-3986 specification: https://www.ietf.org/rfc/rfc3986.txt

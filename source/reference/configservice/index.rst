@@ -15,7 +15,7 @@ Description
 
  
 
-AWS Config provides a way to keep track of the configurations of all the AWS resources associated with your AWS account. You can use AWS Config to get the current and historical configurations of each AWS resource and also to get information about the relationship between the resources. An AWS resource can be an Amazon Compute Cloud (Amazon EC2) instance, an Elastic Block Store (EBS) volume, an Elastic network Interface (ENI), or a security group. For a complete list of resources currently supported by AWS Config, see `Supported AWS Resources`_ .
+AWS Config provides a way to keep track of the configurations of all the AWS resources associated with your AWS account. You can use AWS Config to get the current and historical configurations of each AWS resource and also to get information about the relationship between the resources. An AWS resource can be an Amazon Compute Cloud (Amazon EC2) instance, an Elastic Block Store (EBS) volume, an Elastic network Interface (ENI), or a security group. For a complete list of resources currently supported by AWS Config, see `Supported AWS Resources <http://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources>`_ .
 
  
 
@@ -27,11 +27,11 @@ This reference guide contains documentation for the AWS Config API and the AWS C
 
  
 
-The AWS Config API uses the Signature Version 4 protocol for signing requests. For more information about how to sign a request with this protocol, see `Signature Version 4 Signing Process`_ .
+The AWS Config API uses the Signature Version 4 protocol for signing requests. For more information about how to sign a request with this protocol, see `Signature Version 4 Signing Process <http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html>`_ .
 
  
 
-For detailed information about AWS Config features and their associated actions or commands, as well as how to work with AWS Management Console, see `What Is AWS Config?`_ in the *AWS Config Developer Guide* .
+For detailed information about AWS Config features and their associated actions or commands, as well as how to work with AWS Management Console, see `What Is AWS Config? <http://docs.aws.amazon.com/config/latest/developerguide/WhatIsConfig.html>`_ in the *AWS Config Developer Guide* .
 
 
 
@@ -45,7 +45,9 @@ Available Commands
   :titlesonly:
 
   delete-config-rule
+  delete-configuration-recorder
   delete-delivery-channel
+  delete-evaluation-results
   deliver-config-snapshot
   describe-compliance-by-config-rule
   describe-compliance-by-resource
@@ -66,11 +68,7 @@ Available Commands
   put-configuration-recorder
   put-delivery-channel
   put-evaluations
+  start-config-rules-evaluation
   start-configuration-recorder
   stop-configuration-recorder
   subscribe
-
-
-.. _Signature Version 4 Signing Process: http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
-.. _What Is AWS Config?: http://docs.aws.amazon.com/config/latest/developerguide/WhatIsConfig.html
-.. _Supported AWS Resources: http://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources

@@ -23,6 +23,9 @@ Elastic Transcoder returns all of the jobs currently in the specified pipeline. 
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elastictranscoder-2012-09-25/ListJobsByPipeline>`_
+
+
 ``list-jobs-by-pipeline`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
 When using ``--output text`` and the ``--query`` argument on a paginated response, the ``--query`` argument must extract data from the results of the following query expressions: ``Jobs``
 
@@ -39,7 +42,7 @@ Synopsis
   [--cli-input-json <value>]
   [--starting-token <value>]
   [--max-items <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -51,7 +54,7 @@ Options
 ``--pipeline-id`` (string)
 
 
-  The ID of the pipeline for which you want to get job information. 
+  The ID of the pipeline for which you want to get job information.
 
   
 
@@ -72,15 +75,23 @@ Performs service operation based on the JSON string provided. The JSON string fo
 
    
 
-``--max-items`` (integer)
- 
-
-  The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination. This ``NextToken`` response element should **not** be used directly outside of the AWS CLI.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
    
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--max-items`` (integer)
+ 
+
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``NextToken`` is provided in the command's output. To resume pagination, provide the ``NextToken`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``NextToken`` response element directly outside of the AWS CLI.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -108,7 +119,7 @@ Jobs -> (list)
 
       
 
-      The identifier that Elastic Transcoder assigned to the job. You use this value to get settings for the job or to delete the job. 
+      The identifier that Elastic Transcoder assigned to the job. You use this value to get settings for the job or to delete the job.
 
       
 
@@ -128,7 +139,7 @@ Jobs -> (list)
 
       
 
-      The ``page-token`` of the pipeline that you want Elastic Transcoder to use for transcoding. The pipeline determines several settings, including the Amazon S3 bucket from which Elastic Transcoder gets the files to transcode and the bucket into which Elastic Transcoder puts the transcoded files. 
+      The ``pipeline-id`` of the pipeline that you want Elastic Transcoder to use for transcoding. The pipeline determines several settings, including the Amazon S3 bucket from which Elastic Transcoder gets the files to transcode and the bucket into which Elastic Transcoder puts the transcoded files. 
 
       
 
@@ -210,7 +221,7 @@ Jobs -> (list)
 
          
 
-        ``true`` , ``false`` 
+         ``true`` , ``false``  
 
          
 
@@ -238,7 +249,7 @@ Jobs -> (list)
 
         
 
-        The encryption settings, if any, that are used for decrypting your input files. If your input file is encrypted, you must specify the mode that Elastic Transcoder will use to decrypt your file.
+        The encryption settings, if any, that are used for decrypting your input files. If your input file is encrypted, you must specify the mode that Elastic Transcoder uses to decrypt your file.
 
         
 
@@ -251,15 +262,15 @@ Jobs -> (list)
            
 
            
-          * **S3:** Amazon S3 creates and manages the keys used for encrypting your files.
+          * **S3:** Amazon S3 creates and manages the keys used for encrypting your files. 
            
-          * **S3-AWS-KMS:** Amazon S3 calls the Amazon Key Management Service, which creates and manages the keys that are used for encrypting your files. If you specify ``S3-AWS-KMS`` and you don't want to use the default key, you must add the AWS-KMS key that you want to use to your pipeline.
+          * **S3-AWS-KMS:** Amazon S3 calls the Amazon Key Management Service, which creates and manages the keys that are used for encrypting your files. If you specify ``S3-AWS-KMS`` and you don't want to use the default key, you must add the AWS-KMS key that you want to use to your pipeline. 
            
-          * **AES-CBC-PKCS7:** A padded cipher-block mode of operation originally used for HLS files.
+          * **AES-CBC-PKCS7:** A padded cipher-block mode of operation originally used for HLS files. 
            
-          * **AES-CTR:** AES Counter Mode.
+          * **AES-CTR:** AES Counter Mode. 
            
-          * **AES-GCM:** AES Galois Counter Mode, a mode of operation that is an authenticated encryption format, meaning that a file, key, or initialization vector that has been tampered with will fail the decryption process.
+          * **AES-GCM:** AES Galois Counter Mode, a mode of operation that is an authenticated encryption format, meaning that a file, key, or initialization vector that has been tampered with fails the decryption process. 
            
 
            
@@ -269,22 +280,22 @@ Jobs -> (list)
            
 
            
-          * **Key** 
+          * **Key**   
            
-          * **Key MD5** 
+          * **Key MD5**   
            
-          * **Initialization Vector** 
+          * **Initialization Vector**   
            
 
            
 
           .. warning::
 
-            
+             
 
             For the AES modes, your private encryption keys and your unencrypted data are never stored by AWS; therefore, it is important that you safely manage your encryption keys. If you lose them, you won't be able to unencrypt your data.
 
-            
+             
 
           
 
@@ -298,7 +309,7 @@ Jobs -> (list)
 
            
 
-          ``128`` , ``192`` , or ``256`` . 
+           ``128`` , ``192`` , or ``256`` . 
 
            
 
@@ -325,6 +336,274 @@ Jobs -> (list)
           The series of random bits created by a random bit generator, unique for every encryption operation, that you used to encrypt your input files or that you want Elastic Transcoder to use to encrypt your output files. The initialization vector must be base64-encoded, and it must be exactly 16 bytes long before being base64-encoded.
 
           
+
+          
+
+        
+
+      TimeSpan -> (structure)
+
+        
+
+        Settings for clipping an input. Each input can have different clip settings.
+
+        
+
+        StartTime -> (string)
+
+          
+
+          The place in the input file where you want a clip to start. The format can be either HH:mm:ss.SSS (maximum value: 23:59:59.999; SSS is thousandths of a second) or sssss.SSS (maximum value: 86399.999). If you don't specify a value, Elastic Transcoder starts at the beginning of the input file.
+
+          
+
+          
+
+        Duration -> (string)
+
+          
+
+          The duration of the clip. The format can be either HH:mm:ss.SSS (maximum value: 23:59:59.999; SSS is thousandths of a second) or sssss.SSS (maximum value: 86399.999). If you don't specify a value, Elastic Transcoder creates an output file from StartTime to the end of the file.
+
+           
+
+          If you specify a value longer than the duration of the input file, Elastic Transcoder transcodes the file and returns a warning message.
+
+          
+
+          
+
+        
+
+      InputCaptions -> (structure)
+
+        
+
+        You can configure Elastic Transcoder to transcode captions, or subtitles, from one format to another. All captions must be in UTF-8. Elastic Transcoder supports two types of captions:
+
+         
+
+         
+        * **Embedded:** Embedded captions are included in the same file as the audio and video. Elastic Transcoder supports only one embedded caption per language, to a maximum of 300 embedded captions per file. Valid input values include: ``CEA-608 (EIA-608`` , first non-empty channel only), ``CEA-708 (EIA-708`` , first non-empty channel only), and ``mov-text``   Valid outputs include: ``mov-text``   Elastic Transcoder supports a maximum of one embedded format per output. 
+         
+        * **Sidecar:** Sidecar captions are kept in a separate metadata file from the audio and video data. Sidecar captions require a player that is capable of understanding the relationship between the video file and the sidecar file. Elastic Transcoder supports only one sidecar caption per language, to a maximum of 20 sidecar captions per file. Valid input values include: ``dfxp`` (first div element only), ``ebu-tt`` , ``scc`` , ``smpt`` , ``srt`` , ``ttml`` (first div element only), and ``webvtt``   Valid outputs include: ``dfxp`` (first div element only), ``scc`` , ``srt`` , and ``webvtt`` . 
+         
+
+         
+
+        If you want ttml or smpte-tt compatible captions, specify dfxp as your output format.
+
+         
+
+        Elastic Transcoder does not support OCR (Optical Character Recognition), does not accept pictures as a valid input for captions, and is not available for audio-only transcoding. Elastic Transcoder does not preserve text formatting (for example, italics) during the transcoding process.
+
+         
+
+        To remove captions or leave the captions empty, set ``Captions`` to null. To pass through existing captions unchanged, set the ``MergePolicy`` to ``MergeRetain`` , and pass in a null ``CaptionSources`` array.
+
+         
+
+        For more information on embedded files, see the Subtitles Wikipedia page.
+
+         
+
+        For more information on sidecar files, see the Extensible Metadata Platform and Sidecar file Wikipedia pages.
+
+        
+
+        MergePolicy -> (string)
+
+          
+
+          A policy that determines how Elastic Transcoder handles the existence of multiple captions.
+
+           
+
+           
+          * **MergeOverride:** Elastic Transcoder transcodes both embedded and sidecar captions into outputs. If captions for a language are embedded in the input file and also appear in a sidecar file, Elastic Transcoder uses the sidecar captions and ignores the embedded captions for that language. 
+           
+          * **MergeRetain:** Elastic Transcoder transcodes both embedded and sidecar captions into outputs. If captions for a language are embedded in the input file and also appear in a sidecar file, Elastic Transcoder uses the embedded captions and ignores the sidecar captions for that language. If ``CaptionSources`` is empty, Elastic Transcoder omits all sidecar captions from the output files. 
+           
+          * **Override:** Elastic Transcoder transcodes only the sidecar captions that you specify in ``CaptionSources`` . 
+           
+
+           
+
+           ``MergePolicy`` cannot be null.
+
+          
+
+          
+
+        CaptionSources -> (list)
+
+          
+
+          Source files for the input sidecar captions used during the transcoding process. To omit all sidecar captions, leave ``CaptionSources`` blank.
+
+          
+
+          (structure)
+
+            
+
+            A source file for the input sidecar captions used during the transcoding process.
+
+            
+
+            Key -> (string)
+
+              
+
+              The name of the sidecar caption file that you want Elastic Transcoder to include in the output file.
+
+              
+
+              
+
+            Language -> (string)
+
+              
+
+              A string that specifies the language of the caption. If you specified multiple inputs with captions, the caption language must match in order to be included in the output. Specify this as one of:
+
+               
+
+               
+              * 2-character ISO 639-1 code 
+               
+              * 3-character ISO 639-2 code 
+               
+
+               
+
+              For more information on ISO language codes and language names, see the List of ISO 639-1 codes.
+
+              
+
+              
+
+            TimeOffset -> (string)
+
+              
+
+              For clip generation or captions that do not start at the same time as the associated video file, the ``TimeOffset`` tells Elastic Transcoder how much of the video to encode before including captions.
+
+               
+
+              Specify the TimeOffset in the form [+-]SS.sss or [+-]HH:mm:SS.ss.
+
+              
+
+              
+
+            Label -> (string)
+
+              
+
+              The label of the caption shown in the player when choosing a language. We recommend that you put the caption language name here, in the language of the captions.
+
+              
+
+              
+
+            Encryption -> (structure)
+
+              
+
+              The encryption settings, if any, that Elastic Transcoder needs to decyrpt your caption sources, or that you want Elastic Transcoder to apply to your caption sources.
+
+              
+
+              Mode -> (string)
+
+                
+
+                The specific server-side encryption mode that you want Elastic Transcoder to use when decrypting your input files or encrypting your output files. Elastic Transcoder supports the following options:
+
+                 
+
+                 
+                * **S3:** Amazon S3 creates and manages the keys used for encrypting your files. 
+                 
+                * **S3-AWS-KMS:** Amazon S3 calls the Amazon Key Management Service, which creates and manages the keys that are used for encrypting your files. If you specify ``S3-AWS-KMS`` and you don't want to use the default key, you must add the AWS-KMS key that you want to use to your pipeline. 
+                 
+                * **AES-CBC-PKCS7:** A padded cipher-block mode of operation originally used for HLS files. 
+                 
+                * **AES-CTR:** AES Counter Mode. 
+                 
+                * **AES-GCM:** AES Galois Counter Mode, a mode of operation that is an authenticated encryption format, meaning that a file, key, or initialization vector that has been tampered with fails the decryption process. 
+                 
+
+                 
+
+                For all three AES options, you must provide the following settings, which must be base64-encoded:
+
+                 
+
+                 
+                * **Key**   
+                 
+                * **Key MD5**   
+                 
+                * **Initialization Vector**   
+                 
+
+                 
+
+                .. warning::
+
+                   
+
+                  For the AES modes, your private encryption keys and your unencrypted data are never stored by AWS; therefore, it is important that you safely manage your encryption keys. If you lose them, you won't be able to unencrypt your data.
+
+                   
+
+                
+
+                
+
+              Key -> (string)
+
+                
+
+                The data encryption key that you want Elastic Transcoder to use to encrypt your output file, or that was used to encrypt your input file. The key must be base64-encoded and it must be one of the following bit lengths before being base64-encoded:
+
+                 
+
+                 ``128`` , ``192`` , or ``256`` . 
+
+                 
+
+                The key must also be encrypted by using the Amazon Key Management Service.
+
+                
+
+                
+
+              KeyMd5 -> (string)
+
+                
+
+                The MD5 digest of the key that you used to encrypt your input file, or that you want Elastic Transcoder to use to encrypt your output file. Elastic Transcoder uses the key digest as a checksum to make sure your key was not corrupted in transit. The key MD5 must be base64-encoded, and it must be exactly 16 bytes long before being base64-encoded.
+
+                
+
+                
+
+              InitializationVector -> (string)
+
+                
+
+                The series of random bits created by a random bit generator, unique for every encryption operation, that you used to encrypt your input files or that you want Elastic Transcoder to use to encrypt your output files. The initialization vector must be base64-encoded, and it must be exactly 16 bytes long before being base64-encoded.
+
+                
+
+                
+
+              
+
+            
 
           
 
@@ -392,6 +671,542 @@ Jobs -> (list)
 
       
 
+    Inputs -> (list)
+
+      
+
+      Information about the files that you're transcoding. If you specified multiple files for this job, Elastic Transcoder stitches the files together to make one output.
+
+      
+
+      (structure)
+
+        
+
+        Information about the file that you're transcoding.
+
+        
+
+        Key -> (string)
+
+          
+
+          The name of the file to transcode. Elsewhere in the body of the JSON block is the the ID of the pipeline to use for processing the job. The ``InputBucket`` object in that pipeline tells Elastic Transcoder which Amazon S3 bucket to get the file from. 
+
+           
+
+          If the file name includes a prefix, such as ``cooking/lasagna.mpg`` , include the prefix in the key. If the file isn't in the specified bucket, Elastic Transcoder returns an error.
+
+          
+
+          
+
+        FrameRate -> (string)
+
+          
+
+          The frame rate of the input file. If you want Elastic Transcoder to automatically detect the frame rate of the input file, specify ``auto`` . If you want to specify the frame rate for the input file, enter one of the following values: 
+
+           
+
+           ``10`` , ``15`` , ``23.97`` , ``24`` , ``25`` , ``29.97`` , ``30`` , ``60``  
+
+           
+
+          If you specify a value other than ``auto`` , Elastic Transcoder disables automatic detection of the frame rate.
+
+          
+
+          
+
+        Resolution -> (string)
+
+          
+
+          This value must be ``auto`` , which causes Elastic Transcoder to automatically detect the resolution of the input file.
+
+          
+
+          
+
+        AspectRatio -> (string)
+
+          
+
+          The aspect ratio of the input file. If you want Elastic Transcoder to automatically detect the aspect ratio of the input file, specify ``auto`` . If you want to specify the aspect ratio for the output file, enter one of the following values: 
+
+           
+
+           ``1:1`` , ``4:3`` , ``3:2`` , ``16:9``  
+
+           
+
+          If you specify a value other than ``auto`` , Elastic Transcoder disables automatic detection of the aspect ratio. 
+
+          
+
+          
+
+        Interlaced -> (string)
+
+          
+
+          Whether the input file is interlaced. If you want Elastic Transcoder to automatically detect whether the input file is interlaced, specify ``auto`` . If you want to specify whether the input file is interlaced, enter one of the following values:
+
+           
+
+           ``true`` , ``false``  
+
+           
+
+          If you specify a value other than ``auto`` , Elastic Transcoder disables automatic detection of interlacing.
+
+          
+
+          
+
+        Container -> (string)
+
+          
+
+          The container type for the input file. If you want Elastic Transcoder to automatically detect the container type of the input file, specify ``auto`` . If you want to specify the container type for the input file, enter one of the following values: 
+
+           
+
+           ``3gp`` , ``aac`` , ``asf`` , ``avi`` , ``divx`` , ``flv`` , ``m4a`` , ``mkv`` , ``mov`` , ``mp3`` , ``mp4`` , ``mpeg`` , ``mpeg-ps`` , ``mpeg-ts`` , ``mxf`` , ``ogg`` , ``vob`` , ``wav`` , ``webm``  
+
+          
+
+          
+
+        Encryption -> (structure)
+
+          
+
+          The encryption settings, if any, that are used for decrypting your input files. If your input file is encrypted, you must specify the mode that Elastic Transcoder uses to decrypt your file.
+
+          
+
+          Mode -> (string)
+
+            
+
+            The specific server-side encryption mode that you want Elastic Transcoder to use when decrypting your input files or encrypting your output files. Elastic Transcoder supports the following options:
+
+             
+
+             
+            * **S3:** Amazon S3 creates and manages the keys used for encrypting your files. 
+             
+            * **S3-AWS-KMS:** Amazon S3 calls the Amazon Key Management Service, which creates and manages the keys that are used for encrypting your files. If you specify ``S3-AWS-KMS`` and you don't want to use the default key, you must add the AWS-KMS key that you want to use to your pipeline. 
+             
+            * **AES-CBC-PKCS7:** A padded cipher-block mode of operation originally used for HLS files. 
+             
+            * **AES-CTR:** AES Counter Mode. 
+             
+            * **AES-GCM:** AES Galois Counter Mode, a mode of operation that is an authenticated encryption format, meaning that a file, key, or initialization vector that has been tampered with fails the decryption process. 
+             
+
+             
+
+            For all three AES options, you must provide the following settings, which must be base64-encoded:
+
+             
+
+             
+            * **Key**   
+             
+            * **Key MD5**   
+             
+            * **Initialization Vector**   
+             
+
+             
+
+            .. warning::
+
+               
+
+              For the AES modes, your private encryption keys and your unencrypted data are never stored by AWS; therefore, it is important that you safely manage your encryption keys. If you lose them, you won't be able to unencrypt your data.
+
+               
+
+            
+
+            
+
+          Key -> (string)
+
+            
+
+            The data encryption key that you want Elastic Transcoder to use to encrypt your output file, or that was used to encrypt your input file. The key must be base64-encoded and it must be one of the following bit lengths before being base64-encoded:
+
+             
+
+             ``128`` , ``192`` , or ``256`` . 
+
+             
+
+            The key must also be encrypted by using the Amazon Key Management Service.
+
+            
+
+            
+
+          KeyMd5 -> (string)
+
+            
+
+            The MD5 digest of the key that you used to encrypt your input file, or that you want Elastic Transcoder to use to encrypt your output file. Elastic Transcoder uses the key digest as a checksum to make sure your key was not corrupted in transit. The key MD5 must be base64-encoded, and it must be exactly 16 bytes long before being base64-encoded.
+
+            
+
+            
+
+          InitializationVector -> (string)
+
+            
+
+            The series of random bits created by a random bit generator, unique for every encryption operation, that you used to encrypt your input files or that you want Elastic Transcoder to use to encrypt your output files. The initialization vector must be base64-encoded, and it must be exactly 16 bytes long before being base64-encoded.
+
+            
+
+            
+
+          
+
+        TimeSpan -> (structure)
+
+          
+
+          Settings for clipping an input. Each input can have different clip settings.
+
+          
+
+          StartTime -> (string)
+
+            
+
+            The place in the input file where you want a clip to start. The format can be either HH:mm:ss.SSS (maximum value: 23:59:59.999; SSS is thousandths of a second) or sssss.SSS (maximum value: 86399.999). If you don't specify a value, Elastic Transcoder starts at the beginning of the input file.
+
+            
+
+            
+
+          Duration -> (string)
+
+            
+
+            The duration of the clip. The format can be either HH:mm:ss.SSS (maximum value: 23:59:59.999; SSS is thousandths of a second) or sssss.SSS (maximum value: 86399.999). If you don't specify a value, Elastic Transcoder creates an output file from StartTime to the end of the file.
+
+             
+
+            If you specify a value longer than the duration of the input file, Elastic Transcoder transcodes the file and returns a warning message.
+
+            
+
+            
+
+          
+
+        InputCaptions -> (structure)
+
+          
+
+          You can configure Elastic Transcoder to transcode captions, or subtitles, from one format to another. All captions must be in UTF-8. Elastic Transcoder supports two types of captions:
+
+           
+
+           
+          * **Embedded:** Embedded captions are included in the same file as the audio and video. Elastic Transcoder supports only one embedded caption per language, to a maximum of 300 embedded captions per file. Valid input values include: ``CEA-608 (EIA-608`` , first non-empty channel only), ``CEA-708 (EIA-708`` , first non-empty channel only), and ``mov-text``   Valid outputs include: ``mov-text``   Elastic Transcoder supports a maximum of one embedded format per output. 
+           
+          * **Sidecar:** Sidecar captions are kept in a separate metadata file from the audio and video data. Sidecar captions require a player that is capable of understanding the relationship between the video file and the sidecar file. Elastic Transcoder supports only one sidecar caption per language, to a maximum of 20 sidecar captions per file. Valid input values include: ``dfxp`` (first div element only), ``ebu-tt`` , ``scc`` , ``smpt`` , ``srt`` , ``ttml`` (first div element only), and ``webvtt``   Valid outputs include: ``dfxp`` (first div element only), ``scc`` , ``srt`` , and ``webvtt`` . 
+           
+
+           
+
+          If you want ttml or smpte-tt compatible captions, specify dfxp as your output format.
+
+           
+
+          Elastic Transcoder does not support OCR (Optical Character Recognition), does not accept pictures as a valid input for captions, and is not available for audio-only transcoding. Elastic Transcoder does not preserve text formatting (for example, italics) during the transcoding process.
+
+           
+
+          To remove captions or leave the captions empty, set ``Captions`` to null. To pass through existing captions unchanged, set the ``MergePolicy`` to ``MergeRetain`` , and pass in a null ``CaptionSources`` array.
+
+           
+
+          For more information on embedded files, see the Subtitles Wikipedia page.
+
+           
+
+          For more information on sidecar files, see the Extensible Metadata Platform and Sidecar file Wikipedia pages.
+
+          
+
+          MergePolicy -> (string)
+
+            
+
+            A policy that determines how Elastic Transcoder handles the existence of multiple captions.
+
+             
+
+             
+            * **MergeOverride:** Elastic Transcoder transcodes both embedded and sidecar captions into outputs. If captions for a language are embedded in the input file and also appear in a sidecar file, Elastic Transcoder uses the sidecar captions and ignores the embedded captions for that language. 
+             
+            * **MergeRetain:** Elastic Transcoder transcodes both embedded and sidecar captions into outputs. If captions for a language are embedded in the input file and also appear in a sidecar file, Elastic Transcoder uses the embedded captions and ignores the sidecar captions for that language. If ``CaptionSources`` is empty, Elastic Transcoder omits all sidecar captions from the output files. 
+             
+            * **Override:** Elastic Transcoder transcodes only the sidecar captions that you specify in ``CaptionSources`` . 
+             
+
+             
+
+             ``MergePolicy`` cannot be null.
+
+            
+
+            
+
+          CaptionSources -> (list)
+
+            
+
+            Source files for the input sidecar captions used during the transcoding process. To omit all sidecar captions, leave ``CaptionSources`` blank.
+
+            
+
+            (structure)
+
+              
+
+              A source file for the input sidecar captions used during the transcoding process.
+
+              
+
+              Key -> (string)
+
+                
+
+                The name of the sidecar caption file that you want Elastic Transcoder to include in the output file.
+
+                
+
+                
+
+              Language -> (string)
+
+                
+
+                A string that specifies the language of the caption. If you specified multiple inputs with captions, the caption language must match in order to be included in the output. Specify this as one of:
+
+                 
+
+                 
+                * 2-character ISO 639-1 code 
+                 
+                * 3-character ISO 639-2 code 
+                 
+
+                 
+
+                For more information on ISO language codes and language names, see the List of ISO 639-1 codes.
+
+                
+
+                
+
+              TimeOffset -> (string)
+
+                
+
+                For clip generation or captions that do not start at the same time as the associated video file, the ``TimeOffset`` tells Elastic Transcoder how much of the video to encode before including captions.
+
+                 
+
+                Specify the TimeOffset in the form [+-]SS.sss or [+-]HH:mm:SS.ss.
+
+                
+
+                
+
+              Label -> (string)
+
+                
+
+                The label of the caption shown in the player when choosing a language. We recommend that you put the caption language name here, in the language of the captions.
+
+                
+
+                
+
+              Encryption -> (structure)
+
+                
+
+                The encryption settings, if any, that Elastic Transcoder needs to decyrpt your caption sources, or that you want Elastic Transcoder to apply to your caption sources.
+
+                
+
+                Mode -> (string)
+
+                  
+
+                  The specific server-side encryption mode that you want Elastic Transcoder to use when decrypting your input files or encrypting your output files. Elastic Transcoder supports the following options:
+
+                   
+
+                   
+                  * **S3:** Amazon S3 creates and manages the keys used for encrypting your files. 
+                   
+                  * **S3-AWS-KMS:** Amazon S3 calls the Amazon Key Management Service, which creates and manages the keys that are used for encrypting your files. If you specify ``S3-AWS-KMS`` and you don't want to use the default key, you must add the AWS-KMS key that you want to use to your pipeline. 
+                   
+                  * **AES-CBC-PKCS7:** A padded cipher-block mode of operation originally used for HLS files. 
+                   
+                  * **AES-CTR:** AES Counter Mode. 
+                   
+                  * **AES-GCM:** AES Galois Counter Mode, a mode of operation that is an authenticated encryption format, meaning that a file, key, or initialization vector that has been tampered with fails the decryption process. 
+                   
+
+                   
+
+                  For all three AES options, you must provide the following settings, which must be base64-encoded:
+
+                   
+
+                   
+                  * **Key**   
+                   
+                  * **Key MD5**   
+                   
+                  * **Initialization Vector**   
+                   
+
+                   
+
+                  .. warning::
+
+                     
+
+                    For the AES modes, your private encryption keys and your unencrypted data are never stored by AWS; therefore, it is important that you safely manage your encryption keys. If you lose them, you won't be able to unencrypt your data.
+
+                     
+
+                  
+
+                  
+
+                Key -> (string)
+
+                  
+
+                  The data encryption key that you want Elastic Transcoder to use to encrypt your output file, or that was used to encrypt your input file. The key must be base64-encoded and it must be one of the following bit lengths before being base64-encoded:
+
+                   
+
+                   ``128`` , ``192`` , or ``256`` . 
+
+                   
+
+                  The key must also be encrypted by using the Amazon Key Management Service.
+
+                  
+
+                  
+
+                KeyMd5 -> (string)
+
+                  
+
+                  The MD5 digest of the key that you used to encrypt your input file, or that you want Elastic Transcoder to use to encrypt your output file. Elastic Transcoder uses the key digest as a checksum to make sure your key was not corrupted in transit. The key MD5 must be base64-encoded, and it must be exactly 16 bytes long before being base64-encoded.
+
+                  
+
+                  
+
+                InitializationVector -> (string)
+
+                  
+
+                  The series of random bits created by a random bit generator, unique for every encryption operation, that you used to encrypt your input files or that you want Elastic Transcoder to use to encrypt your output files. The initialization vector must be base64-encoded, and it must be exactly 16 bytes long before being base64-encoded.
+
+                  
+
+                  
+
+                
+
+              
+
+            
+
+          
+
+        DetectedProperties -> (structure)
+
+          
+
+          The detected properties of the input file.
+
+          
+
+          Width -> (integer)
+
+            
+
+            The detected width of the input file, in pixels.
+
+            
+
+            
+
+          Height -> (integer)
+
+            
+
+            The detected height of the input file, in pixels.
+
+            
+
+            
+
+          FrameRate -> (string)
+
+            
+
+            The detected frame rate of the input file, in frames per second.
+
+            
+
+            
+
+          FileSize -> (long)
+
+            
+
+            The detected file size of the input file, in bytes.
+
+            
+
+            
+
+          DurationMillis -> (long)
+
+            
+
+            The detected duration of the input file, in milliseconds.
+
+            
+
+            
+
+          
+
+        
+
+      
+
     Output -> (structure)
 
       
@@ -400,11 +1215,15 @@ Jobs -> (list)
 
        
 
-      
-
       .. warning::
 
+         
+
         Outputs recommended instead.
+
+         
+
+       
 
       A section of the request or response body that provides information about the transcoded (target) file. 
 
@@ -442,7 +1261,7 @@ Jobs -> (list)
 
          
 
-        If you do want Elastic Transcoder to create thumbnails, specify the information that you want to include in the file name for each thumbnail. You can specify the following values in any sequence: 
+        If you do want Elastic Transcoder to create thumbnails, specify the information that you want to include in the file name for each thumbnail. You can specify the following values in any sequence:
 
          
 
@@ -451,7 +1270,7 @@ Jobs -> (list)
 
         .. warning::
 
-          If you specify a literal value and/or ``{resolution}`` but you omit ``{count}`` , Elastic Transcoder returns a validation error and does not create the job.
+           If you specify a literal value and/or ``{resolution}`` but you omit ``{count}`` , Elastic Transcoder returns a validation error and does not create the job. 
 
          
          
@@ -485,15 +1304,15 @@ Jobs -> (list)
            
 
            
-          * **S3:** Amazon S3 creates and manages the keys used for encrypting your files.
+          * **S3:** Amazon S3 creates and manages the keys used for encrypting your files. 
            
-          * **S3-AWS-KMS:** Amazon S3 calls the Amazon Key Management Service, which creates and manages the keys that are used for encrypting your files. If you specify ``S3-AWS-KMS`` and you don't want to use the default key, you must add the AWS-KMS key that you want to use to your pipeline.
+          * **S3-AWS-KMS:** Amazon S3 calls the Amazon Key Management Service, which creates and manages the keys that are used for encrypting your files. If you specify ``S3-AWS-KMS`` and you don't want to use the default key, you must add the AWS-KMS key that you want to use to your pipeline. 
            
-          * **AES-CBC-PKCS7:** A padded cipher-block mode of operation originally used for HLS files.
+          * **AES-CBC-PKCS7:** A padded cipher-block mode of operation originally used for HLS files. 
            
-          * **AES-CTR:** AES Counter Mode.
+          * **AES-CTR:** AES Counter Mode. 
            
-          * **AES-GCM:** AES Galois Counter Mode, a mode of operation that is an authenticated encryption format, meaning that a file, key, or initialization vector that has been tampered with will fail the decryption process.
+          * **AES-GCM:** AES Galois Counter Mode, a mode of operation that is an authenticated encryption format, meaning that a file, key, or initialization vector that has been tampered with fails the decryption process. 
            
 
            
@@ -503,22 +1322,22 @@ Jobs -> (list)
            
 
            
-          * **Key** 
+          * **Key**   
            
-          * **Key MD5** 
+          * **Key MD5**   
            
-          * **Initialization Vector** 
+          * **Initialization Vector**   
            
 
            
 
           .. warning::
 
-            
+             
 
             For the AES modes, your private encryption keys and your unencrypted data are never stored by AWS; therefore, it is important that you safely manage your encryption keys. If you lose them, you won't be able to unencrypt your data.
 
-            
+             
 
           
 
@@ -532,7 +1351,7 @@ Jobs -> (list)
 
            
 
-          ``128`` , ``192`` , or ``256`` . 
+           ``128`` , ``192`` , or ``256`` . 
 
            
 
@@ -568,11 +1387,11 @@ Jobs -> (list)
 
         
 
-        The number of degrees clockwise by which you want Elastic Transcoder to rotate the output relative to the input. Enter one of the following values: 
+        The number of degrees clockwise by which you want Elastic Transcoder to rotate the output relative to the input. Enter one of the following values:
 
          
 
-        ``auto`` , ``0`` , ``90`` , ``180`` , ``270`` 
+         ``auto`` , ``0`` , ``90`` , ``180`` , ``270``  
 
          
 
@@ -586,7 +1405,7 @@ Jobs -> (list)
 
         
 
-        The value of the ``page-token`` object for the preset that you want to use for this job. The preset determines the audio, video, and thumbnail settings that Elastic Transcoder uses for transcoding. To use a preset that you created, specify the preset ID that Elastic Transcoder returned in the response when you created the preset. You can also use the Elastic Transcoder system presets, which you can get with ``list-presets`` .
+        The value of the ``pipeline-id`` object for the preset that you want to use for this job. The preset determines the audio, video, and thumbnail settings that Elastic Transcoder uses for transcoding. To use a preset that you created, specify the preset ID that Elastic Transcoder returned in the response when you created the preset. You can also use the Elastic Transcoder system presets, which you can get with ``list-presets`` .
 
         
 
@@ -596,13 +1415,17 @@ Jobs -> (list)
 
         
 
-        
-
         .. warning::
+
+           
 
           (Outputs in Fragmented MP4 or MPEG-TS format only.
 
-        If you specify a preset in ``PresetId`` for which the value of ``Container`` is ``fmp4`` (Fragmented MP4) or ``ts`` (MPEG-TS), ``SegmentDuration`` is the target maximum duration of each segment in seconds. For ``HLSv3`` format playlists, each media segment is stored in a separate ``.ts`` file. For ``HLSv4`` and ``Smooth`` playlists, all media segments for an output are stored in a single file. Each segment is approximately the length of the ``SegmentDuration`` , though individual segments might be shorter or longer.
+           
+
+         
+
+        If you specify a preset in ``PresetId`` for which the value of ``Container`` is ``fmp4`` (Fragmented MP4) or ``ts`` (MPEG-TS), ``SegmentDuration`` is the target maximum duration of each segment in seconds. For ``HLSv3`` format playlists, each media segment is stored in a separate ``.ts`` file. For ``HLSv4`` , ``MPEG-DASH`` , and ``Smooth`` playlists, all media segments for an output are stored in a single file. Each segment is approximately the length of the ``SegmentDuration`` , though individual segments might be shorter or longer.
 
          
 
@@ -623,13 +1446,17 @@ Jobs -> (list)
         The status of one output in a job. If you specified only one output for the job, ``Outputs:Status`` is always the same as ``Job:Status`` . If you specified more than one output: 
 
          
-        * ``Job:Status`` and ``Outputs:Status`` for all of the outputs is Submitted until Elastic Transcoder starts to process the first output.
+
          
-        * When Elastic Transcoder starts to process the first output, ``Outputs:Status`` for that output and ``Job:Status`` both change to Progressing. For each output, the value of ``Outputs:Status`` remains Submitted until Elastic Transcoder starts to process the output.
+        * ``Job:Status`` and ``Outputs:Status`` for all of the outputs is Submitted until Elastic Transcoder starts to process the first output. 
          
-        * Job:Status remains Progressing until all of the outputs reach a terminal status, either Complete or Error.
+        * When Elastic Transcoder starts to process the first output, ``Outputs:Status`` for that output and ``Job:Status`` both change to Progressing. For each output, the value of ``Outputs:Status`` remains Submitted until Elastic Transcoder starts to process the output. 
          
-        * When all of the outputs reach a terminal status, ``Job:Status`` changes to Complete only if ``Outputs:Status`` for all of the outputs is ``Complete`` . If ``Outputs:Status`` for one or more outputs is ``Error`` , the terminal status for ``Job:Status`` is also ``Error`` .
+        * Job:Status remains Progressing until all of the outputs reach a terminal status, either Complete or Error. 
+         
+        * When all of the outputs reach a terminal status, ``Job:Status`` changes to Complete only if ``Outputs:Status`` for all of the outputs is ``Complete`` . If ``Outputs:Status`` for one or more outputs is ``Error`` , the terminal status for ``Job:Status`` is also ``Error`` . 
+         
+
          
 
         The value of ``Status`` is one of the following: ``Submitted`` , ``Progressing`` , ``Complete`` , ``Canceled`` , or ``Error`` . 
@@ -716,7 +1543,7 @@ Jobs -> (list)
 
          
 
-        Watermarks are added to the output video in the sequence in which you list them in the job outputthe first watermark in the list is added to the output video first, the second watermark in the list is added next, and so on. As a result, if the settings in a preset cause Elastic Transcoder to place all watermarks in the same location, the second watermark that you add will cover the first one, the third one will cover the second, and the fourth one will cover the third.
+        Watermarks are added to the output video in the sequence in which you list them in the job output—the first watermark in the list is added to the output video first, the second watermark in the list is added next, and so on. As a result, if the settings in a preset cause Elastic Transcoder to place all watermarks in the same location, the second watermark that you add covers the first one, the third one covers the second, and the fourth one covers the third.
 
         
 
@@ -732,7 +1559,7 @@ Jobs -> (list)
 
             
 
-            The ID of the watermark settings that Elastic Transcoder uses to add watermarks to the video during transcoding. The settings are in the preset specified by Preset for the current output. In that preset, the value of Watermarks page-token tells Elastic Transcoder which settings to use.
+            The ID of the watermark settings that Elastic Transcoder uses to add watermarks to the video during transcoding. The settings are in the preset specified by Preset for the current output. In that preset, the value of Watermarks pipeline-id tells Elastic Transcoder which settings to use.
 
             
 
@@ -769,15 +1596,15 @@ Jobs -> (list)
                
 
                
-              * **S3:** Amazon S3 creates and manages the keys used for encrypting your files.
+              * **S3:** Amazon S3 creates and manages the keys used for encrypting your files. 
                
-              * **S3-AWS-KMS:** Amazon S3 calls the Amazon Key Management Service, which creates and manages the keys that are used for encrypting your files. If you specify ``S3-AWS-KMS`` and you don't want to use the default key, you must add the AWS-KMS key that you want to use to your pipeline.
+              * **S3-AWS-KMS:** Amazon S3 calls the Amazon Key Management Service, which creates and manages the keys that are used for encrypting your files. If you specify ``S3-AWS-KMS`` and you don't want to use the default key, you must add the AWS-KMS key that you want to use to your pipeline. 
                
-              * **AES-CBC-PKCS7:** A padded cipher-block mode of operation originally used for HLS files.
+              * **AES-CBC-PKCS7:** A padded cipher-block mode of operation originally used for HLS files. 
                
-              * **AES-CTR:** AES Counter Mode.
+              * **AES-CTR:** AES Counter Mode. 
                
-              * **AES-GCM:** AES Galois Counter Mode, a mode of operation that is an authenticated encryption format, meaning that a file, key, or initialization vector that has been tampered with will fail the decryption process.
+              * **AES-GCM:** AES Galois Counter Mode, a mode of operation that is an authenticated encryption format, meaning that a file, key, or initialization vector that has been tampered with fails the decryption process. 
                
 
                
@@ -787,22 +1614,22 @@ Jobs -> (list)
                
 
                
-              * **Key** 
+              * **Key**   
                
-              * **Key MD5** 
+              * **Key MD5**   
                
-              * **Initialization Vector** 
+              * **Initialization Vector**   
                
 
                
 
               .. warning::
 
-                
+                 
 
                 For the AES modes, your private encryption keys and your unencrypted data are never stored by AWS; therefore, it is important that you safely manage your encryption keys. If you lose them, you won't be able to unencrypt your data.
 
-                
+                 
 
               
 
@@ -816,7 +1643,7 @@ Jobs -> (list)
 
                
 
-              ``128`` , ``192`` , or ``256`` . 
+               ``128`` , ``192`` , or ``256`` . 
 
                
 
@@ -864,22 +1691,18 @@ Jobs -> (list)
 
           
 
-          A policy that determines how Elastic Transcoder will handle the existence of multiple album artwork files.
+          A policy that determines how Elastic Transcoder handles the existence of multiple album artwork files.
 
            
 
            
-
+          * ``Replace:`` The specified album art replaces any existing album art. 
            
-          * ``Replace:`` The specified album art will replace any existing album art.
+          * ``Prepend:`` The specified album art is placed in front of any existing album art. 
            
-          * ``Prepend:`` The specified album art will be placed in front of any existing album art.
+          * ``Append:`` The specified album art is placed after any existing album art. 
            
-          * ``Append:`` The specified album art will be placed after any existing album art.
-           
-          * ``Fallback:`` If the original input file contains artwork, Elastic Transcoder will use that artwork for the output. If the original input does not contain artwork, Elastic Transcoder will use the specified album art file.
-           
-
+          * ``Fallback:`` If the original input file contains artwork, Elastic Transcoder uses that artwork for the output. If the original input does not contain artwork, Elastic Transcoder uses the specified album art file. 
            
 
           
@@ -890,7 +1713,7 @@ Jobs -> (list)
 
           
 
-          The file to be used as album art. There can be multiple artworks associated with an audio file, to a maximum of 20. Valid formats are ``.jpg`` and ``.png`` 
+          The file to be used as album art. There can be multiple artworks associated with an audio file, to a maximum of 20. Valid formats are ``.jpg`` and ``.png``  
 
           
 
@@ -953,21 +1776,17 @@ Jobs -> (list)
                
 
                
-
+              * ``Fit:`` Elastic Transcoder scales the output art so it matches the value that you specified in either ``MaxWidth`` or ``MaxHeight`` without exceeding the other value. 
                
-              * ``Fit:`` Elastic Transcoder scales the output art so it matches the value that you specified in either ``MaxWidth`` or ``MaxHeight`` without exceeding the other value.
+              * ``Fill:`` Elastic Transcoder scales the output art so it matches the value that you specified in either ``MaxWidth`` or ``MaxHeight`` and matches or exceeds the other value. Elastic Transcoder centers the output art and then crops it in the dimension (if any) that exceeds the maximum value.  
                
-              * ``Fill:`` Elastic Transcoder scales the output art so it matches the value that you specified in either ``MaxWidth`` or ``MaxHeight`` and matches or exceeds the other value. Elastic Transcoder centers the output art and then crops it in the dimension (if any) that exceeds the maximum value. 
+              * ``Stretch:`` Elastic Transcoder stretches the output art to match the values that you specified for ``MaxWidth`` and ``MaxHeight`` . If the relative proportions of the input art and the output art are different, the output art will be distorted. 
                
-              * ``Stretch:`` Elastic Transcoder stretches the output art to match the values that you specified for ``MaxWidth`` and ``MaxHeight`` . If the relative proportions of the input art and the output art are different, the output art will be distorted.
+              * ``Keep:`` Elastic Transcoder does not scale the output art. If either dimension of the input art exceeds the values that you specified for ``MaxWidth`` and ``MaxHeight`` , Elastic Transcoder crops the output art. 
                
-              * ``Keep:`` Elastic Transcoder does not scale the output art. If either dimension of the input art exceeds the values that you specified for ``MaxWidth`` and ``MaxHeight`` , Elastic Transcoder crops the output art.
+              * ``ShrinkToFit:`` Elastic Transcoder scales the output art down so that its dimensions match the values that you specified for at least one of ``MaxWidth`` and ``MaxHeight`` without exceeding either value. If you specify this option, Elastic Transcoder does not scale the art up. 
                
-              * ``ShrinkToFit:`` Elastic Transcoder scales the output art down so that its dimensions match the values that you specified for at least one of ``MaxWidth`` and ``MaxHeight`` without exceeding either value. If you specify this option, Elastic Transcoder does not scale the art up.
-               
-              * ``ShrinkToFill`` Elastic Transcoder scales the output art down so that its dimensions match the values that you specified for at least one of ``MaxWidth`` and ``MaxHeight`` without dropping below either value. If you specify this option, Elastic Transcoder does not scale the art up.
-               
-
+              * ``ShrinkToFill`` Elastic Transcoder scales the output art down so that its dimensions match the values that you specified for at least one of ``MaxWidth`` and ``MaxHeight`` without dropping below either value. If you specify this option, Elastic Transcoder does not scale the art up. 
                
 
               
@@ -1011,15 +1830,15 @@ Jobs -> (list)
                  
 
                  
-                * **S3:** Amazon S3 creates and manages the keys used for encrypting your files.
+                * **S3:** Amazon S3 creates and manages the keys used for encrypting your files. 
                  
-                * **S3-AWS-KMS:** Amazon S3 calls the Amazon Key Management Service, which creates and manages the keys that are used for encrypting your files. If you specify ``S3-AWS-KMS`` and you don't want to use the default key, you must add the AWS-KMS key that you want to use to your pipeline.
+                * **S3-AWS-KMS:** Amazon S3 calls the Amazon Key Management Service, which creates and manages the keys that are used for encrypting your files. If you specify ``S3-AWS-KMS`` and you don't want to use the default key, you must add the AWS-KMS key that you want to use to your pipeline. 
                  
-                * **AES-CBC-PKCS7:** A padded cipher-block mode of operation originally used for HLS files.
+                * **AES-CBC-PKCS7:** A padded cipher-block mode of operation originally used for HLS files. 
                  
-                * **AES-CTR:** AES Counter Mode.
+                * **AES-CTR:** AES Counter Mode. 
                  
-                * **AES-GCM:** AES Galois Counter Mode, a mode of operation that is an authenticated encryption format, meaning that a file, key, or initialization vector that has been tampered with will fail the decryption process.
+                * **AES-GCM:** AES Galois Counter Mode, a mode of operation that is an authenticated encryption format, meaning that a file, key, or initialization vector that has been tampered with fails the decryption process. 
                  
 
                  
@@ -1029,22 +1848,22 @@ Jobs -> (list)
                  
 
                  
-                * **Key** 
+                * **Key**   
                  
-                * **Key MD5** 
+                * **Key MD5**   
                  
-                * **Initialization Vector** 
+                * **Initialization Vector**   
                  
 
                  
 
                 .. warning::
 
-                  
+                   
 
                   For the AES modes, your private encryption keys and your unencrypted data are never stored by AWS; therefore, it is important that you safely manage your encryption keys. If you lose them, you won't be able to unencrypt your data.
 
-                  
+                   
 
                 
 
@@ -1058,7 +1877,7 @@ Jobs -> (list)
 
                  
 
-                ``128`` , ``192`` , or ``256`` . 
+                 ``128`` , ``192`` , or ``256`` . 
 
                  
 
@@ -1159,9 +1978,9 @@ Jobs -> (list)
          
 
          
-        * **Embedded:** Embedded captions are included in the same file as the audio and video. Elastic Transcoder supports only one embedded caption per language, to a maximum of 300 embedded captions per file. Valid input values include: ``CEA-608 (EIA-608`` , first non-empty channel only), ``CEA-708 (EIA-708`` , first non-empty channel only), and ``mov-text``  Valid outputs include: ``mov-text``  Elastic Transcoder supports a maximum of one embedded format per output. 
+        * **Embedded:** Embedded captions are included in the same file as the audio and video. Elastic Transcoder supports only one embedded caption per language, to a maximum of 300 embedded captions per file. Valid input values include: ``CEA-608 (EIA-608`` , first non-empty channel only), ``CEA-708 (EIA-708`` , first non-empty channel only), and ``mov-text``   Valid outputs include: ``mov-text``   Elastic Transcoder supports a maximum of one embedded format per output. 
          
-        * **Sidecar:** Sidecar captions are kept in a separate metadata file from the audio and video data. Sidecar captions require a player that is capable of understanding the relationship between the video file and the sidecar file. Elastic Transcoder supports only one sidecar caption per language, to a maximum of 20 sidecar captions per file. Valid input values include: ``dfxp`` (first div element only), ``ebu-tt`` , ``scc`` , ``smpt`` , ``srt`` , ``ttml`` (first div element only), and ``webvtt``  Valid outputs include: ``dfxp`` (first div element only), ``scc`` , ``srt`` , and ``webvtt`` . 
+        * **Sidecar:** Sidecar captions are kept in a separate metadata file from the audio and video data. Sidecar captions require a player that is capable of understanding the relationship between the video file and the sidecar file. Elastic Transcoder supports only one sidecar caption per language, to a maximum of 20 sidecar captions per file. Valid input values include: ``dfxp`` (first div element only), ``ebu-tt`` , ``scc`` , ``smpt`` , ``srt`` , ``ttml`` (first div element only), and ``webvtt``   Valid outputs include: ``dfxp`` (first div element only), ``scc`` , ``srt`` , and ``webvtt`` . 
          
 
          
@@ -1195,16 +2014,16 @@ Jobs -> (list)
            
 
            
-          * **MergeOverride:** Elastic Transcoder transcodes both embedded and sidecar captions into outputs. If captions for a language are embedded in the input file and also appear in a sidecar file, Elastic Transcoder uses the sidecar captions and ignores the embedded captions for that language.
+          * **MergeOverride:** Elastic Transcoder transcodes both embedded and sidecar captions into outputs. If captions for a language are embedded in the input file and also appear in a sidecar file, Elastic Transcoder uses the sidecar captions and ignores the embedded captions for that language. 
            
-          * **MergeRetain:** Elastic Transcoder transcodes both embedded and sidecar captions into outputs. If captions for a language are embedded in the input file and also appear in a sidecar file, Elastic Transcoder uses the embedded captions and ignores the sidecar captions for that language. If ``CaptionSources`` is empty, Elastic Transcoder omits all sidecar captions from the output files.
+          * **MergeRetain:** Elastic Transcoder transcodes both embedded and sidecar captions into outputs. If captions for a language are embedded in the input file and also appear in a sidecar file, Elastic Transcoder uses the embedded captions and ignores the sidecar captions for that language. If ``CaptionSources`` is empty, Elastic Transcoder omits all sidecar captions from the output files. 
            
-          * **Override:** Elastic Transcoder transcodes only the sidecar captions that you specify in ``CaptionSources`` .
-           
-
+          * **Override:** Elastic Transcoder transcodes only the sidecar captions that you specify in ``CaptionSources`` . 
            
 
-          ``MergePolicy`` cannot be null.
+           
+
+           ``MergePolicy`` cannot be null.
 
           
 
@@ -1240,14 +2059,14 @@ Jobs -> (list)
 
               
 
-              A string that specifies the language of the caption. Specify this as one of:
+              A string that specifies the language of the caption. If you specified multiple inputs with captions, the caption language must match in order to be included in the output. Specify this as one of:
 
                
 
                
-              * 2-character ISO 639-1 code
+              * 2-character ISO 639-1 code 
                
-              * 3-character ISO 639-2 code
+              * 3-character ISO 639-2 code 
                
 
                
@@ -1286,7 +2105,7 @@ Jobs -> (list)
 
               
 
-              The encryption settings, if any, that you want Elastic Transcoder to apply to your caption sources.
+              The encryption settings, if any, that Elastic Transcoder needs to decyrpt your caption sources, or that you want Elastic Transcoder to apply to your caption sources.
 
               
 
@@ -1299,15 +2118,15 @@ Jobs -> (list)
                  
 
                  
-                * **S3:** Amazon S3 creates and manages the keys used for encrypting your files.
+                * **S3:** Amazon S3 creates and manages the keys used for encrypting your files. 
                  
-                * **S3-AWS-KMS:** Amazon S3 calls the Amazon Key Management Service, which creates and manages the keys that are used for encrypting your files. If you specify ``S3-AWS-KMS`` and you don't want to use the default key, you must add the AWS-KMS key that you want to use to your pipeline.
+                * **S3-AWS-KMS:** Amazon S3 calls the Amazon Key Management Service, which creates and manages the keys that are used for encrypting your files. If you specify ``S3-AWS-KMS`` and you don't want to use the default key, you must add the AWS-KMS key that you want to use to your pipeline. 
                  
-                * **AES-CBC-PKCS7:** A padded cipher-block mode of operation originally used for HLS files.
+                * **AES-CBC-PKCS7:** A padded cipher-block mode of operation originally used for HLS files. 
                  
-                * **AES-CTR:** AES Counter Mode.
+                * **AES-CTR:** AES Counter Mode. 
                  
-                * **AES-GCM:** AES Galois Counter Mode, a mode of operation that is an authenticated encryption format, meaning that a file, key, or initialization vector that has been tampered with will fail the decryption process.
+                * **AES-GCM:** AES Galois Counter Mode, a mode of operation that is an authenticated encryption format, meaning that a file, key, or initialization vector that has been tampered with fails the decryption process. 
                  
 
                  
@@ -1317,22 +2136,22 @@ Jobs -> (list)
                  
 
                  
-                * **Key** 
+                * **Key**   
                  
-                * **Key MD5** 
+                * **Key MD5**   
                  
-                * **Initialization Vector** 
+                * **Initialization Vector**   
                  
 
                  
 
                 .. warning::
 
-                  
+                   
 
                   For the AES modes, your private encryption keys and your unencrypted data are never stored by AWS; therefore, it is important that you safely manage your encryption keys. If you lose them, you won't be able to unencrypt your data.
 
-                  
+                   
 
                 
 
@@ -1346,7 +2165,7 @@ Jobs -> (list)
 
                  
 
-                ``128`` , ``192`` , or ``256`` . 
+                 ``128`` , ``192`` , or ``256`` . 
 
                  
 
@@ -1407,20 +2226,20 @@ Jobs -> (list)
                
 
                
-              * **Valid Embedded Caption Formats:**  
+              * **Valid Embedded Caption Formats:**   
 
                  
-                * **for FLAC** : None
+                * **for FLAC** : None 
                  
-                * **For MP3** : None
+                * **For MP3** : None 
                  
-                * **For MP4** : mov-text
+                * **For MP4** : mov-text 
                  
-                * **For MPEG-TS** : None
+                * **For MPEG-TS** : None 
                  
-                * **For ogg** : None
+                * **For ogg** : None 
                  
-                * **For webm** : None
+                * **For webm** : None 
                  
 
                
@@ -1428,14 +2247,14 @@ Jobs -> (list)
               * **Valid Sidecar Caption Formats:** Elastic Transcoder supports dfxp (first div element only), scc, srt, and webvtt. If you want ttml or smpte-tt compatible captions, specify dfxp as your output format. 
 
                  
-                * **For FMP4** : dfxp
+                * **For FMP4** : dfxp 
                  
-                * **Non-FMP4 outputs** : All sidecar types
+                * **Non-FMP4 outputs** : All sidecar types 
                  
 
                
 
-              ``fmp4`` captions have an extension of ``.ismt`` 
+               ``fmp4`` captions have an extension of ``.ismt``  
 
                
                
@@ -1453,9 +2272,9 @@ Jobs -> (list)
                
 
                
-              * *description* is a description of the video.
+              * *description* is a description of the video. 
                
-              * ``{language}`` is a literal value that Elastic Transcoder replaces with the two- or three-letter code for the language of the caption in the output file names.
+              * ``{language}`` is a literal value that Elastic Transcoder replaces with the two- or three-letter code for the language of the caption in the output file names. 
                
 
                
@@ -1464,7 +2283,7 @@ Jobs -> (list)
 
                
 
-              For example, suppose you're transcoding into srt format. When you enter "Sydney-{language}-sunrise", and the language of the captions is English (en), the name of the first caption file will be Sydney-en-sunrise00000.srt.
+              For example, suppose you're transcoding into srt format. When you enter "Sydney-{language}-sunrise", and the language of the captions is English (en), the name of the first caption file is be Sydney-en-sunrise00000.srt.
 
               
 
@@ -1487,15 +2306,15 @@ Jobs -> (list)
                  
 
                  
-                * **S3:** Amazon S3 creates and manages the keys used for encrypting your files.
+                * **S3:** Amazon S3 creates and manages the keys used for encrypting your files. 
                  
-                * **S3-AWS-KMS:** Amazon S3 calls the Amazon Key Management Service, which creates and manages the keys that are used for encrypting your files. If you specify ``S3-AWS-KMS`` and you don't want to use the default key, you must add the AWS-KMS key that you want to use to your pipeline.
+                * **S3-AWS-KMS:** Amazon S3 calls the Amazon Key Management Service, which creates and manages the keys that are used for encrypting your files. If you specify ``S3-AWS-KMS`` and you don't want to use the default key, you must add the AWS-KMS key that you want to use to your pipeline. 
                  
-                * **AES-CBC-PKCS7:** A padded cipher-block mode of operation originally used for HLS files.
+                * **AES-CBC-PKCS7:** A padded cipher-block mode of operation originally used for HLS files. 
                  
-                * **AES-CTR:** AES Counter Mode.
+                * **AES-CTR:** AES Counter Mode. 
                  
-                * **AES-GCM:** AES Galois Counter Mode, a mode of operation that is an authenticated encryption format, meaning that a file, key, or initialization vector that has been tampered with will fail the decryption process.
+                * **AES-GCM:** AES Galois Counter Mode, a mode of operation that is an authenticated encryption format, meaning that a file, key, or initialization vector that has been tampered with fails the decryption process. 
                  
 
                  
@@ -1505,22 +2324,22 @@ Jobs -> (list)
                  
 
                  
-                * **Key** 
+                * **Key**   
                  
-                * **Key MD5** 
+                * **Key MD5**   
                  
-                * **Initialization Vector** 
+                * **Initialization Vector**   
                  
 
                  
 
                 .. warning::
 
-                  
+                   
 
                   For the AES modes, your private encryption keys and your unencrypted data are never stored by AWS; therefore, it is important that you safely manage your encryption keys. If you lose them, you won't be able to unencrypt your data.
 
-                  
+                   
 
                 
 
@@ -1534,7 +2353,7 @@ Jobs -> (list)
 
                  
 
-                ``128`` , ``192`` , or ``256`` . 
+                 ``128`` , ``192`` , or ``256`` . 
 
                  
 
@@ -1576,7 +2395,7 @@ Jobs -> (list)
 
         
 
-        The encryption settings, if any, that you want Elastic Transcoder to apply to your output files. If you choose to use encryption, you must specify a mode to use. If you choose not to use encryption, Elastic Transcoder will write an unencrypted file to your Amazon S3 bucket.
+        The encryption settings, if any, that you want Elastic Transcoder to apply to your output files. If you choose to use encryption, you must specify a mode to use. If you choose not to use encryption, Elastic Transcoder writes an unencrypted file to your Amazon S3 bucket.
 
         
 
@@ -1589,15 +2408,15 @@ Jobs -> (list)
            
 
            
-          * **S3:** Amazon S3 creates and manages the keys used for encrypting your files.
+          * **S3:** Amazon S3 creates and manages the keys used for encrypting your files. 
            
-          * **S3-AWS-KMS:** Amazon S3 calls the Amazon Key Management Service, which creates and manages the keys that are used for encrypting your files. If you specify ``S3-AWS-KMS`` and you don't want to use the default key, you must add the AWS-KMS key that you want to use to your pipeline.
+          * **S3-AWS-KMS:** Amazon S3 calls the Amazon Key Management Service, which creates and manages the keys that are used for encrypting your files. If you specify ``S3-AWS-KMS`` and you don't want to use the default key, you must add the AWS-KMS key that you want to use to your pipeline. 
            
-          * **AES-CBC-PKCS7:** A padded cipher-block mode of operation originally used for HLS files.
+          * **AES-CBC-PKCS7:** A padded cipher-block mode of operation originally used for HLS files. 
            
-          * **AES-CTR:** AES Counter Mode.
+          * **AES-CTR:** AES Counter Mode. 
            
-          * **AES-GCM:** AES Galois Counter Mode, a mode of operation that is an authenticated encryption format, meaning that a file, key, or initialization vector that has been tampered with will fail the decryption process.
+          * **AES-GCM:** AES Galois Counter Mode, a mode of operation that is an authenticated encryption format, meaning that a file, key, or initialization vector that has been tampered with fails the decryption process. 
            
 
            
@@ -1607,22 +2426,22 @@ Jobs -> (list)
            
 
            
-          * **Key** 
+          * **Key**   
            
-          * **Key MD5** 
+          * **Key MD5**   
            
-          * **Initialization Vector** 
+          * **Initialization Vector**   
            
 
            
 
           .. warning::
 
-            
+             
 
             For the AES modes, your private encryption keys and your unencrypted data are never stored by AWS; therefore, it is important that you safely manage your encryption keys. If you lose them, you won't be able to unencrypt your data.
 
-            
+             
 
           
 
@@ -1636,7 +2455,7 @@ Jobs -> (list)
 
            
 
-          ``128`` , ``192`` , or ``256`` . 
+           ``128`` , ``192`` , or ``256`` . 
 
            
 
@@ -1672,7 +2491,7 @@ Jobs -> (list)
 
         
 
-        If Elastic Transcoder used a preset with a ``ColorSpaceConversionMode`` to transcode the output file, the ``AppliedColorSpaceConversion`` parameter shows the conversion used. If no ``ColorSpaceConversionMode`` was defined in the preset, this parameter will not be included in the job response.
+        If Elastic Transcoder used a preset with a ``ColorSpaceConversionMode`` to transcode the output file, the ``AppliedColorSpaceConversion`` parameter shows the conversion used. If no ``ColorSpaceConversionMode`` was defined in the preset, this parameter is not be included in the job response.
 
         
 
@@ -1696,11 +2515,15 @@ Jobs -> (list)
 
         
 
-        
-
         .. warning::
 
+           
+
           Outputs recommended instead.
+
+           
+
+         
 
         If you specified one output for a job, information about that output. If you specified multiple outputs for a job, the ``Output`` object lists information about the first output. This duplicates the information that is listed for the first output in the ``Outputs`` object.
 
@@ -1738,7 +2561,7 @@ Jobs -> (list)
 
            
 
-          If you do want Elastic Transcoder to create thumbnails, specify the information that you want to include in the file name for each thumbnail. You can specify the following values in any sequence: 
+          If you do want Elastic Transcoder to create thumbnails, specify the information that you want to include in the file name for each thumbnail. You can specify the following values in any sequence:
 
            
 
@@ -1747,7 +2570,7 @@ Jobs -> (list)
 
           .. warning::
 
-            If you specify a literal value and/or ``{resolution}`` but you omit ``{count}`` , Elastic Transcoder returns a validation error and does not create the job.
+             If you specify a literal value and/or ``{resolution}`` but you omit ``{count}`` , Elastic Transcoder returns a validation error and does not create the job. 
 
            
            
@@ -1781,15 +2604,15 @@ Jobs -> (list)
              
 
              
-            * **S3:** Amazon S3 creates and manages the keys used for encrypting your files.
+            * **S3:** Amazon S3 creates and manages the keys used for encrypting your files. 
              
-            * **S3-AWS-KMS:** Amazon S3 calls the Amazon Key Management Service, which creates and manages the keys that are used for encrypting your files. If you specify ``S3-AWS-KMS`` and you don't want to use the default key, you must add the AWS-KMS key that you want to use to your pipeline.
+            * **S3-AWS-KMS:** Amazon S3 calls the Amazon Key Management Service, which creates and manages the keys that are used for encrypting your files. If you specify ``S3-AWS-KMS`` and you don't want to use the default key, you must add the AWS-KMS key that you want to use to your pipeline. 
              
-            * **AES-CBC-PKCS7:** A padded cipher-block mode of operation originally used for HLS files.
+            * **AES-CBC-PKCS7:** A padded cipher-block mode of operation originally used for HLS files. 
              
-            * **AES-CTR:** AES Counter Mode.
+            * **AES-CTR:** AES Counter Mode. 
              
-            * **AES-GCM:** AES Galois Counter Mode, a mode of operation that is an authenticated encryption format, meaning that a file, key, or initialization vector that has been tampered with will fail the decryption process.
+            * **AES-GCM:** AES Galois Counter Mode, a mode of operation that is an authenticated encryption format, meaning that a file, key, or initialization vector that has been tampered with fails the decryption process. 
              
 
              
@@ -1799,22 +2622,22 @@ Jobs -> (list)
              
 
              
-            * **Key** 
+            * **Key**   
              
-            * **Key MD5** 
+            * **Key MD5**   
              
-            * **Initialization Vector** 
+            * **Initialization Vector**   
              
 
              
 
             .. warning::
 
-              
+               
 
               For the AES modes, your private encryption keys and your unencrypted data are never stored by AWS; therefore, it is important that you safely manage your encryption keys. If you lose them, you won't be able to unencrypt your data.
 
-              
+               
 
             
 
@@ -1828,7 +2651,7 @@ Jobs -> (list)
 
              
 
-            ``128`` , ``192`` , or ``256`` . 
+             ``128`` , ``192`` , or ``256`` . 
 
              
 
@@ -1864,11 +2687,11 @@ Jobs -> (list)
 
           
 
-          The number of degrees clockwise by which you want Elastic Transcoder to rotate the output relative to the input. Enter one of the following values: 
+          The number of degrees clockwise by which you want Elastic Transcoder to rotate the output relative to the input. Enter one of the following values:
 
            
 
-          ``auto`` , ``0`` , ``90`` , ``180`` , ``270`` 
+           ``auto`` , ``0`` , ``90`` , ``180`` , ``270``  
 
            
 
@@ -1882,7 +2705,7 @@ Jobs -> (list)
 
           
 
-          The value of the ``page-token`` object for the preset that you want to use for this job. The preset determines the audio, video, and thumbnail settings that Elastic Transcoder uses for transcoding. To use a preset that you created, specify the preset ID that Elastic Transcoder returned in the response when you created the preset. You can also use the Elastic Transcoder system presets, which you can get with ``list-presets`` .
+          The value of the ``pipeline-id`` object for the preset that you want to use for this job. The preset determines the audio, video, and thumbnail settings that Elastic Transcoder uses for transcoding. To use a preset that you created, specify the preset ID that Elastic Transcoder returned in the response when you created the preset. You can also use the Elastic Transcoder system presets, which you can get with ``list-presets`` .
 
           
 
@@ -1892,13 +2715,17 @@ Jobs -> (list)
 
           
 
-          
-
           .. warning::
+
+             
 
             (Outputs in Fragmented MP4 or MPEG-TS format only.
 
-          If you specify a preset in ``PresetId`` for which the value of ``Container`` is ``fmp4`` (Fragmented MP4) or ``ts`` (MPEG-TS), ``SegmentDuration`` is the target maximum duration of each segment in seconds. For ``HLSv3`` format playlists, each media segment is stored in a separate ``.ts`` file. For ``HLSv4`` and ``Smooth`` playlists, all media segments for an output are stored in a single file. Each segment is approximately the length of the ``SegmentDuration`` , though individual segments might be shorter or longer.
+             
+
+           
+
+          If you specify a preset in ``PresetId`` for which the value of ``Container`` is ``fmp4`` (Fragmented MP4) or ``ts`` (MPEG-TS), ``SegmentDuration`` is the target maximum duration of each segment in seconds. For ``HLSv3`` format playlists, each media segment is stored in a separate ``.ts`` file. For ``HLSv4`` , ``MPEG-DASH`` , and ``Smooth`` playlists, all media segments for an output are stored in a single file. Each segment is approximately the length of the ``SegmentDuration`` , though individual segments might be shorter or longer.
 
            
 
@@ -1919,13 +2746,17 @@ Jobs -> (list)
           The status of one output in a job. If you specified only one output for the job, ``Outputs:Status`` is always the same as ``Job:Status`` . If you specified more than one output: 
 
            
-          * ``Job:Status`` and ``Outputs:Status`` for all of the outputs is Submitted until Elastic Transcoder starts to process the first output.
+
            
-          * When Elastic Transcoder starts to process the first output, ``Outputs:Status`` for that output and ``Job:Status`` both change to Progressing. For each output, the value of ``Outputs:Status`` remains Submitted until Elastic Transcoder starts to process the output.
+          * ``Job:Status`` and ``Outputs:Status`` for all of the outputs is Submitted until Elastic Transcoder starts to process the first output. 
            
-          * Job:Status remains Progressing until all of the outputs reach a terminal status, either Complete or Error.
+          * When Elastic Transcoder starts to process the first output, ``Outputs:Status`` for that output and ``Job:Status`` both change to Progressing. For each output, the value of ``Outputs:Status`` remains Submitted until Elastic Transcoder starts to process the output. 
            
-          * When all of the outputs reach a terminal status, ``Job:Status`` changes to Complete only if ``Outputs:Status`` for all of the outputs is ``Complete`` . If ``Outputs:Status`` for one or more outputs is ``Error`` , the terminal status for ``Job:Status`` is also ``Error`` .
+          * Job:Status remains Progressing until all of the outputs reach a terminal status, either Complete or Error. 
+           
+          * When all of the outputs reach a terminal status, ``Job:Status`` changes to Complete only if ``Outputs:Status`` for all of the outputs is ``Complete`` . If ``Outputs:Status`` for one or more outputs is ``Error`` , the terminal status for ``Job:Status`` is also ``Error`` . 
+           
+
            
 
           The value of ``Status`` is one of the following: ``Submitted`` , ``Progressing`` , ``Complete`` , ``Canceled`` , or ``Error`` . 
@@ -2012,7 +2843,7 @@ Jobs -> (list)
 
            
 
-          Watermarks are added to the output video in the sequence in which you list them in the job outputthe first watermark in the list is added to the output video first, the second watermark in the list is added next, and so on. As a result, if the settings in a preset cause Elastic Transcoder to place all watermarks in the same location, the second watermark that you add will cover the first one, the third one will cover the second, and the fourth one will cover the third.
+          Watermarks are added to the output video in the sequence in which you list them in the job output—the first watermark in the list is added to the output video first, the second watermark in the list is added next, and so on. As a result, if the settings in a preset cause Elastic Transcoder to place all watermarks in the same location, the second watermark that you add covers the first one, the third one covers the second, and the fourth one covers the third.
 
           
 
@@ -2028,7 +2859,7 @@ Jobs -> (list)
 
               
 
-              The ID of the watermark settings that Elastic Transcoder uses to add watermarks to the video during transcoding. The settings are in the preset specified by Preset for the current output. In that preset, the value of Watermarks page-token tells Elastic Transcoder which settings to use.
+              The ID of the watermark settings that Elastic Transcoder uses to add watermarks to the video during transcoding. The settings are in the preset specified by Preset for the current output. In that preset, the value of Watermarks pipeline-id tells Elastic Transcoder which settings to use.
 
               
 
@@ -2065,15 +2896,15 @@ Jobs -> (list)
                  
 
                  
-                * **S3:** Amazon S3 creates and manages the keys used for encrypting your files.
+                * **S3:** Amazon S3 creates and manages the keys used for encrypting your files. 
                  
-                * **S3-AWS-KMS:** Amazon S3 calls the Amazon Key Management Service, which creates and manages the keys that are used for encrypting your files. If you specify ``S3-AWS-KMS`` and you don't want to use the default key, you must add the AWS-KMS key that you want to use to your pipeline.
+                * **S3-AWS-KMS:** Amazon S3 calls the Amazon Key Management Service, which creates and manages the keys that are used for encrypting your files. If you specify ``S3-AWS-KMS`` and you don't want to use the default key, you must add the AWS-KMS key that you want to use to your pipeline. 
                  
-                * **AES-CBC-PKCS7:** A padded cipher-block mode of operation originally used for HLS files.
+                * **AES-CBC-PKCS7:** A padded cipher-block mode of operation originally used for HLS files. 
                  
-                * **AES-CTR:** AES Counter Mode.
+                * **AES-CTR:** AES Counter Mode. 
                  
-                * **AES-GCM:** AES Galois Counter Mode, a mode of operation that is an authenticated encryption format, meaning that a file, key, or initialization vector that has been tampered with will fail the decryption process.
+                * **AES-GCM:** AES Galois Counter Mode, a mode of operation that is an authenticated encryption format, meaning that a file, key, or initialization vector that has been tampered with fails the decryption process. 
                  
 
                  
@@ -2083,22 +2914,22 @@ Jobs -> (list)
                  
 
                  
-                * **Key** 
+                * **Key**   
                  
-                * **Key MD5** 
+                * **Key MD5**   
                  
-                * **Initialization Vector** 
+                * **Initialization Vector**   
                  
 
                  
 
                 .. warning::
 
-                  
+                   
 
                   For the AES modes, your private encryption keys and your unencrypted data are never stored by AWS; therefore, it is important that you safely manage your encryption keys. If you lose them, you won't be able to unencrypt your data.
 
-                  
+                   
 
                 
 
@@ -2112,7 +2943,7 @@ Jobs -> (list)
 
                  
 
-                ``128`` , ``192`` , or ``256`` . 
+                 ``128`` , ``192`` , or ``256`` . 
 
                  
 
@@ -2160,22 +2991,18 @@ Jobs -> (list)
 
             
 
-            A policy that determines how Elastic Transcoder will handle the existence of multiple album artwork files.
+            A policy that determines how Elastic Transcoder handles the existence of multiple album artwork files.
 
              
 
              
-
+            * ``Replace:`` The specified album art replaces any existing album art. 
              
-            * ``Replace:`` The specified album art will replace any existing album art.
+            * ``Prepend:`` The specified album art is placed in front of any existing album art. 
              
-            * ``Prepend:`` The specified album art will be placed in front of any existing album art.
+            * ``Append:`` The specified album art is placed after any existing album art. 
              
-            * ``Append:`` The specified album art will be placed after any existing album art.
-             
-            * ``Fallback:`` If the original input file contains artwork, Elastic Transcoder will use that artwork for the output. If the original input does not contain artwork, Elastic Transcoder will use the specified album art file.
-             
-
+            * ``Fallback:`` If the original input file contains artwork, Elastic Transcoder uses that artwork for the output. If the original input does not contain artwork, Elastic Transcoder uses the specified album art file. 
              
 
             
@@ -2186,7 +3013,7 @@ Jobs -> (list)
 
             
 
-            The file to be used as album art. There can be multiple artworks associated with an audio file, to a maximum of 20. Valid formats are ``.jpg`` and ``.png`` 
+            The file to be used as album art. There can be multiple artworks associated with an audio file, to a maximum of 20. Valid formats are ``.jpg`` and ``.png``  
 
             
 
@@ -2249,21 +3076,17 @@ Jobs -> (list)
                  
 
                  
-
+                * ``Fit:`` Elastic Transcoder scales the output art so it matches the value that you specified in either ``MaxWidth`` or ``MaxHeight`` without exceeding the other value. 
                  
-                * ``Fit:`` Elastic Transcoder scales the output art so it matches the value that you specified in either ``MaxWidth`` or ``MaxHeight`` without exceeding the other value.
+                * ``Fill:`` Elastic Transcoder scales the output art so it matches the value that you specified in either ``MaxWidth`` or ``MaxHeight`` and matches or exceeds the other value. Elastic Transcoder centers the output art and then crops it in the dimension (if any) that exceeds the maximum value.  
                  
-                * ``Fill:`` Elastic Transcoder scales the output art so it matches the value that you specified in either ``MaxWidth`` or ``MaxHeight`` and matches or exceeds the other value. Elastic Transcoder centers the output art and then crops it in the dimension (if any) that exceeds the maximum value. 
+                * ``Stretch:`` Elastic Transcoder stretches the output art to match the values that you specified for ``MaxWidth`` and ``MaxHeight`` . If the relative proportions of the input art and the output art are different, the output art will be distorted. 
                  
-                * ``Stretch:`` Elastic Transcoder stretches the output art to match the values that you specified for ``MaxWidth`` and ``MaxHeight`` . If the relative proportions of the input art and the output art are different, the output art will be distorted.
+                * ``Keep:`` Elastic Transcoder does not scale the output art. If either dimension of the input art exceeds the values that you specified for ``MaxWidth`` and ``MaxHeight`` , Elastic Transcoder crops the output art. 
                  
-                * ``Keep:`` Elastic Transcoder does not scale the output art. If either dimension of the input art exceeds the values that you specified for ``MaxWidth`` and ``MaxHeight`` , Elastic Transcoder crops the output art.
+                * ``ShrinkToFit:`` Elastic Transcoder scales the output art down so that its dimensions match the values that you specified for at least one of ``MaxWidth`` and ``MaxHeight`` without exceeding either value. If you specify this option, Elastic Transcoder does not scale the art up. 
                  
-                * ``ShrinkToFit:`` Elastic Transcoder scales the output art down so that its dimensions match the values that you specified for at least one of ``MaxWidth`` and ``MaxHeight`` without exceeding either value. If you specify this option, Elastic Transcoder does not scale the art up.
-                 
-                * ``ShrinkToFill`` Elastic Transcoder scales the output art down so that its dimensions match the values that you specified for at least one of ``MaxWidth`` and ``MaxHeight`` without dropping below either value. If you specify this option, Elastic Transcoder does not scale the art up.
-                 
-
+                * ``ShrinkToFill`` Elastic Transcoder scales the output art down so that its dimensions match the values that you specified for at least one of ``MaxWidth`` and ``MaxHeight`` without dropping below either value. If you specify this option, Elastic Transcoder does not scale the art up. 
                  
 
                 
@@ -2307,15 +3130,15 @@ Jobs -> (list)
                    
 
                    
-                  * **S3:** Amazon S3 creates and manages the keys used for encrypting your files.
+                  * **S3:** Amazon S3 creates and manages the keys used for encrypting your files. 
                    
-                  * **S3-AWS-KMS:** Amazon S3 calls the Amazon Key Management Service, which creates and manages the keys that are used for encrypting your files. If you specify ``S3-AWS-KMS`` and you don't want to use the default key, you must add the AWS-KMS key that you want to use to your pipeline.
+                  * **S3-AWS-KMS:** Amazon S3 calls the Amazon Key Management Service, which creates and manages the keys that are used for encrypting your files. If you specify ``S3-AWS-KMS`` and you don't want to use the default key, you must add the AWS-KMS key that you want to use to your pipeline. 
                    
-                  * **AES-CBC-PKCS7:** A padded cipher-block mode of operation originally used for HLS files.
+                  * **AES-CBC-PKCS7:** A padded cipher-block mode of operation originally used for HLS files. 
                    
-                  * **AES-CTR:** AES Counter Mode.
+                  * **AES-CTR:** AES Counter Mode. 
                    
-                  * **AES-GCM:** AES Galois Counter Mode, a mode of operation that is an authenticated encryption format, meaning that a file, key, or initialization vector that has been tampered with will fail the decryption process.
+                  * **AES-GCM:** AES Galois Counter Mode, a mode of operation that is an authenticated encryption format, meaning that a file, key, or initialization vector that has been tampered with fails the decryption process. 
                    
 
                    
@@ -2325,22 +3148,22 @@ Jobs -> (list)
                    
 
                    
-                  * **Key** 
+                  * **Key**   
                    
-                  * **Key MD5** 
+                  * **Key MD5**   
                    
-                  * **Initialization Vector** 
+                  * **Initialization Vector**   
                    
 
                    
 
                   .. warning::
 
-                    
+                     
 
                     For the AES modes, your private encryption keys and your unencrypted data are never stored by AWS; therefore, it is important that you safely manage your encryption keys. If you lose them, you won't be able to unencrypt your data.
 
-                    
+                     
 
                   
 
@@ -2354,7 +3177,7 @@ Jobs -> (list)
 
                    
 
-                  ``128`` , ``192`` , or ``256`` . 
+                   ``128`` , ``192`` , or ``256`` . 
 
                    
 
@@ -2455,9 +3278,9 @@ Jobs -> (list)
            
 
            
-          * **Embedded:** Embedded captions are included in the same file as the audio and video. Elastic Transcoder supports only one embedded caption per language, to a maximum of 300 embedded captions per file. Valid input values include: ``CEA-608 (EIA-608`` , first non-empty channel only), ``CEA-708 (EIA-708`` , first non-empty channel only), and ``mov-text``  Valid outputs include: ``mov-text``  Elastic Transcoder supports a maximum of one embedded format per output. 
+          * **Embedded:** Embedded captions are included in the same file as the audio and video. Elastic Transcoder supports only one embedded caption per language, to a maximum of 300 embedded captions per file. Valid input values include: ``CEA-608 (EIA-608`` , first non-empty channel only), ``CEA-708 (EIA-708`` , first non-empty channel only), and ``mov-text``   Valid outputs include: ``mov-text``   Elastic Transcoder supports a maximum of one embedded format per output. 
            
-          * **Sidecar:** Sidecar captions are kept in a separate metadata file from the audio and video data. Sidecar captions require a player that is capable of understanding the relationship between the video file and the sidecar file. Elastic Transcoder supports only one sidecar caption per language, to a maximum of 20 sidecar captions per file. Valid input values include: ``dfxp`` (first div element only), ``ebu-tt`` , ``scc`` , ``smpt`` , ``srt`` , ``ttml`` (first div element only), and ``webvtt``  Valid outputs include: ``dfxp`` (first div element only), ``scc`` , ``srt`` , and ``webvtt`` . 
+          * **Sidecar:** Sidecar captions are kept in a separate metadata file from the audio and video data. Sidecar captions require a player that is capable of understanding the relationship between the video file and the sidecar file. Elastic Transcoder supports only one sidecar caption per language, to a maximum of 20 sidecar captions per file. Valid input values include: ``dfxp`` (first div element only), ``ebu-tt`` , ``scc`` , ``smpt`` , ``srt`` , ``ttml`` (first div element only), and ``webvtt``   Valid outputs include: ``dfxp`` (first div element only), ``scc`` , ``srt`` , and ``webvtt`` . 
            
 
            
@@ -2491,16 +3314,16 @@ Jobs -> (list)
              
 
              
-            * **MergeOverride:** Elastic Transcoder transcodes both embedded and sidecar captions into outputs. If captions for a language are embedded in the input file and also appear in a sidecar file, Elastic Transcoder uses the sidecar captions and ignores the embedded captions for that language.
+            * **MergeOverride:** Elastic Transcoder transcodes both embedded and sidecar captions into outputs. If captions for a language are embedded in the input file and also appear in a sidecar file, Elastic Transcoder uses the sidecar captions and ignores the embedded captions for that language. 
              
-            * **MergeRetain:** Elastic Transcoder transcodes both embedded and sidecar captions into outputs. If captions for a language are embedded in the input file and also appear in a sidecar file, Elastic Transcoder uses the embedded captions and ignores the sidecar captions for that language. If ``CaptionSources`` is empty, Elastic Transcoder omits all sidecar captions from the output files.
+            * **MergeRetain:** Elastic Transcoder transcodes both embedded and sidecar captions into outputs. If captions for a language are embedded in the input file and also appear in a sidecar file, Elastic Transcoder uses the embedded captions and ignores the sidecar captions for that language. If ``CaptionSources`` is empty, Elastic Transcoder omits all sidecar captions from the output files. 
              
-            * **Override:** Elastic Transcoder transcodes only the sidecar captions that you specify in ``CaptionSources`` .
-             
-
+            * **Override:** Elastic Transcoder transcodes only the sidecar captions that you specify in ``CaptionSources`` . 
              
 
-            ``MergePolicy`` cannot be null.
+             
+
+             ``MergePolicy`` cannot be null.
 
             
 
@@ -2536,14 +3359,14 @@ Jobs -> (list)
 
                 
 
-                A string that specifies the language of the caption. Specify this as one of:
+                A string that specifies the language of the caption. If you specified multiple inputs with captions, the caption language must match in order to be included in the output. Specify this as one of:
 
                  
 
                  
-                * 2-character ISO 639-1 code
+                * 2-character ISO 639-1 code 
                  
-                * 3-character ISO 639-2 code
+                * 3-character ISO 639-2 code 
                  
 
                  
@@ -2582,7 +3405,7 @@ Jobs -> (list)
 
                 
 
-                The encryption settings, if any, that you want Elastic Transcoder to apply to your caption sources.
+                The encryption settings, if any, that Elastic Transcoder needs to decyrpt your caption sources, or that you want Elastic Transcoder to apply to your caption sources.
 
                 
 
@@ -2595,15 +3418,15 @@ Jobs -> (list)
                    
 
                    
-                  * **S3:** Amazon S3 creates and manages the keys used for encrypting your files.
+                  * **S3:** Amazon S3 creates and manages the keys used for encrypting your files. 
                    
-                  * **S3-AWS-KMS:** Amazon S3 calls the Amazon Key Management Service, which creates and manages the keys that are used for encrypting your files. If you specify ``S3-AWS-KMS`` and you don't want to use the default key, you must add the AWS-KMS key that you want to use to your pipeline.
+                  * **S3-AWS-KMS:** Amazon S3 calls the Amazon Key Management Service, which creates and manages the keys that are used for encrypting your files. If you specify ``S3-AWS-KMS`` and you don't want to use the default key, you must add the AWS-KMS key that you want to use to your pipeline. 
                    
-                  * **AES-CBC-PKCS7:** A padded cipher-block mode of operation originally used for HLS files.
+                  * **AES-CBC-PKCS7:** A padded cipher-block mode of operation originally used for HLS files. 
                    
-                  * **AES-CTR:** AES Counter Mode.
+                  * **AES-CTR:** AES Counter Mode. 
                    
-                  * **AES-GCM:** AES Galois Counter Mode, a mode of operation that is an authenticated encryption format, meaning that a file, key, or initialization vector that has been tampered with will fail the decryption process.
+                  * **AES-GCM:** AES Galois Counter Mode, a mode of operation that is an authenticated encryption format, meaning that a file, key, or initialization vector that has been tampered with fails the decryption process. 
                    
 
                    
@@ -2613,22 +3436,22 @@ Jobs -> (list)
                    
 
                    
-                  * **Key** 
+                  * **Key**   
                    
-                  * **Key MD5** 
+                  * **Key MD5**   
                    
-                  * **Initialization Vector** 
+                  * **Initialization Vector**   
                    
 
                    
 
                   .. warning::
 
-                    
+                     
 
                     For the AES modes, your private encryption keys and your unencrypted data are never stored by AWS; therefore, it is important that you safely manage your encryption keys. If you lose them, you won't be able to unencrypt your data.
 
-                    
+                     
 
                   
 
@@ -2642,7 +3465,7 @@ Jobs -> (list)
 
                    
 
-                  ``128`` , ``192`` , or ``256`` . 
+                   ``128`` , ``192`` , or ``256`` . 
 
                    
 
@@ -2703,20 +3526,20 @@ Jobs -> (list)
                  
 
                  
-                * **Valid Embedded Caption Formats:**  
+                * **Valid Embedded Caption Formats:**   
 
                    
-                  * **for FLAC** : None
+                  * **for FLAC** : None 
                    
-                  * **For MP3** : None
+                  * **For MP3** : None 
                    
-                  * **For MP4** : mov-text
+                  * **For MP4** : mov-text 
                    
-                  * **For MPEG-TS** : None
+                  * **For MPEG-TS** : None 
                    
-                  * **For ogg** : None
+                  * **For ogg** : None 
                    
-                  * **For webm** : None
+                  * **For webm** : None 
                    
 
                  
@@ -2724,14 +3547,14 @@ Jobs -> (list)
                 * **Valid Sidecar Caption Formats:** Elastic Transcoder supports dfxp (first div element only), scc, srt, and webvtt. If you want ttml or smpte-tt compatible captions, specify dfxp as your output format. 
 
                    
-                  * **For FMP4** : dfxp
+                  * **For FMP4** : dfxp 
                    
-                  * **Non-FMP4 outputs** : All sidecar types
+                  * **Non-FMP4 outputs** : All sidecar types 
                    
 
                  
 
-                ``fmp4`` captions have an extension of ``.ismt`` 
+                 ``fmp4`` captions have an extension of ``.ismt``  
 
                  
                  
@@ -2749,9 +3572,9 @@ Jobs -> (list)
                  
 
                  
-                * *description* is a description of the video.
+                * *description* is a description of the video. 
                  
-                * ``{language}`` is a literal value that Elastic Transcoder replaces with the two- or three-letter code for the language of the caption in the output file names.
+                * ``{language}`` is a literal value that Elastic Transcoder replaces with the two- or three-letter code for the language of the caption in the output file names. 
                  
 
                  
@@ -2760,7 +3583,7 @@ Jobs -> (list)
 
                  
 
-                For example, suppose you're transcoding into srt format. When you enter "Sydney-{language}-sunrise", and the language of the captions is English (en), the name of the first caption file will be Sydney-en-sunrise00000.srt.
+                For example, suppose you're transcoding into srt format. When you enter "Sydney-{language}-sunrise", and the language of the captions is English (en), the name of the first caption file is be Sydney-en-sunrise00000.srt.
 
                 
 
@@ -2783,15 +3606,15 @@ Jobs -> (list)
                    
 
                    
-                  * **S3:** Amazon S3 creates and manages the keys used for encrypting your files.
+                  * **S3:** Amazon S3 creates and manages the keys used for encrypting your files. 
                    
-                  * **S3-AWS-KMS:** Amazon S3 calls the Amazon Key Management Service, which creates and manages the keys that are used for encrypting your files. If you specify ``S3-AWS-KMS`` and you don't want to use the default key, you must add the AWS-KMS key that you want to use to your pipeline.
+                  * **S3-AWS-KMS:** Amazon S3 calls the Amazon Key Management Service, which creates and manages the keys that are used for encrypting your files. If you specify ``S3-AWS-KMS`` and you don't want to use the default key, you must add the AWS-KMS key that you want to use to your pipeline. 
                    
-                  * **AES-CBC-PKCS7:** A padded cipher-block mode of operation originally used for HLS files.
+                  * **AES-CBC-PKCS7:** A padded cipher-block mode of operation originally used for HLS files. 
                    
-                  * **AES-CTR:** AES Counter Mode.
+                  * **AES-CTR:** AES Counter Mode. 
                    
-                  * **AES-GCM:** AES Galois Counter Mode, a mode of operation that is an authenticated encryption format, meaning that a file, key, or initialization vector that has been tampered with will fail the decryption process.
+                  * **AES-GCM:** AES Galois Counter Mode, a mode of operation that is an authenticated encryption format, meaning that a file, key, or initialization vector that has been tampered with fails the decryption process. 
                    
 
                    
@@ -2801,22 +3624,22 @@ Jobs -> (list)
                    
 
                    
-                  * **Key** 
+                  * **Key**   
                    
-                  * **Key MD5** 
+                  * **Key MD5**   
                    
-                  * **Initialization Vector** 
+                  * **Initialization Vector**   
                    
 
                    
 
                   .. warning::
 
-                    
+                     
 
                     For the AES modes, your private encryption keys and your unencrypted data are never stored by AWS; therefore, it is important that you safely manage your encryption keys. If you lose them, you won't be able to unencrypt your data.
 
-                    
+                     
 
                   
 
@@ -2830,7 +3653,7 @@ Jobs -> (list)
 
                    
 
-                  ``128`` , ``192`` , or ``256`` . 
+                   ``128`` , ``192`` , or ``256`` . 
 
                    
 
@@ -2872,7 +3695,7 @@ Jobs -> (list)
 
           
 
-          The encryption settings, if any, that you want Elastic Transcoder to apply to your output files. If you choose to use encryption, you must specify a mode to use. If you choose not to use encryption, Elastic Transcoder will write an unencrypted file to your Amazon S3 bucket.
+          The encryption settings, if any, that you want Elastic Transcoder to apply to your output files. If you choose to use encryption, you must specify a mode to use. If you choose not to use encryption, Elastic Transcoder writes an unencrypted file to your Amazon S3 bucket.
 
           
 
@@ -2885,15 +3708,15 @@ Jobs -> (list)
              
 
              
-            * **S3:** Amazon S3 creates and manages the keys used for encrypting your files.
+            * **S3:** Amazon S3 creates and manages the keys used for encrypting your files. 
              
-            * **S3-AWS-KMS:** Amazon S3 calls the Amazon Key Management Service, which creates and manages the keys that are used for encrypting your files. If you specify ``S3-AWS-KMS`` and you don't want to use the default key, you must add the AWS-KMS key that you want to use to your pipeline.
+            * **S3-AWS-KMS:** Amazon S3 calls the Amazon Key Management Service, which creates and manages the keys that are used for encrypting your files. If you specify ``S3-AWS-KMS`` and you don't want to use the default key, you must add the AWS-KMS key that you want to use to your pipeline. 
              
-            * **AES-CBC-PKCS7:** A padded cipher-block mode of operation originally used for HLS files.
+            * **AES-CBC-PKCS7:** A padded cipher-block mode of operation originally used for HLS files. 
              
-            * **AES-CTR:** AES Counter Mode.
+            * **AES-CTR:** AES Counter Mode. 
              
-            * **AES-GCM:** AES Galois Counter Mode, a mode of operation that is an authenticated encryption format, meaning that a file, key, or initialization vector that has been tampered with will fail the decryption process.
+            * **AES-GCM:** AES Galois Counter Mode, a mode of operation that is an authenticated encryption format, meaning that a file, key, or initialization vector that has been tampered with fails the decryption process. 
              
 
              
@@ -2903,22 +3726,22 @@ Jobs -> (list)
              
 
              
-            * **Key** 
+            * **Key**   
              
-            * **Key MD5** 
+            * **Key MD5**   
              
-            * **Initialization Vector** 
+            * **Initialization Vector**   
              
 
              
 
             .. warning::
 
-              
+               
 
               For the AES modes, your private encryption keys and your unencrypted data are never stored by AWS; therefore, it is important that you safely manage your encryption keys. If you lose them, you won't be able to unencrypt your data.
 
-              
+               
 
             
 
@@ -2932,7 +3755,7 @@ Jobs -> (list)
 
              
 
-            ``128`` , ``192`` , or ``256`` . 
+             ``128`` , ``192`` , or ``256`` . 
 
              
 
@@ -2968,7 +3791,7 @@ Jobs -> (list)
 
           
 
-          If Elastic Transcoder used a preset with a ``ColorSpaceConversionMode`` to transcode the output file, the ``AppliedColorSpaceConversion`` parameter shows the conversion used. If no ``ColorSpaceConversionMode`` was defined in the preset, this parameter will not be included in the job response.
+          If Elastic Transcoder used a preset with a ``ColorSpaceConversionMode`` to transcode the output file, the ``AppliedColorSpaceConversion`` parameter shows the conversion used. If no ``ColorSpaceConversionMode`` was defined in the preset, this parameter is not be included in the job response.
 
           
 
@@ -2992,17 +3815,21 @@ Jobs -> (list)
 
       
 
-      
-
       .. warning::
 
+         
+
         Outputs in Fragmented MP4 or MPEG-TS format only.
+
+         
+
+       
 
       If you specify a preset in ``PresetId`` for which the value of ``Container`` is fmp4 (Fragmented MP4) or ts (MPEG-TS), ``Playlists`` contains information about the master playlists that you want Elastic Transcoder to create.
 
        
 
-      The maximum number of master playlists in a job is 30. 
+      The maximum number of master playlists in a job is 30.
 
       
 
@@ -3022,7 +3849,13 @@ Jobs -> (list)
 
            
 
-          **Note** : Elastic Transcoder automatically appends the relevant file extension to the file name (``.m3u8`` for ``HLSv3`` and ``HLSv4`` playlists, and ``.ism`` and ``.ismc`` for ``Smooth`` playlists). If you include a file extension in ``Name`` , the file name will have two extensions.
+          .. note::
+
+             
+
+            Elastic Transcoder automatically appends the relevant file extension to the file name (``.m3u8`` for ``HLSv3`` and ``HLSv4`` playlists, and ``.ism`` and ``.ismc`` for ``Smooth`` playlists). If you include a file extension in ``Name`` , the file name will have two extensions.
+
+             
 
           
 
@@ -3047,7 +3880,7 @@ Jobs -> (list)
            
 
            
-          * If your output is not ``HLS`` or does not have a segment duration set, the name of the output file is a concatenation of ``OutputKeyPrefix`` and ``Outputs:Key`` : OutputKeyPrefix``Outputs:Key``  
+          * If your output is not ``HLS`` or does not have a segment duration set, the name of the output file is a concatenation of ``OutputKeyPrefix`` and ``Outputs:Key`` : OutputKeyPrefix``Outputs:Key``   
            
           * If your output is ``HLSv3`` and has a segment duration set, or is not included in a playlist, Elastic Transcoder creates an output playlist file with a file extension of ``.m3u8`` , and a series of ``.ts`` files that include a five-digit sequential counter beginning with 00000: OutputKeyPrefix``Outputs:Key`` .m3u8 OutputKeyPrefix``Outputs:Key`` 00000.ts 
            
@@ -3088,7 +3921,7 @@ Jobs -> (list)
 
              
 
-            This value will be written into the method attribute of the ``EXT-X-KEY`` metadata tag in the output playlist.
+            This value is written into the method attribute of the ``EXT-X-KEY`` metadata tag in the output playlist.
 
             
 
@@ -3106,7 +3939,7 @@ Jobs -> (list)
 
              
 
-            ``128`` , ``192`` , or ``256`` . 
+             ``128`` , ``192`` , or ``256`` . 
 
             
 
@@ -3188,7 +4021,7 @@ Jobs -> (list)
 
              
 
-            ``128`` , ``192`` , or ``256`` . 
+             ``128`` , ``192`` , or ``256`` . 
 
              
 
@@ -3216,7 +4049,7 @@ Jobs -> (list)
 
              
 
-            The key ID must be provided in big endian, and Elastic Transcoder will convert it to little endian before inserting it into the PlayReady DRM headers. If you are unsure whether your license server provides your key ID in big or little endian, check with your DRM provider.
+            The key ID must be provided in big endian, and Elastic Transcoder converts it to little endian before inserting it into the PlayReady DRM headers. If you are unsure whether your license server provides your key ID in big or little endian, check with your DRM provider.
 
             
 
@@ -3236,7 +4069,7 @@ Jobs -> (list)
 
             
 
-            The location of the license key required to play DRM content. The URL must be an absolute path, and is referenced by the PlayReady header. The PlayReady header is referenced in the protection header of the client manifest for Smooth Streaming outputs, and in the EXT-X-DXDRM and EXT-XDXDRMINFO metadata tags for HLS playlist outputs. An example URL looks like this: https://www.example.com/exampleKey/
+            The location of the license key required to play DRM content. The URL must be an absolute path, and is referenced by the PlayReady header. The PlayReady header is referenced in the protection header of the client manifest for Smooth Streaming outputs, and in the EXT-X-DXDRM and EXT-XDXDRMINFO metadata tags for HLS playlist outputs. An example URL looks like this: ``https://www.example.com/exampleKey/``  
 
             
 
@@ -3282,7 +4115,7 @@ Jobs -> (list)
 
       
 
-      User-defined metadata that you want to associate with an Elastic Transcoder job. You specify metadata in ``key/value`` pairs, and you can add up to 10 ``key/value`` pairs per job. Elastic Transcoder does not guarantee that ``key/value`` pairs will be returned in the same order in which you specify them.
+      User-defined metadata that you want to associate with an Elastic Transcoder job. You specify metadata in ``key/value`` pairs, and you can add up to 10 ``key/value`` pairs per job. Elastic Transcoder does not guarantee that ``key/value`` pairs are returned in the same order in which you specify them.
 
        
 
@@ -3291,13 +4124,13 @@ Jobs -> (list)
        
 
        
-      * ``0-9`` 
+      * ``0-9``   
        
-      * ``A-Z`` and ``a-z`` 
+      * ``A-Z`` and ``a-z``   
        
-      * ``Space`` 
+      * ``Space``   
        
-      * The following symbols: ``_.:/=+-%@`` 
+      * The following symbols: ``_.:/=+-%@``   
        
 
       

@@ -19,6 +19,9 @@ Modifies the specified attribute of the specified VPC.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcAttribute>`_
+
+
 ========
 Synopsis
 ========
@@ -26,11 +29,11 @@ Synopsis
 ::
 
     modify-vpc-attribute
-  --vpc-id <value>
-  [--enable-dns-support | --no-enable-dns-support]
   [--enable-dns-hostnames | --no-enable-dns-hostnames]
+  [--enable-dns-support | --no-enable-dns-support]
+  --vpc-id <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -38,24 +41,6 @@ Synopsis
 =======
 Options
 =======
-
-``--vpc-id`` (string)
-
-
-  The ID of the VPC.
-
-  
-
-``--enable-dns-support`` | ``--no-enable-dns-support`` (structure)
-
-
-  Indicates whether the DNS resolution is supported for the VPC. If enabled, queries to the Amazon provided DNS server at the 169.254.169.253 IP address, or the reserved IP address at the base of the VPC network range "plus two" will succeed. If disabled, the Amazon provided DNS service in the VPC that resolves public DNS hostnames to IP addresses is not enabled. 
-
-   
-
-  You cannot modify the DNS resolution and DNS hostnames attributes in the same request. Use separate requests for each attribute.
-
-  
 
 ``--enable-dns-hostnames`` | ``--no-enable-dns-hostnames`` (structure)
 
@@ -68,11 +53,29 @@ Options
 
   
 
+``--enable-dns-support`` | ``--no-enable-dns-support`` (structure)
+
+
+  Indicates whether the DNS resolution is supported for the VPC. If enabled, queries to the Amazon provided DNS server at the 169.254.169.253 IP address, or the reserved IP address at the base of the VPC network range "plus two" will succeed. If disabled, the Amazon provided DNS service in the VPC that resolves public DNS hostnames to IP addresses is not enabled.
+
+   
+
+  You cannot modify the DNS resolution and DNS hostnames attributes in the same request. Use separate requests for each attribute.
+
+  
+
+``--vpc-id`` (string)
+
+
+  The ID of the VPC.
+
+  
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 

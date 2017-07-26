@@ -21,12 +21,15 @@ Returns information about a job. Only used for custom actions.
 
 .. warning::
 
-  
+   
 
   When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts. Additionally, this API returns any secret values defined for the action.
 
-  
+   
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetJobDetails>`_
 
 
 ========
@@ -38,7 +41,7 @@ Synopsis
     get-job-details
   --job-id <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -57,8 +60,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -139,7 +142,7 @@ jobDetails -> (structure)
 
   
 
-  The details of the job. 
+  The details of the job.
 
    
 
@@ -183,7 +186,7 @@ jobDetails -> (structure)
 
         
 
-        A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Valid categories are limited to one of the values below. 
+        A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Valid categories are limited to one of the values below.
 
         
 
@@ -193,7 +196,7 @@ jobDetails -> (structure)
 
         
 
-        The creator of the action being called. 
+        The creator of the action being called.
 
         
 
@@ -213,7 +216,7 @@ jobDetails -> (structure)
 
         
 
-        A string that identifies the action type. 
+        A string that identifies the action type.
 
         
 
@@ -295,7 +298,7 @@ jobDetails -> (structure)
 
         
 
-        Represents the context of an action within the stage of a pipeline to a job worker.
+        
 
         
 
@@ -379,7 +382,7 @@ jobDetails -> (structure)
 
               
 
-              The name of the Amazon S3 bucket. 
+              The name of the Amazon S3 bucket.
 
               
 
@@ -389,7 +392,7 @@ jobDetails -> (structure)
 
               
 
-              The key of the object in the Amazon S3 bucket, which uniquely identifies the object in the bucket. 
+              The key of the object in the Amazon S3 bucket, which uniquely identifies the object in the bucket.
 
               
 
@@ -469,7 +472,7 @@ jobDetails -> (structure)
 
               
 
-              The name of the Amazon S3 bucket. 
+              The name of the Amazon S3 bucket.
 
               
 
@@ -479,7 +482,7 @@ jobDetails -> (structure)
 
               
 
-              The key of the object in the Amazon S3 bucket, which uniquely identifies the object in the bucket. 
+              The key of the object in the Amazon S3 bucket, which uniquely identifies the object in the bucket.
 
               
 
@@ -547,7 +550,7 @@ jobDetails -> (structure)
 
       
 
-      Represents information about the AWS Key Management Service (AWS KMS) key used to encrypt data in the artifact store.
+      Represents information about the key used to encrypt data in the artifact store, such as an AWS Key Management Service (AWS KMS) key. 
 
       
 
@@ -555,7 +558,7 @@ jobDetails -> (structure)
 
         
 
-        The ID of the AWS KMS key.
+        The ID used to identify the key. For an AWS KMS key, this is the key ID or key ARN.
 
         
 
@@ -565,7 +568,7 @@ jobDetails -> (structure)
 
         
 
-        The type of AWS KMS key, such as a customer master key.
+        The type of encryption key, such as an AWS Key Management Service (AWS KMS) key. When creating or updating a pipeline, the value must be set to 'KMS'.
 
         
 

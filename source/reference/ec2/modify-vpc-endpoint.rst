@@ -19,6 +19,9 @@ Modifies attributes of a specified VPC endpoint. You can modify the policy assoc
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEndpoint>`_
+
+
 ========
 Synopsis
 ========
@@ -26,14 +29,14 @@ Synopsis
 ::
 
     modify-vpc-endpoint
-  [--dry-run | --no-dry-run]
-  --vpc-endpoint-id <value>
-  [--reset-policy | --no-reset-policy]
-  [--policy-document <value>]
   [--add-route-table-ids <value>]
+  [--dry-run | --no-dry-run]
+  [--policy-document <value>]
   [--remove-route-table-ids <value>]
+  [--reset-policy | --no-reset-policy]
+  --vpc-endpoint-id <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -41,34 +44,6 @@ Synopsis
 =======
 Options
 =======
-
-``--dry-run`` | ``--no-dry-run`` (boolean)
-
-
-  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
-
-  
-
-``--vpc-endpoint-id`` (string)
-
-
-  The ID of the endpoint.
-
-  
-
-``--reset-policy`` | ``--no-reset-policy`` (boolean)
-
-
-  Specify ``true`` to reset the policy document to the default policy. The default policy allows access to the service.
-
-  
-
-``--policy-document`` (string)
-
-
-  A policy document to attach to the endpoint. The policy must be in valid JSON format. 
-
-  
 
 ``--add-route-table-ids`` (list)
 
@@ -85,6 +60,20 @@ Syntax::
 
 
 
+``--dry-run`` | ``--no-dry-run`` (boolean)
+
+
+  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
+
+  
+
+``--policy-document`` (string)
+
+
+  A policy document to attach to the endpoint. The policy must be in valid JSON format.
+
+  
+
 ``--remove-route-table-ids`` (list)
 
 
@@ -100,11 +89,25 @@ Syntax::
 
 
 
+``--reset-policy`` | ``--no-reset-policy`` (boolean)
+
+
+  Specify ``true`` to reset the policy document to the default policy. The default policy allows access to the service.
+
+  
+
+``--vpc-endpoint-id`` (string)
+
+
+  The ID of the endpoint.
+
+  
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 

@@ -15,8 +15,11 @@ Description
 
 
 
-Modifies an existing DB subnet group. DB subnet groups must contain at least one subnet in at least two AZs in the region. 
+Modifies an existing DB subnet group. DB subnet groups must contain at least one subnet in at least two AZs in the region.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSubnetGroup>`_
 
 
 ========
@@ -30,7 +33,7 @@ Synopsis
   [--db-subnet-group-description <value>]
   --subnet-ids <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -42,29 +45,29 @@ Options
 ``--db-subnet-group-name`` (string)
 
 
-  The name for the DB subnet group. This value is stored as a lowercase string. 
+  The name for the DB subnet group. This value is stored as a lowercase string.
 
    
 
-  Constraints: Must contain no more than 255 alphanumeric characters, periods, underscores, spaces, or hyphens. Must not be "default".
+  Constraints: Must contain no more than 255 alphanumeric characters, periods, underscores, spaces, or hyphens. Must not be default.
 
    
 
-  Example: ``mySubnetgroup`` 
+  Example: ``mySubnetgroup``  
 
   
 
 ``--db-subnet-group-description`` (string)
 
 
-  The description for the DB subnet group. 
+  The description for the DB subnet group.
 
   
 
 ``--subnet-ids`` (list)
 
 
-  The EC2 subnet IDs for the DB subnet group. 
+  The EC2 subnet IDs for the DB subnet group.
 
   
 
@@ -79,8 +82,8 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -92,18 +95,18 @@ DBSubnetGroup -> (structure)
 
   
 
-  Contains the result of a successful invocation of the following actions: 
+  Contains the result of a successful invocation of the following actions:
 
    
 
    
-  *  create-db-subnet-group  
+  *  create-db-subnet-group   
    
-  *  modify-db-subnet-group  
+  *  modify-db-subnet-group   
    
-  *  describe-db-subnet-groups  
+  *  describe-db-subnet-groups   
    
-  *  delete-db-subnet-group  
+  *  delete-db-subnet-group   
    
 
    
@@ -116,7 +119,7 @@ DBSubnetGroup -> (structure)
 
     
 
-    The name of the DB subnet group. 
+    The name of the DB subnet group.
 
     
 
@@ -126,7 +129,7 @@ DBSubnetGroup -> (structure)
 
     
 
-    Provides the description of the DB subnet group. 
+    Provides the description of the DB subnet group.
 
     
 
@@ -136,7 +139,7 @@ DBSubnetGroup -> (structure)
 
     
 
-    Provides the VpcId of the DB subnet group. 
+    Provides the VpcId of the DB subnet group.
 
     
 
@@ -146,7 +149,7 @@ DBSubnetGroup -> (structure)
 
     
 
-    Provides the status of the DB subnet group. 
+    Provides the status of the DB subnet group.
 
     
 
@@ -172,7 +175,7 @@ DBSubnetGroup -> (structure)
 
         
 
-        Specifies the identifier of the subnet. 
+        Specifies the identifier of the subnet.
 
         
 
@@ -182,17 +185,17 @@ DBSubnetGroup -> (structure)
 
         
 
-        Contains Availability Zone information. 
+        Contains Availability Zone information.
 
          
 
-        This data type is used as an element in the following data type: 
+        This data type is used as an element in the following data type:
 
-        
-        *  OrderableDBInstanceOption 
-        
+         
 
-        
+         
+        *  OrderableDBInstanceOption   
+         
 
         
 
@@ -200,7 +203,7 @@ DBSubnetGroup -> (structure)
 
           
 
-          The name of the availability zone. 
+          The name of the availability zone.
 
           
 
@@ -212,13 +215,23 @@ DBSubnetGroup -> (structure)
 
         
 
-        Specifies the status of the subnet. 
+        Specifies the status of the subnet.
 
         
 
         
 
       
+
+    
+
+  DBSubnetGroupArn -> (string)
+
+    
+
+    The Amazon Resource Name (ARN) for the DB subnet group.
+
+    
 
     
 

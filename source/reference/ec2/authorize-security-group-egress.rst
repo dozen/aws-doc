@@ -23,17 +23,7 @@ Description
 
 
 
-[EC2-VPC only] Adds one or more egress rules to a security group for use with a VPC. Specifically, this action permits instances to send traffic to one or more destination CIDR IP address ranges, or to one or more destination security groups for the same VPC. This action doesn't apply to security groups for use in EC2-Classic. For more information, see `Security Groups for Your VPC`_ in the *Amazon Virtual Private Cloud User Guide* .
-
- 
-
-.. warning::
-
-   
-
-  You can have up to 50 rules per security group (covering both ingress and egress rules).
-
-   
+[EC2-VPC only] Adds one or more egress rules to a security group for use with a VPC. Specifically, this action permits instances to send traffic to one or more destination IPv4 or IPv6 CIDR address ranges, or to one or more destination security groups for the same VPC. This action doesn't apply to security groups for use in EC2-Classic. For more information, see `Security Groups for Your VPC <http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html>`_ in the *Amazon Virtual Private Cloud User Guide* . For more information about security group limits, see `Amazon VPC Limits <http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Appendix_Limits.html>`_ .
 
  
 
@@ -43,6 +33,9 @@ Each rule consists of the protocol (for example, TCP), plus either a CIDR range 
 
 Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AuthorizeSecurityGroupEgress>`_
 
 
 ========
@@ -61,7 +54,7 @@ Synopsis
   [--source-group <value>]
   [--group-owner <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -95,7 +88,7 @@ Options
 
 Shorthand Syntax::
 
-    IpProtocol=string,FromPort=integer,ToPort=integer,UserIdGroupPairs=[{UserId=string,GroupName=string,GroupId=string},{UserId=string,GroupName=string,GroupId=string}],IpRanges=[{CidrIp=string},{CidrIp=string}],PrefixListIds=[{PrefixListId=string},{PrefixListId=string}] ...
+    FromPort=integer,IpProtocol=string,IpRanges=[{CidrIp=string},{CidrIp=string}],Ipv6Ranges=[{CidrIpv6=string},{CidrIpv6=string}],PrefixListIds=[{PrefixListId=string},{PrefixListId=string}],ToPort=integer,UserIdGroupPairs=[{GroupId=string,GroupName=string,PeeringStatus=string,UserId=string,VpcId=string,VpcPeeringConnectionId=string},{GroupId=string,GroupName=string,PeeringStatus=string,UserId=string,VpcId=string,VpcPeeringConnectionId=string}] ...
 
 
 
@@ -104,26 +97,35 @@ JSON Syntax::
 
   [
     {
-      "IpProtocol": "string",
       "FromPort": integer,
-      "ToPort": integer,
-      "UserIdGroupPairs": [
-        {
-          "UserId": "string",
-          "GroupName": "string",
-          "GroupId": "string"
-        }
-        ...
-      ],
+      "IpProtocol": "string",
       "IpRanges": [
         {
           "CidrIp": "string"
         }
         ...
       ],
+      "Ipv6Ranges": [
+        {
+          "CidrIpv6": "string"
+        }
+        ...
+      ],
       "PrefixListIds": [
         {
           "PrefixListId": "string"
+        }
+        ...
+      ],
+      "ToPort": integer,
+      "UserIdGroupPairs": [
+        {
+          "GroupId": "string",
+          "GroupName": "string",
+          "PeeringStatus": "string",
+          "UserId": "string",
+          "VpcId": "string",
+          "VpcPeeringConnectionId": "string"
         }
         ...
       ]
@@ -136,11 +138,15 @@ JSON Syntax::
 ``--protocol`` (string)
 
 
-  The IP protocol of this permission.
+  The IP protocol: ``tcp`` | ``udp`` | ``icmp`` 
+
+   
+
+  (VPC only) Use ``all`` to specify all protocols.
 
   
 
-  Valid protocol values: ``tcp`` , ``udp`` , ``icmp`` 
+  If this argument is provided without also providing the ``port`` argument, then it will be applied to all ports for the specified protocol.
 
   
 
@@ -179,8 +185,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -210,5 +216,3 @@ Output
 ======
 
 None
-
-.. _Security Groups for Your VPC: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html

@@ -19,8 +19,11 @@ Updates the thing shadow for the specified thing.
 
  
 
-For more information, see `update-thing-shadow`_ in the *AWS IoT Developer Guide* .
+For more information, see `update-thing-shadow <http://docs.aws.amazon.com/iot/latest/developerguide/API_UpdateThingShadow.html>`_ in the *AWS IoT Developer Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iot-data-2015-05-28/UpdateThingShadow>`_
 
 
 .. note::
@@ -81,6 +84,3 @@ payload -> (blob)
 
   
 
-
-
-.. _update-thing-shadow: http://docs.aws.amazon.com/iot/latest/developerguide/API_UpdateThingShadow.html

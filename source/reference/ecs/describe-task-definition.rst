@@ -29,6 +29,9 @@ Describes a task definition. You can specify a ``family`` and ``revision`` to fi
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTaskDefinition>`_
+
+
 ========
 Synopsis
 ========
@@ -38,7 +41,7 @@ Synopsis
     describe-task-definition
   --task-definition <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -57,8 +60,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -139,7 +142,7 @@ taskDefinition -> (structure)
 
     
 
-    The full Amazon Resource Name (ARN) of the of the task definition.
+    The full Amazon Resource Name (ARN) of the task definition.
 
     
 
@@ -149,7 +152,7 @@ taskDefinition -> (structure)
 
     
 
-    A list of container definitions in JSON format that describe the different containers that make up your task. For more information about container definition parameters and defaults, see `Amazon ECS Task Definitions`_ in the *Amazon EC2 Container Service Developer Guide* .
+    A list of container definitions in JSON format that describe the different containers that make up your task. For more information about container definition parameters and defaults, see `Amazon ECS Task Definitions <http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html>`_ in the *Amazon EC2 Container Service Developer Guide* .
 
     
 
@@ -165,7 +168,7 @@ taskDefinition -> (structure)
 
         
 
-        The name of a container. If you are linking multiple containers together in a task definition, the ``name`` of one container can be entered in the ``links`` of another container to connect the containers. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed. This parameter maps to ``name`` in the `Create a container`_ section of the `Docker Remote API`_ and the ``--name`` option to `docker run`_ . 
+        The name of a container. If you are linking multiple containers together in a task definition, the ``name`` of one container can be entered in the ``links`` of another container to connect the containers. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed. This parameter maps to ``name`` in the `Create a container <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container>`_ section of the `Docker Remote API <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/>`_ and the ``--name`` option to `docker run <https://docs.docker.com/engine/reference/run/>`_ . 
 
         
 
@@ -175,16 +178,18 @@ taskDefinition -> (structure)
 
         
 
-        The image used to start a container. This string is passed directly to the Docker daemon. Images in the Docker Hub registry are available by default. Other repositories are specified with ``*repository-url* /*image* :*tag*`` . Up to 255 letters (uppercase and lowercase), numbers, hyphens, underscores, colons, periods, forward slashes, and number signs are allowed. This parameter maps to ``Image`` in the `Create a container`_ section of the `Docker Remote API`_ and the ``IMAGE`` parameter of `docker run`_ .
+        The image used to start a container. This string is passed directly to the Docker daemon. Images in the Docker Hub registry are available by default. Other repositories are specified with `` *repository-url* /*image* :*tag* `` . Up to 255 letters (uppercase and lowercase), numbers, hyphens, underscores, colons, periods, forward slashes, and number signs are allowed. This parameter maps to ``Image`` in the `Create a container <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container>`_ section of the `Docker Remote API <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/>`_ and the ``IMAGE`` parameter of `docker run <https://docs.docker.com/engine/reference/run/>`_ .
 
          
 
          
-        * Images in official repositories on Docker Hub use a single name (for example, ``ubuntu`` or ``mongo`` ).
+        * Images in Amazon ECR repositories use the full registry and repository URI (for example, ``012345678910.dkr.ecr.region-name.amazonaws.com/repository-name`` ).  
          
-        * Images in other repositories on Docker Hub are qualified with an organization name (for example, ``amazon/amazon-ecs-agent`` ).
+        * Images in official repositories on Docker Hub use a single name (for example, ``ubuntu`` or ``mongo`` ). 
          
-        * Images in other online repositories are qualified further by a domain name (for example, ``quay.io/assemblyline/ubuntu`` ).
+        * Images in other repositories on Docker Hub are qualified with an organization name (for example, ``amazon/amazon-ecs-agent`` ). 
+         
+        * Images in other online repositories are qualified further by a domain name (for example, ``quay.io/assemblyline/ubuntu`` ). 
          
 
         
@@ -195,7 +200,7 @@ taskDefinition -> (structure)
 
         
 
-        The number of ``cpu`` units reserved for the container. A container instance has 1,024 ``cpu`` units for every CPU core. This parameter specifies the minimum amount of CPU to reserve for a container, and containers share unallocated CPU units with other containers on the instance with the same ratio as their allocated amount. This parameter maps to ``CpuShares`` in the `Create a container`_ section of the `Docker Remote API`_ and the ``--cpu-shares`` option to `docker run`_ .
+        The number of ``cpu`` units reserved for the container. A container instance has 1,024 ``cpu`` units for every CPU core. This parameter specifies the minimum amount of CPU to reserve for a container, and containers share unallocated CPU units with other containers on the instance with the same ratio as their allocated amount. This parameter maps to ``CpuShares`` in the `Create a container <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container>`_ section of the `Docker Remote API <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/>`_ and the ``--cpu-shares`` option to `docker run <https://docs.docker.com/engine/reference/run/>`_ .
 
          
 
@@ -203,7 +208,7 @@ taskDefinition -> (structure)
 
            
 
-          You can determine the number of CPU units that are available per EC2 instance type by multiplying the vCPUs listed for that instance type on the `Amazon EC2 Instances`_ detail page by 1,024.
+          You can determine the number of CPU units that are available per EC2 instance type by multiplying the vCPUs listed for that instance type on the `Amazon EC2 Instances <http://aws.amazon.com/ec2/instance-types/>`_ detail page by 1,024.
 
            
 
@@ -213,15 +218,15 @@ taskDefinition -> (structure)
 
          
 
-        The Docker daemon on the container instance uses the CPU value to calculate the relative CPU share ratios for running containers. For more information, see `CPU share constraint`_ in the Docker documentation. The minimum valid CPU share value that the Linux kernel allows is 2; however, the CPU parameter is not required, and you can use CPU values below 2 in your container definitions. For CPU values below 2 (including null), the behavior varies based on your Amazon ECS container agent version:
+        The Docker daemon on the container instance uses the CPU value to calculate the relative CPU share ratios for running containers. For more information, see `CPU share constraint <https://docs.docker.com/engine/reference/run/#cpu-share-constraint>`_ in the Docker documentation. The minimum valid CPU share value that the Linux kernel allows is 2; however, the CPU parameter is not required, and you can use CPU values below 2 in your container definitions. For CPU values below 2 (including null), the behavior varies based on your Amazon ECS container agent version:
 
          
 
          
-        * **Agent versions less than or equal to 1.1.0:** Null and zero CPU values are passed to Docker as 0, which Docker then converts to 1,024 CPU shares. CPU values of 1 are passed to Docker as 1, which the Linux kernel converts to 2 CPU shares.
+        * **Agent versions less than or equal to 1.1.0:** Null and zero CPU values are passed to Docker as 0, which Docker then converts to 1,024 CPU shares. CPU values of 1 are passed to Docker as 1, which the Linux kernel converts to 2 CPU shares. 
          
-        * **Agent versions greater than or equal to 1.2.0:** Null, zero, and CPU values of 1 are passed to Docker as 2.
-        
+        * **Agent versions greater than or equal to 1.2.0:** Null, zero, and CPU values of 1 are passed to Docker as 2. 
+         
 
         
 
@@ -231,7 +236,33 @@ taskDefinition -> (structure)
 
         
 
-        The number of MiB of memory to reserve for the container. You must specify a non-zero integer for this parameter; the Docker daemon reserves a minimum of 4 MiB of memory for a container, so you should not specify fewer than 4 MiB of memory for your containers. If your container attempts to exceed the memory allocated here, the container is killed. This parameter maps to ``Memory`` in the `Create a container`_ section of the `Docker Remote API`_ and the ``--memory`` option to `docker run`_ .
+        The hard limit (in MiB) of memory to present to the container. If your container attempts to exceed the memory specified here, the container is killed. This parameter maps to ``Memory`` in the `Create a container <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container>`_ section of the `Docker Remote API <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/>`_ and the ``--memory`` option to `docker run <https://docs.docker.com/engine/reference/run/>`_ .
+
+         
+
+        You must specify a non-zero integer for one or both of ``memory`` or ``memoryReservation`` in container definitions. If you specify both, ``memory`` must be greater than ``memoryReservation`` . If you specify ``memoryReservation`` , then that value is subtracted from the available memory resources for the container instance on which the container is placed; otherwise, the value of ``memory`` is used.
+
+         
+
+        The Docker daemon reserves a minimum of 4 MiB of memory for a container, so you should not specify fewer than 4 MiB of memory for your containers. 
+
+        
+
+        
+
+      memoryReservation -> (integer)
+
+        
+
+        The soft limit (in MiB) of memory to reserve for the container. When system memory is under heavy contention, Docker attempts to keep the container memory to this soft limit; however, your container can consume more memory when it needs to, up to either the hard limit specified with the ``memory`` parameter (if applicable), or all of the available memory on the container instance, whichever comes first. This parameter maps to ``MemoryReservation`` in the `Create a container <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container>`_ section of the `Docker Remote API <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/>`_ and the ``--memory-reservation`` option to `docker run <https://docs.docker.com/engine/reference/run/>`_ .
+
+         
+
+        You must specify a non-zero integer for one or both of ``memory`` or ``memoryReservation`` in container definitions. If you specify both, ``memory`` must be greater than ``memoryReservation`` . If you specify ``memoryReservation`` , then that value is subtracted from the available memory resources for the container instance on which the container is placed; otherwise, the value of ``memory`` is used.
+
+         
+
+        For example, if your container normally uses 128 MiB of memory, but occasionally bursts to 256 MiB of memory for short periods of time, you can set a ``memoryReservation`` of 128 MiB, and a ``memory`` hard limit of 300 MiB. This configuration would allow the container to only reserve 128 MiB of memory from the remaining resources on the container instance, but also allow the container to consume more memory resources when needed.
 
         
 
@@ -241,7 +272,7 @@ taskDefinition -> (structure)
 
         
 
-        The ``link`` parameter allows containers to communicate with each other without the need for port mappings, using the ``name`` parameter and optionally, an ``alias`` for the link. This construct is analogous to ``name:alias`` in Docker links. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed for each ``name`` and ``alias`` . For more information on linking Docker containers, see `https\://docs.docker.com/userguide/dockerlinks/`_ . This parameter maps to ``Links`` in the `Create a container`_ section of the `Docker Remote API`_ and the ``--link`` option to ```docker run```_ .
+        The ``link`` parameter allows containers to communicate with each other without the need for port mappings, using the ``name`` parameter and optionally, an ``alias`` for the link. This construct is analogous to ``name:alias`` in Docker links. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed for each ``name`` and ``alias`` . For more information on linking Docker containers, see `https\://docs.docker.com/engine/userguide/networking/default_network/dockerlinks/ <https://docs.docker.com/engine/userguide/networking/default_network/dockerlinks/>`_ . This parameter maps to ``Links`` in the `Create a container <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container>`_ section of the `Docker Remote API <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/>`_ and the ``--link`` option to `docker run <https://docs.docker.com/engine/reference/run/>`_ .
 
          
 
@@ -267,7 +298,7 @@ taskDefinition -> (structure)
 
         
 
-        The list of port mappings for the container. Port mappings allow containers to access ports on the host container instance to send or receive traffic. This parameter maps to ``PortBindings`` in the `Create a container`_ section of the `Docker Remote API`_ and the ``--publish`` option to `docker run`_ .
+        The list of port mappings for the container. Port mappings allow containers to access ports on the host container instance to send or receive traffic. This parameter maps to ``PortBindings`` in the `Create a container <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container>`_ section of the `Docker Remote API <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/>`_ and the ``--publish`` option to `docker run <https://docs.docker.com/engine/reference/run/>`_ . If the network mode of a task definition is set to ``none`` , then you cannot specify port mappings. If the network mode of a task definition is set to ``host`` , then host ports must either be undefined or they must match the container port in the port mapping.
 
          
 
@@ -293,7 +324,7 @@ taskDefinition -> (structure)
 
             
 
-            The port number on the container that is bound to the user-specified or automatically assigned host port. If you specify a container port and not a host port, your container automatically receives a host port in the ephemeral port range (for more information, see ``hostPort`` ).
+            The port number on the container that is bound to the user-specified or automatically assigned host port. If you specify a container port and not a host port, your container automatically receives a host port in the ephemeral port range (for more information, see ``hostPort`` ). Port mappings that are automatically assigned in this way do not count toward the 100 reserved ports limit of a container instance.
 
             
 
@@ -307,11 +338,21 @@ taskDefinition -> (structure)
 
              
 
-            The default ephemeral port range is 49153 to 65535, and this range is used for Docker versions prior to 1.6.0. For Docker version 1.6.0 and later, the Docker daemon tries to read the ephemeral port range from ``/proc/sys/net/ipv4/ip_local_port_range`` ; if this kernel parameter is unavailable, the default ephemeral port range is used. You should not attempt to specify a host port in the ephemeral port range, because these are reserved for automatic assignment. In general, ports below 32768 are outside of the ephemeral port range.
+            The default ephemeral port range for Docker version 1.6.0 and later is listed on the instance under ``/proc/sys/net/ipv4/ip_local_port_range`` ; if this kernel parameter is unavailable, the default ephemeral port range of 49153 to 65535 is used. You should not attempt to specify a host port in the ephemeral port range as these are reserved for automatic assignment. In general, ports below 32768 are outside of the ephemeral port range.
 
              
 
-            The default reserved ports are 22 for SSH, the Docker ports 2375 and 2376, and the Amazon ECS container agent port 51678. Any host port that was previously specified in a running task is also reserved while the task is running (after a task stops, the host port is released).The current reserved ports are displayed in the ``remainingResources`` of  describe-container-instances output, and a container instance may have up to 50 reserved ports at a time, including the default reserved ports (automatically assigned ports do not count toward this limit).
+            .. note::
+
+               
+
+              The default ephemeral port range of 49153 to 65535 will always be used for Docker versions prior to 1.6.0.
+
+               
+
+             
+
+            The default reserved ports are 22 for SSH, the Docker ports 2375 and 2376, and the Amazon ECS container agent ports 51678 and 51679. Any host port that was previously specified in a running task is also reserved while the task is running (after a task stops, the host port is released).The current reserved ports are displayed in the ``remainingResources`` of  describe-container-instances output, and a container instance may have up to 100 reserved ports at a time, including the default reserved ports (automatically assigned ports do not count toward the 100 reserved ports limit).
 
             
 
@@ -335,17 +376,11 @@ taskDefinition -> (structure)
 
         
 
-        If the ``essential`` parameter of a container is marked as ``true`` , the failure of that container stops the task. If the ``essential`` parameter of a container is marked as ``false`` , then its failure does not affect the rest of the containers in a task. If this parameter is omitted, a container is assumed to be essential.
+        If the ``essential`` parameter of a container is marked as ``true`` , and that container fails or stops for any reason, all other containers that are part of the task are stopped. If the ``essential`` parameter of a container is marked as ``false`` , then its failure does not affect the rest of the containers in a task. If this parameter is omitted, a container is assumed to be essential.
 
          
 
-        .. note::
-
-           
-
-          All tasks must have at least one essential container.
-
-           
+        All tasks must have at least one essential container. If you have an application that is composed of multiple containers, you should group containers that are used for a common purpose into components, and separate the different components into multiple task definitions. For more information, see `Application Architecture <http://docs.aws.amazon.com/AmazonECS/latest/developerguide/application_architecture.html>`_ in the *Amazon EC2 Container Service Developer Guide* .
 
         
 
@@ -365,7 +400,7 @@ taskDefinition -> (structure)
 
          
 
-        The entry point that is passed to the container. This parameter maps to ``Entrypoint`` in the `Create a container`_ section of the `Docker Remote API`_ and the ``--entrypoint`` option to `docker run`_ . For more information, see `https\://docs.docker.com/reference/builder/#entrypoint`_ .
+        The entry point that is passed to the container. This parameter maps to ``Entrypoint`` in the `Create a container <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container>`_ section of the `Docker Remote API <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/>`_ and the ``--entrypoint`` option to `docker run <https://docs.docker.com/engine/reference/run/>`_ . For more information, see `https\://docs.docker.com/engine/reference/builder/#entrypoint <https://docs.docker.com/engine/reference/builder/#entrypoint>`_ .
 
         
 
@@ -381,7 +416,7 @@ taskDefinition -> (structure)
 
         
 
-        The command that is passed to the container. This parameter maps to ``Cmd`` in the `Create a container`_ section of the `Docker Remote API`_ and the ``COMMAND`` parameter to `docker run`_ . For more information, see `https\://docs.docker.com/reference/builder/#cmd`_ .
+        The command that is passed to the container. This parameter maps to ``Cmd`` in the `Create a container <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container>`_ section of the `Docker Remote API <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/>`_ and the ``COMMAND`` parameter to `docker run <https://docs.docker.com/engine/reference/run/>`_ . For more information, see `https\://docs.docker.com/engine/reference/builder/#cmd <https://docs.docker.com/engine/reference/builder/#cmd>`_ .
 
         
 
@@ -397,7 +432,7 @@ taskDefinition -> (structure)
 
         
 
-        The environment variables to pass to a container. This parameter maps to ``Env`` in the `Create a container`_ section of the `Docker Remote API`_ and the ``--env`` option to `docker run`_ .
+        The environment variables to pass to a container. This parameter maps to ``Env`` in the `Create a container <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container>`_ section of the `Docker Remote API <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/>`_ and the ``--env`` option to `docker run <https://docs.docker.com/engine/reference/run/>`_ .
 
          
 
@@ -447,7 +482,7 @@ taskDefinition -> (structure)
 
         
 
-        The mount points for data volumes in your container. This parameter maps to ``Volumes`` in the `Create a container`_ section of the `Docker Remote API`_ and the ``--volume`` option to `docker run`_ .
+        The mount points for data volumes in your container. This parameter maps to ``Volumes`` in the `Create a container <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container>`_ section of the `Docker Remote API <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/>`_ and the ``--volume`` option to `docker run <https://docs.docker.com/engine/reference/run/>`_ .
 
         
 
@@ -497,7 +532,7 @@ taskDefinition -> (structure)
 
         
 
-        Data volumes to mount from another container. This parameter maps to ``VolumesFrom`` in the `Create a container`_ section of the `Docker Remote API`_ and the ``--volumes-from`` option to `docker run`_ .
+        Data volumes to mount from another container. This parameter maps to ``VolumesFrom`` in the `Create a container <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container>`_ section of the `Docker Remote API <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/>`_ and the ``--volumes-from`` option to `docker run <https://docs.docker.com/engine/reference/run/>`_ .
 
         
 
@@ -505,7 +540,7 @@ taskDefinition -> (structure)
 
           
 
-          Details on a data volume from another container.
+          Details on a data volume from another container in the same task definition.
 
           
 
@@ -513,7 +548,7 @@ taskDefinition -> (structure)
 
             
 
-            The name of the container to mount volumes from.
+            The name of another container within the same task definition to mount volumes from.
 
             
 
@@ -537,7 +572,7 @@ taskDefinition -> (structure)
 
         
 
-        The hostname to use for your container. This parameter maps to ``Hostname`` in the `Create a container`_ section of the `Docker Remote API`_ and the ``--hostname`` option to `docker run`_ .
+        The hostname to use for your container. This parameter maps to ``Hostname`` in the `Create a container <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container>`_ section of the `Docker Remote API <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/>`_ and the ``--hostname`` option to `docker run <https://docs.docker.com/engine/reference/run/>`_ .
 
         
 
@@ -547,7 +582,7 @@ taskDefinition -> (structure)
 
         
 
-        The user name to use inside the container. This parameter maps to ``User`` in the `Create a container`_ section of the `Docker Remote API`_ and the ``--user`` option to `docker run`_ .
+        The user name to use inside the container. This parameter maps to ``User`` in the `Create a container <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container>`_ section of the `Docker Remote API <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/>`_ and the ``--user`` option to `docker run <https://docs.docker.com/engine/reference/run/>`_ .
 
         
 
@@ -557,7 +592,7 @@ taskDefinition -> (structure)
 
         
 
-        The working directory in which to run commands inside the container. This parameter maps to ``WorkingDir`` in the `Create a container`_ section of the `Docker Remote API`_ and the ``--workdir`` option to `docker run`_ .
+        The working directory in which to run commands inside the container. This parameter maps to ``WorkingDir`` in the `Create a container <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container>`_ section of the `Docker Remote API <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/>`_ and the ``--workdir`` option to `docker run <https://docs.docker.com/engine/reference/run/>`_ .
 
         
 
@@ -567,7 +602,7 @@ taskDefinition -> (structure)
 
         
 
-        When this parameter is true, networking is disabled within the container. This parameter maps to ``NetworkDisabled`` in the `Create a container`_ section of the `Docker Remote API`_ .
+        When this parameter is true, networking is disabled within the container. This parameter maps to ``NetworkDisabled`` in the `Create a container <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container>`_ section of the `Docker Remote API <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/>`_ .
 
         
 
@@ -577,7 +612,7 @@ taskDefinition -> (structure)
 
         
 
-        When this parameter is true, the container is given elevated privileges on the host container instance (similar to the ``root`` user). This parameter maps to ``Privileged`` in the `Create a container`_ section of the `Docker Remote API`_ and the ``--privileged`` option to `docker run`_ .
+        When this parameter is true, the container is given elevated privileges on the host container instance (similar to the ``root`` user). This parameter maps to ``Privileged`` in the `Create a container <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container>`_ section of the `Docker Remote API <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/>`_ and the ``--privileged`` option to `docker run <https://docs.docker.com/engine/reference/run/>`_ .
 
         
 
@@ -587,7 +622,7 @@ taskDefinition -> (structure)
 
         
 
-        When this parameter is true, the container is given read-only access to its root file system. This parameter maps to ``ReadonlyRootfs`` in the `Create a container`_ section of the `Docker Remote API`_ and the ``--read-only`` option to ``docker run`` .
+        When this parameter is true, the container is given read-only access to its root file system. This parameter maps to ``ReadonlyRootfs`` in the `Create a container <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container>`_ section of the `Docker Remote API <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/>`_ and the ``--read-only`` option to ``docker run`` .
 
         
 
@@ -597,7 +632,7 @@ taskDefinition -> (structure)
 
         
 
-        A list of DNS servers that are presented to the container. This parameter maps to ``Dns`` in the `Create a container`_ section of the `Docker Remote API`_ and the ``--dns`` option to `docker run`_ .
+        A list of DNS servers that are presented to the container. This parameter maps to ``Dns`` in the `Create a container <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container>`_ section of the `Docker Remote API <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/>`_ and the ``--dns`` option to `docker run <https://docs.docker.com/engine/reference/run/>`_ .
 
         
 
@@ -613,7 +648,7 @@ taskDefinition -> (structure)
 
         
 
-        A list of DNS search domains that are presented to the container. This parameter maps to ``DnsSearch`` in the `Create a container`_ section of the `Docker Remote API`_ and the ``--dns-search`` option to `docker run`_ .
+        A list of DNS search domains that are presented to the container. This parameter maps to ``DnsSearch`` in the `Create a container <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container>`_ section of the `Docker Remote API <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/>`_ and the ``--dns-search`` option to `docker run <https://docs.docker.com/engine/reference/run/>`_ .
 
         
 
@@ -629,7 +664,7 @@ taskDefinition -> (structure)
 
         
 
-        A list of hostnames and IP address mappings to append to the ``/etc/hosts`` file on the container. This parameter maps to ``ExtraHosts`` in the `Create a container`_ section of the `Docker Remote API`_ and the ``--add-host`` option to `docker run`_ .
+        A list of hostnames and IP address mappings to append to the ``/etc/hosts`` file on the container. This parameter maps to ``ExtraHosts`` in the `Create a container <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container>`_ section of the `Docker Remote API <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/>`_ and the ``--add-host`` option to `docker run <https://docs.docker.com/engine/reference/run/>`_ .
 
         
 
@@ -669,7 +704,7 @@ taskDefinition -> (structure)
 
         
 
-        A list of strings to provide custom labels for SELinux and AppArmor multi-level security systems. This parameter maps to ``SecurityOpt`` in the `Create a container`_ section of the `Docker Remote API`_ and the ``--security-opt`` option to `docker run`_ .
+        A list of strings to provide custom labels for SELinux and AppArmor multi-level security systems. This parameter maps to ``SecurityOpt`` in the `Create a container <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container>`_ section of the `Docker Remote API <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/>`_ and the ``--security-opt`` option to `docker run <https://docs.docker.com/engine/reference/run/>`_ .
 
          
 
@@ -677,7 +712,7 @@ taskDefinition -> (structure)
 
            
 
-          The Amazon ECS container agent running on a container instance must register with the ``ECS_SELINUX_CAPABLE=true`` or ``ECS_APPARMOR_CAPABLE=true`` environment variables before containers placed on that instance can use these security options. For more information, see `Amazon ECS Container Agent Configuration`_ in the *Amazon EC2 Container Service Developer Guide* .
+          The Amazon ECS container agent running on a container instance must register with the ``ECS_SELINUX_CAPABLE=true`` or ``ECS_APPARMOR_CAPABLE=true`` environment variables before containers placed on that instance can use these security options. For more information, see `Amazon ECS Container Agent Configuration <http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html>`_ in the *Amazon EC2 Container Service Developer Guide* .
 
            
 
@@ -695,7 +730,7 @@ taskDefinition -> (structure)
 
         
 
-        A key/value map of labels to add to the container. This parameter maps to ``Labels`` in the `Create a container`_ section of the `Docker Remote API`_ and the ``--label`` option to `docker run`_ . This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: ``sudo docker version | grep "Server API version"``  
+        A key/value map of labels to add to the container. This parameter maps to ``Labels`` in the `Create a container <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container>`_ section of the `Docker Remote API <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/>`_ and the ``--label`` option to `docker run <https://docs.docker.com/engine/reference/run/>`_ . This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: ``sudo docker version | grep "Server API version"``  
 
         
 
@@ -717,7 +752,7 @@ taskDefinition -> (structure)
 
         
 
-        A list of ``ulimits`` to set in the container. This parameter maps to ``Ulimits`` in the `Create a container`_ section of the `Docker Remote API`_ and the ``--ulimit`` option to `docker run`_ . Valid naming values are displayed in the  Ulimit data type. This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: ``sudo docker version | grep "Server API version"`` 
+        A list of ``ulimits`` to set in the container. This parameter maps to ``Ulimits`` in the `Create a container <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container>`_ section of the `Docker Remote API <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/>`_ and the ``--ulimit`` option to `docker run <https://docs.docker.com/engine/reference/run/>`_ . Valid naming values are displayed in the  Ulimit data type. This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: ``sudo docker version | grep "Server API version"``  
 
         
 
@@ -767,7 +802,7 @@ taskDefinition -> (structure)
 
         
 
-        The log configuration specification for the container. This parameter maps to ``LogConfig`` in the `Create a container`_ section of the `Docker Remote API`_ and the ``--log-driver`` option to `docker run`_ . Valid log drivers are displayed in the  LogConfiguration data type. This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: ``sudo docker version | grep "Server API version"`` 
+        The log configuration specification for the container. This parameter maps to ``LogConfig`` in the `Create a container <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container>`_ section of the `Docker Remote API <https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/>`_ and the ``--log-driver`` option to `docker run <https://docs.docker.com/engine/reference/run/>`_ . By default, containers use the same logging driver that the Docker daemon uses; however the container may use a different logging driver than the Docker daemon by specifying a log driver with this parameter in the container definition. To use a different logging driver for a container, the log system must be configured properly on the container instance (or on a different log server for remote logging options). For more information on the options for different supported log drivers, see `Configure logging drivers <https://docs.docker.com/engine/admin/logging/overview/>`_ in the Docker documentation.
 
          
 
@@ -775,7 +810,21 @@ taskDefinition -> (structure)
 
            
 
-          The Amazon ECS container agent running on a container instance must register the logging drivers available on that instance with the ``ECS_AVAILABLE_LOGGING_DRIVERS`` environment variable before containers placed on that instance can use these log configuration options. For more information, see `Amazon ECS Container Agent Configuration`_ in the *Amazon EC2 Container Service Developer Guide* .
+          Amazon ECS currently supports a subset of the logging drivers available to the Docker daemon (shown in the  LogConfiguration data type). Additional log drivers may be available in future releases of the Amazon ECS container agent.
+
+           
+
+         
+
+        This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: ``sudo docker version | grep "Server API version"``  
+
+         
+
+        .. note::
+
+           
+
+          The Amazon ECS container agent running on a container instance must register the logging drivers available on that instance with the ``ECS_AVAILABLE_LOGGING_DRIVERS`` environment variable before containers placed on that instance can use these log configuration options. For more information, see `Amazon ECS Container Agent Configuration <http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html>`_ in the *Amazon EC2 Container Service Developer Guide* .
 
            
 
@@ -785,7 +834,21 @@ taskDefinition -> (structure)
 
           
 
-          The log driver to use for the container. This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: ``sudo docker version | grep "Server API version"`` 
+          The log driver to use for the container. The valid values listed for this parameter are log drivers that the Amazon ECS container agent can communicate with by default. 
+
+           
+
+          .. note::
+
+             
+
+            If you have a custom driver that is not listed above that you would like to work with the Amazon ECS container agent, you can fork the Amazon ECS container agent project that is `available on GitHub <https://github.com/aws/amazon-ecs-agent>`_ and customize it to work with that driver. We encourage you to submit pull requests for changes that you would like to have included. However, Amazon Web Services does not currently provide support for running modified copies of this software.
+
+             
+
+           
+
+          This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: ``sudo docker version | grep "Server API version"``  
 
           
 
@@ -795,7 +858,7 @@ taskDefinition -> (structure)
 
           
 
-          The configuration options to send to the log driver. This parameter requires version 1.19 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: ``sudo docker version | grep "Server API version"`` 
+          The configuration options to send to the log driver. This parameter requires version 1.19 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: ``sudo docker version | grep "Server API version"``  
 
           
 
@@ -829,6 +892,34 @@ taskDefinition -> (structure)
 
     
 
+  taskRoleArn -> (string)
+
+    
+
+    The Amazon Resource Name (ARN) of the IAM role that containers in this task can assume. All containers in this task are granted the permissions that are specified in this role.
+
+    
+
+    
+
+  networkMode -> (string)
+
+    
+
+    The Docker networking mode to use for the containers in the task. The valid values are ``none`` , ``bridge`` , and ``host`` . 
+
+     
+
+    If the network mode is ``none`` , the containers do not have external connectivity. The default Docker network mode is ``bridge`` . The ``host`` network mode offers the highest networking performance for containers because it uses the host network stack instead of the virtualized network stack provided by the ``bridge`` mode.
+
+     
+
+    For more information, see `Network settings <https://docs.docker.com/engine/reference/run/#network-settings>`_ in the *Docker run reference* .
+
+    
+
+    
+
   revision -> (integer)
 
     
@@ -843,7 +934,7 @@ taskDefinition -> (structure)
 
     
 
-    The list of volumes in a task. For more information about volume definition parameters and defaults, see `Amazon ECS Task Definitions`_ in the *Amazon EC2 Container Service Developer Guide* .
+    The list of volumes in a task. For more information about volume definition parameters and defaults, see `Amazon ECS Task Definitions <http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html>`_ in the *Amazon EC2 Container Service Developer Guide* .
 
     
 
@@ -911,7 +1002,7 @@ taskDefinition -> (structure)
 
       
 
-      The attributes applicable to a container instance when it is registered.
+      An attribute is a name-value pair associated with an Amazon ECS object. Attributes enable you to extend the Amazon ECS data model by adding custom metadata to your resources. For more information, see `Attributes <http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html#attributes>`_ in the *Amazon EC2 Container Service Developer Guide* .
 
       
 
@@ -919,7 +1010,7 @@ taskDefinition -> (structure)
 
         
 
-        The name of the container instance attribute.
+        The name of the attribute. Up to 128 letters (uppercase and lowercase), numbers, hyphens, underscores, and periods are allowed.
 
         
 
@@ -929,7 +1020,67 @@ taskDefinition -> (structure)
 
         
 
-        The value of the container instance attribute (at this time, the value here is ``Null`` , but this could change in future revisions for expandability).
+        The value of the attribute. Up to 128 letters (uppercase and lowercase), numbers, hyphens, underscores, periods, at signs (@), forward slashes, colons, and spaces are allowed.
+
+        
+
+        
+
+      targetType -> (string)
+
+        
+
+        The type of the target with which to attach the attribute. This parameter is required if you use the short form ID for a resource instead of the full Amazon Resource Name (ARN).
+
+        
+
+        
+
+      targetId -> (string)
+
+        
+
+        The ID of the target. You can specify the short form ID for a resource or the full Amazon Resource Name (ARN).
+
+        
+
+        
+
+      
+
+    
+
+  placementConstraints -> (list)
+
+    
+
+    An array of placement constraint objects to use for tasks. 
+
+    
+
+    (structure)
+
+      
+
+      An object representing a constraint on task placement in the task definition. For more information, see `Task Placement Constraints <http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html>`_ in the *Amazon EC2 Container Service Developer Guide* .
+
+      
+
+      type -> (string)
+
+        
+
+        The type of constraint. The ``DistinctInstance`` constraint ensures that each task in a particular group is running on a different container instance. The ``MemberOf`` constraint restricts selection to be from a group of valid candidates.
+
+        
+
+        
+
+      expression -> (string)
+
+        
+
+        A cluster query language expression to apply to the constraint. For more information, see `Cluster Query Language <http://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html>`_ in the *Amazon EC2 Container Service Developer Guide* .
 
         
 
@@ -941,16 +1092,3 @@ taskDefinition -> (structure)
 
   
 
-
-
-.. _``: https://docs.docker.com/reference/commandline/run/
-.. _https\://docs.docker.com/userguide/dockerlinks/: https://docs.docker.com/userguide/dockerlinks/
-.. _CPU share constraint: https://docs.docker.com/reference/run/#cpu-share-constraint
-.. _Amazon ECS Container Agent Configuration: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/developerguide/ecs-agent-config.html
-.. _https\://docs.docker.com/reference/builder/#cmd: https://docs.docker.com/reference/builder/#cmd
-.. _https\://docs.docker.com/reference/builder/#entrypoint: https://docs.docker.com/reference/builder/#entrypoint
-.. _docker run: https://docs.docker.com/reference/commandline/run/
-.. _Create a container: https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container
-.. _Amazon ECS Task Definitions: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html
-.. _Amazon EC2 Instances: http://aws.amazon.com/ec2/instance-types/
-.. _Docker Remote API: https://docs.docker.com/reference/api/docker_remote_api_v1.19/

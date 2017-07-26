@@ -23,8 +23,11 @@ If you exceed your maximum limit of launch configurations, which by default is 1
 
  
 
-For more information, see `Launch Configurations`_ in the *Auto Scaling Developer Guide* .
+For more information, see `Launch Configurations <http://docs.aws.amazon.com/autoscaling/latest/userguide/LaunchConfiguration.html>`_ in the *Auto Scaling User Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateLaunchConfiguration>`_
 
 
 ========
@@ -53,7 +56,7 @@ Synopsis
   [--associate-public-ip-address | --no-associate-public-ip-address]
   [--placement-tenancy <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -72,14 +75,14 @@ Options
 ``--image-id`` (string)
 
 
-  The ID of the Amazon Machine Image (AMI) to use to launch your EC2 instances. For more information, see `Finding an AMI`_ in the *Amazon Elastic Compute Cloud User Guide* .
+  The ID of the Amazon Machine Image (AMI) to use to launch your EC2 instances. For more information, see `Finding an AMI <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html>`_ in the *Amazon Elastic Compute Cloud User Guide* .
 
   
 
 ``--key-name`` (string)
 
 
-  The name of the key pair. For more information, see `Amazon EC2 Key Pairs`_ in the *Amazon Elastic Compute Cloud User Guide* .
+  The name of the key pair. For more information, see `Amazon EC2 Key Pairs <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html>`_ in the *Amazon Elastic Compute Cloud User Guide* .
 
   
 
@@ -90,11 +93,11 @@ Options
 
    
 
-  If your instances are launched in EC2-Classic, you can either specify security group names or the security group IDs. For more information about security groups for EC2-Classic, see `Amazon EC2 Security Groups`_ in the *Amazon Elastic Compute Cloud User Guide* .
+  If your instances are launched in EC2-Classic, you can either specify security group names or the security group IDs. For more information about security groups for EC2-Classic, see `Amazon EC2 Security Groups <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html>`_ in the *Amazon Elastic Compute Cloud User Guide* .
 
    
 
-  If your instances are launched into a VPC, specify security group IDs. For more information, see `Security Groups for Your VPC`_ in the *Amazon Virtual Private Cloud User Guide* .
+  If your instances are launched into a VPC, specify security group IDs. For more information, see `Security Groups for Your VPC <http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html>`_ in the *Amazon Virtual Private Cloud User Guide* .
 
   
 
@@ -109,14 +112,14 @@ Syntax::
 ``--classic-link-vpc-id`` (string)
 
 
-  The ID of a ClassicLink-enabled VPC to link your EC2-Classic instances to. This parameter is supported only if you are launching EC2-Classic instances. For more information, see `ClassicLink`_ in the *Amazon Elastic Compute Cloud User Guide* .
+  The ID of a ClassicLink-enabled VPC to link your EC2-Classic instances to. This parameter is supported only if you are launching EC2-Classic instances. For more information, see `ClassicLink <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html>`_ in the *Amazon Elastic Compute Cloud User Guide* .
 
   
 
 ``--classic-link-vpc-security-groups`` (list)
 
 
-  The IDs of one or more security groups for the specified ClassicLink-enabled VPC. This parameter is required if you specify a ClassicLink-enabled VPC, and is not supported otherwise. For more information, see `ClassicLink`_ in the *Amazon Elastic Compute Cloud User Guide* .
+  The IDs of one or more security groups for the specified ClassicLink-enabled VPC. This parameter is required if you specify a ClassicLink-enabled VPC, and is not supported otherwise. For more information, see `ClassicLink <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html>`_ in the *Amazon Elastic Compute Cloud User Guide* .
 
   
 
@@ -131,7 +134,7 @@ Syntax::
 ``--user-data`` (string)
 
 
-  The user data to make available to the launched EC2 instances. For more information, see `Instance Metadata and User Data`_ in the *Amazon Elastic Compute Cloud User Guide* .
+  The user data to make available to the launched EC2 instances. For more information, see `Instance Metadata and User Data <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html>`_ in the *Amazon Elastic Compute Cloud User Guide* .
 
   
 
@@ -150,35 +153,35 @@ Syntax::
 
    
 
-  For more information, see `Create a Launch Configuration Using an EC2 Instance`_ in the *Auto Scaling Developer Guide* .
+  For more information, see `Create a Launch Configuration Using an EC2 Instance <http://docs.aws.amazon.com/autoscaling/latest/userguide/create-lc-with-instanceID.html>`_ in the *Auto Scaling User Guide* .
 
   
 
 ``--instance-type`` (string)
 
 
-  The instance type of the EC2 instance. For information about available instance types, see `Available Instance Types`_ in the *Amazon Elastic Compute Cloud User Guide.*  
+  The instance type of the EC2 instance. For information about available instance types, see `Available Instance Types <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#AvailableInstanceTypes>`_ in the *Amazon Elastic Compute Cloud User Guide.*  
 
   
 
 ``--kernel-id`` (string)
 
 
-  The ID of the kernel associated with the AMI. 
+  The ID of the kernel associated with the AMI.
 
   
 
 ``--ramdisk-id`` (string)
 
 
-  The ID of the RAM disk associated with the AMI. 
+  The ID of the RAM disk associated with the AMI.
 
   
 
 ``--block-device-mappings`` (list)
 
 
-  One or more mappings that specify how block devices are exposed to the instance. For more information, see `Block Device Mapping`_ in the *Amazon Elastic Compute Cloud User Guide* .
+  One or more mappings that specify how block devices are exposed to the instance. For more information, see `Block Device Mapping <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html>`_ in the *Amazon Elastic Compute Cloud User Guide* .
 
   
 
@@ -215,11 +218,7 @@ JSON Syntax::
 ``--instance-monitoring`` (structure)
 
 
-  Enables detailed monitoring if it is disabled. Detailed monitoring is enabled by default.
-
-   
-
-  When detailed monitoring is enabled, Amazon CloudWatch generates metrics every minute and your account is charged a fee. When you disable detailed monitoring, by specifying ``False`` , CloudWatch generates metrics every 5 minutes. For more information, see `Monitoring Your Auto Scaling Instances and Groups`_ in the *Auto Scaling Developer Guide* .
+  Enables detailed monitoring (``true`` ) or basic monitoring (``false`` ) for the Auto Scaling instances.
 
   
 
@@ -243,7 +242,7 @@ JSON Syntax::
 ``--spot-price`` (string)
 
 
-  The maximum hourly price to be paid for any Spot Instance launched to fulfill the request. Spot Instances are launched when the price you specify exceeds the current Spot market price. For more information, see `Launching Spot Instances in Your Auto Scaling Group`_ in the *Auto Scaling Developer Guide* .
+  The maximum hourly price to be paid for any Spot Instance launched to fulfill the request. Spot Instances are launched when the price you specify exceeds the current Spot market price. For more information, see `Launching Spot Instances in Your Auto Scaling Group <http://docs.aws.amazon.com/autoscaling/latest/userguide/US-SpotInstances.html>`_ in the *Auto Scaling User Guide* .
 
   
 
@@ -254,21 +253,21 @@ JSON Syntax::
 
    
 
-  EC2 instances launched with an IAM role will automatically have AWS security credentials available. You can use IAM roles with Auto Scaling to automatically enable applications running on your EC2 instances to securely access other AWS resources. For more information, see `Launch Auto Scaling Instances with an IAM Role`_ in the *Auto Scaling Developer Guide* .
+  EC2 instances launched with an IAM role will automatically have AWS security credentials available. You can use IAM roles with Auto Scaling to automatically enable applications running on your EC2 instances to securely access other AWS resources. For more information, see `Launch Auto Scaling Instances with an IAM Role <http://docs.aws.amazon.com/autoscaling/latest/userguide/us-iam-role.html>`_ in the *Auto Scaling User Guide* .
 
   
 
 ``--ebs-optimized`` | ``--no-ebs-optimized`` (boolean)
 
 
-  Indicates whether the instance is optimized for Amazon EBS I/O. By default, the instance is not optimized for EBS I/O. The optimization provides dedicated throughput to Amazon EBS and an optimized configuration stack to provide optimal I/O performance. This optimization is not available with all instance types. Additional usage charges apply. For more information, see `Amazon EBS-Optimized Instances`_ in the *Amazon Elastic Compute Cloud User Guide* .
+  Indicates whether the instance is optimized for Amazon EBS I/O. By default, the instance is not optimized for EBS I/O. The optimization provides dedicated throughput to Amazon EBS and an optimized configuration stack to provide optimal I/O performance. This optimization is not available with all instance types. Additional usage charges apply. For more information, see `Amazon EBS-Optimized Instances <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html>`_ in the *Amazon Elastic Compute Cloud User Guide* .
 
   
 
 ``--associate-public-ip-address`` | ``--no-associate-public-ip-address`` (boolean)
 
 
-  Used for groups that launch instances into a virtual private cloud (VPC). Specifies whether to assign a public IP address to each instance. For more information, see `Launching Auto Scaling Instances in a VPC`_ in the *Auto Scaling Developer Guide* .
+  Used for groups that launch instances into a virtual private cloud (VPC). Specifies whether to assign a public IP address to each instance. For more information, see `Launching Auto Scaling Instances in a VPC <http://docs.aws.amazon.com/autoscaling/latest/userguide/asg-in-vpc.html>`_ in the *Auto Scaling User Guide* .
 
    
 
@@ -276,7 +275,7 @@ JSON Syntax::
 
    
 
-  Default: If the instance is launched into a default subnet, the default is ``true`` . If the instance is launched into a nondefault subnet, the default is ``false`` . For more information, see `Supported Platforms`_ in the *Amazon Elastic Compute Cloud User Guide* .
+  Default: If the instance is launched into a default subnet, the default is ``true`` . If the instance is launched into a nondefault subnet, the default is ``false`` . For more information, see `Supported Platforms <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html>`_ in the *Amazon Elastic Compute Cloud User Guide* .
 
   
 
@@ -295,19 +294,19 @@ JSON Syntax::
 
    
 
-  For more information, see `Launching Auto Scaling Instances in a VPC`_ in the *Auto Scaling Developer Guide* .
+  For more information, see `Launching Auto Scaling Instances in a VPC <http://docs.aws.amazon.com/autoscaling/latest/userguide/asg-in-vpc.html>`_ in the *Auto Scaling User Guide* .
 
    
 
-  Valid values: ``default`` | ``dedicated`` 
+  Valid values: ``default`` | ``dedicated``  
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -319,7 +318,7 @@ Examples
 
 This example creates a launch configuration::
 
-     aws autoscaling create-launch-configuration --launch-configuration-name my-launch-config --image-id ami-c6169af6 --instance-type m1.medium
+    aws autoscaling create-launch-configuration --launch-configuration-name my-launch-config --image-id ami-c6169af6 --instance-type m1.medium
 
 This example creates a launch configuration that uses Spot Instances::
 
@@ -337,19 +336,19 @@ Add the following parameter to add an Amazon EBS volume with the device name ``/
 
 Parameter::
 
-  --block-device-mappings "[{\"DeviceName\": \"/dev/sdh\",\"Ebs\":{\"VolumeSize\":100}}]"
+    --block-device-mappings "[{\"DeviceName\": \"/dev/sdh\",\"Ebs\":{\"VolumeSize\":100}}]"
 
 Add the following parameter to add ``ephemeral1`` as an instance store volume with the device name ``/dev/sdc``.
 
 Parameter::
 
-  --block-device-mappings "[{\"DeviceName\": \"/dev/sdc\",\"VirtualName\":\"ephemeral1\"}]"
+    --block-device-mappings "[{\"DeviceName\": \"/dev/sdc\",\"VirtualName\":\"ephemeral1\"}]"
 
 Add the following parameter to omit a device included on the instance (for example, ``/dev/sdf``).
 
 Parameter::
 
-  --block-device-mappings "[{\"DeviceName\": \"/dev/sdf\",\"NoDevice\":\"\"}]"
+    --block-device-mappings "[{\"DeviceName\": \"/dev/sdf\",\"NoDevice\":\"\"}]"
 
 
 ======
@@ -357,20 +356,3 @@ Output
 ======
 
 None
-
-.. _Block Device Mapping: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html
-.. _Instance Metadata and User Data: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
-.. _Security Groups for Your VPC: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html
-.. _Monitoring Your Auto Scaling Instances and Groups: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/as-instance-monitoring.html
-.. _Supported Platforms: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
-.. _Amazon EBS-Optimized Instances: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html
-.. _Amazon EC2 Key Pairs: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html
-.. _Launching Auto Scaling Instances in a VPC: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/asg-in-vpc.html
-.. _Amazon EC2 Security Groups: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html
-.. _Create a Launch Configuration Using an EC2 Instance: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/create-lc-with-instanceID.html
-.. _Available Instance Types: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#AvailableInstanceTypes
-.. _Launch Configurations: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/LaunchConfiguration.html
-.. _Launch Auto Scaling Instances with an IAM Role: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/us-iam-role.html
-.. _Finding an AMI: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html
-.. _ClassicLink: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
-.. _Launching Spot Instances in Your Auto Scaling Group: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/US-SpotInstances.html

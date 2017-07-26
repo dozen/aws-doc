@@ -13,7 +13,7 @@ push
 Description
 ===========
 
-Bundles and uploads to Amazon Simple Storage Service (Amazon S3) an application revision, which is an archive file that contains deployable content and an accompanying Application Specification file (AppSpec file). If the upload is successful, a message is returned that describes how to call the create-deployment command to deploy the application revision from Amazon S3 to target Amazon Elastic Compute Cloud (Amazon EC2) instances.
+Bundles and uploads to Amazon Simple Storage Service (Amazon S3) an application revision, which is a zip archive file that contains deployable content and an accompanying Application Specification file (AppSpec file). If the upload is successful, a message is returned that describes how to call the create-deployment command to deploy the application revision from Amazon S3 to target Amazon Elastic Compute Cloud (Amazon EC2) instances.
 
 
 
@@ -41,13 +41,13 @@ Options
 Required. The name of the AWS CodeDeploy application to be associated with the application revision.
 
 ``--s3-location`` (string)
-Required. Information about the location of the application revision to be uploaded to Amazon S3. You must specify both a bucket and a key that represent the Amazon S3 bucket name and the object key name. Use the format s3://\/\
+Required. Information about the location of the application revision to be uploaded to Amazon S3. You must specify both a bucket and a key that represent the Amazon S3 bucket name and the object key name. Content will be zipped before uploading. Use the format s3://\/\
 
 ``--ignore-hidden-files`` | ``--no-ignore-hidden-files`` (boolean)
 Optional. Set the --ignore-hidden-files flag to not bundle and upload hidden files to Amazon S3; otherwise, set the --no-ignore-hidden-files flag (the default) to bundle and upload hidden files to Amazon S3.
 
 ``--source`` (string)
-Optional. The location of the deployable content and the accompanying AppSpec file on the development machine to be bundled and uploaded to Amazon S3. If not specified, the current directory is used.
+Optional. The location of the deployable content and the accompanying AppSpec file on the development machine to be zipped and uploaded to Amazon S3. If not specified, the current directory is used.
 
 ``--description`` (string)
 Optional. A comment that summarizes the application revision. If not specified, the default string "Uploaded by AWS CLI 'time' UTC" is used, where 'time' is the current system time in Coordinated Universal Time (UTC).

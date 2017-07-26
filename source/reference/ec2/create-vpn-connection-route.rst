@@ -19,8 +19,11 @@ Creates a static route associated with a VPN connection between an existing virt
 
  
 
-For more information about VPN connections, see `Adding a Hardware Virtual Private Gateway to Your VPC`_ in the *Amazon Virtual Private Cloud User Guide* .
+For more information about VPN connections, see `Adding a Hardware Virtual Private Gateway to Your VPC <http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html>`_ in the *Amazon Virtual Private Cloud User Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpnConnectionRoute>`_
 
 
 ========
@@ -30,10 +33,10 @@ Synopsis
 ::
 
     create-vpn-connection-route
-  --vpn-connection-id <value>
   --destination-cidr-block <value>
+  --vpn-connection-id <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -42,13 +45,6 @@ Synopsis
 Options
 =======
 
-``--vpn-connection-id`` (string)
-
-
-  The ID of the VPN connection.
-
-  
-
 ``--destination-cidr-block`` (string)
 
 
@@ -56,11 +52,18 @@ Options
 
   
 
+``--vpn-connection-id`` (string)
+
+
+  The ID of the VPN connection.
+
+  
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -82,5 +85,3 @@ Output
 ======
 
 None
-
-.. _Adding a Hardware Virtual Private Gateway to Your VPC: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html

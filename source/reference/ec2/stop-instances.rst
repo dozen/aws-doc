@@ -15,32 +15,31 @@ Description
 
 
 
-Stops an Amazon EBS-backed instance. Each time you transition an instance from stopped to started, Amazon EC2 charges a full instance hour, even if transitions happen multiple times within a single hour.
+Stops an Amazon EBS-backed instance.
 
  
 
-You can't start or stop Spot instances.
+We don't charge hourly usage for a stopped instance, or data transfer fees; however, your root partition Amazon EBS volume remains, continues to persist your data, and you are charged for Amazon EBS volume usage. Each time you transition an instance from stopped to started, Amazon EC2 charges a full instance hour, even if transitions happen multiple times within a single hour.
 
  
 
-Instances that use Amazon EBS volumes as their root devices can be quickly stopped and started. When an instance is stopped, the compute resources are released and you are not billed for hourly instance usage. However, your root partition Amazon EBS volume remains, continues to persist your data, and you are charged for Amazon EBS volume usage. You can restart your instance at any time.
+You can't start or stop Spot instances, and you can't stop instance store-backed instances.
 
  
 
-Before stopping an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM.
+When you stop an instance, we shut it down. You can restart your instance at any time. Before stopping an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM.
 
  
 
-Performing this operation on an instance that uses an instance store as its root device returns an error.
+Stopping an instance is different to rebooting or terminating it. For example, when you stop an instance, the root device and any other devices attached to the instance persist. When you terminate an instance, the root device and any other devices attached during the instance launch are automatically deleted. For more information about the differences between rebooting, stopping, and terminating instances, see `Instance Lifecycle <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html>`_ in the *Amazon Elastic Compute Cloud User Guide* .
 
  
 
-You can stop, start, and terminate EBS-backed instances. You can only terminate instance store-backed instances. What happens to an instance differs if you stop it or terminate it. For example, when you stop an instance, the root device and any other devices attached to the instance persist. When you terminate an instance, the root device and any other devices attached during the instance launch are automatically deleted. For more information about the differences between stopping and terminating instances, see `Instance Lifecycle`_ in the *Amazon Elastic Compute Cloud User Guide* .
+When you stop an instance, we attempt to shut it down forcibly after a short while. If your instance appears stuck in the stopping state after a period of time, there may be an issue with the underlying host computer. For more information, see `Troubleshooting Stopping Your Instance <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesStopping.html>`_ in the *Amazon Elastic Compute Cloud User Guide* .
 
- 
 
-For more information about troubleshooting, see `Troubleshooting Stopping Your Instance`_ in the *Amazon Elastic Compute Cloud User Guide* .
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/StopInstances>`_
 
 
 ========
@@ -50,11 +49,11 @@ Synopsis
 ::
 
     stop-instances
-  [--dry-run | --no-dry-run]
   --instance-ids <value>
+  [--dry-run | --no-dry-run]
   [--force | --no-force]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -62,13 +61,6 @@ Synopsis
 =======
 Options
 =======
-
-``--dry-run`` | ``--no-dry-run`` (boolean)
-
-
-  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
-
-  
 
 ``--instance-ids`` (list)
 
@@ -85,6 +77,13 @@ Syntax::
 
 
 
+``--dry-run`` | ``--no-dry-run`` (boolean)
+
+
+  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
+
+  
+
 ``--force`` | ``--no-force`` (boolean)
 
 
@@ -92,15 +91,15 @@ Syntax::
 
    
 
-  Default: ``false`` 
+  Default: ``false``  
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -114,14 +113,14 @@ This example stops the specified Amazon EBS-backed instance.
 
 Command::
 
-  aws ec2 stop-instances --instance-ids i-1a2b3c4d
+  aws ec2 stop-instances --instance-ids i-1234567890abcdef0
 
 Output::
 
     {
         "StoppingInstances": [
             {
-                "InstanceId": "i-1a2b3c4d",
+                "InstanceId": "i-1234567890abcdef0",
                 "CurrentState": {
                     "Code": 64,
                     "Name": "stopping"
@@ -160,16 +159,6 @@ StoppingInstances -> (list)
 
     
 
-    InstanceId -> (string)
-
-      
-
-      The ID of the instance.
-
-      
-
-      
-
     CurrentState -> (structure)
 
       
@@ -187,17 +176,17 @@ StoppingInstances -> (list)
          
 
          
-        * ``0`` : ``pending`` 
+        * ``0`` : ``pending``   
          
-        * ``16`` : ``running`` 
+        * ``16`` : ``running``   
          
-        * ``32`` : ``shutting-down`` 
+        * ``32`` : ``shutting-down``   
          
-        * ``48`` : ``terminated`` 
+        * ``48`` : ``terminated``   
          
-        * ``64`` : ``stopping`` 
+        * ``64`` : ``stopping``   
          
-        * ``80`` : ``stopped`` 
+        * ``80`` : ``stopped``   
          
 
         
@@ -213,6 +202,16 @@ StoppingInstances -> (list)
         
 
         
+
+      
+
+    InstanceId -> (string)
+
+      
+
+      The ID of the instance.
+
+      
 
       
 
@@ -233,17 +232,17 @@ StoppingInstances -> (list)
          
 
          
-        * ``0`` : ``pending`` 
+        * ``0`` : ``pending``   
          
-        * ``16`` : ``running`` 
+        * ``16`` : ``running``   
          
-        * ``32`` : ``shutting-down`` 
+        * ``32`` : ``shutting-down``   
          
-        * ``48`` : ``terminated`` 
+        * ``48`` : ``terminated``   
          
-        * ``64`` : ``stopping`` 
+        * ``64`` : ``stopping``   
          
-        * ``80`` : ``stopped`` 
+        * ``80`` : ``stopped``   
          
 
         
@@ -266,7 +265,3 @@ StoppingInstances -> (list)
 
   
 
-
-
-.. _Instance Lifecycle: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html
-.. _Troubleshooting Stopping Your Instance: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesStopping.html

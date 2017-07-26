@@ -34,7 +34,7 @@ Synopsis
 Options
 =======
 
-``paths`` (string)
+``path`` (string)
 
 
 ``--force`` (boolean)

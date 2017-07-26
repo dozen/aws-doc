@@ -23,6 +23,9 @@ The ``authorizationToken`` returned for each registry specified is a base64 enco
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetAuthorizationToken>`_
+
+
 ========
 Synopsis
 ========
@@ -32,7 +35,7 @@ Synopsis
     get-authorization-token
   [--registry-ids <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -59,8 +62,8 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -102,8 +105,8 @@ returns the decoded password for you to use in a ``docker login`` command.
 Command::
 
   aws ecr get-authorization-token --output text \
-  --query authorizationData[].authorizationToken \
-  | base64 -d | cut -d: -f2
+  --query 'authorizationData[].authorizationToken' \
+  | base64 -D | cut -d: -f2
 
 
 **To `docker login` with your decoded password**
@@ -172,7 +175,7 @@ authorizationData -> (list)
 
       
 
-      The registry URL to use for this authorization token in a ``docker login`` command. The Amazon ECR registry URL format is ``https://aws_account_id.dkr.ecr.region.amazonaws.com`` . For example, ``https://012345678910.dkr.ecr.us-east-1.amazonaws.com`` .
+      The registry URL to use for this authorization token in a ``docker login`` command. The Amazon ECR registry URL format is ``https://aws_account_id.dkr.ecr.region.amazonaws.com`` . For example, ``https://012345678910.dkr.ecr.us-east-1.amazonaws.com`` .. 
 
       
 

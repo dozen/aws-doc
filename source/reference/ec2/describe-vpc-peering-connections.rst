@@ -19,6 +19,9 @@ Describes one or more of your VPC peering connections.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcPeeringConnections>`_
+
+
 ========
 Synopsis
 ========
@@ -26,11 +29,11 @@ Synopsis
 ::
 
     describe-vpc-peering-connections
+  [--filters <value>]
   [--dry-run | --no-dry-run]
   [--vpc-peering-connection-ids <value>]
-  [--filters <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -38,32 +41,6 @@ Synopsis
 =======
 Options
 =======
-
-``--dry-run`` | ``--no-dry-run`` (boolean)
-
-
-  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
-
-  
-
-``--vpc-peering-connection-ids`` (list)
-
-
-  One or more VPC peering connection IDs.
-
-   
-
-  Default: Describes all your VPC peering connections.
-
-  
-
-
-
-Syntax::
-
-  "string" "string" ...
-
-
 
 ``--filters`` (list)
 
@@ -73,7 +50,7 @@ Syntax::
    
 
    
-  * ``accepter-vpc-info.cidr-block`` - The CIDR block of the peer VPC. 
+  * ``accepter-vpc-info.cidr-block`` - The IPv4 CIDR block of the peer VPC. 
    
   * ``accepter-vpc-info.owner-id`` - The AWS account ID of the owner of the peer VPC. 
    
@@ -81,7 +58,7 @@ Syntax::
    
   * ``expiration-time`` - The expiration date and time for the VPC peering connection. 
    
-  * ``requester-vpc-info.cidr-block`` - The CIDR block of the requesters VPC. 
+  * ``requester-vpc-info.cidr-block`` - The IPv4 CIDR block of the requester's VPC. 
    
   * ``requester-vpc-info.owner-id`` - The AWS account ID of the owner of the requester VPC. 
    
@@ -91,7 +68,7 @@ Syntax::
    
   * ``status-message`` - A message that provides more information about the status of the VPC peering connection, if applicable. 
    
-  * ``tag`` :*key* =*value* - The key/value combination of a tag assigned to the resource. 
+  * ``tag`` :*key* =*value* - The key/value combination of a tag assigned to the resource. Specify the key of the tag in the filter name and the value of the tag in the filter value. For example, for the tag Purpose=X, specify ``tag:Purpose`` for the filter name and ``X`` for the filter value. 
    
   * ``tag-key`` - The key of a tag assigned to the resource. This filter is independent of the ``tag-value`` filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the ``tag`` :*key* =*value* filter. 
    
@@ -123,11 +100,37 @@ JSON Syntax::
 
 
 
+``--dry-run`` | ``--no-dry-run`` (boolean)
+
+
+  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
+
+  
+
+``--vpc-peering-connection-ids`` (list)
+
+
+  One or more VPC peering connection IDs.
+
+   
+
+  Default: Describes all your VPC peering connections.
+
+  
+
+
+
+Syntax::
+
+  "string" "string" ...
+
+
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -165,31 +168,34 @@ Output::
                 },
                 "VpcPeeringConnectionId": "pcx-11122233",
                 "RequesterVpcInfo": {
+                    "PeeringOptions": {
+                        "AllowEgressFromLocalVpcToRemoteClassicLink": false, 
+                        "AllowEgressFromLocalClassicLinkToRemoteVpc": false
+                    },
                     "OwnerId": "444455556666",
                     "VpcId": "vpc-123abc45",
-                    "CidrBlock": "10.0.0.0/28"
+                    "CidrBlock": "192.168.0.0/16"
                 }
             },
             {
                 "Status": {
-                    "Message": "Pending Acceptance by 123456789123",
+                    "Message": "Pending Acceptance by 444455556666",
                     "Code": "pending-acceptance"
                 },
-                "Tags": [
-                    {
-                        "Value": null,
-                        "Key": "Name"
-                    }
-                ],
+                "Tags": [],
                 "RequesterVpcInfo": {
-                    "OwnerId": "123456789123",
+                    "PeeringOptions": {
+                        "AllowEgressFromLocalVpcToRemoteClassicLink": false, 
+                        "AllowEgressFromLocalClassicLinkToRemoteVpc": false
+                    },
+                    "OwnerId": "444455556666",
                     "VpcId": "vpc-11aa22bb",
                     "CidrBlock": "10.0.0.0/28"
                 },
                 "VpcPeeringConnectionId": "pcx-abababab",
                 "ExpirationTime": "2014-04-03T09:12:43.000Z",
                 "AccepterVpcInfo": {
-                    "OwnerId": "123456789123",
+                    "OwnerId": "444455556666",
                     "VpcId": "vpc-33cc44dd"
                 }
             }
@@ -245,7 +251,7 @@ VpcPeeringConnections -> (list)
 
       
 
-      The information of the peer VPC.
+      Information about the accepter VPC. CIDR block information is only returned when describing an active VPC peering connection.
 
       
 
@@ -253,9 +259,39 @@ VpcPeeringConnections -> (list)
 
         
 
-        The CIDR block for the VPC.
+        The IPv4 CIDR block for the VPC.
 
         
+
+        
+
+      Ipv6CidrBlockSet -> (list)
+
+        
+
+        The IPv6 CIDR block for the VPC.
+
+        
+
+        (structure)
+
+          
+
+          Describes an IPv6 CIDR block.
+
+          
+
+          Ipv6CidrBlock -> (string)
+
+            
+
+            The IPv6 CIDR block.
+
+            
+
+            
+
+          
 
         
 
@@ -266,6 +302,46 @@ VpcPeeringConnections -> (list)
         The AWS account ID of the VPC owner.
 
         
+
+        
+
+      PeeringOptions -> (structure)
+
+        
+
+        Information about the VPC peering connection options for the accepter or requester VPC.
+
+        
+
+        AllowDnsResolutionFromRemoteVpc -> (boolean)
+
+          
+
+          Indicates whether a local VPC can resolve public DNS hostnames to private IP addresses when queried from instances in a peer VPC.
+
+          
+
+          
+
+        AllowEgressFromLocalClassicLinkToRemoteVpc -> (boolean)
+
+          
+
+          Indicates whether a local ClassicLink connection can communicate with the peer VPC over the VPC peering connection.
+
+          
+
+          
+
+        AllowEgressFromLocalVpcToRemoteClassicLink -> (boolean)
+
+          
+
+          Indicates whether a local VPC can communicate with a ClassicLink connection in the peer VPC over the VPC peering connection.
+
+          
+
+          
 
         
 
@@ -295,7 +371,7 @@ VpcPeeringConnections -> (list)
 
       
 
-      The information of the requester VPC.
+      Information about the requester VPC. CIDR block information is only returned when describing an active VPC peering connection.
 
       
 
@@ -303,9 +379,39 @@ VpcPeeringConnections -> (list)
 
         
 
-        The CIDR block for the VPC.
+        The IPv4 CIDR block for the VPC.
 
         
+
+        
+
+      Ipv6CidrBlockSet -> (list)
+
+        
+
+        The IPv6 CIDR block for the VPC.
+
+        
+
+        (structure)
+
+          
+
+          Describes an IPv6 CIDR block.
+
+          
+
+          Ipv6CidrBlock -> (string)
+
+            
+
+            The IPv6 CIDR block.
+
+            
+
+            
+
+          
 
         
 
@@ -316,6 +422,46 @@ VpcPeeringConnections -> (list)
         The AWS account ID of the VPC owner.
 
         
+
+        
+
+      PeeringOptions -> (structure)
+
+        
+
+        Information about the VPC peering connection options for the accepter or requester VPC.
+
+        
+
+        AllowDnsResolutionFromRemoteVpc -> (boolean)
+
+          
+
+          Indicates whether a local VPC can resolve public DNS hostnames to private IP addresses when queried from instances in a peer VPC.
+
+          
+
+          
+
+        AllowEgressFromLocalClassicLinkToRemoteVpc -> (boolean)
+
+          
+
+          Indicates whether a local ClassicLink connection can communicate with the peer VPC over the VPC peering connection.
+
+          
+
+          
+
+        AllowEgressFromLocalVpcToRemoteClassicLink -> (boolean)
+
+          
+
+          Indicates whether a local VPC can communicate with a ClassicLink connection in the peer VPC over the VPC peering connection.
+
+          
+
+          
 
         
 
@@ -381,11 +527,11 @@ VpcPeeringConnections -> (list)
 
           
 
-          The key of the tag. 
+          The key of the tag.
 
            
 
-          Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with ``aws:`` 
+          Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with ``aws:``  
 
           
 

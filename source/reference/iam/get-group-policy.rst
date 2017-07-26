@@ -15,16 +15,29 @@ Description
 
 
 
-Retrieves the specified inline policy document that is embedded in the specified group. 
+Retrieves the specified inline policy document that is embedded in the specified IAM group.
 
  
 
-A group can also have managed policies attached to it. To retrieve a managed policy document that is attached to a group, use  get-policy to determine the policy's default version, then use  get-policy-version to retrieve the policy document. 
+.. note::
+
+   
+
+  Policies returned by this API are URL-encoded compliant with `RFC 3986 <https://tools.ietf.org/html/rfc3986>`_ . You can use a URL decoding method to convert the policy back to plain JSON text. For example, if you use Java, you can use the ``decode`` method of the ``java.net.URLDecoder`` utility class in the Java SDK. Other languages and SDKs provide similar functionality.
+
+   
 
  
 
-For more information about policies, refer to `Managed Policies and Inline Policies`_ in the *IAM User Guide* . 
+An IAM group can also have managed policies attached to it. To retrieve a managed policy document that is attached to a group, use  get-policy to determine the policy's default version, then use  get-policy-version to retrieve the policy document.
 
+ 
+
+For more information about policies, see `Managed Policies and Inline Policies <http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html>`_ in the *IAM User Guide* .
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetGroupPolicy>`_
 
 
 ========
@@ -37,7 +50,7 @@ Synopsis
   --group-name <value>
   --policy-name <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -51,6 +64,10 @@ Options
 
   The name of the group the policy is associated with.
 
+   
+
+  This parameter allows (per its `regex pattern <http://wikipedia.org/wiki/regex>`_ ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-
+
   
 
 ``--policy-name`` (string)
@@ -58,13 +75,17 @@ Options
 
   The name of the policy document to get.
 
+   
+
+  This parameter allows (per its `regex pattern <http://wikipedia.org/wiki/regex>`_ ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-
+
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -137,6 +158,3 @@ PolicyDocument -> (string)
 
   
 
-
-
-.. _Managed Policies and Inline Policies: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html

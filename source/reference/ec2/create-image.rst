@@ -23,8 +23,11 @@ If you customized your instance with instance store volumes or EBS volumes in ad
 
  
 
-For more information, see `Creating Amazon EBS-Backed Linux AMIs`_ in the *Amazon Elastic Compute Cloud User Guide* .
+For more information, see `Creating Amazon EBS-Backed Linux AMIs <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html>`_ in the *Amazon Elastic Compute Cloud User Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateImage>`_
 
 
 ========
@@ -34,14 +37,14 @@ Synopsis
 ::
 
     create-image
+  [--block-device-mappings <value>]
+  [--description <value>]
   [--dry-run | --no-dry-run]
   --instance-id <value>
   --name <value>
-  [--description <value>]
   [--no-reboot | --reboot]
-  [--block-device-mappings <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -49,6 +52,50 @@ Synopsis
 =======
 Options
 =======
+
+``--block-device-mappings`` (list)
+
+
+  Information about one or more block device mappings.
+
+  
+
+
+
+Shorthand Syntax::
+
+    DeviceName=string,VirtualName=string,Ebs={Encrypted=boolean,DeleteOnTermination=boolean,Iops=integer,SnapshotId=string,VolumeSize=integer,VolumeType=string},NoDevice=string ...
+
+
+
+
+JSON Syntax::
+
+  [
+    {
+      "DeviceName": "string",
+      "VirtualName": "string",
+      "Ebs": {
+        "Encrypted": true|false,
+        "DeleteOnTermination": true|false,
+        "Iops": integer,
+        "SnapshotId": "string",
+        "VolumeSize": integer,
+        "VolumeType": "standard"|"io1"|"gp2"|"sc1"|"st1"
+      },
+      "NoDevice": "string"
+    }
+    ...
+  ]
+
+
+
+``--description`` (string)
+
+
+  A description for the new image.
+
+  
 
 ``--dry-run`` | ``--no-dry-run`` (boolean)
 
@@ -75,62 +122,18 @@ Options
 
   
 
-``--description`` (string)
-
-
-  A description for the new image.
-
-  
-
 ``--no-reboot`` | ``--reboot`` (boolean)
 
 
-  By default, this parameter is set to ``false`` , which means Amazon EC2 attempts to shut down the instance cleanly before image creation and then reboots the instance. When the parameter is set to ``true`` , Amazon EC2 doesn't shut down the instance before creating the image. When this option is used, file system integrity on the created image can't be guaranteed.
+  By default, Amazon EC2 attempts to shut down and reboot the instance before creating the image. If the 'No Reboot' option is set, Amazon EC2 doesn't shut down the instance before creating the image. When this option is used, file system integrity on the created image can't be guaranteed.
 
   
-
-``--block-device-mappings`` (list)
-
-
-  Information about one or more block device mappings.
-
-  
-
-
-
-Shorthand Syntax::
-
-    VirtualName=string,DeviceName=string,Ebs={SnapshotId=string,VolumeSize=integer,DeleteOnTermination=boolean,VolumeType=string,Iops=integer,Encrypted=boolean},NoDevice=string ...
-
-
-
-
-JSON Syntax::
-
-  [
-    {
-      "VirtualName": "string",
-      "DeviceName": "string",
-      "Ebs": {
-        "SnapshotId": "string",
-        "VolumeSize": integer,
-        "DeleteOnTermination": true|false,
-        "VolumeType": "standard"|"io1"|"gp2",
-        "Iops": integer,
-        "Encrypted": true|false
-      },
-      "NoDevice": "string"
-    }
-    ...
-  ]
-
-
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -144,12 +147,24 @@ This example creates an AMI from the specified instance.
 
 Command::
 
-  aws ec2 create-image --instance-id i-10a64379 --name "My server" --description "An AMI for my server"
+  aws ec2 create-image --instance-id i-1234567890abcdef0 --name "My server" --description "An AMI for my server"
 
 Output::
 
   {
       "ImageId": "ami-5731123e"
+  }
+
+This example creates an AMI and sets the --no-reboot parameter, so that the instance is not rebooted before the image is created.
+
+Command::
+
+  aws ec2 create-image --instance-id i-0b09a25c58929de26 --name "My server" --no-reboot
+
+Output::
+
+  {
+    "ImageId": "ami-1a2b3c4d"
   }
 
 **To create an AMI using a block device mapping**
@@ -181,6 +196,3 @@ ImageId -> (string)
 
   
 
-
-
-.. _Creating Amazon EBS-Backed Linux AMIs: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html

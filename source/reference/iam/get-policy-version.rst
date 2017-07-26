@@ -15,20 +15,37 @@ Description
 
 
 
-Retrieves information about the specified version of the specified managed policy, including the policy document. 
+Retrieves information about the specified version of the specified managed policy, including the policy document.
 
  
 
-To list the available versions for a policy, use  list-policy-versions . 
+.. note::
+
+   
+
+  Policies returned by this API are URL-encoded compliant with `RFC 3986 <https://tools.ietf.org/html/rfc3986>`_ . You can use a URL decoding method to convert the policy back to plain JSON text. For example, if you use Java, you can use the ``decode`` method of the ``java.net.URLDecoder`` utility class in the Java SDK. Other languages and SDKs provide similar functionality.
+
+   
 
  
 
-This API retrieves information about managed policies. To retrieve information about an inline policy that is embedded in a user, group, or role, use the  get-user-policy ,  get-group-policy , or  get-role-policy API. 
+To list the available versions for a policy, use  list-policy-versions .
 
  
 
-For more information about the types of policies, refer to `Managed Policies and Inline Policies`_ in the *IAM User Guide* . 
+This API retrieves information about managed policies. To retrieve information about an inline policy that is embedded in a user, group, or role, use the  get-user-policy ,  get-group-policy , or  get-role-policy API.
 
+ 
+
+For more information about the types of policies, see `Managed Policies and Inline Policies <http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html>`_ in the *IAM User Guide* .
+
+ 
+
+For more information about managed policy versions, see `Versioning for Managed Policies <http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html>`_ in the *IAM User Guide* .
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetPolicyVersion>`_
 
 
 ========
@@ -41,7 +58,7 @@ Synopsis
   --policy-arn <value>
   --version-id <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -53,11 +70,11 @@ Options
 ``--policy-arn`` (string)
 
 
-  The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS resources. 
+  The Amazon Resource Name (ARN) of the managed policy that you want information about.
 
    
 
-  For more information about ARNs, go to `Amazon Resource Names (ARNs) and AWS Service Namespaces`_ in the *AWS General Reference* . 
+  For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces <http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`_ in the *AWS General Reference* .
 
   
 
@@ -66,13 +83,17 @@ Options
 
   Identifies the policy version to retrieve.
 
+   
+
+  This parameter allows (per its `regex pattern <http://wikipedia.org/wiki/regex>`_ ) a string of characters that consists of the lowercase letter 'v' followed by one or two digits, and optionally followed by a period '.' and a string of letters and digits.
+
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -119,11 +140,7 @@ PolicyVersion -> (structure)
 
   
 
-  Information about the policy version.
-
-   
-
-  For more information about managed policy versions, see `Versioning for Managed Policies`_ in the *IAM User Guide* . 
+  A structure containing details about the policy version.
 
   
 
@@ -169,7 +186,7 @@ PolicyVersion -> (structure)
 
     
 
-    The date and time, in `ISO 8601 date-time format`_ , when the policy version was created.
+    The date and time, in `ISO 8601 date-time format <http://www.iso.org/iso/iso8601>`_ , when the policy version was created.
 
     
 
@@ -177,9 +194,3 @@ PolicyVersion -> (structure)
 
   
 
-
-
-.. _Versioning for Managed Policies: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
-.. _ISO 8601 date-time format: http://www.iso.org/iso/iso8601
-.. _Amazon Resource Names (ARNs) and AWS Service Namespaces: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
-.. _Managed Policies and Inline Policies: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html

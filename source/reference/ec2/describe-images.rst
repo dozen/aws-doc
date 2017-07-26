@@ -21,12 +21,15 @@ Describes one or more of the images (AMIs, AKIs, and ARIs) available to you. Ima
 
 .. note::
 
-  
+   
 
   Deregistered images are included in the returned results for an unspecified interval after deregistration.
 
-  
+   
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImages>`_
 
 
 ========
@@ -36,13 +39,13 @@ Synopsis
 ::
 
     describe-images
-  [--dry-run | --no-dry-run]
-  [--image-ids <value>]
-  [--owners <value>]
   [--executable-users <value>]
   [--filters <value>]
+  [--image-ids <value>]
+  [--owners <value>]
+  [--dry-run | --no-dry-run]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -50,47 +53,6 @@ Synopsis
 =======
 Options
 =======
-
-``--dry-run`` | ``--no-dry-run`` (boolean)
-
-
-  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
-
-  
-
-``--image-ids`` (list)
-
-
-  One or more image IDs.
-
-   
-
-  Default: Describes all images available to you.
-
-  
-
-
-
-Syntax::
-
-  "string" "string" ...
-
-
-
-``--owners`` (list)
-
-
-  Filters the images by the owner. Specify an AWS account ID, ``amazon`` (owner is Amazon), ``aws-marketplace`` (owner is AWS Marketplace), ``self`` (owner is the sender of the request). Omitting this option returns all images for which you have launch permissions, regardless of ownership.
-
-  
-
-
-
-Syntax::
-
-  "string" "string" ...
-
-
 
 ``--executable-users`` (list)
 
@@ -117,7 +79,7 @@ Syntax::
    
   * ``architecture`` - The image architecture (``i386`` | ``x86_64`` ). 
    
-  * ``block-device-mapping.delete-on-termination`` - A no-dry-run value that indicates whether the Amazon EBS volume is deleted on instance termination. 
+  * ``block-device-mapping.delete-on-termination`` - A dry-run value that indicates whether the Amazon EBS volume is deleted on instance termination. 
    
   * ``block-device-mapping.device-name`` - The device name for the EBS volume (for example, ``/dev/sdh`` ). 
    
@@ -125,9 +87,11 @@ Syntax::
    
   * ``block-device-mapping.volume-size`` - The volume size of the EBS volume, in GiB. 
    
-  * ``block-device-mapping.volume-type`` - The volume type of the EBS volume (``gp2`` | ``standard`` | ``io1`` ). 
+  * ``block-device-mapping.volume-type`` - The volume type of the EBS volume (``gp2`` | ``io1`` | ``st1`` | ``sc1`` | ``standard`` ). 
    
   * ``description`` - The description of the image (provided during image creation). 
+   
+  * ``ena-support`` - A dry-run that indicates whether enhanced networking with ENA is enabled. 
    
   * ``hypervisor`` - The hypervisor type (``ovm`` | ``xen`` ). 
    
@@ -135,7 +99,7 @@ Syntax::
    
   * ``image-type`` - The image type (``machine`` | ``kernel`` | ``ramdisk`` ). 
    
-  * ``is-public`` - A no-dry-run that indicates whether the image is public. 
+  * ``is-public`` - A dry-run that indicates whether the image is public. 
    
   * ``kernel-id`` - The kernel ID. 
    
@@ -143,7 +107,7 @@ Syntax::
    
   * ``name`` - The name of the AMI (provided during image creation). 
    
-  * ``owner-alias`` - The AWS account alias (for example, ``amazon`` ). 
+  * ``owner-alias`` - String value from an Amazon-maintained list (``amazon`` | ``aws-marketplace`` | ``microsoft`` ) of snapshot owners. Not to be confused with the user-configured AWS account alias, which is set from the IAM console. 
    
   * ``owner-id`` - The AWS account ID of the image owner. 
    
@@ -165,7 +129,7 @@ Syntax::
    
   * ``state-reason-message`` - The message for the state change. 
    
-  * ``tag`` :*key* =*value* - The key/value combination of a tag assigned to the resource. 
+  * ``tag`` :*key* =*value* - The key/value combination of a tag assigned to the resource. Specify the key of the tag in the filter name and the value of the tag in the filter value. For example, for the tag Purpose=X, specify ``tag:Purpose`` for the filter name and ``X`` for the filter value. 
    
   * ``tag-key`` - The key of a tag assigned to the resource. This filter is independent of the tag-value filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the ``tag`` :*key* =*value* filter. 
    
@@ -197,11 +161,52 @@ JSON Syntax::
 
 
 
+``--image-ids`` (list)
+
+
+  One or more image IDs.
+
+   
+
+  Default: Describes all images available to you.
+
+  
+
+
+
+Syntax::
+
+  "string" "string" ...
+
+
+
+``--owners`` (list)
+
+
+  Filters the images by the owner. Specify an AWS account ID, ``self`` (owner is the sender of the request), or an AWS owner alias (valid values are ``amazon`` | ``aws-marketplace`` | ``microsoft`` ). Omitting this option returns all images for which you have launch permissions, regardless of ownership.
+
+  
+
+
+
+Syntax::
+
+  "string" "string" ...
+
+
+
+``--dry-run`` | ``--no-dry-run`` (boolean)
+
+
+  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
+
+  
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -233,7 +238,7 @@ Output::
                       "DeviceName": "/dev/sda1",
                       "Ebs": {
                           "DeleteOnTermination": true,
-                          "SnapshotId": "snap-ca7b3bd1",
+                          "SnapshotId": "snap-1234567890abcdef0",
                           "VolumeSize": 8,
                           "VolumeType": "standard"
                       }
@@ -299,6 +304,26 @@ Images -> (list)
 
     
 
+    Architecture -> (string)
+
+      
+
+      The architecture of the image.
+
+      
+
+      
+
+    CreationDate -> (string)
+
+      
+
+      The date and time the image was created.
+
+      
+
+      
+
     ImageId -> (string)
 
       
@@ -319,11 +344,31 @@ Images -> (list)
 
       
 
-    State -> (string)
+    ImageType -> (string)
 
       
 
-      The current state of the AMI. If the state is ``available`` , the image is successfully registered and can be used to launch an instance.
+      The type of image.
+
+      
+
+      
+
+    Public -> (boolean)
+
+      
+
+      Indicates whether the image has public launch permissions. The value is ``true`` if this image has public launch permissions or ``false`` if it has only implicit and explicit launch permissions.
+
+      
+
+      
+
+    KernelId -> (string)
+
+      
+
+      The kernel associated with the image, if any. Only applicable for machine images.
 
       
 
@@ -339,21 +384,11 @@ Images -> (list)
 
       
 
-    CreationDate -> (string)
+    Platform -> (string)
 
       
 
-      The date and time the image was created.
-
-      
-
-      
-
-    Public -> (boolean)
-
-      
-
-      Indicates whether the image has public launch permissions. The value is ``true`` if this image has public launch permissions or ``false`` if it has only implicit and explicit launch permissions.
+      The value is ``Windows`` for Windows AMIs; otherwise blank.
 
       
 
@@ -399,36 +434,6 @@ Images -> (list)
 
       
 
-    Architecture -> (string)
-
-      
-
-      The architecture of the image.
-
-      
-
-      
-
-    ImageType -> (string)
-
-      
-
-      The type of image.
-
-      
-
-      
-
-    KernelId -> (string)
-
-      
-
-      The kernel associated with the image, if any. Only applicable for machine images.
-
-      
-
-      
-
     RamdiskId -> (string)
 
       
@@ -439,11 +444,225 @@ Images -> (list)
 
       
 
-    Platform -> (string)
+    State -> (string)
 
       
 
-      The value is ``Windows`` for Windows AMIs; otherwise blank.
+      The current state of the AMI. If the state is ``available`` , the image is successfully registered and can be used to launch an instance.
+
+      
+
+      
+
+    BlockDeviceMappings -> (list)
+
+      
+
+      Any block device mapping entries.
+
+      
+
+      (structure)
+
+        
+
+        Describes a block device mapping.
+
+        
+
+        DeviceName -> (string)
+
+          
+
+          The device name exposed to the instance (for example, ``/dev/sdh`` or ``xvdh`` ).
+
+          
+
+          
+
+        VirtualName -> (string)
+
+          
+
+          The virtual device name (``ephemeral`` N). Instance store volumes are numbered starting from 0. An instance type with 2 available instance store volumes can specify mappings for ``ephemeral0`` and ``ephemeral1`` .The number of available instance store volumes depends on the instance type. After you connect to the instance, you must mount the volume.
+
+           
+
+          Constraints: For M3 instances, you must specify instance store volumes in the block device mapping for the instance. When you launch an M3 instance, we ignore any instance store volumes specified in the block device mapping for the AMI.
+
+          
+
+          
+
+        Ebs -> (structure)
+
+          
+
+          Parameters used to automatically set up EBS volumes when the instance is launched.
+
+          
+
+          Encrypted -> (boolean)
+
+            
+
+            Indicates whether the EBS volume is encrypted. Encrypted Amazon EBS volumes may only be attached to instances that support Amazon EBS encryption.
+
+            
+
+            
+
+          DeleteOnTermination -> (boolean)
+
+            
+
+            Indicates whether the EBS volume is deleted on instance termination.
+
+            
+
+            
+
+          Iops -> (integer)
+
+            
+
+            The number of I/O operations per second (IOPS) that the volume supports. For ``io1`` , this represents the number of IOPS that are provisioned for the volume. For ``gp2`` , this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information about General Purpose SSD baseline performance, I/O credits, and bursting, see `Amazon EBS Volume Types <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html>`_ in the *Amazon Elastic Compute Cloud User Guide* .
+
+             
+
+            Constraint: Range is 100-20000 IOPS for ``io1`` volumes and 100-10000 IOPS for ``gp2`` volumes.
+
+             
+
+            Condition: This parameter is required for requests to create ``io1`` volumes; it is not used in requests to create ``gp2`` , ``st1`` , ``sc1`` , or ``standard`` volumes.
+
+            
+
+            
+
+          SnapshotId -> (string)
+
+            
+
+            The ID of the snapshot.
+
+            
+
+            
+
+          VolumeSize -> (integer)
+
+            
+
+            The size of the volume, in GiB.
+
+             
+
+            Constraints: 1-16384 for General Purpose SSD (``gp2`` ), 4-16384 for Provisioned IOPS SSD (``io1`` ), 500-16384 for Throughput Optimized HDD (``st1`` ), 500-16384 for Cold HDD (``sc1`` ), and 1-1024 for Magnetic (``standard`` ) volumes. If you specify a snapshot, the volume size must be equal to or larger than the snapshot size.
+
+             
+
+            Default: If you're creating the volume from a snapshot and don't specify a volume size, the default is the snapshot size.
+
+            
+
+            
+
+          VolumeType -> (string)
+
+            
+
+            The volume type: ``gp2`` , ``io1`` , ``st1`` , ``sc1`` , or ``standard`` .
+
+             
+
+            Default: ``standard``  
+
+            
+
+            
+
+          
+
+        NoDevice -> (string)
+
+          
+
+          Suppresses the specified device included in the block device mapping of the AMI.
+
+          
+
+          
+
+        
+
+      
+
+    Description -> (string)
+
+      
+
+      The description of the AMI that was provided during image creation.
+
+      
+
+      
+
+    EnaSupport -> (boolean)
+
+      
+
+      Specifies whether enhanced networking with ENA is enabled.
+
+      
+
+      
+
+    Hypervisor -> (string)
+
+      
+
+      The hypervisor type of the image.
+
+      
+
+      
+
+    ImageOwnerAlias -> (string)
+
+      
+
+      The AWS account alias (for example, ``amazon`` , ``self`` ) or the AWS account ID of the AMI owner.
+
+      
+
+      
+
+    Name -> (string)
+
+      
+
+      The name of the AMI that was provided during image creation.
+
+      
+
+      
+
+    RootDeviceName -> (string)
+
+      
+
+      The device name of the root device (for example, ``/dev/sda1`` or ``/dev/xvda`` ).
+
+      
+
+      
+
+    RootDeviceType -> (string)
+
+      
+
+      The type of root device used by the AMI. The AMI can use an EBS volume or an instance store volume.
 
       
 
@@ -453,7 +672,7 @@ Images -> (list)
 
       
 
-      Specifies whether enhanced networking is enabled.
+      Specifies whether enhanced networking with the Intel 82599 Virtual Function interface is enabled.
 
       
 
@@ -486,230 +705,28 @@ Images -> (list)
          
 
          
-        * ``Server.SpotInstanceTermination`` : A Spot instance was terminated due to an increase in the market price.
+        * ``Server.InsufficientInstanceCapacity`` : There was insufficient instance capacity to satisfy the launch request. 
          
-        * ``Server.InternalError`` : An internal error occurred during instance launch, resulting in termination.
+        * ``Server.InternalError`` : An internal error occurred during instance launch, resulting in termination. 
          
-        * ``Server.InsufficientInstanceCapacity`` : There was insufficient instance capacity to satisfy the launch request.
+        * ``Server.ScheduledStop`` : The instance was stopped due to a scheduled retirement. 
          
-        * ``Client.InternalError`` : A client error caused the instance to terminate on launch.
+        * ``Server.SpotInstanceTermination`` : A Spot instance was terminated due to an increase in the market price. 
          
-        * ``Client.InstanceInitiatedShutdown`` : The instance was shut down using the ``shutdown -h`` command from the instance.
+        * ``Client.InternalError`` : A client error caused the instance to terminate on launch. 
          
-        * ``Client.UserInitiatedShutdown`` : The instance was shut down using the Amazon EC2 API.
+        * ``Client.InstanceInitiatedShutdown`` : The instance was shut down using the ``shutdown -h`` command from the instance. 
          
-        * ``Client.VolumeLimitExceeded`` : The limit on the number of EBS volumes or total storage was exceeded. Decrease usage or request an increase in your limits.
+        * ``Client.UserInitiatedShutdown`` : The instance was shut down using the Amazon EC2 API. 
          
-        * ``Client.InvalidSnapshot.NotFound`` : The specified snapshot was not found.
+        * ``Client.VolumeLimitExceeded`` : The limit on the number of EBS volumes or total storage was exceeded. Decrease usage or request an increase in your limits. 
+         
+        * ``Client.InvalidSnapshot.NotFound`` : The specified snapshot was not found. 
          
 
         
 
         
-
-      
-
-    ImageOwnerAlias -> (string)
-
-      
-
-      The AWS account alias (for example, ``amazon`` , ``self`` ) or the AWS account ID of the AMI owner.
-
-      
-
-      
-
-    Name -> (string)
-
-      
-
-      The name of the AMI that was provided during image creation.
-
-      
-
-      
-
-    Description -> (string)
-
-      
-
-      The description of the AMI that was provided during image creation.
-
-      
-
-      
-
-    RootDeviceType -> (string)
-
-      
-
-      The type of root device used by the AMI. The AMI can use an EBS volume or an instance store volume.
-
-      
-
-      
-
-    RootDeviceName -> (string)
-
-      
-
-      The device name of the root device (for example, ``/dev/sda1`` or ``/dev/xvda`` ).
-
-      
-
-      
-
-    BlockDeviceMappings -> (list)
-
-      
-
-      Any block device mapping entries.
-
-      
-
-      (structure)
-
-        
-
-        Describes a block device mapping.
-
-        
-
-        VirtualName -> (string)
-
-          
-
-          The virtual device name (``ephemeral`` N). Instance store volumes are numbered starting from 0. An instance type with 2 available instance store volumes can specify mappings for ``ephemeral0`` and ``ephemeral1`` .The number of available instance store volumes depends on the instance type. After you connect to the instance, you must mount the volume.
-
-           
-
-          Constraints: For M3 instances, you must specify instance store volumes in the block device mapping for the instance. When you launch an M3 instance, we ignore any instance store volumes specified in the block device mapping for the AMI.
-
-          
-
-          
-
-        DeviceName -> (string)
-
-          
-
-          The device name exposed to the instance (for example, ``/dev/sdh`` or ``xvdh`` ).
-
-          
-
-          
-
-        Ebs -> (structure)
-
-          
-
-          Parameters used to automatically set up EBS volumes when the instance is launched.
-
-          
-
-          SnapshotId -> (string)
-
-            
-
-            The ID of the snapshot.
-
-            
-
-            
-
-          VolumeSize -> (integer)
-
-            
-
-            The size of the volume, in GiB.
-
-             
-
-            Constraints: ``1-1024`` for ``standard`` volumes, ``1-16384`` for ``gp2`` volumes, and ``4-16384`` for ``io1`` volumes. If you specify a snapshot, the volume size must be equal to or larger than the snapshot size.
-
-             
-
-            Default: If you're creating the volume from a snapshot and don't specify a volume size, the default is the snapshot size.
-
-            
-
-            
-
-          DeleteOnTermination -> (boolean)
-
-            
-
-            Indicates whether the EBS volume is deleted on instance termination.
-
-            
-
-            
-
-          VolumeType -> (string)
-
-            
-
-            The volume type. ``gp2`` for General Purpose (SSD) volumes, ``io1`` for Provisioned IOPS (SSD) volumes, and ``standard`` for Magnetic volumes.
-
-             
-
-            Default: ``standard`` 
-
-            
-
-            
-
-          Iops -> (integer)
-
-            
-
-            The number of I/O operations per second (IOPS) that the volume supports. For Provisioned IOPS (SSD) volumes, this represents the number of IOPS that are provisioned for the volume. For General Purpose (SSD) volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information on General Purpose (SSD) baseline performance, I/O credits, and bursting, see `Amazon EBS Volume Types`_ in the *Amazon Elastic Compute Cloud User Guide* .
-
-             
-
-            Constraint: Range is 100 to 20000 for Provisioned IOPS (SSD) volumes and 3 to 10000 for General Purpose (SSD) volumes.
-
-             
-
-            Condition: This parameter is required for requests to create ``io1`` volumes; it is not used in requests to create ``standard`` or ``gp2`` volumes.
-
-            
-
-            
-
-          Encrypted -> (boolean)
-
-            
-
-            Indicates whether the EBS volume is encrypted. Encrypted Amazon EBS volumes may only be attached to instances that support Amazon EBS encryption.
-
-            
-
-            
-
-          
-
-        NoDevice -> (string)
-
-          
-
-          Suppresses the specified device included in the block device mapping of the AMI.
-
-          
-
-          
-
-        
-
-      
-
-    VirtualizationType -> (string)
-
-      
-
-      The type of virtualization of the AMI.
-
-      
 
       
 
@@ -733,11 +750,11 @@ Images -> (list)
 
           
 
-          The key of the tag. 
+          The key of the tag.
 
            
 
-          Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with ``aws:`` 
+          Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with ``aws:``  
 
           
 
@@ -761,11 +778,11 @@ Images -> (list)
 
       
 
-    Hypervisor -> (string)
+    VirtualizationType -> (string)
 
       
 
-      The hypervisor type of the image.
+      The type of virtualization of the AMI.
 
       
 
@@ -775,6 +792,3 @@ Images -> (list)
 
   
 
-
-
-.. _Amazon EBS Volume Types: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html

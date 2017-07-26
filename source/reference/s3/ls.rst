@@ -13,7 +13,7 @@ ls
 Description
 ===========
 
-List S3 objects and common prefixes under a prefix or all S3 buckets. Note that the --output argument is ignored for this command.
+List S3 objects and common prefixes under a prefix or all S3 buckets. Note that the --output and --no-paginate arguments are ignored for this command.
 
 
 
@@ -29,6 +29,7 @@ Synopsis
   [--page-size <value>]
   [--human-readable]
   [--summarize]
+  [--request-payer <value>]
 
 
 
@@ -51,6 +52,9 @@ Displays file sizes in human readable format.
 
 ``--summarize`` (boolean)
 Displays summary information (number of objects, total size).
+
+``--request-payer`` (string)
+Confirms that the requester knows that she or he will be charged for the request. Bucket owners need not specify this parameter in their requests. Documentation on downloading objects from requester pays buckets can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
 
 
 

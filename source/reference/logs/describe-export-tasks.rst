@@ -15,12 +15,11 @@ Description
 
 
 
-Returns all the export tasks that are associated with the AWS account making the request. The export tasks can be filtered based on ``TaskId`` or ``TaskStatus`` . 
+Lists the specified export tasks. You can list all your export tasks or filter the results based on task ID or task status.
 
- 
 
-By default, this operation returns up to 50 export tasks that satisfy the specified filters. If there are more export tasks to list, the response would contain a ``nextToken`` value in the response body. You can also limit the number of export tasks returned in the response by specifying the ``limit`` parameter in the request. 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeExportTasks>`_
 
 
 ========
@@ -35,7 +34,7 @@ Synopsis
   [--next-token <value>]
   [--limit <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -47,14 +46,14 @@ Options
 ``--task-id`` (string)
 
 
-  Export task that matches the specified task Id will be returned. This can result in zero or one export task.
+  The ID of the export task. Specifying a task ID filters the results to zero or one export tasks.
 
   
 
 ``--status-code`` (string)
 
 
-  All export tasks that matches the specified status code will be returned. This can return zero or more export tasks.
+  The status code of the export task. Specifying a status code filters the results to zero or more export tasks.
 
   
 
@@ -85,22 +84,22 @@ Options
 ``--next-token`` (string)
 
 
-  A string token used for pagination that points to the next page of results. It must be a value obtained from the response of the previous ``describe-export-tasks`` request. 
+  The token for the next set of items to return. (You received this token from a previous call.)
 
   
 
 ``--limit`` (integer)
 
 
-  The maximum number of items returned in the response. If you don't specify a value, the request would return up to 50 items. 
+  The maximum number of items returned. If you don't specify a value, the default is up to 50 items.
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -112,7 +111,7 @@ exportTasks -> (list)
 
   
 
-  A list of export tasks.
+  The export tasks.
 
   
 
@@ -128,7 +127,7 @@ exportTasks -> (list)
 
       
 
-      Id of the export task.
+      The ID of the export task.
 
       
 
@@ -158,7 +157,7 @@ exportTasks -> (list)
 
       
 
-      A point in time expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC. Events with a timestamp prior to this time are not exported.
+      The start time, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC. Events with a timestamp prior to this time are not exported.
 
       
 
@@ -168,7 +167,7 @@ exportTasks -> (list)
 
       
 
-      A point in time expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than this time are not exported.
+      The end time, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than this time are not exported.
 
       
 
@@ -178,7 +177,7 @@ exportTasks -> (list)
 
       
 
-      Name of Amazon S3 bucket to which the log data was exported.
+      The name of Amazon S3 bucket to which the log data was exported.
 
       
 
@@ -188,7 +187,7 @@ exportTasks -> (list)
 
       
 
-      Prefix that was used as the start of Amazon S3 key for every object exported.
+      The prefix that was used as the start of Amazon S3 key for every object exported.
 
       
 
@@ -198,7 +197,7 @@ exportTasks -> (list)
 
       
 
-      Status of the export task.
+      The status of the export task.
 
       
 
@@ -206,7 +205,7 @@ exportTasks -> (list)
 
         
 
-        Status code of the export task.
+        The status code of the export task.
 
         
 
@@ -216,7 +215,7 @@ exportTasks -> (list)
 
         
 
-        Status message related to the ``code`` .
+        The status message related to the status code.
 
         
 
@@ -236,7 +235,7 @@ exportTasks -> (list)
 
         
 
-        A point in time when the export task got created.
+        The creation time of the export task, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
 
         
 
@@ -246,7 +245,7 @@ exportTasks -> (list)
 
         
 
-        A point in time when the export task got completed.
+        The completion time of the export task, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
 
         
 
@@ -262,7 +261,7 @@ nextToken -> (string)
 
   
 
-  A string token used for pagination that points to the next page of results. It must be a value obtained from the response of the previous request. The token expires after 24 hours.
+  The token for the next set of items to return. The token expires after 24 hours.
 
   
 

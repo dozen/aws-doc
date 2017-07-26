@@ -19,12 +19,15 @@ Lists the receipt rule sets that exist under your AWS account. If there are addi
 
  
 
-For information about managing receipt rule sets, see the `Amazon SES Developer Guide`_ .
+For information about managing receipt rule sets, see the `Amazon SES Developer Guide <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rule-sets.html>`_ .
 
  
 
 This action is throttled at one request per second.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListReceiptRuleSets>`_
 
 
 ========
@@ -36,7 +39,7 @@ Synopsis
     list-receipt-rule-sets
   [--next-token <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -55,8 +58,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -84,7 +87,7 @@ RuleSets -> (list)
 
      
 
-    For information about setting up receipt rule sets, see the `Amazon SES Developer Guide`_ .
+    For information about setting up receipt rule sets, see the `Amazon SES Developer Guide <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rule-set.html>`_ .
 
     
 
@@ -97,11 +100,11 @@ RuleSets -> (list)
        
 
        
-      * Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-).
+      * Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-). 
        
-      * Start and end with a letter or number.
+      * Start and end with a letter or number. 
        
-      * Contain less than 64 characters.
+      * Contain less than 64 characters. 
        
 
       
@@ -132,6 +135,3 @@ NextToken -> (string)
 
   
 
-
-
-.. _Amazon SES Developer Guide: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rule-set.html

@@ -15,22 +15,29 @@ Description
 
 
 
-Creates an IAM entity to describe an identity provider (IdP) that supports `OpenID Connect (OIDC)`_ . 
+Creates an IAM entity to describe an identity provider (IdP) that supports `OpenID Connect (OIDC) <http://openid.net/connect/>`_ .
 
  
 
-The OIDC provider that you create with this operation can be used as a principal in a role's trust policy to establish a trust relationship between AWS and the OIDC provider. 
+The OIDC provider that you create with this operation can be used as a principal in a role's trust policy to establish a trust relationship between AWS and the OIDC provider.
 
  
 
-When you create the IAM OIDC provider, you specify the URL of the OIDC identity provider (IdP) to trust, a list of client IDs (also known as audiences) that identify the application or applications that are allowed to authenticate using the OIDC provider, and a list of thumbprints of the server certificate(s) that the IdP uses. You get all of this information from the OIDC IdP that you want to use for access to AWS. 
+When you create the IAM OIDC provider, you specify the URL of the OIDC identity provider (IdP) to trust, a list of client IDs (also known as audiences) that identify the application or applications that are allowed to authenticate using the OIDC provider, and a list of thumbprints of the server certificate(s) that the IdP uses. You get all of this information from the OIDC IdP that you want to use for access to AWS.
 
  
 
 .. note::
 
-  Because trust for the OIDC provider is ultimately derived from the IAM provider that this action creates, it is a best practice to limit access to the  create-open-id-connect-provider action to highly-privileged users. 
+   
 
+  Because trust for the OIDC provider is ultimately derived from the IAM provider that this action creates, it is a best practice to limit access to the  create-open-id-connect-provider action to highly-privileged users.
+
+   
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateOpenIDConnectProvider>`_
 
 
 ========
@@ -44,7 +51,7 @@ Synopsis
   [--client-id-list <value>]
   --thumbprint-list <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -56,26 +63,26 @@ Options
 ``--url`` (string)
 
 
-  The URL of the identity provider. The URL must begin with "https://" and should correspond to the ``iss`` claim in the provider's OpenID Connect ID tokens. Per the OIDC standard, path components are allowed but query parameters are not. Typically the URL consists of only a host name, like "https://server.example.org" or "https://example.com". 
+  The URL of the identity provider. The URL must begin with "https://" and should correspond to the ``iss`` claim in the provider's OpenID Connect ID tokens. Per the OIDC standard, path components are allowed but query parameters are not. Typically the URL consists of only a host name, like "https://server.example.org" or "https://example.com".
 
    
 
-  You cannot register the same provider multiple times in a single AWS account. If you try to submit a URL that has already been used for an OpenID Connect provider in the AWS account, you will get an error. 
+  You cannot register the same provider multiple times in a single AWS account. If you try to submit a URL that has already been used for an OpenID Connect provider in the AWS account, you will get an error.
 
   
 
 ``--client-id-list`` (list)
 
 
-  A list of client IDs (also known as audiences). When a mobile or web app registers with an OpenID Connect provider, they establish a value that identifies the application. (This is the value that's sent as the ``client_id`` parameter on OAuth requests.) 
+  A list of client IDs (also known as audiences). When a mobile or web app registers with an OpenID Connect provider, they establish a value that identifies the application. (This is the value that's sent as the ``client_id`` parameter on OAuth requests.)
 
    
 
-  You can register multiple client IDs with the same provider. For example, you might have multiple applications that use the same OIDC provider. You cannot register more than 100 client IDs with a single IAM OIDC provider. 
+  You can register multiple client IDs with the same provider. For example, you might have multiple applications that use the same OIDC provider. You cannot register more than 100 client IDs with a single IAM OIDC provider.
 
    
 
-  There is no defined format for a client ID. The ``CreateOpenIDConnectProviderRequest`` action accepts client IDs up to 255 characters long. 
+  There is no defined format for a client ID. The ``CreateOpenIDConnectProviderRequest`` action accepts client IDs up to 255 characters long.
 
   
 
@@ -94,15 +101,15 @@ Syntax::
 
    
 
-  The server certificate thumbprint is the hex-encoded SHA-1 hash value of the X.509 certificate used by the domain where the OpenID Connect provider makes its keys available. It is always a 40-character string. 
+  The server certificate thumbprint is the hex-encoded SHA-1 hash value of the X.509 certificate used by the domain where the OpenID Connect provider makes its keys available. It is always a 40-character string.
 
    
 
-  You must provide at least one thumbprint when creating an IAM OIDC provider. For example, if the OIDC provider is ``server.example.com`` and the provider stores its keys at "https://keys.server.example.com/openid-connect", the thumbprint string would be the hex-encoded SHA-1 hash value of the certificate used by https://keys.server.example.com. 
+  You must provide at least one thumbprint when creating an IAM OIDC provider. For example, if the OIDC provider is ``server.example.com`` and the provider stores its keys at "https://keys.server.example.com/openid-connect", the thumbprint string would be the hex-encoded SHA-1 hash value of the certificate used by https://keys.server.example.com.
 
    
 
-  For more information about obtaining the OIDC provider's thumbprint, see `Obtaining the Thumbprint for an OpenID Connect Provider`_ in the *IAM User Guide* . 
+  For more information about obtaining the OIDC provider's thumbprint, see `Obtaining the Thumbprint for an OpenID Connect Provider <http://docs.aws.amazon.com/IAM/latest/UserGuide/identity-providers-oidc-obtain-thumbprint.html>`_ in the *IAM User Guide* .
 
   
 
@@ -117,8 +124,8 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -172,13 +179,9 @@ OpenIDConnectProviderArn -> (string)
 
   
 
-  The Amazon Resource Name (ARN) of the IAM OpenID Connect provider that was created. For more information, see  OpenIDConnectProviderListEntry . 
+  The Amazon Resource Name (ARN) of the new IAM OpenID Connect provider that is created. For more information, see  OpenIDConnectProviderListEntry . 
 
   
 
   
 
-
-
-.. _OpenID Connect (OIDC): http://openid.net/connect/
-.. _Obtaining the Thumbprint for an OpenID Connect Provider: http://docs.aws.amazon.com/IAM/latest/UserGuide/identity-providers-oidc-obtain-thumbprint.html

@@ -19,8 +19,11 @@ Creates a route table for the specified VPC. After you create a route table, you
 
  
 
-For more information about route tables, see `Route Tables`_ in the *Amazon Virtual Private Cloud User Guide* .
+For more information about route tables, see `Route Tables <http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html>`_ in the *Amazon Virtual Private Cloud User Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateRouteTable>`_
 
 
 ========
@@ -33,7 +36,7 @@ Synopsis
   [--dry-run | --no-dry-run]
   --vpc-id <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -59,8 +62,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -107,156 +110,6 @@ RouteTable -> (structure)
 
   
 
-  RouteTableId -> (string)
-
-    
-
-    The ID of the route table.
-
-    
-
-    
-
-  VpcId -> (string)
-
-    
-
-    The ID of the VPC.
-
-    
-
-    
-
-  Routes -> (list)
-
-    
-
-    The routes in the route table.
-
-    
-
-    (structure)
-
-      
-
-      Describes a route in a route table.
-
-      
-
-      DestinationCidrBlock -> (string)
-
-        
-
-        The CIDR block used for the destination match.
-
-        
-
-        
-
-      DestinationPrefixListId -> (string)
-
-        
-
-        The prefix of the AWS service.
-
-        
-
-        
-
-      GatewayId -> (string)
-
-        
-
-        The ID of a gateway attached to your VPC.
-
-        
-
-        
-
-      InstanceId -> (string)
-
-        
-
-        The ID of a NAT instance in your VPC.
-
-        
-
-        
-
-      InstanceOwnerId -> (string)
-
-        
-
-        The AWS account ID of the owner of the instance.
-
-        
-
-        
-
-      NetworkInterfaceId -> (string)
-
-        
-
-        The ID of the network interface.
-
-        
-
-        
-
-      VpcPeeringConnectionId -> (string)
-
-        
-
-        The ID of the VPC peering connection.
-
-        
-
-        
-
-      NatGatewayId -> (string)
-
-        
-
-        The ID of a NAT gateway.
-
-        
-
-        
-
-      State -> (string)
-
-        
-
-        The state of the route. The ``blackhole`` state indicates that the route's target isn't available (for example, the specified gateway isn't attached to the VPC, or the specified NAT instance has been terminated).
-
-        
-
-        
-
-      Origin -> (string)
-
-        
-
-        Describes how the route was created.
-
-         
-
-         
-        * ``create-route-table`` indicates that route was automatically created when the route table was created.
-         
-        * ``create-route`` indicates that the route was manually added to the route table.
-         
-        * ``enable-vgw-route-propagation`` indicates that the route was propagated by route propagation.
-         
-
-        
-
-        
-
-      
-
-    
-
   Associations -> (list)
 
     
@@ -272,6 +125,16 @@ RouteTable -> (structure)
       Describes an association between a route table and a subnet.
 
       
+
+      Main -> (boolean)
+
+        
+
+        Indicates whether this is the main route table.
+
+        
+
+        
 
       RouteTableAssociationId -> (string)
 
@@ -298,64 +161,6 @@ RouteTable -> (structure)
         
 
         The ID of the subnet. A subnet ID is not returned for an implicit association.
-
-        
-
-        
-
-      Main -> (boolean)
-
-        
-
-        Indicates whether this is the main route table.
-
-        
-
-        
-
-      
-
-    
-
-  Tags -> (list)
-
-    
-
-    Any tags assigned to the route table.
-
-    
-
-    (structure)
-
-      
-
-      Describes a tag.
-
-      
-
-      Key -> (string)
-
-        
-
-        The key of the tag. 
-
-         
-
-        Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with ``aws:`` 
-
-        
-
-        
-
-      Value -> (string)
-
-        
-
-        The value of the tag.
-
-         
-
-        Constraints: Tag values are case-sensitive and accept a maximum of 255 Unicode characters.
 
         
 
@@ -395,8 +200,223 @@ RouteTable -> (structure)
 
     
 
+  RouteTableId -> (string)
+
+    
+
+    The ID of the route table.
+
+    
+
+    
+
+  Routes -> (list)
+
+    
+
+    The routes in the route table.
+
+    
+
+    (structure)
+
+      
+
+      Describes a route in a route table.
+
+      
+
+      DestinationCidrBlock -> (string)
+
+        
+
+        The IPv4 CIDR block used for the destination match.
+
+        
+
+        
+
+      DestinationIpv6CidrBlock -> (string)
+
+        
+
+        The IPv6 CIDR block used for the destination match.
+
+        
+
+        
+
+      DestinationPrefixListId -> (string)
+
+        
+
+        The prefix of the AWS service.
+
+        
+
+        
+
+      EgressOnlyInternetGatewayId -> (string)
+
+        
+
+        The ID of the egress-only Internet gateway.
+
+        
+
+        
+
+      GatewayId -> (string)
+
+        
+
+        The ID of a gateway attached to your VPC.
+
+        
+
+        
+
+      InstanceId -> (string)
+
+        
+
+        The ID of a NAT instance in your VPC.
+
+        
+
+        
+
+      InstanceOwnerId -> (string)
+
+        
+
+        The AWS account ID of the owner of the instance.
+
+        
+
+        
+
+      NatGatewayId -> (string)
+
+        
+
+        The ID of a NAT gateway.
+
+        
+
+        
+
+      NetworkInterfaceId -> (string)
+
+        
+
+        The ID of the network interface.
+
+        
+
+        
+
+      Origin -> (string)
+
+        
+
+        Describes how the route was created.
+
+         
+
+         
+        * ``create-route-table`` - The route was automatically created when the route table was created. 
+         
+        * ``create-route`` - The route was manually added to the route table. 
+         
+        * ``enable-vgw-route-propagation`` - The route was propagated by route propagation. 
+         
+
+        
+
+        
+
+      State -> (string)
+
+        
+
+        The state of the route. The ``blackhole`` state indicates that the route's target isn't available (for example, the specified gateway isn't attached to the VPC, or the specified NAT instance has been terminated).
+
+        
+
+        
+
+      VpcPeeringConnectionId -> (string)
+
+        
+
+        The ID of the VPC peering connection.
+
+        
+
+        
+
+      
+
+    
+
+  Tags -> (list)
+
+    
+
+    Any tags assigned to the route table.
+
+    
+
+    (structure)
+
+      
+
+      Describes a tag.
+
+      
+
+      Key -> (string)
+
+        
+
+        The key of the tag.
+
+         
+
+        Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with ``aws:``  
+
+        
+
+        
+
+      Value -> (string)
+
+        
+
+        The value of the tag.
+
+         
+
+        Constraints: Tag values are case-sensitive and accept a maximum of 255 Unicode characters.
+
+        
+
+        
+
+      
+
+    
+
+  VpcId -> (string)
+
+    
+
+    The ID of the VPC.
+
+    
+
+    
+
   
 
-
-
-.. _Route Tables: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html

@@ -28,13 +28,18 @@ Available Commands
   :maxdepth: 1
   :titlesonly:
 
+  accept-reserved-instances-exchange-quote
   accept-vpc-peering-connection
   allocate-address
   allocate-hosts
+  assign-ipv6-addresses
   assign-private-ip-addresses
   associate-address
   associate-dhcp-options
+  associate-iam-instance-profile
   associate-route-table
+  associate-subnet-cidr-block
+  associate-vpc-cidr-block
   attach-classic-link-vpc
   attach-internet-gateway
   attach-network-interface
@@ -55,7 +60,9 @@ Available Commands
   copy-snapshot
   create-customer-gateway
   create-dhcp-options
+  create-egress-only-internet-gateway
   create-flow-logs
+  create-fpga-image
   create-image
   create-instance-export-task
   create-internet-gateway
@@ -64,6 +71,7 @@ Available Commands
   create-network-acl
   create-network-acl-entry
   create-network-interface
+  create-network-interface-permission
   create-placement-group
   create-reserved-instances-listing
   create-route
@@ -82,6 +90,7 @@ Available Commands
   create-vpn-gateway
   delete-customer-gateway
   delete-dhcp-options
+  delete-egress-only-internet-gateway
   delete-flow-logs
   delete-internet-gateway
   delete-key-pair
@@ -89,6 +98,7 @@ Available Commands
   delete-network-acl
   delete-network-acl-entry
   delete-network-interface
+  delete-network-interface-permission
   delete-placement-group
   delete-route
   delete-route-table
@@ -113,10 +123,16 @@ Available Commands
   describe-conversion-tasks
   describe-customer-gateways
   describe-dhcp-options
+  describe-egress-only-internet-gateways
   describe-export-tasks
   describe-flow-logs
+  describe-fpga-images
+  describe-host-reservation-offerings
+  describe-host-reservations
   describe-hosts
+  describe-iam-instance-profile-associations
   describe-id-format
+  describe-identity-id-format
   describe-image-attribute
   describe-images
   describe-import-image-tasks
@@ -130,6 +146,7 @@ Available Commands
   describe-nat-gateways
   describe-network-acls
   describe-network-interface-attribute
+  describe-network-interface-permissions
   describe-network-interfaces
   describe-placement-groups
   describe-prefix-lists
@@ -141,6 +158,7 @@ Available Commands
   describe-route-tables
   describe-scheduled-instance-availability
   describe-scheduled-instances
+  describe-security-group-references
   describe-security-groups
   describe-snapshot-attribute
   describe-snapshots
@@ -150,11 +168,13 @@ Available Commands
   describe-spot-fleet-requests
   describe-spot-instance-requests
   describe-spot-price-history
+  describe-stale-security-groups
   describe-subnets
   describe-tags
   describe-volume-attribute
   describe-volume-status
   describe-volumes
+  describe-volumes-modifications
   describe-vpc-attribute
   describe-vpc-classic-link
   describe-vpc-classic-link-dns-support
@@ -173,18 +193,25 @@ Available Commands
   disable-vpc-classic-link
   disable-vpc-classic-link-dns-support
   disassociate-address
+  disassociate-iam-instance-profile
   disassociate-route-table
+  disassociate-subnet-cidr-block
+  disassociate-vpc-cidr-block
   enable-vgw-route-propagation
   enable-volume-io
   enable-vpc-classic-link
   enable-vpc-classic-link-dns-support
   get-console-output
+  get-console-screenshot
+  get-host-reservation-purchase-preview
   get-password-data
+  get-reserved-instances-exchange-quote
   import-image
   import-key-pair
   import-snapshot
   modify-hosts
   modify-id-format
+  modify-identity-id-format
   modify-image-attribute
   modify-instance-attribute
   modify-instance-placement
@@ -193,11 +220,14 @@ Available Commands
   modify-snapshot-attribute
   modify-spot-fleet-request
   modify-subnet-attribute
+  modify-volume
   modify-volume-attribute
   modify-vpc-attribute
   modify-vpc-endpoint
+  modify-vpc-peering-connection-options
   monitor-instances
   move-address-to-vpc
+  purchase-host-reservation
   purchase-reserved-instances-offering
   purchase-scheduled-instances
   reboot-instances
@@ -205,6 +235,7 @@ Available Commands
   reject-vpc-peering-connection
   release-address
   release-hosts
+  replace-iam-instance-profile-association
   replace-network-acl-association
   replace-network-acl-entry
   replace-route
@@ -224,6 +255,7 @@ Available Commands
   start-instances
   stop-instances
   terminate-instances
+  unassign-ipv6-addresses
   unassign-private-ip-addresses
   unmonitor-instances
   wait/index

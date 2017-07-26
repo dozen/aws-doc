@@ -19,6 +19,9 @@ Gets information about a deployment group.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentGroup>`_
+
+
 ========
 Synopsis
 ========
@@ -29,7 +32,7 @@ Synopsis
   --application-name <value>
   --deployment-group-name <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -41,7 +44,7 @@ Options
 ``--application-name`` (string)
 
 
-  The name of an existing AWS CodeDeploy application associated with the applicable IAM user or AWS account.
+  The name of an AWS CodeDeploy application associated with the applicable IAM user or AWS account.
 
   
 
@@ -55,8 +58,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -150,7 +153,7 @@ deploymentGroupInfo -> (structure)
 
     
 
-    The Amazon EC2 tags to filter on.
+    The Amazon EC2 tags on which to filter.
 
     
 
@@ -158,7 +161,7 @@ deploymentGroupInfo -> (structure)
 
       
 
-      Information about a tag filter.
+      Information about an EC2 tag filter.
 
       
 
@@ -191,11 +194,11 @@ deploymentGroupInfo -> (structure)
          
 
          
-        * KEY_ONLY: Key only.
+        * KEY_ONLY: Key only. 
          
-        * VALUE_ONLY: Value only.
+        * VALUE_ONLY: Value only. 
          
-        * KEY_AND_VALUE: Key and value.
+        * KEY_AND_VALUE: Key and value. 
          
 
         
@@ -210,7 +213,7 @@ deploymentGroupInfo -> (structure)
 
     
 
-    The on-premises instance tags to filter on.
+    The on-premises instance tags on which to filter.
 
     
 
@@ -251,11 +254,11 @@ deploymentGroupInfo -> (structure)
          
 
          
-        * KEY_ONLY: Key only.
+        * KEY_ONLY: Key only. 
          
-        * VALUE_ONLY: Value only.
+        * VALUE_ONLY: Value only. 
          
-        * KEY_AND_VALUE: Key and value.
+        * KEY_AND_VALUE: Key and value. 
          
 
         
@@ -320,7 +323,7 @@ deploymentGroupInfo -> (structure)
 
     
 
-    Information about the deployment group's target revision, including the revision's type and its location.
+    Information about the deployment group's target revision, including type and location.
 
     
 
@@ -328,14 +331,14 @@ deploymentGroupInfo -> (structure)
 
       
 
-      The application revision's type:
+      The type of application revision:
 
        
 
        
-      * S3: An application revision stored in Amazon S3.
+      * S3: An application revision stored in Amazon S3. 
        
-      * GitHub: An application revision stored in GitHub.
+      * GitHub: An application revision stored in GitHub. 
        
 
       
@@ -346,7 +349,7 @@ deploymentGroupInfo -> (structure)
 
       
 
-      Information about the location of application artifacts that are stored in Amazon S3.
+      Information about the location of application artifacts stored in Amazon S3. 
 
       
 
@@ -379,11 +382,11 @@ deploymentGroupInfo -> (structure)
          
 
          
-        * tar: A tar archive file.
+        * tar: A tar archive file. 
          
-        * tgz: A compressed tar archive file.
+        * tgz: A compressed tar archive file. 
          
-        * zip: A zip archive file.
+        * zip: A zip archive file. 
          
 
         
@@ -424,7 +427,7 @@ deploymentGroupInfo -> (structure)
 
       
 
-      Information about the location of application artifacts that are stored in GitHub.
+      Information about the location of application artifacts stored in GitHub.
 
       
 
@@ -460,7 +463,7 @@ deploymentGroupInfo -> (structure)
 
     
 
-    A list of associated triggers. 
+    Information about triggers associated with the deployment group.
 
     
 
@@ -474,7 +477,11 @@ deploymentGroupInfo -> (structure)
 
       triggerName -> (string)
 
+        
+
         The name of the notification trigger.
+
+        
 
         
 
@@ -482,7 +489,7 @@ deploymentGroupInfo -> (structure)
 
         
 
-        The arn of the Amazon Simple Notification Service topic through which notifications about deployment or instance events are sent.
+        The ARN of the Amazon Simple Notification Service topic through which notifications about deployment or instance events are sent.
 
         
 
@@ -494,28 +501,6 @@ deploymentGroupInfo -> (structure)
 
         The event type or types for which notifications are triggered.
 
-         
-
-        The following event type values are supported:
-
-         
-
-         
-        * DEPLOYMENT_START
-         
-        * DEPLOYMENT_SUCCESS
-         
-        * DEPLOYMENT_FAILURE
-         
-        * DEPLOYMENT_STOP
-         
-        * INSTANCE_START
-         
-        * INSTANCE_SUCCESS
-         
-        * INSTANCE_FAILURE
-         
-
         
 
         (string)
@@ -525,6 +510,394 @@ deploymentGroupInfo -> (structure)
           
 
         
+
+      
+
+    
+
+  alarmConfiguration -> (structure)
+
+    
+
+    A list of alarms associated with the deployment group.
+
+    
+
+    enabled -> (boolean)
+
+      
+
+      Indicates whether the alarm configuration is enabled.
+
+      
+
+      
+
+    ignorePollAlarmFailure -> (boolean)
+
+      
+
+      Indicates whether a deployment should continue if information about the current state of alarms cannot be retrieved from Amazon CloudWatch. The default value is false.
+
+       
+
+       
+      * true: The deployment will proceed even if alarm status information can't be retrieved from Amazon CloudWatch. 
+       
+      * false: The deployment will stop if alarm status information can't be retrieved from Amazon CloudWatch. 
+       
+
+      
+
+      
+
+    alarms -> (list)
+
+      
+
+      A list of alarms configured for the deployment group. A maximum of 10 alarms can be added to a deployment group.
+
+      
+
+      (structure)
+
+        
+
+        Information about an alarm.
+
+        
+
+        name -> (string)
+
+          
+
+          The name of the alarm. Maximum length is 255 characters. Each alarm name can be used only once in a list of alarms.
+
+          
+
+          
+
+        
+
+      
+
+    
+
+  autoRollbackConfiguration -> (structure)
+
+    
+
+    Information about the automatic rollback configuration associated with the deployment group.
+
+    
+
+    enabled -> (boolean)
+
+      
+
+      Indicates whether a defined automatic rollback configuration is currently enabled.
+
+      
+
+      
+
+    events -> (list)
+
+      
+
+      The event type or types that trigger a rollback.
+
+      
+
+      (string)
+
+        
+
+        
+
+      
+
+    
+
+  deploymentStyle -> (structure)
+
+    
+
+    Information about the type of deployment, either in-place or blue/green, you want to run and whether to route deployment traffic behind a load balancer.
+
+    
+
+    deploymentType -> (string)
+
+      
+
+      Indicates whether to run an in-place deployment or a blue/green deployment.
+
+      
+
+      
+
+    deploymentOption -> (string)
+
+      
+
+      Indicates whether to route deployment traffic behind a load balancer.
+
+      
+
+      
+
+    
+
+  blueGreenDeploymentConfiguration -> (structure)
+
+    
+
+    Information about blue/green deployment options for a deployment group.
+
+    
+
+    terminateBlueInstancesOnDeploymentSuccess -> (structure)
+
+      
+
+      Information about whether to terminate instances in the original fleet during a blue/green deployment.
+
+      
+
+      action -> (string)
+
+        
+
+        The action to take on instances in the original environment after a successful blue/green deployment.
+
+         
+
+         
+        * TERMINATE: Instances are terminated after a specified wait time. 
+         
+        * KEEP_ALIVE: Instances are left running after they are deregistered from the load balancer and removed from the deployment group. 
+         
+
+        
+
+        
+
+      terminationWaitTimeInMinutes -> (integer)
+
+        
+
+        The number of minutes to wait after a successful blue/green deployment before terminating instances from the original environment.
+
+        
+
+        
+
+      
+
+    deploymentReadyOption -> (structure)
+
+      
+
+      Information about the action to take when newly provisioned instances are ready to receive traffic in a blue/green deployment.
+
+      
+
+      actionOnTimeout -> (string)
+
+        
+
+        Information about when to reroute traffic from an original environment to a replacement environment in a blue/green deployment.
+
+         
+
+         
+        * CONTINUE_DEPLOYMENT: Register new instances with the load balancer immediately after the new application revision is installed on the instances in the replacement environment. 
+         
+        * STOP_DEPLOYMENT: Do not register new instances with load balancer unless traffic is rerouted manually. If traffic is not rerouted manually before the end of the specified wait period, the deployment status is changed to Stopped. 
+         
+
+        
+
+        
+
+      waitTimeInMinutes -> (integer)
+
+        
+
+        The number of minutes to wait before the status of a blue/green deployment changed to Stopped if rerouting is not started manually. Applies only to the STOP_DEPLOYMENT option for actionOnTimeout
+
+        
+
+        
+
+      
+
+    greenFleetProvisioningOption -> (structure)
+
+      
+
+      Information about how instances are provisioned for a replacement environment in a blue/green deployment.
+
+      
+
+      action -> (string)
+
+        
+
+        The method used to add instances to a replacement environment.
+
+         
+
+         
+        * DISCOVER_EXISTING: Use instances that already exist or will be created manually. 
+         
+        * COPY_AUTO_SCALING_GROUP: Use settings from a specified Auto Scaling group to define and create instances in a new Auto Scaling group. 
+         
+
+        
+
+        
+
+      
+
+    
+
+  loadBalancerInfo -> (structure)
+
+    
+
+    Information about the load balancer to use in a deployment.
+
+    
+
+    elbInfoList -> (list)
+
+      
+
+      An array containing information about the load balancer in Elastic Load Balancing to use in a deployment.
+
+      
+
+      (structure)
+
+        
+
+        Information about a load balancer in Elastic Load Balancing to use in a deployment.
+
+        
+
+        name -> (string)
+
+          
+
+          For blue/green deployments, the name of the load balancer that will be used to route traffic from original instances to replacement instances in a blue/green deployment. For in-place deployments, the name of the load balancer that instances are deregistered from so they are not serving traffic during a deployment, and then re-registered with after the deployment completes.
+
+          
+
+          
+
+        
+
+      
+
+    
+
+  lastSuccessfulDeployment -> (structure)
+
+    
+
+    Information about the most recent successful deployment to the deployment group.
+
+    
+
+    deploymentId -> (string)
+
+      
+
+      The deployment ID.
+
+      
+
+      
+
+    status -> (string)
+
+      
+
+      The status of the most recent deployment.
+
+      
+
+      
+
+    endTime -> (timestamp)
+
+      
+
+      A timestamp indicating when the most recent deployment to the deployment group completed.
+
+      
+
+      
+
+    createTime -> (timestamp)
+
+      
+
+      A timestamp indicating when the most recent deployment to the deployment group started.
+
+      
+
+      
+
+    
+
+  lastAttemptedDeployment -> (structure)
+
+    
+
+    Information about the most recent attempted deployment to the deployment group.
+
+    
+
+    deploymentId -> (string)
+
+      
+
+      The deployment ID.
+
+      
+
+      
+
+    status -> (string)
+
+      
+
+      The status of the most recent deployment.
+
+      
+
+      
+
+    endTime -> (timestamp)
+
+      
+
+      A timestamp indicating when the most recent deployment to the deployment group completed.
+
+      
+
+      
+
+    createTime -> (timestamp)
+
+      
+
+      A timestamp indicating when the most recent deployment to the deployment group started.
+
+      
 
       
 

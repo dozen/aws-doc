@@ -15,8 +15,11 @@ Description
 
 
 
-Describes one or more launch configurations. If you omit the list of names, then the call describes all launch configurations.
+Describes one or more launch configurations.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLaunchConfigurations>`_
 
 
 ``describe-launch-configurations`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
@@ -35,7 +38,7 @@ Synopsis
   [--starting-token <value>]
   [--page-size <value>]
   [--max-items <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -47,7 +50,7 @@ Options
 ``--launch-configuration-names`` (list)
 
 
-  The launch configuration names.
+  The launch configuration names. If you omit this parameter, all launch configurations are described.
 
   
 
@@ -69,26 +72,34 @@ Performs service operation based on the JSON string provided. The JSON string fo
 
    
 
-``--page-size`` (integer)
- 
-
-  The size of each page.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
    
 
-  
+``--page-size`` (integer)
+ 
 
-  
+  The size of each page to get in the AWS service call. This does not affect the number of items returned in the command's output. Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call. This can help prevent the AWS service calls from timing out.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
 
 ``--max-items`` (integer)
  
 
-  The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination. This ``NextToken`` response element should **not** be used directly outside of the AWS CLI.
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``NextToken`` is provided in the command's output. To resume pagination, provide the ``NextToken`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``NextToken`` response element directly outside of the AWS CLI.
 
    
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -100,70 +111,70 @@ Examples
 
 This example describes the specified launch configuration::
 
-	aws autoscaling describe-launch-configurations --launch-configuration-names my-launch-config
+    aws autoscaling describe-launch-configurations --launch-configuration-names my-launch-config
 
 The following is example output::
 
-	{
-		"LaunchConfigurations": [
-			{
-				"UserData": null,
-				"EbsOptimized": false,
-				"LaunchConfigurationARN": "arn:aws:autoscaling:us-west-2:123456789012:launchConfiguration:98d3b196-4cf9-4e88-8ca1-8547c24ced8b:launchConfigurationName/my-launch-config",
-				"InstanceMonitoring": {
-					"Enabled": true
-				},
-				"ImageId": "ami-043a5034",
-				"CreatedTime": "2014-05-07T17:39:28.599Z",
-				"BlockDeviceMappings": [],
-				"KeyName": null,
-				"SecurityGroups": [
-					"sg-67ef0308"
-				],
-				"LaunchConfigurationName": "my-launch-config",
-				"KernelId": null,
-				"RamdiskId": null,
-				"InstanceType": "t1.micro",
-				"AssociatePublicIpAddress": true
-			}
-		]
-	}
+    {
+        "LaunchConfigurations": [
+            {
+                "UserData": null,
+                "EbsOptimized": false,
+                "LaunchConfigurationARN": "arn:aws:autoscaling:us-west-2:123456789012:launchConfiguration:98d3b196-4cf9-4e88-8ca1-8547c24ced8b:launchConfigurationName/my-launch-config",
+                "InstanceMonitoring": {
+                    "Enabled": true
+                },
+                "ImageId": "ami-043a5034",
+                "CreatedTime": "2014-05-07T17:39:28.599Z",
+                "BlockDeviceMappings": [],
+                "KeyName": null,
+                "SecurityGroups": [
+                    "sg-67ef0308"
+                ],
+                "LaunchConfigurationName": "my-launch-config",
+                "KernelId": null,
+                "RamdiskId": null,
+                "InstanceType": "t1.micro",
+                "AssociatePublicIpAddress": true
+            }
+        ]
+    }
 
 To return a specific number of launch configurations, use the ``max-items`` parameter::
 
-	aws autoscaling describe-launch-configurations --max-items 1
+    aws autoscaling describe-launch-configurations --max-items 1
 
 The following is example output::
 
-	{
-		"NextToken": "None___1",
-		"LaunchConfigurations": [
-			{
-				"UserData": null,
-				"EbsOptimized": false,
-				"LaunchConfigurationARN": "arn:aws:autoscaling:us-west-2:123456789012:launchConfiguration:98d3b196-4cf9-4e88-8ca1-8547c24ced8b:launchConfigurationName/my-launch-config",
-				"InstanceMonitoring": {
-					"Enabled": true
-				},
-				"ImageId": "ami-043a5034",
-				"CreatedTime": "2014-05-07T17:39:28.599Z",
-				"BlockDeviceMappings": [],
-				"KeyName": null,
-				"SecurityGroups": [
-					"sg-67ef0308"
-				],
-				"LaunchConfigurationName": "my-launch-config",
-				"KernelId": null,
-				"RamdiskId": null,
-				"InstanceType": "t1.micro",
-				"AssociatePublicIpAddress": true
-			}
-		]
-	}
+    {
+        "NextToken": "Z3M3LMPEXAMPLE",
+        "LaunchConfigurations": [
+            {
+                "UserData": null,
+                "EbsOptimized": false,
+                "LaunchConfigurationARN": "arn:aws:autoscaling:us-west-2:123456789012:launchConfiguration:98d3b196-4cf9-4e88-8ca1-8547c24ced8b:launchConfigurationName/my-launch-config",
+                "InstanceMonitoring": {
+                    "Enabled": true
+                },
+                "ImageId": "ami-043a5034",
+                "CreatedTime": "2014-05-07T17:39:28.599Z",
+                "BlockDeviceMappings": [],
+                "KeyName": null,
+                "SecurityGroups": [
+                    "sg-67ef0308"
+                ],
+                "LaunchConfigurationName": "my-launch-config",
+                "KernelId": null,
+                "RamdiskId": null,
+                "InstanceType": "t1.micro",
+                "AssociatePublicIpAddress": true
+            }
+        ]
+    }
 
 If the output includes a ``NextToken`` field, there are more launch configurations. To get the additional launch configurations, use the value of this field with the ``starting-token`` parameter in a subsequent call as follows::
 
-    aws autoscaling describe-launch-configurations --starting-token None___1
+    aws autoscaling describe-launch-configurations --starting-token Z3M3LMPEXAMPLE
 
 
 ======
@@ -246,7 +257,7 @@ LaunchConfigurations -> (list)
 
       
 
-      The ID of a ClassicLink-enabled VPC to link your EC2-Classic instances to. This parameter can only be used if you are launching EC2-Classic instances. For more information, see `ClassicLink`_ in the *Amazon Elastic Compute Cloud User Guide* .
+      The ID of a ClassicLink-enabled VPC to link your EC2-Classic instances to. This parameter can only be used if you are launching EC2-Classic instances. For more information, see `ClassicLink <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html>`_ in the *Amazon Elastic Compute Cloud User Guide* .
 
       
 
@@ -256,7 +267,7 @@ LaunchConfigurations -> (list)
 
       
 
-      The IDs of one or more security groups for the VPC specified in ``ClassicLinkVPCId`` . This parameter is required if you specify a ClassicLink-enabled VPC, and cannot be used otherwise. For more information, see `ClassicLink`_ in the *Amazon Elastic Compute Cloud User Guide* .
+      The IDs of one or more security groups for the VPC specified in ``ClassicLinkVPCId`` . This parameter is required if you specify a ClassicLink-enabled VPC, and cannot be used otherwise. For more information, see `ClassicLink <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html>`_ in the *Amazon Elastic Compute Cloud User Guide* .
 
       
 
@@ -380,15 +391,15 @@ LaunchConfigurations -> (list)
 
             
 
-            The volume type. For more information, see `Amazon EBS Volume Types`_ in the *Amazon Elastic Compute Cloud User Guide* .
+            The volume type. For more information, see `Amazon EBS Volume Types <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html>`_ in the *Amazon Elastic Compute Cloud User Guide* .
 
              
 
-            Valid values: ``standard`` | ``io1`` | ``gp2`` 
+            Valid values: ``standard`` | ``io1`` | ``gp2``  
 
              
 
-            Default: ``standard`` 
+            Default: ``standard``  
 
             
 
@@ -402,7 +413,7 @@ LaunchConfigurations -> (list)
 
              
 
-            Default: ``true`` 
+            Default: ``true``  
 
             
 
@@ -426,7 +437,7 @@ LaunchConfigurations -> (list)
 
             
 
-            Indicates whether the volume should be encrypted. Encrypted EBS volumes must be attached to instances that support Amazon EBS encryption. Volumes that are created from encrypted snapshots are automatically encrypted. There is no way to create an encrypted volume from an unencrypted snapshot or an unencrypted volume from an encrypted snapshot. For more information, see `Amazon EBS Encryption`_ in the *Amazon Elastic Compute Cloud User Guide* .
+            Indicates whether the volume should be encrypted. Encrypted EBS volumes must be attached to instances that support Amazon EBS encryption. Volumes that are created from encrypted snapshots are automatically encrypted. There is no way to create an encrypted volume from an unencrypted snapshot or an unencrypted volume from an encrypted snapshot. For more information, see `Amazon EBS Encryption <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html>`_ in the *Amazon Elastic Compute Cloud User Guide* .
 
             
 
@@ -456,7 +467,7 @@ LaunchConfigurations -> (list)
 
       
 
-      Controls whether instances in this group are launched with detailed monitoring.
+      Controls whether instances in this group are launched with detailed (``true`` ) or basic (``false`` ) monitoring.
 
       
 
@@ -546,8 +557,3 @@ NextToken -> (string)
 
   
 
-
-
-.. _Amazon EBS Volume Types: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
-.. _ClassicLink: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
-.. _Amazon EBS Encryption: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html

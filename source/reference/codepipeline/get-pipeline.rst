@@ -19,6 +19,9 @@ Returns the metadata, structure, stages, and actions of a pipeline. Can be used 
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetPipeline>`_
+
+
 ========
 Synopsis
 ========
@@ -29,7 +32,7 @@ Synopsis
   --name <value>
   [--pipeline-version <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -55,8 +58,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -157,7 +160,7 @@ pipeline -> (structure)
 
     
 
-    The name of the action to be performed. 
+    The name of the action to be performed.
 
     
 
@@ -177,7 +180,7 @@ pipeline -> (structure)
 
     
 
-    The Amazon S3 location where artifacts are stored for the pipeline. If this Amazon S3 bucket is created manually, it must meet the requirements for AWS CodePipeline. For more information, see the Concepts.
+    Represents the context of an action within the stage of a pipeline to a job worker. 
 
     
 
@@ -195,7 +198,7 @@ pipeline -> (structure)
 
       
 
-      The location for storing the artifacts for a pipeline, such as an S3 bucket or folder.
+      The Amazon S3 bucket used for storing the artifacts for a pipeline. You can specify the name of an S3 bucket but not a folder within the bucket. A folder to contain the pipeline artifacts is created for you based on the name of the pipeline. You can use any Amazon S3 bucket in the same AWS Region as the pipeline to store your pipeline artifacts.
 
       
 
@@ -205,7 +208,7 @@ pipeline -> (structure)
 
       
 
-      The AWS Key Management Service (AWS KMS) key used to encrypt the data in the artifact store. If this is undefined, the default key for Amazon S3 is used.
+      The encryption key used to encrypt the data in the artifact store, such as an AWS Key Management Service (AWS KMS) key. If this is undefined, the default key for Amazon S3 is used.
 
       
 
@@ -213,7 +216,7 @@ pipeline -> (structure)
 
         
 
-        The ID of the AWS KMS key.
+        The ID used to identify the key. For an AWS KMS key, this is the key ID or key ARN.
 
         
 
@@ -223,7 +226,7 @@ pipeline -> (structure)
 
         
 
-        The type of AWS KMS key, such as a customer master key.
+        The type of encryption key, such as an AWS Key Management Service (AWS KMS) key. When creating or updating a pipeline, the value must be set to 'KMS'.
 
         
 
@@ -237,7 +240,7 @@ pipeline -> (structure)
 
     
 
-    The stage in which to perform the action. 
+    The stage in which to perform the action.
 
     
 
@@ -263,7 +266,7 @@ pipeline -> (structure)
 
         
 
-        The gates included in a stage.
+        Reserved for future use.
 
         
 
@@ -271,7 +274,7 @@ pipeline -> (structure)
 
           
 
-          Represents information about a gate declaration.
+          Reserved for future use.
 
           
 
@@ -279,7 +282,7 @@ pipeline -> (structure)
 
             
 
-            The name of the gate declaration.
+            Reserved for future use.
 
             
 
@@ -289,7 +292,7 @@ pipeline -> (structure)
 
             
 
-            The type of the gate declaration. 
+            Reserved for future use.
 
             
 
@@ -329,7 +332,7 @@ pipeline -> (structure)
 
             
 
-            The configuration information for the action type. 
+            The configuration information for the action type.
 
             
 
@@ -337,7 +340,7 @@ pipeline -> (structure)
 
               
 
-              A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Valid categories are limited to one of the values below. 
+              A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Valid categories are limited to one of the values below.
 
               
 
@@ -347,7 +350,7 @@ pipeline -> (structure)
 
               
 
-              The creator of the action being called. 
+              The creator of the action being called.
 
               
 
@@ -367,7 +370,7 @@ pipeline -> (structure)
 
               
 
-              A string that identifies the action type. 
+              A string that identifies the action type.
 
               
 
@@ -427,7 +430,7 @@ pipeline -> (structure)
 
                 
 
-                The name of the output of an artifact, such as "My App". 
+                The name of the output of an artifact, such as "My App".
 
                  
 

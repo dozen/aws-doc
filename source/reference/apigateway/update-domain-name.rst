@@ -19,6 +19,9 @@ Changes information about the  DomainName resource.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/apigateway-2015-07-09/UpdateDomainName>`_
+
+
 ========
 Synopsis
 ========
@@ -29,7 +32,7 @@ Synopsis
   --domain-name <value>
   [--patch-operations <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -48,7 +51,7 @@ Options
 ``--patch-operations`` (list)
 
 
-  A list of operations describing the updates to apply to the specified resource. The patches are applied in the order specified in the list.
+  A list of update operations to be applied to the specified resource and in the order specified in this list.
 
   
 
@@ -78,8 +81,29 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
+
+
+
+========
+Examples
+========
+
+**To change the certificate name for a custom domain name**
+
+Command::
+
+  aws apigateway update-domain-name --domain-name api.domain.tld --patch-operations op='replace',path='/certificateName',value='newDomainCertName'
+
+Output::
+
+  {
+      "domainName": "api.domain.tld", 
+      "distributionDomainName": "d123456789012.cloudfront.net", 
+      "certificateName": "newDomainCertName", 
+      "certificateUploadDate": 1462565487
+  }
 
 
 
@@ -107,11 +131,21 @@ certificateName -> (string)
 
   
 
+certificateArn -> (string)
+
+  
+
+  The reference to an AWS-managed certificate. AWS Certificate Manager is the only supported source.
+
+  
+
+  
+
 certificateUploadDate -> (timestamp)
 
   
 
-  The date when the certificate was uploaded, in `ISO 8601 format`_ .
+  The timestamp when the certificate was uploaded.
 
   
 
@@ -121,13 +155,9 @@ distributionDomainName -> (string)
 
   
 
-  The domain name of the Amazon CloudFront distribution. For more information, see the `Amazon CloudFront documentation`_ .
+  The domain name of the Amazon CloudFront distribution. For more information, see the `Amazon CloudFront documentation <http://aws.amazon.com/documentation/cloudfront/>`_ .
 
   
 
   
 
-
-
-.. _Amazon CloudFront documentation: http://aws.amazon.com/documentation/cloudfront/
-.. _ISO 8601 format: http://www.iso.org/iso/home/standards/iso8601.htm

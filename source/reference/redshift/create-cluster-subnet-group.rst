@@ -15,12 +15,15 @@ Description
 
 
 
-Creates a new Amazon Redshift subnet group. You must provide a list of one or more subnets in your existing Amazon Virtual Private Cloud (Amazon VPC) when creating Amazon Redshift subnet group. 
+Creates a new Amazon Redshift subnet group. You must provide a list of one or more subnets in your existing Amazon Virtual Private Cloud (Amazon VPC) when creating Amazon Redshift subnet group.
 
  
 
-For information about subnet groups, go to `Amazon Redshift Cluster Subnet Groups`_ in the *Amazon Redshift Cluster Management Guide* . 
+For information about subnet groups, go to `Amazon Redshift Cluster Subnet Groups <http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-cluster-subnet-groups.html>`_ in the *Amazon Redshift Cluster Management Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterSubnetGroup>`_
 
 
 ========
@@ -35,7 +38,7 @@ Synopsis
   --subnet-ids <value>
   [--tags <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -47,25 +50,25 @@ Options
 ``--cluster-subnet-group-name`` (string)
 
 
-  The name for the subnet group. Amazon Redshift stores the value as a lowercase string. 
+  The name for the subnet group. Amazon Redshift stores the value as a lowercase string.
 
    
 
-  Constraints: 
+  Constraints:
 
    
 
    
-  * Must contain no more than 255 alphanumeric characters or hyphens.
+  * Must contain no more than 255 alphanumeric characters or hyphens. 
    
-  * Must not be "Default".
+  * Must not be "Default". 
    
-  * Must be unique for all subnet groups that are created by your AWS account.
-   
-
+  * Must be unique for all subnet groups that are created by your AWS account. 
    
 
-  Example: ``examplesubnetgroup`` 
+   
+
+  Example: ``examplesubnetgroup``  
 
   
 
@@ -79,7 +82,7 @@ Options
 ``--subnet-ids`` (list)
 
 
-  An array of VPC subnet IDs. A maximum of 20 subnets can be modified in a single request. 
+  An array of VPC subnet IDs. A maximum of 20 subnets can be modified in a single request.
 
   
 
@@ -122,8 +125,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -181,7 +184,7 @@ ClusterSubnetGroup -> (structure)
 
     
 
-    The name of the cluster subnet group. 
+    The name of the cluster subnet group.
 
     
 
@@ -191,7 +194,7 @@ ClusterSubnetGroup -> (structure)
 
     
 
-    The description of the cluster subnet group. 
+    The description of the cluster subnet group.
 
     
 
@@ -201,7 +204,7 @@ ClusterSubnetGroup -> (structure)
 
     
 
-    The VPC ID of the cluster subnet group. 
+    The VPC ID of the cluster subnet group.
 
     
 
@@ -229,7 +232,7 @@ ClusterSubnetGroup -> (structure)
 
       
 
-      Describes a subnet. 
+      Describes a subnet.
 
       
 
@@ -237,7 +240,7 @@ ClusterSubnetGroup -> (structure)
 
         
 
-        The identifier of the subnet. 
+        The identifier of the subnet.
 
         
 
@@ -247,7 +250,7 @@ ClusterSubnetGroup -> (structure)
 
         
 
-        Describes an availability zone. 
+        Describes an availability zone.
 
         
 
@@ -255,7 +258,7 @@ ClusterSubnetGroup -> (structure)
 
           
 
-          The name of the availability zone. 
+          The name of the availability zone.
 
           
 
@@ -267,7 +270,7 @@ ClusterSubnetGroup -> (structure)
 
         
 
-        The status of the subnet. 
+        The status of the subnet.
 
         
 
@@ -319,6 +322,3 @@ ClusterSubnetGroup -> (structure)
 
   
 
-
-
-.. _Amazon Redshift Cluster Subnet Groups: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-cluster-subnet-groups.html

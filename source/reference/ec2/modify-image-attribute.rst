@@ -21,12 +21,25 @@ Modifies the specified attribute of the specified AMI. You can specify only one 
 
 .. note::
 
-  
+   
 
   AWS Marketplace product codes cannot be modified. Images with an AWS Marketplace product code cannot be made public.
 
-  
+   
 
+ 
+
+.. note::
+
+   
+
+  The SriovNetSupport enhanced networking attribute cannot be changed using this command. Instead, enable SriovNetSupport on an instance and create an AMI from the instance. This will result in an image with SriovNetSupport enabled.
+
+   
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyImageAttribute>`_
 
 
 ========
@@ -36,18 +49,18 @@ Synopsis
 ::
 
     modify-image-attribute
-  [--dry-run | --no-dry-run]
-  --image-id <value>
   [--attribute <value>]
-  [--operation-type <value>]
-  [--user-ids <value>]
-  [--user-groups <value>]
-  [--product-codes <value>]
-  [--value <value>]
-  [--launch-permission <value>]
   [--description <value>]
+  --image-id <value>
+  [--launch-permission <value>]
+  [--operation-type <value>]
+  [--product-codes <value>]
+  [--user-groups <value>]
+  [--user-ids <value>]
+  [--value <value>]
+  [--dry-run | --no-dry-run]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -56,10 +69,17 @@ Synopsis
 Options
 =======
 
-``--dry-run`` | ``--no-dry-run`` (boolean)
+``--attribute`` (string)
 
 
-  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
+  The name of the attribute to modify.
+
+  
+
+``--description`` (structure)
+
+
+  A description for the AMI.
 
   
 
@@ -70,12 +90,42 @@ Options
 
   
 
-``--attribute`` (string)
+``--launch-permission`` (structure)
 
 
-  The name of the attribute to modify.
+  A launch permission modification.
 
   
+
+
+
+Shorthand Syntax::
+
+    Add=[{Group=string,UserId=string},{Group=string,UserId=string}],Remove=[{Group=string,UserId=string},{Group=string,UserId=string}]
+
+
+
+
+JSON Syntax::
+
+  {
+    "Add": [
+      {
+        "Group": "all",
+        "UserId": "string"
+      }
+      ...
+    ],
+    "Remove": [
+      {
+        "Group": "all",
+        "UserId": "string"
+      }
+      ...
+    ]
+  }
+
+
 
 ``--operation-type`` (string)
 
@@ -96,10 +146,10 @@ Options
 
   
 
-``--user-ids`` (list)
+``--product-codes`` (list)
 
 
-  One or more AWS account IDs. This is only valid when modifying the ``launchPermission`` attribute.
+  One or more product codes. After you add a product code to an AMI, it can't be removed. This is only valid when modifying the ``productCodes`` attribute.
 
   
 
@@ -126,10 +176,10 @@ Syntax::
 
 
 
-``--product-codes`` (list)
+``--user-ids`` (list)
 
 
-  One or more product codes. After you add a product code to an AMI, it can't be removed. This is only valid when modifying the ``productCodes`` attribute.
+  One or more AWS account IDs. This is only valid when modifying the ``launchPermission`` attribute.
 
   
 
@@ -148,55 +198,18 @@ Syntax::
 
   
 
-``--launch-permission`` (structure)
+``--dry-run`` | ``--no-dry-run`` (boolean)
 
 
-  A launch permission modification.
-
-  
-
-
-
-Shorthand Syntax::
-
-    Add=[{UserId=string,Group=string},{UserId=string,Group=string}],Remove=[{UserId=string,Group=string},{UserId=string,Group=string}]
-
-
-
-
-JSON Syntax::
-
-  {
-    "Add": [
-      {
-        "UserId": "string",
-        "Group": "all"
-      }
-      ...
-    ],
-    "Remove": [
-      {
-        "UserId": "string",
-        "Group": "all"
-      }
-      ...
-    ]
-  }
-
-
-
-``--description`` (structure)
-
-
-  A description for the AMI.
+  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 

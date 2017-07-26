@@ -15,8 +15,15 @@ Description
 
 
 
-Describes one or more of your conversion tasks. For more information, see `Using the Command Line Tools to Import Your Virtual Machine to Amazon EC2`_ in the *Amazon Elastic Compute Cloud User Guide* .
+Describes one or more of your conversion tasks. For more information, see the `VM Import/Export User Guide <http://docs.aws.amazon.com/vm-import/latest/userguide/>`_ .
 
+ 
+
+For information about the import manifest referenced by this API action, see `VM Import Manifest <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html>`_ .
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeConversionTasks>`_
 
 
 ========
@@ -26,11 +33,10 @@ Synopsis
 ::
 
     describe-conversion-tasks
-  [--dry-run | --no-dry-run]
-  [--filters <value>]
   [--conversion-task-ids <value>]
+  [--dry-run | --no-dry-run]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -38,41 +44,6 @@ Synopsis
 =======
 Options
 =======
-
-``--dry-run`` | ``--no-dry-run`` (boolean)
-
-
-  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
-
-  
-
-``--filters`` (list)
-
-
-  One or more filters.
-
-  
-
-
-
-Shorthand Syntax::
-
-    Name=string,Values=string,string ...
-
-
-
-
-JSON Syntax::
-
-  [
-    {
-      "Name": "string",
-      "Values": ["string", ...]
-    }
-    ...
-  ]
-
-
 
 ``--conversion-task-ids`` (list)
 
@@ -89,11 +60,18 @@ Syntax::
 
 
 
+``--dry-run`` | ``--no-dry-run`` (boolean)
+
+
+  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
+
+  
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -116,11 +94,11 @@ Output::
           {
               "ConversionTaskId": "import-i-ffvko9js",
               "ImportInstance": {
-                  "InstanceId": "i-6cc70a3f",
+                  "InstanceId": "i-1234567890abcdef0",
                   "Volumes": [
                       {
                           "Volume": {
-                              "Id": "vol-99e2ebdb",
+                              "Id": "vol-049df61146c4d7901",
                               "Size": 16
                           },
                           "Status": "completed",
@@ -189,6 +167,36 @@ ConversionTasks -> (list)
 
       
 
+      Description -> (string)
+
+        
+
+        A description of the task.
+
+        
+
+        
+
+      InstanceId -> (string)
+
+        
+
+        The ID of the instance.
+
+        
+
+        
+
+      Platform -> (string)
+
+        
+
+        The instance operating system.
+
+        
+
+        
+
       Volumes -> (list)
 
         
@@ -205,6 +213,16 @@ ConversionTasks -> (list)
 
           
 
+          AvailabilityZone -> (string)
+
+            
+
+            The Availability Zone where the resulting instance will reside.
+
+            
+
+            
+
           BytesConverted -> (long)
 
             
@@ -215,11 +233,11 @@ ConversionTasks -> (list)
 
             
 
-          AvailabilityZone -> (string)
+          Description -> (string)
 
             
 
-            The Availability Zone where the resulting instance will reside.
+            A description of the task.
 
             
 
@@ -233,36 +251,6 @@ ConversionTasks -> (list)
 
             
 
-            Format -> (string)
-
-              
-
-              The disk image format.
-
-              
-
-              
-
-            Size -> (long)
-
-              
-
-              The size of the disk image, in GiB.
-
-              
-
-              
-
-            ImportManifestUrl -> (string)
-
-              
-
-              A presigned URL for the import manifest stored in Amazon S3. For information about creating a presigned URL for an Amazon S3 object, read the "Query String Request Authentication Alternative" section of the `Authenticating REST Requests`_ topic in the *Amazon Simple Storage Service Developer Guide* .
-
-              
-
-              
-
             Checksum -> (string)
 
               
@@ -273,31 +261,35 @@ ConversionTasks -> (list)
 
               
 
-            
+            Format -> (string)
 
-          Volume -> (structure)
+              
 
-            
+              The disk image format.
 
-            The volume.
+              
 
-            
+              
+
+            ImportManifestUrl -> (string)
+
+              
+
+              A presigned URL for the import manifest stored in Amazon S3. For information about creating a presigned URL for an Amazon S3 object, read the "Query String Request Authentication Alternative" section of the `Authenticating REST Requests <http://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html>`_ topic in the *Amazon Simple Storage Service Developer Guide* .
+
+               
+
+              For information about the import manifest referenced by this API action, see `VM Import Manifest <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html>`_ .
+
+              
+
+              
 
             Size -> (long)
 
               
 
-              The size of the volume, in GiB.
-
-              
-
-              
-
-            Id -> (string)
-
-              
-
-              The volume identifier.
+              The size of the disk image, in GiB.
 
               
 
@@ -325,47 +317,37 @@ ConversionTasks -> (list)
 
             
 
-          Description -> (string)
+          Volume -> (structure)
 
             
 
-            A description of the task.
+            The volume.
 
             
+
+            Id -> (string)
+
+              
+
+              The volume identifier.
+
+              
+
+              
+
+            Size -> (long)
+
+              
+
+              The size of the volume, in GiB.
+
+              
+
+              
 
             
 
           
-
-        
-
-      InstanceId -> (string)
-
-        
-
-        The ID of the instance.
-
-        
-
-        
-
-      Platform -> (string)
-
-        
-
-        The instance operating system.
-
-        
-
-        
-
-      Description -> (string)
-
-        
-
-        A description of the task.
-
-        
 
         
 
@@ -379,21 +361,21 @@ ConversionTasks -> (list)
 
       
 
-      BytesConverted -> (long)
-
-        
-
-        The number of bytes converted so far.
-
-        
-
-        
-
       AvailabilityZone -> (string)
 
         
 
         The Availability Zone where the resulting volume will reside.
+
+        
+
+        
+
+      BytesConverted -> (long)
+
+        
+
+        The number of bytes converted so far.
 
         
 
@@ -417,11 +399,35 @@ ConversionTasks -> (list)
 
         
 
+        Checksum -> (string)
+
+          
+
+          The checksum computed for the disk image.
+
+          
+
+          
+
         Format -> (string)
 
           
 
           The disk image format.
+
+          
+
+          
+
+        ImportManifestUrl -> (string)
+
+          
+
+          A presigned URL for the import manifest stored in Amazon S3. For information about creating a presigned URL for an Amazon S3 object, read the "Query String Request Authentication Alternative" section of the `Authenticating REST Requests <http://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html>`_ topic in the *Amazon Simple Storage Service Developer Guide* .
+
+           
+
+          For information about the import manifest referenced by this API action, see `VM Import Manifest <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html>`_ .
 
           
 
@@ -437,26 +443,6 @@ ConversionTasks -> (list)
 
           
 
-        ImportManifestUrl -> (string)
-
-          
-
-          A presigned URL for the import manifest stored in Amazon S3. For information about creating a presigned URL for an Amazon S3 object, read the "Query String Request Authentication Alternative" section of the `Authenticating REST Requests`_ topic in the *Amazon Simple Storage Service Developer Guide* .
-
-          
-
-          
-
-        Checksum -> (string)
-
-          
-
-          The checksum computed for the disk image.
-
-          
-
-          
-
         
 
       Volume -> (structure)
@@ -467,21 +453,21 @@ ConversionTasks -> (list)
 
         
 
-        Size -> (long)
-
-          
-
-          The size of the volume, in GiB.
-
-          
-
-          
-
         Id -> (string)
 
           
 
           The volume identifier.
+
+          
+
+          
+
+        Size -> (long)
+
+          
+
+          The size of the volume, in GiB.
 
           
 
@@ -531,11 +517,11 @@ ConversionTasks -> (list)
 
           
 
-          The key of the tag. 
+          The key of the tag.
 
            
 
-          Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with ``aws:`` 
+          Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with ``aws:``  
 
           
 
@@ -563,7 +549,3 @@ ConversionTasks -> (list)
 
   
 
-
-
-.. _Using the Command Line Tools to Import Your Virtual Machine to Amazon EC2: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UploadingYourInstancesandVolumes.html
-.. _Authenticating REST Requests: http://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html

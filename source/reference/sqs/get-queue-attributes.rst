@@ -15,60 +15,39 @@ Description
 
 
 
-Gets attributes for the specified queue. The following attributes are supported: 
-
- 
-* ``All`` - returns all values.
- 
-* ``ApproximateNumberOfMessages`` - returns the approximate number of visible messages in a queue. For more information, see `Resources Required to Process Messages`_ in the *Amazon SQS Developer Guide* .
- 
-* ``ApproximateNumberOfMessagesNotVisible`` - returns the approximate number of messages that are not timed-out and not deleted. For more information, see `Resources Required to Process Messages`_ in the *Amazon SQS Developer Guide* .
- 
-* ``VisibilityTimeout`` - returns the visibility timeout for the queue. For more information about visibility timeout, see `Visibility Timeout`_ in the *Amazon SQS Developer Guide* .
- 
-* ``CreatedTimestamp`` - returns the time when the queue was created (epoch time in seconds).
- 
-* ``LastModifiedTimestamp`` - returns the time when the queue was last changed (epoch time in seconds).
- 
-* ``Policy`` - returns the queue's policy.
- 
-* ``MaximumMessageSize`` - returns the limit of how many bytes a message can contain before Amazon SQS rejects it.
- 
-* ``MessageRetentionPeriod`` - returns the number of seconds Amazon SQS retains a message.
- 
-* ``QueueArn`` - returns the queue's Amazon resource name (ARN).
- 
-* ``ApproximateNumberOfMessagesDelayed`` - returns the approximate number of messages that are pending to be added to the queue.
- 
-* ``DelaySeconds`` - returns the default delay on the queue in seconds.
- 
-* ``ReceiveMessageWaitTimeSeconds`` - returns the time for which a receive-message call will wait for a message to arrive.
- 
-* ``RedrivePolicy`` - returns the parameters for dead letter queue functionality of the source queue. For more information about RedrivePolicy and dead letter queues, see `Using Amazon SQS Dead Letter Queues`_ in the *Amazon SQS Developer Guide* .
- 
-
- 
+Gets attributes for the specified queue.
 
  
 
 .. note::
 
-  Going forward, new attributes might be added. If you are writing code that calls this action, we recommend that you structure your code so that it can handle new attributes gracefully.
+   
+
+  To determine whether a queue is `FIFO <http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html>`_ , you can check whether ``QueueName`` ends with the ``.fifo`` suffix.
+
+   
 
  
 
 .. note::
 
-  Some API actions take lists of parameters. These lists are specified using the ``param.n`` notation. Values of ``n`` are integers starting from 1. For example, a parameter list with two elements looks like this: 
+   
 
- 
+  Some actions take lists of parameters. These lists are specified using the ``param.n`` notation. Values of ``n`` are integers starting from 1. For example, a parameter list with two elements looks like this:
 
-``Attribute.1=this`` 
+   
 
- 
+   ``Attribute.1=this``  
 
-``Attribute.2=that`` 
+   
 
+   ``Attribute.2=that``  
+
+   
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/GetQueueAttributes>`_
 
 
 ========
@@ -81,7 +60,7 @@ Synopsis
   --queue-url <value>
   [--attribute-names <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -93,14 +72,94 @@ Options
 ``--queue-url`` (string)
 
 
-  The URL of the Amazon SQS queue to take action on.
+  The URL of the Amazon SQS queue whose attribute information is retrieved.
+
+   
+
+  Queue URLs are case-sensitive.
 
   
 
 ``--attribute-names`` (list)
 
 
-  A list of attributes to retrieve information for. 
+  A list of attributes for which to retrieve information.
+
+   
+
+  .. note::
+
+     
+
+    In the future, new attributes might be added. If you write code that calls this action, we recommend that you structure your code so that it can handle new attributes gracefully.
+
+     
+
+   
+
+  The following attributes are supported:
+
+   
+
+   
+  * ``All`` - Returns all values.  
+   
+  * ``ApproximateNumberOfMessages`` - Returns the approximate number of visible messages in a queue. For more information, see `Resources Required to Process Messages <http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-resources-required-process-messages.html>`_ in the *Amazon SQS Developer Guide* .  
+   
+  * ``ApproximateNumberOfMessagesDelayed`` - Returns the approximate number of messages that are waiting to be added to the queue.  
+   
+  * ``ApproximateNumberOfMessagesNotVisible`` - Returns the approximate number of messages that have not timed-out and aren't deleted. For more information, see `Resources Required to Process Messages <http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-resources-required-process-messages.html>`_ in the *Amazon SQS Developer Guide* .  
+   
+  * ``CreatedTimestamp`` - Returns the time when the queue was created in seconds (`epoch time <http://en.wikipedia.org/wiki/Unix_time>`_ ). 
+   
+  * ``DelaySeconds`` - Returns the default delay on the queue in seconds. 
+   
+  * ``LastModifiedTimestamp`` - Returns the time when the queue was last changed in seconds (`epoch time <http://en.wikipedia.org/wiki/Unix_time>`_ ). 
+   
+  * ``MaximumMessageSize`` - Returns the limit of how many bytes a message can contain before Amazon SQS rejects it. 
+   
+  * ``MessageRetentionPeriod`` - Returns the length of time, in seconds, for which Amazon SQS retains a message. 
+   
+  * ``Policy`` - Returns the policy of the queue. 
+   
+  * ``QueueArn`` - Returns the Amazon resource name (ARN) of the queue. 
+   
+  * ``ReceiveMessageWaitTimeSeconds`` - Returns the length of time, in seconds, for which the ``receive-message`` action waits for a message to arrive.  
+   
+  * ``RedrivePolicy`` - Returns the parameters for dead letter queue functionality of the source queue. For more information about the redrive policy and dead letter queues, see `Using Amazon SQS Dead Letter Queues <http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html>`_ in the *Amazon SQS Developer Guide* .  
+   
+  * ``VisibilityTimeout`` - Returns the visibility timeout for the queue. For more information about the visibility timeout, see `Visibility Timeout <http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html>`_ in the *Amazon SQS Developer Guide* .  
+   
+
+   
+
+  The following attributes apply only to `server-side-encryption <http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html>`_ :
+
+   
+
+   
+  * ``KmsMasterKeyId`` - Returns the ID of an AWS-managed customer master key (CMK) for Amazon SQS or a custom CMK. For more information, see `Key Terms <http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-sse-key-terms>`_ .  
+   
+  * ``KmsDataKeyReusePeriodSeconds`` - Returns the length of time, in seconds, for which Amazon SQS can reuse a data key to encrypt or decrypt messages before calling AWS KMS again.  
+   
+
+   
+
+  The following attributes apply only to `FIFO (first-in-first-out) queues <http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html>`_ :
+
+   
+
+   
+  * ``FifoQueue`` - Returns whether the queue is FIFO. For more information, see `FIFO Queue Logic <http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-understanding-logic>`_ in the *Amazon SQS Developer Guide* . 
+
+  .. note::
+
+     To determine whether a queue is `FIFO <http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html>`_ , you can check whether ``QueueName`` ends with the ``.fifo`` suffix. 
+
+   
+   
+  * ``ContentBasedDeduplication`` - Returns whether content-based deduplication is enabled for the queue. For more information, see `Exactly-Once Processing <http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing>`_ in the *Amazon SQS Developer Guide* .  
+   
 
   
 
@@ -111,6 +170,7 @@ Syntax::
   "string" "string" ...
 
   Where valid values are:
+    All
     Policy
     VisibilityTimeout
     MaximumMessageSize
@@ -124,6 +184,10 @@ Syntax::
     DelaySeconds
     ReceiveMessageWaitTimeSeconds
     RedrivePolicy
+    FifoQueue
+    ContentBasedDeduplication
+    KmsMasterKeyId
+    KmsDataKeyReusePeriodSeconds
 
 
 
@@ -132,8 +196,8 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -192,15 +256,11 @@ Attributes -> (map)
 
   
 
-  A map of attributes to the respective values.
+  A map of attributes to their respective values.
 
   
 
   Name -> (string)
-
-    
-
-    The name of a queue attribute.
 
     
 
@@ -210,16 +270,7 @@ Attributes -> (map)
 
     
 
-    The value of a queue attribute.
-
-    
-
     
 
   
 
-
-
-.. _Using Amazon SQS Dead Letter Queues: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/SQSDeadLetterQueue.html
-.. _Resources Required to Process Messages: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/ApproximateNumber.html
-.. _Visibility Timeout: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/AboutVT.html

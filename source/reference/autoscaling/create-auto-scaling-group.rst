@@ -23,8 +23,11 @@ If you exceed your maximum limit of Auto Scaling groups, which by default is 20 
 
  
 
-For more information, see `Auto Scaling Groups`_ in the *Auto Scaling Developer Guide* .
+For more information, see `Auto Scaling Groups <http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroup.html>`_ in the *Auto Scaling User Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateAutoScalingGroup>`_
 
 
 ========
@@ -43,6 +46,7 @@ Synopsis
   [--default-cooldown <value>]
   [--availability-zones <value>]
   [--load-balancer-names <value>]
+  [--target-group-arns <value>]
   [--health-check-type <value>]
   [--health-check-grace-period <value>]
   [--placement-group <value>]
@@ -51,7 +55,7 @@ Synopsis
   [--new-instances-protected-from-scale-in | --no-new-instances-protected-from-scale-in]
   [--tags <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -85,7 +89,7 @@ Options
 
    
 
-  For more information, see `Create an Auto Scaling Group Using an EC2 Instance`_ in the *Auto Scaling Developer Guide* .
+  For more information, see `Create an Auto Scaling Group Using an EC2 Instance <http://docs.aws.amazon.com/autoscaling/latest/userguide/create-asg-from-instance.html>`_ in the *Auto Scaling User Guide* .
 
   
 
@@ -117,7 +121,7 @@ Options
 
    
 
-  For more information, see `Auto Scaling Cooldowns`_ in the *Auto Scaling Developer Guide* .
+  For more information, see `Auto Scaling Cooldowns <http://docs.aws.amazon.com/autoscaling/latest/userguide/Cooldown.html>`_ in the *Auto Scaling User Guide* .
 
   
 
@@ -139,11 +143,26 @@ Syntax::
 ``--load-balancer-names`` (list)
 
 
-  One or more load balancers.
+  One or more Classic Load Balancers. To specify an Application Load Balancer, use ``target-group-arns`` instead.
 
    
 
-  For more information, see `Using a Load Balancer With an Auto Scaling Group`_ in the *Auto Scaling Developer Guide* .
+  For more information, see `Using a Load Balancer With an Auto Scaling Group <http://docs.aws.amazon.com/autoscaling/latest/userguide/create-asg-from-instance.html>`_ in the *Auto Scaling User Guide* .
+
+  
+
+
+
+Syntax::
+
+  "string" "string" ...
+
+
+
+``--target-group-arns`` (list)
+
+
+  The Amazon Resource Names (ARN) of the target groups.
 
   
 
@@ -162,14 +181,14 @@ Syntax::
 
    
 
-  By default, health checks use Amazon EC2 instance status checks to determine the health of an instance. For more information, see `Health Checks`_ in the *Auto Scaling Developer Guide* .
+  By default, health checks use Amazon EC2 instance status checks to determine the health of an instance. For more information, see `Health Checks <http://docs.aws.amazon.com/autoscaling/latest/userguide/healthcheck.html>`_ in the *Auto Scaling User Guide* .
 
   
 
 ``--health-check-grace-period`` (integer)
 
 
-  The amount of time, in seconds, that Auto Scaling waits before checking the health status of an EC2 instance that has come into service. During this time, any health check failures for the instance are ignored. The default is 300.
+  The amount of time, in seconds, that Auto Scaling waits before checking the health status of an EC2 instance that has come into service. During this time, any health check failures for the instance are ignored. The default is 0.
 
    
 
@@ -177,14 +196,14 @@ Syntax::
 
    
 
-  For more information, see `Health Checks`_ in the *Auto Scaling Developer Guide* .
+  For more information, see `Health Checks <http://docs.aws.amazon.com/autoscaling/latest/userguide/healthcheck.html>`_ in the *Auto Scaling User Guide* .
 
   
 
 ``--placement-group`` (string)
 
 
-  The name of the placement group into which you'll launch your instances, if any. For more information, see `Placement Groups`_ in the *Amazon Elastic Compute Cloud User Guide* .
+  The name of the placement group into which you'll launch your instances, if any. For more information, see `Placement Groups <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html>`_ in the *Amazon Elastic Compute Cloud User Guide* .
 
   
 
@@ -199,7 +218,7 @@ Syntax::
 
    
 
-  For more information, see `Launching Auto Scaling Instances in a VPC`_ in the *Auto Scaling Developer Guide* .
+  For more information, see `Launching Auto Scaling Instances in a VPC <http://docs.aws.amazon.com/autoscaling/latest/userguide/asg-in-vpc.html>`_ in the *Auto Scaling User Guide* .
 
   
 
@@ -210,7 +229,7 @@ Syntax::
 
    
 
-  For more information, see `Controlling Which Instances Auto Scaling Terminates During Scale In`_ in the *Auto Scaling Developer Guide* .
+  For more information, see `Controlling Which Instances Auto Scaling Terminates During Scale In <http://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-termination.html>`_ in the *Auto Scaling User Guide* .
 
   
 
@@ -236,7 +255,7 @@ Syntax::
 
    
 
-  For more information, see `Tagging Auto Scaling Groups and Instances`_ in the *Auto Scaling Developer Guide* .
+  For more information, see `Tagging Auto Scaling Groups and Instances <http://docs.aws.amazon.com/autoscaling/latest/userguide/autoscaling-tagging.html>`_ in the *Auto Scaling User Guide* .
 
   
 
@@ -267,8 +286,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -280,7 +299,7 @@ Examples
 
 This example creates an Auto Scaling group in a VPC::
 
-     aws autoscaling create-auto-scaling-group --auto-scaling-group-name my-auto-scaling-group --launch-configuration-name my-launch-config --min-size 1 --max-size 3 --vpc-zone-identifier subnet-41767929c
+    aws autoscaling create-auto-scaling-group --auto-scaling-group-name my-auto-scaling-group --launch-configuration-name my-launch-config --min-size 1 --max-size 3 --vpc-zone-identifier subnet-41767929c
 
 This example creates an Auto Scaling group and configures it to use an Elastic Load Balancing load balancer::
 
@@ -300,13 +319,3 @@ Output
 ======
 
 None
-
-.. _Auto Scaling Cooldowns: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/Cooldown.html
-.. _Health Checks: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/healthcheck.html
-.. _Launching Auto Scaling Instances in a VPC: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/asg-in-vpc.html
-.. _Placement Groups: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html
-.. _Create an Auto Scaling Group Using an EC2 Instance: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/create-asg-from-instance.html
-.. _Tagging Auto Scaling Groups and Instances: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/ASTagging.html
-.. _Auto Scaling Groups: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingGroup.html
-.. _Using a Load Balancer With an Auto Scaling Group: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/US_SetUpASLBApp.html
-.. _Controlling Which Instances Auto Scaling Terminates During Scale In: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingBehavior.InstanceTermination.html

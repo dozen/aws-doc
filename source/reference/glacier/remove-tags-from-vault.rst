@@ -15,8 +15,11 @@ Description
 
 
 
-This operation removes one or more tags from the set of tags attached to a vault. For more information about tags, see `Tagging Amazon Glacier Resources`_ . This operation is idempotent. The operation will be successful, even if there are no tags attached to the vault. 
+This operation removes one or more tags from the set of tags attached to a vault. For more information about tags, see `Tagging Amazon Glacier Resources <http://docs.aws.amazon.com/amazonglacier/latest/dev/tagging.html>`_ . This operation is idempotent. The operation will be successful, even if there are no tags attached to the vault. 
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/glacier-2012-06-01/RemoveTagsFromVault>`_
 
 
 ========
@@ -30,7 +33,7 @@ Synopsis
   --vault-name <value>
   [--tag-keys <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -42,7 +45,7 @@ Options
 ``--account-id`` (string)
 
 
-  The ``AccountId`` value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single apos``-`` apos (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens (apos-apos) in the ID.
+  The ``AccountId`` value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single '``-`` ' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens ('-') in the ID.
 
   
 
@@ -69,10 +72,10 @@ Syntax::
 
 
 ``--cli-input-json`` (string)
-Performs service operation based on the JSON vault-name provided. The JSON vault-name follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
+Performs service operation based on the JSON account-id provided. The JSON account-id follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -92,5 +95,3 @@ Output
 ======
 
 None
-
-.. _Tagging Amazon Glacier Resources: http://docs.aws.amazon.com/amazonglacier/latest/dev/tagging.html

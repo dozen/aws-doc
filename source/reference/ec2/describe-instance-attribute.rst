@@ -15,8 +15,11 @@ Description
 
 
 
-Describes the specified attribute of the specified instance. You can specify only one attribute at a time. Valid attribute values are: ``instanceType`` | ``kernel`` | ``ramdisk`` | ``userData`` | ``disableApiTermination`` | ``instanceInitiatedShutdownBehavior`` | ``rootDeviceName`` | ``blockDeviceMapping`` | ``productCodes`` | ``sourceDestCheck`` | ``groupSet`` | ``ebsOptimized`` | ``sriovNetSupport`` 
+Describes the specified attribute of the specified instance. You can specify only one attribute at a time. Valid attribute values are: ``instanceType`` | ``kernel`` | ``ramdisk`` | ``userData`` | ``disableApiTermination`` | ``instanceInitiatedShutdownBehavior`` | ``rootDeviceName`` | ``blockDeviceMapping`` | ``productCodes`` | ``sourceDestCheck`` | ``groupSet`` | ``ebsOptimized`` | ``sriovNetSupport``  
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceAttribute>`_
 
 
 ========
@@ -26,11 +29,11 @@ Synopsis
 ::
 
     describe-instance-attribute
+  --attribute <value>
   [--dry-run | --no-dry-run]
   --instance-id <value>
-  --attribute <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -39,24 +42,14 @@ Synopsis
 Options
 =======
 
-``--dry-run`` | ``--no-dry-run`` (boolean)
-
-
-  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
-
-  
-
-``--instance-id`` (string)
-
-
-  The ID of the instance.
-
-  
-
 ``--attribute`` (string)
 
 
   The instance attribute.
+
+   
+
+  Note: The ``enaSupport`` attribute is not supported at this time.
 
   
 
@@ -102,14 +95,31 @@ Options
   *   ``sriovNetSupport``
 
   
+  *   ``enaSupport``
+
+  
+
+  
+
+``--dry-run`` | ``--no-dry-run`` (boolean)
+
+
+  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
+
+  
+
+``--instance-id`` (string)
+
+
+  The ID of the instance.
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -123,12 +133,12 @@ This example describes the instance type of the specified instance.
 
 Command::
 
-  aws ec2 describe-instance-attribute --instance-id i-5203422c --attribute instanceType
+  aws ec2 describe-instance-attribute --instance-id i-1234567890abcdef0 --attribute instanceType
 
 Output::
 
   {
-      "InstanceId": "i-5203422c"
+      "InstanceId": "i-1234567890abcdef0"
       "InstanceType": {
           "Value": "t1.micro"
       }
@@ -140,12 +150,12 @@ This example describes the ``disableApiTermination`` attribute of the specified 
 
 Command::
 
-  aws ec2 describe-instance-attribute --instance-id i-5203422c --attribute disableApiTermination
+  aws ec2 describe-instance-attribute --instance-id i-1234567890abcdef0 --attribute disableApiTermination
 
 Output::
 
   {
-      "InstanceId": "i-5203422c"
+  "InstanceId": "i-1234567890abcdef0"
       "DisableApiTermination": {
           "Value": "false"
       }
@@ -157,19 +167,19 @@ This example describes the ``blockDeviceMapping`` attribute of the specified ins
 
 Command::
 
-  aws ec2 describe-instance-attribute --instance-id i-5203422c --attribute blockDeviceMapping
+  aws ec2 describe-instance-attribute --instance-id i-1234567890abcdef0 --attribute blockDeviceMapping
 
 Output::
 
   {
-      "InstanceId": "i-5203422c"
+      "InstanceId": "i-1234567890abcdef0"
       "BlockDeviceMappings": [
           {
               "DeviceName": "/dev/sda1",
               "Ebs": {
                   "Status": "attached",
                   "DeleteOnTermination": true,
-                  "VolumeId": "vol-615a1339",
+                  "VolumeId": "vol-049df61146c4d7901",
                   "AttachTime": "2013-05-17T22:42:34.000Z"
               }
           },
@@ -178,7 +188,7 @@ Output::
               "Ebs": {
                   "Status": "attached",
                   "DeleteOnTermination": false,
-                  "VolumeId": "vol-9f54b8dc",
+                  "VolumeId": "vol-049df61146c4d7901",
                   "AttachTime": "2013-09-10T23:07:00.000Z"
               }
           }
@@ -190,151 +200,41 @@ Output::
 Output
 ======
 
-InstanceId -> (string)
+Groups -> (list)
 
   
 
-  The ID of the instance.
+  The security groups associated with the instance.
 
   
 
-  
-
-InstanceType -> (structure)
-
-  
-
-  The instance type.
-
-  
-
-  Value -> (string)
+  (structure)
 
     
 
-    Valid values are case-sensitive and vary by action.
+    Describes a security group.
 
     
 
-    
+    GroupName -> (string)
 
-  
+      
 
-KernelId -> (structure)
+      The name of the security group.
 
-  
+      
 
-  The kernel ID.
+      
 
-  
+    GroupId -> (string)
 
-  Value -> (string)
+      
 
-    
+      The ID of the security group.
 
-    Valid values are case-sensitive and vary by action.
+      
 
-    
-
-    
-
-  
-
-RamdiskId -> (structure)
-
-  
-
-  The RAM disk ID.
-
-  
-
-  Value -> (string)
-
-    
-
-    Valid values are case-sensitive and vary by action.
-
-    
-
-    
-
-  
-
-UserData -> (structure)
-
-  
-
-  The Base64-encoded MIME user data.
-
-  
-
-  Value -> (string)
-
-    
-
-    Valid values are case-sensitive and vary by action.
-
-    
-
-    
-
-  
-
-DisableApiTermination -> (structure)
-
-  
-
-  If the value is ``true`` , you can't terminate the instance through the Amazon EC2 console, CLI, or API; otherwise, you can.
-
-  
-
-  Value -> (boolean)
-
-    
-
-    Valid values are ``true`` or ``false`` .
-
-    
-
-    
-
-  
-
-InstanceInitiatedShutdownBehavior -> (structure)
-
-  
-
-  Indicates whether an instance stops or terminates when you initiate shutdown from the instance (using the operating system command for system shutdown).
-
-  
-
-  Value -> (string)
-
-    
-
-    Valid values are case-sensitive and vary by action.
-
-    
-
-    
-
-  
-
-RootDeviceName -> (structure)
-
-  
-
-  The name of the root device (for example, ``/dev/sda1`` or ``/dev/xvda`` ).
-
-  
-
-  Value -> (string)
-
-    
-
-    Valid values are case-sensitive and vary by action.
-
-    
+      
 
     
 
@@ -374,26 +274,6 @@ BlockDeviceMappings -> (list)
 
       
 
-      VolumeId -> (string)
-
-        
-
-        The ID of the EBS volume.
-
-        
-
-        
-
-      Status -> (string)
-
-        
-
-        The attachment state.
-
-        
-
-        
-
       AttachTime -> (timestamp)
 
         
@@ -414,7 +294,157 @@ BlockDeviceMappings -> (list)
 
         
 
+      Status -> (string)
+
+        
+
+        The attachment state.
+
+        
+
+        
+
+      VolumeId -> (string)
+
+        
+
+        The ID of the EBS volume.
+
+        
+
+        
+
       
+
+    
+
+  
+
+DisableApiTermination -> (structure)
+
+  
+
+  If the value is ``true`` , you can't terminate the instance through the Amazon EC2 console, CLI, or API; otherwise, you can.
+
+  
+
+  Value -> (boolean)
+
+    
+
+    The attribute value. The valid values are ``true`` or ``false`` .
+
+    
+
+    
+
+  
+
+EnaSupport -> (structure)
+
+  
+
+  Indicates whether enhanced networking with ENA is enabled.
+
+  
+
+  Value -> (boolean)
+
+    
+
+    The attribute value. The valid values are ``true`` or ``false`` .
+
+    
+
+    
+
+  
+
+EbsOptimized -> (structure)
+
+  
+
+  Indicates whether the instance is optimized for EBS I/O.
+
+  
+
+  Value -> (boolean)
+
+    
+
+    The attribute value. The valid values are ``true`` or ``false`` .
+
+    
+
+    
+
+  
+
+InstanceId -> (string)
+
+  
+
+  The ID of the instance.
+
+  
+
+  
+
+InstanceInitiatedShutdownBehavior -> (structure)
+
+  
+
+  Indicates whether an instance stops or terminates when you initiate shutdown from the instance (using the operating system command for system shutdown).
+
+  
+
+  Value -> (string)
+
+    
+
+    The attribute value. Note that the value is case-sensitive.
+
+    
+
+    
+
+  
+
+InstanceType -> (structure)
+
+  
+
+  The instance type.
+
+  
+
+  Value -> (string)
+
+    
+
+    The attribute value. Note that the value is case-sensitive.
+
+    
+
+    
+
+  
+
+KernelId -> (structure)
+
+  
+
+  The kernel ID.
+
+  
+
+  Value -> (string)
+
+    
+
+    The attribute value. Note that the value is case-sensitive.
+
+    
 
     
 
@@ -460,31 +490,11 @@ ProductCodes -> (list)
 
   
 
-EbsOptimized -> (structure)
+RamdiskId -> (structure)
 
   
 
-  Indicates whether the instance is optimized for EBS I/O.
-
-  
-
-  Value -> (boolean)
-
-    
-
-    Valid values are ``true`` or ``false`` .
-
-    
-
-    
-
-  
-
-SriovNetSupport -> (structure)
-
-  
-
-  The value to use for a resource attribute.
+  The RAM disk ID.
 
   
 
@@ -492,7 +502,27 @@ SriovNetSupport -> (structure)
 
     
 
-    Valid values are case-sensitive and vary by action.
+    The attribute value. Note that the value is case-sensitive.
+
+    
+
+    
+
+  
+
+RootDeviceName -> (structure)
+
+  
+
+  The name of the root device (for example, ``/dev/sda1`` or ``/dev/xvda`` ).
+
+  
+
+  Value -> (string)
+
+    
+
+    The attribute value. Note that the value is case-sensitive.
 
     
 
@@ -512,7 +542,7 @@ SourceDestCheck -> (structure)
 
     
 
-    Valid values are ``true`` or ``false`` .
+    The attribute value. The valid values are ``true`` or ``false`` .
 
     
 
@@ -520,41 +550,41 @@ SourceDestCheck -> (structure)
 
   
 
-Groups -> (list)
+SriovNetSupport -> (structure)
 
   
 
-  The security groups associated with the instance.
+  Indicates whether enhanced networking with the Intel 82599 Virtual Function interface is enabled.
 
   
 
-  (structure)
+  Value -> (string)
 
     
 
-    Describes a security group.
+    The attribute value. Note that the value is case-sensitive.
 
     
 
-    GroupName -> (string)
+    
 
-      
+  
 
-      The name of the security group.
+UserData -> (structure)
 
-      
+  
 
-      
+  The user data.
 
-    GroupId -> (string)
+  
 
-      
+  Value -> (string)
 
-      The ID of the security group.
+    
 
-      
+    The attribute value. Note that the value is case-sensitive.
 
-      
+    
 
     
 

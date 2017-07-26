@@ -19,8 +19,11 @@ Gets the thing shadow for the specified thing.
 
  
 
-For more information, see `get-thing-shadow`_ in the *AWS IoT Developer Guide* .
+For more information, see `get-thing-shadow <http://docs.aws.amazon.com/iot/latest/developerguide/API_GetThingShadow.html>`_ in the *AWS IoT Developer Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iot-data-2015-05-28/GetThingShadow>`_
 
 
 .. note::
@@ -73,6 +76,3 @@ payload -> (blob)
 
   
 
-
-
-.. _get-thing-shadow: http://docs.aws.amazon.com/iot/latest/developerguide/API_GetThingShadow.html

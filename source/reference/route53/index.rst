@@ -33,14 +33,15 @@ Available Commands
   create-traffic-policy
   create-traffic-policy-instance
   create-traffic-policy-version
+  create-vpc-association-authorization
   delete-health-check
   delete-hosted-zone
   delete-reusable-delegation-set
   delete-traffic-policy
   delete-traffic-policy-instance
+  delete-vpc-association-authorization
   disassociate-vpc-from-hosted-zone
   get-change
-  get-change-details
   get-checker-ip-ranges
   get-geo-location
   get-health-check
@@ -53,8 +54,6 @@ Available Commands
   get-traffic-policy
   get-traffic-policy-instance
   get-traffic-policy-instance-count
-  list-change-batches-by-hosted-zone
-  list-change-batches-by-rr-set
   list-geo-locations
   list-health-checks
   list-hosted-zones
@@ -68,6 +67,8 @@ Available Commands
   list-traffic-policy-instances-by-hosted-zone
   list-traffic-policy-instances-by-policy
   list-traffic-policy-versions
+  list-vpc-association-authorizations
+  test-dns-answer
   update-health-check
   update-hosted-zone-comment
   update-traffic-policy-comment

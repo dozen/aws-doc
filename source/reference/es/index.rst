@@ -19,7 +19,7 @@ Use the Amazon Elasticsearch configuration API to create, configure, and manage 
 
  
 
-The endpoint for configuration service requests is region-specific: es.*region* .amazonaws.com. For example, es.us-east-1.amazonaws.com. For a current list of supported regions and endpoints, see `Regions and Endpoints`_ .
+The endpoint for configuration service requests is region-specific: es.*region* .amazonaws.com. For example, es.us-east-1.amazonaws.com. For a current list of supported regions and endpoints, see `Regions and Endpoints <http://docs.aws.amazon.com/general/latest/gr/rande.html#elasticsearch-service-regions>`_ .
 
 
 
@@ -38,10 +38,10 @@ Available Commands
   describe-elasticsearch-domain
   describe-elasticsearch-domain-config
   describe-elasticsearch-domains
+  describe-elasticsearch-instance-type-limits
   list-domain-names
+  list-elasticsearch-instance-types
+  list-elasticsearch-versions
   list-tags
   remove-tags
   update-elasticsearch-domain-config
-
-
-.. _Regions and Endpoints: http://docs.aws.amazon.com/general/latest/gr/rande.html#cloudsearch_region

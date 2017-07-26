@@ -19,8 +19,11 @@ Deletes the specified set of tags from the specified set of resources. This call
 
  
 
-For more information about tags, see `Tagging Your Resources`_ in the *Amazon Elastic Compute Cloud User Guide* .
+For more information about tags, see `Tagging Your Resources <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html>`_ in the *Amazon Elastic Compute Cloud User Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTags>`_
 
 
 ========
@@ -34,7 +37,7 @@ Synopsis
   --resources <value>
   [--tags <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -96,8 +99,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -118,13 +121,13 @@ It's optional to specify the value for any tag with a value. If you specify a va
 
 Command::
 
-  aws ec2 delete-tags --resources i-12345678 --tags Key=Name,Value=
+  aws ec2 delete-tags --resources i-1234567890abcdef0 --tags Key=Name,Value=
  
 This example deletes the tag with the ``purpose`` key from the specified instance, regardless of the tag's value.
 
 Command::
 
-  aws ec2 delete-tags --resources i-12345678 --tags Key=purpose
+  aws ec2 delete-tags --resources i-1234567890abcdef0 --tags Key=purpose
   
 **To delete a tag from multiple resources**
   
@@ -132,7 +135,7 @@ This example deletes the ``Purpose=Test`` tag from a specified instance and AMI.
 
 Command::
 
-  aws ec2 delete-tags --resources i-12345678 ami-78a54011 --tags Key=Purpose
+  aws ec2 delete-tags --resources i-1234567890abcdef0 ami-78a54011 --tags Key=Purpose
 
 
 ======
@@ -140,5 +143,3 @@ Output
 ======
 
 None
-
-.. _Tagging Your Resources: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html

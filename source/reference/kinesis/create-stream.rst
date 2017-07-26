@@ -15,7 +15,7 @@ Description
 
 
 
-Creates a Amazon Kinesis stream. A stream captures and transports data records that are continuously emitted from different data sources or *producers* . Scale-out within an Amazon Kinesis stream is explicitly supported by means of shards, which are uniquely identified groups of data records in an Amazon Kinesis stream.
+Creates an Amazon Kinesis stream. A stream captures and transports data records that are continuously emitted from different data sources or *producers* . Scale-out within a stream is explicitly supported by means of shards, which are uniquely identified groups of data records in a stream.
 
  
 
@@ -23,11 +23,11 @@ You specify and control the number of shards that a stream is composed of. Each 
 
  
 
-The stream name identifies the stream. The name is scoped to the AWS account used by the application. It is also scoped by region. That is, two streams in two different accounts can have the same name, and two streams in the same account, but in two different regions, can have the same name. 
+The stream name identifies the stream. The name is scoped to the AWS account used by the application. It is also scoped by region. That is, two streams in two different accounts can have the same name, and two streams in the same account, but in two different regions, can have the same name.
 
  
 
-``create-stream`` is an asynchronous operation. Upon receiving a ``create-stream`` request, Amazon Kinesis immediately returns and sets the stream status to ``CREATING`` . After the stream is created, Amazon Kinesis sets the stream status to ``ACTIVE`` . You should perform read and write operations only on an ``ACTIVE`` stream. 
+ ``create-stream`` is an asynchronous operation. Upon receiving a ``create-stream`` request, Amazon Kinesis immediately returns and sets the stream status to ``CREATING`` . After the stream is created, Amazon Kinesis sets the stream status to ``ACTIVE`` . You should perform read and write operations only on an ``ACTIVE`` stream. 
 
  
 
@@ -36,14 +36,14 @@ You receive a ``LimitExceededException`` when making a ``create-stream`` request
  
 
  
-* Have more than five streams in the ``CREATING`` state at any point in time.
+* Have more than five streams in the ``CREATING`` state at any point in time. 
  
-* Create more shards than are authorized for your account.
- 
-
+* Create more shards than are authorized for your account. 
  
 
-For the default shard limit for an AWS account, see `Amazon Kinesis Limits`_ . If you need to increase this limit, `contact AWS Support`_ .
+ 
+
+For the default shard limit for an AWS account, see `Streams Limits <http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html>`_ in the *Amazon Kinesis Streams Developer Guide* . If you need to increase this limit, `contact AWS Support <http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html>`_ .
 
  
 
@@ -51,8 +51,11 @@ You can use ``describe-stream`` to check the stream status, which is returned in
 
  
 
- create-stream has a limit of 5 transactions per second per account.
+  create-stream has a limit of 5 transactions per second per account.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/CreateStream>`_
 
 
 ========
@@ -65,7 +68,7 @@ Synopsis
   --stream-name <value>
   --shard-count <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -77,7 +80,7 @@ Options
 ``--stream-name`` (string)
 
 
-  A name to identify the stream. The stream name is scoped to the AWS account used by the application that creates the stream. It is also scoped by region. That is, two streams in two different AWS accounts can have the same name, and two streams in the same AWS account, but in two different regions, can have the same name.
+  A name to identify the stream. The stream name is scoped to the AWS account used by the application that creates the stream. It is also scoped by region. That is, two streams in two different AWS accounts can have the same name, and two streams in the same AWS account but in two different regions can have the same name.
 
   
 
@@ -95,8 +98,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -105,6 +108,3 @@ Output
 ======
 
 None
-
-.. _contact AWS Support: http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html
-.. _Amazon Kinesis Limits: http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html

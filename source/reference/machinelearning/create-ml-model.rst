@@ -15,24 +15,27 @@ Description
 
 
 
-Creates a new ``MLModel`` using the data files and the recipe as information sources. 
+Creates a new ``MLModel`` using the ``DataSource`` and the recipe as information sources. 
 
  
 
-An ``MLModel`` is nearly immutable. Users can only update the ``MLModelName`` and the ``ScoreThreshold`` in an ``MLModel`` without creating a new ``MLModel`` . 
+An ``MLModel`` is nearly immutable. Users can update only the ``MLModelName`` and the ``ScoreThreshold`` in an ``MLModel`` without creating a new ``MLModel`` . 
 
  
 
-``create-ml-model`` is an asynchronous operation. In response to ``create-ml-model`` , Amazon Machine Learning (Amazon ML) immediately returns and sets the ``MLModel`` status to ``PENDING`` . After the ``MLModel`` is created and ready for use, Amazon ML sets the status to ``COMPLETED`` . 
+``create-ml-model`` is an asynchronous operation. In response to ``create-ml-model`` , Amazon Machine Learning (Amazon ML) immediately returns and sets the ``MLModel`` status to ``PENDING`` . After the ``MLModel`` has been created and ready is for use, Amazon ML sets the status to ``COMPLETED`` . 
 
  
 
-You can use the  get-ml-model operation to check progress of the ``MLModel`` during the creation operation.
+You can use the ``get-ml-model`` operation to check the progress of the ``MLModel`` during the creation operation.
 
  
 
-  create-ml-model requires a ``DataSource`` with computed statistics, which can be created by setting ``ComputeStatistics`` to ``true`` in  create-data-source-from-rds ,  create-data-source-from-s3 , or  create-data-source-from-redshift operations. 
+ ``create-ml-model`` requires a ``DataSource`` with computed statistics, which can be created by setting ``ComputeStatistics`` to ``true`` in ``create-data-source-from-rds`` , ``create-data-source-from-s3`` , or ``create-data-source-from-redshift`` operations. 
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/machinelearning-2014-12-12/CreateMLModel>`_
 
 
 ========
@@ -50,7 +53,7 @@ Synopsis
   [--recipe <value>]
   [--recipe-uri <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -90,7 +93,7 @@ Options
 
    
 
-  For more information, see the `Amazon Machine Learning Developer Guide`_ .
+  For more information, see the `Amazon Machine Learning Developer Guide <http://docs.aws.amazon.com/machine-learning/latest/dg>`_ .
 
   
 
@@ -112,7 +115,7 @@ Options
 ``--parameters`` (map)
 
 
-  A list of the training parameters in the ``MLModel`` . The list is implemented as a map of key/value pairs.
+  A list of the training parameters in the ``MLModel`` . The list is implemented as a map of key-value pairs.
 
    
 
@@ -121,13 +124,15 @@ Options
    
 
    
-  * ``sgd.l1RegularizationAmount`` - Coefficient regularization L1 norm. It controls overfitting the data by penalizing large coefficients. This tends to drive coefficients to zero, resulting in sparse feature set. If you use this parameter, start by specifying a small value such as 1.0E-08. The value is a double that ranges from 0 to MAX_DOUBLE. The default is not to use L1 normalization. The parameter cannot be used when ``L2`` is specified. Use this parameter sparingly. 
+  * ``sgd.maxMLModelSizeInBytes`` - The maximum allowed size of the model. Depending on the input data, the size of the model might affect its performance. The value is an integer that ranges from ``100000`` to ``2147483648`` . The default value is ``33554432`` . 
    
-  * ``sgd.l2RegularizationAmount`` - Coefficient regularization L2 norm. It controls overfitting the data by penalizing large coefficients. This tends to drive coefficients to small, nonzero values. If you use this parameter, start by specifying a small value such as 1.0E-08. The valuseis a double that ranges from 0 to MAX_DOUBLE. The default is not to use L2 normalization. This cannot be used when ``L1`` is specified. Use this parameter sparingly. 
+  * ``sgd.maxPasses`` - The number of times that the training process traverses the observations to build the ``MLModel`` . The value is an integer that ranges from ``1`` to ``10000`` . The default value is ``10`` .
    
-  * ``sgd.maxPasses`` - Number of times that the training process traverses the observations to build the ``MLModel`` . The value is an integer that ranges from 1 to 10000. The default value is 10. 
+  * ``sgd.shuffleType`` - Whether Amazon ML shuffles the training data. Shuffling the data improves a model's ability to find the optimal solution for a variety of data types. The valid values are ``auto`` and ``none`` . The default value is ``none`` . We strongly recommend that you shuffle your data. 
    
-  * ``sgd.maxMLModelSizeInBytes`` - Maximum allowed size of the model. Depending on the input data, the size of the model might affect its performance. The value is an integer that ranges from 100000 to 2147483648. The default value is 33554432.  
+  * ``sgd.l1RegularizationAmount`` - The coefficient regularization L1 norm. It controls overfitting the data by penalizing large coefficients. This tends to drive coefficients to zero, resulting in a sparse feature set. If you use this parameter, start by specifying a small value, such as ``1.0E-08`` . The value is a double that ranges from ``0`` to ``MAX_DOUBLE`` . The default is to not use L1 normalization. This parameter can't be used when ``L2`` is specified. Use this parameter sparingly. 
+   
+  * ``sgd.l2RegularizationAmount`` - The coefficient regularization L2 norm. It controls overfitting the data by penalizing large coefficients. This tends to drive coefficients to small, nonzero values. If you use this parameter, start by specifying a small value, such as ``1.0E-08`` . The value is a double that ranges from ``0`` to ``MAX_DOUBLE`` . The default is to not use L2 normalization. This parameter can't be used when ``L1`` is specified. Use this parameter sparingly. 
    
 
   
@@ -158,22 +163,22 @@ JSON Syntax::
 ``--recipe`` (string)
 
 
-  The data recipe for creating ``MLModel`` . You must specify either the recipe or its URI. If you don’t specify a recipe or its URI, Amazon ML creates a default.
+  The data recipe for creating the ``MLModel`` . You must specify either the recipe or its URI. If you don't specify a recipe or its URI, Amazon ML creates a default.
 
   
 
 ``--recipe-uri`` (string)
 
 
-  The Amazon Simple Storage Service (Amazon S3) location and file name that contains the ``MLModel`` recipe. You must specify either the recipe or its URI. If you don’t specify a recipe or its URI, Amazon ML creates a default.
+  The Amazon Simple Storage Service (Amazon S3) location and file name that contains the ``MLModel`` recipe. You must specify either the recipe or its URI. If you don't specify a recipe or its URI, Amazon ML creates a default.
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -191,6 +196,3 @@ MLModelId -> (string)
 
   
 
-
-
-.. _Amazon Machine Learning Developer Guide: http://docs.aws.amazon.com/machine-learning/latest/dg

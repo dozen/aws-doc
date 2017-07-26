@@ -29,11 +29,11 @@ Every part you upload to this resource (see  upload-multipart-part ), except the
 
 .. note::
 
-  
+   
 
   You don't need to know the size of the archive when you start a multipart upload because Amazon Glacier does not require you to specify the overall archive size.
 
-  
+   
 
  
 
@@ -41,12 +41,15 @@ After you complete the multipart upload, Amazon Glacier removes the multipart up
 
  
 
-An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see `Access Control Using AWS Identity and Access Management (IAM)`_ .
+An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see `Access Control Using AWS Identity and Access Management (IAM) <http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html>`_ .
 
  
 
-For conceptual information and underlying REST API, go to `Uploading Large Archives in Parts (Multipart Upload)`_ and `Initiate Multipart Upload`_ in the *Amazon Glacier Developer Guide* .
+For conceptual information and underlying REST API, see `Uploading Large Archives in Parts (Multipart Upload) <http://docs.aws.amazon.com/amazonglacier/latest/dev/uploading-archive-mpu.html>`_ and `Initiate Multipart Upload <http://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-initiate-upload.html>`_ in the *Amazon Glacier Developer Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/glacier-2012-06-01/InitiateMultipartUpload>`_
 
 
 ========
@@ -61,7 +64,7 @@ Synopsis
   [--archive-description <value>]
   [--part-size <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -73,7 +76,7 @@ Options
 ``--account-id`` (string)
 
 
-  The ``AccountId`` value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single apos``-`` apos (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens (apos-apos) in the ID. 
+  The ``AccountId`` value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single '``-`` ' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens ('-') in the ID. 
 
   
 
@@ -103,10 +106,10 @@ Options
   
 
 ``--cli-input-json`` (string)
-Performs service operation based on the JSON part-size provided. The JSON part-size follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
+Performs service operation based on the JSON account-id provided. The JSON account-id follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -132,7 +135,7 @@ location -> (string)
 
   
 
-  The relative URI path of the multipart upload ID Amazon Glacier created. 
+  The relative URI path of the multipart upload ID Amazon Glacier created.
 
   
 
@@ -142,14 +145,9 @@ uploadId -> (string)
 
   
 
-  The ID of the multipart upload. This value is also included as part of the location. 
+  The ID of the multipart upload. This value is also included as part of the location.
 
   
 
   
 
-
-
-.. _Access Control Using AWS Identity and Access Management (IAM): http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html
-.. _Uploading Large Archives in Parts (Multipart Upload): http://docs.aws.amazon.com/amazonglacier/latest/dev/uploading-archive-mpu.html
-.. _Initiate Multipart Upload: http://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-initiate-upload.html

@@ -23,6 +23,9 @@ If the update is successful, this method returns an operation ID that you can us
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateDomainContact>`_
+
+
 ========
 Synopsis
 ========
@@ -35,7 +38,7 @@ Synopsis
   [--registrant-contact <value>]
   [--tech-contact <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -47,23 +50,7 @@ Options
 ``--domain-name`` (string)
 
 
-  The name of a domain.
-
-   
-
-  Type: String
-
-   
-
-  Default: None
-
-   
-
-  Constraints: The domain name can contain only the letters a through z, the numbers 0 through 9, and hyphen (-). Internationalized Domain Names are not supported.
-
-   
-
-  Required: Yes
+  The name of the domain that you want to update contact information for.
 
   
 
@@ -71,18 +58,6 @@ Options
 
 
   Provides detailed contact information.
-
-   
-
-  Type: Complex
-
-   
-
-  Children: ``FirstName`` , ``MiddleName`` , ``LastName`` , ``ContactType`` , ``OrganizationName`` , ``AddressLine1`` , ``AddressLine2`` , ``City`` , ``State`` , ``CountryCode`` , ``ZipCode`` , ``PhoneNumber`` , ``Email`` , ``Fax`` , ``ExtraParams`` 
-
-   
-
-  Required: Yes
 
   
 
@@ -113,7 +88,7 @@ JSON Syntax::
     "Fax": "string",
     "ExtraParams": [
       {
-        "Name": "DUNS_NUMBER"|"BRAND_NUMBER"|"BIRTH_DEPARTMENT"|"BIRTH_DATE_IN_YYYY_MM_DD"|"BIRTH_COUNTRY"|"BIRTH_CITY"|"DOCUMENT_NUMBER"|"AU_ID_NUMBER"|"AU_ID_TYPE"|"CA_LEGAL_TYPE"|"ES_IDENTIFICATION"|"ES_IDENTIFICATION_TYPE"|"ES_LEGAL_FORM"|"FI_BUSINESS_NUMBER"|"FI_ID_NUMBER"|"IT_PIN"|"RU_PASSPORT_DATA"|"SE_ID_NUMBER"|"SG_ID_NUMBER"|"VAT_NUMBER",
+        "Name": "DUNS_NUMBER"|"BRAND_NUMBER"|"BIRTH_DEPARTMENT"|"BIRTH_DATE_IN_YYYY_MM_DD"|"BIRTH_COUNTRY"|"BIRTH_CITY"|"DOCUMENT_NUMBER"|"AU_ID_NUMBER"|"AU_ID_TYPE"|"CA_LEGAL_TYPE"|"CA_BUSINESS_ENTITY_TYPE"|"ES_IDENTIFICATION"|"ES_IDENTIFICATION_TYPE"|"ES_LEGAL_FORM"|"FI_BUSINESS_NUMBER"|"FI_ID_NUMBER"|"IT_PIN"|"RU_PASSPORT_DATA"|"SE_ID_NUMBER"|"SG_ID_NUMBER"|"VAT_NUMBER",
         "Value": "string"
       }
       ...
@@ -127,18 +102,6 @@ JSON Syntax::
 
   Provides detailed contact information.
 
-   
-
-  Type: Complex
-
-   
-
-  Children: ``FirstName`` , ``MiddleName`` , ``LastName`` , ``ContactType`` , ``OrganizationName`` , ``AddressLine1`` , ``AddressLine2`` , ``City`` , ``State`` , ``CountryCode`` , ``ZipCode`` , ``PhoneNumber`` , ``Email`` , ``Fax`` , ``ExtraParams`` 
-
-   
-
-  Required: Yes
-
   
 
 
@@ -168,7 +131,7 @@ JSON Syntax::
     "Fax": "string",
     "ExtraParams": [
       {
-        "Name": "DUNS_NUMBER"|"BRAND_NUMBER"|"BIRTH_DEPARTMENT"|"BIRTH_DATE_IN_YYYY_MM_DD"|"BIRTH_COUNTRY"|"BIRTH_CITY"|"DOCUMENT_NUMBER"|"AU_ID_NUMBER"|"AU_ID_TYPE"|"CA_LEGAL_TYPE"|"ES_IDENTIFICATION"|"ES_IDENTIFICATION_TYPE"|"ES_LEGAL_FORM"|"FI_BUSINESS_NUMBER"|"FI_ID_NUMBER"|"IT_PIN"|"RU_PASSPORT_DATA"|"SE_ID_NUMBER"|"SG_ID_NUMBER"|"VAT_NUMBER",
+        "Name": "DUNS_NUMBER"|"BRAND_NUMBER"|"BIRTH_DEPARTMENT"|"BIRTH_DATE_IN_YYYY_MM_DD"|"BIRTH_COUNTRY"|"BIRTH_CITY"|"DOCUMENT_NUMBER"|"AU_ID_NUMBER"|"AU_ID_TYPE"|"CA_LEGAL_TYPE"|"CA_BUSINESS_ENTITY_TYPE"|"ES_IDENTIFICATION"|"ES_IDENTIFICATION_TYPE"|"ES_LEGAL_FORM"|"FI_BUSINESS_NUMBER"|"FI_ID_NUMBER"|"IT_PIN"|"RU_PASSPORT_DATA"|"SE_ID_NUMBER"|"SG_ID_NUMBER"|"VAT_NUMBER",
         "Value": "string"
       }
       ...
@@ -182,18 +145,6 @@ JSON Syntax::
 
   Provides detailed contact information.
 
-   
-
-  Type: Complex
-
-   
-
-  Children: ``FirstName`` , ``MiddleName`` , ``LastName`` , ``ContactType`` , ``OrganizationName`` , ``AddressLine1`` , ``AddressLine2`` , ``City`` , ``State`` , ``CountryCode`` , ``ZipCode`` , ``PhoneNumber`` , ``Email`` , ``Fax`` , ``ExtraParams`` 
-
-   
-
-  Required: Yes
-
   
 
 
@@ -223,7 +174,7 @@ JSON Syntax::
     "Fax": "string",
     "ExtraParams": [
       {
-        "Name": "DUNS_NUMBER"|"BRAND_NUMBER"|"BIRTH_DEPARTMENT"|"BIRTH_DATE_IN_YYYY_MM_DD"|"BIRTH_COUNTRY"|"BIRTH_CITY"|"DOCUMENT_NUMBER"|"AU_ID_NUMBER"|"AU_ID_TYPE"|"CA_LEGAL_TYPE"|"ES_IDENTIFICATION"|"ES_IDENTIFICATION_TYPE"|"ES_LEGAL_FORM"|"FI_BUSINESS_NUMBER"|"FI_ID_NUMBER"|"IT_PIN"|"RU_PASSPORT_DATA"|"SE_ID_NUMBER"|"SG_ID_NUMBER"|"VAT_NUMBER",
+        "Name": "DUNS_NUMBER"|"BRAND_NUMBER"|"BIRTH_DEPARTMENT"|"BIRTH_DATE_IN_YYYY_MM_DD"|"BIRTH_COUNTRY"|"BIRTH_CITY"|"DOCUMENT_NUMBER"|"AU_ID_NUMBER"|"AU_ID_TYPE"|"CA_LEGAL_TYPE"|"CA_BUSINESS_ENTITY_TYPE"|"ES_IDENTIFICATION"|"ES_IDENTIFICATION_TYPE"|"ES_LEGAL_FORM"|"FI_BUSINESS_NUMBER"|"FI_ID_NUMBER"|"IT_PIN"|"RU_PASSPORT_DATA"|"SE_ID_NUMBER"|"SG_ID_NUMBER"|"VAT_NUMBER",
         "Value": "string"
       }
       ...
@@ -235,8 +186,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -248,19 +199,7 @@ OperationId -> (string)
 
   
 
-  Identifier for tracking the progress of the request. To use this ID to query the operation status, use GetOperationDetail.
-
-   
-
-  Type: String
-
-   
-
-  Default: None
-
-   
-
-  Constraints: Maximum 255 characters.
+  Identifier for tracking the progress of the request. To use this ID to query the operation status, use  get-operation-detail .
 
   
 

@@ -19,6 +19,9 @@ Returns the  Rule that is specified by the ``RuleId`` that you included in the `
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetRule>`_
+
+
 ========
 Synopsis
 ========
@@ -28,7 +31,7 @@ Synopsis
     get-rule
   --rule-id <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -47,8 +50,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -65,9 +68,9 @@ Rule -> (structure)
    
 
    
-  *  Rule : Contains ``MetricName`` , ``Name`` , an array of ``Predicate`` objects, and ``RuleId`` 
+  *  Rule : Contains ``MetricName`` , ``Name`` , an array of ``Predicate`` objects, and ``RuleId``   
    
-  *  Predicate : Each ``Predicate`` object contains ``DataId`` , ``Negated`` , and ``Type`` 
+  *  Predicate : Each ``Predicate`` object contains ``DataId`` , ``Negated`` , and ``Type``   
    
 
   
@@ -80,7 +83,7 @@ Rule -> (structure)
 
      
 
-    ``RuleId`` is returned by  create-rule and by  list-rules .
+     ``RuleId`` is returned by  create-rule and by  list-rules .
 
     
 
@@ -100,6 +103,10 @@ Rule -> (structure)
 
     
 
+    A friendly name or description for the metrics for this ``Rule`` . The name can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can't contain whitespace. You can't change ``MetricName`` after you create the ``Rule`` .
+
+    
+
     
 
   Predicates -> (list)
@@ -114,7 +121,7 @@ Rule -> (structure)
 
       
 
-      Specifies the  ByteMatchSet ,  IPSet , and  SqlInjectionMatchSet objects that you want to add to a ``Rule`` and, for each object, indicates whether you want to negate the settings, for example, requests that do NOT originate from the IP address 192.0.2.44. 
+      Specifies the  ByteMatchSet ,  IPSet ,  SqlInjectionMatchSet ,  XssMatchSet , and  SizeConstraintSet objects that you want to add to a ``Rule`` and, for each object, indicates whether you want to negate the settings, for example, requests that do NOT originate from the IP address 192.0.2.44. 
 
       
 
@@ -122,11 +129,11 @@ Rule -> (structure)
 
         
 
-        Set ``Negated`` to ``False`` if you want AWS WAF to allow, block, or count requests based on the settings in the specified  ByteMatchSet ,  IPSet , or  SqlInjectionMatchSet . For example, if an ``IPSet`` includes the IP address ``192.0.2.44`` , AWS WAF will allow or block requests based on that IP address.
+        Set ``Negated`` to ``False`` if you want AWS WAF to allow, block, or count requests based on the settings in the specified  ByteMatchSet ,  IPSet ,  SqlInjectionMatchSet ,  XssMatchSet , or  SizeConstraintSet . For example, if an ``IPSet`` includes the IP address ``192.0.2.44`` , AWS WAF will allow or block requests based on that IP address.
 
          
 
-        Set ``Negated`` to ``True`` if you want AWS WAF to allow or block a request based on the negation of the settings in the  ByteMatchSet ,  IPSet , or  SqlInjectionMatchSet . For example, if an ``IPSet`` includes the IP address ``192.0.2.44`` , AWS WAF will allow, block, or count requests based on all IP addresses *except*  ``192.0.2.44`` .
+        Set ``Negated`` to ``True`` if you want AWS WAF to allow or block a request based on the negation of the settings in the  ByteMatchSet ,  IPSet ,  SqlInjectionMatchSet ,  XssMatchSet , or  SizeConstraintSet . For example, if an ``IPSet`` includes the IP address ``192.0.2.44`` , AWS WAF will allow, block, or count requests based on all IP addresses *except*  ``192.0.2.44`` .
 
         
 

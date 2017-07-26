@@ -15,12 +15,15 @@ Description
 
 
 
-Specify the time-based auto scaling configuration for a specified instance. For more information, see `Managing Load with Time-based and Load-based Instances`_ .
+Specify the time-based auto scaling configuration for a specified instance. For more information, see `Managing Load with Time-based and Load-based Instances <http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-autoscaling.html>`_ .
 
  
 
-**Required Permissions** : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see `Managing User Permissions`_ .
+ **Required Permissions** : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see `Managing User Permissions <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html>`_ .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/SetTimeBasedAutoScaling>`_
 
 
 ========
@@ -33,7 +36,7 @@ Synopsis
   --instance-id <value>
   [--auto-scaling-schedule <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -89,8 +92,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -104,8 +107,6 @@ The following example sets the time-based configuration for a specified instance
 You must first use ``create-instance`` to add the instance to the layer. ::
 
   aws opsworks --region us-east-1 set-time-based-auto-scaling --instance-id 69b6237c-08c0-4edb-a6af-78f3d01cedf2 --auto-scaling-schedule file://schedule.json
-
-**Note**: AWS OpsWorks CLI commands should set the region to ``us-east-1`` regardless of the stack's location.
 
 The example puts the schedule in a separate file in the working directory named ``schedule.json``.
 For this example, the instance is on for a few hours around midday UTC (Coordinated Universal Time) on Monday and Tuesday. ::
@@ -140,6 +141,3 @@ Output
 ======
 
 None
-
-.. _Managing User Permissions: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
-.. _Managing Load with Time-based and Load-based Instances: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-autoscaling.html

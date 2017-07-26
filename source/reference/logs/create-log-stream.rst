@@ -15,20 +15,29 @@ Description
 
 
 
-Creates a new log stream in the specified log group. The name of the log stream must be unique within the log group. There is no limit on the number of log streams that can exist in a log group. 
+Creates a log stream for the specified log group.
 
  
 
-You must use the following guidelines when naming a log stream: 
-
- 
-* Log stream names can be between 1 and 512 characters long.
- 
-* The ':' colon character is not allowed.
- 
+There is no limit on the number of log streams that you can create for a log group.
 
  
 
+You must use the following guidelines when naming a log stream:
+
+ 
+
+ 
+* Log stream names must be unique within the log group. 
+ 
+* Log stream names can be between 1 and 512 characters long. 
+ 
+* The ':' (colon) and '*' (asterisk) characters are not allowed. 
+ 
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateLogStream>`_
 
 
 ========
@@ -41,7 +50,7 @@ Synopsis
   --log-group-name <value>
   --log-stream-name <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -53,22 +62,22 @@ Options
 ``--log-group-name`` (string)
 
 
-  The name of the log group under which the log stream is to be created.
+  The name of the log group.
 
   
 
 ``--log-stream-name`` (string)
 
 
-  The name of the log stream to create.
+  The name of the log stream.
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 

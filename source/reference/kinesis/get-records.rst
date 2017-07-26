@@ -15,7 +15,7 @@ Description
 
 
 
-Gets data records from a shard.
+Gets data records from an Amazon Kinesis stream's shard.
 
  
 
@@ -23,7 +23,7 @@ Specify a shard iterator using the ``shard-iterator`` parameter. The shard itera
 
  
 
-You can scale by provisioning multiple shards. Your application should have one thread per shard, each reading continuously from its stream. To read from a stream continually, call  get-records in a loop. Use  get-shard-iterator to get the shard iterator to specify in the first  get-records call.  get-records returns a new shard iterator in ``NextShardIterator`` . Specify the shard iterator returned in ``NextShardIterator`` in subsequent calls to  get-records . Note that if the shard has been closed, the shard iterator can't return more data and  get-records returns ``null`` in ``NextShardIterator`` . You can terminate the loop when the shard is closed, or when the shard iterator reaches the record with the sequence number or other attribute that marks it as the last record to process.
+You can scale by provisioning multiple shards per stream while considering service limits (for more information, see `Streams Limits <http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html>`_ in the *Amazon Kinesis Streams Developer Guide* ). Your application should have one thread per shard, each reading continuously from its stream. To read from a stream continually, call  get-records in a loop. Use  get-shard-iterator to get the shard iterator to specify in the first  get-records call.  get-records returns a new shard iterator in ``NextShardIterator`` . Specify the shard iterator returned in ``NextShardIterator`` in subsequent calls to  get-records . Note that if the shard has been closed, the shard iterator can't return more data and  get-records returns ``null`` in ``NextShardIterator`` . You can terminate the loop when the shard is closed, or when the shard iterator reaches the record with the sequence number or other attribute that marks it as the last record to process.
 
  
 
@@ -31,16 +31,19 @@ Each data record can be up to 1 MB in size, and each shard can read up to 2 MB p
 
  
 
-The size of the data returned by  get-records will vary depending on the utilization of the shard. The maximum size of data that  get-records can return is 10 MB. If a call returns this amount of data, subsequent calls made within the next 5 seconds throw ``ProvisionedThroughputExceededException`` . If there is insufficient provisioned throughput on the shard, subsequent calls made within the next 1 second throw ``ProvisionedThroughputExceededException`` . Note that  get-records won't return any data when it throws an exception. For this reason, we recommend that you wait one second between calls to  get-records ; however, it's possible that the application will get exceptions for longer than 1 second.
+The size of the data returned by  get-records varies depending on the utilization of the shard. The maximum size of data that  get-records can return is 10 MB. If a call returns this amount of data, subsequent calls made within the next 5 seconds throw ``ProvisionedThroughputExceededException`` . If there is insufficient provisioned throughput on the shard, subsequent calls made within the next 1 second throw ``ProvisionedThroughputExceededException`` . Note that  get-records won't return any data when it throws an exception. For this reason, we recommend that you wait one second between calls to  get-records ; however, it's possible that the application will get exceptions for longer than 1 second.
 
  
 
-To detect whether the application is falling behind in processing, you can use the ``MillisBehindLatest`` response attribute. You can also monitor the stream using CloudWatch metrics (see `Monitoring Amazon Kinesis`_ in the *Amazon Kinesis Developer Guide* ).
+To detect whether the application is falling behind in processing, you can use the ``MillisBehindLatest`` response attribute. You can also monitor the stream using CloudWatch metrics and other mechanisms (see `Monitoring <http://docs.aws.amazon.com/kinesis/latest/dev/monitoring.html>`_ in the *Amazon Kinesis Streams Developer Guide* ).
 
  
 
-Each Amazon Kinesis record includes a value, ``ApproximateArrivalTimestamp`` , that is set when an Amazon Kinesis stream successfully receives and stores a record. This is commonly referred to as a server-side timestamp, which is different than a client-side timestamp, where the timestamp is set when a data producer creates or sends the record to a stream. The timestamp has millisecond precision. There are no guarantees about the timestamp accuracy, or that the timestamp is always increasing. For example, records in a shard or across a stream might have timestamps that are out of order.
+Each Amazon Kinesis record includes a value, ``ApproximateArrivalTimestamp`` , that is set when a stream successfully receives and stores a record. This is commonly referred to as a server-side timestamp, whereas a client-side timestamp is set when a data producer creates or sends the record to a stream (a data producer is any data source putting data records into a stream, for example with  put-records ). The timestamp has millisecond precision. There are no guarantees about the timestamp accuracy, or that the timestamp is always increasing. For example, records in a shard or across a stream might have timestamps that are out of order.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/GetRecords>`_
 
 
 ========
@@ -53,7 +56,7 @@ Synopsis
   --shard-iterator <value>
   [--limit <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -79,8 +82,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -108,7 +111,7 @@ Records -> (list)
 
       
 
-      The unique identifier of the record in the stream.
+      The unique identifier of the record within its shard.
 
       
 
@@ -144,6 +147,24 @@ Records -> (list)
 
       
 
+    EncryptionType -> (string)
+
+      
+
+      The encryption type used on the record. This parameter can be one of the following values:
+
+       
+
+       
+      * ``NONE`` : Do not encrypt the records in the stream. 
+       
+      * ``KMS`` : Use server-side encryption on the records in the stream using a customer-managed KMS key. 
+       
+
+      
+
+      
+
     
 
   
@@ -168,6 +189,3 @@ MillisBehindLatest -> (long)
 
   
 
-
-
-.. _Monitoring Amazon Kinesis: http://docs.aws.amazon.com/kinesis/latest/dev/monitoring.html

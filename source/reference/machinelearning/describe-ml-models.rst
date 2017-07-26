@@ -19,6 +19,9 @@ Returns a list of ``MLModel`` that match the search criteria in the request.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/machinelearning-2014-12-12/DescribeMLModels>`_
+
+
 ``describe-ml-models`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
 When using ``--output text`` and the ``--query`` argument on a paginated response, the ``--query`` argument must extract data from the results of the following query expressions: ``Results``
 
@@ -43,7 +46,7 @@ Synopsis
   [--starting-token <value>]
   [--page-size <value>]
   [--max-items <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -221,26 +224,34 @@ Performs service operation based on the JSON string provided. The JSON string fo
 
    
 
-``--page-size`` (integer)
- 
-
-  The size of each page.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
    
 
-  
+``--page-size`` (integer)
+ 
 
-  
+  The size of each page to get in the AWS service call. This does not affect the number of items returned in the command's output. Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call. This can help prevent the AWS service calls from timing out.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
 
 ``--max-items`` (integer)
  
 
-  The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination. This ``NextToken`` response element should **not** be used directly outside of the AWS CLI.
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``NextToken`` is provided in the command's output. To resume pagination, provide the ``NextToken`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``NextToken`` response element directly outside of the AWS CLI.
 
    
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -252,7 +263,7 @@ Results -> (list)
 
   
 
-  A list of  MLModel that meet the search criteria.
+  A list of ``MLModel`` that meet the search criteria.
 
   
 
@@ -260,7 +271,7 @@ Results -> (list)
 
     
 
-    Represents the output of a  get-ml-model operation. 
+    Represents the output of a ``get-ml-model`` operation. 
 
      
 
@@ -282,7 +293,7 @@ Results -> (list)
 
       
 
-      The ID of the training ``DataSource`` . The  create-ml-model operation uses the ``TrainingDataSourceId`` .
+      The ID of the training ``DataSource`` . The ``create-ml-model`` operation uses the ``TrainingDataSourceId`` .
 
       
 
@@ -337,15 +348,15 @@ Results -> (list)
        
 
        
-      * PENDING - Amazon Machine Learning (Amazon ML) submitted a request to create an ``MLModel`` .
+      * ``PENDING`` - Amazon Machine Learning (Amazon ML) submitted a request to create an ``MLModel`` .
        
-      * INPROGRESS - The creation process is underway.
+      * ``INPROGRESS`` - The creation process is underway.
        
-      * FAILED - The request to create an ``MLModel`` did not run to completion. It is not usable.
+      * ``FAILED`` - The request to create an ``MLModel`` didn't run to completion. The model isn't usable.
        
-      * COMPLETED - The creation process completed successfully.
+      * ``COMPLETED`` - The creation process completed successfully.
        
-      * DELETED - The ``MLModel`` is marked as deleted. It is not usable.
+      * ``DELETED`` - The ``MLModel`` is marked as deleted. It isn't usable.
        
 
       
@@ -419,11 +430,11 @@ Results -> (list)
          
 
          
-        * NONE - Endpoint does not exist or was previously deleted.
+        * ``NONE`` - Endpoint does not exist or was previously deleted.
          
-        * READY - Endpoint is ready to be used for real-time predictions.
+        * ``READY`` - Endpoint is ready to be used for real-time predictions.
          
-        * UPDATING - Updating/creating the endpoint. 
+        * ``UPDATING`` - Updating/creating the endpoint. 
          
 
         
@@ -436,7 +447,7 @@ Results -> (list)
 
       
 
-      A list of the training parameters in the ``MLModel`` . The list is implemented as a map of key/value pairs.
+      A list of the training parameters in the ``MLModel`` . The list is implemented as a map of key-value pairs.
 
        
 
@@ -445,13 +456,15 @@ Results -> (list)
        
 
        
-      * ``sgd.l1RegularizationAmount`` - Coefficient regularization L1 norm. It controls overfitting the data by penalizing large coefficients. This tends to drive coefficients to zero, resulting in a sparse feature set. If you use this parameter, specify a small value, such as 1.0E-04 or 1.0E-08. The value is a double that ranges from 0 to MAX_DOUBLE. The default is not to use L1 normalization. The parameter cannot be used when ``L2`` is specified. Use this parameter sparingly. 
+      * ``sgd.maxMLModelSizeInBytes`` - The maximum allowed size of the model. Depending on the input data, the size of the model might affect its performance. The value is an integer that ranges from ``100000`` to ``2147483648`` . The default value is ``33554432`` . 
        
-      * ``sgd.l2RegularizationAmount`` - Coefficient regularization L2 norm. It controls overfitting the data by penalizing large coefficients. This tends to drive coefficients to small, nonzero values. If you use this parameter, specify a small value, such as 1.0E-04 or 1.0E-08. The valus is a double that ranges from 0 to MAX_DOUBLE. The default is not to use L2 normalization. This cannot be used when ``L1`` is specified. Use this parameter sparingly. 
+      * ``sgd.maxPasses`` - The number of times that the training process traverses the observations to build the ``MLModel`` . The value is an integer that ranges from ``1`` to ``10000`` . The default value is ``10`` .
        
-      * ``sgd.maxPasses`` - Number of times that the training process traverses the observations to build the ``MLModel`` . The value is an integer that ranges from 1 to 10000. The default value is 10. 
+      * ``sgd.shuffleType`` - Whether Amazon ML shuffles the training data. Shuffling the data improves a model's ability to find the optimal solution for a variety of data types. The valid values are ``auto`` and ``none`` . The default value is ``none`` .
        
-      * ``sgd.maxMLModelSizeInBytes`` - Maximum allowed size of the model. Depending on the input data, the model size might affect performance.  The value is an integer that ranges from 100000 to 2147483648. The default value is 33554432.  
+      * ``sgd.l1RegularizationAmount`` - The coefficient regularization L1 norm, which controls overfitting the data by penalizing large coefficients. This parameter tends to drive coefficients to zero, resulting in sparse feature set. If you use this parameter, start by specifying a small value, such as ``1.0E-08`` . The value is a double that ranges from ``0`` to ``MAX_DOUBLE`` . The default is to not use L1 normalization. This parameter can't be used when ``L2`` is specified. Use this parameter sparingly. 
+       
+      * ``sgd.l2RegularizationAmount`` - The coefficient regularization L2 norm, which controls overfitting the data by penalizing large coefficients. This tends to drive coefficients to small, nonzero values. If you use this parameter, start by specifying a small value, such as ``1.0E-08`` . The value is a double that ranges from ``0`` to ``MAX_DOUBLE`` . The default is to not use L2 normalization. This parameter can't be used when ``L1`` is specified. Use this parameter sparingly. 
        
 
       
@@ -497,7 +510,7 @@ Results -> (list)
        
 
        
-      * SGD -- Stochastic gradient descent. The goal of SGD is to minimize the gradient of the loss function. 
+      * ``SGD`` -- Stochastic gradient descent. The goal of ``SGD`` is to minimize the gradient of the loss function. 
        
 
       
@@ -513,11 +526,11 @@ Results -> (list)
        
 
        
-      * REGRESSION - Produces a numeric result. For example, "What listing price should a house have?".
+      * ``REGRESSION`` - Produces a numeric result. For example, "What price should a house be listed at?"
        
-      * BINARY - Produces one of two possible results. For example, "Is this a child-friendly web site?".
+      * ``BINARY`` - Produces one of two possible results. For example, "Is this a child-friendly web site?".
        
-      * MULTICLASS - Produces more than two possible results. For example, "Is this a HIGH, LOW or MEDIUM risk trade?".
+      * ``MULTICLASS`` - Produces one of several possible results. For example, "Is this a HIGH-, LOW-, or MEDIUM-risk trade?".
        
 
       
@@ -545,6 +558,36 @@ Results -> (list)
       
 
       A description of the most recent details about accessing the ``MLModel`` .
+
+      
+
+      
+
+    ComputeTime -> (long)
+
+      
+
+      Long integer type that is a 64-bit signed number.
+
+      
+
+      
+
+    FinishedAt -> (timestamp)
+
+      
+
+      A timestamp represented in epoch time.
+
+      
+
+      
+
+    StartedAt -> (timestamp)
+
+      
+
+      A timestamp represented in epoch time.
 
       
 

@@ -15,7 +15,7 @@ Description
 
 
 
-Returns the name of one or more specified configuration recorders. If the recorder name is not specified, this action returns the names of all the configuration recorders associated with the account. 
+Returns the details for the specified configuration recorders. If the configuration recorder is not specified, this action returns the details for all configuration recorders associated with the account.
 
  
 
@@ -23,10 +23,13 @@ Returns the name of one or more specified configuration recorders. If the record
 
    
 
-  Currently, you can specify only one configuration recorder per account.
+  Currently, you can specify only one configuration recorder per region in your account.
 
    
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigurationRecorders>`_
 
 
 ========
@@ -38,7 +41,7 @@ Synopsis
     describe-configuration-recorders
   [--configuration-recorder-names <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -65,8 +68,8 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -120,7 +123,7 @@ ConfigurationRecorders -> (list)
 
       
 
-      The name of the recorder. By default, AWS Config automatically assigns the name defaultwhen creating the configuration recorder. You cannot change the assigned name.
+      The name of the recorder. By default, AWS Config automatically assigns the name "default" when creating the configuration recorder. You cannot change the assigned name.
 
       
 
@@ -166,7 +169,7 @@ ConfigurationRecorders -> (list)
 
         
 
-        Specifies whether AWS Config includes all supported types of global resources with the resources that it records.
+        Specifies whether AWS Config includes all supported types of global resources (for example, IAM resources) with the resources that it records.
 
          
 
@@ -175,6 +178,10 @@ ConfigurationRecorders -> (list)
          
 
         If you set this option to ``true`` , when AWS Config adds support for a new type of global resource, it automatically starts recording resources of that type.
+
+         
+
+        The configuration details for any global resource are the same in all regions. To prevent duplicate configuration items, you should consider customizing AWS Config in only one region to record global resources.
 
         
 
@@ -196,7 +203,7 @@ ConfigurationRecorders -> (list)
 
          
 
-        For a list of valid ``resourceTypes`` values, see the **resourceType Value** column in `Supported AWS Resource Types`_ .
+        For a list of valid ``resourceTypes`` values, see the **resourceType Value** column in `Supported AWS Resource Types <http://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources>`_ .
 
         
 
@@ -214,6 +221,3 @@ ConfigurationRecorders -> (list)
 
   
 
-
-
-.. _Supported AWS Resource Types: http://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources

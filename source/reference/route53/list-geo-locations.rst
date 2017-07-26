@@ -15,12 +15,15 @@ Description
 
 
 
-To retrieve a list of supported geo locations, send a ``GET`` request to the ``/*Route 53 API version* /geolocations`` resource. The response to this request includes a ``GeoLocationDetailsList`` element with zero, one, or multiple ``GeoLocationDetails`` child elements. The list is sorted by country code, and then subdivision code, followed by continents at the end of the list. 
+Retrieves a list of supported geo locations.
 
  
 
-By default, the list of geo locations is displayed on a single page. You can control the length of the page that is displayed by using the ``MaxItems`` parameter. If the list is truncated, ``IsTruncated`` will be set to *true* and a combination of ``NextContinentCode, NextCountryCode, NextSubdivisionCode`` will be populated. You can pass these as parameters to ``StartContinentCode, StartCountryCode, StartSubdivisionCode`` to control the geo location that the list begins with. 
+Countries are listed first, and continents are listed last. If Amazon Route 53 supports subdivisions for a country (for example, states or provinces), the subdivisions for that country are listed in alphabetical order immediately after the corresponding country.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListGeoLocations>`_
 
 
 ========
@@ -35,7 +38,7 @@ Synopsis
   [--start-subdivision-code <value>]
   [--max-items <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -47,52 +50,48 @@ Options
 ``--start-continent-code`` (string)
 
 
-  The first continent code in the lexicographic ordering of geo locations that you want the ``list-geo-locations`` request to list. For non-continent geo locations, this should be null.
+  The code for the continent with which you want to start listing locations that Amazon Route 53 supports for geolocation. If Amazon Route 53 has already returned a page or more of results, if ``IsTruncated`` is true, and if ``NextContinentCode`` from the previous response has a value, enter that value in ``StartContinentCode`` to return the next page of results.
 
    
 
-  Valid values: ``AF`` | ``AN`` | ``AS`` | ``EU`` | ``OC`` | ``NA`` | ``SA`` 
-
-   
-
-  Constraint: Specifying ``ContinentCode`` with either ``CountryCode`` or ``SubdivisionCode`` returns an  InvalidInput error.
+  Include ``StartContinentCode`` only if you want to list continents. Don't include ``StartContinentCode`` when you're listing countries or countries with their subdivisions.
 
   
 
 ``--start-country-code`` (string)
 
 
-  The first country code in the lexicographic ordering of geo locations that you want the ``list-geo-locations`` request to list.
+  The code for the country with which you want to start listing locations that Amazon Route 53 supports for geolocation. If Amazon Route 53 has already returned a page or more of results, if ``IsTruncated`` is ``true`` , and if ``NextCountryCode`` from the previous response has a value, enter that value in ``StartCountryCode`` to return the next page of results.
 
    
 
-  The default geo location uses a ``*`` for the country code. All other country codes follow the ISO 3166 two-character code.
+  Amazon Route 53 uses the two-letter country codes that are specified in `ISO standard 3166-1 alpha-2 <https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2>`_ .
 
   
 
 ``--start-subdivision-code`` (string)
 
 
-  The first subdivision code in the lexicographic ordering of geo locations that you want the ``list-geo-locations`` request to list.
+  The code for the subdivision (for example, state or province) with which you want to start listing locations that Amazon Route 53 supports for geolocation. If Amazon Route 53 has already returned a page or more of results, if ``IsTruncated`` is ``true`` , and if ``NextSubdivisionCode`` from the previous response has a value, enter that value in ``StartSubdivisionCode`` to return the next page of results.
 
    
 
-  Constraint: Specifying ``SubdivisionCode`` without ``CountryCode`` returns an  InvalidInput error.
+  To list subdivisions of a country, you must include both ``StartCountryCode`` and ``StartSubdivisionCode`` .
 
   
 
 ``--max-items`` (string)
 
 
-  The maximum number of geo locations you want in the response body.
+  (Optional) The maximum number of geolocations to be included in the response body for this request. If more than ``MaxItems`` geolocations remain to be listed, then the value of the ``IsTruncated`` element in the response is ``true`` .
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -104,7 +103,7 @@ GeoLocationDetailsList -> (list)
 
   
 
-  A complex type that contains information about the geo locations that are returned by the request.
+  A complex type that contains one ``GeoLocationDetails`` element for each location that Amazon Route 53 supports for geolocation.
 
   
 
@@ -112,7 +111,7 @@ GeoLocationDetailsList -> (list)
 
     
 
-    A complex type that contains information about a ``GeoLocation`` .
+    A complex type that contains the codes and full continent, country, and subdivision names for the specified ``geolocation`` code.
 
     
 
@@ -120,7 +119,7 @@ GeoLocationDetailsList -> (list)
 
       
 
-      The code for a continent geo location. Note: only continent locations have a continent code.
+      The two-letter code for the continent.
 
       
 
@@ -130,7 +129,7 @@ GeoLocationDetailsList -> (list)
 
       
 
-      The name of the continent. This element is only present if ``ContinentCode`` is also present.
+      The full name of the continent.
 
       
 
@@ -140,11 +139,7 @@ GeoLocationDetailsList -> (list)
 
       
 
-      The code for a country geo location. The default location uses '*' for the country code and will match all locations that are not matched by a geo location.
-
-       
-
-      The default geo location uses a ``*`` for the country code. All other country codes follow the ISO 3166 two-character code.
+      The two-letter code for the country.
 
       
 
@@ -154,7 +149,7 @@ GeoLocationDetailsList -> (list)
 
       
 
-      The name of the country. This element is only present if ``CountryCode`` is also present.
+      The name of the country.
 
       
 
@@ -164,7 +159,7 @@ GeoLocationDetailsList -> (list)
 
       
 
-      The code for a country's subdivision (e.g., a province of Canada). A subdivision code is only valid with the appropriate country code.
+      The code for the subdivision, for example, a state in the United States or a province in Canada.
 
       
 
@@ -174,7 +169,7 @@ GeoLocationDetailsList -> (list)
 
       
 
-      The name of the subdivision. This element is only present if ``SubdivisionCode`` is also present.
+      The full name of the subdivision, for example, a state in the United States or a province in Canada.
 
       
 
@@ -188,11 +183,7 @@ IsTruncated -> (boolean)
 
   
 
-  A flag that indicates whether there are more geo locations to be listed. If your results were truncated, you can make a follow-up request for the next page of results by using the values included in the  ListGeoLocationsResponse$NextContinentCode ,  ListGeoLocationsResponse$NextCountryCode and  ListGeoLocationsResponse$NextSubdivisionCode elements.
-
-   
-
-  Valid Values: ``true`` | ``false`` 
+  A value that indicates whether more locations remain to be listed after the last location in this response. If so, the value of ``IsTruncated`` is ``true`` . To get more values, submit another request and include the values of ``NextContinentCode`` , ``NextCountryCode`` , and ``NextSubdivisionCode`` in the ``StartContinentCode`` , ``StartCountryCode`` , and ``StartSubdivisionCode`` , as applicable.
 
   
 
@@ -202,7 +193,7 @@ NextContinentCode -> (string)
 
   
 
-  If the results were truncated, the continent code of the next geo location in the list. This element is present only if  ListGeoLocationsResponse$IsTruncated is true and the next geo location to list is a continent location. 
+  If ``IsTruncated`` is ``true`` , you can make a follow-up request to display more locations. Enter the value of ``NextContinentCode`` in the ``StartContinentCode`` parameter in another ``list-geo-locations`` request.
 
   
 
@@ -212,7 +203,7 @@ NextCountryCode -> (string)
 
   
 
-  If the results were truncated, the country code of the next geo location in the list. This element is present only if  ListGeoLocationsResponse$IsTruncated is true and the next geo location to list is not a continent location. 
+  If ``IsTruncated`` is ``true`` , you can make a follow-up request to display more locations. Enter the value of ``NextCountryCode`` in the ``StartCountryCode`` parameter in another ``list-geo-locations`` request.
 
   
 
@@ -222,7 +213,7 @@ NextSubdivisionCode -> (string)
 
   
 
-  If the results were truncated, the subdivision code of the next geo location in the list. This element is present only if  ListGeoLocationsResponse$IsTruncated is true and the next geo location has a subdivision. 
+  If ``IsTruncated`` is ``true`` , you can make a follow-up request to display more locations. Enter the value of ``NextSubdivisionCode`` in the ``StartSubdivisionCode`` parameter in another ``list-geo-locations`` request.
 
   
 
@@ -232,7 +223,7 @@ MaxItems -> (string)
 
   
 
-  The maximum number of records you requested. The maximum value of ``MaxItems`` is 100.
+  The value that you specified for ``MaxItems`` in the request.
 
   
 

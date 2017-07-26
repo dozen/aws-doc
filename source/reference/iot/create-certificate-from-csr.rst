@@ -19,11 +19,15 @@ Creates an X.509 certificate using the specified certificate signing request.
 
  
 
-**Note** Reusing the same certificate signing request (CSR) results in a distinct certificate.
+ **Note:** The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-256 or NIST P-384 curves. 
 
  
 
-You can create multiple certificates in a batch by creating a directory and copying multiple .csr files into that directory and specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs. 
+ **Note:** Reusing the same certificate signing request (CSR) results in a distinct certificate.
+
+ 
+
+You can create multiple certificates in a batch by creating a directory, copying multiple .csr files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs.
 
  
 
@@ -31,7 +35,7 @@ Assuming a set of CSRs are located inside of the directory my-csr-directory:
 
  
 
-On Linux and OSX, the command is:
+On Linux and OS X, the command is:
 
  
 
@@ -39,32 +43,35 @@ $ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certi
 
  
 
-This command lists all of the CSRs in my-csr-directory and pipes each CSR filename to the aws iot create-certificate-from-csr AWS CLI command to create a certificate for the corresponding CSR. 
+This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the aws iot create-certificate-from-csr AWS CLI command to create a certificate for the corresponding CSR.
 
  
 
-The aws iot create-certificate-from-csr part of the command can also be run in parallel to speed up the certificate creation process: 
+The aws iot create-certificate-from-csr part of the command can also be run in parallel to speed up the certificate creation process:
 
  
 
-$ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} 
+$ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{}
 
  
 
-On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is: 
+On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is:
 
  
 
- ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_} 
+ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_}
 
  
 
-On Windows Command Prompt, the command to create certificates for all CSRs in my-csr-directory is: 
+On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is:
 
  
 
- forfiles /p my-csr-directory /c "cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path"
+forfiles /p my-csr-directory /c "cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path"
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iot-2015-05-28/CreateCertificateFromCsr>`_
 
 
 ========
@@ -78,7 +85,7 @@ Synopsis
   [--set-as-active | --no-set-as-active]
   [--certificate-pem-outfile <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -107,8 +114,8 @@ Saves the command output contents of certificatePem to the given filename
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 

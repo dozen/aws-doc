@@ -19,6 +19,9 @@ Describes your Elastic IP addresses that are being moved to the EC2-VPC platform
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeMovingAddresses>`_
+
+
 ========
 Synopsis
 ========
@@ -26,13 +29,13 @@ Synopsis
 ::
 
     describe-moving-addresses
-  [--dry-run | --no-dry-run]
-  [--public-ips <value>]
-  [--next-token <value>]
   [--filters <value>]
+  [--dry-run | --no-dry-run]
   [--max-results <value>]
+  [--next-token <value>]
+  [--public-ips <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -40,35 +43,6 @@ Synopsis
 =======
 Options
 =======
-
-``--dry-run`` | ``--no-dry-run`` (boolean)
-
-
-  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
-
-  
-
-``--public-ips`` (list)
-
-
-  One or more Elastic IP addresses.
-
-  
-
-
-
-Syntax::
-
-  "string" "string" ...
-
-
-
-``--next-token`` (string)
-
-
-  The token to use to retrieve the next page of results.
-
-  
 
 ``--filters`` (list)
 
@@ -104,6 +78,13 @@ JSON Syntax::
 
 
 
+``--dry-run`` | ``--no-dry-run`` (boolean)
+
+
+  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
+
+  
+
 ``--max-results`` (integer)
 
 
@@ -115,11 +96,33 @@ JSON Syntax::
 
   
 
+``--next-token`` (string)
+
+
+  The token to use to retrieve the next page of results.
+
+  
+
+``--public-ips`` (list)
+
+
+  One or more Elastic IP addresses.
+
+  
+
+
+
+Syntax::
+
+  "string" "string" ...
+
+
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -172,21 +175,21 @@ MovingAddressStatuses -> (list)
 
     
 
-    PublicIp -> (string)
-
-      
-
-      The Elastic IP address.
-
-      
-
-      
-
     MoveStatus -> (string)
 
       
 
       The status of the Elastic IP address that's being moved to the EC2-VPC platform, or restored to the EC2-Classic platform.
+
+      
+
+      
+
+    PublicIp -> (string)
+
+      
+
+      The Elastic IP address.
 
       
 

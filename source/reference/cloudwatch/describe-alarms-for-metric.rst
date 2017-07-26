@@ -15,8 +15,11 @@ Description
 
 
 
-Retrieves all alarms for a single metric. Specify a statistic, period, or unit to filter the set of alarms further. 
+Retrieves the alarms for the specified metric. To filter the results, specify a statistic, period, or unit.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarmsForMetric>`_
 
 
 ========
@@ -29,11 +32,12 @@ Synopsis
   --metric-name <value>
   --namespace <value>
   [--statistic <value>]
+  [--extended-statistic <value>]
   [--dimensions <value>]
   [--period <value>]
   [--unit <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -45,21 +49,21 @@ Options
 ``--metric-name`` (string)
 
 
-  The name of the metric. 
+  The name of the metric.
 
   
 
 ``--namespace`` (string)
 
 
-  The namespace of the metric. 
+  The namespace of the metric.
 
   
 
 ``--statistic`` (string)
 
 
-  The statistic for the metric. 
+  The statistic for the metric, other than percentiles. For percentile statistics, use ``ExtendedStatistics`` .
 
   
 
@@ -84,10 +88,17 @@ Options
 
   
 
+``--extended-statistic`` (string)
+
+
+  The percentile statistic for the metric. Specify a value between p0.0 and p100.
+
+  
+
 ``--dimensions`` (list)
 
 
-  The list of dimensions associated with the metric. If the metric has any associated dimensions, you must specify them in order for the describe-alarms-for-metric to succeed. 
+  The dimensions associated with the metric. If the metric has any associated dimensions, you must specify them in order for the call to succeed.
 
   
 
@@ -115,14 +126,14 @@ JSON Syntax::
 ``--period`` (integer)
 
 
-  The period in seconds over which the statistic is applied. 
+  The period, in seconds, over which the statistic is applied.
 
   
 
 ``--unit`` (string)
 
 
-  The unit for the metric. 
+  The unit for the metric.
 
   
 
@@ -216,8 +227,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -307,7 +318,7 @@ MetricAlarms -> (list)
 
   
 
-  A list of information for each alarm with the specified metric. 
+  The information for each alarm with the specified metric.
 
   
 
@@ -315,7 +326,7 @@ MetricAlarms -> (list)
 
     
 
-    The  MetricAlarm data type represents an alarm. You can use  put-metric-alarm to create or update an alarm. 
+    Represents an alarm.
 
     
 
@@ -323,7 +334,7 @@ MetricAlarms -> (list)
 
       
 
-      The name of the alarm. 
+      The name of the alarm.
 
       
 
@@ -333,7 +344,7 @@ MetricAlarms -> (list)
 
       
 
-      The Amazon Resource Name (ARN) of the alarm. 
+      The Amazon Resource Name (ARN) of the alarm.
 
       
 
@@ -343,7 +354,7 @@ MetricAlarms -> (list)
 
       
 
-      The description for the alarm. 
+      The description of the alarm.
 
       
 
@@ -353,7 +364,7 @@ MetricAlarms -> (list)
 
       
 
-      The time stamp of the last update to the alarm configuration. 
+      The time stamp of the last update to the alarm configuration.
 
       
 
@@ -363,7 +374,7 @@ MetricAlarms -> (list)
 
       
 
-      Indicates whether actions should be executed during any changes to the alarm's state. 
+      Indicates whether actions should be executed during any changes to the alarm state.
 
       
 
@@ -373,7 +384,7 @@ MetricAlarms -> (list)
 
       
 
-      The list of actions to execute when this alarm transitions into an ``OK`` state from any other state. Each action is specified as an Amazon Resource Name (ARN). 
+      The actions to execute when this alarm transitions to the ``OK`` state from any other state. Each action is specified as an Amazon Resource Name (ARN).
 
       
 
@@ -389,7 +400,7 @@ MetricAlarms -> (list)
 
       
 
-      The list of actions to execute when this alarm transitions into an ``ALARM`` state from any other state. Each action is specified as an Amazon Resource Name (ARN). 
+      The actions to execute when this alarm transitions to the ``ALARM`` state from any other state. Each action is specified as an Amazon Resource Name (ARN).
 
       
 
@@ -405,13 +416,7 @@ MetricAlarms -> (list)
 
       
 
-      The list of actions to execute when this alarm transitions into an ``INSUFFICIENT_DATA`` state from any other state. Each action is specified as an Amazon Resource Name (ARN). 
-
-       
-
-      .. warning::
-
-        The current WSDL lists this attribute as ``UnknownActions`` .
+      The actions to execute when this alarm transitions to the ``INSUFFICIENT_DATA`` state from any other state. Each action is specified as an Amazon Resource Name (ARN).
 
       
 
@@ -427,7 +432,7 @@ MetricAlarms -> (list)
 
       
 
-      The state value for the alarm. 
+      The state value for the alarm.
 
       
 
@@ -437,7 +442,7 @@ MetricAlarms -> (list)
 
       
 
-      A human-readable explanation for the alarm's state. 
+      An explanation for the alarm state, in text format.
 
       
 
@@ -447,7 +452,7 @@ MetricAlarms -> (list)
 
       
 
-      An explanation for the alarm's state in machine-readable JSON format 
+      An explanation for the alarm state, in JSON format.
 
       
 
@@ -457,7 +462,7 @@ MetricAlarms -> (list)
 
       
 
-      The time stamp of the last update to the alarm's state. 
+      The time stamp of the last update to the alarm state.
 
       
 
@@ -467,7 +472,7 @@ MetricAlarms -> (list)
 
       
 
-      The name of the alarm's metric. 
+      The name of the metric associated with the alarm.
 
       
 
@@ -477,7 +482,7 @@ MetricAlarms -> (list)
 
       
 
-      The namespace of alarm's associated metric. 
+      The namespace of the metric associated with the alarm.
 
       
 
@@ -487,7 +492,17 @@ MetricAlarms -> (list)
 
       
 
-      The statistic to apply to the alarm's associated metric. 
+      The statistic for the metric associated with the alarm, other than percentile. For percentile statistics, use ``extended-statistic`` .
+
+      
+
+      
+
+    ExtendedStatistic -> (string)
+
+      
+
+      The percentile statistic for the metric associated with the alarm. Specify a value between p0.0 and p100.
 
       
 
@@ -497,7 +512,7 @@ MetricAlarms -> (list)
 
       
 
-      The list of dimensions associated with the alarm's associated metric. 
+      The dimensions for the metric associated with the alarm.
 
       
 
@@ -505,11 +520,7 @@ MetricAlarms -> (list)
 
         
 
-        The ``Dimension`` data type further expands on the identity of a metric using a Name, Value pair. 
-
-         
-
-        For examples that use one or more dimensions, see  put-metric-data .
+        Expands the identity of a metric.
 
         
 
@@ -517,7 +528,7 @@ MetricAlarms -> (list)
 
           
 
-          The name of the dimension. 
+          The name of the dimension.
 
           
 
@@ -527,7 +538,7 @@ MetricAlarms -> (list)
 
           
 
-          The value representing the dimension measurement 
+          The value representing the dimension measurement.
 
           
 
@@ -541,7 +552,7 @@ MetricAlarms -> (list)
 
       
 
-      The period in seconds over which the statistic is applied. 
+      The period, in seconds, over which the statistic is applied.
 
       
 
@@ -551,7 +562,7 @@ MetricAlarms -> (list)
 
       
 
-      The unit of the alarm's associated metric. 
+      The unit of the metric associated with the alarm.
 
       
 
@@ -561,7 +572,7 @@ MetricAlarms -> (list)
 
       
 
-      The number of periods over which data is compared to the specified threshold. 
+      The number of periods over which data is compared to the specified threshold.
 
       
 
@@ -571,7 +582,7 @@ MetricAlarms -> (list)
 
       
 
-      The value against which the specified statistic is compared. 
+      The value to compare with the specified statistic.
 
       
 
@@ -581,7 +592,27 @@ MetricAlarms -> (list)
 
       
 
-      The arithmetic operation to use when comparing the specified ``statistic`` and ``Threshold`` . The specified ``statistic`` value is used as the first operand. 
+      The arithmetic operation to use when comparing the specified statistic and threshold. The specified statistic value is used as the first operand.
+
+      
+
+      
+
+    TreatMissingData -> (string)
+
+      
+
+      Sets how this alarm is to handle missing data points. If this parameter is omitted, the default behavior of ``missing`` is used.
+
+      
+
+      
+
+    EvaluateLowSampleCountPercentile -> (string)
+
+      
+
+      Used only for alarms based on percentiles. If ``ignore`` , the alarm state does not change during periods with too few data points to be statistically significant. If ``evaluate`` or this parameter is not used, the alarm will always be evaluated and possibly change state no matter how many data points are available.
 
       
 

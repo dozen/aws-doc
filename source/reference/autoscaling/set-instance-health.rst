@@ -19,8 +19,11 @@ Sets the health status of the specified instance.
 
  
 
-For more information, see `Health Checks`_ in the *Auto Scaling Developer Guide* .
+For more information, see `Health Checks <http://docs.aws.amazon.com/autoscaling/latest/userguide/healthcheck.html>`_ in the *Auto Scaling User Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/SetInstanceHealth>`_
 
 
 ========
@@ -34,7 +37,7 @@ Synopsis
   --health-status <value>
   [--should-respect-grace-period | --no-should-respect-grace-period]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -53,7 +56,7 @@ Options
 ``--health-status`` (string)
 
 
-  The health status of the instance. Set to ``Healthy`` if you want the instance to remain in service. Set to ``Unhealthy`` if you want the instance to be out of service. Auto Scaling will terminate and replace the unhealthy instance. 
+  The health status of the instance. Set to ``Healthy`` if you want the instance to remain in service. Set to ``Unhealthy`` if you want the instance to be out of service. Auto Scaling will terminate and replace the unhealthy instance.
 
   
 
@@ -71,8 +74,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -84,7 +87,7 @@ Examples
 
 This example sets the health status of the specified instance to ``Unhealthy``::
 
-   aws autoscaling set-instance-health --instance-id i-93633f9b --health-status Unhealthy
+    aws autoscaling set-instance-health --instance-id i-93633f9b --health-status Unhealthy
 
 
 ======
@@ -92,5 +95,3 @@ Output
 ======
 
 None
-
-.. _Health Checks: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/healthcheck.html

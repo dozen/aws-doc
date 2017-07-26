@@ -15,26 +15,53 @@ Description
 
 
 
-Generates a data key that you can use in your application to locally encrypt data. This call returns a plaintext version of the key in the ``Plaintext`` field of the response object and an encrypted copy of the key in the ``CiphertextBlob`` field. The key is encrypted by using the master key specified by the ``KeyId`` field. To decrypt the encrypted key, pass it to the ``decrypt`` API. 
+Returns a data encryption key that you can use in your application to encrypt data locally.
 
  
 
-We recommend that you use the following pattern to locally encrypt data: call the ``generate-data-key`` API, use the key returned in the ``Plaintext`` response field to locally encrypt data, and then erase the plaintext data key from memory. Store the encrypted data key (contained in the ``CiphertextBlob`` field) alongside of the locally encrypted data. 
+You must specify the customer master key (CMK) under which to generate the data key. You must also specify the length of the data key using either the ``KeySpec`` or ``NumberOfBytes`` field. You must specify one field or the other, but not both. For common key lengths (128-bit and 256-bit symmetric keys), we recommend that you use ``KeySpec`` .
 
  
 
-.. note::
-
-  You should not call the ``encrypt`` function to re-encrypt your data keys within a region. ``generate-data-key`` always returns the data key encrypted and tied to the customer master key that will be used to decrypt it. There is no need to decrypt it twice. 
+This operation returns a plaintext copy of the data key in the ``Plaintext`` field of the response, and an encrypted copy of the data key in the ``CiphertextBlob`` field. The data key is encrypted under the CMK specified in the ``KeyId`` field of the request.
 
  
 
-If you decide to use the optional ``EncryptionContext`` parameter, you must also store the context in full or at least store enough information along with the encrypted data to be able to reconstruct the context when submitting the ciphertext to the ``decrypt`` API. It is a good practice to choose a context that you can reconstruct on the fly to better secure the ciphertext. For more information about how this parameter is used, see `Encryption Context`_ . 
+We recommend that you use the following pattern to encrypt data locally in your application:
 
  
 
-To decrypt data, pass the encrypted data key to the ``decrypt`` API. ``decrypt`` uses the associated master key to decrypt the encrypted data key and returns it as plaintext. Use the plaintext data key to locally decrypt your data and then erase the key from memory. You must specify the encryption context, if any, that you specified when you generated the key. The encryption context is logged by CloudTrail, and you can use this log to help track the use of particular data. 
+ 
+* Use this operation (``generate-data-key`` ) to retrieve a data encryption key. 
+ 
+* Use the plaintext data encryption key (returned in the ``Plaintext`` field of the response) to encrypt data locally, then erase the plaintext data key from memory. 
+ 
+* Store the encrypted data key (returned in the ``CiphertextBlob`` field of the response) alongside the locally encrypted data. 
+ 
 
+ 
+
+To decrypt data locally:
+
+ 
+
+ 
+* Use the  decrypt operation to decrypt the encrypted data key into a plaintext copy of the data key. 
+ 
+* Use the plaintext data key to decrypt data locally, then erase the plaintext data key from memory. 
+ 
+
+ 
+
+To return only an encrypted copy of the data key, use  generate-data-key-without-plaintext . To return a random byte string that is cryptographically secure, use  generate-random .
+
+ 
+
+If you use the optional ``EncryptionContext`` field, you must store at least enough information to be able to reconstruct the full encryption context when you later send the ciphertext to the  decrypt operation. It is a good practice to choose an encryption context that you can reconstruct on the fly to better secure the ciphertext. For more information, see `Encryption Context <http://docs.aws.amazon.com/kms/latest/developerguide/encryption-context.html>`_ in the *AWS Key Management Service Developer Guide* .
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateDataKey>`_
 
 
 ========
@@ -50,7 +77,7 @@ Synopsis
   [--key-spec <value>]
   [--grant-tokens <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -62,18 +89,22 @@ Options
 ``--key-id`` (string)
 
 
-  A unique identifier for the customer master key. This value can be a globally unique identifier, a fully specified ARN to either an alias or a key, or an alias name prefixed by "alias/". 
+  The identifier of the CMK under which to generate and encrypt the data encryption key.
 
    
-  * Key ARN Example - arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
-   
-  * Alias ARN Example - arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
-   
-  * Globally Unique Key ID Example - 12345678-1234-1234-1234-123456789012
-   
-  * Alias Name Example - alias/MyAliasName
+
+  A valid identifier is the unique key ID or the Amazon Resource Name (ARN) of the CMK, or the alias name or ARN of an alias that refers to the CMK. Examples:
+
    
 
+   
+  * Unique key ID: ``1234abcd-12ab-34cd-56ef-1234567890ab``   
+   
+  * CMK ARN: ``arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab``   
+   
+  * Alias name: ``alias/ExampleAlias``   
+   
+  * Alias ARN: ``arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias``   
    
 
   
@@ -81,7 +112,11 @@ Options
 ``--encryption-context`` (map)
 
 
-  Name/value pair that contains additional data to be authenticated during the encryption and decryption processes that use the key. This value is logged by AWS CloudTrail to provide context around the data encrypted by the key. 
+  A set of key-value pairs that represents additional authenticated data.
+
+   
+
+  For more information, see `Encryption Context <http://docs.aws.amazon.com/kms/latest/developerguide/encryption-context.html>`_ in the *AWS Key Management Service Developer Guide* .
 
   
 
@@ -104,14 +139,14 @@ JSON Syntax::
 ``--number-of-bytes`` (integer)
 
 
-  Integer that contains the number of bytes to generate. Common values are 128, 256, 512, and 1024. 1024 is the current limit. We recommend that you use the ``KeySpec`` parameter instead. 
+  The length of the data encryption key in bytes. For example, use the value 64 to generate a 512-bit data key (64 bytes is 512 bits). For common key lengths (128-bit and 256-bit symmetric keys), we recommend that you use the ``KeySpec`` field instead of this one.
 
   
 
 ``--key-spec`` (string)
 
 
-  Value that identifies the encryption algorithm and key size to generate a data key for. Currently this can be AES_128 or AES_256. 
+  The length of the data encryption key. Use ``AES_128`` to generate a 128-bit symmetric key, or ``AES_256`` to generate a 256-bit symmetric key.
 
   
 
@@ -134,7 +169,7 @@ JSON Syntax::
 
    
 
-  For more information, go to `Grant Tokens`_ in the *AWS Key Management Service Developer Guide* .
+  For more information, see `Grant Tokens <http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token>`_ in the *AWS Key Management Service Developer Guide* .
 
   
 
@@ -149,8 +184,8 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -162,11 +197,7 @@ CiphertextBlob -> (blob)
 
   
 
-  Ciphertext that contains the encrypted data key. You must store the blob and enough information to reconstruct the encryption context so that the data encrypted by using the key can later be decrypted. You must provide both the ciphertext blob and the encryption context to the  decrypt API to recover the plaintext data key and decrypt the object. 
-
-   
-
-  If you are using the CLI, the value is Base64 encoded. Otherwise, it is not encoded.
+  The encrypted data encryption key.
 
   
 
@@ -176,7 +207,7 @@ Plaintext -> (blob)
 
   
 
-  Plaintext that contains the data key. Use this for encryption and decryption and then remove it from memory as soon as possible. 
+  The data encryption key. Use this data key for local encryption and decryption, then remove it from memory as soon as possible.
 
   
 
@@ -186,13 +217,9 @@ KeyId -> (string)
 
   
 
-  System generated unique identifier of the key to be used to decrypt the encrypted copy of the data key.
+  The identifier of the CMK under which the data encryption key was generated and encrypted.
 
   
 
   
 
-
-
-.. _Grant Tokens: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
-.. _Encryption Context: http://docs.aws.amazon.com/kms/latest/developerguide/encrypt-context.html

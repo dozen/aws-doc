@@ -15,46 +15,15 @@ Description
 
 
 
-Gets information about all of the versions for a specified traffic policy. ``list-traffic-policy-versions`` lists only versions that have not been deleted.
+Gets information about all of the versions for a specified traffic policy.
 
  
 
-Amazon Route 53 returns a maximum of 100 items in each response. If you have a lot of traffic policies, you can use the ``maxitems`` parameter to list them in groups of up to 100.
+Traffic policy versions are listed in numerical order by ``VersionNumber`` .
 
- 
 
-The response includes three values that help you navigate from one group of ``maxitems`` maxitems traffic policies to the next:
 
- 
-
- 
-* **IsTruncated** 
- 
-
-If the value of ``IsTruncated`` in the response is ``true`` , there are more traffic policy versions associated with the specified traffic policy.
-
- 
-
-If ``IsTruncated`` is ``false`` , this response includes the last traffic policy version that is associated with the specified traffic policy.
-
- 
-* **traffic-policy-version-marker** 
- 
-
-The ID of the next traffic policy version that is associated with the current AWS account. If you want to list more traffic policies, make another call to ``list-traffic-policy-versions`` , and specify the value of the ``traffic-policy-version-marker`` element in the ``traffic-policy-version-marker`` request parameter.
-
- 
-
-If ``IsTruncated`` is ``false`` , Amazon Route 53 omits the ``traffic-policy-version-marker`` element from the response.
-
- 
-* **MaxItems** 
- 
-
-The value that you specified for the ``MaxItems`` parameter in the request that produced the current response.
-
- 
-
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTrafficPolicyVersions>`_
 
 
 ========
@@ -68,7 +37,7 @@ Synopsis
   [--traffic-policy-version-marker <value>]
   [--max-items <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -87,30 +56,26 @@ Options
 ``--traffic-policy-version-marker`` (string)
 
 
-  For your first request to ``list-traffic-policy-versions`` , do not include the ``traffic-policy-version-marker`` parameter.
+  For your first request to ``list-traffic-policy-versions`` , don't include the ``traffic-policy-version-marker`` parameter.
 
    
 
-  If you have more traffic policy versions than the value of ``MaxItems`` , ``list-traffic-policy-versions`` returns only the first group of ``MaxItems`` versions. To get the next group of ``MaxItems`` traffic policy versions, submit another request to ``list-traffic-policy-versions`` . For the value of ``traffic-policy-version-marker`` , specify the value of the ``traffic-policy-version-marker`` element that was returned in the previous response.
-
-   
-
-  Traffic policy versions are listed in sequential order.
+  If you have more traffic policy versions than the value of ``MaxItems`` , ``list-traffic-policy-versions`` returns only the first group of ``MaxItems`` versions. To get more traffic policy versions, submit another ``list-traffic-policy-versions`` request. For the value of ``traffic-policy-version-marker`` , specify the value of ``traffic-policy-version-marker`` in the previous response.
 
   
 
 ``--max-items`` (string)
 
 
-  The maximum number of traffic policy versions that you want Amazon Route 53 to include in the response body for this request. If the specified traffic policy has more than ``MaxItems`` versions, the value of the ``IsTruncated`` element in the response is ``true`` , and the value of the ``traffic-policy-version-marker`` element is the ID of the first version in the next group of ``MaxItems`` traffic policy versions.
+  The maximum number of traffic policy versions that you want Amazon Route 53 to include in the response body for this request. If the specified traffic policy has more than ``MaxItems`` versions, the value of ``IsTruncated`` in the response is ``true`` , and the value of the ``traffic-policy-version-marker`` element is the ID of the first version that Amazon Route 53 will return if you submit another request.
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -130,7 +95,15 @@ TrafficPolicies -> (list)
 
     
 
+    A complex type that contains settings for a traffic policy.
+
+    
+
     Id -> (string)
+
+      
+
+      The ID that Amazon Route 53 assigned to a traffic policy when you created it.
 
       
 
@@ -140,9 +113,17 @@ TrafficPolicies -> (list)
 
       
 
+      The version number that Amazon Route 53 assigns to a traffic policy. For a new traffic policy, the value of ``Version`` is always 1.
+
+      
+
       
 
     Name -> (string)
+
+      
+
+      The name that you specified when you created the traffic policy.
 
       
 
@@ -152,15 +133,27 @@ TrafficPolicies -> (list)
 
       
 
+      The DNS type of the resource record sets that Amazon Route 53 creates when you use a traffic policy to create a traffic policy instance.
+
+      
+
       
 
     Document -> (string)
 
       
 
+      The definition of a traffic policy in JSON format. You specify the JSON document to use for a new traffic policy in the ``create-traffic-policy`` request. For more information about the JSON format, see `Traffic Policy Document Format <http://docs.aws.amazon.com/Route53/latest/APIReference/api-policies-traffic-policy-document-format.html>`_ .
+
+      
+
       
 
     Comment -> (string)
+
+      
+
+      The comment that you specify in the ``create-traffic-policy`` request, if any.
 
       
 
@@ -174,11 +167,7 @@ IsTruncated -> (boolean)
 
   
 
-  A flag that indicates whether there are more traffic policies to be listed. If the response was truncated, you can get the next group of ``maxitems`` traffic policies by calling ``list-traffic-policy-versions`` again and specifying the value of the ``NextMarker`` element in the marker parameter.
-
-   
-
-  Valid Values: ``true`` | ``false`` 
+  A flag that indicates whether there are more traffic policies to be listed. If the response was truncated, you can get the next group of traffic policies by submitting another ``list-traffic-policy-versions`` request and specifying the value of ``NextMarker`` in the ``marker`` parameter.
 
   
 
@@ -188,7 +177,7 @@ TrafficPolicyVersionMarker -> (string)
 
   
 
-  If ``IsTruncated`` is ``true`` , the value of ``traffic-policy-version-marker`` identifies the first traffic policy in the next group of ``MaxItems`` traffic policies. Call ``list-traffic-policy-versions`` again and specify the value of ``traffic-policy-version-marker`` in the ``traffic-policy-version-marker`` request parameter.
+  If ``IsTruncated`` is ``true`` , the value of ``traffic-policy-version-marker`` identifies the first traffic policy that Amazon Route 53 will return if you submit another request. Call ``list-traffic-policy-versions`` again and specify the value of ``traffic-policy-version-marker`` in the ``traffic-policy-version-marker`` request parameter.
 
    
 
@@ -202,7 +191,7 @@ MaxItems -> (string)
 
   
 
-  The value that you specified for the ``maxitems`` parameter in the call to ``list-traffic-policy-versions`` that produced the current response.
+  The value that you specified for the ``maxitems`` parameter in the ``list-traffic-policy-versions`` request that produced the current response.
 
   
 

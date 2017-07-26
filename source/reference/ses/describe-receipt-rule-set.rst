@@ -19,12 +19,15 @@ Returns the details of the specified receipt rule set.
 
  
 
-For information about managing receipt rule sets, see the `Amazon SES Developer Guide`_ .
+For information about managing receipt rule sets, see the `Amazon SES Developer Guide <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rule-sets.html>`_ .
 
  
 
 This action is throttled at one request per second.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DescribeReceiptRuleSet>`_
 
 
 ========
@@ -36,7 +39,7 @@ Synopsis
     describe-receipt-rule-set
   --rule-set-name <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -55,8 +58,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -81,11 +84,11 @@ Metadata -> (structure)
      
 
      
-    * Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-).
+    * Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-). 
      
-    * Start and end with a letter or number.
+    * Start and end with a letter or number. 
      
-    * Contain less than 64 characters.
+    * Contain less than 64 characters. 
      
 
     
@@ -124,7 +127,7 @@ Rules -> (list)
 
      
 
-    For information about setting up receipt rules, see the `Amazon SES Developer Guide`_ .
+    For information about setting up receipt rules, see the `Amazon SES Developer Guide <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rules.html>`_ .
 
     
 
@@ -137,11 +140,11 @@ Rules -> (list)
        
 
        
-      * Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-).
+      * Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-). 
        
-      * Start and end with a letter or number.
+      * Start and end with a letter or number. 
        
-      * Contain less than 64 characters.
+      * Contain less than 64 characters. 
        
 
       
@@ -152,7 +155,7 @@ Rules -> (list)
 
       
 
-      If ``true`` , the receipt rule is active. The default value is true.
+      If ``true`` , the receipt rule is active. The default value is ``false`` .
 
       
 
@@ -200,7 +203,7 @@ Rules -> (list)
 
          
 
-        For information about setting up receipt rules, see the `Amazon SES Developer Guide`_ .
+        For information about setting up receipt rules, see the `Amazon SES Developer Guide <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rules.html>`_ .
 
         
 
@@ -216,7 +219,7 @@ Rules -> (list)
 
             
 
-            The ARN of the Amazon SNS topic to notify when the message is saved to the Amazon S3 bucket. An example of an Amazon SNS topic ARN is ``arn:aws:sns:us-west-2:123456789012:MyTopic`` . For more information about Amazon SNS topics, see the `Amazon SNS Developer Guide`_ .
+            The ARN of the Amazon SNS topic to notify when the message is saved to the Amazon S3 bucket. An example of an Amazon SNS topic ARN is ``arn:aws:sns:us-west-2:123456789012:MyTopic`` . For more information about Amazon SNS topics, see the `Amazon SNS Developer Guide <http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html>`_ .
 
             
 
@@ -251,20 +254,24 @@ Rules -> (list)
              
 
              
-            * To use the default master key, provide an ARN in the form of ``arn:aws:kms:REGION:ACCOUNT-ID-WITHOUT-HYPHENS:alias/aws/ses`` . For example, if your AWS account ID is 123456789012 and you want to use the default master key in the US West (Oregon) region, the ARN of the default master key would be ``arn:aws:kms:us-west-2:123456789012:alias/aws/ses`` . If you use the default master key, you don't need to perform any extra steps to give Amazon SES permission to use the key.
+            * To use the default master key, provide an ARN in the form of ``arn:aws:kms:REGION:ACCOUNT-ID-WITHOUT-HYPHENS:alias/aws/ses`` . For example, if your AWS account ID is 123456789012 and you want to use the default master key in the US West (Oregon) region, the ARN of the default master key would be ``arn:aws:kms:us-west-2:123456789012:alias/aws/ses`` . If you use the default master key, you don't need to perform any extra steps to give Amazon SES permission to use the key. 
              
-            * To use a custom master key you created in AWS KMS, provide the ARN of the master key and ensure that you add a statement to your key's policy to give Amazon SES permission to use it. For more information about giving permissions, see the `Amazon SES Developer Guide`_ .
-             
-
+            * To use a custom master key you created in AWS KMS, provide the ARN of the master key and ensure that you add a statement to your key's policy to give Amazon SES permission to use it. For more information about giving permissions, see the `Amazon SES Developer Guide <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html>`_ . 
              
 
-            For more information about key policies, see the `AWS KMS Developer Guide`_ . If you do not specify a master key, Amazon SES will not encrypt your emails.
+             
+
+            For more information about key policies, see the `AWS KMS Developer Guide <http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html>`_ . If you do not specify a master key, Amazon SES will not encrypt your emails.
 
              
 
             .. warning::
 
-              Your mail is encrypted by Amazon SES using the Amazon S3 encryption client before the mail is submitted to Amazon S3 for storage. It is not encrypted using Amazon S3 server-side encryption. This means that you must use the Amazon S3 encryption client to decrypt the email after retrieving it from Amazon S3, as the service has no access to use your AWS KMS keys for decryption. This encryption client is currently available with the `AWS Java SDK`_ and `AWS Ruby SDK`_ only. For more information about client-side encryption using AWS KMS master keys, see the `Amazon S3 Developer Guide`_ . 
+               
+
+              Your mail is encrypted by Amazon SES using the Amazon S3 encryption client before the mail is submitted to Amazon S3 for storage. It is not encrypted using Amazon S3 server-side encryption. This means that you must use the Amazon S3 encryption client to decrypt the email after retrieving it from Amazon S3, as the service has no access to use your AWS KMS keys for decryption. This encryption client is currently available with the `AWS Java SDK <http://aws.amazon.com/sdk-for-java/>`_ and `AWS Ruby SDK <http://aws.amazon.com/sdk-for-ruby/>`_ only. For more information about client-side encryption using AWS KMS master keys, see the `Amazon S3 Developer Guide <http://alpha-docs-aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html>`_ .
+
+               
 
             
 
@@ -284,7 +291,7 @@ Rules -> (list)
 
             
 
-            The Amazon Resource Name (ARN) of the Amazon SNS topic to notify when the bounce action is taken. An example of an Amazon SNS topic ARN is ``arn:aws:sns:us-west-2:123456789012:MyTopic`` . For more information about Amazon SNS topics, see the `Amazon SNS Developer Guide`_ .
+            The Amazon Resource Name (ARN) of the Amazon SNS topic to notify when the bounce action is taken. An example of an Amazon SNS topic ARN is ``arn:aws:sns:us-west-2:123456789012:MyTopic`` . For more information about Amazon SNS topics, see the `Amazon SNS Developer Guide <http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html>`_ .
 
             
 
@@ -294,7 +301,7 @@ Rules -> (list)
 
             
 
-            The SMTP reply code, as defined by `RFC 5321`_ .
+            The SMTP reply code, as defined by `RFC 5321 <https://tools.ietf.org/html/rfc5321>`_ .
 
             
 
@@ -304,7 +311,7 @@ Rules -> (list)
 
             
 
-            The SMTP enhanced status code, as defined by `RFC 3463`_ .
+            The SMTP enhanced status code, as defined by `RFC 3463 <https://tools.ietf.org/html/rfc3463>`_ .
 
             
 
@@ -344,7 +351,7 @@ Rules -> (list)
 
             
 
-            The Amazon Resource Name (ARN) of the Amazon SNS topic to notify when the WorkMail action is called. An example of an Amazon SNS topic ARN is ``arn:aws:sns:us-west-2:123456789012:MyTopic`` . For more information about Amazon SNS topics, see the `Amazon SNS Developer Guide`_ .
+            The Amazon Resource Name (ARN) of the Amazon SNS topic to notify when the WorkMail action is called. An example of an Amazon SNS topic ARN is ``arn:aws:sns:us-west-2:123456789012:MyTopic`` . For more information about Amazon SNS topics, see the `Amazon SNS Developer Guide <http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html>`_ .
 
             
 
@@ -354,7 +361,7 @@ Rules -> (list)
 
             
 
-            The ARN of the Amazon WorkMail organization. An example of an Amazon WorkMail organization ARN is ``arn:aws:workmail:us-west-2:123456789012:organization/m-68755160c4cb4e29a2b2f8fb58f359d7`` . For information about Amazon WorkMail organizations, see the `Amazon WorkMail Administrator Guide`_ .
+            The ARN of the Amazon WorkMail organization. An example of an Amazon WorkMail organization ARN is ``arn:aws:workmail:us-west-2:123456789012:organization/m-68755160c4cb4e29a2b2f8fb58f359d7`` . For information about Amazon WorkMail organizations, see the `Amazon WorkMail Administrator Guide <http://docs.aws.amazon.com/workmail/latest/adminguide/organizations_overview.html>`_ .
 
             
 
@@ -374,7 +381,7 @@ Rules -> (list)
 
             
 
-            The Amazon Resource Name (ARN) of the Amazon SNS topic to notify when the Lambda action is taken. An example of an Amazon SNS topic ARN is ``arn:aws:sns:us-west-2:123456789012:MyTopic`` . For more information about Amazon SNS topics, see the `Amazon SNS Developer Guide`_ .
+            The Amazon Resource Name (ARN) of the Amazon SNS topic to notify when the Lambda action is taken. An example of an Amazon SNS topic ARN is ``arn:aws:sns:us-west-2:123456789012:MyTopic`` . For more information about Amazon SNS topics, see the `Amazon SNS Developer Guide <http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html>`_ .
 
             
 
@@ -384,7 +391,7 @@ Rules -> (list)
 
             
 
-            The Amazon Resource Name (ARN) of the AWS Lambda function. An example of an AWS Lambda function ARN is ``arn:aws:lambda:us-west-2:account-id:function:MyFunction`` . For more information about AWS Lambda, see the `AWS Lambda Developer Guide`_ .
+            The Amazon Resource Name (ARN) of the AWS Lambda function. An example of an AWS Lambda function ARN is ``arn:aws:lambda:us-west-2:account-id:function:MyFunction`` . For more information about AWS Lambda, see the `AWS Lambda Developer Guide <http://docs.aws.amazon.com/lambda/latest/dg/welcome.html>`_ .
 
             
 
@@ -394,13 +401,17 @@ Rules -> (list)
 
             
 
-            The invocation type of the AWS Lambda function. An invocation type of ``RequestResponse`` means that the execution of the function will immediately result in a response, and a value of ``Event`` means that the function will be invoked asynchronously. The default value is ``Event`` . For information about AWS Lambda invocation types, see the `AWS Lambda Developer Guide`_ .
+            The invocation type of the AWS Lambda function. An invocation type of ``RequestResponse`` means that the execution of the function will immediately result in a response, and a value of ``Event`` means that the function will be invoked asynchronously. The default value is ``Event`` . For information about AWS Lambda invocation types, see the `AWS Lambda Developer Guide <http://docs.aws.amazon.com/lambda/latest/dg/API_Invoke.html>`_ .
 
              
 
             .. warning::
 
+               
+
               There is a 30-second timeout on ``RequestResponse`` invocations. You should use ``Event`` invocation in most cases. Use ``RequestResponse`` only when you want to make a mail flow decision, such as whether to stop the receipt rule or the receipt rule set.
+
+               
 
             
 
@@ -430,7 +441,7 @@ Rules -> (list)
 
             
 
-            The Amazon Resource Name (ARN) of the Amazon SNS topic to notify when the stop action is taken. An example of an Amazon SNS topic ARN is ``arn:aws:sns:us-west-2:123456789012:MyTopic`` . For more information about Amazon SNS topics, see the `Amazon SNS Developer Guide`_ .
+            The Amazon Resource Name (ARN) of the Amazon SNS topic to notify when the stop action is taken. An example of an Amazon SNS topic ARN is ``arn:aws:sns:us-west-2:123456789012:MyTopic`` . For more information about Amazon SNS topics, see the `Amazon SNS Developer Guide <http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html>`_ .
 
             
 
@@ -480,7 +491,7 @@ Rules -> (list)
 
             
 
-            The Amazon Resource Name (ARN) of the Amazon SNS topic to notify. An example of an Amazon SNS topic ARN is ``arn:aws:sns:us-west-2:123456789012:MyTopic`` . For more information about Amazon SNS topics, see the `Amazon SNS Developer Guide`_ .
+            The Amazon Resource Name (ARN) of the Amazon SNS topic to notify. An example of an Amazon SNS topic ARN is ``arn:aws:sns:us-west-2:123456789012:MyTopic`` . For more information about Amazon SNS topics, see the `Amazon SNS Developer Guide <http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html>`_ .
 
             
 
@@ -490,7 +501,7 @@ Rules -> (list)
 
             
 
-            The encoding to use for the email within the Amazon SNS notification. UTF-8 is easier to use, but may not preserve all special characters when a message was encoded with a different encoding format. Base64 preserves all special characters. The default value is Base64.
+            The encoding to use for the email within the Amazon SNS notification. UTF-8 is easier to use, but may not preserve all special characters when a message was encoded with a different encoding format. Base64 preserves all special characters. The default value is UTF-8.
 
             
 
@@ -506,7 +517,7 @@ Rules -> (list)
 
       
 
-      If ``true`` , then messages to which this receipt rule applies are scanned for spam and viruses. The default value is ``true`` .
+      If ``true`` , then messages to which this receipt rule applies are scanned for spam and viruses. The default value is ``false`` .
 
       
 
@@ -516,15 +527,3 @@ Rules -> (list)
 
   
 
-
-
-.. _RFC 5321: https://tools.ietf.org/html/rfc5321
-.. _AWS Java SDK: https://aws.amazon.com/sdk-for-java/
-.. _Amazon S3 Developer Guide: http://alpha-docs-aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html
-.. _Amazon WorkMail Administrator Guide: http://docs.aws.amazon.com/workmail/latest/adminguide/organizations_overview.html
-.. _AWS Lambda Developer Guide: http://docs.aws.amazon.com/lambda/latest/dg/API_Invoke.html
-.. _AWS KMS Developer Guide: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html
-.. _Amazon SES Developer Guide: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html
-.. _RFC 3463: https://tools.ietf.org/html/rfc3463
-.. _Amazon SNS Developer Guide: http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html
-.. _AWS Ruby SDK: https://aws.amazon.com/sdk-for-ruby/

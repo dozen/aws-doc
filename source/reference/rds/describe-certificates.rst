@@ -15,8 +15,11 @@ Description
 
 
 
-Lists the set of CA certificates provided by Amazon RDS for this AWS account. 
+Lists the set of CA certificates provided by Amazon RDS for this AWS account.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeCertificates>`_
 
 
 ========
@@ -31,7 +34,7 @@ Synopsis
   [--max-records <value>]
   [--marker <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -43,7 +46,7 @@ Options
 ``--certificate-identifier`` (string)
 
 
-  The user-supplied certificate identifier. If this parameter is specified, information for only the identified certificate is returned. This parameter isn't case-sensitive. 
+  The user-supplied certificate identifier. If this parameter is specified, information for only the identified certificate is returned. This parameter isn't case-sensitive.
 
    
 
@@ -52,11 +55,11 @@ Options
    
 
    
-  * Must contain from 1 to 63 alphanumeric characters or hyphens
+  * Must contain from 1 to 63 alphanumeric characters or hyphens 
    
-  * First character must be a letter
+  * First character must be a letter 
    
-  * Cannot end with a hyphen or contain two consecutive hyphens
+  * Cannot end with a hyphen or contain two consecutive hyphens 
    
 
   
@@ -114,8 +117,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -135,7 +138,7 @@ Certificates -> (list)
 
     
 
-    A CA certificate for an AWS account. 
+    A CA certificate for an AWS account.
 
     
 
@@ -143,7 +146,7 @@ Certificates -> (list)
 
       
 
-      The unique key that identifies a certificate. 
+      The unique key that identifies a certificate.
 
       
 
@@ -153,7 +156,7 @@ Certificates -> (list)
 
       
 
-      The type of the certificate. 
+      The type of the certificate.
 
       
 
@@ -163,7 +166,7 @@ Certificates -> (list)
 
       
 
-      The thumbprint of the certificate. 
+      The thumbprint of the certificate.
 
       
 
@@ -173,7 +176,7 @@ Certificates -> (list)
 
       
 
-      The starting date from which the certificate is valid. 
+      The starting date from which the certificate is valid.
 
       
 
@@ -183,7 +186,17 @@ Certificates -> (list)
 
       
 
-      The final date that the certificate continues to be valid. 
+      The final date that the certificate continues to be valid.
+
+      
+
+      
+
+    CertificateArn -> (string)
+
+      
+
+      The Amazon Resource Name (ARN) for the certificate.
 
       
 

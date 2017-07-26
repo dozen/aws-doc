@@ -15,17 +15,21 @@ Description
 
  
 
-AWS Identity and Access Management (IAM) is a web service that you can use to manage users and user permissions under your AWS account. This guide provides descriptions of IAM actions that you can call programmatically. For general information about IAM, see `AWS Identity and Access Management (IAM)`_ . For the user guide for IAM, see `Using IAM`_ . 
+AWS Identity and Access Management (IAM) is a web service that you can use to manage users and user permissions under your AWS account. This guide provides descriptions of IAM actions that you can call programmatically. For general information about IAM, see `AWS Identity and Access Management (IAM) <http://aws.amazon.com/iam/>`_ . For the user guide for IAM, see `Using IAM <http://docs.aws.amazon.com/IAM/latest/UserGuide/>`_ . 
 
  
 
 .. note::
 
-  AWS provides SDKs that consist of libraries and sample code for various programming languages and platforms (Java, Ruby, .NET, iOS, Android, etc.). The SDKs provide a convenient way to create programmatic access to IAM and AWS. For example, the SDKs take care of tasks such as cryptographically signing requests (see below), managing errors, and retrying requests automatically. For information about the AWS SDKs, including how to download and install them, see the `Tools for Amazon Web Services`_ page. 
+   
+
+  AWS provides SDKs that consist of libraries and sample code for various programming languages and platforms (Java, Ruby, .NET, iOS, Android, etc.). The SDKs provide a convenient way to create programmatic access to IAM and AWS. For example, the SDKs take care of tasks such as cryptographically signing requests (see below), managing errors, and retrying requests automatically. For information about the AWS SDKs, including how to download and install them, see the `Tools for Amazon Web Services <http://aws.amazon.com/tools/>`_ page. 
+
+   
 
  
 
-We recommend that you use the AWS SDKs to make programmatic API calls to IAM. However, you can also use the IAM Query API to make direct calls to the IAM web service. To learn more about the IAM Query API, see `Making Query Requests`_ in the *Using IAM* guide. IAM supports GET and POST requests for all actions. That is, the API does not require you to use GET for some actions and POST for others. However, GET requests are subject to the limitation size of a URL. Therefore, for operations that require larger sizes, use a POST request. 
+We recommend that you use the AWS SDKs to make programmatic API calls to IAM. However, you can also use the IAM Query API to make direct calls to the IAM web service. To learn more about the IAM Query API, see `Making Query Requests <http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html>`_ in the *Using IAM* guide. IAM supports GET and POST requests for all actions. That is, the API does not require you to use GET for some actions and POST for others. However, GET requests are subject to the limitation size of a URL. Therefore, for operations that require larger sizes, use a POST request. 
 
  
 
@@ -33,11 +37,11 @@ We recommend that you use the AWS SDKs to make programmatic API calls to IAM. Ho
 
  
 
-Requests must be signed using an access key ID and a secret access key. We strongly recommend that you do not use your AWS account access key ID and secret access key for everyday work with IAM. You can use the access key ID and secret access key for an IAM user or you can use the AWS Security Token Service to generate temporary security credentials and use those to sign requests. 
+Requests must be signed using an access key ID and a secret access key. We strongly recommend that you do not use your AWS account access key ID and secret access key for everyday work with IAM. You can use the access key ID and secret access key for an IAM user or you can use the AWS Security Token Service to generate temporary security credentials and use those to sign requests.
 
  
 
-To sign requests, we recommend that you use `Signature Version 4`_ . If you have an existing application that uses Signature Version 2, you do not have to update it to use Signature Version 4. However, some operations now require Signature Version 4. The documentation for operations that require version 4 indicate this requirement. 
+To sign requests, we recommend that you use `Signature Version 4 <http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html>`_ . If you have an existing application that uses Signature Version 2, you do not have to update it to use Signature Version 4. However, some operations now require Signature Version 4. The documentation for operations that require version 4 indicate this requirement. 
 
  
 
@@ -50,11 +54,11 @@ For more information, see the following:
  
 
  
-* `AWS Security Credentials`_ . This topic provides general information about the types of credentials used for accessing AWS. 
+* `AWS Security Credentials <http://docs.aws.amazon.com/general/latest/gr/aws-security-credentials.html>`_ . This topic provides general information about the types of credentials used for accessing AWS.  
  
-* `IAM Best Practices`_ . This topic presents a list of suggestions for using the IAM service to help secure your AWS resources. 
+* `IAM Best Practices <http://docs.aws.amazon.com/IAM/latest/UserGuide/IAMBestPractices.html>`_ . This topic presents a list of suggestions for using the IAM service to help secure your AWS resources.  
  
-* `Signing AWS API Requests`_ . This set of topics walk you through the process of signing a request using an access key ID and secret access key. 
+* `Signing AWS API Requests <http://docs.aws.amazon.com/general/latest/gr/signing_aws_api_requests.html>`_ . This set of topics walk you through the process of signing a request using an access key ID and secret access key.  
  
 
 
@@ -85,6 +89,8 @@ Available Commands
   create-policy-version
   create-role
   create-saml-provider
+  create-service-linked-role
+  create-service-specific-credential
   create-user
   create-virtual-mfa-device
   deactivate-mfa-device
@@ -102,6 +108,7 @@ Available Commands
   delete-role-policy
   delete-saml-provider
   delete-server-certificate
+  delete-service-specific-credential
   delete-signing-certificate
   delete-ssh-public-key
   delete-user
@@ -152,6 +159,7 @@ Available Commands
   list-roles
   list-saml-providers
   list-server-certificates
+  list-service-specific-credentials
   list-signing-certificates
   list-ssh-public-keys
   list-user-policies
@@ -163,6 +171,7 @@ Available Commands
   remove-client-id-from-open-id-connect-provider
   remove-role-from-instance-profile
   remove-user-from-group
+  reset-service-specific-credential
   resync-mfa-device
   set-default-policy-version
   simulate-custom-policy
@@ -173,8 +182,10 @@ Available Commands
   update-group
   update-login-profile
   update-open-id-connect-provider-thumbprint
+  update-role-description
   update-saml-provider
   update-server-certificate
+  update-service-specific-credential
   update-signing-certificate
   update-ssh-public-key
   update-user
@@ -182,13 +193,3 @@ Available Commands
   upload-signing-certificate
   upload-ssh-public-key
   wait/index
-
-
-.. _Signature Version 4: http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
-.. _AWS Identity and Access Management (IAM): http://aws.amazon.com/iam/
-.. _IAM Best Practices: http://docs.aws.amazon.com/IAM/latest/UserGuide/IAMBestPractices.html
-.. _AWS Security Credentials: http://docs.aws.amazon.com/general/latest/gr/aws-security-credentials.html
-.. _Using IAM: http://docs.aws.amazon.com/IAM/latest/UserGuide/
-.. _Tools for Amazon Web Services: http://aws.amazon.com/tools/
-.. _Signing AWS API Requests: http://docs.aws.amazon.com/general/latest/gr/signing_aws_api_requests.html
-.. _Making Query Requests: http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html

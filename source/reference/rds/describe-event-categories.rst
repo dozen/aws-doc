@@ -15,8 +15,11 @@ Description
 
 
 
-Displays a list of categories for all event source types, or, if specified, for a specified source type. You can see a list of the event categories and source types in the `Events`_ topic in the *Amazon RDS User Guide.* 
+Displays a list of categories for all event source types, or, if specified, for a specified source type. You can see a list of the event categories and source types in the `Events <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html>`_ topic in the *Amazon RDS User Guide.*  
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEventCategories>`_
 
 
 ========
@@ -29,7 +32,7 @@ Synopsis
   [--source-type <value>]
   [--filters <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -41,7 +44,7 @@ Options
 ``--source-type`` (string)
 
 
-  The type of source that will be generating the events. 
+  The type of source that will be generating the events.
 
    
 
@@ -80,8 +83,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -135,6 +138,3 @@ EventCategoriesMapList -> (list)
 
   
 
-
-
-.. _Events: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html

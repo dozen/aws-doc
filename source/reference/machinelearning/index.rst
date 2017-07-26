@@ -24,6 +24,7 @@ Available Commands
   :maxdepth: 1
   :titlesonly:
 
+  add-tags
   create-batch-prediction
   create-data-source-from-rds
   create-data-source-from-redshift
@@ -36,10 +37,12 @@ Available Commands
   delete-evaluation
   delete-ml-model
   delete-realtime-endpoint
+  delete-tags
   describe-batch-predictions
   describe-data-sources
   describe-evaluations
   describe-ml-models
+  describe-tags
   get-batch-prediction
   get-data-source
   get-evaluation

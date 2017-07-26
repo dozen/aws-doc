@@ -24,11 +24,11 @@ This action takes a list of identities as input and returns the following inform
  
 
  
-* Whether Easy DKIM signing is enabled or disabled.
+* Whether Easy DKIM signing is enabled or disabled. 
  
-* A set of DKIM tokens that represent the identity. If the identity is an email address, the tokens represent the domain of that address.
+* A set of DKIM tokens that represent the identity. If the identity is an email address, the tokens represent the domain of that address. 
  
-* Whether Amazon SES has successfully verified the DKIM tokens published in the domain's DNS. This information is only returned for domain name identities, not for email addresses.
+* Whether Amazon SES has successfully verified the DKIM tokens published in the domain's DNS. This information is only returned for domain name identities, not for email addresses. 
  
 
  
@@ -37,8 +37,11 @@ This action is throttled at one request per second and can only get DKIM attribu
 
  
 
-For more information about creating DNS records using DKIM tokens, go to the `Amazon SES Developer Guide`_ .
+For more information about creating DNS records using DKIM tokens, go to the `Amazon SES Developer Guide <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim-dns-records.html>`_ .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityDkimAttributes>`_
 
 
 ========
@@ -50,7 +53,7 @@ Synopsis
     get-identity-dkim-attributes
   --identities <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -77,8 +80,8 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -127,7 +130,7 @@ DkimAttributes -> (map)
 
   
 
-  The DKIM attributes for an email address or a domain. 
+  The DKIM attributes for an email address or a domain.
 
   
 
@@ -149,7 +152,7 @@ DkimAttributes -> (map)
 
       
 
-      True if DKIM signing is enabled for email sent from the identity; false otherwise.
+      True if DKIM signing is enabled for email sent from the identity; false otherwise. The default value is true.
 
       
 
@@ -173,7 +176,7 @@ DkimAttributes -> (map)
 
        
 
-      For more information about creating DNS records using DKIM tokens, go to the `Amazon SES Developer Guide`_ .
+      For more information about creating DNS records using DKIM tokens, go to the `Amazon SES Developer Guide <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim-dns-records.html>`_ .
 
       
 
@@ -189,6 +192,3 @@ DkimAttributes -> (map)
 
   
 
-
-
-.. _Amazon SES Developer Guide: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim-dns-records.html

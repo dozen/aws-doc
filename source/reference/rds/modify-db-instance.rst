@@ -15,8 +15,11 @@ Description
 
 
 
-Modify settings for a DB instance. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. 
+Modifies settings for a DB instance. You can change one or more database configuration parameters by specifying these parameters and the new values in the request.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstance>`_
 
 
 ========
@@ -29,6 +32,7 @@ Synopsis
   --db-instance-identifier <value>
   [--allocated-storage <value>]
   [--db-instance-class <value>]
+  [--db-subnet-group-name <value>]
   [--db-security-groups <value>]
   [--vpc-security-group-ids <value>]
   [--apply-immediately | --no-apply-immediately]
@@ -41,6 +45,7 @@ Synopsis
   [--engine-version <value>]
   [--allow-major-version-upgrade | --no-allow-major-version-upgrade]
   [--auto-minor-version-upgrade | --no-auto-minor-version-upgrade]
+  [--license-model <value>]
   [--iops <value>]
   [--option-group-name <value>]
   [--new-db-instance-identifier <value>]
@@ -48,13 +53,17 @@ Synopsis
   [--tde-credential-arn <value>]
   [--tde-credential-password <value>]
   [--ca-certificate-identifier <value>]
+  [--domain <value>]
   [--copy-tags-to-snapshot | --no-copy-tags-to-snapshot]
   [--monitoring-interval <value>]
   [--db-port-number <value>]
   [--publicly-accessible | --no-publicly-accessible]
   [--monitoring-role-arn <value>]
+  [--domain-iam-role-name <value>]
+  [--promotion-tier <value>]
+  [--enable-iam-database-authentication | --no-enable-iam-database-authentication]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -66,7 +75,7 @@ Options
 ``--db-instance-identifier`` (string)
 
 
-  The DB instance identifier. This value is stored as a lowercase string. 
+  The DB instance identifier. This value is stored as a lowercase string.
 
    
 
@@ -75,13 +84,13 @@ Options
    
 
    
-  * Must be the identifier for an existing DB instance
+  * Must be the identifier for an existing DB instance 
    
-  * Must contain from 1 to 63 alphanumeric characters or hyphens
+  * Must contain from 1 to 63 alphanumeric characters or hyphens 
    
-  * First character must be a letter
+  * First character must be a letter 
    
-  * Cannot end with a hyphen or contain two consecutive hyphens
+  * Cannot end with a hyphen or contain two consecutive hyphens 
    
 
   
@@ -177,14 +186,14 @@ Options
 
    
 
-  If you choose to migrate your DB instance from using standard storage to using Provisioned IOPS, or from using Provisioned IOPS to using standard storage, the process can take time. The duration of the migration depends on several factors such as database load, storage size, storage type (standard or Provisioned IOPS), amount of IOPS provisioned (if any), and the number of prior scale storage operations. Typical migration times are under 24 hours, but the process can take up to several days in some cases. During the migration, the DB instance will be available for use, but might experience performance degradation. While the migration takes place, nightly backups for the instance will be suspended. No other Amazon RDS operations can take place for the instance, including modifying the instance, rebooting the instance, deleting the instance, creating a Read Replica for the instance, and creating a DB snapshot of the instance. 
+  If you choose to migrate your DB instance from using standard storage to using Provisioned IOPS, or from using Provisioned IOPS to using standard storage, the process can take time. The duration of the migration depends on several factors such as database load, storage size, storage type (standard or Provisioned IOPS), amount of IOPS provisioned (if any), and the number of prior scale storage operations. Typical migration times are under 24 hours, but the process can take up to several days in some cases. During the migration, the DB instance will be available for use, but might experience performance degradation. While the migration takes place, nightly backups for the instance will be suspended. No other Amazon RDS operations can take place for the instance, including modifying the instance, rebooting the instance, deleting the instance, creating a Read Replica for the instance, and creating a DB snapshot of the instance.
 
   
 
 ``--db-instance-class`` (string)
 
 
-  The new compute and memory capacity of the DB instance. To determine the instance classes that are available for a particular DB engine, use the  describe-orderable-db-instance-options action. 
+  The new compute and memory capacity of the DB instance. To determine the instance classes that are available for a particular DB engine, use the  describe-orderable-db-instance-options action. Note that not all instance classes are available in all regions for all DB engines. 
 
    
 
@@ -196,14 +205,33 @@ Options
 
    
 
-  Valid Values: ``db.t1.micro | db.m1.small | db.m1.medium | db.m1.large | db.m1.xlarge | db.m2.xlarge | db.m2.2xlarge | db.m2.4xlarge | db.m3.medium | db.m3.large | db.m3.xlarge | db.m3.2xlarge | db.m4.large | db.m4.xlarge | db.m4.2xlarge | db.m4.4xlarge | db.m4.10xlarge | db.r3.large | db.r3.xlarge | db.r3.2xlarge | db.r3.4xlarge | db.r3.8xlarge | db.t2.micro | db.t2.small | db.t2.medium | db.t2.large`` 
+  Valid Values: ``db.t1.micro | db.m1.small | db.m1.medium | db.m1.large | db.m1.xlarge | db.m2.xlarge | db.m2.2xlarge | db.m2.4xlarge | db.m3.medium | db.m3.large | db.m3.xlarge | db.m3.2xlarge | db.m4.large | db.m4.xlarge | db.m4.2xlarge | db.m4.4xlarge | db.m4.10xlarge | db.r3.large | db.r3.xlarge | db.r3.2xlarge | db.r3.4xlarge | db.r3.8xlarge | db.t2.micro | db.t2.small | db.t2.medium | db.t2.large``  
+
+  
+
+``--db-subnet-group-name`` (string)
+
+
+  The new DB subnet group for the DB instance. You can use this parameter to move your DB instance to a different VPC. If your DB instance is not in a VPC, you can also use this parameter to move your DB instance into a VPC. For more information, see `Updating the VPC for a DB Instance <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC>`_ . 
+
+   
+
+  Changing the subnet group causes an outage during the change. The change is applied during the next maintenance window, unless you specify ``true`` for the ``ApplyImmediately`` parameter. 
+
+   
+
+  Constraints: Must contain no more than 255 alphanumeric characters, periods, underscores, spaces, or hyphens.
+
+   
+
+  Example: ``mySubnetGroup``  
 
   
 
 ``--db-security-groups`` (list)
 
 
-  A list of DB security groups to authorize on this DB instance. Changing this setting does not result in an outage and the change is asynchronously applied as soon as possible. 
+  A list of DB security groups to authorize on this DB instance. Changing this setting does not result in an outage and the change is asynchronously applied as soon as possible.
 
    
 
@@ -212,11 +240,11 @@ Options
    
 
    
-  * Must be 1 to 255 alphanumeric characters
+  * Must be 1 to 255 alphanumeric characters 
    
-  * First character must be a letter
+  * First character must be a letter 
    
-  * Cannot end with a hyphen or contain two consecutive hyphens
+  * Cannot end with a hyphen or contain two consecutive hyphens 
    
 
   
@@ -232,7 +260,7 @@ Syntax::
 ``--vpc-security-group-ids`` (list)
 
 
-  A list of EC2 VPC security groups to authorize on this DB instance. This change is asynchronously applied as soon as possible. 
+  A list of EC2 VPC security groups to authorize on this DB instance. This change is asynchronously applied as soon as possible.
 
    
 
@@ -241,11 +269,11 @@ Syntax::
    
 
    
-  * Must be 1 to 255 alphanumeric characters
+  * Must be 1 to 255 alphanumeric characters 
    
-  * First character must be a letter
+  * First character must be a letter 
    
-  * Cannot end with a hyphen or contain two consecutive hyphens
+  * Cannot end with a hyphen or contain two consecutive hyphens 
    
 
   
@@ -265,11 +293,11 @@ Syntax::
 
    
 
-  If this parameter is set to ``false`` , changes to the DB instance are applied during the next maintenance window. Some parameter changes can cause an outage and will be applied on the next call to  reboot-db-instance , or the next failure reboot. Review the table of parameters in `Modifying a DB Instance and Using the Apply Immediately Parameter`_ to see the impact that setting ``ApplyImmediately`` to ``true`` or ``false`` has for each modified parameter and to determine when the changes will be applied. 
+  If this parameter is set to ``false`` , changes to the DB instance are applied during the next maintenance window. Some parameter changes can cause an outage and will be applied on the next call to  reboot-db-instance , or the next failure reboot. Review the table of parameters in `Modifying a DB Instance and Using the Apply Immediately Parameter <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.Modifying.html>`_ to see the impact that setting ``ApplyImmediately`` to ``true`` or ``false`` has for each modified parameter and to determine when the changes will be applied. 
 
    
 
-  Default: ``false`` 
+  Default: ``false``  
 
   
 
@@ -294,14 +322,18 @@ Syntax::
 
   .. note::
 
-    Amazon RDS API actions never return the password, so this action provides a way to regain access to a primary instance user if the password is lost. This includes restoring privileges that might have been accidentally revoked. 
+     
+
+    Amazon RDS API actions never return the password, so this action provides a way to regain access to a primary instance user if the password is lost. This includes restoring privileges that might have been accidentally revoked.
+
+     
 
   
 
 ``--db-parameter-group-name`` (string)
 
 
-  The name of the DB parameter group to apply to the DB instance. Changing this setting does not result in an outage. The parameter group name itself is changed immediately, but the actual parameter changes are not applied until you reboot the instance without failover. The db instance will NOT be rebooted automatically and the parameter changes will NOT be applied during the next maintenance window. 
+  The name of the DB parameter group to apply to the DB instance. Changing this setting does not result in an outage. The parameter group name itself is changed immediately, but the actual parameter changes are not applied until you reboot the instance without failover. The db instance will NOT be rebooted automatically and the parameter changes will NOT be applied during the next maintenance window.
 
    
 
@@ -316,7 +348,7 @@ Syntax::
 ``--backup-retention-period`` (integer)
 
 
-  The number of days to retain automated backups. Setting this parameter to a positive number enables backups. Setting this parameter to 0 disables automated backups. 
+  The number of days to retain automated backups. Setting this parameter to a positive number enables backups. Setting this parameter to 0 disables automated backups.
 
    
 
@@ -333,13 +365,13 @@ Syntax::
    
 
    
-  * Must be a value from 0 to 35
+  * Must be a value from 0 to 35 
    
-  * Can be specified for a MySQL Read Replica only if the source is running MySQL 5.6
+  * Can be specified for a MySQL Read Replica only if the source is running MySQL 5.6 
    
-  * Can be specified for a PostgreSQL Read Replica only if the source is running PostgreSQL 9.3.5
+  * Can be specified for a PostgreSQL Read Replica only if the source is running PostgreSQL 9.3.5 
    
-  * Cannot be set to 0 if the DB instance is a source to Read Replicas
+  * Cannot be set to 0 if the DB instance is a source to Read Replicas 
    
 
   
@@ -356,13 +388,13 @@ Syntax::
    
 
    
-  * Must be in the format hh24:mi-hh24:mi
+  * Must be in the format hh24:mi-hh24:mi 
    
-  * Times should be in Universal Time Coordinated (UTC)
+  * Times should be in Universal Time Coordinated (UTC) 
    
-  * Must not conflict with the preferred maintenance window
+  * Must not conflict with the preferred maintenance window 
    
-  * Must be at least 30 minutes
+  * Must be at least 30 minutes 
    
 
   
@@ -370,7 +402,7 @@ Syntax::
 ``--preferred-maintenance-window`` (string)
 
 
-  The weekly time range (in UTC) during which system maintenance can occur, which might result in an outage. Changing this parameter does not result in an outage, except in the following situation, and the change is asynchronously applied as soon as possible. If there are pending actions that cause a reboot, and the maintenance window is changed to include the current time, then changing this parameter will cause a reboot of the DB instance. If moving this window to the current time, there must be at least 30 minutes between the current time and end of the window to ensure pending changes are applied. 
+  The weekly time range (in UTC) during which system maintenance can occur, which might result in an outage. Changing this parameter does not result in an outage, except in the following situation, and the change is asynchronously applied as soon as possible. If there are pending actions that cause a reboot, and the maintenance window is changed to include the current time, then changing this parameter will cause a reboot of the DB instance. If moving this window to the current time, there must be at least 30 minutes between the current time and end of the window to ensure pending changes are applied.
 
    
 
@@ -397,7 +429,7 @@ Syntax::
 
    
 
-  Constraints: Cannot be specified if the DB instance is a Read Replica. This parameter cannot be used with SQL Server DB instances. Multi-AZ for SQL Server DB instances is set using the Mirroring option in an option group associated with the DB instance.
+  Constraints: Cannot be specified if the DB instance is a Read Replica.
 
   
 
@@ -408,7 +440,7 @@ Syntax::
 
    
 
-  For major version upgrades, if a non-default DB parameter group is currently in use, a new DB parameter group in the DB parameter group family for the new engine version must be specified. The new DB parameter group can be the default for that DB parameter group family. 
+  For major version upgrades, if a non-default DB parameter group is currently in use, a new DB parameter group in the DB parameter group family for the new engine version must be specified. The new DB parameter group can be the default for that DB parameter group family.
 
    
 
@@ -419,7 +451,7 @@ Syntax::
 ``--allow-major-version-upgrade`` | ``--no-allow-major-version-upgrade`` (boolean)
 
 
-  Indicates that major version upgrades are allowed. Changing this parameter does not result in an outage and the change is asynchronously applied as soon as possible. 
+  Indicates that major version upgrades are allowed. Changing this parameter does not result in an outage and the change is asynchronously applied as soon as possible.
 
    
 
@@ -431,6 +463,17 @@ Syntax::
 
 
   Indicates that minor version upgrades will be applied automatically to the DB instance during the maintenance window. Changing this parameter does not result in an outage except in the following case and the change is asynchronously applied as soon as possible. An outage will result if this parameter is set to ``true`` during the maintenance window, and a newer minor version is available, and RDS has enabled auto patching for that engine version. 
+
+  
+
+``--license-model`` (string)
+
+
+  The license model for the DB instance.
+
+   
+
+  Valid values: ``license-included`` | ``bring-your-own-license`` | ``general-public-license``  
 
   
 
@@ -461,7 +504,7 @@ Syntax::
 
    
 
-  If you choose to migrate your DB instance from using standard storage to using Provisioned IOPS, or from using Provisioned IOPS to using standard storage, the process can take time. The duration of the migration depends on several factors such as database load, storage size, storage type (standard or Provisioned IOPS), amount of IOPS provisioned (if any), and the number of prior scale storage operations. Typical migration times are under 24 hours, but the process can take up to several days in some cases. During the migration, the DB instance will be available for use, but might experience performance degradation. While the migration takes place, nightly backups for the instance will be suspended. No other Amazon RDS operations can take place for the instance, including modifying the instance, rebooting the instance, deleting the instance, creating a Read Replica for the instance, and creating a DB snapshot of the instance. 
+  If you choose to migrate your DB instance from using standard storage to using Provisioned IOPS, or from using Provisioned IOPS to using standard storage, the process can take time. The duration of the migration depends on several factors such as database load, storage size, storage type (standard or Provisioned IOPS), amount of IOPS provisioned (if any), and the number of prior scale storage operations. Typical migration times are under 24 hours, but the process can take up to several days in some cases. During the migration, the DB instance will be available for use, but might experience performance degradation. While the migration takes place, nightly backups for the instance will be suspended. No other Amazon RDS operations can take place for the instance, including modifying the instance, rebooting the instance, deleting the instance, creating a Read Replica for the instance, and creating a DB snapshot of the instance.
 
   
 
@@ -472,7 +515,7 @@ Syntax::
 
    
 
-  Permanent options, such as the TDE option for Oracle Advanced Security TDE, cannot be removed from an option group, and that option group cannot be removed from a DB instance once it is associated with a DB instance 
+  Permanent options, such as the TDE option for Oracle Advanced Security TDE, cannot be removed from an option group, and that option group cannot be removed from a DB instance once it is associated with a DB instance
 
   
 
@@ -488,11 +531,11 @@ Syntax::
    
 
    
-  * Must contain from 1 to 63 alphanumeric characters or hyphens
+  * Must contain from 1 to 63 alphanumeric characters or hyphens 
    
-  * First character must be a letter
+  * First character must be a letter 
    
-  * Cannot end with a hyphen or contain two consecutive hyphens
+  * Cannot end with a hyphen or contain two consecutive hyphens 
    
 
   
@@ -500,11 +543,11 @@ Syntax::
 ``--storage-type`` (string)
 
 
-  Specifies the storage type to be associated with the DB instance. 
+  Specifies the storage type to be associated with the DB instance.
 
    
 
-  Valid values: ``standard | gp2 | io1`` 
+  Valid values: ``standard | gp2 | io1``  
 
    
 
@@ -512,28 +555,35 @@ Syntax::
 
    
 
-  Default: ``io1`` if the ``Iops`` parameter is specified; otherwise ``standard`` 
+  Default: ``io1`` if the ``Iops`` parameter is specified; otherwise ``standard``  
 
   
 
 ``--tde-credential-arn`` (string)
 
 
-  The ARN from the Key Store with which to associate the instance for TDE encryption. 
+  The ARN from the Key Store with which to associate the instance for TDE encryption.
 
   
 
 ``--tde-credential-password`` (string)
 
 
-  The password for the given ARN from the Key Store in order to access the device. 
+  The password for the given ARN from the Key Store in order to access the device.
 
   
 
 ``--ca-certificate-identifier`` (string)
 
 
-  Indicates the certificate that needs to be associated with the instance. 
+  Indicates the certificate that needs to be associated with the instance.
+
+  
+
+``--domain`` (string)
+
+
+  The Active Directory Domain to move the instance to. Specify ``none`` to remove the instance from its current domain. The domain must be created prior to this operation. Currently only a Microsoft SQL Server instance can be created in a Active Directory Domain. 
 
   
 
@@ -547,7 +597,7 @@ Syntax::
 ``--monitoring-interval`` (integer)
 
 
-  The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance. To disable collecting Enhanced Monitoring metrics, specify 0. The default is 60.
+  The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance. To disable collecting Enhanced Monitoring metrics, specify 0. The default is 0.
 
    
 
@@ -555,14 +605,14 @@ Syntax::
 
    
 
-  Valid Values: ``0, 1, 5, 10, 15, 30, 60`` 
+  Valid Values: ``0, 1, 5, 10, 15, 30, 60``  
 
   
 
 ``--db-port-number`` (integer)
 
 
-  The port number on which the database accepts connections. 
+  The port number on which the database accepts connections.
 
    
 
@@ -578,11 +628,11 @@ Syntax::
 
    
 
-  Default: ``3306`` 
+  Default: ``3306``  
 
    
 
-  Valid Values: ``1150-65535`` 
+  Valid Values: ``1150-65535``  
 
    
 
@@ -590,11 +640,11 @@ Syntax::
 
    
 
-  Default: ``3306`` 
+  Default: ``3306``  
 
    
 
-  Valid Values: ``1150-65535`` 
+  Valid Values: ``1150-65535``  
 
    
 
@@ -602,11 +652,15 @@ Syntax::
 
    
 
-  Default: ``5432`` 
+  Default: ``5432``  
 
    
 
-  Valid Values: ``1150-65535`` 
+  Valid Values: ``1150-65535``  
+
+   
+
+  Type: Integer
 
    
 
@@ -614,11 +668,11 @@ Syntax::
 
    
 
-  Default: ``1521`` 
+  Default: ``1521``  
 
    
 
-  Valid Values: ``1150-65535`` 
+  Valid Values: ``1150-65535``  
 
    
 
@@ -626,7 +680,7 @@ Syntax::
 
    
 
-  Default: ``1433`` 
+  Default: ``1433``  
 
    
 
@@ -638,22 +692,22 @@ Syntax::
 
    
 
-  Default: ``3306`` 
+  Default: ``3306``  
 
    
 
-  Valid Values: ``1150-65535`` 
+  Valid Values: ``1150-65535``  
 
   
 
 ``--publicly-accessible`` | ``--no-publicly-accessible`` (boolean)
 
 
-  no-allow-major-version-upgrade value that indicates if the DB instance has a publicly resolvable DNS name. Set to ``True`` to make the DB instance Internet-facing with a publicly resolvable DNS name, which resolves to a public IP address. Set to ``False`` to make the DB instance internal with a DNS name that resolves to a private IP address. 
+  apply-immediately value that indicates if the DB instance has a publicly resolvable DNS name. Set to ``True`` to make the DB instance Internet-facing with a publicly resolvable DNS name, which resolves to a public IP address. Set to ``False`` to make the DB instance internal with a DNS name that resolves to a private IP address. 
 
    
 
-  ``PubliclyAccessible`` only applies to DB instances in a VPC. The DB instance must be part of a public subnet and ``PubliclyAccessible`` must be true in order for it to be publicly accessible. 
+   ``PubliclyAccessible`` only applies to DB instances in a VPC. The DB instance must be part of a public subnet and ``PubliclyAccessible`` must be true in order for it to be publicly accessible. 
 
    
 
@@ -661,14 +715,14 @@ Syntax::
 
    
 
-  Default: false 
+  Default: false
 
   
 
 ``--monitoring-role-arn`` (string)
 
 
-  The ARN for the IAM role that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. For example, ``arn:aws:iam:123456789012:role/emaccess`` . For information on creating a monitoring role, go to `To create an IAM role for Amazon RDS Enhanced Monitoring`_ .
+  The ARN for the IAM role that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. For example, ``arn:aws:iam:123456789012:role/emaccess`` . For information on creating a monitoring role, go to `To create an IAM role for Amazon RDS Enhanced Monitoring <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.html#USER_Monitoring.OS.IAMRole>`_ .
 
    
 
@@ -676,11 +730,56 @@ Syntax::
 
   
 
+``--domain-iam-role-name`` (string)
+
+
+  The name of the IAM role to use when making API calls to the Directory Service.
+
+  
+
+``--promotion-tier`` (integer)
+
+
+  A value that specifies the order in which an Aurora Replica is promoted to the primary instance after a failure of the existing primary instance. For more information, see `Fault Tolerance for an Aurora DB Cluster <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Managing.html#Aurora.Managing.FaultTolerance>`_ . 
+
+   
+
+  Default: 1
+
+   
+
+  Valid Values: 0 - 15
+
+  
+
+``--enable-iam-database-authentication`` | ``--no-enable-iam-database-authentication`` (boolean)
+
+
+  True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts; otherwise false.
+
+   
+
+  You can enable IAM database authentication for the following database engines
+
+   
+
+   
+  * For MySQL 5.6, minor version 5.6.34 or higher 
+   
+  * For MySQL 5.7, minor version 5.7.16 or higher 
+   
+
+   
+
+  Default: ``false``  
+
+  
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -692,16 +791,20 @@ DBInstance -> (structure)
 
   
 
-  Contains the result of a successful invocation of the following actions: 
+  Contains the result of a successful invocation of the following actions:
 
    
 
    
-  *  create-db-instance  
+  *  create-db-instance   
    
-  *  delete-db-instance  
+  *  delete-db-instance   
    
-  *  modify-db-instance  
+  *  modify-db-instance   
+   
+  *  stop-db-instance   
+   
+  *  start-db-instance   
    
 
    
@@ -714,7 +817,7 @@ DBInstance -> (structure)
 
     
 
-    Contains a user-supplied database identifier. This identifier is the unique key that identifies a DB instance. 
+    Contains a user-supplied database identifier. This identifier is the unique key that identifies a DB instance.
 
     
 
@@ -724,7 +827,7 @@ DBInstance -> (structure)
 
     
 
-    Contains the name of the compute and memory capacity class of the DB instance. 
+    Contains the name of the compute and memory capacity class of the DB instance.
 
     
 
@@ -734,7 +837,7 @@ DBInstance -> (structure)
 
     
 
-    Provides the name of the database engine to be used for this DB instance. 
+    Provides the name of the database engine to be used for this DB instance.
 
     
 
@@ -744,7 +847,7 @@ DBInstance -> (structure)
 
     
 
-    Specifies the current state of this database. 
+    Specifies the current state of this database.
 
     
 
@@ -754,7 +857,7 @@ DBInstance -> (structure)
 
     
 
-    Contains the master username for the DB instance. 
+    Contains the master username for the DB instance.
 
     
 
@@ -768,15 +871,15 @@ DBInstance -> (structure)
 
      
 
-     **MySQL, MariaDB, SQL Server, PostgreSQL, Amazon Aurora**  
+     **MySQL, MariaDB, SQL Server, PostgreSQL**  
 
      
 
-    Contains the name of the initial database of this instance that was provided at create time, if one was specified when the DB instance was created. This same name is returned for the life of the DB instance. 
+    Contains the name of the initial database of this instance that was provided at create time, if one was specified when the DB instance was created. This same name is returned for the life of the DB instance.
 
      
 
-    Type: monitoring-role-arn
+    Type: db-instance-identifier
 
      
 
@@ -784,7 +887,7 @@ DBInstance -> (structure)
 
      
 
-    Contains the Oracle System ID (SID) of the created DB instance. Not shown when the returned parameters do not apply to an Oracle DB instance. 
+    Contains the Oracle System ID (SID) of the created DB instance. Not shown when the returned parameters do not apply to an Oracle DB instance.
 
     
 
@@ -794,7 +897,7 @@ DBInstance -> (structure)
 
     
 
-    Specifies the connection endpoint. 
+    Specifies the connection endpoint.
 
     
 
@@ -802,7 +905,7 @@ DBInstance -> (structure)
 
       
 
-      Specifies the DNS address of the DB instance. 
+      Specifies the DNS address of the DB instance.
 
       
 
@@ -812,7 +915,7 @@ DBInstance -> (structure)
 
       
 
-      Specifies the port that the database engine is listening on. 
+      Specifies the port that the database engine is listening on.
 
       
 
@@ -834,7 +937,7 @@ DBInstance -> (structure)
 
     
 
-    Specifies the allocated storage size specified in gigabytes. 
+    Specifies the allocated storage size specified in gigabytes.
 
     
 
@@ -844,7 +947,7 @@ DBInstance -> (structure)
 
     
 
-    Provides the date and time the DB instance was created. 
+    Provides the date and time the DB instance was created.
 
     
 
@@ -864,7 +967,7 @@ DBInstance -> (structure)
 
     
 
-    Specifies the number of days for which automatic DB snapshots are retained. 
+    Specifies the number of days for which automatic DB snapshots are retained.
 
     
 
@@ -882,18 +985,18 @@ DBInstance -> (structure)
 
       
 
-      This data type is used as a response element in the following actions: 
+      This data type is used as a response element in the following actions:
 
        
 
        
-      *  modify-db-instance  
+      *  modify-db-instance   
        
-      *  reboot-db-instance  
+      *  reboot-db-instance   
        
-      *  restore-db-instance-from-db-snapshot  
+      *  restore-db-instance-from-db-snapshot   
        
-      *  restore-db-instance-to-point-in-time  
+      *  restore-db-instance-to-point-in-time   
        
 
       
@@ -902,7 +1005,7 @@ DBInstance -> (structure)
 
         
 
-        The name of the DB security group. 
+        The name of the DB security group.
 
         
 
@@ -912,7 +1015,7 @@ DBInstance -> (structure)
 
         
 
-        The status of the DB security group. 
+        The status of the DB security group.
 
         
 
@@ -926,7 +1029,7 @@ DBInstance -> (structure)
 
     
 
-    Provides List of VPC security group elements that the DB instance belongs to. 
+    Provides a list of VPC security group elements that the DB instance belongs to.
 
     
 
@@ -952,7 +1055,7 @@ DBInstance -> (structure)
 
         
 
-        The status of the VPC security group. 
+        The status of the VPC security group.
 
         
 
@@ -966,7 +1069,7 @@ DBInstance -> (structure)
 
     
 
-    Provides the list of DB parameter groups applied to this DB instance. 
+    Provides the list of DB parameter groups applied to this DB instance.
 
     
 
@@ -974,7 +1077,7 @@ DBInstance -> (structure)
 
       
 
-      The status of the DB parameter group. 
+      The status of the DB parameter group.
 
        
 
@@ -983,17 +1086,17 @@ DBInstance -> (structure)
        
 
        
-      *  create-db-instance  
+      *  create-db-instance   
        
-      *  create-db-instance-read-replica  
+      *  create-db-instance-read-replica   
        
-      *  delete-db-instance  
+      *  delete-db-instance   
        
-      *  modify-db-instance  
+      *  modify-db-instance   
        
-      *  reboot-db-instance  
+      *  reboot-db-instance   
        
-      *  restore-db-instance-from-db-snapshot  
+      *  restore-db-instance-from-db-snapshot   
        
 
       
@@ -1002,7 +1105,7 @@ DBInstance -> (structure)
 
         
 
-        The name of the DP parameter group. 
+        The name of the DP parameter group.
 
         
 
@@ -1012,7 +1115,7 @@ DBInstance -> (structure)
 
         
 
-        The status of parameter updates. 
+        The status of parameter updates.
 
         
 
@@ -1026,7 +1129,7 @@ DBInstance -> (structure)
 
     
 
-    Specifies the name of the Availability Zone the DB instance is located in. 
+    Specifies the name of the Availability Zone the DB instance is located in.
 
     
 
@@ -1036,7 +1139,7 @@ DBInstance -> (structure)
 
     
 
-    Specifies information on the subnet group associated with the DB instance, including the name, description, and subnets in the subnet group. 
+    Specifies information on the subnet group associated with the DB instance, including the name, description, and subnets in the subnet group.
 
     
 
@@ -1044,7 +1147,7 @@ DBInstance -> (structure)
 
       
 
-      The name of the DB subnet group. 
+      The name of the DB subnet group.
 
       
 
@@ -1054,7 +1157,7 @@ DBInstance -> (structure)
 
       
 
-      Provides the description of the DB subnet group. 
+      Provides the description of the DB subnet group.
 
       
 
@@ -1064,7 +1167,7 @@ DBInstance -> (structure)
 
       
 
-      Provides the VpcId of the DB subnet group. 
+      Provides the VpcId of the DB subnet group.
 
       
 
@@ -1074,7 +1177,7 @@ DBInstance -> (structure)
 
       
 
-      Provides the status of the DB subnet group. 
+      Provides the status of the DB subnet group.
 
       
 
@@ -1100,7 +1203,7 @@ DBInstance -> (structure)
 
           
 
-          Specifies the identifier of the subnet. 
+          Specifies the identifier of the subnet.
 
           
 
@@ -1110,17 +1213,17 @@ DBInstance -> (structure)
 
           
 
-          Contains Availability Zone information. 
+          Contains Availability Zone information.
 
            
 
-          This data type is used as an element in the following data type: 
+          This data type is used as an element in the following data type:
 
-          
-          *  OrderableDBInstanceOption 
-          
+           
 
-          
+           
+          *  OrderableDBInstanceOption   
+           
 
           
 
@@ -1128,7 +1231,7 @@ DBInstance -> (structure)
 
             
 
-            The name of the availability zone. 
+            The name of the availability zone.
 
             
 
@@ -1140,7 +1243,7 @@ DBInstance -> (structure)
 
           
 
-          Specifies the status of the subnet. 
+          Specifies the status of the subnet.
 
           
 
@@ -1150,13 +1253,23 @@ DBInstance -> (structure)
 
       
 
+    DBSubnetGroupArn -> (string)
+
+      
+
+      The Amazon Resource Name (ARN) for the DB subnet group.
+
+      
+
+      
+
     
 
   PreferredMaintenanceWindow -> (string)
 
     
 
-    Specifies the weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC). 
+    Specifies the weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).
 
     
 
@@ -1166,7 +1279,7 @@ DBInstance -> (structure)
 
     
 
-    Specifies that changes to the DB instance are pending. This element is only included when changes are pending. Specific changes are identified by subelements. 
+    Specifies that changes to the DB instance are pending. This element is only included when changes are pending. Specific changes are identified by subelements.
 
     
 
@@ -1194,7 +1307,7 @@ DBInstance -> (structure)
 
       
 
-      Contains the pending or in-progress change of the master credentials for the DB instance. 
+      Contains the pending or in-progress change of the master credentials for the DB instance.
 
       
 
@@ -1204,7 +1317,7 @@ DBInstance -> (structure)
 
       
 
-      Specifies the pending port for the DB instance. 
+      Specifies the pending port for the DB instance.
 
       
 
@@ -1214,7 +1327,7 @@ DBInstance -> (structure)
 
       
 
-      Specifies the pending number of days for which automated backups are retained. 
+      Specifies the pending number of days for which automated backups are retained.
 
       
 
@@ -1224,7 +1337,7 @@ DBInstance -> (structure)
 
       
 
-      Indicates that the Single-AZ DB instance is to change to a Multi-AZ deployment. 
+      Indicates that the Single-AZ DB instance is to change to a Multi-AZ deployment.
 
       
 
@@ -1234,7 +1347,21 @@ DBInstance -> (structure)
 
       
 
-      Indicates the database engine version. 
+      Indicates the database engine version.
+
+      
+
+      
+
+    LicenseModel -> (string)
+
+      
+
+      The license model for the DB instance.
+
+       
+
+      Valid values: ``license-included`` | ``bring-your-own-license`` | ``general-public-license``  
 
       
 
@@ -1244,7 +1371,7 @@ DBInstance -> (structure)
 
       
 
-      Specifies the new Provisioned IOPS value for the DB instance that will be applied or is being applied. 
+      Specifies the new Provisioned IOPS value for the DB instance that will be applied or is being applied.
 
       
 
@@ -1264,7 +1391,7 @@ DBInstance -> (structure)
 
       
 
-      Specifies the storage type to be associated with the DB instance. 
+      Specifies the storage type to be associated with the DB instance.
 
       
 
@@ -1280,13 +1407,23 @@ DBInstance -> (structure)
 
       
 
+    DBSubnetGroupName -> (string)
+
+      
+
+      The new DB subnet group for the DB instance. 
+
+      
+
+      
+
     
 
   LatestRestorableTime -> (timestamp)
 
     
 
-    Specifies the latest time to which a database can be restored with point-in-time restore. 
+    Specifies the latest time to which a database can be restored with point-in-time restore.
 
     
 
@@ -1296,7 +1433,7 @@ DBInstance -> (structure)
 
     
 
-    Specifies if the DB instance is a Multi-AZ deployment. 
+    Specifies if the DB instance is a Multi-AZ deployment.
 
     
 
@@ -1306,7 +1443,7 @@ DBInstance -> (structure)
 
     
 
-    Indicates the database engine version. 
+    Indicates the database engine version.
 
     
 
@@ -1316,7 +1453,7 @@ DBInstance -> (structure)
 
     
 
-    Indicates that minor version patches are applied automatically. 
+    Indicates that minor version patches are applied automatically.
 
     
 
@@ -1326,7 +1463,7 @@ DBInstance -> (structure)
 
     
 
-    Contains the identifier of the source DB instance if this DB instance is a Read Replica. 
+    Contains the identifier of the source DB instance if this DB instance is a Read Replica.
 
     
 
@@ -1336,7 +1473,23 @@ DBInstance -> (structure)
 
     
 
-    Contains one or more identifiers of the Read Replicas associated with this DB instance. 
+    Contains one or more identifiers of the Read Replicas associated with this DB instance.
+
+    
+
+    (string)
+
+      
+
+      
+
+    
+
+  ReadReplicaDBClusterIdentifiers -> (list)
+
+    
+
+    Contains one or more identifiers of Aurora DB clusters that are Read Replicas of this DB instance.
 
     
 
@@ -1352,7 +1505,7 @@ DBInstance -> (structure)
 
     
 
-    License model information for this DB instance. 
+    License model information for this DB instance.
 
     
 
@@ -1362,7 +1515,7 @@ DBInstance -> (structure)
 
     
 
-    Specifies the Provisioned IOPS (I/O operations per second) value. 
+    Specifies the Provisioned IOPS (I/O operations per second) value.
 
     
 
@@ -1372,7 +1525,7 @@ DBInstance -> (structure)
 
     
 
-    Provides the list of option group memberships for this DB instance. 
+    Provides the list of option group memberships for this DB instance.
 
     
 
@@ -1380,7 +1533,7 @@ DBInstance -> (structure)
 
       
 
-      Provides information on the option groups the DB instance is a member of. 
+      Provides information on the option groups the DB instance is a member of.
 
       
 
@@ -1388,7 +1541,7 @@ DBInstance -> (structure)
 
         
 
-        The name of the option group that the instance belongs to. 
+        The name of the option group that the instance belongs to.
 
         
 
@@ -1412,7 +1565,7 @@ DBInstance -> (structure)
 
     
 
-    If present, specifies the name of the character set that this instance is associated with. 
+    If present, specifies the name of the character set that this instance is associated with.
 
     
 
@@ -1422,7 +1575,7 @@ DBInstance -> (structure)
 
     
 
-    If present, specifies the name of the secondary Availability Zone for a DB instance with multi-AZ support. 
+    If present, specifies the name of the secondary Availability Zone for a DB instance with multi-AZ support.
 
     
 
@@ -1432,23 +1585,23 @@ DBInstance -> (structure)
 
     
 
-    Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address. 
+    Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address.
 
      
 
-    Default: The default behavior varies depending on whether a VPC has been requested or not. The following list shows the default behavior in each case. 
+    Default: The default behavior varies depending on whether a VPC has been requested or not. The following list shows the default behavior in each case.
 
      
 
      
-    * **Default VPC:** true
+    * **Default VPC:** true 
      
-    * **VPC:** false
-     
-
+    * **VPC:** false 
      
 
-    If no DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance will be publicly accessible. If a specific DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance will be private. 
+     
+
+    If no DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance will be publicly accessible. If a specific DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance will be private.
 
     
 
@@ -1458,7 +1611,7 @@ DBInstance -> (structure)
 
     
 
-    The status of a Read Replica. If the instance is not a Read Replica, this will be blank. 
+    The status of a Read Replica. If the instance is not a Read Replica, this will be blank.
 
     
 
@@ -1474,7 +1627,7 @@ DBInstance -> (structure)
 
         
 
-        This value is currently "read replication." 
+        This value is currently "read replication."
 
         
 
@@ -1484,7 +1637,7 @@ DBInstance -> (structure)
 
         
 
-        no-allow-major-version-upgrade value that is true if the instance is operating normally, or false if the instance is in an error state. 
+        apply-immediately value that is true if the instance is operating normally, or false if the instance is in an error state.
 
         
 
@@ -1494,7 +1647,7 @@ DBInstance -> (structure)
 
         
 
-        Status of the DB instance. For a StatusType of read replica, the values can be replicating, error, stopped, or terminated. 
+        Status of the DB instance. For a StatusType of read replica, the values can be replicating, error, stopped, or terminated.
 
         
 
@@ -1504,7 +1657,7 @@ DBInstance -> (structure)
 
         
 
-        Details of the error if there is an error for the instance. If the instance is not in an error state, this value is blank. 
+        Details of the error if there is an error for the instance. If the instance is not in an error state, this value is blank.
 
         
 
@@ -1518,7 +1671,7 @@ DBInstance -> (structure)
 
     
 
-    Specifies the storage type associated with DB instance. 
+    Specifies the storage type associated with DB instance.
 
     
 
@@ -1528,7 +1681,7 @@ DBInstance -> (structure)
 
     
 
-    The ARN from the Key Store with which the instance is associated for TDE encryption. 
+    The ARN from the key store with which the instance is associated for TDE encryption.
 
     
 
@@ -1538,7 +1691,7 @@ DBInstance -> (structure)
 
     
 
-    Specifies the port that the DB instance listens on. If the DB instance is part of a DB cluster, this can be a different port than the DB cluster port. 
+    Specifies the port that the DB instance listens on. If the DB instance is part of a DB cluster, this can be a different port than the DB cluster port.
 
     
 
@@ -1558,7 +1711,7 @@ DBInstance -> (structure)
 
     
 
-    Specifies whether the DB instance is encrypted. 
+    Specifies whether the DB instance is encrypted.
 
     
 
@@ -1578,7 +1731,7 @@ DBInstance -> (structure)
 
     
 
-    The region-unique, immutable identifier for the DB instance. This identifier is found in AWS CloudTrail log entries whenever the KMS key for the DB instance is accessed. 
+    The region-unique, immutable identifier for the DB instance. This identifier is found in AWS CloudTrail log entries whenever the KMS key for the DB instance is accessed.
 
     
 
@@ -1591,6 +1744,66 @@ DBInstance -> (structure)
     The identifier of the CA certificate for this DB instance.
 
     
+
+    
+
+  DomainMemberships -> (list)
+
+    
+
+    The Active Directory Domain membership records associated with the DB instance.
+
+    
+
+    (structure)
+
+      
+
+      An Active Directory Domain membership record associated with the DB instance.
+
+      
+
+      Domain -> (string)
+
+        
+
+        The identifier of the Active Directory Domain.
+
+        
+
+        
+
+      Status -> (string)
+
+        
+
+        The status of the DB instance's Active Directory Domain membership, such as joined, pending-join, failed etc).
+
+        
+
+        
+
+      FQDN -> (string)
+
+        
+
+        The fully qualified domain name of the Active Directory Domain.
+
+        
+
+        
+
+      IAMRoleName -> (string)
+
+        
+
+        The name of the IAM role to be used when making API calls to the Directory Service.
+
+        
+
+        
+
+      
 
     
 
@@ -1634,9 +1847,59 @@ DBInstance -> (structure)
 
     
 
+  PromotionTier -> (integer)
+
+    
+
+    A value that specifies the order in which an Aurora Replica is promoted to the primary instance after a failure of the existing primary instance. For more information, see `Fault Tolerance for an Aurora DB Cluster <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Managing.html#Aurora.Managing.FaultTolerance>`_ . 
+
+    
+
+    
+
+  DBInstanceArn -> (string)
+
+    
+
+    The Amazon Resource Name (ARN) for the DB instance.
+
+    
+
+    
+
+  Timezone -> (string)
+
+    
+
+    The time zone of the DB instance. In most cases, the ``Timezone`` element is empty. ``Timezone`` content appears only for Microsoft SQL Server DB instances that were created with a time zone specified. 
+
+    
+
+    
+
+  IAMDatabaseAuthenticationEnabled -> (boolean)
+
+    
+
+    True if mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled; otherwise false.
+
+     
+
+    IAM database authentication can be enabled for the following database engines
+
+     
+
+     
+    * For MySQL 5.6, minor version 5.6.34 or higher 
+     
+    * For MySQL 5.7, minor version 5.7.16 or higher 
+     
+    * Aurora 5.6 or higher. To enable IAM database authentication for Aurora, see DBCluster Type. 
+     
+
+    
+
+    
+
   
 
-
-
-.. _Modifying a DB Instance and Using the Apply Immediately Parameter: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.Modifying.html
-.. _To create an IAM role for Amazon RDS Enhanced Monitoring: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.html#USER_Monitoring.OS.IAMRole

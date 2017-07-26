@@ -15,24 +15,27 @@ Description
 
 
 
-Describes the specified stream.
+Describes the specified Amazon Kinesis stream.
 
  
 
-The information about the stream includes its current status, its Amazon Resource Name (ARN), and an array of shard objects. For each shard object, there is information about the hash key and sequence number ranges that the shard spans, and the IDs of any earlier shards that played in a role in creating the shard. A sequence number is the identifier associated with every record ingested in the Amazon Kinesis stream. The sequence number is assigned when a record is put into the stream.
+The information returned includes the stream name, Amazon Resource Name (ARN), creation time, enhanced metric configuration, and shard map. The shard map is an array of shard objects. For each shard object, there is the hash key and sequence number ranges that the shard spans, and the IDs of any earlier shards that played in a role in creating the shard. Every record ingested in the stream is identified by a sequence number, which is assigned when the record is put into the stream.
 
  
 
-You can limit the number of returned shards using the ``Limit`` parameter. The number of shards in a stream may be too large to return from a single call to ``describe-stream`` . You can detect this by using the ``HasMoreShards`` flag in the returned output. ``HasMoreShards`` is set to ``true`` when there is more data available. 
+You can limit the number of shards returned by each call. For more information, see `Retrieving Shards from a Stream <http://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-retrieve-shards.html>`_ in the *Amazon Kinesis Streams Developer Guide* .
 
  
 
-``describe-stream`` is a paginated operation. If there are more shards available, you can request them using the shard ID of the last shard returned. Specify this ID in the ``ExclusiveStartShardId`` parameter in a subsequent request to ``describe-stream`` . 
+There are no guarantees about the chronological order shards returned. To process shards in chronological order, use the ID of the parent shard to track the lineage to the oldest shard.
 
  
 
- describe-stream has a limit of 10 transactions per second per account.
+This operation has a limit of 10 transactions per second per account.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeStream>`_
 
 
 ``describe-stream`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
@@ -51,7 +54,7 @@ Synopsis
   [--starting-token <value>]
   [--page-size <value>]
   [--max-items <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -77,26 +80,34 @@ Performs service operation based on the JSON string provided. The JSON string fo
 
    
 
-``--page-size`` (integer)
- 
-
-  The size of each page.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
    
 
-  
+``--page-size`` (integer)
+ 
 
-  
+  The size of each page to get in the AWS service call. This does not affect the number of items returned in the command's output. Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call. This can help prevent the AWS service calls from timing out.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
 
 ``--max-items`` (integer)
  
 
-  The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination. This ``NextToken`` response element should **not** be used directly outside of the AWS CLI.
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``NextToken`` is provided in the command's output. To resume pagination, provide the ``NextToken`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``NextToken`` response element directly outside of the AWS CLI.
 
    
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -108,7 +119,7 @@ StreamDescription -> (structure)
 
   
 
-  The current status of the stream, the stream ARN, an array of shard objects that comprise the stream, and states whether there are more shards available.
+  The current status of the stream, the stream ARN, an array of shard objects that comprise the stream, and whether there are more shards available.
 
   
 
@@ -136,22 +147,18 @@ StreamDescription -> (structure)
 
     
 
-    The current status of the stream being described.
-
-     
-
-    The stream status is one of the following states:
+    The current status of the stream being described. The stream status is one of the following states:
 
      
 
      
-    * ``CREATING`` - The stream is being created. Amazon Kinesis immediately returns and sets ``StreamStatus`` to ``CREATING`` .
+    * ``CREATING`` - The stream is being created. Amazon Kinesis immediately returns and sets ``StreamStatus`` to ``CREATING`` . 
      
-    * ``DELETING`` - The stream is being deleted. The specified stream is in the ``DELETING`` state until Amazon Kinesis completes the deletion.
+    * ``DELETING`` - The stream is being deleted. The specified stream is in the ``DELETING`` state until Amazon Kinesis completes the deletion. 
      
-    * ``ACTIVE`` - The stream exists and is ready for read and write operations or deletion. You should perform read and write operations only on an ``ACTIVE`` stream.
+    * ``ACTIVE`` - The stream exists and is ready for read and write operations or deletion. You should perform read and write operations only on an ``ACTIVE`` stream. 
      
-    * ``UPDATING`` - Shards in the stream are being merged or split. Read and write operations continue to work while the stream is in the ``UPDATING`` state.
+    * ``UPDATING`` - Shards in the stream are being merged or split. Read and write operations continue to work while the stream is in the ``UPDATING`` state. 
      
 
     
@@ -178,7 +185,7 @@ StreamDescription -> (structure)
 
         
 
-        The unique identifier of the shard within the Amazon Kinesis stream.
+        The unique identifier of the shard within the stream.
 
         
 
@@ -188,7 +195,7 @@ StreamDescription -> (structure)
 
         
 
-        The shard Id of the shard's parent.
+        The shard ID of the shard's parent.
 
         
 
@@ -198,7 +205,7 @@ StreamDescription -> (structure)
 
         
 
-        The shard Id of the shard adjacent to the shard's parent.
+        The shard ID of the shard adjacent to the shard's parent.
 
         
 
@@ -283,6 +290,108 @@ StreamDescription -> (structure)
     
 
     The current retention period, in hours.
+
+    
+
+    
+
+  StreamCreationTimestamp -> (timestamp)
+
+    
+
+    The approximate time that the stream was created.
+
+    
+
+    
+
+  EnhancedMonitoring -> (list)
+
+    
+
+    Represents the current enhanced monitoring settings of the stream.
+
+    
+
+    (structure)
+
+      
+
+      Represents enhanced metrics types.
+
+      
+
+      ShardLevelMetrics -> (list)
+
+        
+
+        List of shard-level metrics.
+
+         
+
+        The following are the valid shard-level metrics. The value "``ALL`` " enhances every metric.
+
+         
+
+         
+        * ``IncomingBytes``   
+         
+        * ``IncomingRecords``   
+         
+        * ``OutgoingBytes``   
+         
+        * ``OutgoingRecords``   
+         
+        * ``WriteProvisionedThroughputExceeded``   
+         
+        * ``ReadProvisionedThroughputExceeded``   
+         
+        * ``IteratorAgeMilliseconds``   
+         
+        * ``ALL``   
+         
+
+         
+
+        For more information, see `Monitoring the Amazon Kinesis Streams Service with Amazon CloudWatch <http://docs.aws.amazon.com/kinesis/latest/dev/monitoring-with-cloudwatch.html>`_ in the *Amazon Kinesis Streams Developer Guide* .
+
+        
+
+        (string)
+
+          
+
+          
+
+        
+
+      
+
+    
+
+  EncryptionType -> (string)
+
+    
+
+    The server-side encryption type used on the stream. This parameter can be one of the following values:
+
+     
+
+     
+    * ``NONE`` : Do not encrypt the records in the stream. 
+     
+    * ``KMS`` : Use server-side encryption on the records in the stream using a customer-managed KMS key. 
+     
+
+    
+
+    
+
+  KeyId -> (string)
+
+    
+
+    The GUID for the customer-managed KMS key used for encryption on the stream.
 
     
 

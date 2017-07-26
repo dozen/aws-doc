@@ -31,7 +31,7 @@ The simulation does not perform the API actions, it only checks the authorizatio
 
  
 
-**Note:** This API discloses information about the permissions granted to other users. If you do not want users to see other user's permissions, then consider allowing them to use  simulate-custom-policy instead.
+ **Note:** This API discloses information about the permissions granted to other users. If you do not want users to see other user's permissions, then consider allowing them to use  simulate-custom-policy instead.
 
  
 
@@ -41,6 +41,13 @@ Context keys are variables maintained by AWS and its services that provide detai
 
 If the output is long, you can use the ``MaxItems`` and ``Marker`` parameters to paginate the results.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SimulatePrincipalPolicy>`_
+
+
+``simulate-principal-policy`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
+When using ``--output text`` and the ``--query`` argument on a paginated response, the ``--query`` argument must extract data from the results of the following query expressions: ``EvaluationResults``
 
 
 ========
@@ -60,9 +67,10 @@ Synopsis
   [--context-entries <value>]
   [--resource-handling-option <value>]
   [--max-items <value>]
-  [--marker <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--starting-token <value>]
+  [--page-size <value>]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -76,12 +84,20 @@ Options
 
   The Amazon Resource Name (ARN) of a user, group, or role whose policies you want to include in the simulation. If you specify a user, group, or role, the simulation includes all policies that are associated with that entity. If you specify a user, the simulation also includes all policies that are attached to any groups the user belongs to.
 
+   
+
+  For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces <http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`_ in the *AWS General Reference* .
+
   
 
 ``--policy-input-list`` (list)
 
 
   An optional list of additional policy documents to include in the simulation. Each document is specified as a string containing the complete, valid JSON text of an IAM policy.
+
+   
+
+  The `regex pattern <http://wikipedia.org/wiki/regex>`_ used to validate this parameter is a string of characters consisting of any printable ASCII character ranging from the space character (\u0020) through end of the ASCII character range as well as the printable characters in the Basic Latin and Latin-1 Supplement character set (through \u00FF). It also includes the special characters tab (\u0009), line feed (\u000A), and carriage return (\u000D).
 
   
 
@@ -117,6 +133,10 @@ Syntax::
 
   The simulation does not automatically retrieve policies for the specified resources. If you want to include a resource policy in the simulation, then you must include the policy as a string in the ``ResourcePolicy`` parameter.
 
+   
+
+  For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces <http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`_ in the *AWS General Reference* .
+
   
 
 
@@ -132,6 +152,10 @@ Syntax::
 
   A resource-based policy to include in the simulation provided as a string. Each resource in the simulation is treated as if it had this policy attached. You can include only one resource-based policy in a simulation.
 
+   
+
+  The `regex pattern <http://wikipedia.org/wiki/regex>`_ used to validate this parameter is a string of characters consisting of any printable ASCII character ranging from the space character (\u0020) through end of the ASCII character range as well as the printable characters in the Basic Latin and Latin-1 Supplement character set (through \u00FF). It also includes the special characters tab (\u0009), line feed (\u000A), and carriage return (\u000D).
+
   
 
 ``--resource-owner`` (string)
@@ -144,7 +168,7 @@ Syntax::
 ``--caller-arn`` (string)
 
 
-  The ARN of the user that you want to specify as the simulated caller of the APIs. If you do not specify a ``CallerArn`` , it defaults to the ARN of the user that you specify in ``PolicySourceArn`` , if you specified a user. If you include both a ``PolicySourceArn`` (for example, ``arn:aws:iam::123456789012:user/David`` ) and a ``CallerArn`` (for example, ``arn:aws:iam::123456789012:user/Bob`` ), the result is that you simulate calling the APIs as Bob, as if Bob had David's policies.
+  The ARN of the IAM user that you want to specify as the simulated caller of the APIs. If you do not specify a ``CallerArn`` , it defaults to the ARN of the user that you specify in ``PolicySourceArn`` , if you specified a user. If you include both a ``PolicySourceArn`` (for example, ``arn:aws:iam::123456789012:user/David`` ) and a ``CallerArn`` (for example, ``arn:aws:iam::123456789012:user/Bob`` ), the result is that you simulate calling the APIs as Bob, as if Bob had David's policies.
 
    
 
@@ -152,14 +176,18 @@ Syntax::
 
    
 
-  ``CallerArn`` is required if you include a ``ResourcePolicy`` and the ``PolicySourceArn`` is not the ARN for an IAM user. This is required so that the resource-based policy's ``Principal`` element has a value to use in evaluating the policy.
+   ``CallerArn`` is required if you include a ``ResourcePolicy`` and the ``PolicySourceArn`` is not the ARN for an IAM user. This is required so that the resource-based policy's ``Principal`` element has a value to use in evaluating the policy.
+
+   
+
+  For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces <http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`_ in the *AWS General Reference* .
 
   
 
 ``--context-entries`` (list)
 
 
-  A list of context keys and corresponding values for the simulation to use. Whenever a context key is evaluated by a ``Condition`` element in one of the simulated policies, the corresponding value is supplied.
+  A list of context keys and corresponding values for the simulation to use. Whenever a context key is evaluated in one of the simulated IAM permission policies, the corresponding value is supplied.
 
   
 
@@ -192,49 +220,64 @@ JSON Syntax::
 
    
 
-  Each of the EC2 scenarios requires that you specify instance, image, and security-group resources. If your scenario includes an EBS volume, then you must specify that volume as a resource. If the EC2 scenario includes VPC, then you must supply the network-interface resource. If it includes an IP subnet, then you must specify the subnet resource. For more information on the EC2 scenario options, see `Supported Platforms`_ in the *AWS EC2 User Guide* .
+  Each of the EC2 scenarios requires that you specify instance, image, and security-group resources. If your scenario includes an EBS volume, then you must specify that volume as a resource. If the EC2 scenario includes VPC, then you must supply the network-interface resource. If it includes an IP subnet, then you must specify the subnet resource. For more information on the EC2 scenario options, see `Supported Platforms <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html>`_ in the *AWS EC2 User Guide* .
 
    
 
    
-  * **EC2-Classic-InstanceStore**  instance, image, security-group 
+  * **EC2-Classic-InstanceStore**   instance, image, security-group 
    
-  * **EC2-Classic-EBS**  instance, image, security-group, volume 
+  * **EC2-Classic-EBS**   instance, image, security-group, volume 
    
-  * **EC2-VPC-InstanceStore**  instance, image, security-group, network-interface 
+  * **EC2-VPC-InstanceStore**   instance, image, security-group, network-interface 
    
-  * **EC2-VPC-InstanceStore-Subnet**  instance, image, security-group, network-interface, subnet 
+  * **EC2-VPC-InstanceStore-Subnet**   instance, image, security-group, network-interface, subnet 
    
-  * **EC2-VPC-EBS**  instance, image, security-group, network-interface, volume 
+  * **EC2-VPC-EBS**   instance, image, security-group, network-interface, volume 
    
-  * **EC2-VPC-EBS-Subnet**  instance, image, security-group, network-interface, subnet, volume 
+  * **EC2-VPC-EBS-Subnet**   instance, image, security-group, network-interface, subnet, volume 
    
 
   
 
 ``--max-items`` (integer)
+ 
 
-
-  Use this only when paginating results to indicate the maximum number of items you want in the response. If additional items exist beyond the maximum you specify, the ``IsTruncated`` response element is ``true`` .
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``NextToken`` is provided in the command's output. To resume pagination, provide the ``NextToken`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``NextToken`` response element directly outside of the AWS CLI.
 
    
 
-  This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. In that case, the ``IsTruncated`` response element returns ``true`` and ``Marker`` contains a value to include in the subsequent call that tells the service where to continue from. 
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
-  
-
-``--marker`` (string)
-
-
-  Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the ``Marker`` element in the response that you received to indicate where the next call should start.
-
-  
+   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--starting-token`` (string)
+ 
+
+  A token to specify where to start paginating. This is the ``NextToken`` from a previously truncated response.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--page-size`` (integer)
+ 
+
+  The size of each page to get in the AWS service call. This does not affect the number of items returned in the command's output. Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call. This can help prevent the AWS service calls from timing out.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -258,7 +301,7 @@ EvaluationResults -> (list)
 
      
 
-    This data type is used by the return parameter of `` SimulatePolicy`` .
+    This data type is used by the return parameter of ``  simulate-custom-policy `` and ``  simulate-principal-policy `` .
 
     
 
@@ -308,7 +351,7 @@ EvaluationResults -> (list)
 
          
 
-        This data type is used by the ``MatchedStatements`` member of the `` EvaluationResult`` type.
+        This data type is used by the ``MatchedStatements`` member of the ``  EvaluationResult `` type.
 
         
 
@@ -400,15 +443,31 @@ EvaluationResults -> (list)
 
       
 
-      A list of context keys that are required by the included input policies but that were not provided by one of the input parameters. To discover the context keys used by a set of policies, you can call  get-context-keys-for-custom-policy or  get-context-keys-for-principal-policy .
+      A list of context keys that are required by the included input policies but that were not provided by one of the input parameters. This list is used when the resource in a simulation is "*", either explicitly, or when the ``ResourceArns`` parameter blank. If you include a list of resources, then any missing context values are instead included under the ``ResourceSpecificResults`` section. To discover the context keys used by a set of policies, you can call  get-context-keys-for-custom-policy or  get-context-keys-for-principal-policy .
+
+      
+
+      (string)
 
         
 
-      If the response includes any keys in this list, then the reported results might be untrustworthy because the simulation could not completely evaluate all of the conditions specified in the policies that would occur in a real world request.
+        
 
-       
+      
 
-      (string)
+    OrganizationsDecisionDetail -> (structure)
+
+      
+
+      A structure that details how AWS Organizations and its service control policies affect the results of the simulation. Only applies if the simulated user's account is part of an organization.
+
+      
+
+      AllowedByOrganizations -> (boolean)
+
+        
+
+        Specifies whether the simulated action is allowed by the AWS Organizations service control policies that impact the simulated user's account.
 
         
 
@@ -420,7 +479,7 @@ EvaluationResults -> (list)
 
       
 
-      Additional details about the results of the evaluation decision. When there are both IAM policies and resource policies, this parameter explains how each set of policies contributes to the final evaluation decision. When simulating cross-account access to a resource, both the resource-based policy and the caller's IAM policy must grant access. See `How IAM Roles Differ from Resource-based Policies`_ 
+      Additional details about the results of the evaluation decision. When there are both IAM policies and resource policies, this parameter explains how each set of policies contributes to the final evaluation decision. When simulating cross-account access to a resource, both the resource-based policy and the caller's IAM policy must grant access. See `How IAM Roles Differ from Resource-based Policies <http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_compare-resource-policies.html>`_  
 
       
 
@@ -494,7 +553,7 @@ EvaluationResults -> (list)
 
              
 
-            This data type is used by the ``MatchedStatements`` member of the `` EvaluationResult`` type.
+            This data type is used by the ``MatchedStatements`` member of the ``  EvaluationResult `` type.
 
             
 
@@ -586,7 +645,7 @@ EvaluationResults -> (list)
 
           
 
-          A list of context keys that are required by the included input policies but that were not provided by one of the input parameters. To discover the context keys used by a set of policies, you can call  get-context-keys-for-custom-policy or  get-context-keys-for-principal-policy .
+          A list of context keys that are required by the included input policies but that were not provided by one of the input parameters. This list is used when a list of ARNs is included in the ``ResourceArns`` parameter instead of "*". If you do not specify individual resources, by setting ``ResourceArns`` to "*" or by not including the ``ResourceArns`` parameter, then any missing context values are instead included under the ``EvaluationResults`` section. To discover the context keys used by a set of policies, you can call  get-context-keys-for-custom-policy or  get-context-keys-for-principal-policy .
 
           
 
@@ -648,7 +707,3 @@ Marker -> (string)
 
   
 
-
-
-.. _Supported Platforms: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
-.. _How IAM Roles Differ from Resource-based Policies: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_compare-resource-policies.html

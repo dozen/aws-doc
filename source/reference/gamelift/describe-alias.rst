@@ -15,8 +15,35 @@ Description
 
 
 
-Retrieves properties for a specified alias. To get the alias, specify an alias ID. If successful, an  Alias object is returned.
+Retrieves properties for an alias. This operation returns all alias metadata and settings. To get an alias's target fleet ID only, use ``resolve-alias`` . 
 
+ 
+
+To get alias properties, specify the alias ID. If successful, the requested alias record is returned.
+
+ 
+
+Alias-related operations include:
+
+ 
+
+ 
+*  create-alias   
+ 
+*  list-aliases   
+ 
+*  describe-alias   
+ 
+*  update-alias   
+ 
+*  delete-alias   
+ 
+*  resolve-alias   
+ 
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeAlias>`_
 
 
 ========
@@ -28,7 +55,7 @@ Synopsis
     describe-alias
   --alias-id <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -40,15 +67,15 @@ Options
 ``--alias-id`` (string)
 
 
-  Unique identifier for a fleet alias. Specify the alias you want to retrieve. 
+  Unique identifier for a fleet alias. Specify the alias you want to retrieve.
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -60,7 +87,7 @@ Alias -> (structure)
 
   
 
-  Object containing the requested alias.
+  Object that contains the requested alias.
 
   
 
@@ -68,7 +95,7 @@ Alias -> (structure)
 
     
 
-    Unique identifier for a fleet alias.
+    Unique identifier for an alias; alias IDs are unique within a region.
 
     
 
@@ -78,7 +105,17 @@ Alias -> (structure)
 
     
 
-    Descriptive label associated with this alias. Alias names do not need to be unique.
+    Descriptive label that is associated with an alias. Alias names do not need to be unique.
+
+    
+
+    
+
+  AliasArn -> (string)
+
+    
+
+    Unique identifier for an alias; alias ARNs are unique across all regions.
 
     
 
@@ -88,7 +125,7 @@ Alias -> (structure)
 
     
 
-    Human-readable description of the alias.
+    Human-readable description of an alias.
 
     
 
@@ -98,7 +135,7 @@ Alias -> (structure)
 
     
 
-    Routing configuration for a fleet alias. 
+    Alias configuration for the alias, including routing type and settings.
 
     
 
@@ -106,15 +143,19 @@ Alias -> (structure)
 
       
 
-      Type of routing strategy. Possible routing types include: 
+      Type of routing strategy.
 
-      
-      * SIMPLE: The alias resolves to one specific fleet. Use this type when routing to active fleets.
-      
-      * TERMINAL: The alias does not resolve to a fleet but instead can be used to display a message to the user. A terminal alias throws a TerminalRoutingStrategyException with the  RoutingStrategy message embedded.
-      
+       
 
-      
+      Possible routing types include the following:
+
+       
+
+       
+      * **SIMPLE** – The alias resolves to one specific fleet. Use this type when routing to active fleets. 
+       
+      * **TERMINAL** – The alias does not resolve to a fleet but instead can be used to display a message to the user. A terminal alias throws a TerminalRoutingStrategyException with the  RoutingStrategy message embedded. 
+       
 
       
 
@@ -124,7 +165,7 @@ Alias -> (structure)
 
       
 
-      Unique identifier for a fleet.
+      Unique identifier for a fleet that the alias points to.
 
       
 
@@ -146,7 +187,7 @@ Alias -> (structure)
 
     
 
-    Time stamp indicating when this object was created. Format is an integer representing the number of seconds since the Unix epoch (Unix time).
+    Time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (for example "1469498468.057").
 
     
 
@@ -156,7 +197,7 @@ Alias -> (structure)
 
     
 
-    Time stamp indicating when this object was last modified. Format is an integer representing the number of seconds since the Unix epoch (Unix time).
+    Time stamp indicating when this data object was last modified. Format is a number expressed in Unix time as milliseconds (for example "1469498468.057").
 
     
 

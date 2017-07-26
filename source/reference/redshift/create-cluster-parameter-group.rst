@@ -15,7 +15,7 @@ Description
 
 
 
-Creates an Amazon Redshift parameter group. 
+Creates an Amazon Redshift parameter group.
 
  
 
@@ -23,8 +23,11 @@ Creating parameter groups is independent of creating clusters. You can associate
 
  
 
-Parameters in the parameter group define specific behavior that applies to the databases you create on the cluster. For more information about parameters and parameter groups, go to `Amazon Redshift Parameter Groups`_ in the *Amazon Redshift Cluster Management Guide* . 
+Parameters in the parameter group define specific behavior that applies to the databases you create on the cluster. For more information about parameters and parameter groups, go to `Amazon Redshift Parameter Groups <http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html>`_ in the *Amazon Redshift Cluster Management Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterParameterGroup>`_
 
 
 ========
@@ -39,7 +42,7 @@ Synopsis
   --description <value>
   [--tags <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -51,36 +54,40 @@ Options
 ``--parameter-group-name`` (string)
 
 
-  The name of the cluster parameter group. 
+  The name of the cluster parameter group.
 
    
 
-  Constraints: 
+  Constraints:
 
    
 
    
-  * Must be 1 to 255 alphanumeric characters or hyphens
+  * Must be 1 to 255 alphanumeric characters or hyphens 
    
-  * First character must be a letter.
+  * First character must be a letter. 
    
-  * Cannot end with a hyphen or contain two consecutive hyphens.
+  * Cannot end with a hyphen or contain two consecutive hyphens. 
    
-  * Must be unique withing your AWS account.
+  * Must be unique withing your AWS account. 
    
 
    
 
   .. note::
 
+     
+
     This value is stored as a lower-case string.
+
+     
 
   
 
 ``--parameter-group-family`` (string)
 
 
-  The Amazon Redshift engine version to which the cluster parameter group applies. The cluster engine version determines the set of parameters. 
+  The Amazon Redshift engine version to which the cluster parameter group applies. The cluster engine version determines the set of parameters.
 
    
 
@@ -91,7 +98,7 @@ Options
 ``--description`` (string)
 
 
-  A description of the parameter group. 
+  A description of the parameter group.
 
   
 
@@ -126,8 +133,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -176,7 +183,7 @@ ClusterParameterGroup -> (structure)
 
     
 
-    The name of the cluster parameter group. 
+    The name of the cluster parameter group.
 
     
 
@@ -186,7 +193,7 @@ ClusterParameterGroup -> (structure)
 
     
 
-    The name of the cluster parameter group family that this cluster parameter group is compatible with. 
+    The name of the cluster parameter group family that this cluster parameter group is compatible with.
 
     
 
@@ -196,7 +203,7 @@ ClusterParameterGroup -> (structure)
 
     
 
-    The description of the parameter group. 
+    The description of the parameter group.
 
     
 
@@ -244,6 +251,3 @@ ClusterParameterGroup -> (structure)
 
   
 
-
-
-.. _Amazon Redshift Parameter Groups: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html

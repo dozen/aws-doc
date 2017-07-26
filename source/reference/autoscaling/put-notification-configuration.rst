@@ -15,16 +15,19 @@ Description
 
 
 
-Configures an Auto Scaling group to send notifications when specified events take place. Subscribers to this topic can have messages for events delivered to an endpoint such as a web server or email address. 
+Configures an Auto Scaling group to send notifications when specified events take place. Subscribers to the specified topic can have messages delivered to an endpoint such as a web server or an email address.
 
  
 
-For more information see `Getting Notifications When Your Auto Scaling Group Changes`_ in the *Auto Scaling Developer Guide* .
+This configuration overwrites any existing configuration.
 
  
 
-This configuration overwrites an existing configuration.
+For more information see `Getting SNS Notifications When Your Auto Scaling Group Scales <http://docs.aws.amazon.com/autoscaling/latest/userguide/ASGettingNotifications.html>`_ in the *Auto Scaling User Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutNotificationConfiguration>`_
 
 
 ========
@@ -38,7 +41,7 @@ Synopsis
   --topic-arn <value>
   --notification-types <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -57,7 +60,7 @@ Options
 ``--topic-arn`` (string)
 
 
-  The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic. 
+  The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic.
 
   
 
@@ -79,8 +82,8 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -92,7 +95,7 @@ Examples
 
 This example adds the specified notification to the specified Auto Scaling group::
 
-	aws autoscaling put-notification-configuration --auto-scaling-group-name my-auto-scaling-group --topic-arn arn:aws:sns:us-west-2:123456789012:my-sns-topic --notification-type autoscaling:TEST_NOTIFICATION
+    aws autoscaling put-notification-configuration --auto-scaling-group-name my-auto-scaling-group --topic-arn arn:aws:sns:us-west-2:123456789012:my-sns-topic --notification-type autoscaling:TEST_NOTIFICATION
 
 For more information, see `Configure Your Auto Scaling Group to Send Notifications`_ in the *Auto Scaling Developer Guide*.
 
@@ -104,5 +107,3 @@ Output
 ======
 
 None
-
-.. _Getting Notifications When Your Auto Scaling Group Changes: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/ASGettingNotifications.html

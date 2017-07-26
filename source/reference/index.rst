@@ -143,7 +143,13 @@ Available Services
 
   acm/index
   apigateway/index
+  application-autoscaling/index
+  appstream/index
+  athena/index
   autoscaling/index
+  batch/index
+  budgets/index
+  clouddirectory/index
   cloudformation/index
   cloudfront/index
   cloudhsm/index
@@ -151,16 +157,23 @@ Available Services
   cloudsearchdomain/index
   cloudtrail/index
   cloudwatch/index
+  codebuild/index
   codecommit/index
   codepipeline/index
+  codestar/index
   cognito-identity/index
+  cognito-idp/index
   cognito-sync/index
   configservice/index
   configure/index
+  cur/index
   datapipeline/index
+  dax/index
   deploy/index
   devicefarm/index
   directconnect/index
+  discovery/index
+  dms/index
   ds/index
   dynamodb/index
   dynamodbstreams/index
@@ -172,41 +185,65 @@ Available Services
   elasticbeanstalk/index
   elastictranscoder/index
   elb/index
+  elbv2/index
   emr/index
   es/index
   events/index
   firehose/index
   gamelift/index
   glacier/index
+  greengrass/index
+  health/index
   iam/index
   importexport/index
   inspector/index
   iot/index
   iot-data/index
   kinesis/index
+  kinesisanalytics/index
   kms/index
   lambda/index
+  lex-models/index
+  lex-runtime/index
+  lightsail/index
   logs/index
   machinelearning/index
+  marketplace-entitlement/index
   marketplacecommerceanalytics/index
+  meteringmarketplace/index
+  mturk/index
   opsworks/index
+  opsworks-cm/index
+  organizations/index
+  pinpoint/index
+  polly/index
   rds/index
   redshift/index
+  rekognition/index
+  resourcegroupstaggingapi/index
   route53/index
   route53domains/index
   s3/index
   s3api/index
   sdb/index
+  servicecatalog/index
   ses/index
+  shield/index
+  sms/index
+  snowball/index
   sns/index
   sqs/index
   ssm/index
+  stepfunctions/index
   storagegateway/index
   sts/index
   support/index
   swf/index
   waf/index
+  waf-regional/index
+  workdocs/index
   workspaces/index
+  xray/index
 
 
 ========

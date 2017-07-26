@@ -29,8 +29,11 @@ Describes load-based auto scaling configurations for specified layers.
 
  
 
-**Required Permissions** : To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see `Managing User Permissions`_ .
+ **Required Permissions** : To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see `Managing User Permissions <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html>`_ .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeLoadBasedAutoScaling>`_
 
 
 ========
@@ -42,7 +45,7 @@ Synopsis
     describe-load-based-auto-scaling
   --layer-ids <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -69,8 +72,8 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -85,8 +88,6 @@ The layer is identified by its layer ID, which you can find on the layer's
 details page or by running ``describe-layers``. ::
 
   aws opsworks describe-load-based-auto-scaling --region us-east-1 --layer-ids 6bec29c9-c866-41a0-aba5-fa3e374ce2a1
-
-**Note**: AWS OpsWorks CLI commands should set the region to ``us-east-1`` regardless of the stack's location.
 
 *Output*: The example layer has a single load-based instance. :: 
 
@@ -163,7 +164,7 @@ LoadBasedAutoScalingConfigurations -> (list)
 
       
 
-      An ``AutoScalingThresholds`` object that describes the upscaling configuration, which defines how and when AWS OpsWorks increases the number of instances.
+      An ``AutoScalingThresholds`` object that describes the upscaling configuration, which defines how and when AWS OpsWorks Stacks increases the number of instances.
 
       
 
@@ -191,7 +192,7 @@ LoadBasedAutoScalingConfigurations -> (list)
 
         
 
-        The amount of time (in minutes) after a scaling event occurs that AWS OpsWorks should ignore metrics and suppress additional scaling events. For example, AWS OpsWorks adds new instances following an upscaling event but the instances won't start reducing the load until they have been booted and configured. There is no point in raising additional scaling events during that operation, which typically takes several minutes. ``IgnoreMetricsTime`` allows you to direct AWS OpsWorks to suppress scaling events long enough to get the new instances online.
+        The amount of time (in minutes) after a scaling event occurs that AWS OpsWorks Stacks should ignore metrics and suppress additional scaling events. For example, AWS OpsWorks Stacks adds new instances following an upscaling event but the instances won't start reducing the load until they have been booted and configured. There is no point in raising additional scaling events during that operation, which typically takes several minutes. ``IgnoreMetricsTime`` allows you to direct AWS OpsWorks Stacks to suppress scaling events long enough to get the new instances online.
 
         
 
@@ -221,7 +222,7 @@ LoadBasedAutoScalingConfigurations -> (list)
 
         
 
-        The load threshold. A value of -1 disables the threshold. For more information about how load is computed, see `Load (computing)`_ .
+        The load threshold. A value of -1 disables the threshold. For more information about how load is computed, see `Load (computing) <http://en.wikipedia.org/wiki/Load_%28computing%29>`_ .
 
         
 
@@ -237,7 +238,11 @@ LoadBasedAutoScalingConfigurations -> (list)
 
         .. note::
 
-          To use custom alarms, you must update your service role to allow ``cloudwatch:DescribeAlarms`` . You can either have AWS OpsWorks update the role for you when you first use this feature or you can edit the role manually. For more information, see `Allowing AWS OpsWorks to Act on Your Behalf`_ .
+           
+
+          To use custom alarms, you must update your service role to allow ``cloudwatch:DescribeAlarms`` . You can either have AWS OpsWorks Stacks update the role for you when you first use this feature or you can edit the role manually. For more information, see `Allowing AWS OpsWorks Stacks to Act on Your Behalf <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-servicerole.html>`_ .
+
+           
 
         
 
@@ -255,7 +260,7 @@ LoadBasedAutoScalingConfigurations -> (list)
 
       
 
-      An ``AutoScalingThresholds`` object that describes the downscaling configuration, which defines how and when AWS OpsWorks reduces the number of instances.
+      An ``AutoScalingThresholds`` object that describes the downscaling configuration, which defines how and when AWS OpsWorks Stacks reduces the number of instances.
 
       
 
@@ -283,7 +288,7 @@ LoadBasedAutoScalingConfigurations -> (list)
 
         
 
-        The amount of time (in minutes) after a scaling event occurs that AWS OpsWorks should ignore metrics and suppress additional scaling events. For example, AWS OpsWorks adds new instances following an upscaling event but the instances won't start reducing the load until they have been booted and configured. There is no point in raising additional scaling events during that operation, which typically takes several minutes. ``IgnoreMetricsTime`` allows you to direct AWS OpsWorks to suppress scaling events long enough to get the new instances online.
+        The amount of time (in minutes) after a scaling event occurs that AWS OpsWorks Stacks should ignore metrics and suppress additional scaling events. For example, AWS OpsWorks Stacks adds new instances following an upscaling event but the instances won't start reducing the load until they have been booted and configured. There is no point in raising additional scaling events during that operation, which typically takes several minutes. ``IgnoreMetricsTime`` allows you to direct AWS OpsWorks Stacks to suppress scaling events long enough to get the new instances online.
 
         
 
@@ -313,7 +318,7 @@ LoadBasedAutoScalingConfigurations -> (list)
 
         
 
-        The load threshold. A value of -1 disables the threshold. For more information about how load is computed, see `Load (computing)`_ .
+        The load threshold. A value of -1 disables the threshold. For more information about how load is computed, see `Load (computing) <http://en.wikipedia.org/wiki/Load_%28computing%29>`_ .
 
         
 
@@ -329,7 +334,11 @@ LoadBasedAutoScalingConfigurations -> (list)
 
         .. note::
 
-          To use custom alarms, you must update your service role to allow ``cloudwatch:DescribeAlarms`` . You can either have AWS OpsWorks update the role for you when you first use this feature or you can edit the role manually. For more information, see `Allowing AWS OpsWorks to Act on Your Behalf`_ .
+           
+
+          To use custom alarms, you must update your service role to allow ``cloudwatch:DescribeAlarms`` . You can either have AWS OpsWorks Stacks update the role for you when you first use this feature or you can edit the role manually. For more information, see `Allowing AWS OpsWorks Stacks to Act on Your Behalf <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-servicerole.html>`_ .
+
+           
 
         
 
@@ -347,8 +356,3 @@ LoadBasedAutoScalingConfigurations -> (list)
 
   
 
-
-
-.. _Managing User Permissions: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
-.. _Allowing AWS OpsWorks to Act on Your Behalf: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-servicerole.html
-.. _Load (computing): http://en.wikipedia.org/wiki/Load_%28computing%29

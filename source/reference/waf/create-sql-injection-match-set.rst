@@ -24,19 +24,22 @@ To create and configure a ``SqlInjectionMatchSet`` , perform the following steps
  
 
  
-* Use  get-change-token to get the change token that you provide in the ``change-token`` parameter of a ``create-sql-injection-match-set`` request.
+* Use  get-change-token to get the change token that you provide in the ``change-token`` parameter of a ``create-sql-injection-match-set`` request. 
  
-* Submit a ``create-sql-injection-match-set`` request.
+* Submit a ``create-sql-injection-match-set`` request. 
  
-* Use ``get-change-token`` to get the change token that you provide in the ``change-token`` parameter of an  update-sql-injection-match-set request.
+* Use ``get-change-token`` to get the change token that you provide in the ``change-token`` parameter of an  update-sql-injection-match-set request. 
  
-* Submit an  update-sql-injection-match-set request to specify the parts of web requests in which you want to allow, block, or count malicious SQL code.
- 
-
+* Submit an  update-sql-injection-match-set request to specify the parts of web requests in which you want to allow, block, or count malicious SQL code. 
  
 
-For more information about how to use the AWS WAF API to allow or block HTTP requests, see the `AWS WAF Developer Guide`_ .
+ 
 
+For more information about how to use the AWS WAF API to allow or block HTTP requests, see the `AWS WAF Developer Guide <http://docs.aws.amazon.com/waf/latest/developerguide/>`_ .
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateSqlInjectionMatchSet>`_
 
 
 ========
@@ -49,7 +52,7 @@ Synopsis
   --name <value>
   --change-token <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -75,8 +78,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -96,11 +99,11 @@ SqlInjectionMatchSet -> (structure)
 
     
 
-    A unique identifier for a ``SqlInjectionMatchSet`` . You use ``SqlInjectionMatchSetId`` to get information about a ``SqlInjectionMatchSet`` (see  get-sql-injection-match-set ), update a ``SqlInjectionMatchSet`` (see  update-sql-injection-match-set , insert a ``SqlInjectionMatchSet`` into a ``Rule`` or delete one from a ``Rule`` (see  update-rule ), and delete a ``SqlInjectionMatchSet`` from AWS WAF (see  delete-sql-injection-match-set ).
+    A unique identifier for a ``SqlInjectionMatchSet`` . You use ``SqlInjectionMatchSetId`` to get information about a ``SqlInjectionMatchSet`` (see  get-sql-injection-match-set ), update a ``SqlInjectionMatchSet`` (see  update-sql-injection-match-set ), insert a ``SqlInjectionMatchSet`` into a ``Rule`` or delete one from a ``Rule`` (see  update-rule ), and delete a ``SqlInjectionMatchSet`` from AWS WAF (see  delete-sql-injection-match-set ).
 
      
 
-    ``SqlInjectionMatchSetId`` is returned by  create-sql-injection-match-set and by  list-sql-injection-match-sets .
+     ``SqlInjectionMatchSetId`` is returned by  create-sql-injection-match-set and by  list-sql-injection-match-sets .
 
     
 
@@ -136,7 +139,7 @@ SqlInjectionMatchSet -> (structure)
 
         
 
-        Specifies where in a web request to look for ``TargetString`` .
+        Specifies where in a web request to look for snippets of malicious SQL code.
 
         
 
@@ -149,15 +152,15 @@ SqlInjectionMatchSet -> (structure)
            
 
            
-          * ``HEADER`` : A specified request header, for example, the value of the ``User-Agent`` or ``Referer`` header. If you choose ``HEADER`` for the type, specify the name of the header in ``Data`` .
+          * ``HEADER`` : A specified request header, for example, the value of the ``User-Agent`` or ``Referer`` header. If you choose ``HEADER`` for the type, specify the name of the header in ``Data`` . 
            
-          * ``METHOD`` : The HTTP method, which indicated the type of operation that the request is asking the origin to perform. Amazon CloudFront supports the following methods: ``DELETE`` , ``GET`` , ``HEAD`` , ``OPTIONS`` , ``PATCH`` , ``POST`` , and ``PUT`` .
+          * ``METHOD`` : The HTTP method, which indicated the type of operation that the request is asking the origin to perform. Amazon CloudFront supports the following methods: ``DELETE`` , ``GET`` , ``HEAD`` , ``OPTIONS`` , ``PATCH`` , ``POST`` , and ``PUT`` . 
            
-          * ``QUERY_STRING`` : A query string, which is the part of a URL that appears after a ``?`` character, if any.
+          * ``QUERY_STRING`` : A query string, which is the part of a URL that appears after a ``?`` character, if any. 
            
-          * ``URI`` : The part of a web request that identifies a resource, for example, ``/images/daily-ad.jpg`` .
+          * ``URI`` : The part of a web request that identifies a resource, for example, ``/images/daily-ad.jpg`` . 
            
-          * ``BODY`` : The part of a request that contains any additional data that you want to send to your web server as the HTTP request body, such as data from a form. The request body immediately follows the request headers. Note that only the first ``8192`` bytes of the request body are forwarded to AWS WAF for inspection. To allow or block requests based on the length of the body, you can create a size constraint set. For more information, see  create-size-constraint-set . 
+          * ``BODY`` : The part of a request that contains any additional data that you want to send to your web server as the HTTP request body, such as data from a form. The request body immediately follows the request headers. Note that only the first ``8192`` bytes of the request body are forwarded to AWS WAF for inspection. To allow or block requests based on the length of the body, you can create a size constraint set. For more information, see  create-size-constraint-set .  
            
 
           
@@ -188,7 +191,7 @@ SqlInjectionMatchSet -> (structure)
 
          
 
-        **CMD_LINE** 
+         **CMD_LINE**  
 
          
 
@@ -197,20 +200,20 @@ SqlInjectionMatchSet -> (structure)
          
 
          
-        * Delete the following characters: \ " ' ^
+        * Delete the following characters: \ " ' ^ 
          
-        * Delete spaces before the following characters: / (
+        * Delete spaces before the following characters: / ( 
          
-        * Replace the following characters with a space: , ;
+        * Replace the following characters with a space: , ; 
          
-        * Replace multiple spaces with one space
+        * Replace multiple spaces with one space 
          
-        * Convert uppercase letters (A-Z) to lowercase (a-z)
-         
-
+        * Convert uppercase letters (A-Z) to lowercase (a-z) 
          
 
-        **COMPRESS_WHITE_SPACE** 
+         
+
+         **COMPRESS_WHITE_SPACE**  
 
          
 
@@ -219,26 +222,26 @@ SqlInjectionMatchSet -> (structure)
          
 
          
-        * \f, formfeed, decimal 12
+        * \f, formfeed, decimal 12 
          
-        * \t, tab, decimal 9
+        * \t, tab, decimal 9 
          
-        * \n, newline, decimal 10
+        * \n, newline, decimal 10 
          
-        * \r, carriage return, decimal 13
+        * \r, carriage return, decimal 13 
          
-        * \v, vertical tab, decimal 11
+        * \v, vertical tab, decimal 11 
          
-        * non-breaking space, decimal 160
+        * non-breaking space, decimal 160 
          
-
-         
-
-        ``COMPRESS_WHITE_SPACE`` also replaces multiple spaces with one space.
 
          
 
-        **HTML_ENTITY_DECODE** 
+         ``COMPRESS_WHITE_SPACE`` also replaces multiple spaces with one space.
+
+         
+
+         **HTML_ENTITY_DECODE**  
 
          
 
@@ -247,22 +250,22 @@ SqlInjectionMatchSet -> (structure)
          
 
          
-        * Replaces ``(ampersand)quot;`` with ``"`` 
+        * Replaces ``(ampersand)quot;`` with ``"``   
          
-        * Replaces ``(ampersand)nbsp;`` with a non-breaking space, decimal 160
+        * Replaces ``(ampersand)nbsp;`` with a non-breaking space, decimal 160 
          
-        * Replaces ``(ampersand)lt;`` with a "less than" symbol
+        * Replaces ``(ampersand)lt;`` with a "less than" symbol 
          
-        * Replaces ``(ampersand)gt;`` with ``>`` 
+        * Replaces ``(ampersand)gt;`` with ````   
          
-        * Replaces characters that are represented in hexadecimal format, ``(ampersand)#xhhhh;`` , with the corresponding characters
+        * Replaces characters that are represented in hexadecimal format, ``(ampersand)#xhhhh;`` , with the corresponding characters 
          
-        * Replaces characters that are represented in decimal format, ``(ampersand)#nnnn;`` , with the corresponding characters
-         
-
+        * Replaces characters that are represented in decimal format, ``(ampersand)#nnnn;`` , with the corresponding characters 
          
 
-        **LOWERCASE** 
+         
+
+         **LOWERCASE**  
 
          
 
@@ -270,7 +273,7 @@ SqlInjectionMatchSet -> (structure)
 
          
 
-        **URL_DECODE** 
+         **URL_DECODE**  
 
          
 
@@ -278,7 +281,7 @@ SqlInjectionMatchSet -> (structure)
 
          
 
-        **NONE** 
+         **NONE**  
 
          
 
@@ -304,6 +307,3 @@ ChangeToken -> (string)
 
   
 
-
-
-.. _AWS WAF Developer Guide: http://docs.aws.amazon.com/waf/latest/developerguide/

@@ -19,8 +19,11 @@ Describes one or more regions that are currently available to you.
 
  
 
-For a list of the regions supported by Amazon EC2, see `Regions and Endpoints`_ .
+For a list of the regions supported by Amazon EC2, see `Regions and Endpoints <http://docs.aws.amazon.com/general/latest/gr/rande.html#ec2_region>`_ .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeRegions>`_
 
 
 ========
@@ -30,11 +33,11 @@ Synopsis
 ::
 
     describe-regions
-  [--dry-run | --no-dry-run]
-  [--region-names <value>]
   [--filters <value>]
+  [--region-names <value>]
+  [--dry-run | --no-dry-run]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -42,28 +45,6 @@ Synopsis
 =======
 Options
 =======
-
-``--dry-run`` | ``--no-dry-run`` (boolean)
-
-
-  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
-
-  
-
-``--region-names`` (list)
-
-
-  The names of one or more regions.
-
-  
-
-
-
-Syntax::
-
-  "string" "string" ...
-
-
 
 ``--filters`` (list)
 
@@ -101,11 +82,33 @@ JSON Syntax::
 
 
 
+``--region-names`` (list)
+
+
+  The names of one or more regions.
+
+  
+
+
+
+Syntax::
+
+  "string" "string" ...
+
+
+
+``--dry-run`` | ``--no-dry-run`` (boolean)
+
+
+  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
+
+  
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -128,6 +131,10 @@ Output::
           {
               "Endpoint": "ec2.eu-west-1.amazonaws.com",
               "RegionName": "eu-west-1"
+          },
+          {
+              "Endpoint": "ec2.ap-south-1.amazonaws.com",
+              "RegionName": "ap-south-1"
           },
           {
               "Endpoint": "ec2.ap-southeast-1.amazonaws.com",
@@ -195,6 +202,28 @@ Output::
       ]
   }
 
+**To describe region names only**
+
+This example uses the ``--query`` parameter to filter the output and return the names of the regions only. The output is returned as tab-delimited lines.
+
+Command::
+
+  aws ec2 describe-regions --query 'Regions[].{Name:RegionName}' --output text
+  
+Output::
+
+  ap-south-1
+  eu-west-1
+  ap-southeast-1
+  ap-southeast-2
+  eu-central-1
+  ap-northeast-2
+  ap-northeast-1
+  us-east-1
+  sa-east-1
+  us-west-1
+  us-west-2
+
 
 ======
 Output
@@ -216,16 +245,6 @@ Regions -> (list)
 
     
 
-    RegionName -> (string)
-
-      
-
-      The name of the region.
-
-      
-
-      
-
     Endpoint -> (string)
 
       
@@ -236,10 +255,17 @@ Regions -> (list)
 
       
 
+    RegionName -> (string)
+
+      
+
+      The name of the region.
+
+      
+
+      
+
     
 
   
 
-
-
-.. _Regions and Endpoints: http://docs.aws.amazon.com/general/latest/gr/rande.html#ec2_region

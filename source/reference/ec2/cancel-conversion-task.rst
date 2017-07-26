@@ -19,8 +19,11 @@ Cancels an active conversion task. The task can be the import of an instance or 
 
  
 
-For more information, see `Using the Command Line Tools to Import Your Virtual Machine to Amazon EC2`_ in the *Amazon Elastic Compute Cloud User Guide* .
+For more information, see `Importing a Virtual Machine Using the Amazon EC2 CLI <http://docs.aws.amazon.com/AWSEC2/latest/CommandLineReference/ec2-cli-vmimport-export.html>`_ .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelConversionTask>`_
 
 
 ========
@@ -30,11 +33,11 @@ Synopsis
 ::
 
     cancel-conversion-task
-  [--dry-run | --no-dry-run]
   --conversion-task-id <value>
+  [--dry-run | --no-dry-run]
   [--reason-message <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -43,17 +46,17 @@ Synopsis
 Options
 =======
 
-``--dry-run`` | ``--no-dry-run`` (boolean)
-
-
-  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
-
-  
-
 ``--conversion-task-id`` (string)
 
 
   The ID of the conversion task.
+
+  
+
+``--dry-run`` | ``--no-dry-run`` (boolean)
+
+
+  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
 
   
 
@@ -67,8 +70,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -90,5 +93,3 @@ Output
 ======
 
 None
-
-.. _Using the Command Line Tools to Import Your Virtual Machine to Amazon EC2: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UploadingYourInstancesandVolumes.html

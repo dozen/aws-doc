@@ -15,8 +15,11 @@ Description
 
 
 
-Creates a new deployment group for application revisions to be deployed to.
+Creates a deployment group to which application revisions will be deployed.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeploymentGroup>`_
 
 
 ========
@@ -33,9 +36,14 @@ Synopsis
   [--auto-scaling-groups <value>]
   --service-role-arn <value>
   [--trigger-configurations <value>]
+  [--alarm-configuration <value>]
+  [--auto-rollback-configuration <value>]
+  [--deployment-style <value>]
+  [--blue-green-deployment-configuration <value>]
+  [--load-balancer-info <value>]
   [--ec2-tag-filters <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -47,7 +55,7 @@ Options
 ``--application-name`` (string)
 
 
-  The name of an existing AWS CodeDeploy application associated with the applicable IAM user or AWS account.
+  The name of an AWS CodeDeploy application associated with the applicable IAM user or AWS account.
 
   
 
@@ -61,52 +69,22 @@ Options
 ``--deployment-config-name`` (string)
 
 
-  If specified, the deployment configuration name can be either one of the predefined configurations provided with AWS CodeDeploy, or a custom deployment configuration that you created by calling the create deployment configuration operation.
+  If specified, the deployment configuration name can be either one of the predefined configurations provided with AWS CodeDeploy or a custom deployment configuration that you create by calling the create deployment configuration operation.
 
    
 
-  .. note::
-
-     
-
-    CodeDeployDefault.OneAtATime is the default deployment configuration that is used if a configuration isn't specified for either the deployment or the deployment group.
-
-     
+  CodeDeployDefault.OneAtATime is the default deployment configuration. It is used if a configuration isn't specified for the deployment or the deployment group.
 
    
 
-  The predefined deployment configurations including the following:
-
-   
-
-   
-  * **CodeDeployDefault.AllAtOnce** attempts to deploy an application revision to as many instances as possible at once. The status of the overall deployment will be displayed as **Succeeded** if the application revision is deployed to one or more of the instances. The status of the overall deployment will be displayed as **Failed** if the application revision is not deployed to any of the instances. Using an example of nine instances, CodeDeployDefault.AllAtOnce will attempt to deploy to all nine instances at once. The overall deployment will succeed if deployment to even a single instance is successful; it will fail only if deployments to all nine instances fail.  
-   
-  * **CodeDeployDefault.HalfAtATime** deploys to up to half of the instances at a time (with fractions rounded down). The overall deployment succeeds if the application revision deploys to at least half of the instances (with fractions rounded up); otherwise, the deployment fails. For example, for nine instances, deploy to up to four instances at a time. The overall deployment succeeds if deployment to five or more instances succeed; otherwise, the deployment fails. Note that the deployment may successfully deploy to some instances, even if the overall deployment fails. 
-   
-  * **CodeDeployDefault.OneAtATime** deploys the application revision to only one instance at a time. For deployment groups that contain more than one instance: 
-
-     
-    * The overall deployment succeeds if the application revision deploys to all of the instances. The exception to this rule is that if deployment to the last instance fails, the overall deployment still succeeds. This is because AWS CodeDeploy allows only one instance to be taken offline at a time with the CodeDeployDefault.OneAtATime configuration. 
-     
-    * The overall deployment fails as soon as the application revision fails to deploy to any but the last instance. Note that the deployment may successfully deploy to some instances, even if the overall deployment fails. 
-     
-    * Example: For nine instances, deploy to one instance at a time. The overall deployment succeeds if the first eight instances are successfully deployed to, but it fails if deployment to any of the first eight instances fails. 
-     
-
-   
-
-  For deployment groups that contain only one instance, the overall deployment is of course successful only if deployment to the single instance succeeds.
-
-   
-   
+  For more information about the predefined deployment configurations in AWS CodeDeploy, see `Working with Deployment Groups in AWS CodeDeploy <http://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations.html>`_ in the AWS CodeDeploy User Guide.
 
   
 
 ``--on-premises-instance-tag-filters`` (list)
 
 
-  The on-premises instance tags to filter on.
+  The on-premises instance tags on which to filter. The deployment group will include on-premises instances with any of the specified tags.
 
   
 
@@ -157,7 +135,7 @@ Syntax::
 ``--trigger-configurations`` (list)
 
 
-  Information about triggers to create when the deployment group is created.
+  Information about triggers to create when the deployment group is created. For examples, see `Create a Trigger for an AWS CodeDeploy Event <http://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-sns.html>`_ in the AWS CodeDeploy User Guide.
 
   
 
@@ -176,17 +154,161 @@ JSON Syntax::
     {
       "triggerName": "string",
       "triggerTargetArn": "string",
-      "triggerEvents": ["DeploymentStart"|"DeploymentSuccess"|"DeploymentFailure"|"DeploymentStop"|"InstanceStart"|"InstanceSuccess"|"InstanceFailure", ...]
+      "triggerEvents": ["DeploymentStart"|"DeploymentSuccess"|"DeploymentFailure"|"DeploymentStop"|"DeploymentRollback"|"DeploymentReady"|"InstanceStart"|"InstanceSuccess"|"InstanceFailure"|"InstanceReady", ...]
     }
     ...
   ]
 
 
 
+``--alarm-configuration`` (structure)
+
+
+  Information to add about Amazon CloudWatch alarms when the deployment group is created.
+
+  
+
+
+
+Shorthand Syntax::
+
+    enabled=boolean,ignorePollAlarmFailure=boolean,alarms=[{name=string},{name=string}]
+
+
+
+
+JSON Syntax::
+
+  {
+    "enabled": true|false,
+    "ignorePollAlarmFailure": true|false,
+    "alarms": [
+      {
+        "name": "string"
+      }
+      ...
+    ]
+  }
+
+
+
+``--auto-rollback-configuration`` (structure)
+
+
+  Configuration information for an automatic rollback that is added when a deployment group is created.
+
+  
+
+
+
+Shorthand Syntax::
+
+    enabled=boolean,events=string,string
+
+
+
+
+JSON Syntax::
+
+  {
+    "enabled": true|false,
+    "events": ["DEPLOYMENT_FAILURE"|"DEPLOYMENT_STOP_ON_ALARM"|"DEPLOYMENT_STOP_ON_REQUEST", ...]
+  }
+
+
+
+``--deployment-style`` (structure)
+
+
+  Information about the type of deployment, in-place or blue/green, that you want to run and whether to route deployment traffic behind a load balancer.
+
+  
+
+
+
+Shorthand Syntax::
+
+    deploymentType=string,deploymentOption=string
+
+
+
+
+JSON Syntax::
+
+  {
+    "deploymentType": "IN_PLACE"|"BLUE_GREEN",
+    "deploymentOption": "WITH_TRAFFIC_CONTROL"|"WITHOUT_TRAFFIC_CONTROL"
+  }
+
+
+
+``--blue-green-deployment-configuration`` (structure)
+
+
+  Information about blue/green deployment options for a deployment group.
+
+  
+
+
+
+Shorthand Syntax::
+
+    terminateBlueInstancesOnDeploymentSuccess={action=string,terminationWaitTimeInMinutes=integer},deploymentReadyOption={actionOnTimeout=string,waitTimeInMinutes=integer},greenFleetProvisioningOption={action=string}
+
+
+
+
+JSON Syntax::
+
+  {
+    "terminateBlueInstancesOnDeploymentSuccess": {
+      "action": "TERMINATE"|"KEEP_ALIVE",
+      "terminationWaitTimeInMinutes": integer
+    },
+    "deploymentReadyOption": {
+      "actionOnTimeout": "CONTINUE_DEPLOYMENT"|"STOP_DEPLOYMENT",
+      "waitTimeInMinutes": integer
+    },
+    "greenFleetProvisioningOption": {
+      "action": "DISCOVER_EXISTING"|"COPY_AUTO_SCALING_GROUP"
+    }
+  }
+
+
+
+``--load-balancer-info`` (structure)
+
+
+  Information about the load balancer used in a deployment.
+
+  
+
+
+
+Shorthand Syntax::
+
+    elbInfoList=[{name=string},{name=string}]
+
+
+
+
+JSON Syntax::
+
+  {
+    "elbInfoList": [
+      {
+        "name": "string"
+      }
+      ...
+    ]
+  }
+
+
+
 ``--ec2-tag-filters`` (list)
 
 
-  The Amazon EC2 tags to filter on.
+  The Amazon EC2 tags on which to filter. The deployment group will include EC2 instances with any of the specified tags.
 
   
 
@@ -215,8 +337,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 

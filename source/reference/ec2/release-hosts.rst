@@ -15,16 +15,19 @@ Description
 
 
 
-When you no longer want to use a Dedicated host it can be released. On-Demand billing is stopped and the host goes into ``released`` state. The host ID of Dedicated hosts that have been released can no longer be specified in another request, e.g., ModifyHosts. You must stop or terminate all instances on a host before it can be released.
+When you no longer want to use an On-Demand Dedicated Host it can be released. On-Demand billing is stopped and the host goes into ``released`` state. The host ID of Dedicated Hosts that have been released can no longer be specified in another request, e.g., ModifyHosts. You must stop or terminate all instances on a host before it can be released.
 
  
 
-When Dedicated hosts are released, it make take some time for them to stop counting toward your limit and you may receive capacity errors when trying to allocate new Dedicated hosts. Try waiting a few minutes, and then try again. 
+When Dedicated Hosts are released, it make take some time for them to stop counting toward your limit and you may receive capacity errors when trying to allocate new Dedicated hosts. Try waiting a few minutes, and then try again.
 
  
 
-Released hosts will still appear in a describe-hosts response.
+Released hosts will still appear in a  describe-hosts response.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReleaseHosts>`_
 
 
 ========
@@ -36,7 +39,7 @@ Synopsis
     release-hosts
   --host-ids <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -48,7 +51,7 @@ Options
 ``--host-ids`` (list)
 
 
-  The IDs of the Dedicated hosts you want to release.
+  The IDs of the Dedicated Hosts you want to release.
 
   
 
@@ -63,8 +66,8 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -99,7 +102,7 @@ Successful -> (list)
 
   
 
-  The IDs of the Dedicated hosts that were successfully released.
+  The IDs of the Dedicated Hosts that were successfully released.
 
   
 
@@ -115,7 +118,7 @@ Unsuccessful -> (list)
 
   
 
-  The IDs of the Dedicated hosts that could not be released, including an error message.
+  The IDs of the Dedicated Hosts that could not be released, including an error message.
 
   
 

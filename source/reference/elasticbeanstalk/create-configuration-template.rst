@@ -24,13 +24,16 @@ Related Topics
  
 
  
-*  describe-configuration-options  
+*  describe-configuration-options   
  
-*  describe-configuration-settings  
+*  describe-configuration-settings   
  
-*  list-available-solution-stacks  
+*  list-available-solution-stacks   
  
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateConfigurationTemplate>`_
 
 
 ========
@@ -43,12 +46,13 @@ Synopsis
   --application-name <value>
   --template-name <value>
   [--solution-stack-name <value>]
+  [--platform-arn <value>]
   [--source-configuration <value>]
   [--environment-id <value>]
   [--description <value>]
   [--option-settings <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -71,7 +75,7 @@ Options
 
    
 
-  Constraint: This name must be unique per application. 
+  Constraint: This name must be unique per application.
 
    
 
@@ -82,7 +86,7 @@ Options
 ``--solution-stack-name`` (string)
 
 
-  The name of the solution stack used by this configuration. The solution stack specifies the operating system, architecture, and application server for a configuration template. It determines the set of configuration options as well as the possible and default values. 
+  The name of the solution stack used by this configuration. The solution stack specifies the operating system, architecture, and application server for a configuration template. It determines the set of configuration options as well as the possible and default values.
 
    
 
@@ -94,14 +98,21 @@ Options
 
    
 
-  If a solution stack name is not specified and the source configuration parameter is specified, AWS Elastic Beanstalk uses the same solution stack as the source configuration template. 
+  If a solution stack name is not specified and the source configuration parameter is specified, AWS Elastic Beanstalk uses the same solution stack as the source configuration template.
+
+  
+
+``--platform-arn`` (string)
+
+
+  The ARN of the custome platform.
 
   
 
 ``--source-configuration`` (structure)
 
 
-  If specified, AWS Elastic Beanstalk uses the configuration values from the specified configuration template to create a new configuration. 
+  If specified, AWS Elastic Beanstalk uses the configuration values from the specified configuration template to create a new configuration.
 
    
 
@@ -138,7 +149,7 @@ JSON Syntax::
 ``--environment-id`` (string)
 
 
-  The ID of the environment used with this configuration template. 
+  The ID of the environment used with this configuration template.
 
   
 
@@ -152,7 +163,7 @@ JSON Syntax::
 ``--option-settings`` (list)
 
 
-  If specified, AWS Elastic Beanstalk sets the specified configuration option to the requested value. The new value overrides the value obtained from the solution stack or the source configuration template. 
+  If specified, AWS Elastic Beanstalk sets the specified configuration option to the requested value. The new value overrides the value obtained from the solution stack or the source configuration template.
 
   
 
@@ -182,8 +193,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -216,7 +227,17 @@ SolutionStackName -> (string)
 
   
 
-  The name of the solution stack this configuration set uses. 
+  The name of the solution stack this configuration set uses.
+
+  
+
+  
+
+PlatformArn -> (string)
+
+  
+
+  The ARN of the custom platform.
 
   
 
@@ -226,7 +247,7 @@ ApplicationName -> (string)
 
   
 
-  The name of the application associated with this configuration set. 
+  The name of the application associated with this configuration set.
 
   
 
@@ -246,7 +267,7 @@ Description -> (string)
 
   
 
-  Describes this configuration set. 
+  Describes this configuration set.
 
   
 
@@ -288,7 +309,7 @@ DateCreated -> (timestamp)
 
   
 
-  The date (in UTC time) when this configuration set was created. 
+  The date (in UTC time) when this configuration set was created.
 
   
 
@@ -298,7 +319,7 @@ DateUpdated -> (timestamp)
 
   
 
-  The date (in UTC time) when this configuration set was last modified. 
+  The date (in UTC time) when this configuration set was last modified.
 
   
 
@@ -308,7 +329,7 @@ OptionSettings -> (list)
 
   
 
-  A list of the configuration options and their values in this configuration set. 
+  A list of the configuration options and their values in this configuration set.
 
   
 
@@ -316,7 +337,7 @@ OptionSettings -> (list)
 
     
 
-    A specification identifying an individual configuration option along with its current value. For a list of possible option values, go to `Option Values`_ in the *AWS Elastic Beanstalk Developer Guide* . 
+    A specification identifying an individual configuration option along with its current value. For a list of possible option values, go to `Option Values <http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-options.html>`_ in the *AWS Elastic Beanstalk Developer Guide* . 
 
     
 
@@ -324,7 +345,7 @@ OptionSettings -> (list)
 
       
 
-      A unique resource name for a time-based scaling configuration option. 
+      A unique resource name for a time-based scaling configuration option.
 
       
 
@@ -334,7 +355,7 @@ OptionSettings -> (list)
 
       
 
-      A unique namespace identifying the option's associated AWS resource. 
+      A unique namespace identifying the option's associated AWS resource.
 
       
 
@@ -344,7 +365,7 @@ OptionSettings -> (list)
 
       
 
-      The name of the configuration option. 
+      The name of the configuration option.
 
       
 
@@ -354,7 +375,7 @@ OptionSettings -> (list)
 
       
 
-      The current value for the configuration option. 
+      The current value for the configuration option.
 
       
 
@@ -364,6 +385,3 @@ OptionSettings -> (list)
 
   
 
-
-
-.. _Option Values: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-options.html

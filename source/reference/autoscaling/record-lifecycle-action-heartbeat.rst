@@ -24,21 +24,24 @@ This step is a part of the procedure for adding a lifecycle hook to an Auto Scal
  
 
  
-* (Optional) Create a Lambda function and a rule that allows CloudWatch Events to invoke your Lambda function when Auto Scaling launches or terminates instances.
+* (Optional) Create a Lambda function and a rule that allows CloudWatch Events to invoke your Lambda function when Auto Scaling launches or terminates instances. 
  
-* (Optional) Create a notification target and an IAM role. The target can be either an Amazon SQS queue or an Amazon SNS topic. The role allows Auto Scaling to publish lifecycle notifications to the target.
+* (Optional) Create a notification target and an IAM role. The target can be either an Amazon SQS queue or an Amazon SNS topic. The role allows Auto Scaling to publish lifecycle notifications to the target. 
  
-* Create the lifecycle hook. Specify whether the hook is used when the instances launch or terminate.
+* Create the lifecycle hook. Specify whether the hook is used when the instances launch or terminate. 
  
-* **If you need more time, record the lifecycle action heartbeat to keep the instance in a pending state.** 
+* **If you need more time, record the lifecycle action heartbeat to keep the instance in a pending state.**   
  
-* If you finish before the timeout period ends, complete the lifecycle action.
- 
-
+* If you finish before the timeout period ends, complete the lifecycle action. 
  
 
-For more information, see `Auto Scaling Lifecycle`_ in the *Auto Scaling Developer Guide* .
+ 
 
+For more information, see `Auto Scaling Lifecycle <http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroupLifecycle.html>`_ in the *Auto Scaling User Guide* .
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/RecordLifecycleActionHeartbeat>`_
 
 
 ========
@@ -53,7 +56,7 @@ Synopsis
   [--lifecycle-action-token <value>]
   [--instance-id <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -93,8 +96,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -106,13 +109,10 @@ Examples
 
 This example records a lifecycle action heartbeat to keep the instance in a pending state::
 
-   aws autoscaling record-lifecycle-action-heartbeat --lifecycle-hook-name my-lifecycle-hook --auto-scaling-group-name my-auto-scaling-group --lifecycle-action-token bcd2f1b8-9a78-44d3-8a7a-4dd07d7cf635
+    aws autoscaling record-lifecycle-action-heartbeat --lifecycle-hook-name my-lifecycle-hook --auto-scaling-group-name my-auto-scaling-group --lifecycle-action-token bcd2f1b8-9a78-44d3-8a7a-4dd07d7cf635
 
 
 ======
 Output
 ======
 
-
-
-.. _Auto Scaling Lifecycle: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingGroupLifecycle.html

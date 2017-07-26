@@ -15,12 +15,15 @@ Description
 
 
 
-Creates an SSM document.
+Creates a Systems Manager document.
 
  
 
-After you create an SSM document, you can use  create-association to associate it with one or more running instances.
+After you create a document, you can use create-association to associate it with one or more running instances.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateDocument>`_
 
 
 ========
@@ -32,8 +35,9 @@ Synopsis
     create-document
   --content <value>
   --name <value>
+  [--document-type <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -45,22 +49,44 @@ Options
 ``--content`` (string)
 
 
-  A valid JSON string. For more information about the contents of this string, see `SSM Document`_ .
+  A valid JSON string.
 
   
 
 ``--name`` (string)
 
 
-  A name for the SSM document.
+  A name for the Systems Manager document.
+
+  
+
+``--document-type`` (string)
+
+
+  The type of document to create. Valid document types include: Policy, Automation, and Command.
+
+  
+
+  Possible values:
+
+  
+  *   ``Command``
+
+  
+  *   ``Policy``
+
+  
+  *   ``Automation``
+
+  
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -68,28 +94,44 @@ Prints a sample input JSON to standard output. Note the specified operation is n
 Examples
 ========
 
-**To create a configuration document**
+**To create a document**
 
-This example creates a configuration document called ``My_Document`` in your account. The document must be in JSON format. For more information about writing a configuration document, see `Configuration Document`_ in the *SSM API Reference*.
+This example creates a document in your account. The document must be in JSON format. Note that ``file://`` must be referenced followed by the path of the content file. For more information about writing a configuration document, see `Configuration Document`_ in the *SSM API Reference*.
 
 .. _`Configuration Document`: http://docs.aws.amazon.com/ssm/latest/APIReference/aws-ssm-document.html
 
 Command::
 
-  aws ssm create-document --content file://myconfigfile.json --name "My_Config_Document"
+  aws ssm create-document --content "file://RunShellScript.json" --name "RunShellScript" --document-type "Command"
 
 Output::
 
- {
+  {
     "DocumentDescription": {
-        "Status": "Creating", 
-        "Sha1": "715919de1715exampled803025817856844a5f3", 
-        "Name": "My_Config_Document", 
-        "CreatedDate": 1424351175.521
+        "Status": "Creating",
+        "Hash": "95cf32aa8c4c4e6f0eb81c4d0cc9a81aa5d209c2c67c703bdea7a233b5596eb
+        "Name": "RunShellScript",
+        "Parameters": [
+            {
+                "Type": "StringList",
+                "Name": "commands",
+                "Description": "(Required) Specify a shell script or a command to run."
+            }
+        ],
+        "DocumentType": "Command",
+        "PlatformTypes": [
+            "Linux"
+        ],
+        "DocumentVersion": "1",
+        "HashType": "Sha256",
+        "CreatedDate": 1487871523.324,
+        "Owner": "809632081692",
+        "SchemaVersion": "2.0",
+        "DefaultVersion": "1",
+        "LatestVersion": "1",
+        "Description": "Run a script"
     }
- }
-
-
+  }
 
 
 ======
@@ -100,7 +142,7 @@ DocumentDescription -> (structure)
 
   
 
-  Information about the SSM document.
+  Information about the Systems Manager document.
 
   
 
@@ -109,6 +151,46 @@ DocumentDescription -> (structure)
     
 
     The SHA1 hash of the document, which you can use for verification purposes.
+
+    
+
+    
+
+  Hash -> (string)
+
+    
+
+    The Sha256 or Sha1 hash created by the system when the document was created. 
+
+     
+
+    .. note::
+
+       
+
+      Sha1 hashes have been deprecated.
+
+       
+
+    
+
+    
+
+  HashType -> (string)
+
+    
+
+    Sha256 or Sha1.
+
+     
+
+    .. note::
+
+       
+
+      Sha1 hashes have been deprecated.
+
+       
 
     
 
@@ -124,9 +206,23 @@ DocumentDescription -> (structure)
 
     
 
+  Owner -> (string)
+
+    
+
+    The AWS user account of the person who created the document.
+
+    
+
+    
+
   CreatedDate -> (timestamp)
 
-    The date when the SSM document was created.
+    
+
+    The date when the document was created.
+
+    
 
     
 
@@ -140,9 +236,23 @@ DocumentDescription -> (structure)
 
     
 
+  DocumentVersion -> (string)
+
+    
+
+    The document version.
+
+    
+
+    
+
   Description -> (string)
 
-    A description of the document.
+    
+
+    A description of the document. 
+
+    
 
     
 
@@ -155,6 +265,10 @@ DocumentDescription -> (structure)
     
 
     (structure)
+
+      
+
+      Parameters specified in a System Manager document that execute on the server when the command is run. 
 
       
 
@@ -172,7 +286,7 @@ DocumentDescription -> (structure)
 
         
 
-        The type of parameter. The type can be either “String” or “StringList”.
+        The type of parameter. The type can be either String or StringList.
 
         
 
@@ -204,7 +318,11 @@ DocumentDescription -> (structure)
 
   PlatformTypes -> (list)
 
-    The list of OS platforms compatible with this SSM document.
+    
+
+    The list of OS platforms compatible with this SSM document. 
+
+    
 
     (string)
 
@@ -214,8 +332,45 @@ DocumentDescription -> (structure)
 
     
 
+  DocumentType -> (string)
+
+    
+
+    The type of document. 
+
+    
+
+    
+
+  SchemaVersion -> (string)
+
+    
+
+    The schema version.
+
+    
+
+    
+
+  LatestVersion -> (string)
+
+    
+
+    The latest version of the document.
+
+    
+
+    
+
+  DefaultVersion -> (string)
+
+    
+
+    The default version.
+
+    
+
+    
+
   
 
-
-
-.. _SSM Document: http://docs.aws.amazon.com/ssm/latest/APIReference/aws-ssm-document.html

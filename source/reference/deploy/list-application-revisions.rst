@@ -19,6 +19,13 @@ Lists information about revisions for an application.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListApplicationRevisions>`_
+
+
+``list-application-revisions`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
+When using ``--output text`` and the ``--query`` argument on a paginated response, the ``--query`` argument must extract data from the results of the following query expressions: ``revisions``
+
+
 ========
 Synopsis
 ========
@@ -32,9 +39,10 @@ Synopsis
   [--s-3-bucket <value>]
   [--s-3-key-prefix <value>]
   [--deployed <value>]
-  [--next-token <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--starting-token <value>]
+  [--max-items <value>]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -46,23 +54,23 @@ Options
 ``--application-name`` (string)
 
 
-  The name of an existing AWS CodeDeploy application associated with the applicable IAM user or AWS account.
+  The name of an AWS CodeDeploy application associated with the applicable IAM user or AWS account.
 
   
 
 ``--sort-by`` (string)
 
 
-  The column name to sort the list results by:
+  The column name to use to sort the list results:
 
    
 
    
-  * registerTime: Sort the list results by when the revisions were registered with AWS CodeDeploy.
+  * registerTime: Sort by the time the revisions were registered with AWS CodeDeploy. 
    
-  * firstUsedTime: Sort the list results by when the revisions were first used by in a deployment.
+  * firstUsedTime: Sort by the time the revisions were first used in a deployment. 
    
-  * lastUsedTime: Sort the list results by when the revisions were last used in a deployment.
+  * lastUsedTime: Sort by the time the revisions were last used in a deployment. 
    
 
    
@@ -89,14 +97,14 @@ Options
 ``--sort-order`` (string)
 
 
-  The order to sort the list results by:
+  The order in which to sort the list results:
 
    
 
    
-  * ascending: Sort the list of results in ascending order.
+  * ascending: ascending order. 
    
-  * descending: Sort the list of results in descending order.
+  * descending: descending order. 
    
 
    
@@ -124,18 +132,18 @@ Options
 ``--s-3-bucket`` (string)
 
 
-  A specific Amazon S3 bucket name to limit the search for revisions.
+  An Amazon S3 bucket name to limit the search for revisions.
 
    
 
-  If set to null, then all of the user's buckets will be searched.
+  If set to null, all of the user's buckets will be searched.
 
   
 
 ``--s-3-key-prefix`` (string)
 
 
-  A specific key prefix for the set of Amazon S3 objects to limit the search for revisions.
+  A key prefix for the set of Amazon S3 objects to limit the search for revisions.
 
   
 
@@ -147,11 +155,11 @@ Options
    
 
    
-  * include: List revisions that are target revisions of a deployment group.
+  * include: List revisions that are target revisions of a deployment group. 
    
-  * exclude: Do not list revisions that are target revisions of a deployment group.
+  * exclude: Do not list revisions that are target revisions of a deployment group. 
    
-  * ignore: List all revisions, regardless of whether they are target revisions of a deployment group.
+  * ignore: List all revisions. 
    
 
   
@@ -171,18 +179,33 @@ Options
 
   
 
-``--next-token`` (string)
-
-
-  An identifier that was returned from the previous list application revisions call, which can be used to return the next set of applications in the list.
-
-  
-
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--starting-token`` (string)
+ 
+
+  A token to specify where to start paginating. This is the ``next-token`` from a previously truncated response.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--max-items`` (integer)
+ 
+
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``next-token`` is provided in the command's output. To resume pagination, provide the ``next-token`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``next-token`` response element directly outside of the AWS CLI.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -232,7 +255,7 @@ revisions -> (list)
 
   
 
-  A list of revision locations that contain the matching revisions.
+  A list of locations that contain the matching revisions.
 
   
 
@@ -240,7 +263,7 @@ revisions -> (list)
 
     
 
-    Information about an application revision's location.
+    Information about the location of an application revision.
 
     
 
@@ -248,14 +271,14 @@ revisions -> (list)
 
       
 
-      The application revision's type:
+      The type of application revision:
 
        
 
        
-      * S3: An application revision stored in Amazon S3.
+      * S3: An application revision stored in Amazon S3. 
        
-      * GitHub: An application revision stored in GitHub.
+      * GitHub: An application revision stored in GitHub. 
        
 
       
@@ -266,7 +289,7 @@ revisions -> (list)
 
       
 
-      Information about the location of application artifacts that are stored in Amazon S3.
+      Information about the location of application artifacts stored in Amazon S3. 
 
       
 
@@ -299,11 +322,11 @@ revisions -> (list)
          
 
          
-        * tar: A tar archive file.
+        * tar: A tar archive file. 
          
-        * tgz: A compressed tar archive file.
+        * tgz: A compressed tar archive file. 
          
-        * zip: A zip archive file.
+        * zip: A zip archive file. 
          
 
         
@@ -344,7 +367,7 @@ revisions -> (list)
 
       
 
-      Information about the location of application artifacts that are stored in GitHub.
+      Information about the location of application artifacts stored in GitHub.
 
       
 
@@ -382,7 +405,7 @@ nextToken -> (string)
 
   
 
-  If the amount of information that is returned is significantly large, an identifier will also be returned, which can be used in a subsequent list application revisions call to return the next set of application revisions in the list.
+  If a large amount of information is returned, an identifier will also be returned. It can be used in a subsequent list application revisions call to return the next set of application revisions in the list.
 
   
 

@@ -19,16 +19,19 @@ Adds a permission to the resource policy associated with the specified AWS Lambd
 
  
 
-For information about the push model, see `AWS Lambda\: How it Works`_ . 
+For information about the push model, see `AWS Lambda\: How it Works <http://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction.html>`_ . 
 
  
 
-If you are using versioning, the permissions you add are specific to the Lambda function version or alias you specify in the ``add-permission`` request via the ``qualifier`` parameter. For more information about versioning, see `AWS Lambda Function Versioning and Aliases`_ . 
+If you are using versioning, the permissions you add are specific to the Lambda function version or alias you specify in the ``add-permission`` request via the ``qualifier`` parameter. For more information about versioning, see `AWS Lambda Function Versioning and Aliases <http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html>`_ . 
 
  
 
 This operation requires permission for the ``lambda:AddPermission`` action.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AddPermission>`_
 
 
 ========
@@ -44,9 +47,10 @@ Synopsis
   --principal <value>
   [--source-arn <value>]
   [--source-account <value>]
+  [--event-source-token <value>]
   [--qualifier <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -62,7 +66,7 @@ Options
 
    
 
-  You can specify a function name (for example, ``Thumbnail`` ) or you can specify Amazon Resource Name (ARN) of the function (for example, ``arn:aws:lambda:us-west-2:account-id:function:ThumbNail`` ). AWS Lambda also allows you to specify partial ARN (for example, ``account-id:Thumbnail`` ). Note that the length constraint applies only to the ARN. If you specify only the function name, it is limited to 64 character in length. 
+  You can specify a function name (for example, ``Thumbnail`` ) or you can specify Amazon Resource Name (ARN) of the function (for example, ``arn:aws:lambda:us-west-2:account-id:function:ThumbNail`` ). AWS Lambda also allows you to specify partial ARN (for example, ``account-id:Thumbnail`` ). Note that the length constraint applies only to the ARN. If you specify only the function name, it is limited to 64 characters in length. 
 
   
 
@@ -76,7 +80,7 @@ Options
 ``--action`` (string)
 
 
-  The AWS Lambda action you want to allow in this statement. Each Lambda action is a string starting with ``lambda:`` followed by the API name (see  Operations ). For example, ``lambda:CreateFunction`` . You can use wildcard (``lambda:*`` ) to grant permission for all AWS Lambda actions. 
+  The AWS Lambda action you want to allow in this statement. Each Lambda action is a string starting with ``lambda:`` followed by the API name . For example, ``lambda:CreateFunction`` . You can use wildcard (``lambda:*`` ) to grant permission for all AWS Lambda actions. 
 
   
 
@@ -90,31 +94,42 @@ Options
 ``--source-arn`` (string)
 
 
-  This is optional; however, when granting Amazon S3 permission to invoke your function, you should specify this field with the bucket Amazon Resource Name (ARN) as its value. This ensures that only events generated from the specified bucket can invoke the function. 
+  This is optional; however, when granting permission to invoke your function, you should specify this field with the Amazon Resource Name (ARN) as its value. This ensures that only events generated from the specified source can invoke the function.
 
    
 
   .. warning::
 
-    If you add a permission for the Amazon S3 principal without providing the source ARN, any AWS account that creates a mapping to your function ARN can send events to invoke your Lambda function from Amazon S3.
+     
+
+    If you add a permission without providing the source ARN, any AWS account that creates a mapping to your function ARN can send events to invoke your Lambda function.
+
+     
 
   
 
 ``--source-account`` (string)
 
 
-  The AWS account ID (without a hyphen) of the source owner. For example, if the ``SourceArn`` identifies a bucket, then this is the bucket owner's account ID. You can use this additional condition to ensure the bucket you specify is owned by a specific account (it is possible the bucket owner deleted the bucket and some other AWS account created the bucket). You can also use this condition to specify all sources (that is, you don't specify the ``SourceArn`` ) owned by a specific account. 
+  This parameter is used for S3 and SES. The AWS account ID (without a hyphen) of the source owner. For example, if the ``SourceArn`` identifies a bucket, then this is the bucket owner's account ID. You can use this additional condition to ensure the bucket you specify is owned by a specific account (it is possible the bucket owner deleted the bucket and some other AWS account created the bucket). You can also use this condition to specify all sources (that is, you don't specify the ``SourceArn`` ) owned by a specific account. 
+
+  
+
+``--event-source-token`` (string)
+
+
+  A unique token that must be supplied by the principal invoking the function. This is currently only used for Alexa Smart Home functions.
 
   
 
 ``--qualifier`` (string)
 
 
-  You can use this optional query parameter to describe a qualified ARN using a function version or an alias name. The permission will then apply to the specific qualified ARN. For example, if you specify function version 2 as the qualifier, then permission applies only when request is made using qualified function ARN: 
+  You can use this optional query parameter to describe a qualified ARN using a function version or an alias name. The permission will then apply to the specific qualified ARN. For example, if you specify function version 2 as the qualifier, then permission applies only when request is made using qualified function ARN:
 
    
 
-  ``arn:aws:lambda:aws-region:acct-id:function:function-name:2`` 
+   ``arn:aws:lambda:aws-region:acct-id:function:function-name:2``  
 
    
 
@@ -122,23 +137,23 @@ Options
 
    
 
-  ``arn:aws:lambda:aws-region:acct-id:function:function-name:PROD`` 
+   ``arn:aws:lambda:aws-region:acct-id:function:function-name:PROD``  
 
    
 
-  If the qualifier is not specified, the permission is valid only when requests is made using unqualified function ARN. 
+  If the qualifier is not specified, the permission is valid only when requests is made using unqualified function ARN.
 
    
 
-  ``arn:aws:lambda:aws-region:acct-id:function:function-name`` 
+   ``arn:aws:lambda:aws-region:acct-id:function:function-name``  
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -150,13 +165,9 @@ Statement -> (string)
 
   
 
-  The permission statement you specified in the request. The response returns the same as a string using a backslash ("\") as an escape character in the JSON. 
+  The permission statement you specified in the request. The response returns the same as a string using a backslash ("\") as an escape character in the JSON.
 
   
 
   
 
-
-
-.. _AWS Lambda\: How it Works: http://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction.html
-.. _AWS Lambda Function Versioning and Aliases: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html

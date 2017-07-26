@@ -15,8 +15,11 @@ Description
 
 
 
-Describes the available option groups. 
+Describes the available option groups.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOptionGroups>`_
 
 
 ``describe-option-groups`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
@@ -38,7 +41,7 @@ Synopsis
   [--starting-token <value>]
   [--page-size <value>]
   [--max-items <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -50,7 +53,7 @@ Options
 ``--option-group-name`` (string)
 
 
-  The name of the option group to describe. Cannot be supplied together with EngineName or MajorEngineVersion. 
+  The name of the option group to describe. Cannot be supplied together with EngineName or MajorEngineVersion.
 
   
 
@@ -85,14 +88,14 @@ JSON Syntax::
 ``--engine-name`` (string)
 
 
-  Filters the list of option groups to only include groups associated with a specific database engine. 
+  Filters the list of option groups to only include groups associated with a specific database engine.
 
   
 
 ``--major-engine-version`` (string)
 
 
-  Filters the list of option groups to only include groups associated with a specific database engine version. If specified, then EngineName must also be specified. 
+  Filters the list of option groups to only include groups associated with a specific database engine version. If specified, then EngineName must also be specified.
 
   
 
@@ -106,26 +109,34 @@ Performs service operation based on the JSON string provided. The JSON string fo
 
    
 
-``--page-size`` (integer)
- 
-
-  The size of each page.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
    
 
-  
+``--page-size`` (integer)
+ 
 
-  
+  The size of each page to get in the AWS service call. This does not affect the number of items returned in the command's output. Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call. This can help prevent the AWS service calls from timing out.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
 
 ``--max-items`` (integer)
  
 
-  The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination. This ``NextToken`` response element should **not** be used directly outside of the AWS CLI.
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``NextToken`` is provided in the command's output. To resume pagination, provide the ``NextToken`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``NextToken`` response element directly outside of the AWS CLI.
 
    
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -137,7 +148,7 @@ OptionGroupsList -> (list)
 
   
 
-  List of option groups. 
+  List of option groups.
 
   
 
@@ -153,7 +164,7 @@ OptionGroupsList -> (list)
 
       
 
-      Specifies the name of the option group. 
+      Specifies the name of the option group.
 
       
 
@@ -163,7 +174,7 @@ OptionGroupsList -> (list)
 
       
 
-      Provides a description of the option group. 
+      Provides a description of the option group.
 
       
 
@@ -173,7 +184,7 @@ OptionGroupsList -> (list)
 
       
 
-      Indicates the name of the engine that this option group can be applied to. 
+      Indicates the name of the engine that this option group can be applied to.
 
       
 
@@ -183,7 +194,7 @@ OptionGroupsList -> (list)
 
       
 
-      Indicates the major engine version associated with this option group. 
+      Indicates the major engine version associated with this option group.
 
       
 
@@ -193,7 +204,7 @@ OptionGroupsList -> (list)
 
       
 
-      Indicates what options are available in the option group. 
+      Indicates what options are available in the option group.
 
       
 
@@ -201,7 +212,7 @@ OptionGroupsList -> (list)
 
         
 
-        Option details. 
+        Option details.
 
         
 
@@ -209,7 +220,7 @@ OptionGroupsList -> (list)
 
           
 
-          The name of the option. 
+          The name of the option.
 
           
 
@@ -219,7 +230,7 @@ OptionGroupsList -> (list)
 
           
 
-          The description of the option. 
+          The description of the option.
 
           
 
@@ -229,7 +240,7 @@ OptionGroupsList -> (list)
 
           
 
-          Indicate if this option is persistent. 
+          Indicate if this option is persistent.
 
           
 
@@ -249,7 +260,17 @@ OptionGroupsList -> (list)
 
           
 
-          If required, the port configured for this option to use. 
+          If required, the port configured for this option to use.
+
+          
+
+          
+
+        OptionVersion -> (string)
+
+          
+
+          The version of the option.
 
           
 
@@ -259,7 +280,7 @@ OptionGroupsList -> (list)
 
           
 
-          The option settings for this option. 
+          The option settings for this option.
 
           
 
@@ -267,7 +288,7 @@ OptionGroupsList -> (list)
 
             
 
-            Option settings are the actual settings being applied or configured for that option. It is used when you modify an option group or describe option groups. For example, the NATIVE_NETWORK_ENCRYPTION option has a setting called SQLNET.ENCRYPTION_SERVER that can have several different values. 
+            Option settings are the actual settings being applied or configured for that option. It is used when you modify an option group or describe option groups. For example, the NATIVE_NETWORK_ENCRYPTION option has a setting called SQLNET.ENCRYPTION_SERVER that can have several different values.
 
             
 
@@ -275,7 +296,7 @@ OptionGroupsList -> (list)
 
               
 
-              The name of the option that has settings that you can set. 
+              The name of the option that has settings that you can set.
 
               
 
@@ -285,7 +306,7 @@ OptionGroupsList -> (list)
 
               
 
-              The current value of the option setting. 
+              The current value of the option setting.
 
               
 
@@ -295,7 +316,7 @@ OptionGroupsList -> (list)
 
               
 
-              The default value of the option setting. 
+              The default value of the option setting.
 
               
 
@@ -305,7 +326,7 @@ OptionGroupsList -> (list)
 
               
 
-              The description of the option setting. 
+              The description of the option setting.
 
               
 
@@ -315,7 +336,7 @@ OptionGroupsList -> (list)
 
               
 
-              The DB engine specific parameter type. 
+              The DB engine specific parameter type.
 
               
 
@@ -325,7 +346,7 @@ OptionGroupsList -> (list)
 
               
 
-              The data type of the option setting. 
+              The data type of the option setting.
 
               
 
@@ -335,7 +356,7 @@ OptionGroupsList -> (list)
 
               
 
-              The allowed values of the option setting. 
+              The allowed values of the option setting.
 
               
 
@@ -345,7 +366,7 @@ OptionGroupsList -> (list)
 
               
 
-              A Boolean value that, when true, indicates the option setting can be modified from the default. 
+              A Boolean value that, when true, indicates the option setting can be modified from the default.
 
               
 
@@ -355,7 +376,7 @@ OptionGroupsList -> (list)
 
               
 
-              Indicates if the option setting is part of a collection. 
+              Indicates if the option setting is part of a collection.
 
               
 
@@ -369,7 +390,7 @@ OptionGroupsList -> (list)
 
           
 
-          If the option requires access to a port, then this DB security group allows access to the port. 
+          If the option requires access to a port, then this DB security group allows access to the port.
 
           
 
@@ -377,18 +398,18 @@ OptionGroupsList -> (list)
 
             
 
-            This data type is used as a response element in the following actions: 
+            This data type is used as a response element in the following actions:
 
              
 
              
-            *  modify-db-instance  
+            *  modify-db-instance   
              
-            *  reboot-db-instance  
+            *  reboot-db-instance   
              
-            *  restore-db-instance-from-db-snapshot  
+            *  restore-db-instance-from-db-snapshot   
              
-            *  restore-db-instance-to-point-in-time  
+            *  restore-db-instance-to-point-in-time   
              
 
             
@@ -397,7 +418,7 @@ OptionGroupsList -> (list)
 
               
 
-              The name of the DB security group. 
+              The name of the DB security group.
 
               
 
@@ -407,7 +428,7 @@ OptionGroupsList -> (list)
 
               
 
-              The status of the DB security group. 
+              The status of the DB security group.
 
               
 
@@ -421,7 +442,7 @@ OptionGroupsList -> (list)
 
           
 
-          If the option requires access to a port, then this VPC security group allows access to the port. 
+          If the option requires access to a port, then this VPC security group allows access to the port.
 
           
 
@@ -447,7 +468,7 @@ OptionGroupsList -> (list)
 
               
 
-              The status of the VPC security group. 
+              The status of the VPC security group.
 
               
 
@@ -476,6 +497,16 @@ OptionGroupsList -> (list)
       
 
       If **AllowsVpcAndNonVpcInstanceMemberships** is ``false`` , this field is blank. If **AllowsVpcAndNonVpcInstanceMemberships** is ``true`` and this field is blank, then this option group can be applied to both VPC and non-VPC instances. If this field contains a value, then this option group can only be applied to instances that are in the VPC indicated by this field. 
+
+      
+
+      
+
+    OptionGroupArn -> (string)
+
+      
+
+      The Amazon Resource Name (ARN) for the option group.
 
       
 

@@ -19,6 +19,9 @@ Cancels a bundling operation for an instance store-backed Windows instance.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelBundleTask>`_
+
+
 ========
 Synopsis
 ========
@@ -26,10 +29,10 @@ Synopsis
 ::
 
     cancel-bundle-task
-  [--dry-run | --no-dry-run]
   --bundle-id <value>
+  [--dry-run | --no-dry-run]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -38,13 +41,6 @@ Synopsis
 Options
 =======
 
-``--dry-run`` | ``--no-dry-run`` (boolean)
-
-
-  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
-
-  
-
 ``--bundle-id`` (string)
 
 
@@ -52,11 +48,18 @@ Options
 
   
 
+``--dry-run`` | ``--no-dry-run`` (boolean)
+
+
+  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
+
+  
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -77,7 +80,7 @@ Output::
   {
     "BundleTask": {
       "UpdateTime": "2015-09-15T13:27:40.000Z", 
-      "InstanceId": "i-1a2b3c4d", 
+      "InstanceId": "i-1234567890abcdef0", 
       "Storage": {
         "S3": {
           "Prefix": "winami", 
@@ -102,131 +105,11 @@ BundleTask -> (structure)
 
   
 
-  InstanceId -> (string)
-
-    
-
-    The ID of the instance associated with this bundle task.
-
-    
-
-    
-
   BundleId -> (string)
 
     
 
     The ID of the bundle task.
-
-    
-
-    
-
-  State -> (string)
-
-    
-
-    The state of the task.
-
-    
-
-    
-
-  StartTime -> (timestamp)
-
-    
-
-    The time this task started.
-
-    
-
-    
-
-  UpdateTime -> (timestamp)
-
-    
-
-    The time of the most recent update for the task.
-
-    
-
-    
-
-  Storage -> (structure)
-
-    
-
-    The Amazon S3 storage locations.
-
-    
-
-    S3 -> (structure)
-
-      
-
-      An Amazon S3 storage location.
-
-      
-
-      Bucket -> (string)
-
-        
-
-        The bucket in which to store the AMI. You can specify a bucket that you already own or a new bucket that Amazon EC2 creates on your behalf. If you specify a bucket that belongs to someone else, Amazon EC2 returns an error.
-
-        
-
-        
-
-      Prefix -> (string)
-
-        
-
-        The beginning of the file name of the AMI.
-
-        
-
-        
-
-      AWSAccessKeyId -> (string)
-
-        
-
-        The access key ID of the owner of the bucket. Before you specify a value for your access key ID, review and follow the guidance in `Best Practices for Managing AWS Access Keys`_ .
-
-        
-
-        
-
-      UploadPolicy -> (blob)
-
-        
-
-        A Base64-encoded Amazon S3 upload policy that gives Amazon EC2 permission to upload items into Amazon S3 on your behalf.
-
-        
-
-        
-
-      UploadPolicySignature -> (string)
-
-        
-
-        The signature of the Base64 encoded JSON document.
-
-        
-
-        
-
-      
-
-    
-
-  Progress -> (string)
-
-    
-
-    The level of task completion, as a percent (for example, 20%).
 
     
 
@@ -262,8 +145,125 @@ BundleTask -> (structure)
 
     
 
+  InstanceId -> (string)
+
+    
+
+    The ID of the instance associated with this bundle task.
+
+    
+
+    
+
+  Progress -> (string)
+
+    
+
+    The level of task completion, as a percent (for example, 20%).
+
+    
+
+    
+
+  StartTime -> (timestamp)
+
+    
+
+    The time this task started.
+
+    
+
+    
+
+  State -> (string)
+
+    
+
+    The state of the task.
+
+    
+
+    
+
+  Storage -> (structure)
+
+    
+
+    The Amazon S3 storage locations.
+
+    
+
+    S3 -> (structure)
+
+      
+
+      An Amazon S3 storage location.
+
+      
+
+      AWSAccessKeyId -> (string)
+
+        
+
+        The access key ID of the owner of the bucket. Before you specify a value for your access key ID, review and follow the guidance in `Best Practices for Managing AWS Access Keys <http://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html>`_ .
+
+        
+
+        
+
+      Bucket -> (string)
+
+        
+
+        The bucket in which to store the AMI. You can specify a bucket that you already own or a new bucket that Amazon EC2 creates on your behalf. If you specify a bucket that belongs to someone else, Amazon EC2 returns an error.
+
+        
+
+        
+
+      Prefix -> (string)
+
+        
+
+        The beginning of the file name of the AMI.
+
+        
+
+        
+
+      UploadPolicy -> (blob)
+
+        
+
+        An Amazon S3 upload policy that gives Amazon EC2 permission to upload items into Amazon S3 on your behalf.
+
+        
+
+        
+
+      UploadPolicySignature -> (string)
+
+        
+
+        The signature of the JSON document.
+
+        
+
+        
+
+      
+
+    
+
+  UpdateTime -> (timestamp)
+
+    
+
+    The time of the most recent update for the task.
+
+    
+
+    
+
   
 
-
-
-.. _Best Practices for Managing AWS Access Keys: http://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html

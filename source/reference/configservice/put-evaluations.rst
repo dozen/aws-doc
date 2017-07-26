@@ -19,6 +19,9 @@ Used by an AWS Lambda function to deliver evaluation results to AWS Config. This
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutEvaluations>`_
+
+
 ========
 Synopsis
 ========
@@ -28,8 +31,9 @@ Synopsis
     put-evaluations
   [--evaluations <value>]
   --result-token <value>
+  [--test-mode | --no-test-mode]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -76,11 +80,28 @@ JSON Syntax::
 
   
 
+``--test-mode`` | ``--no-test-mode`` (boolean)
+
+
+  Use this parameter to specify a test run for ``put-evaluations`` . You can verify whether your AWS Lambda function will deliver evaluation results to AWS Config. No updates occur to your existing evaluations, and evaluation results are not sent to AWS Config.
+
+   
+
+  .. note::
+
+     
+
+    When ``TestMode`` is ``true`` , ``put-evaluations`` doesn't require a valid value for the ``ResultToken`` parameter, but the value cannot be null.
+
+     
+
+  
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -156,7 +177,7 @@ FailedEvaluations -> (list)
 
       
 
-      The time of the event in AWS Config that triggered the evaluation. For event-based evaluations, the time indicates when AWS Config created the configuration item that triggered the evaluation. For periodic evaluations, the time indicates when AWS Config delivered the configuration snapshot that triggered the evaluation.
+      The time of the event in AWS Config that triggered the evaluation. For event-based evaluations, the time indicates when AWS Config created the configuration item that triggered the evaluation. For periodic evaluations, the time indicates when AWS Config triggered the evaluation at the frequency that you specified (for example, every 24 hours).
 
       
 

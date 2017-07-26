@@ -19,8 +19,11 @@ Initiates the copy of an AMI from the specified source region to the current reg
 
  
 
-For more information, see `Copying AMIs`_ in the *Amazon Elastic Compute Cloud User Guide* .
+For more information about the prerequisites and limits when copying an AMI, see `Copying an AMI <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html>`_ in the *Amazon Elastic Compute Cloud User Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CopyImage>`_
 
 
 ========
@@ -30,16 +33,16 @@ Synopsis
 ::
 
     copy-image
-  [--dry-run | --no-dry-run]
-  --source-region <value>
-  --source-image-id <value>
-  --name <value>
-  [--description <value>]
   [--client-token <value>]
+  [--description <value>]
   [--encrypted | --no-encrypted]
   [--kms-key-id <value>]
+  --name <value>
+  --source-image-id <value>
+  --source-region <value>
+  [--dry-run | --no-dry-run]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -48,31 +51,10 @@ Synopsis
 Options
 =======
 
-``--dry-run`` | ``--no-dry-run`` (boolean)
+``--client-token`` (string)
 
 
-  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
-
-  
-
-``--source-region`` (string)
-
-
-  The name of the region that contains the AMI to copy.
-
-  
-
-``--source-image-id`` (string)
-
-
-  The ID of the AMI to copy.
-
-  
-
-``--name`` (string)
-
-
-  The name of the new AMI in the destination region.
+  Unique, case-sensitive identifier you provide to ensure idempotency of the request. For more information, see `How to Ensure Idempotency <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html>`_ in the *Amazon Elastic Compute Cloud User Guide* .
 
   
 
@@ -83,17 +65,10 @@ Options
 
   
 
-``--client-token`` (string)
-
-
-  Unique, case-sensitive identifier you provide to ensure idempotency of the request. For more information, see `How to Ensure Idempotency`_ in the *Amazon Elastic Compute Cloud User Guide* .
-
-  
-
 ``--encrypted`` | ``--no-encrypted`` (boolean)
 
 
-  Specifies whether the destination snapshots of the copied image should be encrypted. The default CMK for EBS is used unless a non-default AWS Key Management Service (AWS KMS) CMK is specified with ``KmsKeyId`` . For more information, see `Amazon EBS Encryption`_ in the *Amazon Elastic Compute Cloud User Guide* .
+  Specifies whether the destination snapshots of the copied image should be encrypted. The default CMK for EBS is used unless a non-default AWS Key Management Service (AWS KMS) CMK is specified with ``KmsKeyId`` . For more information, see `Amazon EBS Encryption <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html>`_ in the *Amazon Elastic Compute Cloud User Guide* .
 
   
 
@@ -104,11 +79,39 @@ Options
 
   
 
+``--name`` (string)
+
+
+  The name of the new AMI in the destination region.
+
+  
+
+``--source-image-id`` (string)
+
+
+  The ID of the AMI to copy.
+
+  
+
+``--source-region`` (string)
+
+
+  The name of the region that contains the AMI to copy.
+
+  
+
+``--dry-run`` | ``--no-dry-run`` (boolean)
+
+
+  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
+
+  
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -144,8 +147,3 @@ ImageId -> (string)
 
   
 
-
-
-.. _Copying AMIs: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html
-.. _Amazon EBS Encryption: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
-.. _How to Ensure Idempotency: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html

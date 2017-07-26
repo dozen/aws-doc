@@ -23,6 +23,9 @@ A typical use is to list all grants that you are able to retire. To retire a gra
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListRetirableGrants>`_
+
+
 ========
 Synopsis
 ========
@@ -34,7 +37,7 @@ Synopsis
   [--marker <value>]
   --retiring-principal <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -46,9 +49,9 @@ Options
 ``--limit`` (integer)
 
 
-  When paginating results, specify the maximum number of items to return in the response. If additional items exist beyond the number you specify, the ``Truncated`` element in the response is set to true.
+  Use this parameter to specify the maximum number of items to return. When this value is present, AWS KMS does not return more than the specified number of items, but it might return fewer.
 
-  
+   
 
   This value is optional. If you include a value, it must be between 1 and 100, inclusive. If you do not include a value, it defaults to 50.
 
@@ -57,7 +60,7 @@ Options
 ``--marker`` (string)
 
 
-  Use this parameter only when paginating results and only in a subsequent request after you've received a response with truncated results. Set it to the value of ``NextMarker`` from the response you just received.
+  Use this parameter in a subsequent request after you receive a response with truncated results. Set it to the value of ``NextMarker`` from the truncated response you just received.
 
   
 
@@ -68,15 +71,15 @@ Options
 
    
 
-  To specify the retiring principal, use the `Amazon Resource Name (ARN)`_ of an AWS principal. Valid AWS principals include AWS accounts (root), IAM users, federated users, and assumed role users. For examples of the ARN syntax for specifying a principal, go to `AWS Identity and Access Management (IAM)`_ in the Example ARNs section of the *Amazon Web Services General Reference* .
+  To specify the retiring principal, use the `Amazon Resource Name (ARN) <http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`_ of an AWS principal. Valid AWS principals include AWS accounts (root), IAM users, federated users, and assumed role users. For examples of the ARN syntax for specifying a principal, see `AWS Identity and Access Management (IAM) <http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam>`_ in the Example ARNs section of the *Amazon Web Services General Reference* .
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -190,7 +193,7 @@ Grants -> (list)
 
       
 
-      The conditions under which the grant's operations are allowed.
+      A list of key-value pairs that must be present in the encryption context of certain subsequent operations that the grant allows.
 
       
 
@@ -198,7 +201,7 @@ Grants -> (list)
 
         
 
-        Contains a list of key-value pairs, a subset of which must be present in the encryption context of a subsequent operation permitted by the grant. When a subsequent operation permitted by the grant includes an encryption context that matches this list or is a subset of this list, the grant allows the operation. Otherwise, the operation is not allowed.
+        A list of key-value pairs, all of which must be present in the encryption context of certain subsequent operations that the grant allows. When certain subsequent operations allowed by the grant include encryption context that matches this list or is a superset of this list, the grant allows the operation. Otherwise, the grant does not allow the operation.
 
         
 
@@ -220,7 +223,7 @@ Grants -> (list)
 
         
 
-        Contains a list of key-value pairs that must be present in the encryption context of a subsequent operation permitted by the grant. When a subsequent operation permitted by the grant includes an encryption context that matches this list, the grant allows the operation. Otherwise, the operation is not allowed.
+        A list of key-value pairs that must be present in the encryption context of certain subsequent operations that the grant allows. When certain subsequent operations allowed by the grant include encryption context that matches this list, the grant allows the operation. Otherwise, the grant does not allow the operation.
 
         
 
@@ -248,7 +251,7 @@ NextMarker -> (string)
 
   
 
-  When ``Truncated`` is true, this value is present and contains the value to use for the ``Marker`` parameter in a subsequent pagination request.
+  When ``Truncated`` is true, this element is present and contains the value to use for the ``Marker`` parameter in a subsequent request.
 
   
 
@@ -258,13 +261,9 @@ Truncated -> (boolean)
 
   
 
-  A flag that indicates whether there are more items in the list. If your results were truncated, you can use the ``Marker`` parameter to make a subsequent pagination request to retrieve more items in the list.
+  A flag that indicates whether there are more items in the list. When this value is true, the list in this response is truncated. To retrieve more items, pass the value of the ``NextMarker`` element in this response to the ``Marker`` parameter in a subsequent request.
 
   
 
   
 
-
-
-.. _AWS Identity and Access Management (IAM): http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam
-.. _Amazon Resource Name (ARN): http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html

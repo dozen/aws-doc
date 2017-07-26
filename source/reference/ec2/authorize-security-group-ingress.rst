@@ -27,30 +27,19 @@ Adds one or more ingress rules to a security group.
 
  
 
-.. warning::
-
-   
-
-  EC2-Classic: You can have up to 100 rules per group.
-
-   
-
-  EC2-VPC: You can have up to 50 rules per group (covering both ingress and egress rules).
-
-   
-
- 
-
 Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.
 
  
 
-[EC2-Classic] This action gives one or more CIDR IP address ranges permission to access a security group in your account, or gives one or more security groups (called the *source groups* ) permission to access a security group for your account. A source group can be for your own AWS account, or another.
+[EC2-Classic] This action gives one or more IPv4 CIDR address ranges permission to access a security group in your account, or gives one or more security groups (called the *source groups* ) permission to access a security group for your account. A source group can be for your own AWS account, or another. You can have up to 100 rules per group.
 
  
 
-[EC2-VPC] This action gives one or more CIDR IP address ranges permission to access a security group in your VPC, or gives one or more other security groups (called the *source groups* ) permission to access a security group for your VPC. The security groups must all be for the same VPC.
+[EC2-VPC] This action gives one or more IPv4 or IPv6 CIDR address ranges permission to access a security group in your VPC, or gives one or more other security groups (called the *source groups* ) permission to access a security group for your VPC. The security groups must all be for the same VPC or a peer VPC in a VPC peering connection. For more information about VPC security group limits, see `Amazon VPC Limits <http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Appendix_Limits.html>`_ .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AuthorizeSecurityGroupIngress>`_
 
 
 ========
@@ -60,17 +49,17 @@ Synopsis
 ::
 
     authorize-security-group-ingress
-  [--dry-run | --no-dry-run]
-  [--group-name <value>]
   [--group-id <value>]
+  [--group-name <value>]
   [--ip-permissions <value>]
+  [--dry-run | --no-dry-run]
   [--protocol <value>]
   [--port <value>]
   [--cidr <value>]
   [--source-group <value>]
   [--group-owner <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -79,10 +68,10 @@ Synopsis
 Options
 =======
 
-``--dry-run`` | ``--no-dry-run`` (boolean)
+``--group-id`` (string)
 
 
-  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
+  The ID of the security group. Required for a nondefault VPC.
 
   
 
@@ -93,17 +82,10 @@ Options
 
   
 
-``--group-id`` (string)
-
-
-  The ID of the security group. Required for a nondefault VPC.
-
-  
-
 ``--ip-permissions`` (list)
 
 
-  A set of IP permissions. Can be used to specify multiple rules in a single command. 
+  A set of IP permissions. Can be used to specify multiple rules in a single command.
 
   
 
@@ -111,7 +93,7 @@ Options
 
 Shorthand Syntax::
 
-    IpProtocol=string,FromPort=integer,ToPort=integer,UserIdGroupPairs=[{UserId=string,GroupName=string,GroupId=string},{UserId=string,GroupName=string,GroupId=string}],IpRanges=[{CidrIp=string},{CidrIp=string}],PrefixListIds=[{PrefixListId=string},{PrefixListId=string}] ...
+    FromPort=integer,IpProtocol=string,IpRanges=[{CidrIp=string},{CidrIp=string}],Ipv6Ranges=[{CidrIpv6=string},{CidrIpv6=string}],PrefixListIds=[{PrefixListId=string},{PrefixListId=string}],ToPort=integer,UserIdGroupPairs=[{GroupId=string,GroupName=string,PeeringStatus=string,UserId=string,VpcId=string,VpcPeeringConnectionId=string},{GroupId=string,GroupName=string,PeeringStatus=string,UserId=string,VpcId=string,VpcPeeringConnectionId=string}] ...
 
 
 
@@ -120,26 +102,35 @@ JSON Syntax::
 
   [
     {
-      "IpProtocol": "string",
       "FromPort": integer,
-      "ToPort": integer,
-      "UserIdGroupPairs": [
-        {
-          "UserId": "string",
-          "GroupName": "string",
-          "GroupId": "string"
-        }
-        ...
-      ],
+      "IpProtocol": "string",
       "IpRanges": [
         {
           "CidrIp": "string"
         }
         ...
       ],
+      "Ipv6Ranges": [
+        {
+          "CidrIpv6": "string"
+        }
+        ...
+      ],
       "PrefixListIds": [
         {
           "PrefixListId": "string"
+        }
+        ...
+      ],
+      "ToPort": integer,
+      "UserIdGroupPairs": [
+        {
+          "GroupId": "string",
+          "GroupName": "string",
+          "PeeringStatus": "string",
+          "UserId": "string",
+          "VpcId": "string",
+          "VpcPeeringConnectionId": "string"
         }
         ...
       ]
@@ -149,14 +140,25 @@ JSON Syntax::
 
 
 
-``--protocol`` (string)
+``--dry-run`` | ``--no-dry-run`` (boolean)
 
 
-  The IP protocol of this permission.
+  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
 
   
 
-  Valid protocol values: ``tcp`` , ``udp`` , ``icmp`` 
+``--protocol`` (string)
+
+
+  The IP protocol: ``tcp`` | ``udp`` | ``icmp`` 
+
+   
+
+  (VPC only) Use ``all`` to specify all protocols.
+
+  
+
+  If this argument is provided without also providing the ``port`` argument, then it will be applied to all ports for the specified protocol.
 
   
 
@@ -195,8 +197,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -238,7 +240,7 @@ Command::
 
 **[EC2-VPC] To add a rule that allows inbound HTTP traffic from another security group**
 
-This example enables inbound access on TCP port 80 from the source security group sg-1a2b3c4d. Note that for EC2-VPC, the source group must be in the same VPC. If the command succeeds, no output is returned.
+This example enables inbound access on TCP port 80 from the source security group sg-1a2b3c4d. Note that for EC2-VPC, the source group must be in the same VPC or in a peer VPC (requires a VPC peering connection). If the command succeeds, no output is returned.
 
 Command::
 
@@ -251,6 +253,14 @@ This example uses the ``ip-permissions`` parameter to add an inbound rule that a
 Command::
 
   aws ec2 authorize-security-group-ingress --group-id sg-123abc12 --ip-permissions '[{"IpProtocol": "icmp", "FromPort": 3, "ToPort": 4, "IpRanges": [{"CidrIp": "0.0.0.0/0"}]}]' 
+
+**[EC2-VPC] To add a rule for IPv6 traffic**
+
+This example grants SSH access (port 22) from the IPv6 range ``2001:db8:1234:1a00::/64``.
+
+Command::
+
+  aws ec2 authorize-security-group-ingress --group-id sg-9bf6ceff --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 22, "ToPort": 22, "Ipv6Ranges": [{"CidrIpv6": "2001:db8:1234:1a00::/64"}]}]'
 
 For more information, see `Using Security Groups`_ in the *AWS Command Line Interface User Guide*.
 

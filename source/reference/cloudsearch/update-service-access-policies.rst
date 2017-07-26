@@ -15,8 +15,11 @@ Description
 
 
 
-Configures the access rules that control access to the domain's document and search endpoints. For more information, see `Configuring Access for an Amazon CloudSearch Domain`_ .
+Configures the access rules that control access to the domain's document and search endpoints. For more information, see `Configuring Access for an Amazon CloudSearch Domain <http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-access.html>`_ .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/cloudsearch-2013-01-01/UpdateServiceAccessPolicies>`_
 
 
 ========
@@ -29,7 +32,7 @@ Synopsis
   --domain-name <value>
   --access-policies <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -55,8 +58,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -76,7 +79,7 @@ AccessPolicies -> (structure)
 
     
 
-    Access rules for a domain's document or search service endpoints. For more information, see `Configuring Access for a Search Domain`_ in the *Amazon CloudSearch Developer Guide* . The maximum size of a policy document is 100 KB.
+    Access rules for a domain's document or search service endpoints. For more information, see `Configuring Access for a Search Domain <http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-access.html>`_ in the *Amazon CloudSearch Developer Guide* . The maximum size of a policy document is 100 KB.
 
     
 
@@ -156,7 +159,3 @@ AccessPolicies -> (structure)
 
   
 
-
-
-.. _Configuring Access for an Amazon CloudSearch Domain: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-access.html
-.. _Configuring Access for a Search Domain: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-access.html

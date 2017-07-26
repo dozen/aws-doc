@@ -13,7 +13,7 @@ add-model
 Description
 ===========
 
-describe the command
+Adds a service JSON model to the appropriate location in ~/.aws/models. Once the model gets added, CLI commands and Boto3 clients will be immediately available for the service JSON model provided.
 
 
 

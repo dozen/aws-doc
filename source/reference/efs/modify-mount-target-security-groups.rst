@@ -19,7 +19,7 @@ Modifies the set of security groups in effect for a mount target.
 
  
 
-When you create a mount target, Amazon EFS also creates a new network interface (see  create-mount-target ). This operation replaces the security groups in effect for the network interface associated with a mount target, with the ``security-groups`` provided in the request. This operation requires that the network interface of the mount target has been created and the life cycle state of the mount target is not "deleted". 
+When you create a mount target, Amazon EFS also creates a new network interface. For more information, see  create-mount-target . This operation replaces the security groups in effect for the network interface associated with a mount target, with the ``security-groups`` provided in the request. This operation requires that the network interface of the mount target has been created and the lifecycle state of the mount target is not ``deleted`` . 
 
  
 
@@ -28,17 +28,14 @@ The operation requires permissions for the following actions:
  
 
  
-* ``elasticfilesystem:ModifyMountTargetSecurityGroups`` action on the mount target's file system. 
+* ``elasticfilesystem:ModifyMountTargetSecurityGroups`` action on the mount target's file system.  
  
-* ``ec2:ModifyNetworkInterfaceAttribute`` action on the mount target's network interface. 
+* ``ec2:ModifyNetworkInterfaceAttribute`` action on the mount target's network interface.  
  
 
 
 
-.. note::
-
-  **AWS CLI support for this service is only available in a preview stage.** You can enable this service by running: ``aws configure set preview.efs true`` 
-
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/ModifyMountTargetSecurityGroups>`_
 
 
 ========
@@ -51,7 +48,7 @@ Synopsis
   --mount-target-id <value>
   [--security-groups <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -63,14 +60,14 @@ Options
 ``--mount-target-id`` (string)
 
 
-  The ID of the mount target whose security groups you want to modify.
+  ID of the mount target whose security groups you want to modify.
 
   
 
 ``--security-groups`` (list)
 
 
-  An array of up to five VPC security group IDs.
+  Array of up to five VPC security group IDs.
 
   
 
@@ -85,8 +82,8 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 

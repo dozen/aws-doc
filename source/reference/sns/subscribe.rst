@@ -19,6 +19,9 @@ Prepares to subscribe an notification-endpoint by sending the notification-endpo
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/Subscribe>`_
+
+
 ========
 Synopsis
 ========
@@ -30,7 +33,7 @@ Synopsis
   --protocol <value>
   [--notification-endpoint <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -54,19 +57,21 @@ Options
    
 
    
-  * ``http`` -- delivery of JSON-encoded message via HTTP POST
+  * ``http`` -- delivery of JSON-encoded message via HTTP POST 
    
-  * ``https`` -- delivery of JSON-encoded message via HTTPS POST
+  * ``https`` -- delivery of JSON-encoded message via HTTPS POST 
    
-  * ``email`` -- delivery of message via SMTP
+  * ``email`` -- delivery of message via SMTP 
    
-  * ``email-json`` -- delivery of JSON-encoded message via SMTP
+  * ``email-json`` -- delivery of JSON-encoded message via SMTP 
    
-  * ``sms`` -- delivery of message via SMS
+  * ``sms`` -- delivery of message via SMS 
    
-  * ``sqs`` -- delivery of JSON-encoded message to an Amazon SQS queue
+  * ``sqs`` -- delivery of JSON-encoded message to an Amazon SQS queue 
    
-  * ``application`` -- delivery of JSON-encoded message to an EndpointArn for a mobile app and device.
+  * ``application`` -- delivery of JSON-encoded message to an EndpointArn for a mobile app and device. 
+   
+  * ``lambda`` -- delivery of JSON-encoded message to an AWS Lambda function. 
    
 
   
@@ -79,19 +84,21 @@ Options
    
 
    
-  * For the ``http`` protocol, the notification-endpoint is an URL beginning with "http://"
+  * For the ``http`` protocol, the notification-endpoint is an URL beginning with "http://" 
    
-  * For the ``https`` protocol, the notification-endpoint is a URL beginning with "https://"
+  * For the ``https`` protocol, the notification-endpoint is a URL beginning with "https://" 
    
-  * For the ``email`` protocol, the notification-endpoint is an email address
+  * For the ``email`` protocol, the notification-endpoint is an email address 
    
-  * For the ``email-json`` protocol, the notification-endpoint is an email address
+  * For the ``email-json`` protocol, the notification-endpoint is an email address 
    
-  * For the ``sms`` protocol, the notification-endpoint is a phone number of an SMS-enabled device
+  * For the ``sms`` protocol, the notification-endpoint is a phone number of an SMS-enabled device 
    
-  * For the ``sqs`` protocol, the notification-endpoint is the ARN of an Amazon SQS queue
+  * For the ``sqs`` protocol, the notification-endpoint is the ARN of an Amazon SQS queue 
    
-  * For the ``application`` protocol, the notification-endpoint is the EndpointArn of a mobile app and device.
+  * For the ``application`` protocol, the notification-endpoint is the EndpointArn of a mobile app and device. 
+   
+  * For the ``lambda`` protocol, the notification-endpoint is the ARN of an AWS Lambda function. 
    
 
   
@@ -99,8 +106,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 

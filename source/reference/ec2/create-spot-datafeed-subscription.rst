@@ -15,8 +15,11 @@ Description
 
 
 
-Creates a data feed for Spot instances, enabling you to view Spot instance usage logs. You can create one data feed per AWS account. For more information, see `Spot Instance Data Feed`_ in the *Amazon Elastic Compute Cloud User Guide* .
+Creates a data feed for Spot instances, enabling you to view Spot instance usage logs. You can create one data feed per AWS account. For more information, see `Spot Instance Data Feed <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html>`_ in the *Amazon Elastic Compute Cloud User Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSpotDatafeedSubscription>`_
 
 
 ========
@@ -26,11 +29,11 @@ Synopsis
 ::
 
     create-spot-datafeed-subscription
-  [--dry-run | --no-dry-run]
   --bucket <value>
+  [--dry-run | --no-dry-run]
   [--prefix <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -39,17 +42,17 @@ Synopsis
 Options
 =======
 
-``--dry-run`` | ``--no-dry-run`` (boolean)
-
-
-  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
-
-  
-
 ``--bucket`` (string)
 
 
   The Amazon S3 bucket in which to store the Spot instance data feed.
+
+  
+
+``--dry-run`` | ``--no-dry-run`` (boolean)
+
+
+  Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is ``DryRunOperation`` . Otherwise, it is ``UnauthorizedOperation`` .
 
   
 
@@ -63,8 +66,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -105,41 +108,11 @@ SpotDatafeedSubscription -> (structure)
 
   
 
-  OwnerId -> (string)
-
-    
-
-    The AWS account ID of the account.
-
-    
-
-    
-
   Bucket -> (string)
 
     
 
     The Amazon S3 bucket where the Spot instance data feed is located.
-
-    
-
-    
-
-  Prefix -> (string)
-
-    
-
-    The prefix that is prepended to data feed files.
-
-    
-
-    
-
-  State -> (string)
-
-    
-
-    The state of the Spot instance data feed subscription.
 
     
 
@@ -175,8 +148,35 @@ SpotDatafeedSubscription -> (structure)
 
     
 
+  OwnerId -> (string)
+
+    
+
+    The AWS account ID of the account.
+
+    
+
+    
+
+  Prefix -> (string)
+
+    
+
+    The prefix that is prepended to data feed files.
+
+    
+
+    
+
+  State -> (string)
+
+    
+
+    The state of the Spot instance data feed subscription.
+
+    
+
+    
+
   
 
-
-
-.. _Spot Instance Data Feed: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html

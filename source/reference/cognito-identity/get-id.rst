@@ -23,6 +23,9 @@ This is a public API. You do not need any credentials to call this API.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/GetId>`_
+
+
 ========
 Synopsis
 ========
@@ -34,7 +37,7 @@ Synopsis
   --identity-pool-id <value>
   [--logins <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -44,32 +47,38 @@ Options
 =======
 
 ``--account-id`` (string)
-A standard AWS account ID (9+ digits).
+
+
+  A standard AWS account ID (9+ digits).
+
+  
 
 ``--identity-pool-id`` (string)
-An identity pool ID in the format REGION:GUID.
+
+
+  An identity pool ID in the format REGION:GUID.
+
+  
 
 ``--logins`` (map)
 
 
-  A set of optional name-value pairs that map provider names to provider tokens.
+  A set of optional name-value pairs that map provider names to provider tokens. The available provider names for ``Logins`` are as follows:
 
    
 
-  The available provider names for ``Logins`` are as follows: 
-
    
-  * Facebook: ``graph.facebook.com``  
+  * Facebook: ``graph.facebook.com``   
    
-  * Google: ``accounts.google.com``  
+  * Amazon Cognito Identity Provider: ``cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789``   
    
-  * Amazon: ``www.amazon.com``  
+  * Google: ``accounts.google.com``   
    
-  * Twitter: ``api.twitter.com``  
+  * Amazon: ``www.amazon.com``   
    
-  * Digits: ``www.digits.com``  
+  * Twitter: ``api.twitter.com``   
    
-
+  * Digits: ``www.digits.com``   
    
 
   
@@ -93,8 +102,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -104,7 +113,11 @@ Output
 
 IdentityId -> (string)
 
+  
+
   A unique identifier in the format REGION:GUID.
+
+  
 
   
 

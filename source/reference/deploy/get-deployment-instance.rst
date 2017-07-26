@@ -19,6 +19,9 @@ Gets information about an instance as part of a deployment.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentInstance>`_
+
+
 ========
 Synopsis
 ========
@@ -29,7 +32,7 @@ Synopsis
   --deployment-id <value>
   --instance-id <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -48,15 +51,15 @@ Options
 ``--instance-id`` (string)
 
 
-  The unique ID of an instance in the deployment's deployment group.
+  The unique ID of an instance in the deployment group.
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -166,17 +169,17 @@ instanceSummary -> (structure)
      
 
      
-    * Pending: The deployment is pending for this instance.
+    * Pending: The deployment is pending for this instance. 
      
-    * In Progress: The deployment is in progress for this instance.
+    * In Progress: The deployment is in progress for this instance. 
      
-    * Succeeded: The deployment has succeeded for this instance.
+    * Succeeded: The deployment has succeeded for this instance. 
      
-    * Failed: The deployment has failed for this instance.
+    * Failed: The deployment has failed for this instance. 
      
-    * Skipped: The deployment has been skipped for this instance.
+    * Skipped: The deployment has been skipped for this instance. 
      
-    * Unknown: The deployment status is unknown for this instance.
+    * Unknown: The deployment status is unknown for this instance. 
      
 
     
@@ -236,17 +239,17 @@ instanceSummary -> (structure)
            
 
            
-          * Success: The specified script ran.
+          * Success: The specified script ran. 
            
-          * ScriptMissing: The specified script was not found in the specified location.
+          * ScriptMissing: The specified script was not found in the specified location. 
            
-          * ScriptNotExecutable: The specified script is not a recognized executable file type.
+          * ScriptNotExecutable: The specified script is not a recognized executable file type. 
            
-          * ScriptTimedOut: The specified script did not finish running in the specified time period.
+          * ScriptTimedOut: The specified script did not finish running in the specified time period. 
            
-          * ScriptFailed: The specified script failed to run as expected.
+          * ScriptFailed: The specified script failed to run as expected. 
            
-          * UnknownError: The specified script did not run for an unknown reason.
+          * UnknownError: The specified script did not run for an unknown reason. 
            
 
           
@@ -277,11 +280,11 @@ instanceSummary -> (structure)
 
           
 
-          The last portion of the associated diagnostic log.
+          The last portion of the diagnostic log.
 
            
 
-          If available, AWS CodeDeploy returns up to the last 4 KB of the associated diagnostic log.
+          If available, AWS CodeDeploy returns up to the last 4 KB of the diagnostic log.
 
           
 
@@ -318,17 +321,17 @@ instanceSummary -> (structure)
          
 
          
-        * Pending: The deployment lifecycle event is pending.
+        * Pending: The deployment lifecycle event is pending. 
          
-        * InProgress: The deployment lifecycle event is in progress.
+        * InProgress: The deployment lifecycle event is in progress. 
          
-        * Succeeded: The deployment lifecycle event has succeeded.
+        * Succeeded: The deployment lifecycle event ran successfully. 
          
-        * Failed: The deployment lifecycle event has failed.
+        * Failed: The deployment lifecycle event has failed. 
          
-        * Skipped: The deployment lifecycle event has been skipped.
+        * Skipped: The deployment lifecycle event has been skipped. 
          
-        * Unknown: The deployment lifecycle event is unknown.
+        * Unknown: The deployment lifecycle event is unknown. 
          
 
         
@@ -336,6 +339,24 @@ instanceSummary -> (structure)
         
 
       
+
+    
+
+  instanceType -> (string)
+
+    
+
+    Information about which environment an instance belongs to in a blue/green deployment.
+
+     
+
+     
+    * BLUE: The instance is part of the original environment. 
+     
+    * GREEN: The instance is part of the replacement environment. 
+     
+
+    
 
     
 

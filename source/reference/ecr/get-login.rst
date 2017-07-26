@@ -41,6 +41,7 @@ Synopsis
 
     get-login
   [--registry-ids <value> [<value>...]]
+  [--include-email | --no-include-email]
 
 
 
@@ -51,6 +52,9 @@ Options
 
 ``--registry-ids`` (string)
 A list of AWS account IDs that correspond to the Amazon ECR registries that you want to log in to.
+
+``--include-email`` | ``--no-include-email`` (boolean)
+Specify if the '-e' flag should be included in the 'docker login' command. The '-e' option has been deprecated and is removed in docker version 17.06 and later. You must specify --no-include-email if you're using docker version 17.06 or later. The default behavior is to include the '-e' flag in the 'docker login' output.
 
 
 

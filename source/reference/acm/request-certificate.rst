@@ -15,8 +15,11 @@ Description
 
 
 
-Requests an ACM Certificate for use with other AWS services. To request an ACM Certificate, you must specify the fully qualified domain name (FQDN) for your site. You can also specify additional FQDNs if users can reach your site by using other names. For each domain name you specify, email is sent to the domain owner to request approval to issue the certificate. After receiving approval from the domain owner, the ACM Certificate is issued. For more information, see the `AWS Certificate Manager User Guide`_ . 
+Requests an ACM Certificate for use with other AWS services. To request an ACM Certificate, you must specify the fully qualified domain name (FQDN) for your site. You can also specify additional FQDNs if users can reach your site by using other names. For each domain name you specify, email is sent to the domain owner to request approval to issue the certificate. After receiving approval from the domain owner, the ACM Certificate is issued. For more information, see the `AWS Certificate Manager User Guide <http://docs.aws.amazon.com/acm/latest/userguide/>`_ .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RequestCertificate>`_
 
 
 ========
@@ -31,7 +34,7 @@ Synopsis
   [--idempotency-token <value>]
   [--domain-validation-options <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -43,14 +46,30 @@ Options
 ``--domain-name`` (string)
 
 
-  Fully qualified domain name (FQDN), such as www.example.com, of the site you want to secure with an ACM Certificate. Use an asterisk (*) to create a wildcard certificate that protects several sites in the same domain. For example, *.example.com protects www.example.com, site.example.com, and images.example.com. 
+  Fully qualified domain name (FQDN), such as www.example.com, of the site that you want to secure with an ACM Certificate. Use an asterisk (*) to create a wildcard certificate that protects several sites in the same domain. For example, *.example.com protects www.example.com, site.example.com, and images.example.com. 
+
+   
+
+  The maximum length of a DNS name is 253 octets. The name is made up of multiple labels separated by periods. No label can be longer than 63 octets. Consider the following examples: 
+
+   
+
+   ``(63 octets).(63 octets).(63 octets).(61 octets)`` is legal because the total length is 253 octets (63+1+63+1+63+1+61) and no label exceeds 63 octets. 
+
+   
+
+   ``(64 octets).(63 octets).(63 octets).(61 octets)`` is not legal because the total length exceeds 253 octets (64+1+63+1+63+1+61) and the first label exceeds 63 octets. 
+
+   
+
+   ``(63 octets).(63 octets).(63 octets).(62 octets)`` is not legal because the total length of the DNS name (63+1+63+1+63+1+62) exceeds 253 octets. 
 
   
 
 ``--subject-alternative-names`` (list)
 
 
-  Additional FQDNs to be included in the Subject Alternative Name extension of the ACM Certificate. For example, add the name www.example.net to a certificate for which the ``DomainName`` field is www.example.com if users can reach your site by using either name. 
+  Additional FQDNs to be included in the Subject Alternative Name extension of the ACM Certificate. For example, add the name www.example.net to a certificate for which the ``DomainName`` field is www.example.com if users can reach your site by using either name. The maximum number of domain names that you can add to an ACM Certificate is 100. However, the initial limit is 10 domain names. If you need more than 10 names, you must request a limit increase. For more information, see `Limits <http://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html>`_ .
 
   
 
@@ -65,28 +84,14 @@ Syntax::
 ``--idempotency-token`` (string)
 
 
-  Customer chosen string that can be used to distinguish between calls to ``request-certificate`` . Idempotency tokens time out after one hour. Therefore, if you call ``request-certificate`` multiple times with the same idempotency token within one hour, ACM recognizes that you are requesting only one certificate and will issue only one. If you change the idempotency token for each call, ACM recognizes that you are requesting multiple certificates. 
+  Customer chosen string that can be used to distinguish between calls to ``request-certificate`` . Idempotency tokens time out after one hour. Therefore, if you call ``request-certificate`` multiple times with the same idempotency token within one hour, ACM recognizes that you are requesting only one certificate and will issue only one. If you change the idempotency token for each call, ACM recognizes that you are requesting multiple certificates.
 
   
 
 ``--domain-validation-options`` (list)
 
 
-  The base validation domain that will act as the suffix of the email addresses that are used to send the emails. This must be the same as the ``Domain`` value or a superdomain of the ``Domain`` value. For example, if you requested a certificate for ``test.example.com`` and specify **DomainValidationOptions** of ``example.com`` , ACM sends email to the domain registrant, technical contact, and administrative contact in WHOIS and the following five addresses: 
-
-   
-  * admin@example.com
-   
-  * administrator@example.com
-   
-  * hostmaster@example.com
-   
-  * postmaster@example.com
-   
-  * webmaster@example.com
-   
-
-   
+  The domain name that you want ACM to use to send you emails to validate your ownership of the domain.
 
   
 
@@ -114,8 +119,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -154,7 +159,7 @@ CertificateArn -> (string)
 
   
 
-  String that contains the ARN of the issued certificate. This must be of the form: 
+  String that contains the ARN of the issued certificate. This must be of the form:
 
    
 
@@ -164,6 +169,3 @@ CertificateArn -> (string)
 
   
 
-
-
-.. _AWS Certificate Manager User Guide: http://docs.aws.amazon.com/acm/latest/userguide/overview.html

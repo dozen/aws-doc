@@ -23,8 +23,11 @@ The owner of the peer VPC must accept the peering request to activate the peerin
 
  
 
-A ``create-vpc-peering-connection`` request between VPCs with overlapping CIDR blocks results in the VPC peering connection having a status of ``failed`` .
+If you try to create a VPC peering connection between VPCs that have overlapping CIDR blocks, the VPC peering connection status goes to ``failed`` .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcPeeringConnection>`_
 
 
 ========
@@ -35,11 +38,11 @@ Synopsis
 
     create-vpc-peering-connection
   [--dry-run | --no-dry-run]
-  [--vpc-id <value>]
-  [--peer-vpc-id <value>]
   [--peer-owner-id <value>]
+  [--peer-vpc-id <value>]
+  [--vpc-id <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -55,20 +58,6 @@ Options
 
   
 
-``--vpc-id`` (string)
-
-
-  The ID of the requester VPC.
-
-  
-
-``--peer-vpc-id`` (string)
-
-
-  The ID of the VPC with which you are creating the VPC peering connection.
-
-  
-
 ``--peer-owner-id`` (string)
 
 
@@ -80,11 +69,25 @@ Options
 
   
 
+``--peer-vpc-id`` (string)
+
+
+  The ID of the VPC with which you are creating the VPC peering connection.
+
+  
+
+``--vpc-id`` (string)
+
+
+  The ID of the requester VPC.
+
+  
+
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -149,7 +152,7 @@ VpcPeeringConnection -> (structure)
 
     
 
-    The information of the peer VPC.
+    Information about the accepter VPC. CIDR block information is only returned when describing an active VPC peering connection.
 
     
 
@@ -157,9 +160,39 @@ VpcPeeringConnection -> (structure)
 
       
 
-      The CIDR block for the VPC.
+      The IPv4 CIDR block for the VPC.
 
       
+
+      
+
+    Ipv6CidrBlockSet -> (list)
+
+      
+
+      The IPv6 CIDR block for the VPC.
+
+      
+
+      (structure)
+
+        
+
+        Describes an IPv6 CIDR block.
+
+        
+
+        Ipv6CidrBlock -> (string)
+
+          
+
+          The IPv6 CIDR block.
+
+          
+
+          
+
+        
 
       
 
@@ -170,6 +203,46 @@ VpcPeeringConnection -> (structure)
       The AWS account ID of the VPC owner.
 
       
+
+      
+
+    PeeringOptions -> (structure)
+
+      
+
+      Information about the VPC peering connection options for the accepter or requester VPC.
+
+      
+
+      AllowDnsResolutionFromRemoteVpc -> (boolean)
+
+        
+
+        Indicates whether a local VPC can resolve public DNS hostnames to private IP addresses when queried from instances in a peer VPC.
+
+        
+
+        
+
+      AllowEgressFromLocalClassicLinkToRemoteVpc -> (boolean)
+
+        
+
+        Indicates whether a local ClassicLink connection can communicate with the peer VPC over the VPC peering connection.
+
+        
+
+        
+
+      AllowEgressFromLocalVpcToRemoteClassicLink -> (boolean)
+
+        
+
+        Indicates whether a local VPC can communicate with a ClassicLink connection in the peer VPC over the VPC peering connection.
+
+        
+
+        
 
       
 
@@ -199,7 +272,7 @@ VpcPeeringConnection -> (structure)
 
     
 
-    The information of the requester VPC.
+    Information about the requester VPC. CIDR block information is only returned when describing an active VPC peering connection.
 
     
 
@@ -207,9 +280,39 @@ VpcPeeringConnection -> (structure)
 
       
 
-      The CIDR block for the VPC.
+      The IPv4 CIDR block for the VPC.
 
       
+
+      
+
+    Ipv6CidrBlockSet -> (list)
+
+      
+
+      The IPv6 CIDR block for the VPC.
+
+      
+
+      (structure)
+
+        
+
+        Describes an IPv6 CIDR block.
+
+        
+
+        Ipv6CidrBlock -> (string)
+
+          
+
+          The IPv6 CIDR block.
+
+          
+
+          
+
+        
 
       
 
@@ -220,6 +323,46 @@ VpcPeeringConnection -> (structure)
       The AWS account ID of the VPC owner.
 
       
+
+      
+
+    PeeringOptions -> (structure)
+
+      
+
+      Information about the VPC peering connection options for the accepter or requester VPC.
+
+      
+
+      AllowDnsResolutionFromRemoteVpc -> (boolean)
+
+        
+
+        Indicates whether a local VPC can resolve public DNS hostnames to private IP addresses when queried from instances in a peer VPC.
+
+        
+
+        
+
+      AllowEgressFromLocalClassicLinkToRemoteVpc -> (boolean)
+
+        
+
+        Indicates whether a local ClassicLink connection can communicate with the peer VPC over the VPC peering connection.
+
+        
+
+        
+
+      AllowEgressFromLocalVpcToRemoteClassicLink -> (boolean)
+
+        
+
+        Indicates whether a local VPC can communicate with a ClassicLink connection in the peer VPC over the VPC peering connection.
+
+        
+
+        
 
       
 
@@ -285,11 +428,11 @@ VpcPeeringConnection -> (structure)
 
         
 
-        The key of the tag. 
+        The key of the tag.
 
          
 
-        Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with ``aws:`` 
+        Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with ``aws:``  
 
         
 

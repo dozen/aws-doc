@@ -15,8 +15,11 @@ Description
 
 
 
-Removes an `` IndexField`` from the search domain. For more information, see `Configuring Index Fields`_ in the *Amazon CloudSearch Developer Guide* .
+Removes an `` IndexField`` from the search domain. For more information, see `Configuring Index Fields <http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html>`_ in the *Amazon CloudSearch Developer Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/cloudsearch-2013-01-01/DeleteIndexField>`_
 
 
 ========
@@ -29,7 +32,7 @@ Synopsis
   --domain-name <value>
   --index-field-name <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -55,8 +58,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -102,7 +105,7 @@ IndexField -> (structure)
 
       
 
-      The type of field. The valid options for a field depend on the field type. For more information about the supported field types, see `Configuring Index Fields`_ in the *Amazon CloudSearch Developer Guide* .
+      The type of field. The valid options for a field depend on the field type. For more information about the supported field types, see `Configuring Index Fields <http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html>`_ in the *Amazon CloudSearch Developer Guide* .
 
       
 
@@ -896,6 +899,3 @@ IndexField -> (structure)
 
   
 
-
-
-.. _Configuring Index Fields: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html

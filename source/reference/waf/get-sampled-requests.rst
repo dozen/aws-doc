@@ -15,12 +15,15 @@ Description
 
 
 
-Gets detailed information about a specified number of requests--a sample--that AWS WAF randomly selects from among the first 5,000 requests that your AWS resource received during a time range that you choose. You can specify a sample size of up to 100 requests, and you can specify any time range in the previous three hours.
+Gets detailed information about a specified number of requests--a sample--that AWS WAF randomly selects from among the first 5,000 requests that your AWS resource received during a time range that you choose. You can specify a sample size of up to 500 requests, and you can specify any time range in the previous three hours.
 
  
 
-``get-sampled-requests`` returns a time range, which is usually the time range that you specified. However, if your resource (such as a CloudFront distribution) received 5,000 requests before the specified time range elapsed, ``get-sampled-requests`` returns an updated time range. This new time range indicates the actual period during which AWS WAF selected the requests in the sample.
+ ``get-sampled-requests`` returns a time range, which is usually the time range that you specified. However, if your resource (such as a CloudFront distribution) received 5,000 requests before the specified time range elapsed, ``get-sampled-requests`` returns an updated time range. This new time range indicates the actual period during which AWS WAF selected the requests in the sample.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetSampledRequests>`_
 
 
 ========
@@ -35,7 +38,7 @@ Synopsis
   --time-window <value>
   --max-items <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -54,14 +57,14 @@ Options
 ``--rule-id`` (string)
 
 
-  ``RuleId`` is one of two values:
+   ``RuleId`` is one of two values:
 
    
 
    
-  * The ``RuleId`` of the ``Rule`` for which you want ``get-sampled-requests`` to return a sample of requests.
+  * The ``RuleId`` of the ``Rule`` for which you want ``get-sampled-requests`` to return a sample of requests. 
    
-  * ``Default_Action`` , which causes ``get-sampled-requests`` to return a sample of the requests that didn't match any of the rules in the specified ``WebACL`` .
+  * ``Default_Action`` , which causes ``get-sampled-requests`` to return a sample of the requests that didn't match any of the rules in the specified ``WebACL`` . 
    
 
   
@@ -69,7 +72,7 @@ Options
 ``--time-window`` (structure)
 
 
-  The start date and time and the end date and time of the range for which you want ``get-sampled-requests`` to return a sample of requests. Specify the date and time in Unix time format (in seconds). You can specify any time range in the previous three hours.
+  The start date and time and the end date and time of the range for which you want ``get-sampled-requests`` to return a sample of requests. Specify the date and time in the following format: ``"2016-09-27T14:50Z"`` . You can specify any time range in the previous three hours.
 
   
 
@@ -101,8 +104,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -143,9 +146,9 @@ SampledRequests -> (list)
          
 
          
-        * ``c-ip`` , if the viewer did not use an HTTP proxy or a load balancer to send the request
+        * ``c-ip`` , if the viewer did not use an HTTP proxy or a load balancer to send the request 
          
-        * ``x-forwarded-for`` , if the viewer did use an HTTP proxy or a load balancer to send the request
+        * ``x-forwarded-for`` , if the viewer did use an HTTP proxy or a load balancer to send the request 
          
 
         
@@ -156,7 +159,7 @@ SampledRequests -> (list)
 
         
 
-        The two-letter country code for the country that the request originated from. For a current list of country codes, see the Wikipedia entry `ISO 3166-1 alpha-2`_ .
+        The two-letter country code for the country that the request originated from. For a current list of country codes, see the Wikipedia entry `ISO 3166-1 alpha-2 <https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2>`_ .
 
         
 
@@ -290,7 +293,7 @@ TimeWindow -> (structure)
 
     
 
-    The beginning of the time range from which you want ``get-sampled-requests`` to return a sample of the requests that your AWS resource received. You can specify any time range in the previous three hours.
+    The beginning of the time range from which you want ``get-sampled-requests`` to return a sample of the requests that your AWS resource received. Specify the date and time in the following format: ``"2016-09-27T14:50Z"`` . You can specify any time range in the previous three hours.
 
     
 
@@ -300,7 +303,7 @@ TimeWindow -> (structure)
 
     
 
-    The end of the time range from which you want ``get-sampled-requests`` to return a sample of the requests that your AWS resource received. You can specify any time range in the previous three hours.
+    The end of the time range from which you want ``get-sampled-requests`` to return a sample of the requests that your AWS resource received. Specify the date and time in the following format: ``"2016-09-27T14:50Z"`` . You can specify any time range in the previous three hours.
 
     
 
@@ -308,6 +311,3 @@ TimeWindow -> (structure)
 
   
 
-
-
-.. _ISO 3166-1 alpha-2: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2

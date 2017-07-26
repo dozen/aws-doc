@@ -21,8 +21,15 @@ Creates a new branch in a repository and points the branch to a commit.
 
 .. note::
 
+   
+
   Calling the create branch operation does not set a repository's default branch. To do this, call the update default branch operation.
 
+   
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreateBranch>`_
 
 
 ========
@@ -36,7 +43,7 @@ Synopsis
   --branch-name <value>
   --commit-id <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -64,19 +71,13 @@ Options
 
   The ID of the commit to point the new branch to.
 
-   
-
-  .. note::
-
-    If this commit ID is not specified, the new branch will point to the commit that is pointed to by the repository's default branch.
-
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -86,7 +87,7 @@ Examples
 
 **To create a branch**
 
-This example creates a branch in an AWS CoceCommit repository. This command produces output only if there are errors.
+This example creates a branch in an AWS CodeCommit repository. This command produces output only if there are errors.
 
 Command::
 
@@ -95,6 +96,7 @@ Command::
 Output::
 
   None.
+
 
 ======
 Output

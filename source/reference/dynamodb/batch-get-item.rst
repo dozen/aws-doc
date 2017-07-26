@@ -15,29 +15,29 @@ Description
 
 
 
-The *batch-get-item* operation returns the attributes of one or more items from one or more tables. You identify requested items by primary key.
+The ``batch-get-item`` operation returns the attributes of one or more items from one or more tables. You identify requested items by primary key.
 
  
 
-A single operation can retrieve up to 16 MB of data, which can contain as many as 100 items. *batch-get-item* will return a partial result if the response size limit is exceeded, the table's provisioned throughput is exceeded, or an internal processing failure occurs. If a partial result is returned, the operation returns a value for *UnprocessedKeys* . You can use this value to retry the operation starting with the next item to get.
+A single operation can retrieve up to 16 MB of data, which can contain as many as 100 items. ``batch-get-item`` will return a partial result if the response size limit is exceeded, the table's provisioned throughput is exceeded, or an internal processing failure occurs. If a partial result is returned, the operation returns a value for ``UnprocessedKeys`` . You can use this value to retry the operation starting with the next item to get.
 
  
 
 .. warning::
 
-  
+   
 
-  If you request more than 100 items *batch-get-item* will return a *ValidationException* with the message "Too many items requested for the batch-get-item call".
+  If you request more than 100 items ``batch-get-item`` will return a ``ValidationException`` with the message "Too many items requested for the batch-get-item call".
 
-  
-
- 
-
-For example, if you ask to retrieve 100 items, but each individual item is 300 KB in size, the system returns 52 items (so as not to exceed the 16 MB limit). It also returns an appropriate *UnprocessedKeys* value so you can get the next page of results. If desired, your application can include its own logic to assemble the pages of results into one data set.
+   
 
  
 
-If *none* of the items can be processed due to insufficient provisioned throughput on all of the tables in the request, then *batch-get-item* will return a *ProvisionedThroughputExceededException* . If *at least one* of the items is successfully processed, then *batch-get-item* completes successfully, while returning the keys of the unread items in *UnprocessedKeys* .
+For example, if you ask to retrieve 100 items, but each individual item is 300 KB in size, the system returns 52 items (so as not to exceed the 16 MB limit). It also returns an appropriate ``UnprocessedKeys`` value so you can get the next page of results. If desired, your application can include its own logic to assemble the pages of results into one data set.
+
+ 
+
+If *none* of the items can be processed due to insufficient provisioned throughput on all of the tables in the request, then ``batch-get-item`` will return a ``ProvisionedThroughputExceededException`` . If *at least one* of the items is successfully processed, then ``batch-get-item`` completes successfully, while returning the keys of the unread items in ``UnprocessedKeys`` .
 
  
 
@@ -49,26 +49,29 @@ If *none* of the items can be processed due to insufficient provisioned throughp
 
    
 
-  For more information, see `Batch Operations and Error Handling`_ in the *Amazon DynamoDB Developer Guide* .
+  For more information, see `Batch Operations and Error Handling <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ErrorHandling.html#BatchOperations>`_ in the *Amazon DynamoDB Developer Guide* .
 
    
 
  
 
-By default, *batch-get-item* performs eventually consistent reads on every table in the request. If you want strongly consistent reads instead, you can set *ConsistentRead* to ``true`` for any or all tables.
+By default, ``batch-get-item`` performs eventually consistent reads on every table in the request. If you want strongly consistent reads instead, you can set ``ConsistentRead`` to ``true`` for any or all tables.
 
  
 
-In order to minimize response latency, *batch-get-item* retrieves items in parallel.
+In order to minimize response latency, ``batch-get-item`` retrieves items in parallel.
 
  
 
-When designing your application, keep in mind that DynamoDB does not return attributes in any particular order. To help parse the response by item, include the primary key values for the items in your request in the *AttributesToGet* parameter.
+When designing your application, keep in mind that DynamoDB does not return items in any particular order. To help parse the response by item, include the primary key values for the items in your request in the ``ProjectionExpression`` parameter.
 
  
 
-If a requested item does not exist, it is not returned in the result. Requests for nonexistent items consume the minimum read capacity units according to the type of read. For more information, see `Capacity Units Calculations`_ in the *Amazon DynamoDB Developer Guide* .
+If a requested item does not exist, it is not returned in the result. Requests for nonexistent items consume the minimum read capacity units according to the type of read. For more information, see `Capacity Units Calculations <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#CapacityUnitCalculations>`_ in the *Amazon DynamoDB Developer Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchGetItem>`_
 
 
 ========
@@ -81,7 +84,7 @@ Synopsis
   --request-items <value>
   [--return-consumed-capacity <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -93,7 +96,7 @@ Options
 ``--request-items`` (map)
 
 
-  A map of one or more table names and, for each table, a map that describes one or more items to retrieve from that table. Each table name can be used only once per *batch-get-item* request.
+  A map of one or more table names and, for each table, a map that describes one or more items to retrieve from that table. Each table name can be used only once per ``batch-get-item`` request.
 
    
 
@@ -102,9 +105,9 @@ Options
    
 
    
-  * *ConsistentRead* - If ``true`` , a strongly consistent read is used; if ``false`` (the default), an eventually consistent read is used. 
+  * ``ConsistentRead`` - If ``true`` , a strongly consistent read is used; if ``false`` (the default), an eventually consistent read is used. 
    
-  * *ExpressionAttributeNames* - One or more substitution tokens for attribute names in the *ProjectionExpression* parameter. The following are some use cases for using *ExpressionAttributeNames* : 
+  * ``ExpressionAttributeNames`` - One or more substitution tokens for attribute names in the ``ProjectionExpression`` parameter. The following are some use cases for using ``ExpressionAttributeNames`` : 
 
      
     * To access an attribute whose name conflicts with a DynamoDB reserved word. 
@@ -120,19 +123,19 @@ Options
 
    
 
-    
-    * ``Percentile`` 
-    
+     
+    * ``Percentile``   
+     
 
    
 
-  The name of this attribute conflicts with a reserved word, so it cannot be used directly in an expression. (For the complete list of reserved words, see `Reserved Words`_ in the *Amazon DynamoDB Developer Guide* ). To work around this, you could specify the following for *ExpressionAttributeNames* :
+  The name of this attribute conflicts with a reserved word, so it cannot be used directly in an expression. (For the complete list of reserved words, see `Reserved Words <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html>`_ in the *Amazon DynamoDB Developer Guide* ). To work around this, you could specify the following for ``ExpressionAttributeNames`` :
 
    
 
-    
-    * ``{"#P":"Percentile"}`` 
-    
+     
+    * ``{"#P":"Percentile"}``   
+     
 
    
 
@@ -140,37 +143,31 @@ Options
 
    
 
-    
-    * ``#P = :val`` 
-    
+     
+    * ``#P = :val``   
+     
 
    
 
   .. note::
 
-    
+     
 
     Tokens that begin with the **:** character are *expression attribute values* , which are placeholders for the actual value at runtime.
 
-    
+     
 
    
 
-  For more information on expression attribute names, see `Accessing Item Attributes`_ in the *Amazon DynamoDB Developer Guide* .
+  For more information on expression attribute names, see `Accessing Item Attributes <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html>`_ in the *Amazon DynamoDB Developer Guide* .
 
    
    
-  * *Keys* - An array of primary key attribute values that define specific items in the table. For each primary key, you must provide *all* of the key attributes. For example, with a hash type primary key, you only need to provide the hash attribute. For a hash-and-range type primary key, you must provide *both* the hash attribute and the range attribute. 
+  * ``Keys`` - An array of primary key attribute values that define specific items in the table. For each primary key, you must provide *all* of the key attributes. For example, with a simple primary key, you only need to provide the partition key value. For a composite key, you must provide *both* the partition key value and the sort key value. 
    
-  * *ProjectionExpression* - A string that identifies one or more attributes to retrieve from the table. These attributes can include scalars, sets, or elements of a JSON document. The attributes in the expression must be separated by commas. If no attribute names are specified, then all attributes will be returned. If any of the requested attributes are not found, they will not appear in the result. For more information, see `Accessing Item Attributes`_ in the *Amazon DynamoDB Developer Guide* . 
+  * ``ProjectionExpression`` - A string that identifies one or more attributes to retrieve from the table. These attributes can include scalars, sets, or elements of a JSON document. The attributes in the expression must be separated by commas. If no attribute names are specified, then all attributes will be returned. If any of the requested attributes are not found, they will not appear in the result. For more information, see `Accessing Item Attributes <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html>`_ in the *Amazon DynamoDB Developer Guide* . 
    
-  * *AttributesToGet* -  
-
-  .. warning::
-
-     This is a legacy parameter, for backward compatibility. New applications should use *ProjectionExpression* instead. Do not combine legacy parameters and expression parameters in a single API call; otherwise, DynamoDB will return a *ValidationException* exception. This parameter allows you to retrieve attributes of type List or Map; however, it cannot retrieve individual elements within a List or a Map.
-
-   The names of one or more attributes to retrieve. If no attribute names are provided, then all attributes will be returned. If any of the requested attributes are not found, they will not appear in the result. Note that *AttributesToGet* has no effect on provisioned throughput consumption. DynamoDB determines capacity units consumed based on item size, not on the amount of data that is returned to an application. 
+  * ``AttributesToGet`` - This is a legacy parameter. Use ``ProjectionExpression`` instead. For more information, see `AttributesToGet <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html>`_ in the *Amazon DynamoDB Developer Guide* .  
    
 
   
@@ -248,11 +245,11 @@ JSON Syntax::
    
 
    
-  * *INDEXES* - The response includes the aggregate *ConsumedCapacity* for the operation, together with *ConsumedCapacity* for each table and secondary index that was accessed. Note that some operations, such as *get-item* and *batch-get-item* , do not access any indexes at all. In these cases, specifying *INDEXES* will only return *ConsumedCapacity* information for table(s). 
+  * ``INDEXES`` - The response includes the aggregate ``ConsumedCapacity`` for the operation, together with ``ConsumedCapacity`` for each table and secondary index that was accessed. Note that some operations, such as ``get-item`` and ``batch-get-item`` , do not access any indexes at all. In these cases, specifying ``INDEXES`` will only return ``ConsumedCapacity`` information for table(s). 
    
-  * *TOTAL* - The response includes only the aggregate *ConsumedCapacity* for the operation.
+  * ``TOTAL`` - The response includes only the aggregate ``ConsumedCapacity`` for the operation. 
    
-  * *NONE* - No *ConsumedCapacity* details are included in the response.
+  * ``NONE`` - No ``ConsumedCapacity`` details are included in the response. 
    
 
   
@@ -275,8 +272,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -348,7 +345,7 @@ Responses -> (map)
 
   
 
-  A map of table name to a list of items. Each object in *Responses* consists of a table name, along with a map of attribute data consisting of the data type and attribute value.
+  A map of table name to a list of items. Each object in ``Responses`` consists of a table name, along with a map of attribute data consisting of the data type and attribute value.
 
   
 
@@ -376,11 +373,15 @@ Responses -> (map)
 
         
 
-        Represents the data for an attribute. You can set one, and only one, of the elements.
+        Represents the data for an attribute.
 
          
 
-        Each attribute in an item is a name-value pair. An attribute can be single-valued or multi-valued set. For example, a book item can have title and authors attributes. Each book has one title but can have many authors. The multi-valued attribute is a set; duplicate values are not allowed. 
+        Each attribute value is described as a name-value pair. The name is the data type, and the value is the data itself.
+
+         
+
+        For more information, see `Data Types <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes>`_ in the *Amazon DynamoDB Developer Guide* .
 
         
 
@@ -388,7 +389,11 @@ Responses -> (map)
 
           
 
-          A String data type.
+          An attribute of type String. For example:
+
+           
+
+           ``"S": "Hello"``  
 
           
 
@@ -398,7 +403,15 @@ Responses -> (map)
 
           
 
-          A Number data type.
+          An attribute of type Number. For example:
+
+           
+
+           ``"N": "123.45"``  
+
+           
+
+          Numbers are sent across the network to DynamoDB as strings, to maximize compatibility across languages and libraries. However, DynamoDB treats them as number type attributes for mathematical operations.
 
           
 
@@ -408,7 +421,11 @@ Responses -> (map)
 
           
 
-          A Binary data type.
+          An attribute of type Binary. For example:
+
+           
+
+           ``"B": "dGhpcyB0ZXh0IGlzIGJhc2U2NC1lbmNvZGVk"``  
 
           
 
@@ -418,7 +435,11 @@ Responses -> (map)
 
           
 
-          A String Set data type.
+          An attribute of type String Set. For example:
+
+           
+
+           ``"SS": ["Giraffe", "Hippo" ,"Zebra"]``  
 
           
 
@@ -434,7 +455,15 @@ Responses -> (map)
 
           
 
-          A Number Set data type.
+          An attribute of type Number Set. For example:
+
+           
+
+           ``"NS": ["42.2", "-19", "7.5", "3.14"]``  
+
+           
+
+          Numbers are sent across the network to DynamoDB as strings, to maximize compatibility across languages and libraries. However, DynamoDB treats them as number type attributes for mathematical operations.
 
           
 
@@ -450,7 +479,11 @@ Responses -> (map)
 
           
 
-          A Binary Set data type.
+          An attribute of type Binary Set. For example:
+
+           
+
+           ``"BS": ["U3Vubnk=", "UmFpbnk=", "U25vd3k="]``  
 
           
 
@@ -466,7 +499,11 @@ Responses -> (map)
 
           
 
-          A Map of attribute values.
+          An attribute of type Map. For example:
+
+           
+
+           ``"M": {"Name": {"S": "Joe"}, "Age": {"N": "35"}}``  
 
           
 
@@ -480,11 +517,15 @@ Responses -> (map)
 
             
 
-            Represents the data for an attribute. You can set one, and only one, of the elements.
+            Represents the data for an attribute.
 
              
 
-            Each attribute in an item is a name-value pair. An attribute can be single-valued or multi-valued set. For example, a book item can have title and authors attributes. Each book has one title but can have many authors. The multi-valued attribute is a set; duplicate values are not allowed. 
+            Each attribute value is described as a name-value pair. The name is the data type, and the value is the data itself.
+
+             
+
+            For more information, see `Data Types <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes>`_ in the *Amazon DynamoDB Developer Guide* .
 
             
 
@@ -492,7 +533,11 @@ Responses -> (map)
 
               
 
-              A String data type.
+              An attribute of type String. For example:
+
+               
+
+               ``"S": "Hello"``  
 
               
 
@@ -502,7 +547,15 @@ Responses -> (map)
 
               
 
-              A Number data type.
+              An attribute of type Number. For example:
+
+               
+
+               ``"N": "123.45"``  
+
+               
+
+              Numbers are sent across the network to DynamoDB as strings, to maximize compatibility across languages and libraries. However, DynamoDB treats them as number type attributes for mathematical operations.
 
               
 
@@ -512,7 +565,11 @@ Responses -> (map)
 
               
 
-              A Binary data type.
+              An attribute of type Binary. For example:
+
+               
+
+               ``"B": "dGhpcyB0ZXh0IGlzIGJhc2U2NC1lbmNvZGVk"``  
 
               
 
@@ -522,7 +579,11 @@ Responses -> (map)
 
               
 
-              A String Set data type.
+              An attribute of type String Set. For example:
+
+               
+
+               ``"SS": ["Giraffe", "Hippo" ,"Zebra"]``  
 
               
 
@@ -538,7 +599,15 @@ Responses -> (map)
 
               
 
-              A Number Set data type.
+              An attribute of type Number Set. For example:
+
+               
+
+               ``"NS": ["42.2", "-19", "7.5", "3.14"]``  
+
+               
+
+              Numbers are sent across the network to DynamoDB as strings, to maximize compatibility across languages and libraries. However, DynamoDB treats them as number type attributes for mathematical operations.
 
               
 
@@ -554,7 +623,11 @@ Responses -> (map)
 
               
 
-              A Binary Set data type.
+              An attribute of type Binary Set. For example:
+
+               
+
+               ``"BS": ["U3Vubnk=", "UmFpbnk=", "U25vd3k="]``  
 
               
 
@@ -570,7 +643,11 @@ Responses -> (map)
 
               
 
-              A Map of attribute values.
+              An attribute of type Map. For example:
+
+               
+
+               ``"M": {"Name": {"S": "Joe"}, "Age": {"N": "35"}}``  
 
               
 
@@ -586,7 +663,11 @@ Responses -> (map)
 
               
 
-              A List of attribute values.
+              An attribute of type List. For example:
+
+               
+
+               ``"L": ["Cookies", "Coffee", 3.14159]``  
 
               
 
@@ -596,7 +677,11 @@ Responses -> (map)
 
               
 
-              A Null data type.
+              An attribute of type Null. For example:
+
+               
+
+               ``"NULL": true``  
 
               
 
@@ -606,7 +691,11 @@ Responses -> (map)
 
               
 
-              A Boolean data type.
+              An attribute of type Boolean. For example:
+
+               
+
+               ``"BOOL": true``  
 
               
 
@@ -620,7 +709,11 @@ Responses -> (map)
 
           
 
-          A List of attribute values.
+          An attribute of type List. For example:
+
+           
+
+           ``"L": ["Cookies", "Coffee", 3.14159]``  
 
           
 
@@ -628,11 +721,15 @@ Responses -> (map)
 
             
 
-            Represents the data for an attribute. You can set one, and only one, of the elements.
+            Represents the data for an attribute.
 
              
 
-            Each attribute in an item is a name-value pair. An attribute can be single-valued or multi-valued set. For example, a book item can have title and authors attributes. Each book has one title but can have many authors. The multi-valued attribute is a set; duplicate values are not allowed. 
+            Each attribute value is described as a name-value pair. The name is the data type, and the value is the data itself.
+
+             
+
+            For more information, see `Data Types <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes>`_ in the *Amazon DynamoDB Developer Guide* .
 
             
 
@@ -640,7 +737,11 @@ Responses -> (map)
 
               
 
-              A String data type.
+              An attribute of type String. For example:
+
+               
+
+               ``"S": "Hello"``  
 
               
 
@@ -650,7 +751,15 @@ Responses -> (map)
 
               
 
-              A Number data type.
+              An attribute of type Number. For example:
+
+               
+
+               ``"N": "123.45"``  
+
+               
+
+              Numbers are sent across the network to DynamoDB as strings, to maximize compatibility across languages and libraries. However, DynamoDB treats them as number type attributes for mathematical operations.
 
               
 
@@ -660,7 +769,11 @@ Responses -> (map)
 
               
 
-              A Binary data type.
+              An attribute of type Binary. For example:
+
+               
+
+               ``"B": "dGhpcyB0ZXh0IGlzIGJhc2U2NC1lbmNvZGVk"``  
 
               
 
@@ -670,7 +783,11 @@ Responses -> (map)
 
               
 
-              A String Set data type.
+              An attribute of type String Set. For example:
+
+               
+
+               ``"SS": ["Giraffe", "Hippo" ,"Zebra"]``  
 
               
 
@@ -686,7 +803,15 @@ Responses -> (map)
 
               
 
-              A Number Set data type.
+              An attribute of type Number Set. For example:
+
+               
+
+               ``"NS": ["42.2", "-19", "7.5", "3.14"]``  
+
+               
+
+              Numbers are sent across the network to DynamoDB as strings, to maximize compatibility across languages and libraries. However, DynamoDB treats them as number type attributes for mathematical operations.
 
               
 
@@ -702,7 +827,11 @@ Responses -> (map)
 
               
 
-              A Binary Set data type.
+              An attribute of type Binary Set. For example:
+
+               
+
+               ``"BS": ["U3Vubnk=", "UmFpbnk=", "U25vd3k="]``  
 
               
 
@@ -718,7 +847,11 @@ Responses -> (map)
 
               
 
-              A Map of attribute values.
+              An attribute of type Map. For example:
+
+               
+
+               ``"M": {"Name": {"S": "Joe"}, "Age": {"N": "35"}}``  
 
               
 
@@ -734,7 +867,11 @@ Responses -> (map)
 
               
 
-              A List of attribute values.
+              An attribute of type List. For example:
+
+               
+
+               ``"L": ["Cookies", "Coffee", 3.14159]``  
 
               
 
@@ -744,7 +881,11 @@ Responses -> (map)
 
               
 
-              A Null data type.
+              An attribute of type Null. For example:
+
+               
+
+               ``"NULL": true``  
 
               
 
@@ -754,7 +895,11 @@ Responses -> (map)
 
               
 
-              A Boolean data type.
+              An attribute of type Boolean. For example:
+
+               
+
+               ``"BOOL": true``  
 
               
 
@@ -768,7 +913,11 @@ Responses -> (map)
 
           
 
-          A Null data type.
+          An attribute of type Null. For example:
+
+           
+
+           ``"NULL": true``  
 
           
 
@@ -778,7 +927,11 @@ Responses -> (map)
 
           
 
-          A Boolean data type.
+          An attribute of type Boolean. For example:
+
+           
+
+           ``"BOOL": true``  
 
           
 
@@ -796,7 +949,7 @@ UnprocessedKeys -> (map)
 
   
 
-  A map of tables and their respective keys that were not processed with the current response. The *UnprocessedKeys* value is in the same form as *RequestItems* , so the value can be provided directly to a subsequent *batch-get-item* operation. For more information, see *RequestItems* in the Request Parameters section.
+  A map of tables and their respective keys that were not processed with the current response. The ``UnprocessedKeys`` value is in the same form as ``RequestItems`` , so the value can be provided directly to a subsequent ``batch-get-item`` operation. For more information, see ``RequestItems`` in the Request Parameters section.
 
    
 
@@ -805,16 +958,16 @@ UnprocessedKeys -> (map)
    
 
    
-  * *Keys* - An array of primary key attribute values that define specific items in the table. 
+  * ``Keys`` - An array of primary key attribute values that define specific items in the table. 
    
-  * *AttributesToGet* - One or more attributes to be retrieved from the table or index. By default, all attributes are returned. If a requested attribute is not found, it does not appear in the result. 
+  * ``ProjectionExpression`` - One or more attributes to be retrieved from the table or index. By default, all attributes are returned. If a requested attribute is not found, it does not appear in the result. 
    
-  * *ConsistentRead* - The consistency of a read operation. If set to ``true`` , then a strongly consistent read is used; otherwise, an eventually consistent read is used. 
-   
-
+  * ``ConsistentRead`` - The consistency of a read operation. If set to ``true`` , then a strongly consistent read is used; otherwise, an eventually consistent read is used. 
    
 
-  If there are no unprocessed keys remaining, the response contains an empty *UnprocessedKeys* map.
+   
+
+  If there are no unprocessed keys remaining, the response contains an empty ``UnprocessedKeys`` map.
 
   
 
@@ -832,7 +985,7 @@ UnprocessedKeys -> (map)
 
      
 
-    For each primary key, you must provide *all* of the key attributes. For example, with a hash type primary key, you only need to provide the hash attribute. For a hash-and-range type primary key, you must provide *both* the hash attribute and the range attribute.
+    For each primary key, you must provide *all* of the key attributes. For example, with a simple primary key, you only need to provide the partition key. For a composite primary key, you must provide *both* the partition key and the sort key.
 
     
 
@@ -858,11 +1011,15 @@ UnprocessedKeys -> (map)
 
           
 
-          Represents the data for an attribute. You can set one, and only one, of the elements.
+          Represents the data for an attribute.
 
            
 
-          Each attribute in an item is a name-value pair. An attribute can be single-valued or multi-valued set. For example, a book item can have title and authors attributes. Each book has one title but can have many authors. The multi-valued attribute is a set; duplicate values are not allowed. 
+          Each attribute value is described as a name-value pair. The name is the data type, and the value is the data itself.
+
+           
+
+          For more information, see `Data Types <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes>`_ in the *Amazon DynamoDB Developer Guide* .
 
           
 
@@ -870,7 +1027,11 @@ UnprocessedKeys -> (map)
 
             
 
-            A String data type.
+            An attribute of type String. For example:
+
+             
+
+             ``"S": "Hello"``  
 
             
 
@@ -880,7 +1041,15 @@ UnprocessedKeys -> (map)
 
             
 
-            A Number data type.
+            An attribute of type Number. For example:
+
+             
+
+             ``"N": "123.45"``  
+
+             
+
+            Numbers are sent across the network to DynamoDB as strings, to maximize compatibility across languages and libraries. However, DynamoDB treats them as number type attributes for mathematical operations.
 
             
 
@@ -890,7 +1059,11 @@ UnprocessedKeys -> (map)
 
             
 
-            A Binary data type.
+            An attribute of type Binary. For example:
+
+             
+
+             ``"B": "dGhpcyB0ZXh0IGlzIGJhc2U2NC1lbmNvZGVk"``  
 
             
 
@@ -900,7 +1073,11 @@ UnprocessedKeys -> (map)
 
             
 
-            A String Set data type.
+            An attribute of type String Set. For example:
+
+             
+
+             ``"SS": ["Giraffe", "Hippo" ,"Zebra"]``  
 
             
 
@@ -916,7 +1093,15 @@ UnprocessedKeys -> (map)
 
             
 
-            A Number Set data type.
+            An attribute of type Number Set. For example:
+
+             
+
+             ``"NS": ["42.2", "-19", "7.5", "3.14"]``  
+
+             
+
+            Numbers are sent across the network to DynamoDB as strings, to maximize compatibility across languages and libraries. However, DynamoDB treats them as number type attributes for mathematical operations.
 
             
 
@@ -932,7 +1117,11 @@ UnprocessedKeys -> (map)
 
             
 
-            A Binary Set data type.
+            An attribute of type Binary Set. For example:
+
+             
+
+             ``"BS": ["U3Vubnk=", "UmFpbnk=", "U25vd3k="]``  
 
             
 
@@ -948,7 +1137,11 @@ UnprocessedKeys -> (map)
 
             
 
-            A Map of attribute values.
+            An attribute of type Map. For example:
+
+             
+
+             ``"M": {"Name": {"S": "Joe"}, "Age": {"N": "35"}}``  
 
             
 
@@ -962,11 +1155,15 @@ UnprocessedKeys -> (map)
 
               
 
-              Represents the data for an attribute. You can set one, and only one, of the elements.
+              Represents the data for an attribute.
 
                
 
-              Each attribute in an item is a name-value pair. An attribute can be single-valued or multi-valued set. For example, a book item can have title and authors attributes. Each book has one title but can have many authors. The multi-valued attribute is a set; duplicate values are not allowed. 
+              Each attribute value is described as a name-value pair. The name is the data type, and the value is the data itself.
+
+               
+
+              For more information, see `Data Types <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes>`_ in the *Amazon DynamoDB Developer Guide* .
 
               
 
@@ -974,7 +1171,11 @@ UnprocessedKeys -> (map)
 
                 
 
-                A String data type.
+                An attribute of type String. For example:
+
+                 
+
+                 ``"S": "Hello"``  
 
                 
 
@@ -984,7 +1185,15 @@ UnprocessedKeys -> (map)
 
                 
 
-                A Number data type.
+                An attribute of type Number. For example:
+
+                 
+
+                 ``"N": "123.45"``  
+
+                 
+
+                Numbers are sent across the network to DynamoDB as strings, to maximize compatibility across languages and libraries. However, DynamoDB treats them as number type attributes for mathematical operations.
 
                 
 
@@ -994,7 +1203,11 @@ UnprocessedKeys -> (map)
 
                 
 
-                A Binary data type.
+                An attribute of type Binary. For example:
+
+                 
+
+                 ``"B": "dGhpcyB0ZXh0IGlzIGJhc2U2NC1lbmNvZGVk"``  
 
                 
 
@@ -1004,7 +1217,11 @@ UnprocessedKeys -> (map)
 
                 
 
-                A String Set data type.
+                An attribute of type String Set. For example:
+
+                 
+
+                 ``"SS": ["Giraffe", "Hippo" ,"Zebra"]``  
 
                 
 
@@ -1020,7 +1237,15 @@ UnprocessedKeys -> (map)
 
                 
 
-                A Number Set data type.
+                An attribute of type Number Set. For example:
+
+                 
+
+                 ``"NS": ["42.2", "-19", "7.5", "3.14"]``  
+
+                 
+
+                Numbers are sent across the network to DynamoDB as strings, to maximize compatibility across languages and libraries. However, DynamoDB treats them as number type attributes for mathematical operations.
 
                 
 
@@ -1036,7 +1261,11 @@ UnprocessedKeys -> (map)
 
                 
 
-                A Binary Set data type.
+                An attribute of type Binary Set. For example:
+
+                 
+
+                 ``"BS": ["U3Vubnk=", "UmFpbnk=", "U25vd3k="]``  
 
                 
 
@@ -1052,7 +1281,11 @@ UnprocessedKeys -> (map)
 
                 
 
-                A Map of attribute values.
+                An attribute of type Map. For example:
+
+                 
+
+                 ``"M": {"Name": {"S": "Joe"}, "Age": {"N": "35"}}``  
 
                 
 
@@ -1068,7 +1301,11 @@ UnprocessedKeys -> (map)
 
                 
 
-                A List of attribute values.
+                An attribute of type List. For example:
+
+                 
+
+                 ``"L": ["Cookies", "Coffee", 3.14159]``  
 
                 
 
@@ -1078,7 +1315,11 @@ UnprocessedKeys -> (map)
 
                 
 
-                A Null data type.
+                An attribute of type Null. For example:
+
+                 
+
+                 ``"NULL": true``  
 
                 
 
@@ -1088,7 +1329,11 @@ UnprocessedKeys -> (map)
 
                 
 
-                A Boolean data type.
+                An attribute of type Boolean. For example:
+
+                 
+
+                 ``"BOOL": true``  
 
                 
 
@@ -1102,7 +1347,11 @@ UnprocessedKeys -> (map)
 
             
 
-            A List of attribute values.
+            An attribute of type List. For example:
+
+             
+
+             ``"L": ["Cookies", "Coffee", 3.14159]``  
 
             
 
@@ -1110,11 +1359,15 @@ UnprocessedKeys -> (map)
 
               
 
-              Represents the data for an attribute. You can set one, and only one, of the elements.
+              Represents the data for an attribute.
 
                
 
-              Each attribute in an item is a name-value pair. An attribute can be single-valued or multi-valued set. For example, a book item can have title and authors attributes. Each book has one title but can have many authors. The multi-valued attribute is a set; duplicate values are not allowed. 
+              Each attribute value is described as a name-value pair. The name is the data type, and the value is the data itself.
+
+               
+
+              For more information, see `Data Types <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes>`_ in the *Amazon DynamoDB Developer Guide* .
 
               
 
@@ -1122,7 +1375,11 @@ UnprocessedKeys -> (map)
 
                 
 
-                A String data type.
+                An attribute of type String. For example:
+
+                 
+
+                 ``"S": "Hello"``  
 
                 
 
@@ -1132,7 +1389,15 @@ UnprocessedKeys -> (map)
 
                 
 
-                A Number data type.
+                An attribute of type Number. For example:
+
+                 
+
+                 ``"N": "123.45"``  
+
+                 
+
+                Numbers are sent across the network to DynamoDB as strings, to maximize compatibility across languages and libraries. However, DynamoDB treats them as number type attributes for mathematical operations.
 
                 
 
@@ -1142,7 +1407,11 @@ UnprocessedKeys -> (map)
 
                 
 
-                A Binary data type.
+                An attribute of type Binary. For example:
+
+                 
+
+                 ``"B": "dGhpcyB0ZXh0IGlzIGJhc2U2NC1lbmNvZGVk"``  
 
                 
 
@@ -1152,7 +1421,11 @@ UnprocessedKeys -> (map)
 
                 
 
-                A String Set data type.
+                An attribute of type String Set. For example:
+
+                 
+
+                 ``"SS": ["Giraffe", "Hippo" ,"Zebra"]``  
 
                 
 
@@ -1168,7 +1441,15 @@ UnprocessedKeys -> (map)
 
                 
 
-                A Number Set data type.
+                An attribute of type Number Set. For example:
+
+                 
+
+                 ``"NS": ["42.2", "-19", "7.5", "3.14"]``  
+
+                 
+
+                Numbers are sent across the network to DynamoDB as strings, to maximize compatibility across languages and libraries. However, DynamoDB treats them as number type attributes for mathematical operations.
 
                 
 
@@ -1184,7 +1465,11 @@ UnprocessedKeys -> (map)
 
                 
 
-                A Binary Set data type.
+                An attribute of type Binary Set. For example:
+
+                 
+
+                 ``"BS": ["U3Vubnk=", "UmFpbnk=", "U25vd3k="]``  
 
                 
 
@@ -1200,7 +1485,11 @@ UnprocessedKeys -> (map)
 
                 
 
-                A Map of attribute values.
+                An attribute of type Map. For example:
+
+                 
+
+                 ``"M": {"Name": {"S": "Joe"}, "Age": {"N": "35"}}``  
 
                 
 
@@ -1216,7 +1505,11 @@ UnprocessedKeys -> (map)
 
                 
 
-                A List of attribute values.
+                An attribute of type List. For example:
+
+                 
+
+                 ``"L": ["Cookies", "Coffee", 3.14159]``  
 
                 
 
@@ -1226,7 +1519,11 @@ UnprocessedKeys -> (map)
 
                 
 
-                A Null data type.
+                An attribute of type Null. For example:
+
+                 
+
+                 ``"NULL": true``  
 
                 
 
@@ -1236,7 +1533,11 @@ UnprocessedKeys -> (map)
 
                 
 
-                A Boolean data type.
+                An attribute of type Boolean. For example:
+
+                 
+
+                 ``"BOOL": true``  
 
                 
 
@@ -1250,7 +1551,11 @@ UnprocessedKeys -> (map)
 
             
 
-            A Null data type.
+            An attribute of type Null. For example:
+
+             
+
+             ``"NULL": true``  
 
             
 
@@ -1260,7 +1565,11 @@ UnprocessedKeys -> (map)
 
             
 
-            A Boolean data type.
+            An attribute of type Boolean. For example:
+
+             
+
+             ``"BOOL": true``  
 
             
 
@@ -1276,7 +1585,7 @@ UnprocessedKeys -> (map)
 
       
 
-      One or more attributes to retrieve from the table or index. If no attribute names are specified then all attributes will be returned. If any of the specified attributes are not found, they will not appear in the result.
+      This is a legacy parameter. Use ``ProjectionExpression`` instead. For more information, see `Legacy Conditional Parameters <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.html>`_ in the *Amazon DynamoDB Developer Guide* .
 
       
 
@@ -1302,7 +1611,7 @@ UnprocessedKeys -> (map)
 
       
 
-      A string that identifies one or more attributes to retrieve from the table. These attributes can include scalars, sets, or elements of a JSON document. The attributes in the *ProjectionExpression* must be separated by commas.
+      A string that identifies one or more attributes to retrieve from the table. These attributes can include scalars, sets, or elements of a JSON document. The attributes in the ``ProjectionExpression`` must be separated by commas.
 
        
 
@@ -1310,17 +1619,7 @@ UnprocessedKeys -> (map)
 
        
 
-      For more information, see `Accessing Item Attributes`_ in the *Amazon DynamoDB Developer Guide* .
-
-       
-
-      .. note::
-
-        
-
-        *ProjectionExpression* replaces the legacy *AttributesToGet* parameter.
-
-        
+      For more information, see `Accessing Item Attributes <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html>`_ in the *Amazon DynamoDB Developer Guide* .
 
       
 
@@ -1330,7 +1629,7 @@ UnprocessedKeys -> (map)
 
       
 
-      One or more substitution tokens for attribute names in an expression. The following are some use cases for using *ExpressionAttributeNames* :
+      One or more substitution tokens for attribute names in an expression. The following are some use cases for using ``ExpressionAttributeNames`` :
 
        
 
@@ -1348,19 +1647,19 @@ UnprocessedKeys -> (map)
 
        
 
-      
-      * ``Percentile`` 
-      
+       
+      * ``Percentile``   
+       
 
        
 
-      The name of this attribute conflicts with a reserved word, so it cannot be used directly in an expression. (For the complete list of reserved words, see `Reserved Words`_ in the *Amazon DynamoDB Developer Guide* ). To work around this, you could specify the following for *ExpressionAttributeNames* :
+      The name of this attribute conflicts with a reserved word, so it cannot be used directly in an expression. (For the complete list of reserved words, see `Reserved Words <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html>`_ in the *Amazon DynamoDB Developer Guide* ). To work around this, you could specify the following for ``ExpressionAttributeNames`` :
 
        
 
-      
-      * ``{"#P":"Percentile"}`` 
-      
+       
+      * ``{"#P":"Percentile"}``   
+       
 
        
 
@@ -1368,23 +1667,23 @@ UnprocessedKeys -> (map)
 
        
 
-      
-      * ``#P = :val`` 
-      
+       
+      * ``#P = :val``   
+       
 
        
 
       .. note::
 
-        
+         
 
         Tokens that begin with the **:** character are *expression attribute values* , which are placeholders for the actual value at runtime.
 
-        
+         
 
        
 
-      For more information on expression attribute names, see `Accessing Item Attributes`_ in the *Amazon DynamoDB Developer Guide* .
+      For more information on expression attribute names, see `Accessing Item Attributes <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html>`_ in the *Amazon DynamoDB Developer Guide* .
 
       
 
@@ -1410,7 +1709,7 @@ ConsumedCapacity -> (list)
 
   
 
-  The read capacity units consumed by the operation.
+  The read capacity units consumed by the entire ``batch-get-item`` operation.
 
    
 
@@ -1419,9 +1718,9 @@ ConsumedCapacity -> (list)
    
 
    
-  * *TableName* - The table that consumed the provisioned throughput. 
+  * ``TableName`` - The table that consumed the provisioned throughput. 
    
-  * *CapacityUnits* - The total number of capacity units consumed. 
+  * ``CapacityUnits`` - The total number of capacity units consumed. 
    
 
   
@@ -1430,7 +1729,7 @@ ConsumedCapacity -> (list)
 
     
 
-    The capacity units consumed by an operation. The data returned includes the total provisioned throughput consumed, along with statistics for the table and any indexes involved in the operation. *ConsumedCapacity* is only returned if the request asked for it. For more information, see `Provisioned Throughput`_ in the *Amazon DynamoDB Developer Guide* .
+    The capacity units consumed by an operation. The data returned includes the total provisioned throughput consumed, along with statistics for the table and any indexes involved in the operation. ``ConsumedCapacity`` is only returned if the request asked for it. For more information, see `Provisioned Throughput <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html>`_ in the *Amazon DynamoDB Developer Guide* .
 
     
 
@@ -1492,7 +1791,7 @@ ConsumedCapacity -> (list)
 
         
 
-        Represents the amount of provisioned throughput capacity consumed on a table or an index. 
+        Represents the amount of provisioned throughput capacity consumed on a table or an index.
 
         
 
@@ -1528,7 +1827,7 @@ ConsumedCapacity -> (list)
 
         
 
-        Represents the amount of provisioned throughput capacity consumed on a table or an index. 
+        Represents the amount of provisioned throughput capacity consumed on a table or an index.
 
         
 
@@ -1550,10 +1849,3 @@ ConsumedCapacity -> (list)
 
   
 
-
-
-.. _Reserved Words: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
-.. _Capacity Units Calculations: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#CapacityUnitCalculations
-.. _Accessing Item Attributes: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
-.. _Batch Operations and Error Handling: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ErrorHandling.html#BatchOperations
-.. _Provisioned Throughput: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html

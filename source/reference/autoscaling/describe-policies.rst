@@ -19,6 +19,9 @@ Describes the policies for the specified Auto Scaling group.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribePolicies>`_
+
+
 ``describe-policies`` is a paginated operation. Multiple API calls may be issued in order to retrieve the entire data set of results. You can disable pagination by providing the ``--no-paginate`` argument.
 When using ``--output text`` and the ``--query`` argument on a paginated response, the ``--query`` argument must extract data from the results of the following query expressions: ``ScalingPolicies``
 
@@ -37,7 +40,7 @@ Synopsis
   [--starting-token <value>]
   [--page-size <value>]
   [--max-items <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -56,7 +59,7 @@ Options
 ``--policy-names`` (list)
 
 
-  One or more policy names or policy ARNs to be described. If you omit this list, all policy names are described. If an group name is provided, the results are limited to that group. This list is limited to 50 items. If you specify an unknown policy name, it is ignored with no error.
+  One or more policy names or policy ARNs to be described. If you omit this parameter, all policy names are described. If an group name is provided, the results are limited to that group. This list is limited to 50 items. If you specify an unknown policy name, it is ignored with no error.
 
   
 
@@ -93,26 +96,34 @@ Performs service operation based on the JSON string provided. The JSON string fo
 
    
 
-``--page-size`` (integer)
- 
-
-  The size of each page.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
 
    
 
-  
+``--page-size`` (integer)
+ 
 
-  
+  The size of each page to get in the AWS service call. This does not affect the number of items returned in the command's output. Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call. This can help prevent the AWS service calls from timing out.
+
+   
+
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
 
 ``--max-items`` (integer)
  
 
-  The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination. This ``NextToken`` response element should **not** be used directly outside of the AWS CLI.
+  The total number of items to return in the command's output. If the total number of items available is more than the value specified, a ``NextToken`` is provided in the command's output. To resume pagination, provide the ``NextToken`` value in the ``starting-token`` argument of a subsequent command. **Do not** use the ``NextToken`` response element directly outside of the AWS CLI.
 
    
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+  For usage examples, see `Pagination <https://docs.aws.amazon.com/cli/latest/userguide/pagination.html>`_ in the *AWS Command Line Interface User Guide* .
+
+   
+
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -124,60 +135,60 @@ Examples
 
 This example describes the policies for the specified Auto Scaling group::
 
-	aws autoscaling describe-policies --auto-scaling-group-name my-auto-scaling-group
+    aws autoscaling describe-policies --auto-scaling-group-name my-auto-scaling-group
 
 The following is example output::
 
-  {
-    "ScalingPolicies": [
-      {
-        "PolicyName": "ScaleIn",
-        "AutoScalingGroupName": "my-auto-scaling-group",
-        "PolicyARN": "arn:aws:autoscaling:us-west-2:123456789012:scalingPolicy:2233f3d7-6290-403b-b632-93c553560106:autoScalingGroupName/my-auto-scaling-group:policyName/ScaleIn",
-        "AdjustmentType": "ChangeInCapacity",
-        "Alarms": [],
-        "ScalingAdjustment": -1
-      },
-      {
-        "PolicyName": "ScalePercentChange",
-        "MinAdjustmentStep": 2,
-        "AutoScalingGroupName": "my-auto-scaling-group",
-        "PolicyARN": "arn:aws:autoscaling:us-west-2:123456789012:scalingPolicy:2b435159-cf77-4e89-8c0e-d63b497baad7:autoScalingGroupName/my-auto-scaling-group:policyName/ScalePercentChange",
-        "Cooldown": 60,
-        "AdjustmentType": "PercentChangeInCapacity",
-        "Alarms": [],
-        "ScalingAdjustment": 25
-      }
-    ]
-  }
+    {
+        "ScalingPolicies": [
+            {
+                "PolicyName": "ScaleIn",
+                "AutoScalingGroupName": "my-auto-scaling-group",
+                "PolicyARN": "arn:aws:autoscaling:us-west-2:123456789012:scalingPolicy:2233f3d7-6290-403b-b632-93c553560106:autoScalingGroupName/my-auto-scaling-group:policyName/ScaleIn",
+                "AdjustmentType": "ChangeInCapacity",
+                "Alarms": [],
+                "ScalingAdjustment": -1
+            },
+            {
+                "PolicyName": "ScalePercentChange",
+                "MinAdjustmentStep": 2,
+                "AutoScalingGroupName": "my-auto-scaling-group",
+                "PolicyARN": "arn:aws:autoscaling:us-west-2:123456789012:scalingPolicy:2b435159-cf77-4e89-8c0e-d63b497baad7:autoScalingGroupName/my-auto-scaling-group:policyName/ScalePercentChange",
+                "Cooldown": 60,
+                "AdjustmentType": "PercentChangeInCapacity",
+                "Alarms": [],
+                "ScalingAdjustment": 25
+            }
+        ]
+    }
 
 To return specific scaling policies, use the ``policy-names`` parameter::
 
-	aws autoscaling describe-policies --auto-scaling-group-name my-auto-scaling-group --policy-names ScaleIn
+    aws autoscaling describe-policies --auto-scaling-group-name my-auto-scaling-group --policy-names ScaleIn
 
 To return a specific number of policies, use the ``max-items`` parameter::
 
-	aws autoscaling describe-policies --auto-scaling-group-name my-auto-scaling-group --max-items 1
+    aws autoscaling describe-policies --auto-scaling-group-name my-auto-scaling-group --max-items 1
 
 The following is example output::
 
-  {
-    "ScalingPolicies": [
-      {
-        "PolicyName": "ScaleIn",
-        "AutoScalingGroupName": "my-auto-scaling-group",
-        "PolicyARN": "arn:aws:autoscaling:us-west-2:123456789012:scalingPolicy:2233f3d7-6290-403b-b632-93c553560106:autoScalingGroupName/my-auto-scaling-group:policyName/ScaleIn",
-        "AdjustmentType": "ChangeInCapacity",
-        "Alarms": [],
-        "ScalingAdjustment": -1
-      }
-    ],
-    "NextToken": "None___1"
-  }
+    {
+        "ScalingPolicies": [
+            {
+                "PolicyName": "ScaleIn",
+                "AutoScalingGroupName": "my-auto-scaling-group",
+                "PolicyARN": "arn:aws:autoscaling:us-west-2:123456789012:scalingPolicy:2233f3d7-6290-403b-b632-93c553560106:autoScalingGroupName/my-auto-scaling-group:policyName/ScaleIn",
+                "AdjustmentType": "ChangeInCapacity",
+                "Alarms": [],
+                "ScalingAdjustment": -1
+            }
+        ],
+        "NextToken": "Z3M3LMPEXAMPLE"
+    }
 
 If the output includes a ``NextToken`` field, use the value of this field with the ``starting-token`` parameter in a subsequent call to get the additional policies::
 
-    aws autoscaling describe-policies --auto-scaling-group-name my-auto-scaling-group --starting-token None___1
+    aws autoscaling describe-policies --auto-scaling-group-name my-auto-scaling-group --starting-token Z3M3LMPEXAMPLE
 
 For more information, see `Dynamic Scaling`_ in the *Auto Scaling Developer Guide*.
 
@@ -431,6 +442,156 @@ ScalingPolicies -> (list)
           
 
           
+
+        
+
+      
+
+    TargetTrackingConfiguration -> (structure)
+
+      
+
+      A target tracking policy.
+
+      
+
+      PredefinedMetricSpecification -> (structure)
+
+        
+
+        A predefined metric. You can specify either a predefined metric or a customized metric.
+
+        
+
+        PredefinedMetricType -> (string)
+
+          
+
+          The metric type.
+
+          
+
+          
+
+        ResourceLabel -> (string)
+
+          
+
+          Identifies the resource associated with the metric type. For predefined metric types ``ASGAverageCPUUtilization`` , ``ASGAverageNetworkIn`` and ``ASGAverageNetworkOut`` , the parameter must not be specified as the resource associated with the metric type is the Auto Scaling group. For predefined metric type ``ALBRequestCountPerTarget`` , the parameter must be specified in the format ``app/*load-balancer-name* /*load-balancer-id* /targetgroup/*target-group-name* /*target-group-id* `` , where ``app/*load-balancer-name* /*load-balancer-id* `` is the final portion of the load balancer ARN, and ``targetgroup/*target-group-name* /*target-group-id* `` is the final portion of the target group ARN. The target group must be attached to the Auto Scaling group.
+
+          
+
+          
+
+        
+
+      CustomizedMetricSpecification -> (structure)
+
+        
+
+        A customized metric.
+
+        
+
+        MetricName -> (string)
+
+          
+
+          The name of the metric.
+
+          
+
+          
+
+        Namespace -> (string)
+
+          
+
+          The namespace of the metric.
+
+          
+
+          
+
+        Dimensions -> (list)
+
+          
+
+          The dimensions of the metric.
+
+          
+
+          (structure)
+
+            
+
+            Describes the dimension of a metric.
+
+            
+
+            Name -> (string)
+
+              
+
+              The name of the dimension.
+
+              
+
+              
+
+            Value -> (string)
+
+              
+
+              The value of the dimension.
+
+              
+
+              
+
+            
+
+          
+
+        Statistic -> (string)
+
+          
+
+          The statistic of the metric.
+
+          
+
+          
+
+        Unit -> (string)
+
+          
+
+          The unit of the metric.
+
+          
+
+          
+
+        
+
+      TargetValue -> (double)
+
+        
+
+        The target value for the metric.
+
+        
+
+        
+
+      DisableScaleIn -> (boolean)
+
+        
+
+        If the parameter is true, then scale-in will be disabled for the target tracking policy, i.e. the target tracking policy will not scale in the Auto Scaling group. The default value is false.
+
+        
 
         
 

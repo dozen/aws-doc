@@ -15,8 +15,11 @@ Description
 
 
 
-The *purchase-reserved-cache-nodes-offering* action allows you to purchase a reserved cache node offering.
+Allows you to purchase a reserved cache node offering.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/PurchaseReservedCacheNodesOffering>`_
 
 
 ========
@@ -30,7 +33,7 @@ Synopsis
   [--reserved-cache-node-id <value>]
   [--cache-node-count <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -46,7 +49,7 @@ Options
 
    
 
-  Example: 438012d3-4052-4cc7-b2e3-8d3372e0e706
+  Example: ``438012d3-4052-4cc7-b2e3-8d3372e0e706``  
 
   
 
@@ -54,6 +57,16 @@ Options
 
 
   A customer-specified identifier to track this reservation.
+
+   
+
+  .. note::
+
+     
+
+    The Reserved Cache Node ID is an unique customer-specified identifier to track this reservation. If this parameter is not specified, ElastiCache automatically generates an identifier for the reservation.
+
+     
 
    
 
@@ -68,15 +81,15 @@ Options
 
    
 
-  Default: ``1`` 
+  Default: ``1``  
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -88,7 +101,7 @@ ReservedCacheNode -> (structure)
 
   
 
-  Represents the output of a *purchase-reserved-cache-nodes-offering* action.
+  Represents the output of a ``purchase-reserved-cache-nodes-offering`` operation.
 
   
 
@@ -128,43 +141,43 @@ ReservedCacheNode -> (structure)
     * General purpose: 
 
        
-      * Current generation: ``cache.t2.micro`` , ``cache.t2.small`` , ``cache.t2.medium`` , ``cache.m3.medium`` , ``cache.m3.large`` , ``cache.m3.xlarge`` , ``cache.m3.2xlarge`` 
+      * Current generation: ``cache.t2.micro`` , ``cache.t2.small`` , ``cache.t2.medium`` , ``cache.m3.medium`` , ``cache.m3.large`` , ``cache.m3.xlarge`` , ``cache.m3.2xlarge`` , ``cache.m4.large`` , ``cache.m4.xlarge`` , ``cache.m4.2xlarge`` , ``cache.m4.4xlarge`` , ``cache.m4.10xlarge``   
        
-      * Previous generation: ``cache.t1.micro`` , ``cache.m1.small`` , ``cache.m1.medium`` , ``cache.m1.large`` , ``cache.m1.xlarge`` 
-       
-
-    
-     
-    * Compute optimized: ``cache.c1.xlarge`` 
-     
-    * Memory optimized 
-
-       
-      * Current generation: ``cache.r3.large`` , ``cache.r3.xlarge`` , ``cache.r3.2xlarge`` , ``cache.r3.4xlarge`` , ``cache.r3.8xlarge`` 
-       
-      * Previous generation: ``cache.m2.xlarge`` , ``cache.m2.2xlarge`` , ``cache.m2.4xlarge`` 
+      * Previous generation: ``cache.t1.micro`` , ``cache.m1.small`` , ``cache.m1.medium`` , ``cache.m1.large`` , ``cache.m1.xlarge``   
        
 
-    
+     
+     
+    * Compute optimized: ``cache.c1.xlarge``   
+     
+    * Memory optimized: 
+
+       
+      * Current generation: ``cache.r3.large`` , ``cache.r3.xlarge`` , ``cache.r3.2xlarge`` , ``cache.r3.4xlarge`` , ``cache.r3.8xlarge``   
+       
+      * Previous generation: ``cache.m2.xlarge`` , ``cache.m2.2xlarge`` , ``cache.m2.4xlarge``   
+       
+
+     
      
 
      
 
-    **Notes:** 
+     **Notes:**  
 
      
 
      
-    * All t2 instances are created in an Amazon Virtual Private Cloud (VPC).
+    * All T2 instances are created in an Amazon Virtual Private Cloud (Amazon VPC). 
      
-    * Redis backup/restore is not supported for t2 instances.
+    * Redis backup/restore is not supported for Redis (cluster mode disabled) T1 and T2 instances. Backup/restore is supported on Redis (cluster mode enabled) T2 instances. 
      
-    * Redis Append-only files (AOF) functionality is not supported for t1 or t2 instances.
-     
-
+    * Redis Append-only files (AOF) functionality is not supported for T1 or T2 instances. 
      
 
-    For a complete listing of cache node types and specifications, see `Amazon ElastiCache Product Features and Details`_ and `Cache Node Type-Specific Parameters for Memcached`_ or `Cache Node Type-Specific Parameters for Redis`_ . 
+     
+
+    For a complete listing of node types and specifications, see `Amazon ElastiCache Product Features and Details <http://aws.amazon.com/elasticache/details>`_ and either `Cache Node Type-Specific Parameters for Memcached <http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#ParameterGroups.Memcached.NodeSpecific>`_ or `Cache Node Type-Specific Parameters for Redis <http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#ParameterGroups.Redis.NodeSpecific>`_ .
 
     
 
@@ -292,8 +305,3 @@ ReservedCacheNode -> (structure)
 
   
 
-
-
-.. _Cache Node Type-Specific Parameters for Memcached: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#CacheParameterGroups.Memcached.NodeSpecific
-.. _Amazon ElastiCache Product Features and Details: http://aws.amazon.com/elasticache/details
-.. _Cache Node Type-Specific Parameters for Redis: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#CacheParameterGroups.Redis.NodeSpecific

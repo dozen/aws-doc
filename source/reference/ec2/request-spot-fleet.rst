@@ -31,8 +31,11 @@ Alternatively, you can specify that the Spot fleet distribute the target capacit
 
  
 
-For more information, see `Spot Fleet Requests`_ in the *Amazon Elastic Compute Cloud User Guide* .
+For more information, see `Spot Fleet Requests <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-requests.html>`_ in the *Amazon Elastic Compute Cloud User Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestSpotFleet>`_
 
 
 ========
@@ -45,7 +48,7 @@ Synopsis
   [--dry-run | --no-dry-run]
   --spot-fleet-request-config <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -73,17 +76,13 @@ Options
 JSON Syntax::
 
   {
+    "AllocationStrategy": "lowestPrice"|"diversified",
     "ClientToken": "string",
-    "SpotPrice": "string",
-    "TargetCapacity": integer,
-    "ValidFrom": timestamp,
-    "ValidUntil": timestamp,
-    "TerminateInstancesWithExpiration": true|false,
+    "ExcessCapacityTerminationPolicy": "noTermination"|"default",
+    "FulfilledCapacity": double,
     "IamFleetRole": "string",
     "LaunchSpecifications": [
       {
-        "ImageId": "string",
-        "KeyName": "string",
         "SecurityGroups": [
           {
             "GroupName": "string",
@@ -91,68 +90,96 @@ JSON Syntax::
           }
           ...
         ],
-        "UserData": "string",
         "AddressingType": "string",
-        "InstanceType": "t1.micro"|"m1.small"|"m1.medium"|"m1.large"|"m1.xlarge"|"m3.medium"|"m3.large"|"m3.xlarge"|"m3.2xlarge"|"m4.large"|"m4.xlarge"|"m4.2xlarge"|"m4.4xlarge"|"m4.10xlarge"|"t2.nano"|"t2.micro"|"t2.small"|"t2.medium"|"t2.large"|"m2.xlarge"|"m2.2xlarge"|"m2.4xlarge"|"cr1.8xlarge"|"i2.xlarge"|"i2.2xlarge"|"i2.4xlarge"|"i2.8xlarge"|"hi1.4xlarge"|"hs1.8xlarge"|"c1.medium"|"c1.xlarge"|"c3.large"|"c3.xlarge"|"c3.2xlarge"|"c3.4xlarge"|"c3.8xlarge"|"c4.large"|"c4.xlarge"|"c4.2xlarge"|"c4.4xlarge"|"c4.8xlarge"|"cc1.4xlarge"|"cc2.8xlarge"|"g2.2xlarge"|"cg1.4xlarge"|"r3.large"|"r3.xlarge"|"r3.2xlarge"|"r3.4xlarge"|"r3.8xlarge"|"d2.xlarge"|"d2.2xlarge"|"d2.4xlarge"|"d2.8xlarge",
-        "Placement": {
-          "AvailabilityZone": "string",
-          "GroupName": "string"
-        },
-        "KernelId": "string",
-        "RamdiskId": "string",
         "BlockDeviceMappings": [
           {
-            "VirtualName": "string",
             "DeviceName": "string",
+            "VirtualName": "string",
             "Ebs": {
+              "Encrypted": true|false,
+              "DeleteOnTermination": true|false,
+              "Iops": integer,
               "SnapshotId": "string",
               "VolumeSize": integer,
-              "DeleteOnTermination": true|false,
-              "VolumeType": "standard"|"io1"|"gp2",
-              "Iops": integer,
-              "Encrypted": true|false
+              "VolumeType": "standard"|"io1"|"gp2"|"sc1"|"st1"
             },
             "NoDevice": "string"
           }
           ...
         ],
-        "Monitoring": {
-          "Enabled": true|false
-        },
-        "SubnetId": "string",
-        "NetworkInterfaces": [
-          {
-            "NetworkInterfaceId": "string",
-            "DeviceIndex": integer,
-            "SubnetId": "string",
-            "Description": "string",
-            "PrivateIpAddress": "string",
-            "Groups": ["string", ...],
-            "DeleteOnTermination": true|false,
-            "PrivateIpAddresses": [
-              {
-                "PrivateIpAddress": "string",
-                "Primary": true|false
-              }
-              ...
-            ],
-            "SecondaryPrivateIpAddressCount": integer,
-            "AssociatePublicIpAddress": true|false
-          }
-          ...
-        ],
+        "EbsOptimized": true|false,
         "IamInstanceProfile": {
           "Arn": "string",
           "Name": "string"
         },
-        "EbsOptimized": true|false,
+        "ImageId": "string",
+        "InstanceType": "t1.micro"|"t2.nano"|"t2.micro"|"t2.small"|"t2.medium"|"t2.large"|"t2.xlarge"|"t2.2xlarge"|"m1.small"|"m1.medium"|"m1.large"|"m1.xlarge"|"m3.medium"|"m3.large"|"m3.xlarge"|"m3.2xlarge"|"m4.large"|"m4.xlarge"|"m4.2xlarge"|"m4.4xlarge"|"m4.10xlarge"|"m4.16xlarge"|"m2.xlarge"|"m2.2xlarge"|"m2.4xlarge"|"cr1.8xlarge"|"r3.large"|"r3.xlarge"|"r3.2xlarge"|"r3.4xlarge"|"r3.8xlarge"|"r4.large"|"r4.xlarge"|"r4.2xlarge"|"r4.4xlarge"|"r4.8xlarge"|"r4.16xlarge"|"x1.16xlarge"|"x1.32xlarge"|"i2.xlarge"|"i2.2xlarge"|"i2.4xlarge"|"i2.8xlarge"|"i3.large"|"i3.xlarge"|"i3.2xlarge"|"i3.4xlarge"|"i3.8xlarge"|"i3.16xlarge"|"hi1.4xlarge"|"hs1.8xlarge"|"c1.medium"|"c1.xlarge"|"c3.large"|"c3.xlarge"|"c3.2xlarge"|"c3.4xlarge"|"c3.8xlarge"|"c4.large"|"c4.xlarge"|"c4.2xlarge"|"c4.4xlarge"|"c4.8xlarge"|"cc1.4xlarge"|"cc2.8xlarge"|"g2.2xlarge"|"g2.8xlarge"|"g3.4xlarge"|"g3.8xlarge"|"g3.16xlarge"|"cg1.4xlarge"|"p2.xlarge"|"p2.8xlarge"|"p2.16xlarge"|"d2.xlarge"|"d2.2xlarge"|"d2.4xlarge"|"d2.8xlarge"|"f1.2xlarge"|"f1.16xlarge",
+        "KernelId": "string",
+        "KeyName": "string",
+        "Monitoring": {
+          "Enabled": true|false
+        },
+        "NetworkInterfaces": [
+          {
+            "AssociatePublicIpAddress": true|false,
+            "DeleteOnTermination": true|false,
+            "Description": "string",
+            "DeviceIndex": integer,
+            "Groups": ["string", ...],
+            "Ipv6AddressCount": integer,
+            "Ipv6Addresses": [
+              {
+                "Ipv6Address": "string"
+              }
+              ...
+            ],
+            "NetworkInterfaceId": "string",
+            "PrivateIpAddress": "string",
+            "PrivateIpAddresses": [
+              {
+                "Primary": true|false,
+                "PrivateIpAddress": "string"
+              }
+              ...
+            ],
+            "SecondaryPrivateIpAddressCount": integer,
+            "SubnetId": "string"
+          }
+          ...
+        ],
+        "Placement": {
+          "AvailabilityZone": "string",
+          "GroupName": "string",
+          "Tenancy": "default"|"dedicated"|"host"
+        },
+        "RamdiskId": "string",
+        "SpotPrice": "string",
+        "SubnetId": "string",
+        "UserData": "string",
         "WeightedCapacity": double,
-        "SpotPrice": "string"
+        "TagSpecifications": [
+          {
+            "ResourceType": "customer-gateway"|"dhcp-options"|"image"|"instance"|"internet-gateway"|"network-acl"|"network-interface"|"reserved-instances"|"route-table"|"snapshot"|"spot-instances-request"|"subnet"|"security-group"|"volume"|"vpc"|"vpn-connection"|"vpn-gateway",
+            "Tags": [
+              {
+                "Key": "string",
+                "Value": "string"
+              }
+              ...
+            ]
+          }
+          ...
+        ]
       }
       ...
     ],
-    "ExcessCapacityTerminationPolicy": "noTermination"|"default",
-    "AllocationStrategy": "lowestPrice"|"diversified"
+    "SpotPrice": "string",
+    "TargetCapacity": integer,
+    "TerminateInstancesWithExpiration": true|false,
+    "Type": "request"|"maintain",
+    "ValidFrom": timestamp,
+    "ValidUntil": timestamp,
+    "ReplaceUnhealthyInstances": true|false
   }
 
 
@@ -160,8 +187,8 @@ JSON Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -342,6 +369,3 @@ SpotFleetRequestId -> (string)
 
   
 
-
-
-.. _Spot Fleet Requests: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-requests.html

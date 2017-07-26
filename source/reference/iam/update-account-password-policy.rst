@@ -23,14 +23,17 @@ Updates the password policy settings for the AWS account.
 
    
 
-  This action does not support partial updates. No parameters are required, but if you do not specify a parameter, that parameter's value reverts to its default value. See the **Request Parameters** section for each parameter's default value. 
+  This action does not support partial updates. No parameters are required, but if you do not specify a parameter, that parameter's value reverts to its default value. See the **Request Parameters** section for each parameter's default value.
 
    
 
  
 
-For more information about using a password policy, see `Managing an IAM Password Policy`_ in the *IAM User Guide* . 
+For more information about using a password policy, see `Managing an IAM Password Policy <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingPasswordPolicies.html>`_ in the *IAM User Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateAccountPasswordPolicy>`_
 
 
 ========
@@ -50,7 +53,7 @@ Synopsis
   [--password-reuse-prevention <value>]
   [--hard-expiry | --no-hard-expiry]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -121,7 +124,7 @@ Options
 ``--allow-users-to-change-password`` | ``--no-allow-users-to-change-password`` (boolean)
 
 
-  Allows all IAM users in your account to use the AWS Management Console to change their own passwords. For more information, see `Letting IAM Users Change Their Own Passwords`_ in the *IAM User Guide* . 
+  Allows all IAM users in your account to use the AWS Management Console to change their own passwords. For more information, see `Letting IAM Users Change Their Own Passwords <http://docs.aws.amazon.com/IAM/latest/UserGuide/HowToPwdIAMUser.html>`_ in the *IAM User Guide* .
 
    
 
@@ -165,8 +168,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -195,6 +198,3 @@ Output
 ======
 
 None
-
-.. _Managing an IAM Password Policy: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingPasswordPolicies.html
-.. _Letting IAM Users Change Their Own Passwords: http://docs.aws.amazon.com/IAM/latest/UserGuide/HowToPwdIAMUser.html

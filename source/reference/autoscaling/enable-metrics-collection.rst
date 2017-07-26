@@ -15,12 +15,11 @@ Description
 
 
 
-Enables monitoring of the specified metrics for the specified Auto Scaling group.
+Enables group metrics for the specified Auto Scaling group. For more information, see `Monitoring Your Auto Scaling Groups and Instances <http://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-monitoring.html>`_ in the *Auto Scaling User Guide* .
 
- 
 
-You can only enable metrics collection if ``InstanceMonitoring`` in the launch configuration for the group is set to ``True`` .
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/EnableMetricsCollection>`_
 
 
 ========
@@ -34,7 +33,7 @@ Synopsis
   [--metrics <value>]
   --granularity <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -58,26 +57,22 @@ Options
    
 
    
-  * ``GroupMinSize`` 
+  * ``GroupMinSize``   
    
-  * ``GroupMaxSize`` 
+  * ``GroupMaxSize``   
    
-  * ``GroupDesiredCapacity`` 
+  * ``GroupDesiredCapacity``   
    
-  * ``GroupInServiceInstances`` 
+  * ``GroupInServiceInstances``   
    
-  * ``GroupPendingInstances`` 
+  * ``GroupPendingInstances``   
    
-  * ``GroupStandbyInstances`` 
+  * ``GroupStandbyInstances``   
    
-  * ``GroupTerminatingInstances`` 
+  * ``GroupTerminatingInstances``   
    
-  * ``GroupTotalInstances`` 
+  * ``GroupTotalInstances``   
    
-
-   
-
-  Note that the ``GroupStandbyInstances`` metric is not enabled by default. You must explicitly request this metric.
 
   
 
@@ -99,8 +94,8 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -112,11 +107,11 @@ Examples
 
 This example enables data collection for the specified Auto Scaling group::
 
-	aws autoscaling enable-metrics-collection --auto-scaling-group-name my-auto-scaling-group --granularity "1Minute"
+    aws autoscaling enable-metrics-collection --auto-scaling-group-name my-auto-scaling-group --granularity "1Minute"
 
 To collect data for a specific metric, use the ``metrics`` parameter::
 
-	aws autoscaling enable-metrics-collection --auto-scaling-group-name my-auto-scaling-group --metrics GroupDesiredCapacity --granularity "1Minute"
+    aws autoscaling enable-metrics-collection --auto-scaling-group-name my-auto-scaling-group --metrics GroupDesiredCapacity --granularity "1Minute"
 
 For more information, see `Monitoring Your Auto Scaling Instances and Groups`_ in the *Auto Scaling Developer Guide*.
 

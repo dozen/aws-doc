@@ -19,8 +19,11 @@ Describes the permissions for a specified stack.
 
  
 
-**Required Permissions** : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see `Managing User Permissions`_ .
+ **Required Permissions** : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see `Managing User Permissions <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html>`_ .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribePermissions>`_
 
 
 ========
@@ -33,7 +36,7 @@ Synopsis
   [--iam-user-arn <value>]
   [--stack-id <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -45,7 +48,7 @@ Options
 ``--iam-user-arn`` (string)
 
 
-  The user's IAM ARN. For more information about IAM ARNs, see `Using Identifiers`_ .
+  The user's IAM ARN. This can also be a federated user's ARN. For more information about IAM ARNs, see `Using Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ .
 
   
 
@@ -59,8 +62,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -73,8 +76,6 @@ Examples
 The following example shows how to to obtain an AWS Identity and Access Management (IAM) user's permission level on a specified stack. ::
 
   aws opsworks --region us-east-1 describe-permissions --iam-user-arn arn:aws:iam::123456789012:user/cli-user-test --stack-id d72553d4-8727-448c-9b00-f024f0ba1b06
-
-**Note**: AWS OpsWorks CLI commands should set the region to ``us-east-1`` regardless of the stack's location.
 
 *Output*::
 
@@ -111,11 +112,11 @@ Permissions -> (list)
    
 
    
-  * If the request object contains only a stack ID, the array contains a ``Permission`` object with permissions for each of the stack IAM ARNs.
+  * If the request object contains only a stack ID, the array contains a ``Permission`` object with permissions for each of the stack IAM ARNs. 
    
-  * If the request object contains only an IAM ARN, the array contains a ``Permission`` object with permissions for each of the user's stack IDs.
+  * If the request object contains only an IAM ARN, the array contains a ``Permission`` object with permissions for each of the user's stack IDs. 
    
-  * If the request contains a stack ID and an IAM ARN, the array contains a single ``Permission`` object with permissions for the specified stack and IAM ARN.
+  * If the request contains a stack ID and an IAM ARN, the array contains a single ``Permission`` object with permissions for the specified stack and IAM ARN. 
    
 
   
@@ -142,7 +143,7 @@ Permissions -> (list)
 
       
 
-      The Amazon Resource Name (ARN) for an AWS Identity and Access Management (IAM) role. For more information about IAM ARNs, see `Using Identifiers`_ .
+      The Amazon Resource Name (ARN) for an AWS Identity and Access Management (IAM) role. For more information about IAM ARNs, see `Using Identifiers <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html>`_ .
 
       
 
@@ -177,20 +178,20 @@ Permissions -> (list)
        
 
        
-      * ``deny``  
+      * ``deny``   
        
-      * ``show``  
+      * ``show``   
        
-      * ``deploy``  
+      * ``deploy``   
        
-      * ``manage``  
+      * ``manage``   
        
-      * ``iam_only``  
-       
-
+      * ``iam_only``   
        
 
-      For more information on the permissions associated with these levels, see `Managing User Permissions`_ 
+       
+
+      For more information on the permissions associated with these levels, see `Managing User Permissions <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html>`_  
 
       
 
@@ -200,7 +201,3 @@ Permissions -> (list)
 
   
 
-
-
-.. _Managing User Permissions: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
-.. _Using Identifiers: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html

@@ -19,8 +19,11 @@ Returns the current list of AWS services and a list of service categories that a
 
  
 
-The service codes and category codes correspond to the values that are displayed in the **Service** and **Category** drop-down lists on the AWS Support Center `Create Case`_ page. The values in those fields, however, do not necessarily match the service codes and categories returned by the ``describe-services`` request. Always use the service codes and categories obtained programmatically. This practice ensures that you always have the most recent set of service and category codes.
+The service codes and category codes correspond to the values that are displayed in the **Service** and **Category** drop-down lists on the AWS Support Center `Create Case <https://console.aws.amazon.com/support/home#/case/create>`_ page. The values in those fields, however, do not necessarily match the service codes and categories returned by the ``describe-services`` request. Always use the service codes and categories obtained programmatically. This practice ensures that you always have the most recent set of service and category codes.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeServices>`_
 
 
 ========
@@ -33,7 +36,7 @@ Synopsis
   [--service-code-list <value>]
   [--language <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -67,8 +70,8 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -96,7 +99,7 @@ services -> (list)
 
       
 
-      The code for an AWS service returned by the  describe-services response. The ``Name`` element contains the corresponding friendly name.
+      The code for an AWS service returned by the  describe-services response. The ``name`` element contains the corresponding friendly name.
 
       
 
@@ -106,7 +109,7 @@ services -> (list)
 
       
 
-      The friendly name for an AWS service. The ``Code`` element contains the corresponding code.
+      The friendly name for an AWS service. The ``code`` element contains the corresponding code.
 
       
 
@@ -132,7 +135,7 @@ services -> (list)
 
           
 
-          The category code for the support case. 
+          The category code for the support case.
 
           
 
@@ -142,7 +145,7 @@ services -> (list)
 
           
 
-          The category name for the support case. 
+          The category name for the support case.
 
           
 
@@ -156,6 +159,3 @@ services -> (list)
 
   
 
-
-
-.. _Create Case: https://console.aws.amazon.com/support/home#/case/create

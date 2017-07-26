@@ -24,11 +24,11 @@ The response contains a  TrustedAdvisorCheckResult object, which contains these 
  
 
  
-*  TrustedAdvisorCategorySpecificSummary 
+*  TrustedAdvisorCategorySpecificSummary   
  
-*  TrustedAdvisorResourceDetail 
+*  TrustedAdvisorResourceDetail   
  
-*  TrustedAdvisorResourcesSummary 
+*  TrustedAdvisorResourcesSummary   
  
 
  
@@ -38,13 +38,16 @@ In addition, the response contains these fields:
  
 
  
-* **Status.** The alert status of the check: "ok" (green), "warning" (yellow), "error" (red), or "not_available".
+* **status.** The alert status of the check: "ok" (green), "warning" (yellow), "error" (red), or "not_available". 
  
-* **Timestamp.** The time of the last refresh of the check.
+* **timestamp.** The time of the last refresh of the check. 
  
-* **CheckId.** The unique identifier for the check.
+* **checkId.** The unique identifier for the check. 
  
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeTrustedAdvisorCheckResult>`_
 
 
 ========
@@ -57,7 +60,7 @@ Synopsis
   --check-id <value>
   [--language <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -83,8 +86,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -232,7 +235,7 @@ result -> (structure)
 
       
 
-      Contains information about a resource identified by a Trusted Advisor check. 
+      Contains information about a resource identified by a Trusted Advisor check.
 
       
 
@@ -250,7 +253,7 @@ result -> (structure)
 
         
 
-        The AWS region in which the identified resource is located. 
+        The AWS region in which the identified resource is located.
 
         
 

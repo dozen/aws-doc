@@ -15,14 +15,21 @@ Description
 
 
 
-Updates the specified application version to have the specified properties. 
+Updates the specified application version to have the specified properties.
 
  
 
 .. note::
 
-  If a property (for example, ``description`` ) is not provided, the value remains unchanged. To clear properties, specify an empty string. 
+   
 
+  If a property (for example, ``description`` ) is not provided, the value remains unchanged. To clear properties, specify an empty string.
+
+   
+
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateApplicationVersion>`_
 
 
 ========
@@ -36,7 +43,7 @@ Synopsis
   --version-label <value>
   [--description <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -48,11 +55,11 @@ Options
 ``--application-name`` (string)
 
 
-  The name of the application associated with this version. 
+  The name of the application associated with this version.
 
    
 
-  If no application is found with this name, ``update-application`` returns an ``InvalidParameterValue`` error. 
+  If no application is found with this name, ``update-application`` returns an ``InvalidParameterValue`` error.
 
   
 
@@ -70,15 +77,15 @@ Options
 ``--description`` (string)
 
 
-  A new description for this release.
+  A new description for this version.
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -124,7 +131,7 @@ ApplicationVersion -> (structure)
 
     
 
-    The name of the application associated with this release.
+    The name of the application to which the application version belongs.
 
     
 
@@ -134,7 +141,7 @@ ApplicationVersion -> (structure)
 
     
 
-    The description of this application version.
+    The description of the application version.
 
     
 
@@ -144,7 +151,81 @@ ApplicationVersion -> (structure)
 
     
 
-    A label uniquely identifying the version for the associated application. 
+    A unique identifier for the application version.
+
+    
+
+    
+
+  SourceBuildInformation -> (structure)
+
+    
+
+    If the version's source code was retrieved from AWS CodeCommit, the location of the source code for the application version.
+
+    
+
+    SourceType -> (string)
+
+      
+
+      The type of repository.
+
+       
+
+       
+      * ``Git``   
+       
+      * ``Zip``   
+       
+
+      
+
+      
+
+    SourceRepository -> (string)
+
+      
+
+      Location where the repository is stored.
+
+       
+
+       
+      * ``CodeCommit``   
+       
+      * ``S3``   
+       
+
+      
+
+      
+
+    SourceLocation -> (string)
+
+      
+
+      The location of the source code, as a formatted string, depending on the value of ``SourceRepository``  
+
+       
+
+       
+      * For ``CodeCommit`` , the format is the repository name and commit ID, separated by a forward slash. For example, ``my-git-repo/265cfa0cf6af46153527f55d6503ec030551f57a`` . 
+       
+      * For ``S3`` , the format is the S3 bucket name and object key, separated by a forward slash. For example, ``my-s3-bucket/Folders/my-source-file`` . 
+       
+
+      
+
+      
+
+    
+
+  BuildArn -> (string)
+
+    
+
+    Reference to the artifact from the AWS CodeBuild build.
 
     
 
@@ -154,7 +235,7 @@ ApplicationVersion -> (structure)
 
     
 
-    The location where the source bundle is located for this version. 
+    The storage location of the application version's source bundle in Amazon S3.
 
     
 

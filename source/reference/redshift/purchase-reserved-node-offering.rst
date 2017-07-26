@@ -19,8 +19,11 @@ Allows you to purchase reserved nodes. Amazon Redshift offers a predefined set o
 
  
 
-For more information about reserved node offerings, go to `Purchasing Reserved Nodes`_ in the *Amazon Redshift Cluster Management Guide* . 
+For more information about reserved node offerings, go to `Purchasing Reserved Nodes <http://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html>`_ in the *Amazon Redshift Cluster Management Guide* .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PurchaseReservedNodeOffering>`_
 
 
 ========
@@ -33,7 +36,7 @@ Synopsis
   --reserved-node-offering-id <value>
   [--node-count <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -52,19 +55,19 @@ Options
 ``--node-count`` (integer)
 
 
-  The number of reserved nodes you want to purchase.
+  The number of reserved nodes that you want to purchase.
 
    
 
-  Default: ``1`` 
+  Default: ``1``  
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -126,7 +129,7 @@ ReservedNode -> (structure)
 
     
 
-    The unique identifier for the reservation. 
+    The unique identifier for the reservation.
 
     
 
@@ -136,7 +139,7 @@ ReservedNode -> (structure)
 
     
 
-    The identifier for the reserved node offering. 
+    The identifier for the reserved node offering.
 
     
 
@@ -146,7 +149,7 @@ ReservedNode -> (structure)
 
     
 
-    The node type of the reserved node. 
+    The node type of the reserved node.
 
     
 
@@ -156,7 +159,7 @@ ReservedNode -> (structure)
 
     
 
-    The time the reservation started. You purchase a reserved node offering for a duration. This is the start time of that duration. 
+    The time the reservation started. You purchase a reserved node offering for a duration. This is the start time of that duration.
 
     
 
@@ -166,7 +169,7 @@ ReservedNode -> (structure)
 
     
 
-    The duration of the node reservation in seconds. 
+    The duration of the node reservation in seconds.
 
     
 
@@ -176,7 +179,7 @@ ReservedNode -> (structure)
 
     
 
-    The fixed cost Amazon Redshift charges you for this reserved node. 
+    The fixed cost Amazon Redshift charges you for this reserved node.
 
     
 
@@ -186,7 +189,7 @@ ReservedNode -> (structure)
 
     
 
-    The hourly rate Amazon Redshift charges you for this reserved node. 
+    The hourly rate Amazon Redshift charges you for this reserved node.
 
     
 
@@ -206,7 +209,7 @@ ReservedNode -> (structure)
 
     
 
-    The number of reserved compute nodes. 
+    The number of reserved compute nodes.
 
     
 
@@ -216,7 +219,7 @@ ReservedNode -> (structure)
 
     
 
-    The state of the reserved compute node. 
+    The state of the reserved compute node.
 
      
 
@@ -225,11 +228,11 @@ ReservedNode -> (structure)
      
 
      
-    * pending-payment-This reserved node has recently been purchased, and the sale has been approved, but payment has not yet been confirmed.
+    * pending-payment-This reserved node has recently been purchased, and the sale has been approved, but payment has not yet been confirmed. 
      
-    * active-This reserved node is owned by the caller and is available for use.
+    * active-This reserved node is owned by the caller and is available for use. 
      
-    * payment-failed-Payment failed for the purchase attempt.
+    * payment-failed-Payment failed for the purchase attempt. 
      
 
     
@@ -266,7 +269,7 @@ ReservedNode -> (structure)
 
         
 
-        The amount charged per the period of time specified by the recurring charge frequency. 
+        The amount charged per the period of time specified by the recurring charge frequency.
 
         
 
@@ -288,6 +291,3 @@ ReservedNode -> (structure)
 
   
 
-
-
-.. _Purchasing Reserved Nodes: http://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html

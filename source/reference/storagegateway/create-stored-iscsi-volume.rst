@@ -15,7 +15,7 @@ Description
 
 
 
-This operation creates a volume on a specified gateway. This operation is supported only for the gateway-stored volume architecture. 
+Creates a volume on a specified gateway. This operation is only supported in the stored volume gateway architecture.
 
  
 
@@ -23,8 +23,11 @@ The size of the volume to create is inferred from the disk size. You can choose 
 
  
 
-In the request you must specify the gateway and the disk information on which you are creating the volume. In response, AWS Storage Gateway creates the volume and returns volume information such as the volume Amazon Resource Name (ARN), its size, and the iSCSI target ARN that initiators can use to connect to the volume target.
+In the request you must specify the gateway and the disk information on which you are creating the volume. In response, the gateway creates the volume and returns volume information such as the volume Amazon Resource Name (ARN), its size, and the iSCSI target ARN that initiators can use to connect to the volume target.
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateStorediSCSIVolume>`_
 
 
 ========
@@ -41,7 +44,7 @@ Synopsis
   --target-name <value>
   --network-interface-id <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -60,14 +63,14 @@ Options
 ``--disk-id`` (string)
 
 
-  The unique identifier for the gateway local disk that is configured as a stored volume. Use `list-local-disks`_ to list disk IDs for a gateway.
+  The unique identifier for the gateway local disk that is configured as a stored volume. Use `list-local-disks <http://docs.aws.amazon.com/storagegateway/latest/userguide/API_ListLocalDisks.html>`_ to list disk IDs for a gateway.
 
   
 
 ``--snapshot-id`` (string)
 
 
-  The snapshot ID (e.g. "snap-1122aabb") of the snapshot to restore as the new stored volume. Specify this field if you want to create the iSCSI storage volume from a snapshot otherwise do not include this field. To list snapshots for your account use `DescribeSnapshots`_ in the *Amazon Elastic Compute Cloud API Reference* .
+  The snapshot ID (e.g. "snap-1122aabb") of the snapshot to restore as the new stored volume. Specify this field if you want to create the iSCSI storage volume from a snapshot otherwise do not include this field. To list snapshots for your account use `DescribeSnapshots <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html>`_ in the *Amazon Elastic Compute Cloud API Reference* .
 
   
 
@@ -78,7 +81,7 @@ Options
 
    
 
-  *Valid Values* : true, false
+  Valid Values: true, false
 
   
 
@@ -96,15 +99,15 @@ Options
 
    
 
-  *Valid Values* : A valid IP address.
+  Valid Values: A valid IP address.
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -142,7 +145,3 @@ TargetARN -> (string)
 
   
 
-
-
-.. _DescribeSnapshots: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html
-.. _list-local-disks: http://docs.aws.amazon.com/storagegateway/latest/userguide/API_ListLocalDisks.html

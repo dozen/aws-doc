@@ -15,6 +15,9 @@ Description
 
 Deprecated, see the get-bucket-lifecycle-configuration operation.
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketLifecycle>`_
+
+
 ========
 Synopsis
 ========
@@ -24,7 +27,7 @@ Synopsis
     get-bucket-lifecycle
   --bucket <value>
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -39,8 +42,8 @@ Options
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -105,6 +108,12 @@ Rules -> (list)
 
         
 
+      ExpiredObjectDeleteMarker -> (boolean)
+
+        Indicates whether Amazon S3 will remove a delete marker with no noncurrent versions. If set to true, the delete marker will be expired; if set to false the policy takes no action. This cannot be specified with Days or Date in a Lifecycle Expiration Policy.
+
+        
+
       
 
     ID -> (string)
@@ -155,7 +164,7 @@ Rules -> (list)
 
       NoncurrentDays -> (integer)
 
-        Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see `How Amazon S3 Calculates When an Object Became Noncurrent`_ in the Amazon Simple Storage Service Developer Guide.
+        Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see `How Amazon S3 Calculates When an Object Became Noncurrent <http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html>`_ in the Amazon Simple Storage Service Developer Guide.
 
         
 
@@ -173,7 +182,19 @@ Rules -> (list)
 
       NoncurrentDays -> (integer)
 
-        Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see `How Amazon S3 Calculates When an Object Became Noncurrent`_ in the Amazon Simple Storage Service Developer Guide.
+        Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see `How Amazon S3 Calculates When an Object Became Noncurrent <http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html>`_ in the Amazon Simple Storage Service Developer Guide.
+
+        
+
+      
+
+    AbortIncompleteMultipartUpload -> (structure)
+
+      Specifies the days since the initiation of an Incomplete Multipart Upload that Lifecycle will wait before permanently removing all parts of the upload.
+
+      DaysAfterInitiation -> (integer)
+
+        Indicates the number of days that must pass since initiation for Lifecycle to abort an Incomplete Multipart Upload.
 
         
 
@@ -183,6 +204,3 @@ Rules -> (list)
 
   
 
-
-
-.. _How Amazon S3 Calculates When an Object Became Noncurrent: /AmazonS3/latest/dev/s3-access-control.html

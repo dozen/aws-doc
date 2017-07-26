@@ -15,12 +15,15 @@ Description
 
 
 
-Runs deployment or stack commands. For more information, see `Deploying Apps`_ and `Run Stack Commands`_ .
+Runs deployment or stack commands. For more information, see `Deploying Apps <http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-deploying.html>`_ and `Run Stack Commands <http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-commands.html>`_ .
 
  
 
-**Required Permissions** : To use this action, an IAM user must have a Deploy or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see `Managing User Permissions`_ .
+ **Required Permissions** : To use this action, an IAM user must have a Deploy or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see `Managing User Permissions <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html>`_ .
 
+
+
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateDeployment>`_
 
 
 ========
@@ -33,11 +36,12 @@ Synopsis
   --stack-id <value>
   [--app-id <value>]
   [--instance-ids <value>]
+  [--layer-ids <value>]
   --command <value>
   [--comment <value>]
   [--custom-json <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -64,6 +68,21 @@ Options
 
 
   The instance IDs for the deployment targets.
+
+  
+
+
+
+Syntax::
+
+  "string" "string" ...
+
+
+
+``--layer-ids`` (list)
+
+
+  The layer IDs for the deployment targets.
 
   
 
@@ -111,7 +130,7 @@ JSON Syntax::
 ``--custom-json`` (string)
 
 
-  A string that contains user-defined, custom JSON. It is used to override the corresponding default stack configuration JSON values. The string should be in the following format and must escape characters such as '"':
+  A string that contains user-defined, custom JSON. It is used to override the corresponding default stack configuration JSON values. The string should be in the following format:
 
    
 
@@ -119,15 +138,15 @@ JSON Syntax::
 
    
 
-  For more information on custom JSON, see `Use Custom JSON to Modify the Stack Configuration Attributes`_ .
+  For more information on custom JSON, see `Use Custom JSON to Modify the Stack Configuration Attributes <http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html>`_ .
 
   
 
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -141,8 +160,6 @@ The following examples show how to use the ``create-deployment`` command to depl
 quote (``"``) characters in the JSON object that specifies the command are all preceded by 
 escape characters (\). Without the escape characters, the command might
 return an invalid JSON error.
-
-**Note**: AWS OpsWorks CLI commands should set the region to ``us-east-1`` regardless of the stack's location.
 
 **Deploy an App**
 
@@ -176,7 +193,7 @@ For more information on deployment, see `Deploying Apps`_ in the *AWS OpsWorks U
 The following ``create-deployment`` command runs a custom recipe, ``phpapp::appsetup``, on the instances in a specified
 stack. ::
 
-  aws opsworks --region us-east-1 create-deployment --stack-id 935450cc-61e0-4b03-a3e0-160ac817d2bb --command "{\"Name\":\"execute_recipes\", \"Args\":{\"recipes\":[\"phpapp::appsetup\"]}}
+  aws opsworks --region ap-south-1 create-deployment --stack-id 935450cc-61e0-4b03-a3e0-160ac817d2bb --command "{\"Name\":\"execute_recipes\", \"Args\":{\"recipes\":[\"phpapp::appsetup\"]}}
 
 *Output*::
 
@@ -191,7 +208,7 @@ For more information, see `Run Stack Commands`_ in the *AWS OpsWorks User Guide*
 The following ``create-deployment`` command installs dependencies, such as packages or Ruby gems, on the instances in a
 specified stack. ::
 
-  aws opsworks --region us-east-1 create-deployment --stack-id 935450cc-61e0-4b03-a3e0-160ac817d2bb --command "{\"Name\":\"install_dependencies\"}"
+  aws opsworks --region ap-south-1 create-deployment --stack-id 935450cc-61e0-4b03-a3e0-160ac817d2bb --command "{\"Name\":\"install_dependencies\"}"
 
 *Output*::
 
@@ -222,9 +239,3 @@ DeploymentId -> (string)
 
   
 
-
-
-.. _Run Stack Commands: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-commands.html
-.. _Use Custom JSON to Modify the Stack Configuration Attributes: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html
-.. _Managing User Permissions: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
-.. _Deploying Apps: http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-deploying.html

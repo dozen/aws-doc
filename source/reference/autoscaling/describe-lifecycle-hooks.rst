@@ -19,6 +19,9 @@ Describes the lifecycle hooks for the specified Auto Scaling group.
 
 
 
+See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLifecycleHooks>`_
+
+
 ========
 Synopsis
 ========
@@ -29,7 +32,7 @@ Synopsis
   --auto-scaling-group-name <value>
   [--lifecycle-hook-names <value>]
   [--cli-input-json <value>]
-  [--generate-cli-skeleton]
+  [--generate-cli-skeleton <value>]
 
 
 
@@ -48,7 +51,7 @@ Options
 ``--lifecycle-hook-names`` (list)
 
 
-  The names of one or more lifecycle hooks.
+  The names of one or more lifecycle hooks. If you omit this parameter, all lifecycle hooks are described.
 
   
 
@@ -63,8 +66,8 @@ Syntax::
 ``--cli-input-json`` (string)
 Performs service operation based on the JSON string provided. The JSON string follows the format provided by ``--generate-cli-skeleton``. If other arguments are provided on the command line, the CLI values will override the JSON-provided values.
 
-``--generate-cli-skeleton`` (boolean)
-Prints a sample input JSON to standard output. Note the specified operation is not run if this argument is specified. The sample input can be used as an argument for ``--cli-input-json``.
+``--generate-cli-skeleton`` (string)
+Prints a JSON skeleton to standard output without sending an API request. If provided with no value or the value ``input``, prints a sample input JSON that can be used as an argument for ``--cli-input-json``. If provided with the value ``output``, it validates the command inputs and returns a sample output JSON for that command.
 
 
 
@@ -76,24 +79,24 @@ Examples
 
 This example describes the lifecycle hooks for the specified Auto Scaling group::
 
-   aws autoscaling describe-lifecycle-hooks --auto-scaling-group-name my-auto-scaling-group
-   
+    aws autoscaling describe-lifecycle-hooks --auto-scaling-group-name my-auto-scaling-group
+
 The following is example output::
 
-  {
-    "LifecycleHooks": [
-        {
-            "GlobalTimeout": 172800,
-            "HeartbeatTimeout": 3600,
-            "RoleARN": "arn:aws:iam::123456789012:role/my-auto-scaling-role",
-            "AutoScalingGroupName": "my-auto-scaling-group",
-            "LifecycleHookName": "my-lifecycle-hook",
-            "DefaultResult": "ABANDON",
-            "NotificationTargetARN": "arn:aws:sns:us-west-2:123456789012:my-sns-topic",
-            "LifecycleTransition": "autoscaling:EC2_INSTANCE_LAUNCHING"
-        }
-    ]
-  }
+    {
+        "LifecycleHooks": [
+            {
+                "GlobalTimeout": 172800,
+                "HeartbeatTimeout": 3600,
+                "RoleARN": "arn:aws:iam::123456789012:role/my-auto-scaling-role",
+                "AutoScalingGroupName": "my-auto-scaling-group",
+                "LifecycleHookName": "my-lifecycle-hook",
+                "DefaultResult": "ABANDON",
+                "NotificationTargetARN": "arn:aws:sns:us-west-2:123456789012:my-sns-topic",
+                "LifecycleTransition": "autoscaling:EC2_INSTANCE_LAUNCHING"
+            }
+        ]
+    }
 
 
 ======
@@ -117,14 +120,14 @@ LifecycleHooks -> (list)
      
 
      
-    * Pause the instance after it launches, but before it is put into service
+    * Pause the instance after it launches, but before it is put into service 
      
-    * Pause the instance as it terminates, but before it is fully terminated
-     
-
+    * Pause the instance as it terminates, but before it is fully terminated 
      
 
-    For more information, see `Auto Scaling Lifecycle`_ in the *Auto Scaling Developer Guide* .
+     
+
+    For more information, see `Auto Scaling Lifecycle <http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroupLifecycle.html>`_ in the *Auto Scaling User Guide* .
 
     
 
@@ -167,19 +170,19 @@ LifecycleHooks -> (list)
        
 
        
-      * Lifecycle action token
+      * Lifecycle action token 
        
-      * User account ID
+      * User account ID 
        
-      * Name of the Auto Scaling group
+      * Name of the Auto Scaling group 
        
-      * Lifecycle hook name
+      * Lifecycle hook name 
        
-      * EC2 instance ID
+      * EC2 instance ID 
        
-      * Lifecycle transition
+      * Lifecycle transition 
        
-      * Notification metadata
+      * Notification metadata 
        
 
       
@@ -220,7 +223,7 @@ LifecycleHooks -> (list)
 
       
 
-      The maximum time, in seconds, that an instance can remain in a ``Pending:Wait`` or ``Terminating:Wait`` state. The default is 172800 seconds (48 hours).
+      The maximum time, in seconds, that an instance can remain in a ``Pending:Wait`` or ``Terminating:Wait`` state. The maximum is 172800 seconds (48 hours) or 100 times ``HeartbeatTimeout`` , whichever is smaller.
 
       
 
@@ -240,6 +243,3 @@ LifecycleHooks -> (list)
 
   
 
-
-
-.. _Auto Scaling Lifecycle: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingGroupLifecycle.html
